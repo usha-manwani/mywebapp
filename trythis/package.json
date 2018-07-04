@@ -1,0 +1,14 @@
+{
+  "name": "trythis",
+  "version": "1.0.0",
+  "description": "design web page",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "usha phulwani",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <roles>
+    <role>
+    <rolename>Administrator</rolename>
+    <rolevalue>1</rolevalue>
+    </role>
+    <role>
+      <rolename>Live Feed</rolename>
+      <rolevalue>2</rolevalue>
+    </role>
+    <role>
+      <rolename>Manage Camera Details</rolename>
+      <rolevalue>3</rolevalue>
+    </role>
+    <role>
+      <rolename>DocumentsUpdate</rolename>
+      <rolevalue>4</rolevalue>
+    </role>
+    <role>
+      <rolename>DocumentsDeletion</rolename>
+      <rolevalue>5</rolevalue>
+    </role>
+    <role>
+      <rolename>ManageUsers</rolename>
+      <rolevalue>6</rolevalue>
+    </role>
+    <role>
+      <rolename>Authorize User</rolename>
+      <rolevalue>7</rolevalue>
+      
+    </role>
+  </roles>
+</root>
