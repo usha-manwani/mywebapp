@@ -12,7 +12,7 @@ namespace trythis.Hubsfile
 {
     public class MyHub : Microsoft.AspNet.SignalR.Hub
     {
-        DataTable ScoresTable = HttpContext.Current.Application["ScoresTable"] as DataTable;
+        //DataTable ScoresTable = HttpContext.Current.Application["ScoresTable"] as DataTable;
         string constr= System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         public void Hello()
         {
@@ -28,6 +28,7 @@ namespace trythis.Hubsfile
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Notification = null;
+                    
                     dt = new DataTable();
                     SqlDependency dependency = new SqlDependency(command);
 
@@ -38,9 +39,13 @@ namespace trythis.Hubsfile
                     SqlDependency.Start(connection.ConnectionString);
                     var reader = command.ExecuteReader();
                     dt.Load(reader);
+                     
                     if (dt.Rows.Count > 0)
                     {
-                        HttpContext.Current.Application["ScoresTable"] = dt;
+                        HttpContext.Current.Application.Lock();
+                        HttpContext.Current.Application["ScoreTable"] = dt;
+                        HttpContext.Current.Application.UnLock();
+                        
                     }
                     
                 }
