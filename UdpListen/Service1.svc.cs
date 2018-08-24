@@ -38,10 +38,7 @@ namespace UdpListen
             AsynchronousSocketListener.StartListening();
         }
 
-        public string Welcome(string name)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 
     public class StateObject

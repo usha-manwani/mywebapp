@@ -23,10 +23,7 @@ namespace UdpListen
         [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
-        [OperationContract]
-        [WebGet(UriTemplate = "/Welcome/{name}")]
-        string Welcome(string name);
-        // TODO: Add your service operations here
+        
     }
 
 
