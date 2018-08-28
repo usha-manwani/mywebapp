@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
 
-namespace final
+namespace trythis
 {
     public class CameraOnline
     {

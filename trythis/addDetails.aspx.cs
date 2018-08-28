@@ -6,7 +6,7 @@ using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace final
+namespace trythis
 {
     public partial class addDetails : System.Web.UI.Page
     {

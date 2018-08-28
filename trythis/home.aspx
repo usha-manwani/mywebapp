@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="home.aspx.cs" Inherits="final.home"  MasterPageFile="~/Site.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="home.aspx.cs" Inherits="trythis.home"  MasterPageFile="~/Site.Master" %>
 <%--<%@ MasterType VirtualPath="~/Site.Master" %>--%>
 <asp:Content ContentPlaceHolderID="HeadContent" ID="headarea" runat="server">
    

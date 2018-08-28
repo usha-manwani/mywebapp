@@ -8,7 +8,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 
-namespace final
+namespace trythis
 {
     public class Global : HttpApplication
     {
@@ -16,8 +16,10 @@ namespace final
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
+            
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
             SqlDependency.Start(constr);
             //trythis.connection.ReceiveData();
         }

@@ -7,29 +7,29 @@ using System.Data.Sql;
 using System.Data;
 
 
-namespace trythis.Hub
+namespace trythis.Hubsfile
 {
     public class UpdateDevice
     {
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         SqlConnection connection;
         DataTable dt;
-         public void update()
+         public DataTable update()
         {
             try
             {
                 connection = new SqlConnection(constr);
                 dt = new DataTable();
-                string query = "select * from dbo.[dataFrom control]";
+                string query = "select * from dbo.[CentralControl]";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
                 connection.OpenAsync();
                 dataAdapter.Fill(dt);
-                if(dt!=null)
-                {
-                    string ip = dt.Rows[0]["ip"].ToString();
-                    SqlCommand cmd = new SqlCommand("DeleteDatefromRemote", connection);
-                    cmd.Parameters.AddWithValue("@ip", ip);
-                }
+                //if(dt!=null)
+                //{
+                //    string ip = dt.Rows[0]["ip"].ToString();
+                //    SqlCommand cmd = new SqlCommand("DeleteDatefromRemote", connection);
+                //    cmd.Parameters.AddWithValue("@ip", ip);
+                //}
                
             }
             catch(Exception ex)
@@ -42,10 +42,11 @@ namespace trythis.Hub
 
                 connection.Close();
             } 
-            if (dt != null)
-            {
-                updateStatus(dt);
-            }
+            //if (dt != null)
+            //{
+            //    updateStatus(dt);
+            //}
+            return dt;
         }
 
         public void updateStatus(DataTable dt)
@@ -62,7 +63,8 @@ namespace trythis.Hub
                     else
                         break;
                 }
-
+                
+                
             }  
         }
         

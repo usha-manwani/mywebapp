@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 
-namespace final
+namespace trythis
 {
    
     public partial class SiteMaster : MasterPage

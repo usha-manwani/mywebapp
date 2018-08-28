@@ -1,15 +1,22 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Status.aspx.cs" Inherits="trythis.Status" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+   
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
-        <Scripts>
-            <asp:ScriptReference Path="~/Scripts/jquery-1.6.4.js" />
-            <asp:ScriptReference Path="~/Scripts/jquery.signalR-2.3.0.js" />
-           
-          
-            </Scripts>
-        </asp:ScriptManagerProxy>
+   
+     <style type="text/css">
+        .sizehead{
+            font-size:medium
+        }
+        .sizedata{
+            font-size:small;
+        }
+        
+    </style>
+    
+                <script type="text/javascript" src="~/Scripts/jquery-1.6.4.js"></script>
+            <script type="text/javascript" src="~/Scripts/jquery.signalR-2.3.0.js"></script>
+            
       <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
    <script type="text/javascript">
         var scoresHub;
@@ -22,23 +29,32 @@
             debugger;
             // Create a function that the hub can call to broadcast messages.
             scoresHub.client.recieveNotification = function (dt) {
-                // Add the message to the page.                
-                $('id*=mytable').DataTable();
+
+                var tble = $('#myTable'),
+                   bdy = $('#tablebody');
+                bdy.empty();
+                
+                $('[id*=myTable]').DataTable();
+                  
+               
+                                
+               
             };
+             $.connection.hub.start();   
             // Start the connection.
-            $.connection.hub.start().done(function () {
-                scoresHub.server.updateData();
-            }).fail(function (e) {
-                alert(e); 
-            });
-            $.connection.hub.start();            
+            //$.connection.hub.start().done(function () {
+            //    scoresHub.server.updateData();
+            //}).fail(function (e) {
+            //    alert(e); 
+            //});
+            //$.connection.hub.start();            
         });
    
 
             var hub = $.connection.MyHub;
        hub.client.addGame = function (game) {
            $tablebody.empty();
-           $("#<%= rptData.ClientID%>").DataTable();
+            $('[id*=myTable]').DataTable();
             };
             $.connection.hub.start();
             
@@ -51,7 +67,7 @@
            <asp:Repeater ID="rptData" runat="server">
                     <HeaderTemplate>
                         <table border="1" id ="myTable">
-                            <thead>
+                            <thead class="sizehead">
                                 <tr>
                                     <th>Location</th>
                                     <th>IP Address</th>
@@ -74,38 +90,38 @@
                                     <th>PM10(µg/m3)</th>
                                 </tr>
                             </thead>
-                            <tbody id ="tablebody">
+                            <tbody id ="tablebody" class="sizedata">
                     </HeaderTemplate>
                     <ItemTemplate>
                         <tr >
-                            <td><%# Eval("location") %></td>
-                            <td><%# Eval("CCIP") %></td>
-                            <td><%# Eval("Status") %></td>
-                            <td><%# Eval("PowerStatus") %></td>
-                            <td><%# Eval("TimerService") %></td>
-                            <td><%# Eval("ComputerPower") %></td>
-                            <td><%# Eval("ProjectorPower") %></td>
-                            <td><%# Eval("ProjectorUsedHour") %></td>
-                            <td><%# Eval("CurtainStatus") %></td>
-                            <td><%# Eval("ScreenStatus") %></td>
-                            <td><%# Eval("light") %></td>
-                            <td><%# Eval("MediaSignal") %></td>
-                            <td><%# Eval("LockStatus") %></td>
-                            <td><%# Eval("podiumLock") %></td>
-                            <td><%# Eval("ClassLocked") %></td>
-                            <td><%# Eval("Temperature") %></td>
-                            <td><%# Eval("Humidity") %></td>
-                            <td><%# Eval("PM25") %></td>
-                            <td><%# Eval("PM10") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"location") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"CCIP") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"Status") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"PowerStatus") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"TimerService") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"ComputerPower") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"ProjectorPower") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"ProjectorUsedHour") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"CurtainStatus") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"ScreenStatus") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"light") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"MediaSignal") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"LockStatus") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"podiumLock") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"ClassLocked") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"Temperature") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"Humidity") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"PM25") %></td>
+                            <td><%# DataBinder.Eval(Container.DataItem,"PM10") %></td>
                         </tr>
                     </ItemTemplate>
                     <FooterTemplate></tbody></table></FooterTemplate>
                 </asp:Repeater>
      
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
+     <%--   <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
             <ContentTemplate>
            <div>
-             <%--<asp:LinkButton runat="server" ID="refresh" Text="Refresh" OnClick="LinkButton1_Click"></asp:LinkButton>--%>
+             <%--<asp:LinkButton runat="server" ID="refresh" Text="Refresh" OnClick="LinkButton1_Click"></asp:LinkButton>
         </div>
              
         
@@ -148,7 +164,10 @@
        </ContentTemplate>
           
             
-    </asp:UpdatePanel>
+    </asp:UpdatePanel>--%>
        
          </div>
+     
+        
+    
 </asp:Content>

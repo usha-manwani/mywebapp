@@ -1,0 +1,207 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="FinalProject.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <META Http-Equiv="Pragma" Content="no-cache">
+    <META Http-Equiv="Expires" Content="0">
+    <META Http-Equiv="Cache-Control" Content="no-cache">
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
+    
+    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
+ <%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+     <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
+ <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+   <link href="Content/Site.css" rel="stylesheet" />
+  
+    
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server"></asp:ContentPlaceHolder>
+   
+    <style type="text/css">
+       
+    
+        .text-bold{
+            font-weight:bold;
+        }
+    
+    .divopt{
+               min-height:700px;
+               width:100%;
+               background-color: white;
+               color:black;
+               font-family: Arial, Helvetica, sans-serif;
+               margin-bottom:20px;
+               margin-right:20px;
+                   
+           }
+    #bgwidth{
+        width:100%; 
+        opacity:0.8;
+        
+    }
+    .opacity1{
+         background:rgba(245,245,245, 0.8);
+        z-index:10000;
+    }
+    div{
+        padding-top:10px;
+    padding-bottom:15px;
+    padding-left:10px;
+    font-size:20px;
+    
+}
+    h2{
+        padding-top:2em;
+       
+    }
+    body{
+        background-image:url(../Images/bg2.jpg);
+        font-size:20px;
+        font-size-adjust:0.60;
+       
+ 
+    }
+    
+
+/*Entirely optional – just wanted to remove the scrollbar on WebKit browsers as I find them ugly*/
+
+    </style>
+    
+</head>
+<body >
+    <form runat="server"  >
+      
+        
+        <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color:teal; color:white; ">
+  <a class="navbar-brand" href="#">Hello <asp:Label id="username" runat="server"></asp:Label></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="home.aspx">Home <span class="sr-only">(current)</span></a>
+      </li>
+     <li class="nav-item">
+            <a id="liveFeed" class="nav-link" runat="server" href="WebForm2.aspx">Live Feed</a>
+        </li> 
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" runat="server" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Options
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" runat="server" id="approveUser" href="Approve.aspx">Authenticate Users</a>
+          <a class="dropdown-item" id="addUser" runat="server" href="AddUser.aspx">Add New User</a>
+            <a class="dropdown-item" id="removeUser" runat="server" href="RemoveUsers.aspx">Remove Users</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" id="manageCam" runat="server" href="Options.aspx">Manage Camera Details</a>
+        </div>
+      </li>
+         <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" runat="server" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Documents
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" id="uploadDoc" runat="server" href="UploadFile.aspx">Upload documents</a>
+          <a class="dropdown-item" id="downloadDoc" runat="server" href="UploadFile.aspx">Download Documents</a>
+            <a class="dropdown-item" id="delDoc" runat="server" href="DeleteDocument.aspx">Delete Documents</a>
+          
+        </div>
+      </li>
+        <li class="nav-item">
+            <a id="status" class="nav-link" runat="server" href="Status.aspx">Status</a>
+        </li>
+        <li class="nav-item">
+            <a id="A1" class="nav-link" runat="server" href="Control.aspx">Control</a>
+        </li>
+      
+        
+    </ul>
+      <ul class="float-right navbar-nav ">
+          <li class="nav-item">
+        <a class="nav-link" href="Contact.aspx">Queries</a>
+      </li>
+          <li class="nav-item">
+       <a class="nav-link " href="About.aspx" id="about" >About</a>
+      </li>
+          <li class="nav-item">
+             <a class="nav-link" href="logout.aspx" id="logout">Sign Out</a>
+              
+          </li>
+      </ul>
+      
+  <%--  <div class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </div>--%>
+  </div>
+</nav>
+       
+        <asp:ScriptManager runat="server" ID="ScriptManager1" EnableCdn="true">
+            
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <%--<asp:ScriptReference Name="MsAjaxBundle" />--%>
+               <%-- <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />--%>
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+  
+        <%--body--%>
+        
+
+        <div class="container-fluid "   id="bgwidth" style="object-fit:cover;">
+            <div class="clearfix"></div>
+            <div style=" display:flex;  " class="row " > 
+
+            <div style="float:left;  background-color:silver; overflow-x:auto; " class="col-sm-4 col-md-3 col-lg-3 " >
+                <div style="padding-top:20px; margin-right:8px; ">
+                <asp:TreeView runat="server" ID="TreeMenuView"  OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged" NodeStyle-NodeSpacing="5px" RootNodeStyle-CssClass="text-bold">
+                    
+                </asp:TreeView>
+                    </div>
+            </div>
+            <div style="float:right; flex:1; overflow-x:hidden; " class=" col-sm-8 col-md-9 col-lg-9 ">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+         </asp:ContentPlaceHolder>
+            </div>
+
+            </div>
+       
+            
+           </div>
+        
+        
+    </form>
+    
+</body>
+</html>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace final {
+namespace trythis {
     
     
     public partial class RemoveUsers {
@@ -45,9 +45,9 @@ namespace final {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new final.SiteMaster Master {
+        public new trythis.SiteMaster Master {
             get {
-                return ((final.SiteMaster)(base.Master));
+                return ((trythis.SiteMaster)(base.Master));
             }
         }
     }

@@ -25,8 +25,17 @@ namespace trythis
         
             if (!IsPostBack)
             {
-                Timer1_Tick();
-                
+                DataTable ScoresTable = Application["ScoreTable"] as DataTable;
+                if (ScoresTable == null)
+                {
+                    Hubsfile.UpdateDevice up = new Hubsfile.UpdateDevice();
+                    ScoresTable = up.update();
+                    Application["ScoreTable"] = ScoresTable;
+
+                }
+                rptData.DataSource = ScoresTable;
+                rptData.DataBind();
+
             }
         
 
@@ -43,6 +52,11 @@ namespace trythis
         protected void Timer1_Tick()
         {
             DataTable ScoresTable = Application["ScoreTable"] as DataTable;
+            if(ScoresTable == null){
+                Hubsfile.UpdateDevice up = new Hubsfile.UpdateDevice();
+                ScoresTable = up.update();
+
+            }
             rptData.DataSource = ScoresTable;
             rptData.DataBind();
             //DataTable dt1 = null;
@@ -70,109 +84,109 @@ namespace trythis
                     row[4] = "Closed";
                 }
                 else
-                    dr[4] = "Open";
+                    row[4] = "Open";
 
                 if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
                 {
-                    dr[6] = "OFF";
+                    row[6] = "OFF";
                 }
                 else
-                    dr[6] = "ON";
+                    row[6] = "ON";
 
                 if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
                 {
-                    dr[15] = "Locked";
+                    row[15] = "Locked";
                 }
                 else
-                    dr[15] = "Opened";
+                    row[15] = "Opened";
 
 
                 if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
                 {
-                    dr[14] = "Locked";
+                    row[14] = "Locked";
                 }
                 else
-                    dr[14] = "Opened";
+                    row[14] = "Opened";
 
 
                 switch (Convert.ToInt32(dr[6]))
                 {
                     case 1:
-                        dr[12] = "Desktop PC";
+                       row[12] = "Desktop PC";
                         break;
                     case 2:
-                        dr[12] = "Laptop";
+                        row[12] = "Laptop";
                         break;
                     case 3:
-                        dr[12] = "Digital Booth";
+                        row[12] = "Digital Booth";
                         break;
                     case 4:
-                        dr[12] = "Digital Equipment";
+                        row[12] = "Digital Equipment";
                         break;
                     case 5:
-                        dr[12] = "DVD";
+                        row[12] = "DVD";
                         break;
                     case 6:
-                        dr[12] = "Blu-Ray DVD";
+                        row[12] = "Blu-Ray DVD";
                         break;
                     case 7:
-                        dr[12] = "TV set";
+                        row[12] = "TV set";
                         break;
                     case 8:
-                        dr[12] = "VCR";
+                        row[12] = "VCR";
                         break;
                     case 9:
-                        dr[12] = "Recording System";
+                        row[12] = "Recording System";
                         break;
                     default:
-                        dr[12] = "No system Detected";
+                        row[12] = "No system Detected";
                         break;
                 }
 
                 if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
                 {
-                    dr[13] = "Locked";
+                    row[13] = "Locked";
                 }
                 else
-                    dr[13] = "Open";
+                    row[13] = "Open";
 
                 if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
                 {
-                    dr[7] = "Closed";
+                    row[7] = "Closed";
                 }
                 else
-                    dr[7] = "Open";
+                    row[7] = "Open";
 
                 switch (Convert.ToInt32(dr[6]))
                 {
                     case 1:
-                        dr[10] = "Open";
+                        row[10] = "Open";
                         break;
                     case 2:
-                        dr[10] = "Down";
+                        row[10] = "Down";
                         break;
                     case 0:
-                        dr[10] = "Stop";
+                        row[10] = "Stop";
                         break;
                 }
                 switch (Convert.ToInt32(dr[6]))
                 {
                     case 1:
-                        dr[9] = "Open";
+                        row[9] = "Open";
                         break;
                     case 2:
-                        dr[9] = "Down";
+                        row[9] = "Down";
                         break;
                     case 0:
-                        dr[9] = "Stop";
+                        row[9] = "Stop";
                         break;
                 }
                 if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
                 {
-                    dr[11] = "OFF";
+                    row[11] = "OFF";
                 }
                 else
-                    dr[11] = "On";
+                    row[11] = "On";
 
             }
 
@@ -182,7 +196,7 @@ namespace trythis
 
                     if (Convert.ToByte(dr[6]) == Convert.ToByte(0xc9))
                     {
-                        dr[3] = "Offline";
+                        row[3] = "Offline";
                     }
                 }
             }

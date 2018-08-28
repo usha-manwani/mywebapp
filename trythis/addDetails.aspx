@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#"  AutoEventWireup="true" CodeBehind="addDetails.aspx.cs" Inherits="final.addDetails" %>
+﻿<%@ Page Title="" Language="C#"  AutoEventWireup="true" CodeBehind="addDetails.aspx.cs" Inherits="trythis.addDetails" %>
 <html>
     <head>
         <title></title>

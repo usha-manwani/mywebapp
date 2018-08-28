@@ -10,7 +10,7 @@ using System.Web.Security;
 using System.Security.Cryptography;
 
 
-namespace final
+namespace trythis
 {
     public partial class Login : System.Web.UI.Page
     {
@@ -69,7 +69,7 @@ namespace final
                      
                     HttpContext.Current.Session["UserId"] = u;
                 
-                    Response.Redirect("~/Status.aspx");
+                    Response.Redirect("~/Options.aspx");
             }
                 else
                 {

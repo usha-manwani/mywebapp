@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 
 
-namespace final
+namespace trythis
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {

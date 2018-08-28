@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace final
+namespace trythis
 {
     public partial class Registration : System.Web.UI.Page
     {

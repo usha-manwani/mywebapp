@@ -55,7 +55,8 @@ namespace trythis.Hubsfile
                     {
                         HttpContext.Current.Application.Lock();
                         HttpContext.Current.Application["ScoreTable"] = dt;
-                        HttpContext.Current.Application.UnLock(); 
+                        HttpContext.Current.Application.UnLock();  
+                    
                     }
                 
             }
