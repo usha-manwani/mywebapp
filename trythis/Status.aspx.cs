@@ -25,7 +25,7 @@ namespace trythis
         
             if (!IsPostBack)
             {
-               
+                Timer1_Tick();
                 
             }
         
@@ -42,9 +42,12 @@ namespace trythis
         }
         protected void Timer1_Tick()
         {
-            DataTable dt1 = null;
-            GridView1.DataSource = dt1;
-            GridView1.DataBind();
+            DataTable ScoresTable = Application["ScoreTable"] as DataTable;
+            rptData.DataSource = ScoresTable;
+            rptData.DataBind();
+            //DataTable dt1 = null;
+            //GridView1.DataSource = dt1;
+            //GridView1.DataBind();
         }
 
         public DataTable updateData(DataTable dt)

@@ -2,10 +2,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-   <script src="Scripts/jquery.signalR-2.3.0.min.js"></script>
-   <script src="Scripts/jquery.signalR-2.3.0.js"></script>
-    
-    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
+    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server">
+        <Scripts>
+            <asp:ScriptReference Path="~/Scripts/jquery-1.6.4.js" />
+            <asp:ScriptReference Path="~/Scripts/jquery.signalR-2.3.0.js" />
+           
+          
+            </Scripts>
+        </asp:ScriptManagerProxy>
+      <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
    <script type="text/javascript">
         var scoresHub;
 
@@ -24,25 +29,25 @@
             $.connection.hub.start().done(function () {
                 scoresHub.server.updateData();
             }).fail(function (e) {
-                alert(e);
+                alert(e); 
             });
-            //$.connection.hub.start();            
+            $.connection.hub.start();            
         });
    
 
             var hub = $.connection.MyHub;
        hub.client.addGame = function (game) {
            $tablebody.empty();
-                $("#<%= rptData.ClientID%>").append("<tr><td>" + Location + "</td><td>" + game.Name + "</td><td>" + game.Description + "</td><td>" + game.Quantity + "</td><td>" + game.Price + "</td></tr>");
+           $("#<%= rptData.ClientID%>").DataTable();
             };
             $.connection.hub.start();
-
+            
 
        </script>
 
-        
-   
+ 
     <div class="divopt">
+        
            <asp:Repeater ID="rptData" runat="server">
                     <HeaderTemplate>
                         <table border="1" id ="myTable">
@@ -100,7 +105,7 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" >
             <ContentTemplate>
            <div>
-             <asp:LinkButton runat="server" ID="refresh" Text="Refresh" OnClick="LinkButton1_Click"></asp:LinkButton>
+             <%--<asp:LinkButton runat="server" ID="refresh" Text="Refresh" OnClick="LinkButton1_Click"></asp:LinkButton>--%>
         </div>
              
         

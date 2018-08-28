@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -11,14 +13,13 @@ using System.Threading;
 
 namespace UdpListen
 {
+    
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class Service1 : IService1
     {
-        public string GetData(int value)
-        {
-            return string.Format("You entered: {0}", value);
-        }
+        
+    
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
@@ -55,6 +56,7 @@ namespace UdpListen
 
     public class AsynchronousSocketListener
     {
+        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
 
         // Thread signal.  
         public static ManualResetEvent allDone = new ManualResetEvent(false);
@@ -120,7 +122,7 @@ namespace UdpListen
             // Create the state object.  
             StateObject state = new StateObject();
             state.workSocket = handler;
-            Send(handler);
+
             handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
                 new AsyncCallback(ReadCallback), state);
         }
@@ -145,13 +147,20 @@ namespace UdpListen
             string ip = ((IPEndPoint)handler.RemoteEndPoint).Address.ToString();
             if (bytesRead > 0)
             {
-                Console.WriteLine(b.ToString() + "  from  " + ip);
-                // Not all data received. Get more.  
-                handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
-                new AsyncCallback(ReadCallback), state);
+                if (bytesRead == 20)
+                {
 
+
+
+
+
+                }
             }
+            handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
+            new AsyncCallback(ReadCallback), state);
+
         }
+
 
         private static void Send(Socket handler)
         {
@@ -183,6 +192,173 @@ namespace UdpListen
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+            }
+        }
+        public static void UpdateData(byte[] receiveBytes, string iP)
+        {
+            DataTable dt = new DataTable();
+            DataRow dr = dt.NewRow();
+            string[] data = new string[20];
+
+            dr[0] = iP;
+
+            if (receiveBytes[6] == Convert.ToByte(0xc4))
+            {
+                data[3] = "Online";
+            }
+            if (receiveBytes[7] == Convert.ToByte(0x00))
+            {
+                data[4] = "Off";
+            }
+            else
+                data[4] = "On";
+
+            if (receiveBytes[8] == Convert.ToByte(0x00))
+            {
+                data[6] = "CLOSED";
+            }
+            else
+                data[6] = "OPEN";
+
+            if (receiveBytes[9] == Convert.ToByte(0x00))
+            {
+                data[15] = "Open";
+            }
+            else
+                data[15] = "Locked";
+
+
+            if (receiveBytes[10] == Convert.ToByte(0x00))
+            {
+                data[14] = "Open";
+            }
+            else
+                data[14] = "Locked";
+
+
+            switch (Convert.ToInt32(receiveBytes[11]))
+            {
+                case 1:
+                    data[12] = "Desktop PC";
+                    break;
+                case 2:
+                    data[12] = "Laptop";
+                    break;
+                case 3:
+                    data[12] = "Digital Booth";
+                    break;
+                case 4:
+                    data[12] = "Digital Equipment";
+                    break;
+                case 5:
+                    data[12] = "DVD";
+                    break;
+                case 6:
+                    data[12] = "Blu-Ray DVD";
+                    break;
+                case 7:
+                    data[12] = "TV set";
+                    break;
+                case 8:
+                    data[12] = "VCR";
+                    break;
+                case 9:
+                    data[12] = "Recording System";
+                    break;
+                default:
+                    data[12] = "No system Detected";
+                    break;
+            }
+
+            if (receiveBytes[12] == Convert.ToByte(0x00))
+            {
+                data[13] = "Locked";
+            }
+            else
+                data[13] = "Open";
+
+            if (receiveBytes[13] == Convert.ToByte(0x00))
+            {
+                data[7] = "Closed";
+            }
+            else
+                data[7] = "Open";
+
+            switch (Convert.ToInt32(receiveBytes[14]))
+            {
+                case 1:
+                    data[10] = "Open";
+                    break;
+                case 2:
+                    data[10] = "Down";
+                    break;
+                case 0:
+                    data[10] = "Stop";
+                    break;
+            }
+            switch (Convert.ToInt32(receiveBytes[15]))
+            {
+                case 1:
+                    data[9] = "Open";
+                    break;
+                case 2:
+                    data[9] = "Down";
+                    break;
+                case 0:
+                    data[9] = "Stop";
+                    break;
+            }
+            if (receiveBytes[16] == Convert.ToByte(0x00))
+            {
+                data[11] = "OFF";
+            }
+            else
+                data[11] = "On";
+            data[16] = "--";
+            data[17] = "--";
+            data[18] = "--";
+            data[19] = "--";
+
+
+
+            if (data != null)
+            {
+                string query = "insert into dbo.[CentralControl] values(";
+                for (int k = 0; k < 20; k++)
+                {
+                    query = query + "'" + data[k] + "',";
+                    // Console.WriteLine(data[k].ToString()+"  from  " + ip);
+                }
+                query = query.Substring(0, query.Length - 1);
+                query = query + ")";
+                string delQuery = "delete from dbo.[CentralControl] where CCIP ='" +data[0]+"'";
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    try
+                    {
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.OpenAsync();
+                            using (SqlCommand delcmd = new SqlCommand(delQuery, con))
+                            {
+
+                                delcmd.ExecuteNonQuery();
+
+                            }
+                            using (SqlCommand cmd = new SqlCommand(query, con))
+                            {
+
+                                cmd.ExecuteNonQuery();
+
+                            }
+                        } 
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                        
+                }
             }
         }
     }

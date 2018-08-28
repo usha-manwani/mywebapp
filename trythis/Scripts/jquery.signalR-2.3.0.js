@@ -1,3 +1,6 @@
+
+
+
 /* jquery.signalR.core.js */
 /*global window:false */
 /*!
@@ -8,9 +11,9 @@
  * Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
  *
  */
+/// <reference path="jquery-1.6.4.js" />
+/// <reference path="jquery.signalr-2.3.0.min.js" />
 
-/// <reference path="Scripts/jquery-1.6.4.js" />
-/// <reference path="jquery.signalR.version.js" />
 (function ($, window, undefined) {
 
     var resources = {

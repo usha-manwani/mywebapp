@@ -24,36 +24,43 @@ namespace trythis.Hubsfile
             using (var connection = new SqlConnection(constr))
             {
                 String query = "SELECT * from dbo.[updateData]";
-                connection.Open();
-                using (SqlCommand command = new SqlCommand(query, connection))
+                try
                 {
-                    command.Notification = null;
+                    connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Notification = null;
+
+                        dt = new DataTable();
+                        DataSet ds = new DataSet();
+                        SqlDependency dependency = new SqlDependency(command);
+
+                        dependency.OnChange += dependency_OnChange;
+
+                        if (connection.State == ConnectionState.Closed)
+                            connection.OpenAsync();
+
+                        SqlDependency.Start(connection.ConnectionString);
+                        var reader = command.ExecuteReader();
+                        dt.Load(reader);
+                        
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
                     
-                    dt = new DataTable();
-                    SqlDependency dependency = new SqlDependency(command);
-
-                    dependency.OnChange += dependency_OnChange;
-
-                    if (connection.State == ConnectionState.Closed) connection.Open();
-
-                    SqlDependency.Start(connection.ConnectionString);
-                    var reader = command.ExecuteReader();
-                    dt.Load(reader);
-                     
                     if (dt.Rows.Count > 0)
                     {
                         HttpContext.Current.Application.Lock();
                         HttpContext.Current.Application["ScoreTable"] = dt;
-                        HttpContext.Current.Application.UnLock();
-                        
+                        HttpContext.Current.Application.UnLock(); 
                     }
-                    
-                }
+                
             }
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
-            //context.Clients.All.displayUsers(_lst);
-
-            
+            context.Clients.All.recieveNotification(dt); 
         }
 
         void dependency_OnChange(object sender, SqlNotificationEventArgs e)
@@ -69,7 +76,7 @@ namespace trythis.Hubsfile
         public static void SendMessages()
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
-            context.Clients.All.updateMessages();
+            context.Clients.All.updateMessages();     
         }
     }
 }

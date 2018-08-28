@@ -253,6 +253,7 @@
     <Content Include="Members\demo.html" />
     <Content Include="home.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MyService.svc" />
     <Content Include="Options.aspx" />
     <Content Include="Registration.aspx" />
     <Content Include="RemoveUsers.aspx" />
@@ -357,6 +358,8 @@
     <Content Include="Scripts\holder.min.js" />
     <Content Include="Scripts\ie-emulation-modes-warning.js" />
     <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-1.6.4.min.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-migrate-3.0.0.js" />
     <Content Include="Scripts\jquery-migrate-3.0.0.min.js" />
@@ -538,6 +541,9 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MyService.svc.cs">
+      <DependentUpon>MyService.svc</DependentUpon>
     </Compile>
     <Compile Include="Options.aspx.cs">
       <DependentUpon>Options.aspx</DependentUpon>

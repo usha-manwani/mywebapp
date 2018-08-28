@@ -13,8 +13,7 @@ namespace UdpListen
     public interface IService1
     {
 
-        [OperationContract]
-        string GetData(int value);
+       
 
         [OperationContract]
        void status();
