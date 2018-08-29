@@ -203,13 +203,6 @@
     <Content Include="addDetails.aspx" />
     <Content Include="AddUser.aspx" />
     <Content Include="Approve.aspx" />
-    <None Include="Connected Services\ServiceReference\Service1.disco" />
-    <None Include="Connected Services\ServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\ServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\ServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -250,6 +243,7 @@
     <Content Include="Images\stop.PNG" />
     <Content Include="Images\unlock.png" />
     <Content Include="Images\up.PNG" />
+    <Content Include="Logout.aspx" />
     <Content Include="Members\demo.html" />
     <Content Include="home.aspx" />
     <Content Include="Login.aspx" />
@@ -402,7 +396,6 @@
     <Content Include="WebComponents.exe" />
     <Content Include="WebForm1.aspx" />
     <Content Include="WebForm2.aspx" />
-    <Content Include="logout.aspx" />
     <Content Include="WebForm3.aspx" />
     <Content Include="webplugin.exe" />
     <Content Include="Scripts\esm\popper.min.js.map" />
@@ -419,19 +412,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <None Include="Connected Services\ServiceReference\Service1.wsdl" />
-    <None Include="Connected Services\ServiceReference\Service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference\Service11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference\Service12.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Connected Services\ServiceReference\trythis.ServiceReference.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\cybersecurity.jpg" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -488,11 +468,6 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="CameraOnline.cs" />
-    <Compile Include="Connected Services\ServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="connection.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -518,6 +493,14 @@
     <Compile Include="Hubsfile\MyHub.cs" />
     <Compile Include="Hubsfile\Startup.cs" />
     <Compile Include="Hubsfile\UpdateDevice.cs" />
+    <Compile Include="IMyService.cs" />
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Members\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -634,13 +617,6 @@
     <Compile Include="WebForm2.aspx.designer.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
-    <Compile Include="logout.aspx.cs">
-      <DependentUpon>logout.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="logout.aspx.designer.cs">
-      <DependentUpon>logout.aspx</DependentUpon>
-    </Compile>
     <Compile Include="WebForm3.aspx.cs">
       <DependentUpon>WebForm3.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -688,9 +664,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

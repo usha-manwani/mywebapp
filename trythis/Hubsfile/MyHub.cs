@@ -23,7 +23,7 @@ namespace trythis.Hubsfile
             DataTable dt;
             using (var connection = new SqlConnection(constr))
             {
-                String query = "SELECT * from dbo.[updateData]";
+                String query = "SELECT * from dbo.[CentralControl]";
                 try
                 {
                     connection.OpenAsync();
@@ -73,11 +73,11 @@ namespace trythis.Hubsfile
             }
         }
 
-        [HubMethodName("sendMessages")]
-        public static void SendMessages()
-        {
-            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
-            context.Clients.All.updateMessages();     
-        }
+        //[HubMethodName("sendMessages")]
+        //public static void SendMessages()
+        //{
+        //    IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
+        //    context.Clients.All.updateMessages();     
+        //}
     }
 }

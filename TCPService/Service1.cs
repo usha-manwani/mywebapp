@@ -1,31 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization;
-using System.ServiceModel;
+using System.ServiceProcess;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
-namespace trythis
+namespace TCPService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "MyService" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select MyService.svc or MyService.svc.cs at the Solution Explorer and start debugging.
-    public class MyService : IMyService
+    public partial class Service1 : ServiceBase
     {
-        public void DoWork()
+        public Service1()
         {
+            InitializeComponent();
         }
-       public void SendData()
-        {
 
-        }
-       public void GetData()
+        protected override void OnStart(string[] args)
         {
             AsynchronousSocketListener.StartListening();
+        }
+
+        protected override void OnStop()
+        {
+            StateObject obj = new StateObject();
+            obj.workSocket = null;
         }
     }
     public class StateObject
@@ -42,7 +47,8 @@ namespace trythis
 
     public class AsynchronousSocketListener
     {
-        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+      
+        public static string constr = ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
 
         // Thread signal.  
         public static ManualResetEvent allDone = new ManualResetEvent(false);
@@ -75,7 +81,7 @@ namespace trythis
                     allDone.Reset();
 
                     // Start an asynchronous socket to listen for connections.  
-                    Console.WriteLine("Waiting for a connection...");
+                   // Console.WriteLine("Waiting for a connection...");
                     listener.BeginAccept(
                         new AsyncCallback(AcceptCallback),
                         listener);
@@ -87,11 +93,11 @@ namespace trythis
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+               // Console.WriteLine(e.ToString());
             }
 
-            Console.WriteLine("\nPress ENTER to continue...");
-            Console.Read();
+          //  Console.WriteLine("\nPress ENTER to continue...");
+          //  Console.Read();
 
         }
 
@@ -104,7 +110,7 @@ namespace trythis
             Socket listener = (Socket)ar.AsyncState;
             Socket handler = listener.EndAccept(ar);
             string ip = ((IPEndPoint)handler.RemoteEndPoint).Address.ToString();
-            Console.WriteLine("ip   " + ip);
+           // Console.WriteLine("ip   " + ip);
             // Create the state object.  
             StateObject state = new StateObject();
             state.workSocket = handler;
@@ -136,7 +142,7 @@ namespace trythis
                 if (bytesRead == 20)
                 {
 
-
+                    UpdateData(state.buffer, ip);
 
 
 
@@ -167,7 +173,7 @@ namespace trythis
 
                 // Complete sending the data to the remote device.  
                 int bytesSent = handler.EndSend(ar);
-                Console.WriteLine("Sent {0} bytes to client.", bytesSent);
+              //  Console.WriteLine("Sent {0} bytes to client.", bytesSent);
 
                 //handler.Shutdown(SocketShutdown.Both);
                 //handler.Close();
@@ -177,16 +183,16 @@ namespace trythis
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+               // Console.WriteLine(e.ToString());
             }
         }
         public static void UpdateData(byte[] receiveBytes, string iP)
         {
             DataTable dt = new DataTable();
-            DataRow dr = dt.NewRow();
+            //DataRow data = dt.NewRow();
             string[] data = new string[20];
 
-            dr[0] = iP;
+            data[0] = iP;
 
             if (receiveBytes[6] == Convert.ToByte(0xc4))
             {
@@ -304,7 +310,9 @@ namespace trythis
             data[17] = "--";
             data[18] = "--";
             data[19] = "--";
-
+            data[1] = "--";
+            data[2] = "--";
+            data[5] = "--";
 
 
             if (data != null)
