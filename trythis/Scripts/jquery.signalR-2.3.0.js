@@ -11,8 +11,8 @@
  * Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
  *
  */
-/// <reference path="jquery-1.6.4.js" />
-/// <reference path="jquery.signalr-2.3.0.min.js" />
+/// <reference path="jquery-3.3.1.js" />
+/// <reference path="jquery.signalr.version.js" />
 
 (function ($, window, undefined) {
 

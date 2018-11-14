@@ -27,7 +27,7 @@ namespace trythis
         {
             if (!IsPostBack)
             {
-                GridView1.DataSource = stat.camcheck();
+                GridView1.DataSource = stat.Camcheck();
                 GridView1.DataBind();
             }
            
@@ -41,7 +41,7 @@ namespace trythis
        
         protected void btnPing_Click(object sender, EventArgs e)
         { 
-             GridView1.DataSource = stat.camcheck() ;
+             GridView1.DataSource = stat.Camcheck() ;
             GridView1.DataBind();
             GridView1.GridLines = GridLines.None;
             GridView1.BorderStyle = BorderStyle.None;

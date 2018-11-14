@@ -40,49 +40,49 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// ImageButton16 control.
+        /// poweronOff control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton16;
+        protected global::System.Web.UI.WebControls.ImageButton poweronOff;
         
         /// <summary>
-        /// ImageButton17 control.
+        /// pcpoweronoff control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton17;
+        protected global::System.Web.UI.WebControls.ImageButton pcpoweronoff;
         
         /// <summary>
-        /// ImageButton18 control.
+        /// syslock control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton18;
+        protected global::System.Web.UI.WebControls.ImageButton syslock;
         
         /// <summary>
-        /// ImageButton19 control.
+        /// podiumlock control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton19;
+        protected global::System.Web.UI.WebControls.ImageButton podiumlock;
         
         /// <summary>
-        /// ImageButton20 control.
+        /// classlock control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton20;
+        protected global::System.Web.UI.WebControls.ImageButton classlock;
         
         /// <summary>
         /// Panel2 control.
@@ -94,58 +94,58 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Panel Panel2;
         
         /// <summary>
-        /// Button1 control.
+        /// pcPowerOn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button pcPowerOn;
         
         /// <summary>
-        /// Button2 control.
+        /// pcHDMI control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button pcHDMI;
         
         /// <summary>
-        /// Button3 control.
+        /// pcPowerOff control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.Button pcPowerOff;
         
         /// <summary>
-        /// Button4 control.
+        /// pcVideo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button4;
+        protected global::System.Web.UI.WebControls.Button pcVideo;
         
         /// <summary>
-        /// Button5 control.
+        /// pcSleep control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button5;
+        protected global::System.Web.UI.WebControls.Button pcSleep;
         
         /// <summary>
-        /// Button6 control.
+        /// pcVGA control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button6;
+        protected global::System.Web.UI.WebControls.Button pcVGA;
         
         /// <summary>
         /// Panel3 control.
@@ -157,31 +157,31 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Panel Panel3;
         
         /// <summary>
-        /// Button7 control.
+        /// light1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button7;
+        protected global::System.Web.UI.WebControls.Button light1;
         
         /// <summary>
-        /// Button8 control.
+        /// light2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button8;
+        protected global::System.Web.UI.WebControls.Button light2;
         
         /// <summary>
-        /// Button9 control.
+        /// light3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button9;
+        protected global::System.Web.UI.WebControls.Button light3;
         
         /// <summary>
         /// Panel9 control.
@@ -193,85 +193,85 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Panel Panel9;
         
         /// <summary>
-        /// Button19 control.
+        /// desktop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button19;
+        protected global::System.Web.UI.WebControls.Button desktop;
         
         /// <summary>
-        /// Button20 control.
+        /// laptop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button20;
+        protected global::System.Web.UI.WebControls.Button laptop;
         
         /// <summary>
-        /// Button21 control.
+        /// digitalScreen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button21;
+        protected global::System.Web.UI.WebControls.Button digitalScreen;
         
         /// <summary>
-        /// Button22 control.
+        /// digitalCurtain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button22;
+        protected global::System.Web.UI.WebControls.Button digitalCurtain;
         
         /// <summary>
-        /// Button23 control.
+        /// dvd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button23;
+        protected global::System.Web.UI.WebControls.Button dvd;
         
         /// <summary>
-        /// Button24 control.
+        /// bluray control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button24;
+        protected global::System.Web.UI.WebControls.Button bluray;
         
         /// <summary>
-        /// Button25 control.
+        /// tvset control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button25;
+        protected global::System.Web.UI.WebControls.Button tvset;
         
         /// <summary>
-        /// Button26 control.
+        /// vcr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button26;
+        protected global::System.Web.UI.WebControls.Button vcr;
         
         /// <summary>
-        /// Button27 control.
+        /// recorder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button27;
+        protected global::System.Web.UI.WebControls.Button recorder;
         
         /// <summary>
         /// Panel4 control.
@@ -283,58 +283,58 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Panel Panel4;
         
         /// <summary>
-        /// ImageButton1 control.
+        /// dsUp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
+        protected global::System.Web.UI.WebControls.ImageButton dsUp;
         
         /// <summary>
-        /// ImageButton2 control.
+        /// dcOpen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton2;
+        protected global::System.Web.UI.WebControls.ImageButton dcOpen;
         
         /// <summary>
-        /// ImageButton3 control.
+        /// dsStop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton3;
+        protected global::System.Web.UI.WebControls.ImageButton dsStop;
         
         /// <summary>
-        /// ImageButton4 control.
+        /// dcStop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton4;
+        protected global::System.Web.UI.WebControls.ImageButton dcStop;
         
         /// <summary>
-        /// ImageButton5 control.
+        /// dsDown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton5;
+        protected global::System.Web.UI.WebControls.ImageButton dsDown;
         
         /// <summary>
-        /// ImageButton6 control.
+        /// dcClose control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton6;
+        protected global::System.Web.UI.WebControls.ImageButton dcClose;
         
         /// <summary>
         /// Panel5 control.
@@ -364,58 +364,58 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// Button13 control.
+        /// micWiredAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button13;
+        protected global::System.Web.UI.WebControls.Button micWiredAdd;
         
         /// <summary>
-        /// Button14 control.
+        /// micAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button14;
+        protected global::System.Web.UI.WebControls.Button micAdd;
         
         /// <summary>
-        /// Button15 control.
+        /// micWiredSub control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button15;
+        protected global::System.Web.UI.WebControls.Button micWiredSub;
         
         /// <summary>
-        /// Button16 control.
+        /// micSub control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button16;
+        protected global::System.Web.UI.WebControls.Button micSub;
         
         /// <summary>
-        /// Button17 control.
+        /// micWiredMute control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button17;
+        protected global::System.Web.UI.WebControls.Button micWiredMute;
         
         /// <summary>
-        /// Button18 control.
+        /// micMute control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button18;
+        protected global::System.Web.UI.WebControls.Button micMute;
         
         /// <summary>
         /// Panel6 control.
@@ -427,31 +427,31 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Panel Panel6;
         
         /// <summary>
-        /// Button10 control.
+        /// volumeAdd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button10;
+        protected global::System.Web.UI.WebControls.Button volumeAdd;
         
         /// <summary>
-        /// Button11 control.
+        /// volumeSub control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button11;
+        protected global::System.Web.UI.WebControls.Button volumeSub;
         
         /// <summary>
-        /// Button12 control.
+        /// volumeMute control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button12;
+        protected global::System.Web.UI.WebControls.Button volumeMute;
         
         /// <summary>
         /// Panel8 control.
@@ -463,84 +463,84 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Panel Panel8;
         
         /// <summary>
-        /// ImageButton7 control.
+        /// dvdpower control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton7;
+        protected global::System.Web.UI.WebControls.ImageButton dvdpower;
         
         /// <summary>
-        /// ImageButton8 control.
+        /// dvdopen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton8;
+        protected global::System.Web.UI.WebControls.ImageButton dvdopen;
         
         /// <summary>
-        /// ImageButton9 control.
+        /// dvdstop control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton9;
+        protected global::System.Web.UI.WebControls.ImageButton dvdstop;
         
         /// <summary>
-        /// ImageButton10 control.
+        /// dvdplay control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton10;
+        protected global::System.Web.UI.WebControls.ImageButton dvdplay;
         
         /// <summary>
-        /// ImageButton11 control.
+        /// dvdprevious control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton11;
+        protected global::System.Web.UI.WebControls.ImageButton dvdprevious;
         
         /// <summary>
-        /// ImageButton12 control.
+        /// dvdnext control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton12;
+        protected global::System.Web.UI.WebControls.ImageButton dvdnext;
         
         /// <summary>
-        /// ImageButton13 control.
+        /// dvdpause control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton13;
+        protected global::System.Web.UI.WebControls.ImageButton dvdpause;
         
         /// <summary>
-        /// ImageButton14 control.
+        /// dvdforward control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton14;
+        protected global::System.Web.UI.WebControls.ImageButton dvdforward;
         
         /// <summary>
-        /// ImageButton15 control.
+        /// dvdrewind control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton ImageButton15;
+        protected global::System.Web.UI.WebControls.ImageButton dvdrewind;
     }
 }

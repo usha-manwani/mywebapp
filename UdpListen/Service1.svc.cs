@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,33 +14,34 @@ using System.Threading;
 
 namespace UdpListen
 {
-    
+
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
-    public class Service1 : IService1
-    {
-        
+    [ServiceBehavior(IncludeExceptionDetailInFaults = true, InstanceContextMode = InstanceContextMode.Single)]
+    [CallbackBehavior(UseSynchronizationContext = false)]
     
-
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
-
-        public void status()
+    public class Service1 : IService1
+    {       
+        public void GetUpdate()
         {
             AsynchronousSocketListener.StartListening();
-        }
+        }    
+        public void GetUpdatedData()
+        {
+           string m = "";
+            Boolean b = m.Contains("");
+            try
+            {
+                SqlConnection con = new SqlConnection("");
 
-       
+            }
+            catch(ReadOnlyException ex)
+            {
+                string message = ex.Message;
+                var r = ex.Source;
+            }
+            
+        }
     }
 
     public class StateObject
@@ -47,19 +49,18 @@ namespace UdpListen
         // Client  socket.  
         public Socket workSocket = null;
         // Size of receive buffer.  
-        public const int BufferSize = 20;
+        public const int BufferSize = 30;
         // Receive buffer.  
         public byte[] buffer = new byte[BufferSize];
         // Received data string.  
-        public StringBuilder sb = new StringBuilder();
+        public StringBuilder sb = new StringBuilder();   
     }
 
     public class AsynchronousSocketListener
     {
-        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-
+        public static string constr = ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         // Thread signal.  
-        public static ManualResetEvent allDone = new ManualResetEvent(false);
+          public static ManualResetEvent allDone = new ManualResetEvent(false);
 
         public AsynchronousSocketListener()
         {
@@ -69,14 +70,10 @@ namespace UdpListen
         {
             // Establish the local endpoint for the socket.  
             // The DNS name of the computer  
-            // running the listener is "host.contoso.com".  
-
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 1200);
-
             // Create a TCP/IP socket.  
             Socket listener = new Socket(AddressFamily.InterNetwork,
                 SocketType.Stream, ProtocolType.Tcp);
-
             // Bind the socket to the local endpoint and listen for incoming connections.  
             try
             {
@@ -87,26 +84,20 @@ namespace UdpListen
                 {
                     // Set the event to nonsignaled state.  
                     allDone.Reset();
-
                     // Start an asynchronous socket to listen for connections.  
-                    Console.WriteLine("Waiting for a connection...");
+
                     listener.BeginAccept(
                         new AsyncCallback(AcceptCallback),
                         listener);
 
                     // Wait until a connection is made before continuing.  
-                    allDone.WaitOne();
+                    allDone.WaitOne(10000);
                 }
-
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+
             }
-
-            Console.WriteLine("\nPress ENTER to continue...");
-            Console.Read();
-
         }
 
         public static void AcceptCallback(IAsyncResult ar)
@@ -118,7 +109,7 @@ namespace UdpListen
             Socket listener = (Socket)ar.AsyncState;
             Socket handler = listener.EndAccept(ar);
             string ip = ((IPEndPoint)handler.RemoteEndPoint).Address.ToString();
-            Console.WriteLine("ip   " + ip);
+
             // Create the state object.  
             StateObject state = new StateObject();
             state.workSocket = handler;
@@ -130,14 +121,11 @@ namespace UdpListen
         public static void ReadCallback(IAsyncResult ar)
         {
             String content = String.Empty;
-
             // Retrieve the state object and the handler socket  
             // from the asynchronous state object.  
             StateObject state = (StateObject)ar.AsyncState;
             Socket handler = state.workSocket;
-
             string b = "";
-
             // Read data from the client socket.   
             int bytesRead = handler.EndReceive(ar);
             for (int i = 0; i < bytesRead; i++)
@@ -149,18 +137,12 @@ namespace UdpListen
             {
                 if (bytesRead == 20)
                 {
-
-
-
-
-
+                    UpdateData(state.buffer, ip);
                 }
             }
             handler.BeginReceive(state.buffer, 0, StateObject.BufferSize, 0,
             new AsyncCallback(ReadCallback), state);
-
         }
-
 
         private static void Send(Socket handler)
         {
@@ -178,29 +160,26 @@ namespace UdpListen
             {
                 // Retrieve the socket from the state object.  
                 Socket handler = (Socket)ar.AsyncState;
-
                 // Complete sending the data to the remote device.  
                 int bytesSent = handler.EndSend(ar);
                 Console.WriteLine("Sent {0} bytes to client.", bytesSent);
 
                 //handler.Shutdown(SocketShutdown.Both);
                 //handler.Close();
-
-
-
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+
             }
         }
+
         public static void UpdateData(byte[] receiveBytes, string iP)
         {
             DataTable dt = new DataTable();
             DataRow dr = dt.NewRow();
             string[] data = new string[20];
 
-            dr[0] = iP;
+            data[0] = iP;
 
             if (receiveBytes[6] == Convert.ToByte(0xc4))
             {
@@ -227,14 +206,12 @@ namespace UdpListen
             else
                 data[15] = "Locked";
 
-
             if (receiveBytes[10] == Convert.ToByte(0x00))
             {
                 data[14] = "Open";
             }
             else
                 data[14] = "Locked";
-
 
             switch (Convert.ToInt32(receiveBytes[11]))
             {
@@ -318,8 +295,9 @@ namespace UdpListen
             data[17] = "--";
             data[18] = "--";
             data[19] = "--";
-
-
+            data[1] = "Class2";
+            data[2] = "1200";
+            data[5] = "--";
 
             if (data != null)
             {
@@ -331,14 +309,14 @@ namespace UdpListen
                 }
                 query = query.Substring(0, query.Length - 1);
                 query = query + ")";
-                string delQuery = "delete from dbo.[CentralControl] where CCIP ='" +data[0]+"'";
+                string delQuery = "delete from dbo.[CentralControl] where CCIP ='" + data[0] + "'";
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     try
                     {
                         if (con.State == ConnectionState.Closed)
                         {
-                            con.OpenAsync();
+                            con.Open();
                             using (SqlCommand delcmd = new SqlCommand(delQuery, con))
                             {
 
@@ -347,17 +325,88 @@ namespace UdpListen
                             }
                             using (SqlCommand cmd = new SqlCommand(query, con))
                             {
-
                                 cmd.ExecuteNonQuery();
-
                             }
-                        } 
+                        }
                     }
                     finally
                     {
                         con.Close();
                     }
-                        
+                }
+            }
+        }
+    }
+
+    public class test
+    {
+        public static NetworkStream stream;
+        public static List<TcpClient> tcpClients;
+        public static TcpListener listener;
+        public static void Run()
+        {
+            listener = new TcpListener(IPAddress.Any, 1200);
+            listener.Start(100);
+
+            try
+            {
+                WaitForClients();
+               
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
+            
+        }
+        public static void  WaitForClients()
+        {
+            try
+            {
+                listener.BeginAcceptTcpClient(new AsyncCallback(OnConnectedAsync), null);
+                
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message + " from " + ex.Source;
+                throw;
+            }
+        }
+        public static void HandleConnectionAsync(TcpClient client)
+        {
+            byte[] buffer = new byte[100];
+            stream = new NetworkStream(client.Client);
+            stream.ReadAsync(buffer, 0, client.Client.Available);
+        }
+        public static void OnConnectedAsync(IAsyncResult asyncResult)
+        {
+            try
+            {
+                TcpClient client = listener.EndAcceptTcpClient(asyncResult);
+                if(client != null)
+                {
+                    if(!tcpClients.Contains(client))
+                    tcpClients.Add(client);
+                    HandleConnectionAsync(client);
+                    WaitForClients();
+                }
+            }
+            catch(Exception ex)
+            {
+                string message = ex.Message + " from " + ex.Source;
+                throw;
+            }
+        }
+
+        public static void SendData(string ipaddress, byte[] byteToSend)
+        {
+            for(int i=0; i < tcpClients.Count; i++)
+            {
+               if(((IPEndPoint) (tcpClients[i].Client.RemoteEndPoint)).Address.ToString() == ipaddress)
+                {
+                    stream = new NetworkStream(tcpClients[i].Client);
+                    stream.WriteAsync(byteToSend, 0, byteToSend.Length);
                 }
             }
         }

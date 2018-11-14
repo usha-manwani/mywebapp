@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="final._Default" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="trythis._Default" %>
 <asp:Content ID="Headcontent" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="Scripts/demo.js"></script>
     <link href="Content/demo.css" rel="stylesheet" />

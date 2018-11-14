@@ -15,11 +15,11 @@ namespace trythis
         DataTable dt = new DataTable();
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
 
-        protected DataTable cameraStatus( DataTable dt1)
+        protected DataTable CameraStatus( DataTable dt1)
         {
             if (dt.Columns.Count!=2)
             {
-                dt.Columns.Add("Status", typeof(System.String));
+                dt.Columns.Add("Status", typeof(string));
             }
             foreach (DataRow r in dt1.Rows)
             {
@@ -31,12 +31,11 @@ namespace trythis
                 }
                 else
                     r["Status"] = "offline";
-            }
-            
+            }            
             return dt1;
         }
 
-        public DataTable camcheck()
+        public DataTable Camcheck()
         {
             
             using (SqlConnection con = new SqlConnection(constr))
@@ -61,11 +60,11 @@ namespace trythis
             }
             if (dt.Rows.Count > 0)
             {
-                cameraStatus(dt);
+                CameraStatus(dt);
             }
             return dt;
         }
-        public string camstatuscheck(string IP)
+        public string Camstatuscheck(string IP)
         {
             string status = "";
             Ping ping = new Ping();

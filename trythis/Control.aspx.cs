@@ -25,47 +25,47 @@ namespace trythis
         {
            
             
-            Button19.BackColor = ColorTranslator.FromHtml("#30A738");
+            desktop.BackColor = ColorTranslator.FromHtml("#30A738");
         }
 
         protected void Button20_Click(object sender, EventArgs e)
         {
-            Button20.BackColor = ColorTranslator.FromHtml("#30A738");
+            laptop.BackColor = ColorTranslator.FromHtml("#30A738");
         }
 
         protected void Button21_Click(object sender, EventArgs e)
         {
-            Button21.BackColor = ColorTranslator.FromHtml("#30A738");
+            digitalScreen.BackColor = ColorTranslator.FromHtml("#30A738");
         }
 
         protected void Button22_Click(object sender, EventArgs e)
         {
-            Button22.BackColor = ColorTranslator.FromHtml("#30A738");
+            digitalCurtain.BackColor = ColorTranslator.FromHtml("#30A738");
         }
 
         protected void Button23_Click(object sender, EventArgs e)
         {
-            Button23.BackColor = ColorTranslator.FromHtml("#30A738");
+            dvd.BackColor = ColorTranslator.FromHtml("#30A738");
         }
 
         protected void Button24_Click(object sender, EventArgs e)
         {
-            Button24.BackColor = ColorTranslator.FromHtml("#30A738");
+            bluray.BackColor = ColorTranslator.FromHtml("#30A738");
         }
 
         protected void Button25_Click(object sender, EventArgs e)
         {
-            Button25.BackColor = ColorTranslator.FromHtml("#30A738");
+            tvset.BackColor = ColorTranslator.FromHtml("#30A738");
         }
 
         protected void Button26_Click(object sender, EventArgs e)
         {
-            Button26.BackColor = ColorTranslator.FromHtml("#30A738");
+            vcr.BackColor = ColorTranslator.FromHtml("#30A738");
         }
 
         protected void Button27_Click(object sender, EventArgs e)
         {
-            Button27.BackColor = ColorTranslator.FromHtml("#30A738");
+            recorder.BackColor = ColorTranslator.FromHtml("#30A738");
         }
     }
 }

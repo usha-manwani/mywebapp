@@ -10,6 +10,7 @@ namespace trythis
 {
     public partial class UploadFile : System.Web.UI.Page
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -29,11 +30,22 @@ namespace trythis
         {
             if (fuSample.PostedFile != null)
             {
-                string fileName = fuSample.FileName;
                 
+                int count = 0;
+                string fileName = fuSample.FileName;
+                string fn = fileName;
+                while (File.Exists(Server.MapPath("~/Uploads/"+ fn)))
+                {
+                   fn= Path.GetFileNameWithoutExtension(fileName);
+                    fn = fn + "("+count+")";
+                    string extension = Path.GetExtension(fileName);
+                    fn = fn + extension;
+                    count++;
+                }
+                fileName = fn;
                 try
                 {
-                    fuSample.PostedFile.SaveAs((Server.MapPath("~/Uploads/") + fileName));
+                    fuSample.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fileName);
                     Response.Redirect(Request.Url.AbsoluteUri);
                 }
                 catch (HttpException)

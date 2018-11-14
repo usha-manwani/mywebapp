@@ -24,22 +24,26 @@ namespace trythis.Hubsfile
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
                 connection.OpenAsync();
                 dataAdapter.Fill(dt);
+                if (dt != null)
+                {
+                    string ip = dt.Rows[0]["ip"].ToString();
+                    SqlCommand command = new SqlCommand("DeleteDatafromRemote", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ip", ip);
+                }
                 //if(dt!=null)
                 //{
                 //    string ip = dt.Rows[0]["ip"].ToString();
                 //    SqlCommand cmd = new SqlCommand("DeleteDatefromRemote", connection);
                 //    cmd.Parameters.AddWithValue("@ip", ip);
-                //}
-               
+                //}               
             }
             catch(Exception ex)
-            { 
-              
+            {               
                 string message = ex.Message;
             }
             finally
             {
-
                 connection.Close();
             } 
             //if (dt != null)
@@ -51,8 +55,7 @@ namespace trythis.Hubsfile
 
         public void updateStatus(DataTable dt)
         {
-            byte[] receivedBytes= new byte[27]; 
-           
+            byte[] receivedBytes= new byte[27];            
             DataColumnCollection dataColumn = dt.Columns;
             foreach(DataRow row in dt.Rows)
             {
@@ -62,11 +65,8 @@ namespace trythis.Hubsfile
                         receivedBytes[i] = Convert.ToByte(row[i]);
                     else
                         break;
-                }
-                
-                
+                }                                
             }  
-        }
-        
+        }        
     }
 }

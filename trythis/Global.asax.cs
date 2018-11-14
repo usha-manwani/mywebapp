@@ -2,31 +2,36 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.ServiceProcess;
+using System.Threading;
 using System.Web;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 
+
 namespace trythis
 {
     public class Global : HttpApplication
     {
-       string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+       
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
             
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            
-            SqlDependency.Start(constr);
+          
+            //SqlDependency.Start(constr);
             //trythis.connection.ReceiveData();
         }
         protected void Application_End()
         {
+            
+           
             //Stop SQL dependency
-            SqlDependency.Stop(constr);
+           // SqlDependency.Stop(constr);
         }
         //public void Application_AuthenticateRequest(Object src, EventArgs e)
         //{
@@ -43,5 +48,7 @@ namespace trythis
         //        }
         //    }
         //}
+        
+
     }
 }

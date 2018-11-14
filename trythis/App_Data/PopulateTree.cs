@@ -537,4 +537,40 @@ namespace trythis
         }
         #endregion
    }
+
+    public class CentralControl
+    {
+        string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+
+        public DataSet ControlDetails()
+        {
+
+            DataSet ds = new DataSet();
+            //DataTable dt;
+            using (SqlConnection connection = new SqlConnection(constr))
+            {
+                string query = "SELECT * from dbo.[CentralControl]";
+                try
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Notification = null;
+                        //dt = new DataTable();
+                        
+                        if (connection.State == ConnectionState.Closed)
+                            connection.Open();
+                        SqlDataAdapter da = new SqlDataAdapter(command);
+                        da.Fill(ds);
+                        //dt.Load(reader);    
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return ds;
+        }
+    }
 }
