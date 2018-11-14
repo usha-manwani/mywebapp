@@ -9,8 +9,13 @@
             var cellIp = tab.rows[i].cells[1];
             if (cellIp.innerHTML == name) {
                 var arraydata = message.split(',');
-                for (j = 2; j < arraydata.length-1; j++) {
-                    tab.rows[i].cells[j].innerHTML = arraydata[j];
+                if (arraydata.length > 15) {
+                    for (j = 2; j < arraydata.length - 1; j++) {
+                        tab.rows[i].cells[j].innerHTML = arraydata[j];
+                    }
+                }
+                else {
+                    tab.rows[i].cells[11].innerHTML = arraydata[2];
                 }
             } 
         }

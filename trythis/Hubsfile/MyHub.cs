@@ -24,8 +24,8 @@ namespace trythis.Hubsfile
             Clients.All.broadcastMessage(sender, data);
         }
         public void SendData()
-        {
-            Clients.All.SendToMachine();
+        {            
+            Clients.All.SendToMachine(1);
         }
        
 
