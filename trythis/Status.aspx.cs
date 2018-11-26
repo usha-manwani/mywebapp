@@ -38,6 +38,8 @@ namespace trythis
         {           
          //   DataTable ScoresTable = Application["ScoreTable"] as DataTable;          
         }
+
+        
         //protected void Timer1_Tick()
         //{
         //    DataTable ScoresTable = Application["ScoreTable"] as DataTable;
@@ -55,7 +57,7 @@ namespace trythis
         //public DataTable updateData(DataTable dt)
         //{
         //    DataTable dt1 = new DataTable();
-            
+
         //    foreach (DataRow dr in dt.Rows)
         //    {
         //        DataRow row = dt1.NewRow();
@@ -190,9 +192,9 @@ namespace trythis
         //    }
 
 
-                
 
-            
+
+
         //    return dt;
 
         //}

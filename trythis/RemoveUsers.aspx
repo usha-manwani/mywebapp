@@ -35,7 +35,7 @@
 </asp:Content>
 <asp:Content ID="Main" ContentPlaceHolderID="MainContent" runat="server">
         <div class="divopt">
-            <asp:GridView ID="GridView1" runat="server"  Width="80%" GridLines="Horizontal" OnRowDeleting="GridView1_RowDeleting"
+            <asp:GridView ID="GridView1" runat="server"  Width="80%" GridLines="Horizontal" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
                 BorderStyle="None" AutoGenerateColumns="false" CellPadding="20" CellSpacing="20"   ForeColor="Black" HeaderStyle-BackColor="#009688" EmptyDataText = "No Registered Users">
                 <RowStyle Height="50" />
                 <Columns >

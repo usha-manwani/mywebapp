@@ -42,5 +42,14 @@ namespace trythis
             }
 
         }
+
+        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            string userid = GridView1.Rows[e.NewEditIndex].Cells[0].Text;
+            ud.DeleteUser(userid);
+            GridView1.DataSource = ud.getUserDetails(s);
+            GridView1.DataBind();
+            deleteuser.Style.Add("display", "block");
+        }
     }
 }

@@ -60,6 +60,7 @@
    
     <asp:Content ID="Main" ContentPlaceHolderID="MainContent" runat="server">
         <asp:ScriptManagerProxy ID="sc1" runat="server"></asp:ScriptManagerProxy>
+        
         <div style="opacity:0.8;" >
    <div Class="divopt" >
        <div class="leftspace">
@@ -137,22 +138,19 @@
         <asp:UpdatePanel runat="server" ID="updateGrade">
             <ContentTemplate>
                 <asp:TextBox ID="instext" runat="server" Visible="false"></asp:TextBox>
-                <div id="TextBoxContainer" class="form-horizontal">
-       
+                <div id="TextBoxContainer" class="form-horizontal">       
         <h4>Add New Grades</h4>
-        <hr />
-        
+        <hr />       
         <div class="form-group">
             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="Grade_Name" CssClass=" control-label" Text="Grade"></asp:Label>
             <div >
                 <asp:TextBox runat="server" ID="Grade_Name" CssClass="form-control"  />
             </div>
         </div>
-            
-            
+                       
         </div>
         <asp:Button ID="btnaddgrade" Text="Add Grade" runat="server"  OnClientClick="AddTextGrade(); return false;" />
-        <asp:Button ID="save" Text="Save" runat="server"    OnClick="btnGradesave_Click" />
+        <asp:Button ID="save" Text="Save" runat="server" OnClientClick="hideGrade();"    OnClick="btnGradesave_Click" />
             </ContentTemplate>
         </asp:UpdatePanel>
                     </div>
@@ -193,7 +191,7 @@
             
         </div>
         <asp:Button ID="BtnClass" Text="Add Class" runat="server"  OnClientClick="AddTextClass(); return false;" />
-        <asp:Button ID="BtnClassSave" Text="Save" runat="server"    OnClick="BtnClassSave_Click"/>
+        <asp:Button ID="BtnClassSave" Text="Save" runat="server" OnClientClick="hideClass();"    OnClick="BtnClassSave_Click"/>
             </ContentTemplate>
         </asp:UpdatePanel>
                     </div>

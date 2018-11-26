@@ -26,11 +26,8 @@ namespace trythis
                 {
                     no = no.Replace(c, string.Empty);
                 }
-                Int64 phone = Convert.ToInt64(no);
-
-
-
-                String connString = null;
+                long phone = Convert.ToInt64(no);
+                string connString = null;
                 connString = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(connString);
                 con.Open();

@@ -7,6 +7,7 @@ using Microsoft.AspNet.SignalR;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace trythis.Hubsfile
 {  
@@ -19,7 +20,13 @@ namespace trythis.Hubsfile
         {
             Clients.All.hello();
         }
-        public void SendMessage(string sender, string data)
+        public async override Task OnConnected()
+        {
+            await base.OnConnected();
+            SendData();
+           
+        }
+            public void SendMessage(string sender, string data)
         {
             Clients.All.broadcastMessage(sender, data);
         }
@@ -27,7 +34,10 @@ namespace trythis.Hubsfile
         {            
             Clients.All.SendToMachine(1);
         }
-       
+       public void SendControlKeys(string machine, string code)
+        {
+            Clients.All.SendControl(machine, code);
+        }
 
         public void GetUsers()
         {

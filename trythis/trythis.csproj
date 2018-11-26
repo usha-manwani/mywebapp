@@ -38,6 +38,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="CresijCamConnectionString-Deployment" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=WIN-OTVR1M4I567\SQLEXPRESS%3bInitial Catalog=CresijCam%3bIntegrated Security=True%3bPersist Security Info=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\CresijCamConnectionString-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -213,11 +224,17 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ControlStyle.css" />
     <Content Include="Content\dashboard.css" />
     <Content Include="Content\demo.css" />
     <Content Include="Content\docs.css" />
     <Content Include="Content\docs.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\ie10-viewport-bug-workaround.css" />
+    <Content Include="Content\normalize.css" />
+    <Content Include="Content\style-responsive.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Control.aspx" />
     <Content Include="DeleteDocument.aspx" />
     <Content Include="HtmlPage2.html" />
@@ -225,6 +242,7 @@
     <Content Include="Images\bg1.jpg" />
     <Content Include="Images\bck2.png" />
     <Content Include="Images\bg3.jpg" />
+    <Content Include="Images\Blu-Ray.png" />
     <Content Include="Images\button_forward %281%29.png" />
     <Content Include="Images\button_next.png" />
     <Content Include="Images\button_open.png" />
@@ -234,22 +252,35 @@
     <Content Include="Images\button_previous.png" />
     <Content Include="Images\button_rewind.png" />
     <Content Include="Images\button_stop.png" />
-    <Content Include="Images\close.PNG" />
+    <Content Include="Images\Camera.png" />
+    <Content Include="Images\close.png" />
+    <Content Include="Images\Desktop.png" />
     <Content Include="Images\down.PNG" />
-    <Content Include="Images\lock.png" />
-    <Content Include="Images\oepn.PNG" />
-    <Content Include="Images\power-13.png" />
+    <Content Include="Images\DVD.png" />
+    <Content Include="Images\HDMI.png" />
+    <Content Include="Images\laptop.png" />
+    <Content Include="Images\Light.png" />
+    <Content Include="Images\unlock.png" />
+    <Content Include="Images\mute.png" />
+    <Content Include="Images\open.png" />
+    <Content Include="Images\platform.png" />
+    <Content Include="Images\power.png" />
     <Content Include="Images\powerOff.png" />
     <Content Include="Images\powerOn.png" />
-    <Content Include="Images\stop.PNG" />
-    <Content Include="Images\unlock.png" />
+    <Content Include="Images\stop.png" />
+    <Content Include="Images\TV.png" />
     <Content Include="Images\up.PNG" />
+    <Content Include="Images\VGA.png" />
+    <Content Include="Images\video.png" />
+    <Content Include="Images\volminus.png" />
+    <Content Include="Images\volplus.png" />
     <Content Include="Logout.aspx" />
     <Content Include="Members\demo.html" />
     <Content Include="home.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="MyService.svc" />
     <Content Include="Options.aspx" />
+    <Content Include="Reader.aspx" />
     <Content Include="Registration.aspx" />
     <Content Include="RemoveUsers.aspx" />
     <Content Include="roles.xml" />
@@ -258,6 +289,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\ButtonsForControl.css" />
+    <Content Include="Scripts\ControlKeys.js" />
     <Content Include="Scripts\DataFromControl.js" />
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -317,9 +350,8 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CresijProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Images\cybersecurity.jpg" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -445,6 +477,13 @@
     </Compile>
     <Compile Include="App_Data\PopulateTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reader.aspx.cs">
+      <DependentUpon>Reader.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reader.aspx.designer.cs">
+      <DependentUpon>Reader.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
