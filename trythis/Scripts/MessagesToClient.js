@@ -1,5 +1,6 @@
 ﻿$(function () {
-    // Declare a proxy to reference the hub. 
+    // Declare a proxy to reference the hub.
+   
     var chat = $.connection.myHub;
 
     // Create a function that the hub can call to broadcast messages.
@@ -8,11 +9,20 @@
         var tab = document.getElementById("MainContent_GridView1");
         for (i = 0; i < tab.rows.length; i++) {
             var cellIp = tab.rows[i].cells[1];
-            if (cellIp.innerHTML == name) {
-                var arraydata = message.split(',');
-                if (arraydata.length > 15) {
-                    for (j = 2; j < arraydata.length - 1; j++) {
-                        tab.rows[i].cells[j].innerHTML = arraydata[j];
+            var arraydata = message.split(',');
+            if (cellIp.innerHTML == name)
+            {
+                
+                if (arraydata[1] == "Heartbeat") {
+                    if (arraydata.length > 18) {
+                        for (j = 2; j < 15; j++) {
+                            tab.rows[i].cells[j].innerHTML = arraydata[j];
+                        }
+                    }
+                    else {
+                        for (j = 2; j < arraydata.length - 1; j++) {
+                            tab.rows[i].cells[j].innerHTML = arraydata[j];
+                        }
                     }
                 }
                 else if (arraydata[1] == "KeyValue") {
@@ -31,17 +41,15 @@
                             break;
                         case 'DSUp':
                             tab.rows[i].cells[9].innerHTML = 'Up';
-                            break;                       
+                            break;
                         default:
                             break;
                     }
                 }
                 else if (arraydata[1] == "LEDIndicator") {
                     if (arraydata[2] == "SystemSwitchOn") {
-                        if (arraydata.length > 4)
-                        {
-                            switch (arraydata[4])
-                            {
+                        if (arraydata.length > 4) {
+                            switch (arraydata[4]) {
                                 case 'ComputerOff':
                                     tab.rows[i].cells[5].innerHTML = 'Off';
                                     break;
@@ -92,13 +100,26 @@
                             case 'ClassLock':
                                 tab.rows[i].cells[14].innerHTML = 'Locked';
                                 break;
-                            
+
                         }
                     }
                     else if (arraydata[2] == "SystemSwitchOff") {
                         tab.rows[i].cells[3].innerHTML = "CLOSED";
                     }
                 }
+                else if (arraydata[0] == "Temp") {
+                    tab.rows[i].cells[15].innerHTML = arraydata[1];
+                    tab.rows[i].cells[16].innerHTML = arraydata[2];
+                    tab.rows[i].cells[17].innerHTML = arraydata[3];
+                    tab.rows[i].cells[18].innerHTML = arraydata[4];
+                }
+
+                else if (arraydata[2] == 'Offline') {
+                    for (j = 2; j < arraydata.length - 1; j++) {
+                        tab.rows[i].cells[j].innerHTML = arraydata[j];
+                    }
+                }
+                break;
                 //else if (arraydata[1] == "PanelKey") {
                 //    switch (arraydata[2]) {
                 //        case 'ComputerSystemON':
@@ -115,6 +136,8 @@
         }
     };
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
+        alert('connected');
+        chat.server.sendData();
         $(document).on("click", "#refresh", function () {
             //Call the Send method on the hub.
             chat.server.sendData();            

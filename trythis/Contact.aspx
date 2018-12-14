@@ -1,8 +1,8 @@
-﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="trythis.Contact" %>
-<%@ MasterType VirtualPath="~/Site.master" %>    
-<asp:Content ID="Head" ContentPlaceHolderID="HeadContent" runat="server">
+﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="trythis.Contact" %>
+<%@ MasterType VirtualPath="~/Master.master" %>    
+<asp:Content ID="Head" ContentPlaceHolderID="masterHead" runat="server">
     </asp:Content>
- <asp:Content ID="Main" ContentPlaceHolderID="MainContent" runat="server">
+ <asp:Content ID="Main" ContentPlaceHolderID="masterBody" runat="server">
         <div class="row " id="d1" runat="server" > 
             <div class="col-lg-12"> 
                 

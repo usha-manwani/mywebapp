@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AddUser.aspx.cs" Inherits="trythis.AddUser" %>
-<%@ MasterType VirtualPath="~/Site.master" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AddUser.aspx.cs" Inherits="trythis.AddUser" %>
+<%@ MasterType VirtualPath="~/Master.master" %>
 <%@Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
- <asp:Content ID="Head" ContentPlaceHolderID="HeadContent" runat="server">
+ <asp:Content ID="Head" ContentPlaceHolderID="masterHead" runat="server">
      <style>
        
           .leftspace{
@@ -42,8 +42,7 @@
             {
                 alert("Please enter a phone No ");
                 return false;
-            }
-            
+            }            
         }
         
     </script>
@@ -52,7 +51,7 @@
 
 
 
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="masterBody" runat="server">
    
        <div class="form-horizontal divopt" >
         <h4>Add a new User..!</h4>
@@ -104,11 +103,10 @@
                 <asp:CheckBoxList ID="CheckBoxList1" runat="server">
                         <asp:ListItem Text="Administrator(Full Access)" Value="1" ></asp:ListItem>
                         <asp:ListItem Text="Live Feed " Value="2"></asp:ListItem>
-                        <asp:ListItem Text="Manage Camera Details" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="Document Update" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="Manage Devices Details(Add,Edit,Delete)" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="Document upload & Download" Value="4"></asp:ListItem>
                         <asp:ListItem Text="Document Deletion" Value="5"></asp:ListItem>
-                        <asp:ListItem Text="Add and Delete Users" Value="6"></asp:ListItem>
-                        <asp:ListItem Text="Authenticate Users" Value="7"></asp:ListItem>
+                        <asp:ListItem Text="Add, Authenticate and Delete Users" Value="6"></asp:ListItem>                       
                     </asp:CheckBoxList>
                 </div>
             </div>
@@ -123,7 +121,7 @@
                     CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number "></asp:RegularExpressionValidator>
                 <br />
                 
-                <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true" OnClientClick="RequirePhone(); return false"  ClientIDMode="Static" CausesValidation="True"  ForeColor="#336699"> Verify Phone Number</asp:LinkButton>
+                <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true" OnClientClick="RequirePhone(); return false"  ClientIDMode="Static" CausesValidation="True"  ForeColor="#336699" CssClass="asplink"> Verify Phone Number</asp:LinkButton>
                  </div>   
                 
             </div>

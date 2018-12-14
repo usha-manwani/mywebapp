@@ -1,6 +1,26 @@
 ﻿@import url('normalize.css');
 @import url('demo.css');
+.header1 {
+    height: 100px;
+    font-size: x-large;
+    border-radius: 5px;
+    
+}
+.hoveronheader{
 
+}
+header:hover{
+   
+    opacity:0.7;
+
+}
+
+.divcontrols {
+    background-color: #ffffff;
+    border: solid;
+   
+    border-radius: 5px;
+}
 body {
 }
     #projectorOn:target {

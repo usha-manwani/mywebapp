@@ -15,36 +15,64 @@ namespace trythis
         static DataTable dt = new DataTable();
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
 
-        public void cam(TreeView t,string ptId, TreeNode c)
+        public void cam(TreeView t, string ptId, TreeNode c)
         {
 
             DataTable dtcam = ExecuteCommand("Select CamName, CameraID, CameraIP  from Camera_Details where location ='" + ptId + "'");
-            foreach(DataRow row in dtcam.Rows)
+            if (dtcam.Rows.Count > 0)
             {
-                TreeNode child = new TreeNode
+                TreeNode nodeCam = new TreeNode
                 {
-                    Text = row[0].ToString(),
-                    Value = row[2].ToString()
-
+                    Text = "Camera",
+                    Value = "Camera"
                 };
-                c.ChildNodes.Add(child);
+                c.ChildNodes.Add(nodeCam);
+                foreach (DataRow row in dtcam.Rows)
+                {
+                    TreeNode child = new TreeNode
+                    {
+                        Text = row[0].ToString(),
+                        Value = row[2].ToString()
+
+                    };
+                    nodeCam.ChildNodes.Add(child);
+                }
             }
-            
+            DataTable dtControlDevice = ExecuteCommand("Select CCIP,Location from CentralControl where location='" + ptId + "'");
+
+            if (dtControlDevice.Rows.Count > 0)
+            {
+                TreeNode nodeCentral = new TreeNode
+                {
+                    Text = "Multimedia Device",
+                    Value = "Multimedia"
+                };
+                c.ChildNodes.Add(nodeCentral);
+                foreach (DataRow row in dtControlDevice.Rows)
+                {
+                    TreeNode child = new TreeNode
+                    {
+                        Text = row[0].ToString(),
+                        Value = row[0].ToString()
+                    };
+                    nodeCentral.ChildNodes.Add(child);
+                }
+            }
+
         }
 
-        public void function(TreeView t, EventArgs args )
+        public void function(TreeView t, EventArgs args)
         {
             if (t.Nodes.Count > 0)
             {
                 t.Nodes.Clear();
             }
+
             DataTable dt = ExecuteCommand("Select InstituteName, ID, InstituteID from Institute_Details");
-           
-            this.PopulateTreeView(dt, 0, null,t);
+            this.PopulateTreeView(dt, 0, null, t);
         }
 
-        
-        private void PopulateTreeView(DataTable dtParent, int ParentId, TreeNode treeNode, TreeView t )
+        private void PopulateTreeView(DataTable dtParent, int ParentId, TreeNode treeNode, TreeView t)
         {
             string val;
             foreach (DataRow row in dtParent.Rows)
@@ -52,67 +80,49 @@ namespace trythis
                 val = row[2].ToString();
                 TreeNode child = new TreeNode
                 {
-
                     Text = row[0].ToString(),
                     Value = row[1].ToString()
-
                 };
-
-
                 if (ParentId == 0)
                 {
                     t.Nodes.Add(child);
-
                     DataTable dtChild = ExecuteCommand("Select GradeName, ID, GradeID from Grade_Details where InsID ='" + val + "'");
-                    PopulateTreeView(dtChild, int.Parse(child.Value), child,t);
+                    PopulateTreeView(dtChild, int.Parse(child.Value), child, t);
                 }
                 else
                 {
-                    if (ParentId !=0)
+                    if (ParentId != 0)
                     {
                         treeNode.ChildNodes.Add(child);
                         DataTable dtclass = ExecuteCommand("Select ClassName, ID,ClassID from Class_Details where GradeID='" + val + "'");
-                        if(dtclass.Rows.Count==0)
+                        if (dtclass.Rows.Count == 0)
                         {
-                            cam(t, val,child);
-                            
+                            cam(t, val, child);
                         }
-                        
-                        PopulateTreeView(dtclass, int.Parse(child.Value), child,t);
-                        
-                        
-                            
-                        
+
+                        PopulateTreeView(dtclass, int.Parse(child.Value), child, t);
                     }
-                       
-                    
-                    else 
+                    else
                         treeNode.ChildNodes.Add(child);
                 }
             }
             t.CollapseAll();
         }
 
-        private static DataTable ExecuteCommand(string Text)
+        public static DataTable ExecuteCommand(string Text)
         {
             SqlConnection con = new SqlConnection(constr);
             try
             {
-               
                 SqlDataAdapter da = new SqlDataAdapter(Text, con);
-
                 //Opening Connection  
                 if (con.State != ConnectionState.Open)
                     con.Open();
-
                 DataTable dt = new DataTable();
-
-
                 //Loading all data in a datatable from datareader  
                 da.Fill(dt);
                 //Closing the connection  
                 return dt;
-
             }
             catch
             {
@@ -122,16 +132,36 @@ namespace trythis
             {
                 con.Close();
             }
-            
-
         }
 
         #endregion
 
         #region Insert Details
-        public Int32 InsertInstitute(string Text)
+
+        public void insertANyData(string Query)
         {
-            Int32 t=0;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using(SqlCommand cmd= new SqlCommand(Query, con))
+                {
+                    try { con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+
+        }
+        public int InsertInstitute(string Text)
+        {
+            int t = 0;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 try
@@ -146,20 +176,20 @@ namespace trythis
                         cmd.ExecuteNonQuery();
 
                         t = Convert.ToInt32(cmd.Parameters["@Ids"].Value);
-                        
+
                     }
 
                 }
-                catch  { }
+                catch { }
                 finally
                 {
                     con.Close();
                 }
                 return t;
             }
-            
+
         }
-        public Int32 InsertGrade(string insID, string Grade)
+        public int InsertGrade(string insID, string Grade)
         {
             Int32 result = 0;
             Int32 i = Convert.ToInt32(insID);
@@ -172,16 +202,16 @@ namespace trythis
                     cmd.Parameters.AddWithValue("@InsID", i);
                     cmd.Parameters.Add("@Ids", SqlDbType.Int);
                     cmd.Parameters["@Ids"].Direction = ParameterDirection.Output;
-                    
+
                     try
                     {
                         con.Open();
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@Ids"].Value);
-                        
+
 
                     }
-                    catch 
+                    catch
                     {
 
                     }
@@ -190,12 +220,12 @@ namespace trythis
                         con.Close();
                     }
                 }
-                
+
             }
             return result;
         }
 
-        public Int32 InsertClass(string gid, string className)
+        public int InsertClass(string gid, string className)
         {
             Int32 result = 0;
             using (SqlConnection con = new SqlConnection(constr))
@@ -226,10 +256,10 @@ namespace trythis
             return result;
         }
 
-        public string InsertCam(String camIP, String camId, string camPass, string port, string loc)
+        public string InsertCam(string camIP, string camId, string camPass, string port, string loc)
         {
-            Int32 camloc = Convert.ToInt32(loc);
-            string camName="";
+            int camloc = Convert.ToInt32(loc);
+            string camName = "";
             if (camIP != null && camId != null && camPass != null && port != null && loc != null)
             {
                 using (SqlConnection con = new SqlConnection(constr))
@@ -245,8 +275,8 @@ namespace trythis
                             cmd.Parameters.AddWithValue("@id", loc);
                             cmd.Parameters.AddWithValue("@portNo", port);
                             cmd.Parameters.AddWithValue("@CamProvider", "HikVision");
-                            
-                            cmd.Parameters.Add("@camName", SqlDbType.NVarChar,-1);
+
+                            cmd.Parameters.Add("@camName", SqlDbType.NVarChar, -1);
                             cmd.Parameters["@camName"].Direction = ParameterDirection.Output;
                             con.Open();
                             cmd.ExecuteNonQuery();
@@ -261,283 +291,512 @@ namespace trythis
                     {
                         con.Close();
                     }
-                    
+
                 }
             }
             return camName;
         }
+
+        public int InsertCentralControl(string ccIP, string loc)
+        {
+            int result = 0;
+
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                try
+                {
+                    string query = "Insert  into CentralControl (CCIP,location, PortNo) values('" + ccIP + "','" + loc + "',1200)";
+                    using (SqlCommand cmd = new SqlCommand("InsCentralControl", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ccip", ccIP);
+                        cmd.Parameters.AddWithValue("@loc", loc);
+                        cmd.Parameters.Add("@result", SqlDbType.Int);
+                        cmd.Parameters["@result"].Direction = ParameterDirection.Output;
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        cmd.ExecuteNonQuery();
+                        result = Convert.ToInt32(cmd.Parameters["@result"].Value);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    result = -2;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+
+            return result;
+        }
         #endregion
 
-        #region Delete details
+            #region Delete details
 
-        public Int32 delCam(string camIP)
-        {
-            Int32 cid = 2;
-            if (camIP != null)
+            public Int32 delCam(string camIP)
             {
+                Int32 cid = 2;
+                if (camIP != null)
+                {
+                    using (SqlConnection con = new SqlConnection(constr))
+                    {
+                        try
+                        {
+                            using (SqlCommand cmd = new SqlCommand("sp_delCam", con))
+                            {
+                                cmd.CommandType = CommandType.StoredProcedure;
+                                cmd.Parameters.Add("@r", SqlDbType.Int);
+                                cmd.Parameters["@r"].Direction = ParameterDirection.Output;
+                                cmd.Parameters.AddWithValue("@Cam", camIP);
+                                con.Open();
+                                cmd.ExecuteNonQuery();
+                                cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
+                    }
+                }
+                return cid;
+            }
+
+            public Int32 DeleteClass(string classId)
+            {
+                Int32 cid = Convert.ToInt32(classId);
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    try
+                    using (SqlCommand cmd = new SqlCommand("sp_DelClass", con))
                     {
-                        using (SqlCommand cmd = new SqlCommand("sp_delCam", con))
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add("@r", SqlDbType.Int);
+                        cmd.Parameters["@r"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.AddWithValue("@class", cid);
+                        try
                         {
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.Add("@r", SqlDbType.Int);
-                            cmd.Parameters["@r"].Direction = ParameterDirection.Output;
-                            cmd.Parameters.AddWithValue("@Cam", camIP);
                             con.Open();
                             cmd.ExecuteNonQuery();
                             cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
                         }
-                    }
-                    catch
-                    {
+                        catch
+                        {
 
-                    }
-                    finally
-                    {
-                        con.Close();
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
                     }
                 }
+                return cid;
             }
-            return cid;
-        }
 
-        public Int32 DeleteClass( string classId)
-        {
-            Int32 cid = Convert.ToInt32(classId);
-            using (SqlConnection con = new SqlConnection(constr))
+
+            public Int32 DelGrade(string GradeId)
             {
-                using (SqlCommand cmd = new SqlCommand("sp_DelClass", con))
+                Int32 cid = Convert.ToInt32(GradeId);
+                using (SqlConnection con = new SqlConnection(constr))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@r", SqlDbType.Int);
-                    cmd.Parameters["@r"].Direction = ParameterDirection.Output;
-                    cmd.Parameters.AddWithValue("@class", cid);
-                    try
+                    using (SqlCommand cmd = new SqlCommand("sp_DelGrade", con))
                     {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
-                    }
-                    catch 
-                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    }
-                    finally
-                    {
-                        con.Close();
+                        cmd.Parameters.AddWithValue("@id", cid);
+                        cmd.Parameters.Add("@r", SqlDbType.Int);
+                        cmd.Parameters["@r"].Direction = ParameterDirection.Output;
+                        try
+                        {
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                        }
+                        catch
+                        {
+
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
                     }
                 }
+                return cid;
             }
-            return cid;
-        }
 
-
-        public Int32 DelGrade(string GradeId)
-        {
-            Int32 cid = Convert.ToInt32(GradeId);
-            using (SqlConnection con = new SqlConnection(constr))
+            public Int32 DelInstitute(string insId)
             {
-                using (SqlCommand cmd = new SqlCommand("sp_DelGrade", con))
+                Int32 cid = Convert.ToInt32(insId);
+                using (SqlConnection con = new SqlConnection(constr))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand("sp_delInstitute", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@id", cid);
-                    cmd.Parameters.Add("@r", SqlDbType.Int);
-                    cmd.Parameters["@r"].Direction = ParameterDirection.Output;
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
-                    }
-                    catch 
-                    {
+                        cmd.Parameters.AddWithValue("@id", cid);
+                        cmd.Parameters.Add("@r", SqlDbType.Int);
+                        cmd.Parameters["@r"].Direction = ParameterDirection.Output;
+                        try
+                        {
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                        }
+                        catch
+                        {
 
-                    }
-                    finally
-                    {
-                        con.Close();
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
                     }
                 }
+                return cid;
             }
-            return cid;
-        }
 
-        public Int32 DelInstitute(string insId)
-        {
-            Int32 cid = Convert.ToInt32(insId);
-            using (SqlConnection con = new SqlConnection(constr))
+            #endregion
+
+            #region Edit details
+
+            public DataTable camDetails(string ip)
             {
-                using (SqlCommand cmd = new SqlCommand("sp_delInstitute", con))
+                DataTable dt = new DataTable();
+                using (SqlConnection con = new SqlConnection(constr))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand("select * from fn_camDetails(@camIP)", con))
+                    {
+                        cmd.Parameters.AddWithValue("@camIP", ip);
+                        try
+                        {
 
-                    cmd.Parameters.AddWithValue("@id", cid);
-                    cmd.Parameters.Add("@r", SqlDbType.Int);
-                    cmd.Parameters["@r"].Direction = ParameterDirection.Output;
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
-                    }
-                    catch 
-                    {
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            da.Fill(dt);
+                        }
+                        catch (Exception ex)
+                        {
 
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
                     }
-                    finally
+                }
+                return dt;
+            }
+
+            public void updateCam(string ip, string pass, string id, string port)
+            {
+                int portNo = Convert.ToInt32(port);
+                DataTable dt = new DataTable();
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("sp_UpdateCam", con))
                     {
-                        con.Close();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@ip", ip);
+                        cmd.Parameters.AddWithValue("@pass", pass);
+                        cmd.Parameters.AddWithValue("@port", portNo);
+                        try
+                        {
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+
+                        }
+                        catch
+                        {
+
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
                     }
                 }
             }
-            return cid;
-        }
+            public void updateIns(Int32 id, string insName)
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("sp_UpdateIns", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.Parameters.AddWithValue("@InsName", insName);
+                        try
+                        {
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch
+                        {
 
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
+                    }
+                }
+            }
+
+            public void updateGrade(Int32 id, string gradeName)
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("sp_UpdateGrade", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.Parameters.AddWithValue("@gradeName", gradeName);
+                        try
+                        {
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
+                    }
+
+                }
+            }
+            public void updateClass(Int32 id, string className)
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("sp_UpdateClass", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.Parameters.AddWithValue("@className", className);
+                        try
+                        {
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch
+                        {
+
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
+                    }
+
+                }
+            }
         #endregion
 
-        #region Edit details
-
-        public DataTable camDetails(string ip)
+        #region cardReaderTree
+        public void fill(TreeView t)
         {
-            DataTable dt = new DataTable();
-            using (SqlConnection con = new SqlConnection(constr))
+            if (t.Nodes.Count > 0)
             {
-                using (SqlCommand cmd = new SqlCommand("select * from fn_camDetails(@camIP)", con))
-                {
-                    cmd.Parameters.AddWithValue("@camIP", ip);
-                    try
-                    {
-                       
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        da.Fill(dt);
-                    }
-                    catch(Exception ex)
-                    {
-
-                    }
-                    finally
-                    {
-                        con.Close();
-                    }
-                }
+                t.Nodes.Clear();
             }
-                    return dt;
+
+            DataTable dt = ExecuteCommand("Select InstituteName, ID, InstituteID from Institute_Details");
+            this.populateTreeCard(dt, 0, null, t);
         }
-
-        public void updateCam(string ip, string pass, string id, string port)
+        private void populateTreeCard(DataTable dtParent, int ParentId, TreeNode treeNode, TreeView t)
         {
-            int portNo = Convert.ToInt32(port);
-            DataTable dt = new DataTable();
-            using (SqlConnection con = new SqlConnection(constr))
+            string val;
+            foreach (DataRow row in dtParent.Rows)
             {
-                using (SqlCommand cmd = new SqlCommand("sp_UpdateCam", con))
+                val = row[2].ToString(); 
+                TreeNode child = new TreeNode
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@ip", ip);
-                    cmd.Parameters.AddWithValue("@pass", pass);
-                    cmd.Parameters.AddWithValue("@port", portNo);
-                    try
+                    Text = row[0].ToString(),
+                    Value = row[1].ToString()
+                };
+                child.ToolTip = val;
+                if (ParentId == 0)
+                {
+                    t.Nodes.Add(child);
+                    DataTable dtChild = ExecuteCommand("Select GradeName, ID, GradeID from Grade_Details where InsID ='" + val + "'");
+                    populateTreeCard(dtChild, int.Parse(child.Value), child, t);
+                }
+                else
+                {
+                    if (ParentId != 0)
                     {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-
+                        treeNode.ChildNodes.Add(child);
+                        DataTable dtclass = ExecuteCommand("Select ClassName,ID, ClassID from Class_Details where GradeID='" + val + "'");
+                        populateTreeCard(dtclass, int.Parse(child.Value), child, t);
                     }
-                    catch 
-                    {
-
-                    }
-                    finally
-                    {
-                        con.Close();
-                    }
+                    else
+                        treeNode.ChildNodes.Add(child);
                 }
             }
-        }
-        public void updateIns(Int32 id, string insName)
-        {
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand("sp_UpdateIns", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    cmd.Parameters.AddWithValue("@InsName", insName);
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch 
-                    {
-
-                    }
-                    finally
-                    {
-                        con.Close();
-                    }
-                }
-            }
-        }
-       
-        public void updateGrade(Int32 id, string gradeName)
-        {
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand("sp_UpdateGrade", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    cmd.Parameters.AddWithValue("@gradeName", gradeName);
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch 
-                    {
-
-                    }
-                    finally
-                    {
-                        con.Close();
-                    }
-                }
-
-            }
-        }
-        public void updateClass(Int32 id, string className)
-        {
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand("sp_UpdateClass", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    cmd.Parameters.AddWithValue("@className", className);
-                    try
-                    {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch 
-                    {
-
-                    }
-                    finally
-                    {
-                        con.Close();
-                    }
-                }
-
-            }
+            t.CollapseAll();
         }
         #endregion
-   }
+        #region CardReaderGidview
+        public DataTable tempcard()
+        {
+            DataTable dt1= new DataTable();
+            using(SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "Select * from tempCardRegister";
+                using(SqlDataAdapter da = new SqlDataAdapter(query,con))
+                {
+                    try
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                            da.Fill(dt1);
+                        }
+                    }
+                    catch (Exception)
+                    {
 
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return dt1;
+        }
+
+        public int inserTempCard(string sno, string id, string name, string card, string com)
+        {
+            int result = -1;
+            int serialno= Convert.ToInt32(sno);
+            if (com == "" || com == null)
+            {
+                com = "No comments";
+            }
+           
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                try
+                {
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    //string query = "insert into tempCardRegister values("+serialno+",'"+id+"','" +mem+ "','" + card+"','" +com+   "','Unregistered','--','Select Access')";
+                    //SqlCommand cmd = new SqlCommand(query, con);
+                    SqlCommand cmd = new SqlCommand("InstempCard", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@memberID", id);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@ReaderID", card);
+                    cmd.Parameters.AddWithValue("@comment", com);
+                    cmd.Parameters.AddWithValue("@state", "unregistered");
+                    cmd.Parameters.AddWithValue("@sno", serialno);
+                    cmd.Parameters.AddWithValue("@access", "--");
+                    cmd.Parameters.AddWithValue("@select", "Select Access");
+                    cmd.Parameters.Add("@result", SqlDbType.Int);
+                    cmd.Parameters["@result"].Direction = ParameterDirection.Output;
+                    cmd.ExecuteNonQuery();
+                    result = Convert.ToInt32(cmd.Parameters["@result"].Value);
+                }
+                catch (Exception ex)
+                {
+                    result = -2;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return result;
+        }
+
+        public int regcard(string sno, string memid, string name, string card,string com, string state, string access,string locnames)
+        {
+            int result = 0;
+            using(SqlConnection con = new SqlConnection(constr))
+            {
+                try
+                {
+                    using(SqlCommand cmd = new SqlCommand("RegCard", con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("sno", sno);
+                        cmd.Parameters.AddWithValue("memberid", memid);
+                        cmd.Parameters.AddWithValue("@name", name);
+                        cmd.Parameters.AddWithValue("@cardid", card);
+                        cmd.Parameters.AddWithValue("@comment", com);
+                        cmd.Parameters.AddWithValue("@state", "UnRegistered");
+                        cmd.Parameters.AddWithValue("@rightsID", access);
+                        cmd.Parameters.AddWithValue("@locnames", locnames);
+                        cmd.Parameters.Add("@result", SqlDbType.Int);
+                        cmd.Parameters["@result"].Direction = ParameterDirection.Output;
+                        cmd.ExecuteNonQuery();
+                        result = Convert.ToInt32(cmd.Parameters["@result"].Value);
+                        string query = " delete from tempCardRegister where ReaderID ='" + card+"'";
+                        SqlCommand cmd1 = new SqlCommand(query, con);
+                        cmd1.ExecuteNonQuery();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    result = -3;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return result;
+        }
+       public string getIP(string loc)
+        {
+            string result = "";
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                try
+                {
+                    string query = "Select CCIP from CentralControl where location ='"+loc+"'"; 
+                    using(SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        if(con.State!= ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        result = cmd.ExecuteScalar().ToString();
+                    }
+                }catch(Exception ex)
+                {
+                    result = "-1";
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return result;
+        }
+        #endregion
+    }
     public class CentralControl
     {
         string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
@@ -573,4 +832,36 @@ namespace trythis
             return ds;
         }
     }
+    public class ScanReader
+    {
+        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        public DataTable CardData()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "select * from CardRegister";
+                try
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        da.Fill(dt);
+                    }
+                }
+                catch(Exception )
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dt;
+        }
+    }   
 }

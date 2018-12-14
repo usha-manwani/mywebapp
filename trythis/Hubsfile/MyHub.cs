@@ -14,31 +14,6 @@ namespace trythis.Hubsfile
     [HubName("myHub")]
     public class MyHub : Microsoft.AspNet.SignalR.Hub
     {
-        //DataTable ScoresTable = HttpContext.Current.Application["ScoresTable"] as DataTable;
-        string constr= ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-        public void Hello()
-        {
-            Clients.All.hello();
-        }
-        public async override Task OnConnected()
-        {
-            await base.OnConnected();
-            SendData();
-           
-        }
-            public void SendMessage(string sender, string data)
-        {
-            Clients.All.broadcastMessage(sender, data);
-        }
-        public void SendData()
-        {            
-            Clients.All.SendToMachine(1);
-        }
-       public void SendControlKeys(string machine, string code)
-        {
-            Clients.All.SendControl(machine, code);
-        }
-
         public void GetUsers()
         {
             DataTable dt;
@@ -54,27 +29,27 @@ namespace trythis.Hubsfile
                         dt = new DataTable();
                         DataSet ds = new DataSet();
                         SqlDependency dependency = new SqlDependency(command);
-                        dependency.OnChange += dependency_OnChange;                        
+                        dependency.OnChange += dependency_OnChange;
                         if (connection.State == ConnectionState.Closed)
                             connection.OpenAsync();
                         SqlDependency.Start(connection.ConnectionString);
                         var reader = command.ExecuteReader();
-                        dt.Load(reader);                        
+                        dt.Load(reader);
                     }
                 }
                 finally
                 {
                     connection.Close();
-                }                    
-                    if (dt.Rows.Count > 0)
-                    {
-                        HttpContext.Current.Application.Lock();
-                        HttpContext.Current.Application["ScoreTable"] = dt;
-                        HttpContext.Current.Application.UnLock();                        
-                    }                
+                }
+                if (dt.Rows.Count > 0)
+                {
+                    HttpContext.Current.Application.Lock();
+                    HttpContext.Current.Application["ScoreTable"] = dt;
+                    HttpContext.Current.Application.UnLock();
+                }
             }
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
-            context.Clients.All.recieveNotification(dt);                                     
+            context.Clients.All.recieveNotification(dt);
         }
 
         void dependency_OnChange(object sender, SqlNotificationEventArgs e)
@@ -92,13 +67,55 @@ namespace trythis.Hubsfile
         //    IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
         //    context.Clients.All.updateMessages();     
         //}
+        //DataTable ScoresTable = HttpContext.Current.Application["ScoresTable"] as DataTable;
+        string constr = ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        public void Hello()
+        {
+            Clients.All.hello();
+        }
+        public async override Task OnConnected()
+        {
+            await base.OnConnected();
+            SendData();
+           
+        }
+        public void SendMessage(string sender, string data)           
+        {
+            if (data.Contains("Toregister"))
+            {
+                Clients.All.registerCard(sender, data);
+            }
+            if (data.Contains("registered"))
+            {
+                updatecardstatus(data);
+               // Clients.All.confirmRegister();
+            }
+            Clients.All.broadcastMessage(sender, data);
+        }
 
+        public void SendData()
+        {            
+            Clients.All.SendToMachine(1);
+        }
+       public void SendControlKeys(string machine, string code)
+        {
+            Clients.All.SendControl(machine, code);
+        }
         public void GetStatus(string sender, string Message )
         {
             int dis;
             byte[] statusRec=  HexEncoding.GetBytes(Message, out dis);
 
             Clients.All.broadcastMessage(sender, statusRec);
+        }
+
+        public void updatecardstatus(string data)
+        {
+            string[] msg=  data.Split(',');
+            string cardID = msg[2];
+            string query = "update CardRegister set state='Registered' where cardID='"+cardID+"'";
+            PopulateTree tree = new PopulateTree();
+            tree.insertANyData(query);
         }
     }
     public class HexEncoding

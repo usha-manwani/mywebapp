@@ -69,12 +69,12 @@ namespace trythis
                 FailureText.Text = "Exception occured";
                 ErrorMessage.Visible = true;
             }
-            if (k > 0)
+            if (k >= 0)
                 {
                     HttpContext.Current.Session["UserName"] = n;
                     HttpContext.Current.Session["role"] = k;
                     HttpContext.Current.Session["UserId"] = u;
-                    Response.Redirect("~/Options.aspx");
+                    Response.Redirect("~/CardReader.aspx");
                 }
                 else
                 {

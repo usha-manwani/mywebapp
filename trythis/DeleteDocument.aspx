@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DeleteDocument.aspx.cs" Inherits="trythis.DeleteDocument" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="DeleteDocument.aspx.cs" Inherits="trythis.DeleteDocument" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="masterBody" runat="server">
      <div class="divopt">
         <fieldset >
             <legend>Download Files</legend>
@@ -10,11 +10,11 @@
             CellPadding="20" CellSpacing="20" ID="GridView1" runat="server" AutoGenerateColumns="false" EmptyDataText = "No files uploaded" >
              <RowStyle Height="50" />
     <Columns>
-        <asp:BoundField DataField="Text" HeaderText="File Name" ControlStyle-ForeColor="Black" />
+        <asp:BoundField DataField="Text" HeaderText="File Name" ControlStyle-ForeColor="white" />
         
         <asp:TemplateField>
             <ItemTemplate>
-                <asp:LinkButton ID = "lnkDelete" Text = "Delete" CommandArgument = '<%# Eval("Value") %>' runat = "server" OnClick = "DeleteFile" />
+                <asp:LinkButton ID = "lnkDelete" Text = "Delete" CommandArgument = '<%# Eval("Value") %>' runat = "server" OnClick = "DeleteFile"  CssClass="asplink" />
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>

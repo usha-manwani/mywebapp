@@ -1,6 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Approve.aspx.cs" Inherits="trythis.Approve" %>
-<%@ MasterType VirtualPath="~/Site.master" %>
- <asp:Content ID="Head" ContentPlaceHolderID="HeadContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Approve.aspx.cs" Inherits="trythis.Approve" %>
+<%@ MasterType VirtualPath="~/Master.master" %>
+ <asp:Content ID="Head" ContentPlaceHolderID="masterHead" runat="server">
      <style>
       
           .leftspace{
@@ -33,7 +33,7 @@
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </asp:Content>
-<asp:Content ID="Main" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Main" ContentPlaceHolderID="masterBody" runat="server">
         <div class="divopt">
             <asp:GridView ID="GridView1" runat="server"  Width="80%" GridLines="Horizontal" OnRowEditing="GridView1_RowEditing" EmptyDataText = "No Pending Requests"
                 BorderStyle="None" AutoGenerateColumns="false" CellPadding="20" CellSpacing="20"   ForeColor="Black" HeaderStyle-BackColor="#009688">
@@ -46,7 +46,7 @@
                    <%--  <asp:CommandField EditText="Add Permissions" ButtonType="Link" ShowEditButton="true" ControlStyle-ForeColor="#0066CC" />--%>
                      <asp:TemplateField >
                             <ItemTemplate>
-                                 <asp:linkButton ID="btnEdit"  runat="server" Text="Give Permissions" CommandName="Edit" />
+                                 <asp:linkButton ID="btnEdit"  runat="server" Text="Give Permissions" CommandName="Edit" CssClass="asplink" />
                             </ItemTemplate>
                      </asp:TemplateField>
  

@@ -76,7 +76,7 @@
                     CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number "></asp:RegularExpressionValidator>
                 <br />
                 
-                <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true" OnClientClick="RequirePhone(); return false"  ClientIDMode="Static" CausesValidation="True"> Verify Phone Number</asp:LinkButton>
+                <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true" OnClientClick="RequirePhone(); return false"  ClientIDMode="Static" CausesValidation="True" > Verify Phone Number</asp:LinkButton>
                     
                 
             </div>

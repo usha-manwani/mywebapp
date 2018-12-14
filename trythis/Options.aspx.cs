@@ -14,7 +14,7 @@ namespace trythis
     public partial class Options : System.Web.UI.Page
     {
         protected string Values;
-        Int32 index;
+        int index;
         PopulateTree fillTree = new PopulateTree();
         static DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
@@ -89,12 +89,8 @@ namespace trythis
 
         }
         protected void BtnClassSave_Click(object sender, EventArgs e)
-        {
-            
+        {            
             int result = 0;
-            
-
-
             string[] textboxValues = Request.Form.GetValues("DynamicTextClass");
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             this.Values = serializer.Serialize(textboxValues);
@@ -112,7 +108,11 @@ namespace trythis
         }
         protected void BtnCamSave_Click(object sender, EventArgs e)
         {
-          
+            
+            if(ccSystem.Text!= string.Empty || ccSystem.Text !=null)
+            {
+               int f= fillTree.InsertCentralControl(ccSystem.Text, tbSelectedClass.Text);
+            }
             string[] ip = Request.Form.GetValues("IP");
             string[] port = Request.Form.GetValues("Port");
             string[] user = Request.Form.GetValues("User");
@@ -276,5 +276,7 @@ namespace trythis
             del.Style.Add("display", "none");
             delnot.Style.Add("display", "none");
         }
+
+      
     }
 }

@@ -423,9 +423,9 @@ namespace trythis {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new trythis.SiteMaster Master {
+        public new trythis.Master Master {
             get {
-                return ((trythis.SiteMaster)(base.Master));
+                return ((trythis.Master)(base.Master));
             }
         }
     }

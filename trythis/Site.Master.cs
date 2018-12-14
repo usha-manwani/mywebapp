@@ -22,6 +22,7 @@ namespace trythis
         public static DataTable dtGrade = new DataTable("GradeDetails");
         public static DataTable dtClass = new DataTable("ClassDetails");
         public DataTable dt = new DataTable();
+        PopulateTree tree = new PopulateTree();
         public static string c="";
        // static DataTable dt = new DataTable();
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
@@ -52,12 +53,11 @@ namespace trythis
             Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
             Response.AddHeader("Pragma", "no-cache");
             if (!this.IsPostBack)
-            {
+            {                
+                TreeMenuView.Nodes.Add(root);
                 DataTable dt = ExecuteCommand("Select InstituteName, ID, InstituteID from Institute_Details");
                 dtIns = dt;
-                TreeMenuView.Nodes.Add(root);
                 this.PopulateTreeView(dt, 0, null);
-
             }
         }
 
@@ -153,6 +153,10 @@ namespace trythis
                         treeNode.ChildNodes.Add(child);
                         DataTable dtclass = ExecuteCommand("Select ClassName, Id,ClassID from Class_Details where GradeID='" + val + "'");
                         dtClass.Merge(dtclass);
+                        if (dtclass.Rows.Count == 0)
+                        {
+                           tree.cam(TreeMenuView, val, child);
+                        }
                         PopulateTreeView(dtclass, int.Parse(child.Value), child);
                     }
                     else
@@ -197,10 +201,18 @@ namespace trythis
 
         protected void TreeMenuView_SelectedNodeChanged(object sender, EventArgs e)
         {
-            if (TreeMenuView.SelectedNode.Depth == 3)
+            if (TreeMenuView.SelectedNode.Depth == 5)
             {
-
                 c = TreeMenuView.SelectedValue.ToString();
+                if (TreeMenuView.SelectedNode.Parent.Value == "Camera")
+                {
+
+                }
+                else if (TreeMenuView.SelectedNode.Parent.Value == "Multimedia")
+                {
+                    HttpContext.Current.Session["DeviceIP"] = c;
+                    Response.Redirect("~/Control.aspx");
+                }
 
                 if (selected != null)
                 {

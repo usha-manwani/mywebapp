@@ -10,25 +10,21 @@
       <rolevalue>2</rolevalue>
     </role>
     <role>
-      <rolename>Manage Camera Details</rolename>
+      <rolename>Manage Devices Details(Add,Edit,Delete)</rolename>
       <rolevalue>3</rolevalue>
     </role>
     <role>
-      <rolename>DocumentsUpdate</rolename>
+      <rolename>Document upload and Download</rolename>
       <rolevalue>4</rolevalue>
     </role>
     <role>
-      <rolename>DocumentsDeletion</rolename>
+      <rolename>Document Deletion</rolename>
       <rolevalue>5</rolevalue>
     </role>
     <role>
-      <rolename>ManageUsers</rolename>
+      <rolename>Add, Authenticate and Delete Users</rolename>
       <rolevalue>6</rolevalue>
     </role>
-    <role>
-      <rolename>Authorize User</rolename>
-      <rolevalue>7</rolevalue>
-      
-    </role>
+   
   </roles>
 </root>

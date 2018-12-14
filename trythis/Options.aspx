@@ -1,11 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Options.aspx.cs" Inherits="trythis.Options" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Options.aspx.cs" Inherits="trythis.Options" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %> 
-<%@ MasterType VirtualPath="~/Site.master" %>
-   <asp:Content ID="Head" ContentPlaceHolderID="HeadContent" runat="server">
+<%@ MasterType VirtualPath="~/Master.master" %>
+   <asp:Content ID="Head" ContentPlaceHolderID="MasterHead" runat="server">
        
  
+        <link href="Content/bootstrap.css" rel="stylesheet" />
+       <link href="Content/font-awesome.css" rel="stylesheet" />
       
-      
+        
+       <script src="Scripts/bootstrap.js"></script>
+        
        <link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="Stylesheet"
         type="text/css" />
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
@@ -51,45 +55,55 @@
     width:600px}
 
 
+        .TabHeaderCSS
+        {
+             font-family:'Ruda', sans-serif;
+             cursor: pointer;
+             color:#2f323a;
+        } 
        </style>
-       
-       
-       
-
    </asp:Content>
    
-    <asp:Content ID="Main" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Content ID="Main" ContentPlaceHolderID="masterBody" runat="server">
         <asp:ScriptManagerProxy ID="sc1" runat="server"></asp:ScriptManagerProxy>
         
         <div style="opacity:0.8;" >
    <div Class="divopt" >
+    
        <div class="leftspace">
        
-       <cc1:TabContainer runat="server" BorderStyle="None">
-           <cc1:TabPanel ID="addpaneltab" runat="server" HeaderText="Add" >
-               <ContentTemplate>
-                  
-                   <asp:LinkButton runat="server" Text="Add Institutes" ID="AddInstitutes" OnClientClick="displayPopup(); return false;" Font-Underline="True" Font-Bold="True" Font-Size="20px"></asp:LinkButton>
-                 
-                      
-                          <asp:treeView ID="TreeMenuView1"   EnableClientScript="true"  runat="server" OnSelectedNodeChanged="TreeMenuView1_SelectedNodeChanged" NodeStyle-NodeSpacing="5px" CssClass="leftspace" ToolTip="Add new Details" PopulateNodesFromClient="true" >
-                    
-                         </asp:treeView>
- 
-                   
+       <cc1:TabContainer runat="server" BorderStyle="None" CssClass="TabHeaderCSS" >
+           <cc1:TabPanel ID="addpaneltab"  runat="server"   BorderStyle="None" >
+                <HeaderTemplate >
+           <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add
+       </HeaderTemplate>
+               <ContentTemplate>                  
+                   <asp:LinkButton runat="server" Text="Add Institutes" ID="AddInstitutes" OnClientClick="displayPopup(); return false;" Font-Underline="True" 
+                       Font-Bold="True" Font-Size="20px" ForeColor="#2f323a"></asp:LinkButton>                                       
+                          <asp:treeView ID="TreeMenuView1"   EnableClientScript="true"  runat="server" 
+                              OnSelectedNodeChanged="TreeMenuView1_SelectedNodeChanged" NodeStyle-NodeSpacing="5px" CssClass="leftspace" ToolTip="Add new Details" PopulateNodesFromClient="true" ForeColor="#2F323A" ShowCheckBoxes="None">                    
+                         </asp:treeView>                   
                </ContentTemplate>
            </cc1:TabPanel>
-           <cc1:TabPanel runat="server" ID="editpaneltab" HeaderText="Edit">
+           <cc1:TabPanel  runat="server" ID="editpaneltab"  BorderStyle="None" >
+               <HeaderTemplate>
+           <i class="fas fa-edit" aria-hidden="true"></i>&nbsp;Edit
+       </HeaderTemplate>
                <ContentTemplate>
                    <asp:TextBox runat="server" Visible="false" ></asp:TextBox>
-               <asp:treeView ID="TreeViewEdit" ToolTip="Edit Details" runat="server" OnSelectedNodeChanged="TreeViewEdit_SelectedNodeChanged"  NodeStyle-NodeSpacing="5px" CssClass="leftspace" >
+               <asp:treeView ID="TreeViewEdit" ToolTip="Edit Details" runat="server"  
+                   OnSelectedNodeChanged="TreeViewEdit_SelectedNodeChanged"  NodeStyle-NodeSpacing="5px" CssClass="leftspace" ForeColor="#2F323A">
                     
                 </asp:treeView>
                    </ContentTemplate>
            </cc1:TabPanel>
-           <cc1:TabPanel runat="server" ID="deletepaneltab" HeaderText="Delete">
+           <cc1:TabPanel runat="server" ID="deletepaneltab" BorderStyle="None" >
+               <HeaderTemplate>
+           <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;Delete
+       </HeaderTemplate>
                <ContentTemplate>
-               <asp:treeView ID="TreeViewDelete" ToolTip="Delete Details" runat="server" OnSelectedNodeChanged="TreeViewDelete_SelectedNodeChanged" NodeStyle-NodeSpacing="5px" CssClass="leftspace" >
+               <asp:treeView ID="TreeViewDelete" ToolTip="Delete Details" runat="server" 
+                   OnSelectedNodeChanged="TreeViewDelete_SelectedNodeChanged" NodeStyle-NodeSpacing="5px" CssClass="leftspace" ForeColor="#2F323A">
                     
                 </asp:treeView>
                    </ContentTemplate> 
@@ -106,7 +120,7 @@
         
         <div id="id01" class="w3-modal">
             <div class="w3-modal-content w3-card-4" >
-                <header class="w3-container w3-teal">
+                <header class="w3-container ">
                     <span onclick="document.getElementById('id01').style.display='none'"
                           class="w3-button w3-display-topright">&times;</span>
                     <h2>Add Institutes And Grades</h2>
@@ -128,9 +142,9 @@
         <div class="w3-container">
           <div id="idGrade" class="w3-modal" runat="server" >
             <div class="w3-modal-content w3-card-4" >
-                <header class="w3-container w3-teal">
-                    <span onclick="hideGrade();"
-                          class="w3-button w3-display-topright">&times;</span>
+                <header class="w3-container ">
+                    <span onclick="hideGrade();">
+                          <i class="fa fa-times" aria-hidden="true"></i>&times;</span>
                     <h2>Add Grades</h2>
                 </header>
                 <div class="w3-container" >
@@ -227,7 +241,7 @@
                           
                             <br />
              <asp:Button ID="btncam" Text="Add Camera Details" runat="server"  OnClientClick="AddTextCam(); return false;" />            
-        <asp:Button ID="BtnCamSave" Text="Save" runat="server"    OnClick="BtnCamSave_Click"/>
+        <asp:Button ID="BtnCamSave" Text="Save" runat="server" OnClick="BtnCamSave_Click"/>
                            
                                 
                         </ContentTemplate>

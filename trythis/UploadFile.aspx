@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="UploadFile.aspx.cs" Inherits="trythis.UploadFile" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/master.Master" AutoEventWireup="true" CodeBehind="UploadFile.aspx.cs" Inherits="trythis.UploadFile" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
 </asp:Content>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="masterBody" runat="server">
     <div class="divopt" style="padding-top:2em;">
         
         
@@ -32,7 +32,7 @@
         <asp:BoundField DataField="Text" HeaderText="Files" HeaderStyle-Font-Size="X-Large" ControlStyle-ForeColor="Black" />
         <asp:TemplateField>
             <ItemTemplate>
-                <asp:LinkButton ID="lnkDownload" Text = "Download" CommandArgument = '<%# Eval("Value") %>' runat="server" OnClick = "DownloadFile"></asp:LinkButton>
+                <asp:LinkButton ID="lnkDownload" Text = "Download" CommandArgument = '<%# Eval("Value") %>' runat="server" OnClick = "DownloadFile" CssClass="asplink"></asp:LinkButton>
             </ItemTemplate>
         </asp:TemplateField>
         

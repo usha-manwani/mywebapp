@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebAppli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CresijOnWeb", "CresijOnWeb\CresijOnWeb.csproj", "{2D0C9D93-5757-4B46-81A4-9A036F044201}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CresijWeb", "CresijWeb\CresijWeb.csproj", "{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{2D0C9D93-5757-4B46-81A4-9A036F044201}.Release|x64.Build.0 = Release|Any CPU
 		{2D0C9D93-5757-4B46-81A4-9A036F044201}.Release|x86.ActiveCfg = Release|Any CPU
 		{2D0C9D93-5757-4B46-81A4-9A036F044201}.Release|x86.Build.0 = Release|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Debug|x64.Build.0 = Debug|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Debug|x86.Build.0 = Debug|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Release|x64.ActiveCfg = Release|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Release|x64.Build.0 = Release|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A2400B9-4532-4179-A4B4-EE294A9BAEC9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

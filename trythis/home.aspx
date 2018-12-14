@@ -1,8 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="home.aspx.cs" Inherits="trythis.home"  MasterPageFile="~/Site.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="home.aspx.cs" Inherits="trythis.home"  MasterPageFile="~/Master.Master" %>
 <%--<%@ MasterType VirtualPath="~/Site.Master" %>--%>
-<asp:Content ContentPlaceHolderID="HeadContent" ID="headarea" runat="server">   
+<asp:Content ContentPlaceHolderID="masterHead" ID="headarea" runat="server">   
 </asp:Content>
-<asp:Content ContentPlaceHolderID="MainContent" ID="MainBody" runat="server">
+<asp:Content ContentPlaceHolderID="masterBody" ID="MainBody" runat="server">
     <div class="divopt">
     <asp:GridView ID="GridView1" runat="server" GridLines="Horizontal" AutoGenerateColumns="false" 
         CellPadding="40" CellSpacing="40"   ForeColor="Black" HeaderStyle-BackColor="#009688" 
@@ -13,7 +13,7 @@
             <asp:BoundField DataField="Status" HeaderText="Status" HeaderStyle-HorizontalAlign="Left" />           
              <asp:TemplateField >
                             <ItemTemplate>
-                                 <asp:linkButton ID="btnPing"  runat="server" Text="Check Status" OnClick="btnPing_Click" />
+                                 <asp:linkButton ID="btnPing"  runat="server" Text="Check Status" OnClick="btnPing_Click" CssClass="asplink" />
                             </ItemTemplate>
              </asp:TemplateField>
         </Columns>
