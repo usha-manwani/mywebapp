@@ -206,6 +206,7 @@
         alert("connection done");
         createDivs();
         chat.server.sendData();
+       
         $(document).on('click', '.trying', function () {
             if ($(this).hasClass("fa-angle-double-up")) {
                 $(this).removeClass("fa-angle-double-up").addClass("fa-angle-double-down")
@@ -336,71 +337,89 @@
     });
 });
 function createDivs() {
+    var chkds = $("input[name='toggle']:checkbox");
+    chkds.checked = true;
+   
     var deviceidsloc = $('#dev').val();
-    var dev = deviceidsloc.split(",");
-    for (i = 0; i < dev.length; i++) {
-        var ip = dev[i].split(":");
+    if (deviceidsloc != "" && deviceidsloc != undefined) {
+        var dev = deviceidsloc.split(",");
+        for (i = 0; i < dev.length; i++) {
+            var ip = dev[i].split(":");
+            var rows = document.getElementById("smallcontrol");
+            var DIV = document.createElement("div");
+            DIV.className = "col-md-3";
+            rows.appendChild(DIV);
+            var table = document.createElement("table");
+            table.className = "table1234";
+            var row1 = table.insertRow(0);
+            row1.style.textAlign = "center";
+            var cell1 = row1.insertCell(0);
+            cell1.innerHTML = '<h3 style="color:white; cursor:pointer;">' + ip[1] + '</h3>';
+            cell1.className = 'tdcenter';
+            cell1.setAttribute('onclick', 'openRemote();');
+            
+            cell1.setAttribute("colspan", "3");
+            
+            var cell12 = row1.insertCell(1);
+            cell12.setAttribute("colspan", "3");
+            var div1 = document.createElement("div");
+            div1.className = "switch";
+            var chk = document.createElement("input");
+            chk.type = "checkbox";
+            chk.name = "toggle";
+            chk.value = ip[0];
+            chk.onchange = function () { isRemote(this.value) };
+            div1.appendChild(chk);
+            var label1 = document.createElement("label");
+            label1.htmlFor = "toggle";
+            var i1 = document.createElement("i");
+            label1.appendChild(i1);
+            var span1 = document.createElement("span");
+            div1.appendChild(label1);
+            div1.appendChild(span1);
+            // span1.className = "checking";
+            cell12.appendChild(div1);
+
+            var row2 = table.insertRow(1);
+            row2.className = "trstyle";
+
+            var cell21 = row2.insertCell(0);
+            cell21.setAttribute("colspan", "2");
+            var cell22 = row2.insertCell(1);
+            cell22.setAttribute("colspan", "2");
+            var cell23 = row2.insertCell(2);
+            cell23.setAttribute("colspan", "2");
+            var row3 = table.insertRow(2);
+            row3.className = "trstyle";
+            var cell31 = row3.insertCell(0);
+            cell31.setAttribute("colspan", "2");
+            cell31.className = 'tdcenter';
+            cell31.setAttribute("onclick", "volume(" + this + ");");
+            cell31.innerHTML = '<i style="color:white;" class="fa fa-volume-up" aria-hidden=true></i>';
+            var cell32 = row3.insertCell(1);
+            cell32.setAttribute("colspan", "2");
+            cell32.className = 'tdcenter';
+            cell32.innerHTML = '<i style="color:white;" class="fa fa-lock" aria-hidden=true></i>';
+            var cell33 = row3.insertCell(2);
+            cell33.setAttribute("colspan", "2");
+            cell33.className = 'tdcenter';
+            cell33.innerHTML = '<i style="color:white;" class="fa fa-desktop" aria-hidden=true></i>';
+            DIV.appendChild(table);
+        }
+    }
+    else {
         var rows = document.getElementById("smallcontrol");
         var DIV = document.createElement("div");
         DIV.className = "col-md-3";
         rows.appendChild(DIV);
-        var table = document.createElement("table");
-        table.className = "table1234";
-        var row1 = table.insertRow(0);
-        row1.style.textAlign = "center";
-        var cell1 = row1.insertCell(0);
-        cell1.innerHTML = '<h3 style="color:white">' + ip[1] + '</h3>';
-        cell1.className = 'tdcenter';
-        cell1.setAttribute("colspan", "3");
-       
-        var div1 = document.createElement("div");
-        div1.className = "switch";
-        var i1 = '<i class=checking></i>';
-        div1.innerHTML = i1;
-        // span1.className = "checking";
-        cell1.appendChild(div1);
-        
-        var row2 = table.insertRow(1);
-        row2.className = "trstyle";
-
-        var cell21 = row2.insertCell(0);
-
-        var cell22 = row2.insertCell(1);
-        var cell23 = row2.insertCell(2);
-        var row3 = table.insertRow(2);
-
-        row3.className = "trstyle";
-        var cell31 = row3.insertCell(0);
-        cell31.className = 'tdcenter';
-        cell31.innerHTML = '<i style="color:white;" class="fa fa-volume-up" aria-hidden=true></i>';
-        var cell32 = row3.insertCell(1);
-        cell32.className = 'tdcenter';
-        cell32.innerHTML = '<i style="color:white;" class="fa fa-lock" aria-hidden=true></i>';
-        var cell33 = row3.insertCell(2);
-        cell33.className = 'tdcenter';
-        cell33.innerHTML = '<i style="color:white;" class="fa fa-desktop" aria-hidden=true></i>';
-        DIV.appendChild(table);
-
-        //rows.appendChild('<div class="col-md-3">'+   
-        //    '< table class= "1234" style = " border-radius:10px; width:250px; height:200px;background: #202838;" >'+
-        //    '<tr  style=" text-align:center">'+
-        //        '<td colspan="3" style="text-align:center">'+
-        //    '<h3 style="color:white">' + ip[1] +'</h3>'+
-        //            '<div class="switch"><label for="toggle" class="checking" ></label>'+
-        //            '</div></td></tr>'+
-        //    '<tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">'+
-        //        '<td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>'+
-        //        '<td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>'+
-        //        '<td>p</td></tr>'+
-        //    '<tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">'+
-        //        '<td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>'+
-        //        '<td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>'+
-        //    '<td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>'+
-        //    '</tr ></table ></div > ');
-
+        DIV.innerHTML='<h3 style="color: Black;">No Devices to show!!</h3>'
     }
 }
 
+function volume(texter) {
+    var tt = texter.innerHTML;
+    tt.setAttribute("color", "green");
+}
 function changeColor() {
     var rr = document.getElementsByClassName("table1234");
     for (i = 0; i < rr.length; i++) {
@@ -408,3 +427,22 @@ function changeColor() {
     }
 }
 
+function isRemote(ipofdevice) {
+    alert(ipofdevice);
+    
+}
+
+function openRemote() {
+    document.getElementById("control").style.display = "block";
+    document.getElementById("smallcontrol").style.display = "none";
+}
+window.onclick = function (event) {
+    if (event.target == modal) {
+        document.getElementById("control").style.display = "none";
+    }
+}
+
+ function closexx () {
+     document.getElementById("control").style.display = "none";
+     document.getElementById("smallcontrol").style.display = "block";
+}

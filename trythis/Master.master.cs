@@ -111,12 +111,13 @@ namespace trythis
 
         protected void TreeMenuView_SelectedNodeChanged(object sender, EventArgs e)
         {
+            string devicelocations = string.Empty;
             if (TreeMenuView.SelectedNode.Depth == 2)
             {
               DataTable dt=  ExecuteCommand("select cd.ClassName as loc ,cc.CCIP as ip from CentralControl cc join Class_Details cd on cd.ClassID=cc.location where cd.GradeID='" + TreeMenuView.SelectedNode.ToolTip + "'");
                 if (dt.Rows.Count > 0)
                 {
-                    string devicelocations = string.Empty;
+                   
                     string[] deviceloc = new string[dt.Rows.Count];
                     Dictionary<string, string> ipsloc = new Dictionary<string, string>();
                     foreach(DataRow row in dt.Rows)
@@ -132,8 +133,13 @@ namespace trythis
                     HttpContext.Current.Session["iploc"] = ipsloc;
                     HttpContext.Current.Session["deviceloc"] = deviceloc;
                     HttpContext.Current.Session["devices"] = devicelocations;
-                    Response.Redirect("~/Control.aspx");
+                    
                 }
+                else
+                {
+                    HttpContext.Current.Session["devices"] = devicelocations; 
+                }
+                Response.Redirect("~/Control.aspx");
             }
             //if (TreeMenuView.SelectedNode.Depth == 5)
             //{

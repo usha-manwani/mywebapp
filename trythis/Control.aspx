@@ -34,7 +34,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 150px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -44,7 +44,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
         .modal-content {
-    background-color: #fefefe;
+    background-color:aliceblue;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -70,15 +70,21 @@ pp{
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
         <script src="Scripts/ControlKeys.js"></script>
     <div class="row" id="smallcontrol" style="height:900px; ">
-        <%--   <div class="col-md-3">   
+           <div class="col-md-3">   
             <table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;">
             <tr id="first" style=" text-align:center">
                 <td colspan="3" style="text-align:center">                    
                     <h3 style="color:white">Class Name</h3>
                     <div class="switch">
- 
-  <i class="checking"></i>
-   </div>
+
+  <input type="checkbox" name="toggle" />
+
+  <label for="toggle"><i></i></label>
+
+  <span></span>
+
+</div>
+
                 </td>
             </tr>
             <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
@@ -91,7 +97,7 @@ pp{
                 <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
                 <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
             </tr>
-        </table></div>--%>
+        </table></div>
         
         <%-- <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
             <tr style=" text-align:center" >
@@ -300,9 +306,9 @@ pp{
              border-radius:5px" class="row changecolor" onmouseover="this.style.background='white';"
              onmouseout="this.style.background='#dff0d8';">
         <header>
-            <p>Remote Control For 
+            <p style="text-align:left">Remote Control For 
                 <asp:Label runat="server" Font-Bold="true" Font-Italic="true" ID="deviceips" Text=""></asp:Label>
-            </p>
+            </p><span class="close " onclick="closexx();" style="align-content:flex-end">&times;</span>
         </header>
     </div>
         <input id="sessionInput" type="hidden" value='<%= Session["DeviceIP"] %>' />
@@ -313,14 +319,14 @@ pp{
         <table >
             <tr>
                 <td>   
-                <div  style="height:300px;width:290px; background-color:#dfdcdc; border:none">
+                <div  style="height:300px;width:290px;  border:none">
              
              <header style=" background-color:#428bca;color:black; text-align:center;border:solid; border-color:#428bca ">System Control&nbsp;
                  <span data-toggle="collapse" data-target="#system" style="color:white" class="fa fa-angle-double-down trying" ></span>
              </header>
           
-           <div id="system" class="divcontrols" style=" border-color:#428bca" >
-                <table style=" height:220px; width:250px" >
+           <div id="system" class="divcontrols"  >
+                <table style=" height:220px; width:250px;border-color:#428bca" >
                     <tr > 
                         <td colspan="3" style="font-size:small; text-align:center"> System Power</td>
                         <td colspan="3" style="font-size:small; text-align:center"> Computer Power</td>
@@ -358,7 +364,7 @@ pp{
                 </div>
                 </td>
                 <td>
-                <div style="height:300px;width:290px; background-color:#dfdcdc; border:none">
+                <div style="height:300px;width:290px;  border:none">
              
              <header style=" background-color:#dff0d8;color:black; text-align:center ;border:solid; border-color:#dff0d8">Projector Control&nbsp;
                   <span data-toggle="collapse" data-target="#Projector" style="color:#3c763d"class="fa fa-angle-double-down trying" ></span>
@@ -402,7 +408,7 @@ pp{
              </div>
                 </td>
                 <td>
-                <div style="height:300px;width:180px; background-color:#dfdcdc; border:none">
+                <div style="height:300px;width:180px;  border:none">
              
              <header style=" background-color:#d9edf7;color:black; text-align:center;border:solid; border-color:#d9edf7 ">Light Control&nbsp;
                  <span class="fa fa-angle-double-down trying" data-toggle="collapse" data-target="#light" style="color:#31708f;">
@@ -526,7 +532,7 @@ pp{
             </tr>
             <tr>
                 <td>
-                <div style="height:290px;width:290px; background-color:#dfdcdc; border:none">
+                <div style="height:290px;width:290px; border:none">
              
                 <header style=" background-color:#dff0d8;color:black; text-align:center;border:solid; border-color:#dff0d8 ">Screen & curtain&nbsp;
                     <span data-toggle="collapse" data-target="#ScreenCurtain" style="color:#3c763d"class="fa fa-angle-double-down trying" ></span>
@@ -578,7 +584,7 @@ pp{
                 </td>
 
                 <td>
-                <div style="height:290px;width:290px; background-color:#dfdcdc; border:none">
+                <div style="height:290px;width:290px;  border:none">
              
                 <header style=" background-color:#d9edf7;color:black; text-align:center;border:solid; border-color:#d9edf7 ">Microphone Control&nbsp;
                     <span class="fa fa-angle-double-down trying" data-toggle="collapse" data-target="#Microphone" style="color:#31708f;"></span>
@@ -632,7 +638,7 @@ pp{
                 </td>
 
                 <td>
-                <div  style="height:290px ;width:180px; background-color:#dfdcdc;border:none ">
+                <div  style="height:290px ;width:180px; border:none ">
              
                 <header style=" background-color:#fcf8e3;color:black ; border:solid; border-color:#fcf8e3; text-align:center "> Volume&nbsp;
                      <span data-toggle="collapse" data-target="#volume" style="color:#916d3b"class="fa fa-angle-double-down trying" ></span>
@@ -670,13 +676,13 @@ pp{
     </div>
      </div>
     <script type="text/javascript">
-        debugger;
+       
         window.onclick = function (event) {
             if (event.target == modal) {
                 document.getElementById("control").style.display = "none";
             }
         }
-       
+        
     </script>
     
 </asp:Content>

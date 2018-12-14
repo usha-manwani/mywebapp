@@ -102,7 +102,7 @@
                             <h4><p>Card Registration</p></h4>
                             
                         </div> 
-          <span class="close col" style="text-align:right">&times;</span>
+          <span class="close col" onclick="xx();" style="text-align:right">&times;</span>
                         </div>
       <div id="tablescan">
       <asp:UpdatePanel ID="up1" runat="server">
@@ -235,9 +235,9 @@
             var modal = document.getElementById('modalAccess');
             modal.style.display = "block";            
         });
-        var modal = document.getElementById('myModal');        
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+//        var modal = document.getElementById('myModal');        
+//// Get the <span> element that closes the modal
+//            var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
         btn.onclick = function ()
@@ -247,9 +247,9 @@ var span = document.getElementsByClassName("close")[0];
         }
 
 // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";    
-        }
+        //span.onclick = function() {
+        //    modal.style.display = "none";    
+        //}
    
 // When the user clicks anywhere outside of the modal, close it
         window.onclick = function (event)

@@ -32,7 +32,8 @@
 
         function confirm() {
             alert("yeppee!!");
-        } 
+        }
+       
         //Add validation rule for dynamically generated email fields
 
         //$("#btnselect").click(function () {
@@ -47,7 +48,10 @@
 
     });
 });
-
+function xx() {
+    var modal = document.getElementById('myModal');
+    modal.style.display = "none";
+}
 
 function trysolve(id, states) {
     var rownum = 0;
