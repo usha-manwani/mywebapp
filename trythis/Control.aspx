@@ -69,12 +69,16 @@ pp{
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
         <script src="Scripts/ControlKeys.js"></script>
-    <div class="row" id="smallcontrol" style="height:900px; ">
-           <div class="col-md-3">   
+    <div class="container-fluid">
+    <div class="row clearfix" id="smallcontrol" >
+        <input type="hidden" name="ipForRemote" value="" />
+        <%--   <div class="col-md-3">   
             <table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;">
             <tr id="first" style=" text-align:center">
                 <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name</h3>
+                    <h3 style="color:white">Class Name aur bada h</h3>
+                    </td>
+                <td>
                     <div class="switch">
 
   <input type="checkbox" name="toggle" />
@@ -87,17 +91,17 @@ pp{
 
                 </td>
             </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
+            <tr style="  height:50px; border:solid; border-color:white; border-width:1px">
+                <td colspan="2" ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
+                <td title="proj" colspan="2" style="color:greenyellow" ><i style="font-size:24px; color:white" class="fa" >&#xf0a0;</i></td>
+                <td colspan="2" ><i class="fa fa-hdd" style="color:pink"></i></td>
             </tr>
             <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
+                <td colspan="2" ><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
+                <td colspan="2" ><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
+                <td colspan="2" ><i class="fa fa-desktop fa-2x  " aria-hidden="true" style="color:white"></i></td>
             </tr>
-        </table></div>
+        </table></div>--%>
         
         <%-- <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
             <tr style=" text-align:center" >
@@ -299,6 +303,7 @@ pp{
         </table></div>
            --%>
     </div>
+        </div>
   
     <div id="control" class="modal">
     <div class=" modal-content" style="font-family: 'Ruda', sans-serif" >

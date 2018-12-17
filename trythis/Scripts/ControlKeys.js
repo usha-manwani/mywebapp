@@ -1,19 +1,15 @@
 ﻿﻿$(function () {
-    var getSessionValue = $('#sessionInput').val();
-    var gg = $('#sessionInput1').val();
+     //window.addEventListener('resize', () => {
+     //    var size = $(window).width();
+     //    if (size <= 768) {
 
-    //  document.getElementById('first').style.backgroundColor = "#b9f3fe";
-    //document.getElementById("l1").style.background = "#b9f3fe";
-    //var tab2 = document.getElementsByClassName("1234");
-    //var tab3 = tab2[0].querySelector(".checking");
-    //tab3[0].style.background = "#b9f3fe";
-    // var tabcell= tab2.rows[0].cells[0]
-    // document.getElementsByClassName("checking").style.background = "#b9f3fe";
-    //document.getElementById("MainContent_masterBody_deviceips").innerText = getSessionValue + " Location " + deviceidsloc;
-    alert("Selected Multimedia ControlDevice IP is " + getSessionValue + " location " + gg);
-    var ipAddress = getSessionValue;
+     //    }
+
+     //});
+    var ipAddress;
     var chat = $.connection.myHub;
-    chat.client.broadcastMessage = function (name, message) {
+     chat.client.broadcastMessage = function (name, message) {
+         tbleupdate(name, message);
         if (name == ipAddress) {
             var arraydata = message.split(',');
             if (arraydata[1] == "Heartbeat") {
@@ -205,8 +201,59 @@
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         alert("connection done");
         createDivs();
+        var chkbox = document.getElementsByName("toggle");
+        
+        for (k = 0; k < chkbox.length; k++) {            
+            chat.server.sendControlKeys(chkbox[k].value, "8B B9 00 03 05 01 09");
+        }
         chat.server.sendData();
-       
+        $(document).on('change', "input[name='toggle']:checkbox", function () {
+                ipAddress = this.value;
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");
+        });
+        $(document).on('click', "*[name='volIcon']", function () {           
+            var vol = $(this).closest('table').find('input').val();
+            if ($(this).hasClass("fa-volume-up")) {
+                $(this).removeClass("fa-volume-up");
+                $(this).addClass("fa-volume-mute");
+                $(this).addClass("red");
+                chat.server.sendControlKeys(vol, "8B B9 00 04 02 04 22 2c");
+            }                
+            else {
+                $(this).removeClass("fa-volume-mute");
+                $(this).addClass("fa-volume-up");
+                $(this).removeClass("red");
+                $(this).addClass("iconColor");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2a");
+            }            
+        });
+        $(document).on('click', "*[name='lockIcon']", function () {          
+            var lock = $(this).closest('table').find('input').val();
+            chat.server.sendControlKeys(lock, "8B B9 00 04 02 04 2d 37");           
+        });
+        $(document).on('click', "*[name='desktopIcon']", function () {           
+            var desktop = $(this).closest('table').find('input').val();
+            chat.server.sendControlKeys(desktop, "8B B9 00 04 02 04 17 21");           
+        });
+        $(document).on('click', "*[name='projIcon']", function () {            
+            var rgb = this.style.color;
+            var colCode= '#' + rgb.substr(4, rgb.indexOf(')') - 4).split(',').map((color) => parseInt(color).toString(16)).join('');
+            var proj = $(this).closest('table').find('input').val();
+            if (colCode == "#67ec3a") {
+                this.style.color = "white";
+                chat.server.sendControlKeys(proj, "8B B9 00 04 02 04 43 4d");    
+            }                
+            else {
+                this.style.color = "#67ec3a";
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 33 3d");               
+            }
+            alert(proj);
+        });
+        $(document).on('click', '.aclass', function () {
+            alert(this.innerHTML);             
+            ipAddress = $(this).closest('tr').find('input').val();         
+            openRemote(ipAddress);
+        });
         $(document).on('click', '.trying', function () {
             if ($(this).hasClass("fa-angle-double-up")) {
                 $(this).removeClass("fa-angle-double-up").addClass("fa-angle-double-down")
@@ -217,8 +264,6 @@
             }
 
         });
-        //    alert('right');
-
         $(document).on("click", "#syslock", function () {
             var src = document.getElementById('syslock');
             if (src.src.indexOf("Images/unlock.png") != -1)
@@ -226,7 +271,6 @@
             else
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");
         });
-
         $(document).on("click", "#podiumlock", function () {
             var src = document.getElementById('podiumlock');
             if (src.src.indexOf("Images/unlock.png") != -1)
@@ -329,7 +373,7 @@
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
         });
         $(document).on("click", "#systempower", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 000402041822");
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");
         });
         $(document).on("click", "#pcpower", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");
@@ -343,32 +387,40 @@ function createDivs() {
     var deviceidsloc = $('#dev').val();
     if (deviceidsloc != "" && deviceidsloc != undefined) {
         var dev = deviceidsloc.split(",");
-        for (i = 0; i < dev.length; i++) {
+        var counter = 0;
+        for (i = 0; i < dev.length; i++) {            
+            
             var ip = dev[i].split(":");
             var rows = document.getElementById("smallcontrol");
             var DIV = document.createElement("div");
-            DIV.className = "col-md-3";
+            DIV.className = "col-xs-12 col-md-4 ";
             rows.appendChild(DIV);
             var table = document.createElement("table");
             table.className = "table1234";
+            //row1
             var row1 = table.insertRow(0);
             row1.style.textAlign = "center";
+            //classname
             var cell1 = row1.insertCell(0);
-            cell1.innerHTML = '<h3 style="color:white; cursor:pointer;">' + ip[1] + '</h3>';
+            var a1 = document.createElement("a");           
+            a1.name = "classnames";            
+            a1.innerHTML = ip[1];
+            cell1.appendChild(a1);
+            a1.className = "aclass";
+            a1.style.color = "white";        
             cell1.className = 'tdcenter';
-            cell1.setAttribute('onclick', 'openRemote();');
-            
-            cell1.setAttribute("colspan", "3");
-            
+            cell1.title = "click to open Remote Control";
+           //on/off
             var cell12 = row1.insertCell(1);
-            cell12.setAttribute("colspan", "3");
+           // cell12.setAttribute("colspan", "3");
             var div1 = document.createElement("div");
             div1.className = "switch";
             var chk = document.createElement("input");
             chk.type = "checkbox";
             chk.name = "toggle";
+            chk.className = "tdcenter";
             chk.value = ip[0];
-            chk.onchange = function () { isRemote(this.value) };
+           // chk.onchange = function () { isRemote(this.value, this.checked) };
             div1.appendChild(chk);
             var label1 = document.createElement("label");
             label1.htmlFor = "toggle";
@@ -376,38 +428,54 @@ function createDivs() {
             label1.appendChild(i1);
             var span1 = document.createElement("span");
             div1.appendChild(label1);
-            div1.appendChild(span1);
-            // span1.className = "checking";
+            div1.appendChild(span1);           
             cell12.appendChild(div1);
-
+            cell12.title = "System On/Off";
+            //row 2
             var row2 = table.insertRow(1);
             row2.className = "trstyle";
-
+            //proj
             var cell21 = row2.insertCell(0);
-            cell21.setAttribute("colspan", "2");
+           // cell21.setAttribute("colspan", "2");
+            cell21.className = "tdcenter";
+            cell21.title = "Projector";
+            cell21.style.color = "white";
+            cell21.innerHTML = '<i style="font-size:1.5em" class="fa fa-hdd" aria-hidden=true name="projIcon"></i>';
+            //ss
             var cell22 = row2.insertCell(1);
-            cell22.setAttribute("colspan", "2");
+          //  cell22.setAttribute("colspan", "2");
+            //ss
             var cell23 = row2.insertCell(2);
-            cell23.setAttribute("colspan", "2");
+           // cell23.setAttribute("colspan", "2");
+            //row3
             var row3 = table.insertRow(2);
             row3.className = "trstyle";
+            //vol
             var cell31 = row3.insertCell(0);
-            cell31.setAttribute("colspan", "2");
-            cell31.className = 'tdcenter';
-            cell31.setAttribute("onclick", "volume(" + this + ");");
-            cell31.innerHTML = '<i style="color:white;" class="fa fa-volume-up" aria-hidden=true></i>';
+          //  cell31.setAttribute("colspan", "2");
+            cell31.className = 'tdcenter ';           
+            cell31.innerHTML = '<i style="font-size:1.5em" class="fa fa-volume-up" aria-hidden=true name="volIcon"></i>';
+            cell31.title = "volume";
+            cell31.style.color = "white";
+            //lock
             var cell32 = row3.insertCell(1);
-            cell32.setAttribute("colspan", "2");
-            cell32.className = 'tdcenter';
-            cell32.innerHTML = '<i style="color:white;" class="fa fa-lock" aria-hidden=true></i>';
+          //  cell32.setAttribute("colspan", "2");
+            cell32.className = 'tdcenter ';
+            cell32.innerHTML = '<i style="font-size:1.5em" class="fa fa-lock " aria-hidden=true name="lockIcon"> </i > ';
+            cell32.title = "system lock";
+            cell32.style.color = "white";
+            //desktop
             var cell33 = row3.insertCell(2);
-            cell33.setAttribute("colspan", "2");
-            cell33.className = 'tdcenter';
-            cell33.innerHTML = '<i style="color:white;" class="fa fa-desktop" aria-hidden=true></i>';
+           // cell33.setAttribute("colspan", "2");
+            cell33.className = 'tdlast';
+            cell33.title = "PC";
+            cell33.style.color = "white";
+            cell33.innerHTML = '<i style="font-size:1.5em" class="fa fa-desktop " aria-hidden=true name="desktopIcon"></i>';
             DIV.appendChild(table);
         }
     }
-    else {
+    else
+    {
         var rows = document.getElementById("smallcontrol");
         var DIV = document.createElement("div");
         DIV.className = "col-md-3";
@@ -427,14 +495,21 @@ function changeColor() {
     }
 }
 
-function isRemote(ipofdevice) {
-    alert(ipofdevice);
-    
+function isRemote(ipofdevice, chknot) {
+    if (chknot ) {
+        alert(ipofdevice + "  " + chknot);
+    }
+    else {
+        alert("you are wrong");
+    }
 }
 
-function openRemote() {
+function openRemote(ipofremote) {
+    var iplabel = document.getElementById("MainContent_masterBody_deviceips");
+    iplabel.innerText = ipofremote;
     document.getElementById("control").style.display = "block";
     document.getElementById("smallcontrol").style.display = "none";
+    
 }
 window.onclick = function (event) {
     if (event.target == modal) {
@@ -445,4 +520,86 @@ window.onclick = function (event) {
  function closexx () {
      document.getElementById("control").style.display = "none";
      document.getElementById("smallcontrol").style.display = "block";
+     //document.getElementById("smallcontrol").addClass = "newspaper";
 }
+
+function tbleupdate(name, message) {
+    var chkbox = document.getElementsByName("toggle");
+    var arraydata = message.split(',');
+    for (k = 0; k < chkbox.length; k++) {
+        if (chkbox[k].value == name) {
+            
+            if (arraydata[1] == "Heartbeat") {
+                if (arraydata[3] == 'OPEN') {
+                    chkbox[k].checked = true;
+                }
+                else {
+                    chkbox[k].checked = false;
+                }
+
+                if (arraydata[5] == 'On') {
+                    var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                    desktop.addClass("iconColor");
+                    desktop.removeClass("red");
+                   
+                }
+                else {
+                    var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                    desktop.removeClass("iconColor");
+                    desktop.addClass("red");
+                }
+                if (arraydata[12] == 'Locked') {
+                    var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");
+                    syslocked.addClass("fa-lock");                   
+                    syslocked.removeClass("fa-unlock");
+                    syslocked.removeClass("iconColor");
+                    syslocked.addClass("red");
+                }
+                else {
+                    var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");
+                    syslocked.addClass("fa-unlock");
+                    syslocked.addClass("iconColor");
+                    syslocked.removeClass("fa-lock");
+                    syslocked.removeClass("red");
+                }
+            }
+            else if (arraydata[1] == "LEDIndicator") {
+                if (arraydata[2] == "SystemSwitchOn") {
+                    chkbox[k].checked = true;
+                    switch (arraydata[4]) {
+                        case "ComputerOff":
+                            var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                            desktop.removeClass("iconColor");
+                            desktop.addClass("red");
+                            break;
+                        case "ComputerOn":
+                            var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                            desktop.addClass("iconColor");
+                            desktop.removeClass("red");
+                            break;
+                    }
+                   
+                }
+                else {
+                    chkbox[k].checked = false;
+                    var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                    desktop.removeClass("iconColor");
+                    desktop.addClass("red");
+                }
+            
+            }
+            else if (arraydata[1] == "KeyValue") {
+                if (arraydata[2] == 'SystemON') {
+                    chkbox[k].checked = true;
+                }
+                else {
+                    chkbox[k].checked = false;
+                }
+            }           
+        }
+    }
+}
+
+
+
+

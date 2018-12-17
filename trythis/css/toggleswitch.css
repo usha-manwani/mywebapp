@@ -16,7 +16,7 @@
 
 .switch {
     
-    width: 120px;
+    width: 100px;
     height: 40px;
     position: relative;
     cursor: pointer;
@@ -131,10 +131,18 @@
 }
 .tdcenter {
     text-align: center;
-    
+    cursor:pointer;
+   
+    width:33.3%;
     
 }
+.tdlast {
+    text-align: center;
+    
+    width:33.3%;
+}
 .table1234 {
+    float:left;
     border-radius: 10px;
     width: 250px;
     height: 200px;
@@ -142,8 +150,36 @@
 }
 .trstyle {
     height: 50px;
-    height: 50px;
+   align-content:center;
     border: solid;
     border-color: white;
-    border-width: 1px
+    border-width: 1px;
+   
+    
+}
+
+.aclass{
+   color:white;
+   cursor:pointer;
+}
+
+.iconColor{
+    color:lightgreen;
+}
+.red{
+    color:indianred;
+}
+.grid {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-width: 220px;
+    -moz-column-width: 220px;
+    column-width: 220px;
+   
+}
+.newspaper {
+    -webkit-column-width: 250px; /* Chrome, Safari, Opera */
+    -moz-column-width: 250px; /* Firefox */
+    column-width: 250px;
 }
