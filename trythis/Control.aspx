@@ -30,7 +30,8 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
 [type=radio]:checked + img {
   outline: 2px solid #f00;
 }
- .modal {
+ .modal 
+ {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -42,22 +43,22 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+ }
         .modal-content {
     background-color:aliceblue;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
-}
-pp{
-  background-color: #565656;
-  color: transparent;
-  text-shadow: 0px 2px 3px rgba(255,255,255,0.3);
-  -webkit-background-clip: text;
+    width: 50%;
+        }
+    .pp{
+    background-color: #565656;
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(255,255,255,0.3);
+    -webkit-background-clip: text;
      -moz-background-clip: text;
           background-clip: text;
-}
+    }
     </style>                                                                                
     <link href="Content/ControlStyle.css" rel="stylesheet" />   
     <link href="css/toggleswitch.css" rel="stylesheet" />
@@ -303,35 +304,37 @@ pp{
         </table></div>
            --%>
     </div>
-        </div>
-  
+        </div>  
     <div id="control" class="modal">
-    <div class=" modal-content" style="font-family: 'Ruda', sans-serif" >
-         <div style="width:100%; color:#3c763d; border:solid;border-color:#3c763d; background-color:#dff0d8; 
-             border-radius:5px" class="row changecolor" onmouseover="this.style.background='white';"
+    <div class=" modal-content" style="font-family: 'Ruda', sans-serif" >        
+  <div style="width:100%; color:#3c763d; border:solid;border-color:#3c763d; background-color:#dff0d8; 
+             border-radius:5px" class="row " onmouseover="this.style.background='white';"
              onmouseout="this.style.background='#dff0d8';">
         <header>
-            <p style="text-align:left">Remote Control For 
-                <asp:Label runat="server" Font-Bold="true" Font-Italic="true" ID="deviceips" Text=""></asp:Label>
-            </p><span class="close " onclick="closexx();" style="align-content:flex-end">&times;</span>
-        </header>
-    </div>
+            <p style="text-align:center">Remote Control For 
+                <asp:Label runat="server" Font-Bold="true" Font-Italic="true" ID="deviceips" Text=""></asp:Label></p>
+            </header>
+       <div style="text-align:right">
+             <i class="fa fa-times-circle" aria-hidden="true" onclick="closexx();"
+                 style="text-align:right;cursor:pointer"></i>
+         </div>
+      </div>        
         <input id="sessionInput" type="hidden" value='<%= Session["DeviceIP"] %>' />
         <input id="sessionInput1" type="hidden" value='<%= Session["loc"] %>' />
         <input id="dev" type="hidden" value='<%=Session["devices"] %>' />
         <asp:TextBox style="display:none" ID="ipAddressToSend" runat="server"></asp:TextBox>
         <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" ></asp:ScriptManagerProxy>
-        <table >
+        <table // class="container" >
             <tr>
                 <td>   
-                <div  style="height:300px;width:290px;  border:none">
-             
-             <header style=" background-color:#428bca;color:black; text-align:center;border:solid; border-color:#428bca ">System Control&nbsp;
-                 <span data-toggle="collapse" data-target="#system" style="color:white" class="fa fa-angle-double-down trying" ></span>
-             </header>
-          
+                <div  style="height:250px;width:250px;  border:none">    
+             <header style=" background-color:#2680a7;color:black; text-align:center;border:solid;
+                border-color:#428bca ">System Control&nbsp;
+                 <span data-toggle="collapse" data-target="#system" style="color:white" 
+                     class="fa fa-angle-down trying" ></span>
+             </header>          
            <div id="system" class="divcontrols"  >
-                <table style=" height:220px; width:250px;border-color:#428bca" >
+                <table style=" height:180px; width:220px;border-color:#333333" >
                     <tr > 
                         <td colspan="3" style="font-size:small; text-align:center"> System Power</td>
                         <td colspan="3" style="font-size:small; text-align:center"> Computer Power</td>
@@ -339,73 +342,81 @@ pp{
                     <tr style="align-items:center; align-content:center;">
                         <td colspan="3" style="text-align:center">
                             <span>
-                                <img src="Images/powerOff.png" id="systempower" height="70" width="70" class="imgclick"/></span>
+                                <img src="Images/offimages/sysof.png" id="systempower" 
+                                    height="60" width="60" class="imgclick"/></span>
                              </td>
                         <td colspan="3" style="text-align:center">
                             <span>
-                                <img src="Images/powerOff.png" id="pcpower" height="70" width="70" class="imgclick"/></span>                          
+                                <img src="Images/offimages/pcof.png" id="pcpower" 
+                                    height="60" width="60" class="imgclick"/></span>                          
                     </tr>                               
                     <tr >
                         <td colspan="2" style="text-align:center">
                             <span>
-                                <img src="Images/unlock.png" id="syslock" height="30" width="30" class="imgclick"/></span>                            
-                           </td>
+                                <img src="Images/offimages/sysunlock.png"  id="syslock" 
+                                    height="40" width="40" class="imgclick"/></span>                            
+                           </td>                      
                         <td colspan="2" style="text-align:center"  >
                             <span>
-                                <img src="Images/unlock.png" id="podiumlock" height="30" width="30" class="imgclick"/></span>
-                            </td>
+                                <img src="Images/offimages/podiumunlock.png" id="podiumlock"
+                                    height="40" width="40" class="imgclick"/></span>
+                            </td>                       
                         <td colspan="2" style="text-align:center" >
                             <span>
-                                <img src="Images/unlock.png" id="classlock" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/classunlock.png"  id="classlock" 
+                                    height="40" width="40" class="imgclick"/></span>
                              </td>
                     </tr>
-                    <tr >
+                   <%-- <tr >
                         <td colspan="2" style="font-size:small; text-align:center">system lock</td>
                         <td colspan="2" style="font-size:small; text-align:center" >podium lock</td>
                         <td colspan="2" style="font-size:small; text-align:center">class lock</td>
-                    </tr>
+                    </tr>--%>
                 </table> 
                </div>          
                 </div>
                 </td>
                 <td>
-                <div style="height:300px;width:290px;  border:none">
-             
+                <div style="height:250px;width:250px;  border:none">            
              <header style=" background-color:#dff0d8;color:black; text-align:center ;border:solid; border-color:#dff0d8">Projector Control&nbsp;
-                  <span data-toggle="collapse" data-target="#Projector" style="color:#3c763d"class="fa fa-angle-double-down trying" ></span>
+                  <span data-toggle="collapse" data-target="#Projector" style="color:#3c763d"class="fa fa-angle-down trying" ></span>
              </header>
              <div id="Projector" class="divcontrols" style=" border-color:#3c763d">
-                     <table style=" height:220px; width:270px">
-                  
+                     <table style=" height:180px; width:230px">                  
                     <tr style="width:220px">
                         <td style="text-align:center">
                              <span>
-                                <img src="Images/power.png" id="projectorOn" height="30" width="30" class="imgclick"/></span>                
+                                <img src="Images/offimages/proj1.png" id="projectorOn" 
+                                    height="40" width="40" class="imgclick"/></span>                
                         </td>
                         <td style="text-align:center">
                             <a  href="#" style=" color:white;">
-                                <img src="Images/HDMI.png" id="hdmi" height="30" width="30" class="imgclick"/></a>
-                            
+                                <img src="Images/offimages/hdmi.png" id="hdmi" height="40" 
+                                    width="40" class="imgclick"/></a>                            
                         </td>
                     </tr>
                     <tr style="width:220px">
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/power.png" id="projectorOff" height="30" width="30" class="imgclick"/></span>                            
+                                <img src="Images/offimages/proj2.png" id="projectorOff" 
+                                    height="40" width="40" class="imgclick"/></span>                            
                         </td>
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/video.png" id="projVideo" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/videooff.png" id="projVideo"
+                                    height="40" width="40" class="imgclick"/></span>
                            </td>
                     </tr>
                     <tr style="width:220px">
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/stop.png" id="projSleep" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/proj3.png" id="projSleep"
+                                    height="40" width="40" class="imgclick"/></span>
                             </td>
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/VGA.png" id="vga" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/vga.png" id="vga" 
+                                    height="40" width="40" class="imgclick"/></span>
                              </td>
                     </tr>                
                 </table>
@@ -413,32 +424,34 @@ pp{
              </div>
                 </td>
                 <td>
-                <div style="height:300px;width:180px;  border:none">
-             
-             <header style=" background-color:#d9edf7;color:black; text-align:center;border:solid; border-color:#d9edf7 ">Light Control&nbsp;
-                 <span class="fa fa-angle-double-down trying" data-toggle="collapse" data-target="#light" style="color:#31708f;">
-                     </span></header>
-             
-           
+                <div style="height:250px;width:180px;  border:none">             
+             <header style=" background-color:#d9edf7;color:black; text-align:center;
+                        border:solid; border-color:#d9edf7 ">Light Control&nbsp;
+                 <span class="fa fa-angle-down trying" data-toggle="collapse"
+                     data-target="#light" style="color:#31708f;">
+                     </span></header>                       
                     <div id="light" class="divcontrols" style=" border-color: #31708f;">
-                             <table style="width:160px; height:220px;">
+                             <table style="width:160px; height:180px;">
                  
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/light.png" id="light1" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/light1off.png" id="light1"
+                                    height="40" width="40" class="imgclick"/></span>
                              </td>
                     </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/light.png" id="light2" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/light2off.png" id="light2" 
+                                    height="40" width="40" class="imgclick"/></span>
                              </td>
                     </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/light.png" id="light3" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/light3.png" id="light3" 
+                                    height="40" width="40" class="imgclick"/></span>
                             </td>
                     </tr>
                 </table>
@@ -446,104 +459,148 @@ pp{
              </div>
                 </td>
                 <td rowspan="2">
-                <div  style=" width:200px; height:590px"> 
-            <header style=" background-color:#fcf8e3;color:black; text-align:center;border:solid; border-color:#fcf8e3 ">Media Signal&nbsp;
-                <span data-toggle="collapse" data-target="#media" style="color:#916d3b"class="fa fa-angle-double-down trying" ></span>
+                <div  style=" width:180px; height:500px "> 
+            <header style=" background-color:#fcf8e3;color:black; text-align:center;
+                    border:solid; border-color:#fcf8e3 ">Media Signal&nbsp;
+                <span data-toggle="collapse" data-target="#media" style="color:#916d3b" 
+                    class="fa fa-angle-down trying" ></span>
             </header>
             <div id="media" class="divcontrols" style=" border-color:#916d3b">
-                <table style="width:130px;height:540px">
-                  
+                <table style="width:160px;">                 
                     <tr  style="width:130px;">
                         <td  style="text-align:center">
                             <label>
                             <input type="radio" name="test" id="desktop" checked>
-                            <img src="Images/Desktop.png" height="30" width="30" class="imgclick">
+                            <img src="Images/offimages/desktop.png" height="40" width="40" class="imgclick">
                             </label>
-                            <%--<input type="image" src="Images/Desktop.png" class="imgclick" height="30" width="30" id="desktop"/>--%></td>
-                    </tr>
+                            </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <label>
                             <input type="radio" name="test" id="laptop" checked>
-                            <img src="Images/laptop.png" height="30" width="30" class="imgclick">
+                            <img src="Images/offimages/laptop.png" height="40" width="40" class="imgclick">
                             </label>
-                            <%--<input type="image" src="Images/laptop.png" class="imgclick" height="30" width="30" id="laptop"/>--%></td>
-                    </tr>
+                            </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <label>
                             <input type="radio" name="test" id="platform" checked>
-                            <img src="Images/platform.png" height="30" width="30" class="imgclick">
+                            <img src="Images/platform.png" height="40" width="40" class="imgclick">
                             </label>
-                            <%--<input type="image" src="Images/platform.png" class="imgclick" height="30" width="30" id="platform"/>--%></td>
-                    </tr>
+                           </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center" >
-                            <%--<input type="image" src="Images/platform.png" class="imgclick" height="30" width="30" id="digitalEquipment"/>--%> 
                              <label>
                             <input type="radio" name="test" id="digitalEquipment" checked>
-                            <img src="Images/platform.png" height="30" width="30" class="imgclick">
+                            <img src="Images/platform.png" height="40" width="40" class="imgclick">
                             </label>
                         </td>
                     </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
-                            <%--<input type="image" src="Images/DVD.png" class="imgclick" height="30" width="30" id="dvd"/>--%> 
                             <label>
                             <input type="radio" name="test" id="dvd" checked>
-                            <img src="Images/DVD.png" height="30" width="30" class="imgclick">
+                            <img src="Images/offimages/dvd.png" height="40" width="40" class="imgclick">
                             </label>
                         </td>
                     </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
-                            <%--<input type="image" src="Images/Blu-Ray.png" class="imgclick" height="30" width="30" id="bluray"/>--%>
-                            <label>
+                           <label>
                             <input type="radio" name="test" id="bluray" checked>
-                            <img src="Images/Blu-Ray.png" height="30" width="30" class="imgclick">
+                            <img src="Images/offimages/bluraydvd.png" height="40" width="40" class="imgclick">
                             </label>
                        </td>
                     </tr>
                     <tr  style="width:130px;">
                         <td  style="text-align:center">
-                           <%--<input type="image" src="Images/TV.png" class="imgclick" height="30" width="30" id="tv"/>--%>
                             <label>
                             <input type="radio" name="test" id="tv" checked>
-                            <img src="Images/TV.png" height="30" width="30" class="imgclick">
+                            <img src="Images/offimages/tv.png" height="40" width="40" class="imgclick">
                             </label>
                         </td>
                     </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
-                            <%--<input type="image" src="Images/Camera.png" class="imgclick" height="30" width="30" id="camera"/>--%>
-                        <label>
+                            <label>
                             <input type="radio" name="test" id="camera" checked>
-                            <img src="Images/Camera.png" height="30" width="30" class="imgclick">
+                            <img src="Images/offimages/camera.png" height="40" width="40" class="imgclick">
                             </label>    
                        </td>
                             </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center" >
-                            <%--<input type="image" src="Images/video.png" class="imgclick" height="30" width="30" id="Recorder"/>--%>
-                        <label>
+                            <label>
                             <input type="radio" name="test" id="recorder" checked>
-                            <img src="Images/video.png" height="30" width="30" class="imgclick">
+                            <img src="Images/offimages/video.png" height="40" width="40" class="imgclick">
                             </label>    
                         </td></tr>
                 </table>
                 </div>
                      </div>
                     </td>
+                <td  rowspan="2">                   
+                <div  style=" width:200px; height:500px "> 
+            <header style=" background-color:#428bca;color:black; text-align:center;
+                    border:solid; border-color:#428bca ">DVD Controls&nbsp;
+                <span data-toggle="collapse" data-target="#dvdsubmenu" style="color:white" 
+                    class="fa fa-angle-down trying" ></span>
+            </header>
+            <div id="dvdsubmenu" class="divcontrols" style=" border-color:#428bca">
+                <table style="width:180px; height:400px">                 
+                    <tr>
+                        <td  style="text-align:center">
+                            <img src="Images/submenu/dvd/poweroff.png" id="dvdpoweron" height="40" width="40" />
+                           </td>
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/stop.png" id="dvdstop" height="40" width="40" />
+                        </td>
+                            </tr>
+                   <tr>
+                        <td  style="text-align:center">
+                            <img src="Images/submenu/dvd/play.png" id="playdvd" height="40" width="40" />
+                           </td>
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/pause.png" id="dvdpause" height="40" width="40" />
+                        </td>
+                            </tr>
+                   <tr>
+                        <td  style="text-align:center">
+                            <img src="Images/submenu/dvd/backward.png" id="dvdback" height="40" width="40" />
+                           </td>
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/forward.png" id="dvdforward" height="40" width="40" />
+                        </td>
+                            </tr>
+                    <tr>
+                        <td  style="text-align:center">
+                            <img src="Images/submenu/dvd/pre.png" id="dvdpre" height="40" width="40" />
+                           </td>
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/next.png" id="dvdnext" height="40" width="40" />
+                        </td>
+                  <tr>                       
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/exit.png" id="dvdexit" height="40" width="40" />
+                        </td>
+                            </tr>
+                   
+                </table>
+                </div>
+                     </div>                   
+                </td>
             </tr>
             <tr>
                 <td>
-                <div style="height:290px;width:290px; border:none">
+                <div style="height:250px;width:250px; border:none">
              
-                <header style=" background-color:#dff0d8;color:black; text-align:center;border:solid; border-color:#dff0d8 ">Screen & curtain&nbsp;
-                    <span data-toggle="collapse" data-target="#ScreenCurtain" style="color:#3c763d"class="fa fa-angle-double-down trying" ></span>
+                <header style=" background-color:#dff0d8;color:black; text-align:center;
+                        border:solid; border-color:#dff0d8 ">Screen & curtain&nbsp;
+                    <span data-toggle="collapse" data-target="#ScreenCurtain" 
+                        style="color:#3c763d"class="fa fa-angle-down trying" ></span>
                 </header>
                 <div id="ScreenCurtain" class="divcontrols" style=" border-color:#3c763d">
-                <table style="width:270px; height:220px;">
+                <table style="width:220px; height:180px;">
                 
                  <tr  >
                     <td  style=" font-size:small; text-align:center">
@@ -556,47 +613,53 @@ pp{
                 <tr  >
                     <td  style="text-align:center">
                         <span>
-                                <img src="Images/up.PNG" id="dsup" height="30" width="30" class="imgclick"/></span>   
+                                <img src="Images/offimages/up.PNG" id="dsup" 
+                                    height="40" width="40" class="imgclick"/></span>   
                     </td>
                     <td style="text-align:center">
                          <span>
-                                <img src="Images/open.PNG" id="dcopen" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/open.PNG" id="dcopen"
+                                    height="40" width="40" class="imgclick"/></span>
                          </td>
                 </tr>
                  <tr>
                     <td  style="text-align:center">
                         <span>
-                                <img src="Images/stop.PNG" id="dsstop" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/stopscreen.PNG" 
+                                    id="dsstop" height="40" width="40" class="imgclick"/></span>
                         </td>
                     <td style="text-align:center">
                         <span>
-                                <img src="Images/stop.PNG" id="dcstop" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/stopcurtain.PNG" 
+                                    id="dcstop" height="40" width="40" class="imgclick"/></span>
                         </td>
                      </tr>
                       <tr >
                     <td style="text-align:center">
                         <span>
-                                <img src="Images/down.PNG" id="dsdown" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/screendown.PNG" id="dsdown" 
+                                    height="40" width="40" class="imgclick"/></span>
                        </td>
                     <td  style="text-align:center">
                         <span>
-                                <img src="Images/close.PNG" id="dcclose" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/curtainclose.PNG" id="dcclose"
+                                    height="40" width="40" class="imgclick"/></span>
                        </td>
                 </tr>                
             </table>
                 </div>
                     </div>
                 </td>
-
                 <td>
-                <div style="height:290px;width:290px;  border:none">
-             
-                <header style=" background-color:#d9edf7;color:black; text-align:center;border:solid; border-color:#d9edf7 ">Microphone Control&nbsp;
-                    <span class="fa fa-angle-double-down trying" data-toggle="collapse" data-target="#Microphone" style="color:#31708f;"></span>
+                <div style="height:250px;width:250px;  border:none">            
+                <header style=" background-color:#d9edf7;color:black; text-align:center;
+                    border:solid; border-color:#d9edf7 ">Microphone Control&nbsp;
+                    <span class="fa fa-angle-down trying" data-toggle="collapse" 
+                        data-target="#Microphone" style="color:#31708f;"></span>
                 </header>
                     
                 <div id="Microphone" class="divcontrols" style=" border-color: #31708f;">
-                    <table style="width:270px; height:220px;">
+                    <table style="width:250px; height:180px;">
                 <tr>
                     <td style="text-align:center">
                         <asp:Label ID="Label3" runat="server" Text="Wired Mic" Font-Size="Small"  ></asp:Label>
@@ -608,66 +671,72 @@ pp{
                  <tr >
                     <td style="text-align:center" >
                         <span>
-                                <img src="Images/volplus.PNG" id="wiredvolplus" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/wiredvolplus.PNG" id="wiredvolplus"
+                                    height="40" width="40" class="imgclick"/></span>
                         </td>
                     <td style="text-align:center">
                         <span>
-                                <img src="Images/volplus.PNG" id="wirelessvolplus" height="30" width="30" class="imgclick"/></span>
+                                <img src="Images/offimages/wirelessvolplus.PNG" id="wirelessvolplus"
+                                    height="40" width="40" class="imgclick"/></span>
                        </td>
                 </tr>
-                 <tr >
-                     
+                 <tr>                  
                     <td style="text-align:center">
                         <span>
-                                <img src="Images/volminus.PNG" id="wiredvolminus" height="50" width="50" class="imgclick"/></span>
+                                <img src="Images/offimages/wiredvolminus.PNG" id="wiredvolminus"
+                                    height="40" width="40" class="imgclick"/></span>
                         </td>
                     <td style="text-align:center">
                         <span>
-                                <img src="Images/volminus.PNG" id="wirelessvolminus" height="50" width="50" class="imgclick"/></span>
+                                <img src="Images/offimages/wirelessvolminus.PNG" id="wirelessvolminus"
+                                    height="40" width="40" class="imgclick"/></span>
                         </td>
                      </tr>
                        <tr >
                     <td style="text-align:center" class="auto-style1">
                         <span>
-                                <img src="Images/mute.PNG" id="wiredmute" height="50" width="50" class="imgclick"/></span>
+                                <img src="Images/offimages/wiredmute.PNG" id="wiredmute"
+                                    height="40" width="40" class="imgclick"/></span>
                         </td>
                      <td style="text-align:center" class="auto-style1">
                          <span>
-                                <img src="Images/mute.PNG" id="wirelessmute" height="50" width="50" class="imgclick"/></span>
+                                <img src="Images/offimages/wirelessmute.PNG" id="wirelessmute"
+                                    height="40" width="40" class="imgclick"/></span>
                        </td>
-                </tr>
-                
+                </tr>                
             </table>
                     </div>
                     </div>
                 </td>
-
                 <td>
-                <div  style="height:290px ;width:180px; border:none ">
-             
-                <header style=" background-color:#fcf8e3;color:black ; border:solid; border-color:#fcf8e3; text-align:center "> Volume&nbsp;
-                     <span data-toggle="collapse" data-target="#volume" style="color:#916d3b"class="fa fa-angle-double-down trying" ></span>
+                <div  style="height:250px ;width:180px; border:none ">             
+                <header style=" background-color:#fcf8e3;color:black ; border:solid;
+                        border-color:#fcf8e3; text-align:center "> Volume&nbsp;
+                     <span data-toggle="collapse" data-target="#volume" style="color:#916d3b" 
+                         class="fa fa-angle-down trying" ></span>
                 </header>
                 <div id="volume" class="divcontrols" style=" border-color:#916d3b">
-                     <table style="width:160px; height:220px;">
+                     <table style="width:160px; height:180px;">
                
-                <tr  >
+                <tr>
                     <td style="text-align:center" >
                         <span>
-                                <img src="Images/volplus.PNG" id="volplus" height="50" width="50" class="imgclick"/></span>
+                                <img src="Images/offimages/volplus.PNG" id="volplus"
+                                    height="40" width="40" class="imgclick"/></span>
                           </td>
                     </tr>
-                 <tr  >
+                 <tr>
                     <td style="text-align:center">
                         <span>
-                                <img src="Images/volminus.PNG" id="volminus" height="50" width="50" class="imgclick"/></span>
+                                <img src="Images/offimages/volminus.PNG" id="volminus"
+                                    height="40" width="40" class="imgclick"/></span>
                        </td>
                          </tr>
-                 <tr >
+                 <tr>
                     <td style="text-align:center">
                         <span>
-                                <img src="Images/mute.PNG" id="mute" height="50" width="50" class="imgclick"/></span>
-                        
+                                <img src="Images/offimages/mute.PNG" id="mute"
+                                    height="40" width="40" class="imgclick"/></span>                        
                         </td>
                 </tr>
             </table>
@@ -676,8 +745,8 @@ pp{
                     </div>
                 </td>
             </tr>
-        </table>
-      
+        </table>   
+        
     </div>
      </div>
     <script type="text/javascript">
@@ -686,8 +755,7 @@ pp{
             if (event.target == modal) {
                 document.getElementById("control").style.display = "none";
             }
-        }
-        
+        }        
     </script>
     
 </asp:Content>

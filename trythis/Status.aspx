@@ -1,5 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="Status.aspx.cs" Inherits="trythis.Status" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.Master" AutoEventWireup="true" CodeBehind="Status.aspx.cs" Inherits="trythis.Status" %>
+<%@ MasterType VirtualPath="~/Master.master" %>
+<asp:Content ID="Head" ContentPlaceHolderID="masterchildHead" runat="server">
+    <%--<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">--%>
   
    <style type="text/css">
        .imgclick{
@@ -20,8 +22,10 @@
             box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);   
         }
    </style>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<%--</asp:Content>--%>
+    </asp:Content>
+<asp:Content ID="Main" ContentPlaceHolderID="masterchildBody" runat="server">
+    <%--<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">--%>
  
              <!--Reference the SignalR library. -->
      
@@ -32,15 +36,16 @@
    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' ></script> 
       <script src="Scripts/MessagesToClient.js" type="text/javascript"></script>
     
-    <div class="row" style="padding-right:20px; background:#fff">                          
+    <div class="row" style="padding-right:20px; margin-top:8px; background:#fff">                          
          <br>
      <asp:UpdatePanel ID="UpdatePanel1" runat="server"  >
             <ContentTemplate>
                       <table style="width:100%; ">
-                          <tr class="site-footer" style="height:50px;">
+                          <tr class="site-footer" style="height:50px; ">
                               <td class="panel-heading" style="text-align:left">Status:</td>
                               <td style="display:flex; justify-content:flex-end; ">
-                                  <span style="float:right; color:white;">
+                                  <span style="float:right; color:white;" >
+                                      <%--<i class="fa fa-refresh fa-spin fa-3x fa-fw" id="refresh"></i>--%>
                                 <img src="Images/refresh.png" id="refresh"  class="imgclick"/>
                                   </span>
                                  </td>
@@ -69,14 +74,14 @@
             <asp:BoundField HeaderText="Curtain Status" DataField="CurtainStatus"><ItemStyle Width="6%" /><ControlStyle Width="6%"/></asp:BoundField>
             <asp:BoundField HeaderText="digital Screen Status" DataField="ScreenStatus"><ItemStyle Width="6%" /><ControlStyle Width="6%"/></asp:BoundField>
             <asp:BoundField HeaderText="Light" DataField="light"><ItemStyle Width="4%" /><ControlStyle Width="4%"/></asp:BoundField>
-            <asp:BoundField HeaderText="Media Signal" DataField="MediaSignal"><ItemStyle Width="7%" /><ControlStyle Width="7%"/></asp:BoundField>
+            <asp:BoundField HeaderText="Media Signal" DataField="MediaSignal"><ItemStyle Width="10%" /><ControlStyle Width="10%"/></asp:BoundField>
             <asp:BoundField HeaderText="System lock Status" DataField="LockStatus"><ItemStyle Width="5%" /><ControlStyle Width="5%"/></asp:BoundField>
             <asp:BoundField HeaderText="Podium Lock Status" DataField="podiumLock"><ItemStyle Width="5%" /><ControlStyle Width="5%"/></asp:BoundField>
             <asp:BoundField HeaderText="Class Lock Status" DataField="ClassLocked"><ItemStyle Width="5%" /><ControlStyle Width="5%"/></asp:BoundField>
-            <asp:BoundField HeaderText="temperature" DataField="Temperature"><ItemStyle Width="5%" /><ControlStyle Width="5%"/></asp:BoundField>
-            <asp:BoundField HeaderText="Humidity" DataField="Humidity"><ItemStyle Width="5%" /><ControlStyle Width="5%"/></asp:BoundField>
-            <asp:BoundField HeaderText="PM2.5(µg/m3)" DataField="PM25"><ItemStyle Width="5%" /><ControlStyle Width="5%"/></asp:BoundField>
-            <asp:BoundField HeaderText="PM10(µg/m3)" DataField="PM10"><ItemStyle Width="5%" /><ControlStyle Width="5%"/></asp:BoundField>                
+            <asp:BoundField HeaderText="temperature" DataField="Temperature"><ItemStyle Width="4%" /><ControlStyle Width="4%"/></asp:BoundField>
+            <asp:BoundField HeaderText="Humidity" DataField="Humidity"><ItemStyle Width="4%" /><ControlStyle Width="4%"/></asp:BoundField>
+            <asp:BoundField HeaderText="PM2.5(µg/m3)" DataField="PM25"><ItemStyle Width="4%" /><ControlStyle Width="4%"/></asp:BoundField>
+            <asp:BoundField HeaderText="PM10(µg/m3)" DataField="PM10"><ItemStyle Width="4%" /><ControlStyle Width="4%"/></asp:BoundField>                
         </Columns>
     </asp:GridView>  
                               </td>
@@ -87,6 +92,9 @@
         </div>
                
 </asp:Content>
+    <%--</asp:Content>--%>
+
+
                   <%--  <div class=" row site-footer" style=" padding-right:20px; " >
                         <div class="panel-heading col-md-8" >
                              Status:

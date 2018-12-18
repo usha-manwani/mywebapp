@@ -68,7 +68,7 @@
         <asp:ScriptManagerProxy ID="sc1" runat="server"></asp:ScriptManagerProxy>
         
         <div style="opacity:0.8;" >
-   <div Class="divopt" >
+   <div  >
     
        <div class="leftspace">
        

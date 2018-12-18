@@ -15,43 +15,43 @@
             if (arraydata[1] == "Heartbeat") {
                 if (arraydata[3] == 'OPEN') {
                     var img = document.getElementById("systempower");
-                    img.src = "Images/powerOn.png";
+                    img.src = "Images/onimages/syspoweron.png";
                 }
                 else {
                     var img = document.getElementById("systempower");
-                    img.src = "Images/powerOff.png";
+                    img.src = "Images/offimages/sysof.png";
                 }
                 if (arraydata[5] == 'On') {
                     var imgpc = document.getElementById("pcpower");
-                    imgpc.src = "Images/powerOn.png";
+                    imgpc.src = "Images/onimages/pcpoweron.png";
                 }
                 else {
                     var imgpc = document.getElementById("pcpower");
-                    imgpc.src = "Images/powerOff.png";
+                    imgpc.src = "Images/offimages/pcof.png";
                 }
                 if (arraydata[12] == 'Locked') {
                     var src = document.getElementById('syslock');
-                    src.src = "Images/lock.png";
+                    src.src = "Images/onimages/syslock.png";
                 }
                 else {
                     var src = document.getElementById('syslock');
-                    src.src = "Images/unlock.png";
+                    src.src = "Images/onimages/sysunlock.png";
                 }
                 if (arraydata[13] == 'Locked') {
                     var src = document.getElementById('podiumlock');
-                    src.src = "Images/lock.png";
+                    src.src = "Images/onimages/podiumlock.png";
                 }
                 else {
                     var src = document.getElementById('podiumlock');
-                    src.src = "Images/unlock.png";
+                    src.src = "Images/onimages/podiumunlock.png";
                 }
                 if (arraydata[14] == 'Locked') {
                     var src = document.getElementById('classlock');
-                    src.src = "Images/lock.png";
+                    src.src = "Images/onimages/classlock.png";
                 }
                 else {
                     var src = document.getElementById('classlock');
-                    src.src = "Images/unlock.png";
+                    src.src = "Images/onimages/classunlock.png";
                 }
                 switch (arraydata[11]) {
                     case 'Desktop':
@@ -96,11 +96,11 @@
                         switch (arraydata[2]) {
                             case 'SystemON':
                                 var img = document.getElementById("systempower");
-                                img.src = "Images/powerOn.png";
+                                img.src = "Images/onimages/syspoweron.png"; 
                                 break;
                             case 'SystemOff':
                                 var img = document.getElementById("systempower");
-                                img.src = "Images/powerOff.png";
+                                img.src = "Images/offimages/sysof.png";
                                 break;
                             default:
                                 break
@@ -110,16 +110,16 @@
 
                         if (arraydata[2] == "SystemSwitchOn") {
                             var img = document.getElementById("systempower");
-                            img.src = "Images/powerOn.png";
+                            img.src = "Images/onimages/syspoweron.png";
                             if (arraydata.length > 4) {
                                 var imgpc = document.getElementById("pcpower");
                                 switch (arraydata[4]) {
                                     case 'ComputerOff':
 
-                                        imgpc.src = "Images/powerOff.png";
+                                        imgpc.src = "Images/offimages/pcof.png";
                                         break;
                                     case 'ComputerOn':
-                                        imgpc.src = "Images/powerOn.png";
+                                        imgpc.src = "Images/onimages/pcpoweron.png";
                                         break;
                                 }
 
@@ -172,7 +172,7 @@
                         }
                         else if (arraydata[2] == "SystemSwitchOff") {
                             var img = document.getElementById("systempower");
-                            img.src = "Images/powerOff.png";
+                            img.src = "Images/offimages/sysof.png";
                         }
                     }
 
@@ -220,11 +220,12 @@
                 chat.server.sendControlKeys(vol, "8B B9 00 04 02 04 22 2c");
             }                
             else {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2a");
                 $(this).removeClass("fa-volume-mute");
                 $(this).addClass("fa-volume-up");
                 $(this).removeClass("red");
                 $(this).addClass("iconColor");
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2a");
+                
             }            
         });
         $(document).on('click', "*[name='lockIcon']", function () {          
@@ -255,11 +256,11 @@
             openRemote(ipAddress);
         });
         $(document).on('click', '.trying', function () {
-            if ($(this).hasClass("fa-angle-double-up")) {
-                $(this).removeClass("fa-angle-double-up").addClass("fa-angle-double-down")
+            if ($(this).hasClass("fa-angle-up")) {
+                $(this).removeClass("fa-angle-up").addClass("fa-angle-down")
                 $(this).parent('header').addClass("header1");
             } else {
-                $(this).removeClass("fa-angle-double-down").addClass("fa-angle-double-up");
+                $(this).removeClass("fa-angle-down").addClass("fa-angle-up");
                 $(this).parent('header').removeClass("header1");
             }
 
@@ -508,8 +509,7 @@ function openRemote(ipofremote) {
     var iplabel = document.getElementById("MainContent_masterBody_deviceips");
     iplabel.innerText = ipofremote;
     document.getElementById("control").style.display = "block";
-    document.getElementById("smallcontrol").style.display = "none";
-    
+    document.getElementById("smallcontrol").style.display = "none";    
 }
 window.onclick = function (event) {
     if (event.target == modal) {
@@ -519,8 +519,8 @@ window.onclick = function (event) {
 
  function closexx () {
      document.getElementById("control").style.display = "none";
-     document.getElementById("smallcontrol").style.display = "block";
-     //document.getElementById("smallcontrol").addClass = "newspaper";
+     document.getElementById("smallcontrol").style.display ="flex";
+    document.getElementById("smallcontrol").addClass = "clearfix";
 }
 
 function tbleupdate(name, message) {

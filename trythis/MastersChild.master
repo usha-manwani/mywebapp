@@ -1,0 +1,35 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="MastersChild.master.cs" Inherits="trythis.MastersChild" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <asp:ContentPlaceHolder ID="masterchildHead" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+      <aside>
+      <div id="sidebar" class="nav-collapse" style="display: flex;
+     margin-left:0px;">  
+         
+        <!-- sidebar menu start-->          
+        <ul class="sidebar-menu" id="nav-accordion" >  
+             <div style="height:100px; margin-left:-10px; width:250px; background-color:#4ecdc4;align-items:center">
+                 <h3 class="centered" style="margin-right:10px" >Devices Management</h3>
+             </div>
+
+          <li class="mt" >  
+              
+                      <asp:TreeView runat="server"  OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
+                          ID="TreeMenuView" NodeStyle-NodeSpacing="1px"  
+                          RootNodeStyle-CssClass="text-bold" ForeColor="White" >
+                 </asp:TreeView>  
+                  
+                                 
+              </li>
+          </ul>             
+        <!-- sidebar menu end-->     
+          </div>
+    </aside>   
+     <section id="main-content">
+      <section class="wrapper">
+          <asp:ContentPlaceHolder ID="masterchildBody" runat="server"></asp:ContentPlaceHolder>
+             
+          </section>
+         </section>
+</asp:Content>

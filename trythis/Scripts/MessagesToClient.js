@@ -6,7 +6,7 @@
     // Create a function that the hub can call to broadcast messages.
     chat.client.broadcastMessage = function (name, message) {
         // Html encode display name and message. 
-        var tab = document.getElementById("MainContent_GridView1");
+        var tab = document.getElementById("MainContent_masterchildBody_GridView1");
         for (i = 0; i < tab.rows.length; i++) {
             var cellIp = tab.rows[i].cells[1];
             var arraydata = message.split(',');
@@ -139,6 +139,7 @@
         alert('connected');
         chat.server.sendData();
         $(document).on("click", "#refresh", function () {
+           
             //Call the Send method on the hub.
             chat.server.sendData();            
         });

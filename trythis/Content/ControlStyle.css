@@ -3,22 +3,16 @@
 .header1 {
     height: 100px;
     font-size: x-large;
-    border-radius: 5px;
-    
+    border-radius: 5px;    
 }
-.hoveronheader{
-
-}
-header:hover{
-   
+header:hover{   
     opacity:0.7;
-
+    background-color:white;
 }
 
 .divcontrols {
-    background-color: #ffffff;
-    border: solid;
-   
+    background-color: white;
+    border: solid;   
     border-radius: 5px;
 }
 body {
@@ -39,7 +33,7 @@ body {
     margin: 0;
 }
 
-.switch {
+/*.switch {
     margin: 50px auto;
     position: relative;
 }
@@ -65,7 +59,7 @@ body {
     }
 
 
-        /* DEMO 4 */
+        
 
         .switch.demo4 {
             width: 150px;
@@ -148,8 +142,8 @@ body {
                 background: -webkit-linear-gradient(#cbc7bc, #d2cbc3);
                 background: linear-gradient(#cbc7bc, #d2cbc3);
                 box-shadow: 0 -2px 5px rgba(255,255,255,0.05), 0 2px 5px rgba(255,255,255,0.1);
-            
+            }
 
         .switch:not(:checked) input {
-            /* Styles for input go here... */
-        }
+            /* Styles for input go here... 
+        }*/

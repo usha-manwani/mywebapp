@@ -276,7 +276,13 @@
     <Content Include="addDetails.aspx" />
     <Content Include="AddUser.aspx" />
     <Content Include="Approve.aspx" />
+    <Content Include="assets\css\cs-skin-elastic.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\js\flot-chart-init.js" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\vmap.sampledata.js" />
     <Content Include="CardReader.aspx" />
+    <Content Include="charttest.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -310,6 +316,7 @@
     <Content Include="Content\webfonts\fa-solid-900.svg" />
     <Content Include="Control.aspx" />
     <Content Include="controlRemote.aspx" />
+    <Content Include="css\chart.css" />
     <Content Include="css\stepper.css" />
     <Content Include="css\style-responsive.css" />
     <Content Include="css\style.css" />
@@ -342,8 +349,157 @@
     <Content Include="Images\laptop.png" />
     <Content Include="Images\Light.png" />
     <Content Include="Images\lock.png" />
+    <Content Include="Images\offimages\bluraydvd.png" />
+    <Content Include="Images\offimages\camera.png" />
+    <Content Include="Images\offimages\classlock.png" />
+    <Content Include="Images\offimages\classunlock.png" />
+    <Content Include="Images\offimages\curtainclose.png" />
+    <Content Include="Images\offimages\desktop.png" />
+    <Content Include="Images\offimages\dvd.png" />
+    <Content Include="Images\offimages\hdmi.png" />
+    <Content Include="Images\offimages\laptop.png" />
+    <Content Include="Images\offimages\light1off.png" />
+    <Content Include="Images\offimages\light2off.png" />
+    <Content Include="Images\offimages\light3.png" />
+    <Content Include="Images\offimages\mute.png" />
+    <Content Include="Images\offimages\open.png" />
+    <Content Include="Images\offimages\pcof.png" />
+    <Content Include="Images\offimages\podiumlock.png" />
+    <Content Include="Images\offimages\podiumunlock.png" />
+    <Content Include="Images\offimages\proj1.png" />
+    <Content Include="Images\offimages\proj2.png" />
+    <Content Include="Images\offimages\proj3.png" />
+    <Content Include="Images\offimages\recorder.png" />
+    <Content Include="Images\offimages\screen.png" />
+    <Content Include="Images\offimages\screendown.png" />
+    <Content Include="Images\offimages\stopcurtain.png" />
+    <Content Include="Images\offimages\stopscreen.png" />
+    <Content Include="Images\offimages\syslock.png" />
+    <Content Include="Images\offimages\sysof.png" />
+    <Content Include="Images\offimages\sysunlock.png" />
+    <Content Include="Images\offimages\tv.png" />
+    <Content Include="Images\offimages\up.png" />
+    <Content Include="Images\offimages\vga.png" />
+    <Content Include="Images\offimages\video.png" />
+    <Content Include="Images\offimages\videooff.png" />
+    <Content Include="Images\offimages\volminus.png" />
+    <Content Include="Images\offimages\volplus.png" />
+    <Content Include="Images\offimages\wiredmute.png" />
+    <Content Include="Images\offimages\wiredvolminus.png" />
+    <Content Include="Images\offimages\wiredvolplus.png" />
+    <Content Include="Images\offimages\wirelessmute.png" />
+    <Content Include="Images\offimages\wirelessvolminus.png" />
+    <Content Include="Images\offimages\wirelessvolplus.png" />
+    <Content Include="Images\onimages\bluraydvd.png" />
+    <Content Include="Images\onimages\camera.png" />
+    <Content Include="Images\onimages\classlock.png" />
+    <Content Include="Images\onimages\classunlock.png" />
+    <Content Include="Images\onimages\closecurtain.png" />
+    <Content Include="Images\onimages\desktop.png" />
+    <Content Include="Images\onimages\down.png" />
+    <Content Include="Images\onimages\dvdon.png" />
+    <Content Include="Images\onimages\hdmion.png" />
+    <Content Include="Images\onimages\laptopon.png" />
+    <Content Include="Images\onimages\light1on.png" />
+    <Content Include="Images\onimages\light2on.png" />
+    <Content Include="Images\onimages\light3.png" />
+    <Content Include="Images\onimages\mute.png" />
+    <Content Include="Images\onimages\open.png" />
+    <Content Include="Images\onimages\pcpoweron.png" />
+    <Content Include="Images\onimages\podiumlock.png" />
+    <Content Include="Images\onimages\podiumunlock.png" />
+    <Content Include="Images\onimages\projector.png" />
+    <Content Include="Images\onimages\projectoron1.png" />
+    <Content Include="Images\onimages\projectoron2.png" />
+    <Content Include="Images\onimages\projectoron3.png" />
+    <Content Include="Images\onimages\recorder.png" />
+    <Content Include="Images\onimages\stop.png" />
+    <Content Include="Images\onimages\stopcurtain.png" />
+    <Content Include="Images\onimages\syslock.png" />
+    <Content Include="Images\onimages\syspoweron.png" />
+    <Content Include="Images\onimages\sysunlock.png" />
+    <Content Include="Images\onimages\tv.png" />
+    <Content Include="Images\onimages\up.png" />
+    <Content Include="Images\onimages\vga.png" />
+    <Content Include="Images\onimages\videion.png" />
+    <Content Include="Images\onimages\video.png" />
+    <Content Include="Images\onimages\volminus.png" />
+    <Content Include="Images\onimages\volplus.png" />
+    <Content Include="Images\onimages\wiredmute.png" />
+    <Content Include="Images\onimages\wiredvolminus.png" />
+    <Content Include="Images\onimages\wiredvolplus.png" />
+    <Content Include="Images\onimages\wirelessmute.png" />
+    <Content Include="Images\onimages\wirelessvolminus.png" />
+    <Content Include="Images\onimages\wirelessvolplus.png" />
     <Content Include="Images\proj.png" />
     <Content Include="Images\refresh.png" />
+    <Content Include="Images\submenu\cam\change.png" />
+    <Content Include="Images\submenu\cam\change1.png" />
+    <Content Include="Images\submenu\cam\minus.png" />
+    <Content Include="Images\submenu\cam\minus1.png" />
+    <Content Include="Images\submenu\cam\nocam.png" />
+    <Content Include="Images\submenu\cam\nocam1.png" />
+    <Content Include="Images\submenu\cam\novideo.png" />
+    <Content Include="Images\submenu\cam\novideo1.png" />
+    <Content Include="Images\submenu\cam\plus.png" />
+    <Content Include="Images\submenu\cam\plus1.png" />
+    <Content Include="Images\submenu\cam\rotate.png" />
+    <Content Include="Images\submenu\cam\rotate1.png" />
+    <Content Include="Images\submenu\cam\save.png" />
+    <Content Include="Images\submenu\cam\save1.png" />
+    <Content Include="Images\submenu\cam\scam.png" />
+    <Content Include="Images\submenu\cam\scam1.png" />
+    <Content Include="Images\submenu\cam\stop.png" />
+    <Content Include="Images\submenu\cam\stop1.png" />
+    <Content Include="Images\submenu\cam\tcam.png" />
+    <Content Include="Images\submenu\cam\tcam1.png" />
+    <Content Include="Images\submenu\cam\wb.png" />
+    <Content Include="Images\submenu\cam\wb1.png" />
+    <Content Include="Images\submenu\dvd\backward.png" />
+    <Content Include="Images\submenu\dvd\backwarded.png" />
+    <Content Include="Images\submenu\dvd\exit.png" />
+    <Content Include="Images\submenu\dvd\exitpressed.png" />
+    <Content Include="Images\submenu\dvd\forward.png" />
+    <Content Include="Images\submenu\dvd\forwarded.png" />
+    <Content Include="Images\submenu\dvd\next.png" />
+    <Content Include="Images\submenu\dvd\nexts.png" />
+    <Content Include="Images\submenu\dvd\pause.png" />
+    <Content Include="Images\submenu\dvd\paused.png" />
+    <Content Include="Images\submenu\dvd\play.png" />
+    <Content Include="Images\submenu\dvd\played.png" />
+    <Content Include="Images\submenu\dvd\poweroff.png" />
+    <Content Include="Images\submenu\dvd\poweron.png" />
+    <Content Include="Images\submenu\dvd\pre.png" />
+    <Content Include="Images\submenu\dvd\prev.png" />
+    <Content Include="Images\submenu\dvd\stop.png" />
+    <Content Include="Images\submenu\dvd\stoppresses.png" />
+    <Content Include="Images\submenu\recorder\change.png" />
+    <Content Include="Images\submenu\recorder\change1.png" />
+    <Content Include="Images\submenu\recorder\play.png" />
+    <Content Include="Images\submenu\recorder\play1.png" />
+    <Content Include="Images\submenu\recorder\poweroff.png" />
+    <Content Include="Images\submenu\recorder\poweroff1.png" />
+    <Content Include="Images\submenu\recorder\poweron.png" />
+    <Content Include="Images\submenu\recorder\poweron1.png" />
+    <Content Include="Images\submenu\recorder\save.png" />
+    <Content Include="Images\submenu\recorder\save1.png" />
+    <Content Include="Images\submenu\recorder\stop.png" />
+    <Content Include="Images\submenu\recorder\stop1.png" />
+    <Content Include="Images\submenu\tv\exit.png" />
+    <Content Include="Images\submenu\tv\exit1.png" />
+    <Content Include="Images\submenu\tv\input.png" />
+    <Content Include="Images\submenu\tv\input1.png" />
+    <Content Include="Images\submenu\tv\minus.png" />
+    <Content Include="Images\submenu\tv\minus1.png" />
+    <Content Include="Images\submenu\tv\off.png" />
+    <Content Include="Images\submenu\tv\ok.png" />
+    <Content Include="Images\submenu\tv\ok1.png" />
+    <Content Include="Images\submenu\tv\on.png" />
+    <Content Include="Images\submenu\tv\option.png" />
+    <Content Include="Images\submenu\tv\option1.png" />
+    <Content Include="Images\submenu\tv\plus.png" />
+    <Content Include="Images\submenu\tv\plus1.png" />
+    <Content Include="Images\submenu\子菜单.jpg" />
     <Content Include="Images\unlock.png" />
     <Content Include="Images\mute.png" />
     <Content Include="Images\open.png" />
@@ -595,6 +751,7 @@
     <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebForms.js" />
     <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
     <Content Include="Status.aspx" />
+    <Content Include="tempratureCharts.aspx" />
     <Content Include="WebForm2.aspx" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -630,6 +787,7 @@
     <Content Include="Content\webfonts\fa-brands-400.ttf" />
     <Content Include="Content\webfonts\fa-brands-400.eot" />
     <Content Include="css\customstyles.less" />
+    <Content Include="MastersChild.master" />
     <None Include="Properties\PublishProfiles\CresijProfile.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
@@ -699,6 +857,13 @@
     <Compile Include="CardReader.aspx.designer.cs">
       <DependentUpon>CardReader.aspx</DependentUpon>
     </Compile>
+    <Compile Include="charttest.aspx.cs">
+      <DependentUpon>charttest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="charttest.aspx.designer.cs">
+      <DependentUpon>charttest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -754,6 +919,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MastersChild.master.cs">
+      <DependentUpon>MastersChild.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MastersChild.master.designer.cs">
+      <DependentUpon>MastersChild.master</DependentUpon>
     </Compile>
     <Compile Include="Master.master.cs">
       <DependentUpon>Master.master</DependentUpon>
@@ -841,6 +1013,13 @@
       <DependentUpon>Status.aspx</DependentUpon>
     </Compile>
     <Compile Include="TCPSocket.cs" />
+    <Compile Include="tempratureCharts.aspx.cs">
+      <DependentUpon>tempratureCharts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tempratureCharts.aspx.designer.cs">
+      <DependentUpon>tempratureCharts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UploadFile.aspx.cs">
       <DependentUpon>UploadFile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
