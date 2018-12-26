@@ -14,6 +14,7 @@ namespace trythis
     
     public partial class CardReader : System.Web.UI.Page
     {
+        string nodesval = "";
         
         PopulateTree pp = new PopulateTree();
         DataTable _dt = new DataTable();
@@ -23,14 +24,12 @@ namespace trythis
         static Dictionary<int, string> valuePairs = new Dictionary<int, string>();
         static Dictionary<string, string> cardtoregister = new Dictionary<string, string>();
         static List<KeyValuePair<string, string>> idsloc = new List<KeyValuePair<string, string>>();
+        
         IHubContext hubContext;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
-            {
-                
+            {               
                 string query = "select * from Institute_Details";
                 _dtInstitute = PopulateTree.ExecuteCommand(query);
                 PopulateTree populateTree = new PopulateTree();
@@ -42,8 +41,7 @@ namespace trythis
                 // Call UpdateRow on every postback
                 this.GridView1.UpdateRow(this.GridView1.SelectedIndex, false);
             }
-        }
-      
+        }        
         //public void GridViewSource()
         //{
         //    //DataTable dt = pp.tempcard();
@@ -137,20 +135,20 @@ namespace trythis
         { 
             string nodes="";
             if (TreeView1.CheckedNodes.Count > 0)
-            {
-                string nodesval = "";
+            {                
                 int i = 0;
                 foreach (TreeNode node in TreeView1.CheckedNodes)
                 {
-                    nodes = nodes + node.Text + ", ";
-                    nodesval = nodesval + node.ToolTip+" ";
-                    idsloc.Add(new KeyValuePair<string, string>(GridView1.Rows[selectindex].Cells[3].Text, node.ToolTip));
-                  //  cardtoregister.Add( node.ToolTip, GridView1.Rows[selectindex].Cells[3].Text);
+                    if (node.Depth==2)
+                    {
+                        nodes = nodes + node.Text + ", ";
+                        nodesval = nodesval + node.ToolTip + ",";
+                        idsloc.Add(new KeyValuePair<string, string>(GridView1.Rows[selectindex].Cells[3].Text, node.ToolTip));
+                    }                
                     i++;     
-                }
-                
+                }                
                 nodesval = nodesval.Substring(0, nodesval.Length - 1);
-                //valuePairs.Add(selectindex, nodesval);
+                cardtoregister.Add(GridView1.Rows[selectindex].Cells[3].Text, nodesval);
                 GridView1.Rows[selectindex].Cells[6].Text = nodes;
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "MyKey2", "HideTree();", true);
             }            
@@ -164,8 +162,7 @@ namespace trythis
                 nodes[i] = node.Text.ToString();
                 i++;
             }
-        }
-        
+        }        
         protected void openaccess_Click(object sender, EventArgs e)
         {
             LinkButton lb = (LinkButton)sender;
@@ -175,7 +172,6 @@ namespace trythis
                 selectindex = row.RowIndex; //gets the row index selected
             }
         }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
             hubContext = GlobalHost.ConnectionManager.GetHubContext<Hubsfile.MyHub>();
@@ -183,24 +179,22 @@ namespace trythis
             string access = "";
             for (int i = 0; i < GridView1.Rows.Count; i++)
             {
-                foreach (KeyValuePair<int, string> j in valuePairs)
+                string locs = "";
+                if (cardtoregister.ContainsKey(GridView1.Rows[i].Cells[3].Text))
                 {
-                    if (j.Key == i)
-                    {
-                        access = j.Value;
-                        break;
-                    }
+                    cardtoregister.TryGetValue(GridView1.Rows[i].Cells[3].Text, out string loc);
+                    locs = loc;
                 }
-                int result = tree.regcard(GridView1.Rows[i].Cells[0].Text, GridView1.Rows[i].Cells[1].Text, GridView1.Rows[i].Cells[2].Text, GridView1.Rows[i].Cells[3].Text, GridView1.Rows[i].Cells[4].Text, GridView1.Rows[i].Cells[5].Text, access, GridView1.Rows[i].Cells[6].Text);
+                int result = tree.regcard(GridView1.Rows[i].Cells[0].Text, GridView1.Rows[i].Cells[1].Text, GridView1.Rows[i].Cells[2].Text, GridView1.Rows[i].Cells[3].Text, GridView1.Rows[i].Cells[4].Text, GridView1.Rows[i].Cells[5].Text, access, GridView1.Rows[i].Cells[6].Text,locs);
                 if (result == 1)
                 {
                     foreach (KeyValuePair<string, string> keyValue in idsloc)
                     {
-                    if (keyValue.Key == GridView1.Rows[i].Cells[3].Text)
-                    {
-                        string ip = tree.getIP(keyValue.Value);
-                        if (!string.IsNullOrEmpty(ip))
+                        if (keyValue.Key == GridView1.Rows[i].Cells[3].Text)
                         {
+                            string ip = PopulateTree.getIP(keyValue.Value);
+                            if (!string.IsNullOrEmpty(ip) && ip!="-1")
+                            {
                             string cardbytes = keyValue.Key;
                             string c = "";
                             int checksum = 9;
@@ -217,9 +211,8 @@ namespace trythis
                             checksum = checksum & Convert.ToByte(0XFF);
                             string data = "8B B9 00 07 01 01 " + c + checksum.ToString("X2");
                             hubContext.Clients.All.SendControl(ip, data);
+                            }
                         }
-
-                    }
                     }
                 }
             }
@@ -227,22 +220,30 @@ namespace trythis
             GridView1.DataBind();
             valuePairs.Clear();
             idsloc.Clear();
+            nodesval = "";
             ScriptManager.RegisterStartupScript(this, typeof(Page), "MyKey1", "hideGrid();", true);
-
         }
-
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            PopulateTree.ExecuteCommand("delete from tempCardRegister");
+            GridView1.DataSource = null;
+            GridView1.DataBind();
+            valuePairs.Clear();
+            idsloc.Clear();
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyKey3", "xx();", true);
+        }
         //protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
         //{
-            
+
         //    int i = e.NewEditIndex;
         //    Label card = (Label)GridView1.Rows[e.NewEditIndex].FindControl("cardID");
         //    Label states = (Label)GridView1.Rows[e.NewEditIndex].FindControl("state");
-          
+
         //    //List<CardData> cardscans = HttpContext.Current.Session["myCardList"] as List<CardData>;
         //    //card.Text = cardscans[i].cardids;
         //    //states.Text = cardscans[1].state;
         //    GridView1.EditIndex = e.NewEditIndex;
-            
+
         //    GridView1.DataSource = (DataTable)ViewState["_data"];
         //    GridView1.DataBind();
         //}
@@ -257,15 +258,15 @@ namespace trythis
         //    Label card = (Label)GridView1.Rows[e.RowIndex].FindControl("cardID");
         //    Label states = (Label)GridView1.Rows[e.RowIndex].FindControl("state");
         //    Label access = (Label)GridView1.Rows[e.RowIndex].FindControl("Access");
-            
-            
+
+
 
         //    GridView1.EditIndex = -1;
         //   // updatingData(i, txtsno.Text, txtname.Text,txtmember.Text,txtcomment.Text,card.Text,states.Text,access.Text);
-            
-            
+
+
         //}
-       
+
         //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         //{            
         //}
@@ -276,7 +277,5 @@ namespace trythis
         //    GridView1.DataSource = (DataTable)ViewState["_data"];
         //    GridView1.DataBind();
         //}
-
-     
     }
-}
+    }

@@ -238,10 +238,10 @@ ul.top-menu > li > .logout {
     display: inline-block;
     height: 90%;
     position: fixed;
-    background: #2f323a;
+    background: #2f323a;    
     font-family: 'Ruda', sans-serif;
 }
-
+   
 
 #sidebar h5 {
 	color: #f2f2f2;
@@ -407,13 +407,14 @@ ul.sidebar-menu li a.active i {
 
 /* MAIN CONTENT CONFIGURATION */
 #main-content {
-    margin-left: 250px;
-   min-height:900px;
+   margin-left: 250px;
+   min-height:1300px;
 }
 
 .header, .footer {
     min-height: 60px;
     padding: 0 15px;
+    
 }
 
 .header {
@@ -435,6 +436,7 @@ ul.sidebar-menu li a.active i {
     padding-right: 15px;
     padding-bottom: 15px;
     padding-top: 0px;
+    
     width: 100%;
 }
 
@@ -768,6 +770,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
 .sidebar-closed #main-content {
     margin-left: 0px;
+    
 }
 
 .sidebar-closed #sidebar {
@@ -3336,7 +3339,10 @@ ul.chat-available-user li a:hover {
 .site-footer {
     background: #4ECDC4;
     color: #fff;
-    padding: 15px 0;
+    margin-bottom:-80px;
+    padding: 10px 0;
+    height:80px;
+    
 }
 
 .site-footer p {

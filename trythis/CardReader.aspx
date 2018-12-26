@@ -1,64 +1,14 @@
 ﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeBehind="CardReader.aspx.cs" Inherits="trythis.CardReader" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
 <link href="css/stepper.css" rel="stylesheet" />
-       <style type="text/css">
-          .line {
-    width: 0.5px;
-    background-color: lightgrey !important;
-  }
-  .lead {
-    font-size: 1.1rem;
-  }
-        .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-        .modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
-
-        .linkcursor{
-            cursor:pointer;
-            text-decoration:underline;
-            text-decoration-color:blue;
-            color:blue;
-        }
-        .cellwidth{
-            width:10%
-        }
-        .celwidth1{
-            width:30%
-        }
-        input{
-            width:100%
-        }
-        .label12{
-            color:black;
-        }
-        .displaynone{
-            display:none;
-        }
-</style>
+       
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterBody" runat="server">    
-    
+    <link href="css/Card.css" rel="stylesheet" />
         <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
     
-   <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
+   <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
     <script src="Scripts/CardReader.js"></script>
       <div>
            <div class="panel-heading col " >
@@ -79,16 +29,35 @@
     <div class="d-flex mb-1">
       <div class="d-flex flex-column pr-4 align-items-center">
         <div class="rounded-circle py-2 px-3 bg-primary text-white mb-1">2</div>
-        <div class="line h-100 d-none"></div>
+        <div class="line h-100 "></div>
       </div>
       <div>
         <h5 class="text-dark">Provide Access to User</h5>
-        <p class="lead text-muted pb-3">After completing step 1, you can give access to User to Register the card. <h6> You can select access level and options from the Select Access link in the table. Click on Register once done with providing access to register the card</h6>
+        <p class="lead text-muted pb-3">After completing step 1, you can give access to User to Register the card.
+            <h6> You can select access level and options from the
+                Select Access link in the table. Click on Register 
+                once done with providing access to register the card</h6>
+        </p>
+      </div>
+    </div>
+             <div class="d-flex mb-1">
+      <div class="d-flex flex-column pr-4 align-items-center">
+        <div class="rounded-circle py-2 px-3 bg-primary text-white mb-1">3</div>
+        <div class="line h-100 d-none"></div>
+      </div>
+      <div>
+        <h5 class="text-dark">Check Card Status</h5>
+        <p class="lead text-muted pb-3">Please check the current status of card(s) that you register. 
+            <h6> You might want to check if the scanned card is registered to all locations or is in pending state.
+                You can check and try to update it &nbsp;<a class=" linkstyle"
+                    style=" color: blue; text-decoration: underline;" onclick="openGrid();">here</a> 
+            </h6>
         </p>
       </div>
     </div>
   
   </div>
+
           <asp:Label ID="iptosend" runat="server" CssClass="displaynone" Text=""></asp:Label>
           <asp:Label ID="datatosend" runat="server" CssClass="displaynone" Text=""></asp:Label>
          <div id="myModal" class="modal" >
@@ -126,6 +95,7 @@
            </div>
                   
       <asp:Button CssClass="btn btn-round btn-navbar" runat="server" Width="100px" OnClick="Unnamed_Click" ID="btnSave1"  Text="OK" />
+                     <button type="button" class="btn btn-round btn-navbar" onclick="xx();">Cancel</button>
                     <asp:Label runat="server" ID="info" Text="" ForeColor="red"></asp:Label>
                      </ContentTemplate>
                  </asp:UpdatePanel> 
@@ -147,7 +117,7 @@
            forecolor="black"
            font-italic="false"    />
 
-        <alternatingrowstyle backcolor="White"  
+                <alternatingrowstyle backcolor="White"  
           forecolor="black"
           font-italic="false"   />
                   <Columns>
@@ -189,6 +159,7 @@
                             </div>
                    </div>
               <asp:Button CssClass="btn btn-round btn-navbar" runat="server" Width="100px" OnClick="btnSave_Click"  ID="btnSave" Text="register" />
+              <asp:Button CssClass="btn btn-round btn-navbar" runat="server" Width="100px" OnClick="btnCancel_Click" Text="Cancel" ID="btnCancel" />
           <br /><br />
                 
               </ContentTemplate>
@@ -199,14 +170,14 @@
   </div>
              </div>
             
-       <div class="modal sidebar-menu"  id="modalAccess" style="max-height:700px; overflow-y:auto">
+       <div class="modal sidebar-menu"  id="modalAccess" style="max-height:700px; display:none; overflow-y:auto">
                       
                                  <div class="modal-content" style="width:600px">
                                      <span class="close1" id="modalClose" style="text-align:right"><i class="fa fa-times" aria-hidden="true"></i></span>
                                      <h3> open</h3>
                                      <asp:UpdatePanel runat="server" ID="selectAccessPanel">
                                          <ContentTemplate>
-                                     <asp:TreeView  ShowCheckBoxes="All"  ID="TreeView1" NodeStyle-NodeSpacing="1" runat="server"></asp:TreeView>
+                                     <asp:TreeView  ShowCheckBoxes="All" ID="TreeView1" NodeStyle-NodeSpacing="1" runat="server"></asp:TreeView>
                                    <%-- <button onclick="GetSelected()">select</button>--%>
                                  <asp:Button Text="Get Selected" runat="server" ID="btnToSelect"  OnClick="addAccess_Click"/>
                                              </ContentTemplate>
@@ -235,23 +206,7 @@
             var modal = document.getElementById('modalAccess');
             modal.style.display = "block";            
         });
-//        var modal = document.getElementById('myModal');        
-//// Get the <span> element that closes the modal
-//            var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-        btn.onclick = function ()
-        {           
-            modal.style.display = "block";
-            return false;
-        }
-
-// When the user clicks on <span> (x), close the modal
-        //span.onclick = function() {
-        //    modal.style.display = "none";    
-        //}
-   
-// When the user clicks anywhere outside of the modal, close it
+       
         window.onclick = function (event)
         {
             if (event.target == modal)
@@ -270,6 +225,7 @@
                 return false;
             }
         }  
+
     </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="masterSideBody" runat="server">

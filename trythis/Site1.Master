@@ -202,19 +202,14 @@
            <%-- <div style="float:right; flex:1; overflow-x:auto; " class=" col-sm-12 col-md-12 col-lg-12 ">--%>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
          </asp:ContentPlaceHolder>
-              <footer class="site-footer">
-      <div class="text-center">
+              <footer class="site-footer position-sticky">
+      <div class="text-center" style="font-size:small">
         <p>
           &copy; Copyrights <strong>Cresij</strong>. All Rights Reserved
         </p>
-        <div class="credits">
-          <!--
-            You are NOT allowed to delete the credit link to TemplateMag with free version.
-            You can delete the credit link only if you bought the pro version.
-            Buy the pro version with working PHP/AJAX contact form: https://templatemag.com/dashio-bootstrap-admin-template/
-            Licensing information: https://templatemag.com/license/
-          -->
-          Created By  <a href="https://google.com/">Usha Phulwani</a>
+        <div class="credits" style="font-size:small">
+        
+          Created By  <a href="https://google.com/" >Usha Phulwani</a>
         </div>
         <a href="index.html#" class="go-top">
           <i class="fa fa-angle-up"></i>

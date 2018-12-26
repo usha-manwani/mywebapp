@@ -1,11 +1,10 @@
 ﻿$(function () {
     var chat = $.connection.myHub;
-
     chat.client.confirmRegister = function () {
         alert('Card Successfully Registered!!');
-    }
+    }    
     chat.client.registerCard = function (name, message) {
-        var text1 = document.getElementById("MainContent_masterBody_info");
+        var text1 = document.getElementById("MainContent_masterchildBody_masterBody_info");
         text1.innerHTML = "";
         var mymodal = document.getElementById('myModal');
         mymodal.style.display = 'block';
@@ -17,9 +16,9 @@
         if (arrayData[0] == 'Reader') {
             if (arrayData[1] == 'Toregister') {
                 
-                    var cc = "";
-                    cc = document.getElementById("checkcard").value;
-                    if (!cc.includes(arrayData[2])) {
+                var cc = "";
+                cc = document.getElementById("checkcard").value;
+                if (!cc.includes(arrayData[2])) {
                         cc = cc + " " + arrayData[2];
                         document.getElementById("checkcard").value = cc;
                         addNewCardID(arrayData[2]);
@@ -29,10 +28,33 @@
     }
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         alert("Hub Connection started");
+       
+        $(document).on("change", "input:checkbox", function () {
 
-        function confirm() {
-            alert("yeppee!!");
-        }
+            //});
+            //$("[id*=TreeView1] input[type=checkbox]").bind("click", function () {
+            var table = $(this).closest("table");
+            if (table.next().length > 0 && table.next()[0].tagName == "DIV") {
+                //Is Parent CheckBox
+                var childDiv = table.next();
+                var isChecked = $(this).is(":checked");
+                $("input[type=checkbox]", childDiv).each(function () {
+                    if (isChecked) {
+                        $(this).attr("checked", "checked");
+                    } else {
+                        $(this).removeAttr("checked");
+                    }
+                });
+            } else {
+                //Is Child CheckBox
+                var parentDIV = $(this).closest("DIV");
+                if ($("input[type=checkbox]", parentDIV).length == $("input[type=checkbox]:checked", parentDIV).length) {
+                    $("input[type=checkbox]", parentDIV.prev()).attr("checked", "checked");
+                } else {
+                    $("input[type=checkbox]", parentDIV.prev()).removeAttr("checked");
+                }
+            }
+        });
        
         //Add validation rule for dynamically generated email fields
 
@@ -46,21 +68,24 @@
 
         //};
 
-    });
+    });  
 });
 function xx() {
     var modal = document.getElementById('myModal');
     modal.style.display = "none";
+    var tbscan = document.getElementById('tablescan');
+    tbscan.style.display = "none";
+    document.getElementById("checkcard").value = "";
+    $("#tablescan").find("tr:not(:first)").remove();
 }
-
 function trysolve(id, states) {
     var rownum = 0;
-    var table = document.getElementById("MainContent_masterBody_GridView1");
-    var tabhide = document.getElementById("MainContent_masterBody_tabhidden")
+    var table = document.getElementById("MainContent_masterchildBody_masterBody_GridView1");
+    var tabhide = document.getElementById("MainContent_masterchildBody_masterBody_tabhidden")
     for (i = 1; i < 6; i++) {
        
-        if (document.getElementById("MainContent_masterBody_GridView1").rows[i].cells[3].innerText == "") {
-            document.getElementById("MainContent_masterBody_GridView1").rows[i].cells[3].innerHTML = id;
+        if (document.getElementById("MainContent_masterchildBody_masterBody_GridView1").rows[i].cells[3].innerText == "") {
+            document.getElementById("MainContent_masterchildBody_masterBody_GridView1").rows[i].cells[3].innerHTML = id;
             table.rows[i].cells[5].innerText = "unregistrerd";
             //table.rows[i].cell[3].getElementsByTagName("span").innerHTML = id;
             //alert('gotlabel');
@@ -72,36 +97,10 @@ function trysolve(id, states) {
     }
     return rownum;
 }
-$(function () {
-    $("[id*=TreeView1] input[type=checkbox]").bind("click", function () {
-        var table = $(this).closest("table");
-        if (table.next().length > 0 && table.next()[0].tagName == "DIV") {
-            //Is Parent CheckBox
-            var childDiv = table.next();
-            var isChecked = $(this).is(":checked");
-            $("input[type=checkbox]", childDiv).each(function () {
-                if (isChecked) {
-                    $(this).attr("checked", "checked");
-                } else {
-                    $(this).removeAttr("checked");
-                }
-            });
-        } else {
-            //Is Child CheckBox
-            var parentDIV = $(this).closest("DIV");
-            if ($("input[type=checkbox]", parentDIV).length == $("input[type=checkbox]:checked", parentDIV).length) {
-                $("input[type=checkbox]", parentDIV.prev()).attr("checked", "checked");
-            } else {
-                $("input[type=checkbox]", parentDIV.prev()).removeAttr("checked");
-            }
-        }
-    });
-})
-
 function getRowIndex(lnk) {
     var row = lnk.parentNode.parentNode;
     var rowIndex = row.rowIndex ;
-    var r = document.getElementById('MainContent_masterBody_indexselect');
+    var r = document.getElementById('MainContent_masterchildBody_masterBody_indexselect');
     r.value = rowIndex;
     alert(r.value);
     
@@ -131,7 +130,6 @@ function getRowIndex(lnk) {
 //    document.getElementById("modalAccess").style.display = "none";
 //    return false;
 //}
-
 function addNewCardID(cardID)
 {
     var tble = document.getElementById("cardtable");
@@ -171,7 +169,6 @@ function addNewCardID(cardID)
     cell5.appendChild(txt5);
     
 }
-
 function isNumberKey(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -180,9 +177,7 @@ function isNumberKey(evt) {
     }
     return true;
 }  
-
 function showGrid() {
-
     var tbscan = document.getElementById('tablescan');
     tbscan.style.display = "none";
     var gridmodal = document.getElementById('griddiv');
@@ -190,14 +185,14 @@ function showGrid() {
     return false;
 }
 function hideGrid() {
-
+    document.getElementById("checkcard").value = "";
     var gridmodal = document.getElementById('griddiv');
     gridmodal.style.display = "none";
     var mymodal = document.getElementById('myModal');
     mymodal.style.display = 'none';
+    alert("Please check status of card !! ");
     return false;
 }
-
 function HideTree() {
     var modal = document.getElementById('modalAccess');
     modal.style.display = "none";
@@ -208,3 +203,6 @@ function HideTree() {
         }
     }
 }
+
+
+

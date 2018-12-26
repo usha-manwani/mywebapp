@@ -45,17 +45,15 @@ namespace trythis
                 val = row[2].ToString();
                 TreeNode child = new TreeNode
                 {
-
                     Text = row[0].ToString(),
                     Value = row[1].ToString()
-
                 };
                 child.ToolTip = row[2].ToString();
+                
                 if (ParentId == 0)
                 {
                     child.SelectAction = TreeNodeSelectAction.Expand;
                     root.ChildNodes.Add(child);
-
                     DataTable dtChild = ExecuteCommand("Select GradeName, Id, GradeID from Grade_Details where InsID ='" + val + "'");
                     dtGrade.Merge(dtChild);
                     PopulateTreeView(dtChild, int.Parse(child.Value), child);
@@ -92,8 +90,6 @@ namespace trythis
                     con.Open();
 
                 DataTable dt = new DataTable();
-
-
                 //Loading all data in a datatable from datareader  
                 da.Fill(dt);
                 //Closing the connection  
@@ -108,7 +104,6 @@ namespace trythis
             {
                 con.Close();
             }
-
         }
 
         protected void TreeMenuView_SelectedNodeChanged(object sender, EventArgs e)
@@ -119,7 +114,6 @@ namespace trythis
                 DataTable dt = ExecuteCommand("select cd.ClassName as loc ,cc.CCIP as ip from CentralControl cc join Class_Details cd on cd.ClassID=cc.location where cd.GradeID='" + TreeMenuView.SelectedNode.ToolTip + "'");
                 if (dt.Rows.Count > 0)
                 {
-
                     string[] deviceloc = new string[dt.Rows.Count];
                     Dictionary<string, string> ipsloc = new Dictionary<string, string>();
                     foreach (DataRow row in dt.Rows)
@@ -135,7 +129,6 @@ namespace trythis
                     HttpContext.Current.Session["iploc"] = ipsloc;
                     HttpContext.Current.Session["deviceloc"] = deviceloc;
                     HttpContext.Current.Session["devices"] = devicelocations;
-
                 }
                 else
                 {

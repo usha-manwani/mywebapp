@@ -133,7 +133,30 @@ namespace trythis
                 con.Close();
             }
         }
-
+        public static DataSet GetDataSet(string Text)
+        {
+            SqlConnection con = new SqlConnection(constr);
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter(Text, con);
+                //Opening Connection  
+                if (con.State != ConnectionState.Open)
+                    con.Open();
+                DataSet ds = new DataSet();
+                //Loading all data in a datatable from datareader  
+                da.Fill(ds);
+                //Closing the connection  
+                return ds;
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
         #endregion
 
         #region Insert Details
@@ -678,7 +701,6 @@ namespace trythis
             }
             return dt1;
         }
-
         public int inserTempCard(string sno, string id, string name, string card, string com)
         {
             int result = -1;
@@ -725,8 +747,7 @@ namespace trythis
             }
             return result;
         }
-
-        public int regcard(string sno, string memid, string name, string card,string com, string state, string access,string locnames)
+        public int regcard(string sno, string memid, string name, string card,string com, string state, string access,string locnames, string locids)
         {
             int result = 0;
             using(SqlConnection con = new SqlConnection(constr))
@@ -745,9 +766,10 @@ namespace trythis
                         cmd.Parameters.AddWithValue("@name", name);
                         cmd.Parameters.AddWithValue("@cardid", card);
                         cmd.Parameters.AddWithValue("@comment", com);
-                        cmd.Parameters.AddWithValue("@state", "UnRegistered");
+                        cmd.Parameters.AddWithValue("@state", "Unregistered");
                         cmd.Parameters.AddWithValue("@rightsID", access);
-                        cmd.Parameters.AddWithValue("@locnames", locnames);
+                        cmd.Parameters.AddWithValue("@pending", locnames);
+                        cmd.Parameters.AddWithValue("@classId", locids);
                         cmd.Parameters.Add("@result", SqlDbType.Int);
                         cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
@@ -768,7 +790,7 @@ namespace trythis
             }
             return result;
         }
-       public string getIP(string loc)
+       public static string getIP(string loc)
         {
             string result = "";
             using (SqlConnection con = new SqlConnection(constr))
@@ -794,6 +816,93 @@ namespace trythis
                 }
             }
             return result;
+        }
+        public int updateStatus(string ip,string card)
+        {
+            int result = 0;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using(SqlCommand cmd= new SqlCommand("regOnLoc", con))
+                {
+                    try
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@cardID", card);
+                        cmd.Parameters.AddWithValue("@ip", ip);
+                        result = cmd.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+                        result = -2;
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static string insertCardLogs(string ip, string cardId)
+        {
+            string newlog = "";
+            SqlConnection con = new SqlConnection(constr);
+            using (SqlCommand cmd = new SqlCommand("cardLogs", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ip", ip);
+                cmd.Parameters.AddWithValue("@id", cardId);
+                cmd.Parameters.Add("@newlog", SqlDbType.NVarChar, 100);
+                cmd.Parameters["@newlog"].Direction = ParameterDirection.Output;
+                try
+                {
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    cmd.ExecuteNonQuery();
+                    newlog = cmd.Parameters["@newlog"].Value.ToString();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return newlog;
+        }
+        public DataTable GetCardLogs()
+        {
+            DataTable dt = null;
+            string query = "select cc.MemberID cc.Name ";
+            using(SqlConnection con= new SqlConnection(constr))
+            {
+                using(SqlCommand cmd = new SqlCommand("GetCardLogs", con))
+                {
+                    try
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        
+                        if(con.State!= ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                }
+            }
+            return dt;
         }
         #endregion
     }
@@ -835,7 +944,7 @@ namespace trythis
     public class ScanReader
     {
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-        public DataTable CardData()
+        public static DataTable CardData()
         {
             DataTable dt = new DataTable();
             using (SqlConnection con = new SqlConnection(constr))
@@ -864,4 +973,5 @@ namespace trythis
             return dt;
         }
     }   
+    
 }

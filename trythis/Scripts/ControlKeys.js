@@ -1,14 +1,8 @@
 ﻿﻿$(function () {
-     //window.addEventListener('resize', () => {
-     //    var size = $(window).width();
-     //    if (size <= 768) {
 
-     //    }
-
-     //});
-    var ipAddress;
+     var ipAddress = document.getElementById("MainContent_masterchildBody_masterBody_deviceips").innerText;
     var chat = $.connection.myHub;
-     chat.client.broadcastMessage = function (name, message) {
+    chat.client.broadcastMessage = function (name, message) {
          tbleupdate(name, message);
         if (name == ipAddress) {
             var arraydata = message.split(',');
@@ -394,7 +388,7 @@ function createDivs() {
             var ip = dev[i].split(":");
             var rows = document.getElementById("smallcontrol");
             var DIV = document.createElement("div");
-            DIV.className = "col-xs-12 col-md-4 ";
+            DIV.className = "col-xs-12 col-md-6 col-lg-4";
             rows.appendChild(DIV);
             var table = document.createElement("table");
             table.className = "table1234";
@@ -506,7 +500,7 @@ function isRemote(ipofdevice, chknot) {
 }
 
 function openRemote(ipofremote) {
-    var iplabel = document.getElementById("MainContent_masterBody_deviceips");
+    var iplabel = document.getElementById("MainContent_masterchildBody_masterBody_deviceips");
     iplabel.innerText = ipofremote;
     document.getElementById("control").style.display = "block";
     document.getElementById("smallcontrol").style.display = "none";    

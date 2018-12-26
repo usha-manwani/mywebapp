@@ -87,10 +87,15 @@ namespace trythis.Hubsfile
             }
             if (data.Contains("registered"))
             {
-                updatecardstatus(data);
+                updatecardstatus(sender,data);
                // Clients.All.confirmRegister();
             }
-            Clients.All.broadcastMessage(sender, data);
+            else if (data.Contains("readerlog"))
+            {
+                updateCardLogs(sender,data);
+                Clients.All.SendControl(sender, "8B B9 00 04 01 0B C4 D4");
+            }
+              Clients.All.broadcastMessage(sender, data);
         }
 
         public void SendData()
@@ -105,17 +110,23 @@ namespace trythis.Hubsfile
         {
             int dis;
             byte[] statusRec=  HexEncoding.GetBytes(Message, out dis);
-
             Clients.All.broadcastMessage(sender, statusRec);
         }
 
-        public void updatecardstatus(string data)
+        public void updatecardstatus(string ip,string data)
         {
             string[] msg=  data.Split(',');
-            string cardID = msg[2];
-            string query = "update CardRegister set state='Registered' where cardID='"+cardID+"'";
+            string cardID = msg[2];            
             PopulateTree tree = new PopulateTree();
-            tree.insertANyData(query);
+            tree.updateStatus(ip, cardID);
+        }
+        public void updateCardLogs(string ip, string data)
+        {
+            string[] msg = data.Split(',');
+            string cardID = msg[2];
+            string newdata = PopulateTree.insertCardLogs(ip, cardID);
+            if(!string.IsNullOrEmpty(newdata))
+            Clients.All.logs(newdata);
         }
     }
     public class HexEncoding

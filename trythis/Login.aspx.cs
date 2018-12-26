@@ -74,7 +74,7 @@ namespace trythis
                     HttpContext.Current.Session["UserName"] = n;
                     HttpContext.Current.Session["role"] = k;
                     HttpContext.Current.Session["UserId"] = u;
-                    Response.Redirect("~/charttest.aspx");
+                    Response.Redirect("~/status.aspx");
                 }
                 else
                 {

@@ -72,7 +72,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
         <script src="Scripts/ControlKeys.js"></script>
     <div class="container-fluid">
     <div class="row clearfix" id="smallcontrol" >
-        <input type="hidden" name="ipForRemote" value="" />
+        <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
         <%--   <div class="col-md-3">   
             <table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;">
             <tr id="first" style=" text-align:center">
@@ -324,7 +324,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
         <input id="dev" type="hidden" value='<%=Session["devices"] %>' />
         <asp:TextBox style="display:none" ID="ipAddressToSend" runat="server"></asp:TextBox>
         <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" ></asp:ScriptManagerProxy>
-        <table // class="container" >
+        <table  class="container " >
             <tr>
                 <td>   
                 <div  style="height:250px;width:250px;  border:none">    

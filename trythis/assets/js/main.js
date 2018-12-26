@@ -38,10 +38,10 @@ jQuery(document).ready(function($) {
 		$(this).prop('Counter',0).animate({
 			Counter: $(this).text()
 		}, {
-			duration: 3000,
+			duration: 2000,
 			easing: 'swing',
-			step: function (now) {
-				$(this).text(Math.ceil(now));
+                step: function (now) {
+                    $(this).text(now.toFixed(2));
 			}
 		});
 	});

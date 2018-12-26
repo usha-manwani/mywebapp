@@ -135,6 +135,11 @@
             }
         }
     };
+    chat.client.updatelog = function () {
+        alert("inside grid");
+        _doPostBack("<%=up1.UniqueID %>", "");
+
+    };
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         alert('connected');
         chat.server.sendData();
