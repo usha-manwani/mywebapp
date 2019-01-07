@@ -10,7 +10,7 @@ using System.Web.Security;
 using System.Security.Cryptography;
 
 
-namespace trythis
+namespace WebCresij
 {
     public partial class Login : System.Web.UI.Page
     {
@@ -69,19 +69,21 @@ namespace trythis
                 FailureText.Text = "Exception occured";
                 ErrorMessage.Visible = true;
             }
-            if (k >= 0)
-                {
-                    HttpContext.Current.Session["UserName"] = n;
-                    HttpContext.Current.Session["role"] = k;
-                    HttpContext.Current.Session["UserId"] = u;
-                    Response.Redirect("~/status.aspx");
-                }
-                else
-                {
-                    FailureText.Text = " id  " + id + "   phone " + phone + "  return value " + k;
-                    ErrorMessage.Visible = true;
-                }           
+            if (k > 0)
+            {
+                HttpContext.Current.Session["UserName"] = n;
+                HttpContext.Current.Session["role"] = k;
+                HttpContext.Current.Session["UserId"] = u;
+                Response.Redirect("~/status.aspx");
+            }
+            else if (k == -9)
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg1", "alert('UserID is in pending state !! \nPlease try after some time!!');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg", "alert('Wrong ID or Password!! Please try again!');", true);
+            }                       
         }
-
     }
 }

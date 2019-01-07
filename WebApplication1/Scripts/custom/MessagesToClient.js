@@ -5,6 +5,7 @@
     // Create a function that the hub can call to broadcast messages.
     chat.client.broadcastMessage = function (name, message) {
         // Html encode display name and message. 
+        alert("connectedc");
         var tab = document.getElementById("MainContent_GridView1");
         for (i = 0; i < tab.rows.length; i++) {
             var cellIp = tab.rows[i].cells[1];

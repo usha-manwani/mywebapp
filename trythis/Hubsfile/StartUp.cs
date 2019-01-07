@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(trythis.Hubsfile.Startup))]
+[assembly: OwinStartup(typeof(WebCresij.Hubsfile.Startup))]
 
-namespace trythis.Hubsfile
+namespace WebCresij.Hubsfile
 {
     public class Startup
     {

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RemoveUsers.aspx.cs" Inherits="trythis.RemoveUsers" MasterPageFile="~/Master.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RemoveUsers.aspx.cs" Inherits="WebCresij.RemoveUsers" MasterPageFile="~/Master.Master" %>
 <%@ MasterType VirtualPath="~/Master.master" %>
  <asp:Content ID="Head" ContentPlaceHolderID="masterHead" runat="server">
      <style>

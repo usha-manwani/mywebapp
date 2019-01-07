@@ -10,13 +10,13 @@ header:hover{
     background-color:white;
 }
 
+
 .divcontrols {
     background-color: white;
     border: solid;   
     border-radius: 5px;
 }
-body {
-}
+
     #projectorOn:target {
     -webkit-box-shadow: 40px 40px 20px 20px #9DAFE3;
     box-shadow: 40px 40px 20px 20px #9DAFE3;
@@ -147,3 +147,4 @@ body {
         .switch:not(:checked) input {
             /* Styles for input go here... 
         }*/
+

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace trythis {
+namespace WebCresij {
     
     
     public partial class WebForm2 {
@@ -36,9 +36,9 @@ namespace trythis {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new trythis.SiteMaster Master {
+        public new WebCresij.SiteMaster Master {
             get {
-                return ((trythis.SiteMaster)(base.Master));
+                return ((WebCresij.SiteMaster)(base.Master));
             }
         }
     }

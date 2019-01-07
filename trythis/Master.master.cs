@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace trythis
+namespace WebCresij
 {
     public partial class Master : System.Web.UI.MasterPage
     {

@@ -47,40 +47,56 @@
                     var src = document.getElementById('classlock');
                     src.src = "Images/onimages/classunlock.png";
                 }
+                uncheck();
                 switch (arraydata[11]) {
                     case 'Desktop':
+                        var desk = document.getElementById('desktop');
                         document.getElementById('desktop').checked = true;
+                        $(desk).closest("td").find("img").attr('src', "Images/onimages/desktop.png");                        
+                        
                         break;
                     case 'Laptop':
                         document.getElementById('laptop').checked = true;
+                        var laptop = document.getElementById('laptop');
+                        $(laptop).closest("td").find("img").attr('src',"Images/onimages/laptopon.png");
+                       
                         break;
                     case 'Digital Curtain':
                         document.getElementById('platform').checked = true;
+                        $('#platform').closest("td").find("img").attr('src', "Images/platform.png");
                         break;
                     case 'Digital Screen':
                         document.getElementById('digitalEquipment').checked = true;
+                        $('#digitalEquipment').closest("td").find("img").attr('src', "Images/platform.png");
                         break;
                     case 'DVD':
                         document.getElementById('dvd').checked = true;
+                        $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
                         break;
                     case 'TV':
                         document.getElementById('tv').checked = true;
+                        $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
                         break;
                     case 'Video Camera':
                         document.getElementById('camera').checked = true;
+                        $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
                         break;
                     case 'Blu-Ray DVD':
                         document.getElementById('bluray').checked = true;
+                        $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
                         break;
                     case 'Recording System':
                         document.getElementById('recorder').checked = true;
+                        $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
                         break;
                 }
 
-                if (arraydata[13] == 'Closed') {
-
+                if (arraydata[6] == 'Closed') {
+                    var src = document.getElementById("projectorOn");
+                    src.src = "Images/onimages/projectoron1.png";
                 } else {
-
+                    var src = document.getElementById("projectorOn");
+                    src.src = "Images/offimages/proj1.png";
                 }
 
             }
@@ -118,36 +134,43 @@
                                 }
 
                             }
+                            uncheck();
                             switch (arraydata[3]) {
-
-
                                 case 'Desktop':
                                     document.getElementById('desktop').checked = true;
-
+                                    $('#desktop').closest("td").find("img").attr('src', "Images/onimages/desktop.png");
                                     break;
                                 case 'Laptop':
                                     document.getElementById('laptop').checked = true;
+                                    $('#laptop').closest("td").find("img").attr('src', "Images/onimages/laptopon.png");
                                     break;
                                 case 'DigitalCurtain':
                                     document.getElementById('platform').checked = true;
+                                    $('#platform').closest("td").find("img").attr('src', "Images/platform.png");
                                     break;
                                 case 'DigitalScreen':
                                     document.getElementById('digitalEquipment').checked = true;
+                                    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/platform.png");
                                     break;
                                 case 'DVD':
                                     document.getElementById('dvd').checked = true;
+                                    $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
                                     break;
                                 case 'TV':
                                     document.getElementById('tv').checked = true;
+                                    $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
                                     break;
                                 case 'VideoCamera':
                                     document.getElementById('camera').checked = true;
+                                    $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
                                     break;
                                 case 'Blu-RayDVD':
                                     document.getElementById('bluray').checked = true;
+                                    $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
                                     break;
                                 case 'RecordingSystem':
                                     document.getElementById('recorder').checked = true;
+                                    $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
                                     break;
                                 case 'TurnOffLights':
                                     tab.rows[i].cells[10].innerHTML = 'Off';
@@ -248,16 +271,17 @@
             alert(this.innerHTML);             
             ipAddress = $(this).closest('tr').find('input').val();         
             openRemote(ipAddress);
-        });
+            chat.server.sendData(); 
+        });        
         $(document).on('click', '.trying', function () {
-            if ($(this).hasClass("fa-angle-up")) {
-                $(this).removeClass("fa-angle-up").addClass("fa-angle-down")
-                $(this).parent('header').addClass("header1");
-            } else {
+            
+            if ($(this).hasClass("fa-angle-up")) {                
+                $(this).removeClass("fa-angle-up").addClass("fa-angle-down");                
+                 
+            } else {                
                 $(this).removeClass("fa-angle-down").addClass("fa-angle-up");
-                $(this).parent('header').removeClass("header1");
+                          
             }
-
         });
         $(document).on("click", "#syslock", function () {
             var src = document.getElementById('syslock');
@@ -300,30 +324,51 @@
         });
         $(document).on("click", "#desktop", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 10 1A");
+            $('[class^="displaynone"]').hide();
         });
         $(document).on("click", "#laptop", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 11 1b");
+            $('[class^="displaynone"]').hide();
         });
         $(document).on("click", "#platform", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 12 1c");
+            $('[class^="displaynone"]').hide();
         });
         $(document).on("click", "#digitalEquipment", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 13 1d");
+            $('[class^="displaynone"]').hide();
         });
         $(document).on("click", "#dvd", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 14 1e");
+            $('[class^="displaynone"]').hide();
+            var target = $(this).attr('data-target')
+            $(target).show();
         });
         $(document).on("click", "#tv", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 15 1f");
+            $('[class^="displaynone"]').hide();
+            var target = $(this).attr('data-target')
+            $(target).show();
         });
         $(document).on("click", "#bluray", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 1a 24");
+            $('[class^="displaynone"]').hide();
+            var target = $(this).attr('data-target')
+            $(target).show();
+            
         });
         $(document).on("click", "#camera", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 16 20");
+            $('[class^="displaynone"]').hide();
+            var target = $(this).attr('data-target')
+            $(target).show();
+            
         });
         $(document).on("click", "#recorder", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 19 23");
+            $('[class^="displaynone"]').hide();
+            var target = $(this).attr('data-target')
+            $(target).show();
         });
         $(document).on("click", "#projectorOn", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 33 3d");
@@ -373,6 +418,12 @@
         $(document).on("click", "#pcpower", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");
         });
+        $(document).on("change", "*[name ='test']", function () {
+            
+                   
+                   
+            
+        });
     });
 });
 function createDivs() {
@@ -388,10 +439,11 @@ function createDivs() {
             var ip = dev[i].split(":");
             var rows = document.getElementById("smallcontrol");
             var DIV = document.createElement("div");
-            DIV.className = "col-xs-12 col-md-6 col-lg-4";
+            DIV.name = "mathaSur";
+            DIV.className = "col-md-6 col-lg-3 col-sm-12";
             rows.appendChild(DIV);
             var table = document.createElement("table");
-            table.className = "table1234";
+            table.className = "table1234 shadows";
             //row1
             var row1 = table.insertRow(0);
             row1.style.textAlign = "center";
@@ -438,10 +490,18 @@ function createDivs() {
             cell21.innerHTML = '<i style="font-size:1.5em" class="fa fa-hdd" aria-hidden=true name="projIcon"></i>';
             //ss
             var cell22 = row2.insertCell(1);
-          //  cell22.setAttribute("colspan", "2");
+            cell22.className = "tdcenter";
+            cell22.title = "Curtain/Screen Status";
+            cell22.style.color = "white";
+            cell22.innerHTML = '<img src= "Images/imgs/curtain32.png" id="curtainMain" />';
+          
             //ss
             var cell23 = row2.insertCell(2);
-           // cell23.setAttribute("colspan", "2");
+            cell23.title = "Media Signal";
+            cell23.className = "tdcenter";
+            cell23.style.color = "white";
+            cell23.innerHTML = '<i style="font-size:1.5em" class="fa fa-window-restore"  aria-hidden=true name="mediaIcon"></i>';
+           
             //row3
             var row3 = table.insertRow(2);
             row3.className = "trstyle";
@@ -463,7 +523,7 @@ function createDivs() {
             var cell33 = row3.insertCell(2);
            // cell33.setAttribute("colspan", "2");
             cell33.className = 'tdlast';
-            cell33.title = "PC";
+            cell33.title = "PC On/Off";
             cell33.style.color = "white";
             cell33.innerHTML = '<i style="font-size:1.5em" class="fa fa-desktop " aria-hidden=true name="desktopIcon"></i>';
             DIV.appendChild(table);
@@ -543,7 +603,7 @@ function tbleupdate(name, message) {
                     desktop.addClass("red");
                 }
                 if (arraydata[12] == 'Locked') {
-                    var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");
+                    var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");                    
                     syslocked.addClass("fa-lock");                   
                     syslocked.removeClass("fa-unlock");
                     syslocked.removeClass("iconColor");
@@ -551,10 +611,94 @@ function tbleupdate(name, message) {
                 }
                 else {
                     var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");
+                    
                     syslocked.addClass("fa-unlock");
                     syslocked.addClass("iconColor");
                     syslocked.removeClass("fa-lock");
                     syslocked.removeClass("red");
+                }
+                if (arraydata[6] == 'Closed') {
+                    var proj = $(chkbox[k]).closest('table').find("*[name='projIcon']");
+                    proj.addClass("red");
+                    proj.removeClass("iconColor");
+                }
+                else {
+                    var proj = $(chkbox[k]).closest('table').find("*[name='projIcon']");
+                    proj.addClass("iconColor");
+                    proj.removeClass("red");
+
+                }
+               
+                switch (arraydata[11]) {
+                    case "Desktop":
+                        var media = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                        media.removeClass("^='fa-'");
+                        media.title = "desktop";
+                        media.addClass("fa-desktop");
+                        media.addClass("iconColor");
+                        break;
+                    case "Laptop":
+                        var laptop = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");                                                
+                        laptop.removeClass("^='fa-'");                       
+                        laptop.addClass("iconColor");
+                        laptop.addClass("fa-laptop");                        
+                        break;
+                    case "Digital Curtain":
+                        var curtain = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                        curtain.removeClass("^='fa-'");
+                        curtain.addClass("fa-window-maximize");
+                        curtain.addClass("iconColor");  
+                        var cur = $(chkbox[k]).closest('table').find("#curtainMain");
+                        if (arraydata[8] == 'Stop') {
+                            $(cur).attr('src', 'Images/imgs/curtainclose32.png');                           
+                        }
+                        else if (arraydata[8] == 'close') {
+                            ur.src = 'Images/imgs/curtain32.png';
+                        }
+                        else {
+                            cur.src = 'Images/imgs/curtainopen32.png';
+                        }
+                        
+                        break;
+                    case "Video Camera":
+                        var camera = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                        camera.removeClass("^='fa-'");
+                        camera.addClass("fa-camera");
+                        camera.addClass("iconColor");
+                        
+                        break;
+                    case "Digital Screen":
+                        var sc = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                        sc.removeClass("^='fa-'");
+                        sc.addClass("iconColor");
+                        sc.addClass("fa-mobile");
+                       
+                        break;
+                    case "TV":
+                        var tv = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                        tv.removeClass("^='fa-'");
+                        tv.addClass("iconColor");
+                        tv.addClass("fa-tv");
+                        break;
+                    case "Blu-Ray DVD":
+                        var blu = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                        blu.removeClass("^='fa-'");
+                        blu.addClass("iconColor");
+                        blu.addClass("fa-compact-disc");
+                        break;
+                    case "DVD":
+                        var dvd = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                        dvd.removeClass("^='fa-'");
+                        dvd.addClass("iconColor");
+                        dvd.addClass("fa-compact-disc");
+                        break;
+                    case 'Recording System':
+                        var rec = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                        rec.removeClass("^='fa-'");
+                        rec.addClass("iconColor");
+                        rec.addClass("fa-video-camera");
+                        break;
+                        
                 }
             }
             else if (arraydata[1] == "LEDIndicator") {
@@ -571,6 +715,75 @@ function tbleupdate(name, message) {
                             desktop.addClass("iconColor");
                             desktop.removeClass("red");
                             break;
+                    }
+                    switch (arraydata[3]) {
+                        case 'Desktop':
+                            var media = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                            media.removeClass("^='fa-'");
+                            media.title = "desktop";
+                            media.addClass("fa-desktop");
+                            media.addClass("iconColor");
+                            break;
+                        case 'Laptop':
+                            var laptop = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                            laptop.removeClass("^='fa-'");
+                            laptop.addClass("iconColor");
+                            laptop.addClass("fa-laptop"); 
+                            break;
+                        case 'DigitalCurtain':
+                            var curtain = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                            curtain.removeClass("^='fa-'");
+                            curtain.addClass("fa-window-maximize");
+                            curtain.addClass("iconColor"); 
+                            var cur = $(chkbox[k]).closest('table').find("#curtainMain");
+                            if (arraydata[8] == 'Stop') {
+                                $(cur).attr('src', 'Images/imgs/curtainclose32.png');
+                            }
+                            else if (arraydata[8] == 'close') {
+                                ur.src = 'Images/imgs/curtain32.png';
+                            }
+                            else {
+                                cur.src = 'Images/imgs/curtainopen32.png';
+                            }
+                            break;
+                        case 'DigitalScreen':
+                            var sc = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                            sc.removeClass("^='fa-'");
+                            sc.addClass("iconColor");
+                            sc.addClass("fa-mobile");
+                            break;
+                        case 'DVD':
+                            var dvd = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                            dvd.removeClass("^='fa-'");
+                            dvd.addClass("iconColor");
+                            dvd.addClass("fa-compact-disc");
+                            break;
+                        case 'VideoCamera':
+                            var camera = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                            camera.removeClass("^='fa-'");
+                            camera.addClass("fa-camera");
+                            camera.addClass("iconColor");
+                            break;
+                        case 'TV':
+                            var tv = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                            tv.removeClass("^='fa-'");
+                            tv.addClass("iconColor");
+                            tv.addClass("fa-tv");
+                            break;
+                        case 'Blu-RayDVD':
+                            var blu = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                            blu.removeClass("^='fa-'");
+                            blu.addClass("iconColor");
+                            blu.addClass("fa-compact-disc");
+                            break;
+                            break;
+                        case 'RecordingSystem':
+                            var rec = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
+                            rec.removeClass("^='fa-'");
+                            rec.addClass("iconColor");
+                            rec.addClass("fa-video-camera");
+                            break;
+
                     }
                    
                 }
@@ -592,6 +805,26 @@ function tbleupdate(name, message) {
             }           
         }
     }
+}
+
+function uncheck() {
+    $('#desktop').closest("td").find("img").attr('src', "Images/offimages/desktop.png");
+
+    $('#laptop').closest("td").find("img").attr('src', "Images/offimages/laptop.png");
+
+    $('#platform').closest("td").find("img").attr('src', "Images/platform.png");
+
+    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/platform.png");
+
+    $('#dvd').closest("td").find("img").attr('src', "Images/offimages/dvd.png");
+
+    $('#bluray').closest("td").find("img").attr('src', "Images/offimages/bluraydvd.png");
+
+    $('#tv').closest("td").find("img").attr('src', "Images/offimages/tv.png");
+
+    $('#camera').closest("td").find("img").attr('src', "Images/offimages/camera.png");
+
+    $('#recorder').closest("td").find("img").attr('src', "Images/offimages/recorder.png");
 }
 
 

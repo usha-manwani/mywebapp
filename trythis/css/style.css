@@ -231,7 +231,9 @@ ul.top-menu > li > .logout {
 
 /*sidebar navigation*/
 .asplink{
-    color:white;
+    color:steelblue;
+    text-decoration:underline;
+    
 }
 #sidebar {
     width: 250px;

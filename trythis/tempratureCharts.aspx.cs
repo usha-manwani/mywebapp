@@ -7,7 +7,7 @@ using System.Data;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.SignalR;
 
-namespace trythis
+namespace WebCresij
 {
     public partial class tempratureCharts : System.Web.UI.Page
     {
@@ -75,8 +75,7 @@ namespace trythis
 
         protected void ddlClass_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string classID = ddlClass.SelectedValue;
-           
+            string classID = ddlClass.SelectedValue;           
             string ip= PopulateTree.getIP(classID);
             HttpContext.Current.Session["ipforgraph"] = ip;
             IHubContext  hubContext = GlobalHost.ConnectionManager.GetHubContext<Hubsfile.MyHub>();

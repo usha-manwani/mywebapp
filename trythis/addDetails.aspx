@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#"  AutoEventWireup="true" CodeBehind="addDetails.aspx.cs" Inherits="trythis.addDetails" %>
+﻿<%@ Page Title="" Language="C#"  AutoEventWireup="true" CodeBehind="addDetails.aspx.cs" Inherits="WebCresij.addDetails" %>
 <html>
     <head>
         <title></title>
@@ -12,6 +12,7 @@ select,
 textarea {
     max-width: 280px;
 }
+           
 
         </style>
     </head>
@@ -59,20 +60,16 @@ textarea {
         </div>
      
 </div>
-
-    
-
-
     <script type="text/javascript">
          function GetDynamicTextBox(value){
-        return '<div class="form-group">' + '<asp:Label runat="server" Text="Grade" CssClass="col-sm-2 control-label" Font-Bold="True"/>' +
-           '<div class="col-sm-10"><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
-             }
+            return '<div class="form-group">' + '<asp:Label runat="server" Text="Grade" CssClass="col-sm-2 control-label" Font-Bold="True"/>' +
+            '<div class="col-sm-10"><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
+         }
 
- function AddTextGrade() {
-    var div = document.createElement('DIV');
-    div.innerHTML = GetDynamicTextBox("");
-    document.getElementById("TextBoxContainer").appendChild(div);
+        function AddTextGrade() {
+            var div = document.createElement('DIV');
+            div.innerHTML = GetDynamicTextBox("");
+            document.getElementById("TextBoxContainer").appendChild(div);
         }
 
         function hideAddConfirm() {

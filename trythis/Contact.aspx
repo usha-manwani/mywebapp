@@ -1,4 +1,4 @@
-﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="trythis.Contact" %>
+﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="WebCresij.Contact" %>
 <%@ MasterType VirtualPath="~/Master.master" %>    
 <asp:Content ID="Head" ContentPlaceHolderID="masterHead" runat="server">
     </asp:Content>

@@ -5,8 +5,8 @@ using Microsoft.AspNet.SignalR.Hubs;
 
 namespace WebApplication1
 {
-    [HubName("myHub")]
-    public class MyHub : Hub
+    [HubName("myHub1")]
+    public class MyHub1 : Hub
     {
         // public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         public void Send(string name, string message)

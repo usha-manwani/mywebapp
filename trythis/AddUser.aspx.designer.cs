@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace trythis {
+namespace WebCresij {
     
     
     public partial class AddUser {
@@ -99,9 +99,9 @@ namespace trythis {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new trythis.Master Master {
+        public new WebCresij.Master Master {
             get {
-                return ((trythis.Master)(base.Master));
+                return ((WebCresij.Master)(base.Master));
             }
         }
     }

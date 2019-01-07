@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace trythis
+namespace WebCresij
 {
     public partial class MastersChild : System.Web.UI.MasterPage
     {
@@ -116,10 +116,17 @@ namespace trythis
                 {
                     string[] deviceloc = new string[dt.Rows.Count];
                     Dictionary<string, string> ipsloc = new Dictionary<string, string>();
-                    foreach (DataRow row in dt.Rows)
+                    try
                     {
-                        devicelocations = devicelocations + row[1].ToString() + ":" + row[0].ToString() + ",";
-                        ipsloc.Add(row[1].ToString(), row[0].ToString());
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            devicelocations = devicelocations + row[1].ToString() + ":" + row[0].ToString() + ",";
+                            ipsloc.Add(row[1].ToString(), row[0].ToString());
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+
                     }
                     for (int i = 0; i < deviceloc.Length; i++)
                     {

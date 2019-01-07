@@ -203,6 +203,40 @@ function HideTree() {
         }
     }
 }
-
+function isNameKey(evt) {
+    var x = (evt.which) ? evt.which : event.keyCode;
+    var c = String.fromCharCode(x);
+    if (/^[A-Za-z ._-]+$/.test(c)) {
+        return true;
+    }
+    else {
+        alert("A name can contain letters, dot, hyphen and underscore only");
+        return false;
+    }
+}
+$(document).on('change', "*[name='txtSno']", function () {
+    var text = document.getElementsByName("txtSno");    
+    var txt;
+    outerloop: for (i = 0; i < text.length; i++) {
+        for (j = i + 1; j < text.length; j++) {
+            if (text[i].value == text[j].value && text[i].value != "" && text[j]!="") {
+                alert("Please enter different Serial Number Values!!")
+                break outerloop;
+            }
+        }       
+    }
+});
+$(document).on('change', "*[name='memID']", function () {
+    var text = document.getElementsByName("memID");    
+    var txt;
+    outerloop: for (i = 0; i < text.length; i++) {
+        for (j = i + 1; j < text.length; j++) {
+            if (text[i].value == text[j].value && text[i].value != "" && text[j] != "") {
+                alert("Please enter different Member IDs Values!!")
+                break outerloop;
+            }
+        }
+    }
+});
 
 

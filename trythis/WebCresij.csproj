@@ -72,6 +72,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.8.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
@@ -151,6 +154,7 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
     </Reference>
@@ -296,6 +300,7 @@
     <Content Include="assets\js\init\vector-init.js" />
     <Content Include="assets\js\init\weather-init.js" />
     <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\Schedule.js" />
     <Content Include="assets\js\vmap.sampledata.js" />
     <Content Include="assets\js\widgets.js" />
     <Content Include="CardLogs.aspx" />
@@ -321,6 +326,7 @@
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\ie10-viewport-bug-workaround.css" />
     <Content Include="Content\normalize.css" />
+    <Content Include="Content\options.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
     <Content Include="Content\solid.css" />
@@ -344,6 +350,7 @@
     <Content Include="css\zabuto_calendar.css" />
     <Content Include="DeleteDocument.aspx" />
     <Content Include="editDelCard.aspx" />
+    <Content Include="exportdata.aspx" />
     <Content Include="HtmlPage2.html" />
     <Content Include="Images\bg2.jpg" />
     <Content Include="Images\bg1.jpg" />
@@ -365,6 +372,9 @@
     <Content Include="Images\down.PNG" />
     <Content Include="Images\DVD.png" />
     <Content Include="Images\HDMI.png" />
+    <Content Include="Images\imgs\curtain32.png" />
+    <Content Include="Images\imgs\curtainclose32.png" />
+    <Content Include="Images\imgs\curtainopen32.png" />
     <Content Include="Images\laptop.png" />
     <Content Include="Images\Light.png" />
     <Content Include="Images\lock.png" />
@@ -574,7 +584,6 @@
     <Content Include="img\ui-zac.jpg" />
     <Content Include="img\weather.jpg" />
     <Content Include="img\zoom.png" />
-    <Content Include="index.html" />
     <Content Include="lib\advanced-datatable\css\demo_page.css" />
     <Content Include="lib\advanced-datatable\css\demo_table.css" />
     <Content Include="lib\advanced-datatable\css\demo_table_jui.css" />
@@ -699,7 +708,7 @@
     <Content Include="lib\zabuto_calendar.js" />
     <Content Include="Logout.aspx" />
     <Content Include="home.aspx" />
-    <Content Include="Login.aspx" />
+    <Content Include="Index.aspx" />
     <Content Include="MyService.svc" />
     <Content Include="Options.aspx" />
     <Content Include="Reader.aspx" />
@@ -718,6 +727,7 @@
     <Content Include="Scripts\custom-scripts.js" />
     <Content Include="Scripts\DataFromControl.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
+    <Content Include="Scripts\editCard.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -936,6 +946,13 @@
     <Compile Include="editDelCard.aspx.designer.cs">
       <DependentUpon>editDelCard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="exportdata.aspx.cs">
+      <DependentUpon>exportdata.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="exportdata.aspx.designer.cs">
+      <DependentUpon>exportdata.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Hubsfile\MyHub.cs" />
     <Compile Include="Hubsfile\Startup.cs" />
     <Compile Include="Hubsfile\UpdateDevice.cs" />
@@ -957,12 +974,12 @@
     <Compile Include="home.aspx.designer.cs">
       <DependentUpon>home.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Login.aspx.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Login.aspx.designer.cs">
-      <DependentUpon>Login.aspx</DependentUpon>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="MastersChild.master.cs">
       <DependentUpon>MastersChild.master</DependentUpon>
@@ -1126,6 +1143,26 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

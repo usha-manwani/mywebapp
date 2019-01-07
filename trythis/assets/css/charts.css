@@ -26,3 +26,6 @@ canvas {
     padding: 1.875em;
     width: 100%;  
 }
+.displaynone{
+    display:none;
+}

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Control.aspx.cs" Inherits="trythis.Control" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Control.aspx.cs" Inherits="WebCresij.Control" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
     <style type="text/css">
 
@@ -49,7 +49,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
+    width: 60%;
         }
     .pp{
     background-color: #565656;
@@ -58,6 +58,15 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
     -webkit-background-clip: text;
      -moz-background-clip: text;
           background-clip: text;
+    }
+    .displaynone{
+        display:none;
+
+    }
+    .displayblock{
+        display:inline-block;
+        cursor:pointer;
+       
     }
     </style>                                                                                
     <link href="Content/ControlStyle.css" rel="stylesheet" />   
@@ -71,7 +80,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
         <script src="Scripts/ControlKeys.js"></script>
     <div class="container-fluid">
-    <div class="row clearfix" id="smallcontrol" >
+    <div class="row clearfix" id="smallcontrol" style="width:100%; min-width:600px" >
         <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
         <%--   <div class="col-md-3">   
             <table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;">
@@ -314,11 +323,11 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
             <p style="text-align:center">Remote Control For 
                 <asp:Label runat="server" Font-Bold="true" Font-Italic="true" ID="deviceips" Text=""></asp:Label></p>
             </header>
-       <div style="text-align:right">
+        <div style="text-align:right">
              <i class="fa fa-times-circle" aria-hidden="true" onclick="closexx();"
                  style="text-align:right;cursor:pointer"></i>
          </div>
-      </div>        
+        </div>        
         <input id="sessionInput" type="hidden" value='<%= Session["DeviceIP"] %>' />
         <input id="sessionInput1" type="hidden" value='<%= Session["loc"] %>' />
         <input id="dev" type="hidden" value='<%=Session["devices"] %>' />
@@ -329,9 +338,10 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                 <td>   
                 <div  style="height:250px;width:250px;  border:none">    
              <header style=" background-color:#2680a7;color:black; text-align:center;border:solid;
-                border-color:#428bca ">System Control&nbsp;
+                border-color:#428bca " 
+                  >System Control&nbsp; 
                  <span data-toggle="collapse" data-target="#system" style="color:white" 
-                     class="fa fa-angle-down trying" ></span>
+                     class="fa fa-angle-down trying" aria-expanded="true" aria-controls="system" ></span>
              </header>          
            <div id="system" class="divcontrols"  >
                 <table style=" height:180px; width:220px;border-color:#333333" >
@@ -367,21 +377,19 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                                     height="40" width="40" class="imgclick"/></span>
                              </td>
                     </tr>
-                   <%-- <tr >
-                        <td colspan="2" style="font-size:small; text-align:center">system lock</td>
-                        <td colspan="2" style="font-size:small; text-align:center" >podium lock</td>
-                        <td colspan="2" style="font-size:small; text-align:center">class lock</td>
-                    </tr>--%>
+                  
                 </table> 
                </div>          
                 </div>
                 </td>
                 <td>
                 <div style="height:250px;width:250px;  border:none">            
-             <header style=" background-color:#dff0d8;color:black; text-align:center ;border:solid; border-color:#dff0d8">Projector Control&nbsp;
-                  <span data-toggle="collapse" data-target="#Projector" style="color:#3c763d"class="fa fa-angle-down trying" ></span>
-             </header>
-             <div id="Projector" class="divcontrols" style=" border-color:#3c763d">
+                    <header style=" background-color:#dff0d8;color:black; text-align:center ;
+                        border:solid; border-color:#dff0d8">Projector Control&nbsp;
+                        <span data-toggle="collapse" data-target="#Projector" style="color:#3c763d" 
+                            class="fa fa-angle-down trying" ></span>
+                    </header>
+                    <div id="Projector" class="divcontrols" style=" border-color:#3c763d">
                      <table style=" height:180px; width:230px">                  
                     <tr style="width:220px">
                         <td style="text-align:center">
@@ -470,28 +478,28 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     <tr  style="width:130px;">
                         <td  style="text-align:center">
                             <label>
-                            <input type="radio" name="test" id="desktop" checked>
+                            <input type="radio" value="1" name="test" id="desktop" data-target=".displaynone" checked/>
                             <img src="Images/offimages/desktop.png" height="40" width="40" class="imgclick">
                             </label>
                             </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <label>
-                            <input type="radio" name="test" id="laptop" checked>
+                            <input type="radio" value="2" name="test" id="laptop" data-target=".displaynone" checked>
                             <img src="Images/offimages/laptop.png" height="40" width="40" class="imgclick">
                             </label>
                             </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <label>
-                            <input type="radio" name="test" id="platform" checked>
+                            <input type="radio" value="3" name="test" id="platform" data-target=".displaynone" checked>
                             <img src="Images/platform.png" height="40" width="40" class="imgclick">
                             </label>
                            </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center" >
                              <label>
-                            <input type="radio" name="test" id="digitalEquipment" checked>
+                            <input type="radio" value="4" name="test" id="digitalEquipment" data-target=".displaynone" checked>
                             <img src="Images/platform.png" height="40" width="40" class="imgclick">
                             </label>
                         </td>
@@ -499,7 +507,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <label>
-                            <input type="radio" name="test" id="dvd" checked>
+                            <input type="radio" value="5" name="test" id="dvd" data-target="#dvdcontrols" checked>
                             <img src="Images/offimages/dvd.png" height="40" width="40" class="imgclick">
                             </label>
                         </td>
@@ -507,7 +515,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                            <label>
-                            <input type="radio" name="test" id="bluray" checked>
+                            <input type="radio" value="6" name="test" id="bluray" data-target="#bluraydvd" checked>
                             <img src="Images/offimages/bluraydvd.png" height="40" width="40" class="imgclick">
                             </label>
                        </td>
@@ -515,7 +523,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     <tr  style="width:130px;">
                         <td  style="text-align:center">
                             <label>
-                            <input type="radio" name="test" id="tv" checked>
+                            <input type="radio" value="7" name="test" id="tv" data-target="#tvcontrols" checked>
                             <img src="Images/offimages/tv.png" height="40" width="40" class="imgclick">
                             </label>
                         </td>
@@ -523,7 +531,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <label>
-                            <input type="radio" name="test" id="camera" checked>
+                            <input type="radio" value="8" name="test" id="camera" data-target="#Camera" checked>
                             <img src="Images/offimages/camera.png" height="40" width="40" class="imgclick">
                             </label>    
                        </td>
@@ -531,7 +539,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     <tr  style="width:130px;">
                         <td style="text-align:center" >
                             <label>
-                            <input type="radio" name="test" id="recorder" checked>
+                            <input type="radio" value="9" name="test" id="recorder" data-target="#recordercontrol" checked>
                             <img src="Images/offimages/video.png" height="40" width="40" class="imgclick">
                             </label>    
                         </td></tr>
@@ -541,6 +549,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     </td>
                 <td  rowspan="2">                   
                 <div  style=" width:200px; height:500px "> 
+                    <div id="dvdcontrols" class="displaynone">
             <header style=" background-color:#428bca;color:black; text-align:center;
                     border:solid; border-color:#428bca ">DVD Controls&nbsp;
                 <span data-toggle="collapse" data-target="#dvdsubmenu" style="color:white" 
@@ -550,44 +559,267 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                 <table style="width:180px; height:400px">                 
                     <tr>
                         <td  style="text-align:center">
-                            <img src="Images/submenu/dvd/poweroff.png" id="dvdpoweron" height="40" width="40" />
+                            <img src="Images/submenu/dvd/poweroff.png" id="dvdpoweron" 
+                                height="40" width="40" class="imgclick"/>
                            </td>
                         <td style="text-align:center">
-                            <img src="Images/submenu/dvd/stop.png" id="dvdstop" height="40" width="40" />
+                            <img src="Images/submenu/dvd/stop.png" id="dvdstop"
+                                height="40" width="40" class="imgclick"/>
                         </td>
                             </tr>
                    <tr>
                         <td  style="text-align:center">
-                            <img src="Images/submenu/dvd/play.png" id="playdvd" height="40" width="40" />
+                            <img src="Images/submenu/dvd/play.png" id="playdvd"
+                                height="40" width="40" class="imgclick"/>
                            </td>
                         <td style="text-align:center">
-                            <img src="Images/submenu/dvd/pause.png" id="dvdpause" height="40" width="40" />
+                            <img src="Images/submenu/dvd/pause.png" id="dvdpause"
+                                height="40" width="40" class="imgclick" />
                         </td>
                             </tr>
                    <tr>
                         <td  style="text-align:center">
-                            <img src="Images/submenu/dvd/backward.png" id="dvdback" height="40" width="40" />
+                            <img src="Images/submenu/dvd/backward.png" id="dvdback" 
+                                height="40" width="40" class="imgclick"/>
                            </td>
                         <td style="text-align:center">
-                            <img src="Images/submenu/dvd/forward.png" id="dvdforward" height="40" width="40" />
+                            <img src="Images/submenu/dvd/forward.png" id="dvdforward" 
+                                height="40" width="40" class="imgclick"/>
                         </td>
                             </tr>
                     <tr>
                         <td  style="text-align:center">
-                            <img src="Images/submenu/dvd/pre.png" id="dvdpre" height="40" width="40" />
+                            <img src="Images/submenu/dvd/pre.png" id="dvdpre" 
+                                height="40" width="40" class="imgclick"/>
                            </td>
                         <td style="text-align:center">
-                            <img src="Images/submenu/dvd/next.png" id="dvdnext" height="40" width="40" />
+                            <img src="Images/submenu/dvd/next.png" id="dvdnext"
+                                height="40" width="40" class="imgclick"/>
                         </td>
                   <tr>                       
                         <td style="text-align:center">
-                            <img src="Images/submenu/dvd/exit.png" id="dvdexit" height="40" width="40" />
+                            <img src="Images/submenu/dvd/exit.png" id="dvdexit" 
+                                height="40" width="40" class="imgclick" />
                         </td>
                             </tr>
                    
                 </table>
                 </div>
-                     </div>                   
+                        </div>
+                    <div id="bluraydvd" class="displaynone">
+                        <header style=" background-color:#428bca;color:black; text-align:center;
+                    border:solid; border-color:#428bca "> Blu-ray DVD Controls&nbsp;
+                <span data-toggle="collapse" data-target="#bludvdsubmenu" style="color:white" 
+                    class="fa fa-angle-down trying" ></span>
+            </header>
+            <div id="bludvdsubmenu" class="divcontrols" style=" border-color:#428bca">
+                <table style="width:180px; height:400px">                 
+                    <tr>
+                        <td  style="text-align:center">
+                            <img src="Images/submenu/dvd/poweroff.png" id="bludvdpoweron"
+                                height="40" width="40" class="imgclick" />
+                           </td>
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/stop.png" id="bludvdstop" 
+                                height="40" width="40" class="imgclick"/>
+                        </td>
+                            </tr>
+                   <tr>
+                        <td  style="text-align:center">
+                            <img src="Images/submenu/dvd/play.png" id="bluplaydvd" 
+                                height="40" width="40" class="imgclick"/>
+                           </td>
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/pause.png" id="bludvdpause"
+                                height="40" width="40" class="imgclick"/>
+                        </td>
+                            </tr>
+                   <tr>
+                        <td  style="text-align:center">
+                            <img src="Images/submenu/dvd/backward.png" id="bludvdback" 
+                                height="40" width="40" class="imgclick"/>
+                           </td>
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/forward.png" id="bludvdforward"
+                                height="40" width="40" class="imgclick"/>
+                        </td>
+                            </tr>
+                    <tr>
+                        <td  style="text-align:center">
+                            <img src="Images/submenu/dvd/pre.png" id="bludvdpre" 
+                                height="40" width="40" class="imgclick"/>
+                           </td>
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/next.png" id="bludvdnext"
+                                height="40" width="40" class="imgclick"/>
+                        </td>
+                  <tr>                       
+                        <td style="text-align:center">
+                            <img src="Images/submenu/dvd/exit.png" id="bludvdexit"
+                                height="40" width="40" class="imgclick"/>
+                        </td>
+                            </tr>
+                   
+                </table>
+                </div>
+                    </div>
+                    <div id="Camera" class="displaynone">
+                        <header style=" background-color:#428bca;color:black; text-align:center;
+                    border:solid; border-color:#428bca "> Camera Sub-Menu&nbsp;
+                <span data-toggle="collapse" data-target="#camerasubmenu" style="color:white" 
+                    class="fa fa-angle-down trying" ></span></header>
+                        <div id="camerasubmenu" class="divcontrols">
+                            <table style="width:180px; height:400px">                 
+                                <tr>
+                                    <td  class="text-center">
+                                        <img src="Images/submenu/cam/tcam.png" id="tcampoweroff"
+                                            height="40" width="40" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/scam.png" id="scampoweroff"
+                                            height="40" width="40" class="imgclick"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/rotate.png" height="40"
+                                            width="40" id="rotate" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/wb.png" height="40" 
+                                            width="40" id="wb" class="imgclick"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/plus.png" height="40"
+                                            width="40" id="plus" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/minus.png" height="40"
+                                            width="40" id="minus" class="imgclick"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/save.png" height="40"
+                                            width="40" id="savecam" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/change.png" height="40"
+                                            width="40" id="changecam" class="imgclick"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/stop.png" height="40"
+                                            width="40" id="stopcam" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/novideo.png" height="40"
+                                            width="40" id="novideo" class="imgclick"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/cam/nocam.png" height="40"
+                                            width="40" id="nocam" class="imgclick"/>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                          </table>
+                        </div>
+                    </div>
+                    <div id="tvcontrols" class="displaynone">
+                        <header style=" background-color:#428bca;color:black; text-align:center;
+                    border:solid; border-color:#428bca "> TV Controls&nbsp;
+                <span data-toggle="collapse" data-target="#tvsubmenu" style="color:white" 
+                    class="fa fa-angle-down trying" ></span></header>
+                        <div id="tvsubmenu" class="divcontrols" >
+                            <table style="width:180px; height:250px">                 
+                                <tr>
+                                    <td  class="text-center">
+                                        <img src="Images/submenu/tv/off.png" height="40" 
+                                            width="40" id="tvoff" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/tv/input.png" height="40" 
+                                            width="40" id="inputtv" class="imgclick"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/tv/ok.png" height="40"
+                                            width="40" id="oktv" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/tv/option.png" height="40"
+                                            width="40" id="optiontv" class="imgclick"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/tv/plus.png" height="40"
+                                            width="40" id="plustv" class="imgclick"/>
+                                    </td>
+                                     <td class="text-center">
+                                         <img src="Images/submenu/tv/minus.png" height="40"
+                                             width="40" id="minustv" class="imgclick"/>
+                                     </td>   
+                                </tr>
+                                <tr>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/tv/exit.png" height="40" 
+                                            width="40" id="exittv" class="imgclick"/>
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="recordercontrol" class="displaynone">
+                         <header style=" background-color:#428bca;color:black; text-align:center;
+                    border:solid; border-color:#428bca "> Recorder Control&nbsp;
+                <span data-toggle="collapse" data-target="#recordermenu" style="color:white" 
+                    class="fa fa-angle-down trying" ></span></header>
+                         <div id="recordermenu" class="divcontrols" >
+                            <table style="width:180px; height:250px">                 
+                                <tr>
+                                    <td  class="text-center">
+                                        <img src="Images/submenu/recorder/poweron.png" height="40"
+                                            width="40" id="recpoweron" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/recorder/poweroff.png" height="40"
+                                            width="40" id="recpoweroff" class="imgclick"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  class="text-center">
+                                        <img src="Images/submenu/recorder/play.png" height="40"
+                                            width="40" id="recplay" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/recorder/stop.png" height="40"
+                                            width="40" id="recstop" class="imgclick"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  class="text-center">
+                                        <img src="Images/submenu/recorder/change.png" height="40"
+                                            width="40" id="recchange" class="imgclick"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="Images/submenu/recorder/save.png" height="40"
+                                            width="40" id="recsave" class="imgclick"/>
+                                    </td>
+                                </tr>
+                            </table>
+                    </div>
+                     </div>   
+                </div>
                 </td>
             </tr>
             <tr>

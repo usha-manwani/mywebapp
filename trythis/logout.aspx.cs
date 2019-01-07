@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace trythis
+namespace WebCresij
 {
     public partial class Logout : System.Web.UI.Page
     {
@@ -15,7 +15,7 @@ namespace trythis
             HttpContext.Current.Session["role"] = null;
             HttpContext.Current.Session.Clear();
             HttpContext.Current.Session.Abandon();
-            Response.Redirect("Login.aspx");
+            Response.Redirect("Index.aspx");
         }
     }
 }

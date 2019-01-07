@@ -9,7 +9,7 @@ using System.Data;
 using System.Configuration;
 using System.Threading.Tasks;
 
-namespace trythis.Hubsfile
+namespace WebCresij.Hubsfile
 {  
     [HubName("myHub")]
     public class MyHub : Microsoft.AspNet.SignalR.Hub

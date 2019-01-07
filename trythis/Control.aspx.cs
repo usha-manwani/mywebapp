@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
 
-namespace trythis
+namespace WebCresij
 {
     public partial class Control : System.Web.UI.Page
     {

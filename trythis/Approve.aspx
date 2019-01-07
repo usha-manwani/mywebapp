@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Approve.aspx.cs" Inherits="trythis.Approve" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Approve.aspx.cs" Inherits="WebCresij.Approve" %>
 <%@ MasterType VirtualPath="~/Master.master" %>
  <asp:Content ID="Head" ContentPlaceHolderID="masterHead" runat="server">
      <style>

@@ -9,7 +9,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Web;
 
-namespace trythis
+namespace WebCresij
 {
     public class TCPSocket
     {

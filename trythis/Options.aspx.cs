@@ -9,70 +9,61 @@ using System.Data.SqlClient;
 using System.Web.Script.Serialization;
 
 
-namespace trythis
+namespace WebCresij
 {
     public partial class Options : System.Web.UI.Page
     {
         protected string Values;
-        int index;
+       
         PopulateTree fillTree = new PopulateTree();
         static DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
-        {
-            
-          if(!IsPostBack)
+        {            
+            if(!IsPostBack)
             {
                 fillTree.function(TreeMenuView1, e);
                 fillTree.function(TreeViewEdit, e);
                 fillTree.function(TreeViewDelete, e);
-            }
-          
-                closeDiv();
-            
+            }        
         }
 
         #region Add
         protected void TreeMenuView1_SelectedNodeChanged(object sender, EventArgs e)
         {
-
-
             int level = TreeMenuView1.SelectedNode.Depth;
             if (level == 0)
             {
-                instext.Text = TreeMenuView1.SelectedValue;
-                closeDiv();
-                idGrade.Style.Add("display", "block");
-                
+                instext.Text = TreeMenuView1.SelectedNode.ToolTip;
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "DisplayGrade", "displayGrade();", true);
             }
             else if (level == 1)
             {
-                TextGrade.Text = TreeMenuView1.SelectedValue;
-                closeDiv();
-                idClass.Style.Add("display", "block");
-                
+                TextGrade.Text = TreeMenuView1.SelectedNode.ToolTip;
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowClass", "displayClass();", true);
             }
             else if (level == 2)
             {
-                tbSelectedClass.Text = TreeMenuView1.SelectedValue;
-                closeDiv();
-                idCamera.Style.Add("display", "block");
-                
+                tbSelectedClass.Text = TreeMenuView1.SelectedNode.ToolTip;
+                string classid = TreeMenuView1.SelectedNode.ToolTip;
+                string ip = PopulateTree.getIP(classid);
+                if (!string.IsNullOrEmpty(ip))
+                {
+                    ccSystem.Text = ip;
+                    ccSystem.Enabled = false;
+                }
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowCam", "displayCam();", true);
+
             }
             else if(level==3)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('Can not add more items inside Camera!!')", true);
-                closeDiv();
+            {                
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('Can not add more items inside Devices Details!!')", true);            
             }
-            TreeMenuView1.SelectedNode.Selected = false;
-           
-
+                      
         }
         protected void btnGradesave_Click(object sender, EventArgs e)
-        {
-            
+        {            
             int v = 0;
             v = fillTree.InsertGrade(instext.Text, Grade_Name.Text);
-
             string[] textboxValues = Request.Form.GetValues("DynamicTextBox");
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             this.Values = serializer.Serialize(textboxValues);
@@ -81,16 +72,17 @@ namespace trythis
                 foreach (string textboxValue in textboxValues)
                 {
                     v = fillTree.InsertGrade(instext.Text, textboxValue);
-
                 }
             }
-            closeDiv();
-            Response.Redirect("~/Options.aspx");
-
+            bindTree();
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "HideGrade", "xx();", true);
         }
         protected void BtnClassSave_Click(object sender, EventArgs e)
         {            
             int result = 0;
+            int v = 0;
+            v = fillTree.InsertClass(TextGrade.Text, Class_Name.Text);
+           
             string[] textboxValues = Request.Form.GetValues("DynamicTextClass");
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             this.Values = serializer.Serialize(textboxValues);
@@ -98,92 +90,95 @@ namespace trythis
             {
                 foreach (string textboxValue in textboxValues)
                 {
-                    result = fillTree.InsertClass(TextGrade.Text, textboxValue);
-
+                    result = fillTree.InsertClass(TextGrade.Text, textboxValue);                   
                 }
             }
-            closeDiv();
-            Response.Redirect("~/Options.aspx");
-
+            bindTree();
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "HideClass", "hideClass();", true);
         }
         protected void BtnCamSave_Click(object sender, EventArgs e)
         {
-            
-            if(ccSystem.Text!= string.Empty || ccSystem.Text !=null)
+            int f = 0;
+            if (!string.IsNullOrEmpty(ccSystem.Text) && !string.IsNullOrWhiteSpace(ccSystem.Text))
             {
-               int f= fillTree.InsertCentralControl(ccSystem.Text, tbSelectedClass.Text);
+               f= fillTree.InsertCentralControl(ccSystem.Text, tbSelectedClass.Text);
             }
-            string[] ip = Request.Form.GetValues("IP");
-            string[] port = Request.Form.GetValues("Port");
-            string[] user = Request.Form.GetValues("User");
-            string[] pass = Request.Form.GetValues("Pass");
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            var i = serializer.Serialize(ip);
-            var p = serializer.Serialize(port);
-            var u = serializer.Serialize(user);
-            var pas = serializer.Serialize(pass);
-            if (ip != null)
+            if (f != 0 && f != 1)
             {
-
-                for (int n = 0; n < ip.Length; n++)
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alertip", "duplicateIP();", true);
+            }
+            else
+            {
+                string[] ip = Request.Form.GetValues("IP");
+                string[] port = Request.Form.GetValues("Port");
+                string[] user = Request.Form.GetValues("User");
+                string[] pass = Request.Form.GetValues("Pass");
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                var i = serializer.Serialize(ip);
+                var p = serializer.Serialize(port);
+                var u = serializer.Serialize(user);
+                var pas = serializer.Serialize(pass);
+                if (ip != null)
                 {
-                    var camip = ip[n];
-                    var id = user[n];
-                    var pa = pass[n];
-                    var portno = port[n];
-                    string camName = fillTree.InsertCam(camip, id, pa, portno, tbSelectedClass.Text);
-                    TreeNode node = new TreeNode
+                    for (int n = 0; n < ip.Length; n++)
                     {
-                        Text = camName,
-                        Value = camip
-                    };
-                    node.PopulateOnDemand = false;
-
-                    TreeMenuView1.SelectedNode.ChildNodes.Add(node);
-
-                }
+                        var camip = ip[n];
+                        var id = user[n];
+                        var pa = pass[n];
+                        var portno = port[n];
+                        string camName = fillTree.InsertCam(camip, id, pa, portno, tbSelectedClass.Text);
+                    }
+                } 
             }
-            closeDiv();
-            Response.Redirect("~/Options.aspx");
+            bindTree();
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "HideCam", "hideCam();", true);
         }
+       
         #endregion
 
         #region Edit
         //edit
         protected void TreeViewEdit_SelectedNodeChanged(object sender, EventArgs e)
         {
-            Int32 level = TreeViewEdit.SelectedNode.Depth;
-            if(level==3)
+            int level = TreeViewEdit.SelectedNode.Depth;
+            if(level==4)
             {
-                string p = TreeViewEdit.SelectedNode.Value;
-                
-                DataTable dt = fillTree.camDetails(p);
-                camEditIP.Text = dt.Rows[0][0].ToString();
-                portEdit.Text = dt.Rows[0][3].ToString();
-                idEditcam.Text = dt.Rows[0][1].ToString();
-                passEditcam.Text = dt.Rows[0][2].ToString();
-                closeDiv();
-                edit.Style.Add("display", "block");
-                
+                if (TreeViewEdit.SelectedNode.Parent.Text == "Camera")
+                {
+                    string p = TreeViewEdit.SelectedNode.Value;
+                    DataTable dt = fillTree.camDetails(p);
+                    camEditIP.Text = dt.Rows[0][0].ToString();
+                    portEdit.Text = dt.Rows[0][3].ToString();
+                    idEditcam.Text = dt.Rows[0][1].ToString();
+                    passEditcam.Text = dt.Rows[0][2].ToString();
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowEditCam", "EditCam();", true);
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "noteditable", "DeviceNotEdit();", true);
+                    bindTree();
+                }
+            }
+            else if (level == 3)
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "donothing", "donothing();", true);
             }
             else
             {
-                edit.Style.Add("display", "none");
-                closeDiv();
-                DivRename.Style.Add("display", "block");
-            }
-            
-                
+                renameText.Value = TreeViewEdit.SelectedNode.ToolTip;
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowRename", "Rename();", true);
+            }                           
         }
         protected void saveCamEdit_Click(object sender, EventArgs e)
         {
-            fillTree.updateCam(camEditIP.Text, passEditcam.Text, idEditcam.Text, portEdit.Text);
-            closeDiv();
-            Response.Redirect("~/Options.aspx");
+            string prent = TreeViewEdit.SelectedNode.Parent.Parent.ToolTip;
+            fillTree.updateCam(camEditIP.Text, passEditcam.Text, idEditcam.Text, portEdit.Text, prent);
+            bindTree();
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "HideEditCam", "hideEdit();", true);            
         }
         protected void saveRename_Click(object sender, EventArgs e)
         {
-            int v = Convert.ToInt32(TreeViewEdit.SelectedNode.Value);
+            string v = TreeViewEdit.SelectedNode.ToolTip;
             if (TreeViewEdit.SelectedNode.Depth == 0)
             {
                 fillTree.updateIns(v, tbRename.Text);
@@ -196,87 +191,75 @@ namespace trythis
             {
                 fillTree.updateClass(v, tbRename.Text);
             }
-
-            closeDiv();
-            Response.Redirect("~/Options.aspx");
+            
+            bindTree();
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "HideRename", "hideRename();", true);
+            
         }
         #endregion
-
         #region delete
         //del
         protected void TreeViewDelete_SelectedNodeChanged(object sender, EventArgs e)
         {
-
-            delvalue.Text = TreeViewDelete.SelectedValue;
-            index = TreeViewDelete.Nodes.IndexOf(TreeViewDelete.SelectedNode);
-            closeDiv();
-            del.Style.Add("display", "block");
-
+            if(TreeViewDelete.SelectedNode.Depth == 3)
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "nodelete", "nodelete();", true);
+            }
+            else
+            delvalue.Text = TreeViewDelete.SelectedValue;            
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "ConfirmDel", "ConfirmDel();", true);
         }
         protected void btndel_Click(object sender, EventArgs e)
         {
-            closeDiv();
-            string cam = "";
-            int result = 2;
-
-            
-                    if (TreeViewDelete.SelectedNode.Depth == 3)
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "HideDel", "hideDelConfirm();", true);
+            string cam = delvalue.Text;
+             int result = 2;    
+                    if (TreeViewDelete.SelectedNode.Depth == 4)
                     {
-                        cam = delvalue.Text;
-                        result = fillTree.delCam(cam);
+                        if (TreeViewDelete.SelectedNode.Parent.Text == "Camera")
+                        { 
+                            result = fillTree.delCam(cam, TreeViewDelete.SelectedNode.Parent.Parent.ToolTip);
+                        }
+                        else
+                        {
+                            result = fillTree.DelCC(cam, TreeViewDelete.SelectedNode.Parent.Parent.ToolTip);
+                        }
                     }
                     else if (TreeViewDelete.SelectedNode.Depth == 2)
                     {
-                        cam = delvalue.Text;
-                        result = fillTree.DeleteClass(cam);
+                        result = fillTree.DeleteClass(TreeViewDelete.SelectedNode.ToolTip);
                     }
                     else if (TreeViewDelete.SelectedNode.Depth == 1)
                     {
-                        cam = delvalue.Text;
-                        result = fillTree.DelGrade(cam);
+                        result = fillTree.DelGrade(TreeViewDelete.SelectedNode.ToolTip);
                     }
                     else if (TreeViewDelete.SelectedNode.Depth == 0)
                     {
-                        cam = delvalue.Text;
-                        result = fillTree.DelInstitute(cam);
+                        result = fillTree.DelInstitute(TreeViewDelete.SelectedNode.ToolTip);
                     }
-                
-            if (result == 1)
-            {
-                
-                TreeNode tt = TreeViewDelete.SelectedNode;
-                TreeViewEdit.Nodes.Remove(tt);
-                TreeMenuView1.Nodes.Remove(tt);
-                TreeViewDelete.Nodes.Remove(tt);
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('Deleted Successfully'); location.href='Options.aspx';", true);
 
-
-            }
-            else if (result == 0 || result == 2)
-            {
-
-                closeDiv();
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('The requested Item can not be deleted at this moment. Please try later'); location.href='Options.aspx';", true);
-                
-            }
-           
             
+            bindTree();
+            if (result == 1 || result==0)
+            {                                
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('Deleted Successfully');", true);               
+            }
+            else 
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('The requested Item can not be deleted at this moment. Please try later'); ", true);    
+            }            
         }
 
         #endregion
 
         //close all popups
-        protected void closeDiv()
-        {
-            DivRename.Style.Add("display", "none");
-            edit.Style.Add("display", "none");
-            idClass.Style.Add("display", "none");
-            idGrade.Style.Add("display", "none");
-            idCamera.Style.Add("display", "none");
-            del.Style.Add("display", "none");
-            delnot.Style.Add("display", "none");
-        }
+        
 
-      
+        protected void bindTree()
+        {
+            fillTree.function(TreeMenuView1, null);
+            fillTree.function(TreeViewEdit, null);
+            fillTree.function(TreeViewDelete, null);
+        }      
     }
 }

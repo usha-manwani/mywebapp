@@ -1,4 +1,4 @@
-﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeBehind="CardReader.aspx.cs" Inherits="trythis.CardReader" %>
+﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeBehind="CardReader.aspx.cs" Inherits="WebCresij.CardReader" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
 <link href="css/stepper.css" rel="stylesheet" />
        
@@ -78,6 +78,7 @@
                  <ContentTemplate>
        <div class="table-responsive col-md-12">
            <input type="hidden" id="checkcard" value="" />
+           <input type="hidden" id="snoinsert" value="" />
            <input type="hidden" value="0" id="hiddencount" />
       <table id="cardtable" style="font-size:Small;border-collapse:collapse; width:100%" cellspacing="0" rules="all" border="1" >
           <thead>

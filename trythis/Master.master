@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/MastersChild.Master" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="trythis.Master" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/MastersChild.Master" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="WebCresij.Master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
     
     <asp:ContentPlaceHolder ID="masterHead" runat="server"></asp:ContentPlaceHolder>

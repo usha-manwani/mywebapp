@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="DeleteDocument.aspx.cs" Inherits="trythis.DeleteDocument" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="DeleteDocument.aspx.cs" Inherits="WebCresij.DeleteDocument" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterBody" runat="server">

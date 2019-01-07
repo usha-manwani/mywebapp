@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="CardLogs.aspx.cs" Inherits="trythis.CardLogs" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="CardLogs.aspx.cs" Inherits="WebCresij.CardLogs" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
     <link href="css/logs.css" rel="stylesheet" />
     <link href="lib/advanced-datatable/css/demo_page.css" rel="stylesheet" />
@@ -8,6 +8,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
+    
      <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
   
@@ -64,7 +65,10 @@
             
                 </div>
         </div>
-    </div>           
+    </div>      
+            <div class="row mb">
+                <asp:Button CssClass="btn btn-info" Text="Export to Excel" runat="server" ID="exportexcel" OnClick="exportexcel_Click"/>
+            </div>
             </ContentTemplate>
            
     </asp:UpdatePanel>

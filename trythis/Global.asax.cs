@@ -11,7 +11,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 
 
-namespace trythis
+namespace WebCresij
 {
     public class Global : HttpApplication
     {
@@ -24,7 +24,7 @@ namespace trythis
             BundleConfig.RegisterBundles(BundleTable.Bundles);
           
             //SqlDependency.Start(constr);
-            //trythis.connection.ReceiveData();
+            //WebCresij.connection.ReceiveData();
         }
         protected void Application_End()
         {

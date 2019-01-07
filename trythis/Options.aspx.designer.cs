@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace trythis {
+namespace WebCresij {
     
     
     public partial class Options {
@@ -94,24 +94,6 @@ namespace trythis {
         protected global::System.Web.UI.HtmlControls.HtmlIframe Iframe1;
         
         /// <summary>
-        /// idGrade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl idGrade;
-        
-        /// <summary>
-        /// updateGrade control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updateGrade;
-        
-        /// <summary>
         /// instext control.
         /// </summary>
         /// <remarks>
@@ -148,15 +130,6 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Button save;
         
         /// <summary>
-        /// idClass control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl idClass;
-        
-        /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
         /// <remarks>
@@ -175,6 +148,15 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.TextBox TextGrade;
         
         /// <summary>
+        /// Class_Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Class_Name;
+        
+        /// <summary>
         /// BtnClass control.
         /// </summary>
         /// <remarks>
@@ -191,15 +173,6 @@ namespace trythis {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnClassSave;
-        
-        /// <summary>
-        /// idCamera control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl idCamera;
         
         /// <summary>
         /// AddCam control.
@@ -245,15 +218,6 @@ namespace trythis {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCamSave;
-        
-        /// <summary>
-        /// edit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl edit;
         
         /// <summary>
         /// UpdatePanel2 control.
@@ -319,13 +283,13 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Button saveCamEdit;
         
         /// <summary>
-        /// DivRename control.
+        /// renameText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivRename;
+        protected global::System.Web.UI.WebControls.HiddenField renameText;
         
         /// <summary>
         /// tbRename control.
@@ -355,15 +319,6 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Button cancelRename;
         
         /// <summary>
-        /// del control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl del;
-        
-        /// <summary>
         /// delvalue control.
         /// </summary>
         /// <remarks>
@@ -391,15 +346,6 @@ namespace trythis {
         protected global::System.Web.UI.WebControls.Button delcancel;
         
         /// <summary>
-        /// delnot control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl delnot;
-        
-        /// <summary>
         /// TextBox1 control.
         /// </summary>
         /// <remarks>
@@ -423,9 +369,9 @@ namespace trythis {
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new trythis.Master Master {
+        public new WebCresij.Master Master {
             get {
-                return ((trythis.Master)(base.Master));
+                return ((WebCresij.Master)(base.Master));
             }
         }
     }

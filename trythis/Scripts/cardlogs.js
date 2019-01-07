@@ -2,13 +2,12 @@
 var chat = $.connection.myHub; 
 chat.client.logs = function (newrow) {   
     var newdata = newrow.split(',');    
-    var grid = document.getElementById("MainContent_masterchildBody_gv1");
-    
+    var grid = document.getElementById("MainContent_masterchildBody_gv1");    
     var row1 = grid.insertRow(1);
     var cell = row1.insertCell(0);
-    cell.innerHTML = newdata[0];
+    cell.innerHTML = newdata[1];
     var cell1 = row1.insertCell(1);
-    cell1.innerHTML = newdata[1];
+    cell1.innerHTML = newdata[0];
     var cell2 = row1.insertCell(2);
     cell2.innerHTML = newdata[2];
     var cell3 = row1.insertCell(3);    
@@ -18,11 +17,7 @@ chat.client.logs = function (newrow) {
 };
 
 $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-    alert("hub start");
    
-    var grid = document.getElementById("MainContent_masterchildBody_gv1");
-    alert(grid);
-    //alert(grid.rows[13].cells[2].innerHTML);
 });
 
 function sqlToJsDate(sqlDate) {

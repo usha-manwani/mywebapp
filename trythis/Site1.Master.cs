@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace trythis
+namespace WebCresij
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
@@ -26,12 +26,12 @@ namespace trythis
                 }
                 else
                 {
-                    Response.Redirect("~/Login.aspx");
+                    Response.Redirect("~/Index.aspx");
                 }
             }
             catch
             {
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect("~/Index.aspx");
             }
             Response.ClearHeaders();
             Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
@@ -94,6 +94,7 @@ namespace trythis
                     {
                         navbarDropdown.Visible = true;
                     }
+                    
                 }               
             }                       
         }

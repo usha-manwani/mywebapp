@@ -8,7 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 
-namespace trythis
+namespace WebCresij
 {
    
     public partial class SiteMaster : MasterPage
@@ -42,12 +42,12 @@ namespace trythis
                 }
                 else
                 {
-                    Response.Redirect("~/Login.aspx");
+                    Response.Redirect("~/Index.aspx");
                 }
             }
             catch
             {
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect("~/Index.aspx");
             }
             Response.ClearHeaders();
             Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");

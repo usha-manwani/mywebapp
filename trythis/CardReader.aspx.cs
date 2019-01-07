@@ -9,7 +9,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace trythis
+namespace WebCresij
 {
     
     public partial class CardReader : System.Web.UI.Page

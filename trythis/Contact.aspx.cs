@@ -7,7 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Script.Serialization;
 
-namespace trythis
+namespace WebCresij
 {
     public partial class Contact : Page
     {

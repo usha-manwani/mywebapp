@@ -75,7 +75,7 @@
     .chat-room .mid-side {
         margin-bottom: 0!important;
     }
-
+    
 
 }
 
@@ -89,10 +89,8 @@
 
     #sidebar {
         height: auto;
-        overflow: hidden;
-        position: absolute;
-        width: 100%;
-        z-index: 1001;
+        overflow: hidden;      
+        width: 100%;      
     }
 
 
@@ -315,7 +313,7 @@
 
 @media (max-width: 480px) {
 
-    .notify-row, .search, .dont-show , .inbox-head .sr-input, .inbox-head .sr-btn{
+    .notify-row, .search, .dont-show, .inbox-head .sr-input, .inbox-head .sr-btn {
         display: none;
     }
 
@@ -323,13 +321,14 @@
         display: block;
     }
 
-    .mail-box .sm-side , .mail-box .lg-side{
-        width: 100% ;
+    .mail-box .sm-side, .mail-box .lg-side {
+        width: 100%;
     }
 
     #top_menu .nav > li, ul.top-menu > li {
         float: right;
     }
+
     .hidden-phone {
         display: none !important;
     }
@@ -352,12 +351,12 @@
     }
 
     .chart-position {
-       margin-top: 0px;
-     }
+        margin-top: 0px;
+    }
 
     .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
         background-color: #ccc;
-        border-color:#ccc ;
+        border-color: #ccc;
     }
 
     /*chat room*/
@@ -365,31 +364,32 @@
     .chat-room aside {
         display: block;
     }
+
     .chat-room .left-side, .chat-room .mid-side, .chat-room .right-side, .chat-room .left-side footer {
         width: 100%;
     }
 
-    .chat-room .left-side footer {
-        position: relative;
-    }
+        .chat-room .left-side footer {
+            position: relative;
+        }
 
     ul.chat-user {
         margin-bottom: 20px;
     }
 
-    .chat-room .left-side , .chat-room .mid-side{
+    .chat-room .left-side, .chat-room .mid-side {
         margin-bottom: 10px;
-
     }
 
-    .chat-room .left-side .user-head , .chat-room-head, .chat-room .right-side .user-head{
-        border-radius: 4px 4px 0 0;
-        -webit-border-radius: 4px 4px 0 0;
-    }
-    .chat-room .left-side footer {
-        border-radius: 0 0 4px 4px;
-        -webkit-border-radius: 0 0 4px 4px;
-    }
+        .chat-room .left-side .user-head, .chat-room-head, .chat-room .right-side .user-head {
+            border-radius: 4px 4px 0 0;
+            -webit-border-radius: 4px 4px 0 0;
+        }
+
+        .chat-room .left-side footer {
+            border-radius: 0 0 4px 4px;
+            -webkit-border-radius: 0 0 4px 4px;
+        }
 
     /**/
     .chat-room .right-side .user-head {
@@ -414,7 +414,7 @@
     }
 
     .chat-room .mid-side {
-        margin-bottom: 0!important;
+        margin-bottom: 0 !important;
     }
 }
 

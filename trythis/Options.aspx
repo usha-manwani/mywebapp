@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Options.aspx.cs" Inherits="trythis.Options" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Options.aspx.cs" Inherits="WebCresij.Options" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %> 
 <%@ MasterType VirtualPath="~/Master.master" %>
    <asp:Content ID="Head" ContentPlaceHolderID="MasterHead" runat="server">
@@ -7,71 +7,24 @@
         <link href="Content/bootstrap.css" rel="stylesheet" />
        <link href="Content/font-awesome.css" rel="stylesheet" />
       
-        
+       <link href="Content/options.css" rel="stylesheet" />
        <script src="Scripts/bootstrap.js"></script>
         
        <link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="Stylesheet"
         type="text/css" />
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-      
 
-       <style>
-           /*.divopt{
-               min-height:700px;
-               width:auto;
-               background-color: #2D2D2D;
-               color: #FFFFFF;
-               font-family: Arial, Helvetica, sans-serif;
-               overflow:hidden;
-               margin-left:10px;
-               margin-top:20px;
-               margin-bottom:20px;
-                   
-           }*/
-          .leftspace{
-              
-              
-              margin-right:20px;
-              height:inherit;
-              margin-bottom:20px;
-              
-          }
-          .w3-modal{
-              z-index:3;display:none;
-              padding-top:100px;
-              position:fixed;
-              left:0;top:0;
-              width:100%;
-              height:100%;
-              overflow:auto;
-              background-color:rgb(0,0,0);
-              background-color:rgba(0,0,0,0.4)}
-.w3-modal-content{
-    margin:auto;background-color:#fff;
-    position:relative;
-    padding:0;
-    outline:0;
-    width:600px}
-
-
-        .TabHeaderCSS
-        {
-             font-family:'Ruda', sans-serif;
-             cursor: pointer;
-             color:#2f323a;
-        } 
-       </style>
    </asp:Content>
    
     <asp:Content ID="Main" ContentPlaceHolderID="masterBody" runat="server">
         <asp:ScriptManagerProxy ID="sc1" runat="server"></asp:ScriptManagerProxy>
         
-        <div style="opacity:0.8;" >
-   <div  >
+        <div style="opacity:0.8;" >   
     
-       <div class="leftspace">
-       
+       <div class="leftspace" oncontextmenu="return false;" >
+       <asp:UpdatePanel runat="server">
+           <ContentTemplate>        
        <cc1:TabContainer runat="server" BorderStyle="None" CssClass="TabHeaderCSS" >
            <cc1:TabPanel ID="addpaneltab"  runat="server"   BorderStyle="None" >
                 <HeaderTemplate >
@@ -109,52 +62,41 @@
                    </ContentTemplate> 
            </cc1:TabPanel>
        </cc1:TabContainer>
+               </ContentTemplate>
+       </asp:UpdatePanel>
           </div>     
-       </div>
+      
        
 
  <%--Add all details--%>
 
-
-      <div class="w3-container"  >
-        
-        <div id="id01" class="w3-modal">
-            <div class="w3-modal-content w3-card-4" >
-                <header class="w3-container ">
+           <div style="position:center; margin-top:400px"> 
+                 <div id="id01" class="modal">
+            <div class="modal-content" >
+                <header class="row" >
                     <span onclick="document.getElementById('id01').style.display='none'"
-                          class="w3-button w3-display-topright">&times;</span>
+                           class="w3-button w3-display-topright">&times;</span>
                     <h2>Add Institutes And Grades</h2>
                 </header>
-                <div class="w3-container" >
-                  
-                    
-                        <iframe width="500" height="600"  id="Iframe1" src="~/addDetails.aspx" runat="server" frameBorder="0"></iframe>
-               
-                    </div>
-                
-                <footer class="w3-container w3-teal">
-                   
-                </footer>
+                <div class="row" >  
+                    <iframe width="100%" height="500"  id="Iframe1" src="~/addDetails.aspx" runat="server" frameBorder="0"></iframe>               
+                </div>
             </div>
         </div>
-     
-</div>
-        <div class="w3-container">
-          <div id="idGrade" class="w3-modal" runat="server" >
-            <div class="w3-modal-content w3-card-4" >
-                <header class="w3-container ">
-                    <span onclick="hideGrade();">
-                          <i class="fa fa-times" aria-hidden="true"></i>&times;</span>
-                    <h2>Add Grades</h2>
-                </header>
-                <div class="w3-container" >
-                  
-        <asp:UpdatePanel runat="server" ID="updateGrade">
-            <ContentTemplate>
-                <asp:TextBox ID="instext" runat="server" Visible="false"></asp:TextBox>
-                <div id="TextBoxContainer" class="form-horizontal">       
-        <h4>Add New Grades</h4>
-        <hr />       
+                <div id="idGrade" class="modal" >
+  <!-- Modal content -->
+  <div class="modal-content">
+      <div class=" row " style=" padding-right:20px; " >          
+                        <div class="panel-heading col " >
+                            <h4>Add Grades</h4>                            
+                        </div> 
+          <span class="close col" onclick="xx();" style="text-align:right">&times;</span>
+                        </div>
+      <div class="row space">
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                      <asp:TextBox ID="instext" runat="server" Visible="false"></asp:TextBox>
+                <div id="TextBoxContainer" class="form-horizontal">           
         <div class="form-group">
             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="Grade_Name" CssClass=" control-label" Text="Grade"></asp:Label>
             <div >
@@ -164,72 +106,57 @@
                        
         </div>
         <asp:Button ID="btnaddgrade" Text="Add Grade" runat="server"  OnClientClick="AddTextGrade(); return false;" />
-        <asp:Button ID="save" Text="Save" runat="server" OnClientClick="hideGrade();"    OnClick="btnGradesave_Click" />
-            </ContentTemplate>
-        </asp:UpdatePanel>
+        <asp:Button ID="save" Text="Save" runat="server" OnClientClick="hideGrade();"  OnClick="btnGradesave_Click" />
+                </ContentTemplate>
+            </asp:UpdatePanel>
+          
+      </div>
+      </div>
                     </div>
-                
-                <footer class="w3-container w3-teal">
-                   
-                </footer>
-            </div>
-        </div>
-            </div>
+      
 
-
-        <div class="w3-container">
-          <div id="idClass" class="w3-modal" runat="server">
-            <div class="w3-modal-content w3-card-4" >
-                <header class="w3-container w3-teal">
-                    <span onclick="hideClass();"
-                          class="w3-button w3-display-topright">&times;</span>
-                    <h2>Add Class</h2>
-                </header>
-                <div class="w3-container" >
-                  
+          <div id="idClass" class="modal" >
+            <div class="modal-content" >
+                <div class=" row " style=" padding-right:20px; " >          
+                        <div class="panel-heading col " >
+                    <h4>Add Class</h4>
+                            </div>
+                    <span class="close col" onclick="hideClass();" style="text-align:right">&times;</span>
+                </div>
+                <div class="row space" >                  
         <asp:UpdatePanel runat="server" ID="UpdatePanel1">
             <ContentTemplate>
-                
+                <asp:TextBox runat="server" ID="TextGrade" Visible="false"  />
                 <div id="TextContainer" class="form-horizontal">
-       
-        <h4>Add New Class</h4>
-        <hr />
-        
         <div class="form-group">
-            <asp:Label runat="server" Text="Selected Grade " AssociatedControlID="TextGrade" CssClass=" control-label" Font-Bold="True"></asp:Label>
+            <asp:Label runat="server" Text="Class" AssociatedControlID="TextGrade" CssClass=" control-label" Font-Bold="True"></asp:Label>
             <div>
-                <asp:TextBox runat="server" ID="TextGrade" CssClass="form-control" Enabled="false"  />
+                <asp:TextBox runat="server" ID="Class_Name" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
-            
-            
+          
         </div>
         <asp:Button ID="BtnClass" Text="Add Class" runat="server"  OnClientClick="AddTextClass(); return false;" />
-        <asp:Button ID="BtnClassSave" Text="Save" runat="server" OnClientClick="hideClass();"    OnClick="BtnClassSave_Click"/>
+        <asp:Button ID="BtnClassSave" Text="Save" runat="server" OnClientClick="hideClass();" OnClick="BtnClassSave_Click"/>
             </ContentTemplate>
         </asp:UpdatePanel>
                     </div>
-                
-                <footer class="w3-container w3-teal " >
-                   
-                </footer>
             </div>
         </div>
-            </div>
-        <div class="w3-container">
-            
-        <div id="idCamera" class="w3-modal" runat="server">
-            <div class="w3-modal-content w3-card-4"  >
-                <header class="w3-container w3-teal">
+                   
+        <div id="idCamera" class="modal" >
+            <div class="modal-content"  >
+                <div class=" row " style=" padding-right:20px; " >          
+                        <div class="panel-heading col " >
+                             <h4>Add Device Details</h4></div>
                     <span onclick="hideCam();"
                           class="w3-button w3-display-topright">&times;</span>
-                    <h2>Add Camera Details</h2>
-                </header>
-                <div class="w3-container" >
+                   
+                </div>
+                <div class="row space" >
                   
         <asp:UpdatePanel runat="server" ID="AddCam">
-                        <ContentTemplate>
-                            
+                        <ContentTemplate>                            
                                <hr />
                             <asp:TextBox Visible="false" runat="server" ID="tbSelectedClass"></asp:TextBox>
                                <div class="form-group">
@@ -237,49 +164,51 @@
                             <asp:TextBox runat="server" CssClass="form-control" id="ccSystem"></asp:TextBox>
                                    </div>
                             <div id="camdiv">
-                                </div>
-                          
+                                </div>                          
                             <br />
              <asp:Button ID="btncam" Text="Add Camera Details" runat="server"  OnClientClick="AddTextCam(); return false;" />            
-        <asp:Button ID="BtnCamSave" Text="Save" runat="server" OnClick="BtnCamSave_Click"/>
-                           
-                                
+        <asp:Button ID="BtnCamSave" Text="Save" runat="server" OnClick="BtnCamSave_Click"/>                                                          
                         </ContentTemplate>
-
-                    </asp:UpdatePanel>
-                   
-                 
-               
+                    </asp:UpdatePanel>             
             </div>
         </div>
-
-        </div>
-            </div>
-        
-
-         <script>
-            function displayGrade()
+        </div> 
+    <script>
+        function displayGrade()
         {
-               document.getElementById('idGrade').style.display = 'block';
+            document.getElementById('idGrade').style.display = 'block';
         }
-
- function displayPopup() {
-               document.getElementById('id01').style.display = 'block';
-            }
+        function displayClass() {
+            document.getElementById('idClass').style.display = 'block';
+        }
+        function displayCam() {
+            document.getElementById('idCamera').style.display = 'block';
+        }
+    function displayPopup() {
+        document.getElementById('id01').style.display = 'block';
+        }
+        function xx() {
+        document.getElementById('idGrade').style.display = 'none';
+    }
+    function hideClass() {
+        document.getElementById('idClass').style.display = 'none';            
+    }
+    function hideCam() {
+        document.getElementById('idCamera').style.display = 'none';            
+        }
+        function duplicateIP() {
+            alert("Can not have same IP address in this institute!!\n Please enter different one!!")
+        }   
 // Get the modal
-var c = document.getElementById('<%=idClass.ClientID%>');
+    var c = document.getElementById('idClass');
              var modal = document.getElementById('id01');
-             var m = document.getElementById('<%=idGrade.ClientID%>');
-             var cam = document.getElementById('<%=idCamera.ClientID%>');
-             var del = document.getElementById('<%=del.ClientID%>');
-             var dn = document.getElementById('<%=delnot.ClientID%>');
-             var ec = document.getElementById('<%=edit.ClientID%>');
+             var m = document.getElementById('idGrade');
+             var cam = document.getElementById('idCamera');
+             var del = document.getElementById('del');
+             var dn = document.getElementById('delnot');
+             var ec = document.getElementById('edit');
 // When the user clicks anywhere outside of the modal, close it
-           
-         
-          
-     
-             window.onclick = function (event) {
+        window.onclick = function (event) {
 
                  if (event.target == del) {
                      del.style.display = "none";
@@ -306,69 +235,47 @@ var c = document.getElementById('<%=idClass.ClientID%>');
          }
        
 // Get the modal
-
- 
-
-
     function GetDynamicTextBox(value){
         return '<div class="form-group">' + '<asp:Label runat="server" Text="Grade" CssClass=" control-label" Font-Bold="True"/>' +
            '<div ><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
-             }
-
+    }
              
-                function AddTextGrade() {
-    var div = document.createElement('DIV');
-    div.innerHTML = GetDynamicTextBox("");
-    document.getElementById("TextBoxContainer").appendChild(div);
+    function AddTextGrade() {
+        var div = document.createElement('DIV');
+        div.innerHTML = GetDynamicTextBox("");
+        document.getElementById("TextBoxContainer").appendChild(div);
     
-             }
+    }
 
-             function GetDynamicTextClass(value){
+    function GetDynamicTextClass(value){
         return '<div class="form-group">' + '<asp:Label runat="server" Text="Class" CssClass=" control-label" Font-Bold="True"/>' +
             '<input name = "DynamicTextClass" class="form-control" type="text" value = "' + value + '" /></div>' +
-            '<div class="form-group">' +
-            '<asp:Label Text="Central Control System IP Address" AssociatedControlID="ccSystem" runat="server" CssClass=" control-label" Font-Bold="True"></asp:Label>' +
-                     '<input name="ccSystem"  class="form-control" type="text" value = "' + value + '" /></div>'
-                                   
-               }
+            '<div class="form-group">' 
+    }
 
-             function AddTextClass() {
-    var div = document.createElement('DIV');
-    div.innerHTML = GetDynamicTextClass("");
-    document.getElementById("TextContainer").appendChild(div);
-    
-             }
+    function AddTextClass() {
+        var div = document.createElement('DIV');
+        div.innerHTML = GetDynamicTextClass("");
+        document.getElementById("TextContainer").appendChild(div);
+    }
 
-             function GetDynamicCamDetails(value) {
-                 return '<p style="color: #C0C0C0">Add Camera Details</p><section> <div class="form-horizontal"><div class = "form-group">' + '<asp:label runat="server" Text="Camera IP" CssClass=" control-label" Fond-Bold="True"/>' +
-                     '<div ><input name="IP" class="form-control" type="text" value="' + value + '"/></div></div>' +
-                 '<div class = "form-group">' + '<asp:label runat="server" Text="Port No" CssClass=" control-label" Fond-Bold="True"/>' +
-                     '<div ><input name="Port" class="form-control" type="text" value="' + value + '"/></div></div>' +
-                 '<div class = "form-group">' + '<asp:label runat="server" Text="UserID" CssClass=" control-label" Fond-Bold="True"/>' +
-                     '<div ><input name="User" class="form-control" type="text" value="' + value + '"/></div></div>' +
-                 '<div class = "form-group">' + '<asp:label runat="server" Text="Password" CssClass=" control-label" Fond-Bold="True"/>' +
-                     '<div ><input name="Pass" class="form-control" type="text" value="' + value + '"/></div></div></div><section>'
-             }
-
-             function AddTextCam() {
-                 var div = document.createElement('DIV');
-                 div.innerHTML = GetDynamicCamDetails("");
-                 document.getElementById("camdiv").appendChild(div);
-             }
+    function GetDynamicCamDetails(value) {
+        return '<p style="color: #C0C0C0">Add Camera Details</p><section><div class="form-horizontal"><table style="width:100%;"><tr><td style="text-align:center"> <div class = "form-group">' + '<asp:label runat="server" Text="Camera IP" CssClass=" control-label" Fond-Bold="True"/>' +
+                     '<div ><input name="IP" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
+                 '<td style="text-align:center"><div class = "form-group">' + '<asp:label runat="server" Text="Port No" CssClass=" control-label" Fond-Bold="True"/>' +
+                     '<div ><input name="Port" class="form-control" type="text" value="' + value + '"/></div></div></td></tr>' +
+                 '<tr><td style="text-align:center"><div class = "form-group">' + '<asp:label runat="server" Text="UserID" CssClass=" control-label" Fond-Bold="True"/>' +
+                     '<div ><input name="User" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
+                 '<td style="text-align:center"><div class = "form-group">' + '<asp:label runat="server" Text="Password" CssClass=" control-label" Fond-Bold="True"/>' +
+                     '<div ><input name="Pass" class="form-control" type="text" value="' + value + '"/></div></div></td></tr></table></div><section>'
+    }
+    function AddTextCam() {
+        var div = document.createElement('DIV');
+        div.innerHTML = GetDynamicCamDetails("");
+        document.getElementById("camdiv").appendChild(div);
+    }
      
-        function hideGrade() {
-           document.getElementById('<%=idGrade.ClientID%>').style.display = 'none';
-            
-             }
-             function hideClass() {
-           document.getElementById('<%=idClass.ClientID%>').style.display = 'none';
-            
-             }
-             function hideCam() {
-           document.getElementById('<%=idCamera.ClientID%>').style.display = 'none';
-            
-             }
-        
+    
 </script>
 
 
@@ -376,18 +283,17 @@ var c = document.getElementById('<%=idClass.ClientID%>');
 
 
   <%--Edit all details--%>
-
-
-         <div class="w3-container"  >
-        
-        <div id="edit" class="w3-modal" runat="server">
-            <div class="w3-modal-content w3-card-4" >
-                <header class="w3-container w3-teal">
-                    <span onclick="hideEdit();"
-                          class="w3-button w3-display-topright">&times;</span>
+        <div id="edit" class="modal" >
+            <div class="modal-content" >
+                <div class=" row " style=" padding-right:20px; " >          
+                        <div class="panel-heading col " >
+                    
                     <h3>Edit Camera Details!!</h3>
-                </header>
-                <div class="w3-container" >
+                            </div>
+                            <span onclick="hideEdit();"
+                          class="w3-button w3-display-topright">&times;</span>
+                </div>
+                <div class="row space" >
                <asp:UpdatePanel runat="server" ID="UpdatePanel2">
                         <ContentTemplate>
                             
@@ -414,7 +320,7 @@ var c = document.getElementById('<%=idClass.ClientID%>');
                           
                             <br />
              <asp:Button ID="cancelCamEdit" Text="Cancel" runat="server"  OnClientClick="hideEdit(); return false;" />            
-        <asp:Button ID="saveCamEdit" Text="Save" runat="server" OnClientClick="hideEdit(); return false;"   OnClick="saveCamEdit_Click"/>
+        <asp:Button ID="saveCamEdit" Text="Save" runat="server"    OnClick="saveCamEdit_Click"/>
                            
                                 
                         </ContentTemplate>
@@ -424,19 +330,18 @@ var c = document.getElementById('<%=idClass.ClientID%>');
                 
             </div>
         </div>
-     
-</div>
-
-         <div class="w3-container"  >
-        
-        <div id="DivRename" class="w3-modal" runat="server">
-            <div class="w3-modal-content w3-card-4" style="width:500px; height:250px;  text-align:center; " >
-                <header class="w3-container w3-teal">
+               
+                  
+        <asp:HiddenField id="renameText" runat="server" />
+        <div id="DivRename" class="modal">
+            <div class="modal-content" style="width:500px; height:250px;  text-align:center; " >
+                 <div class=" row " style=" padding-right:20px; " >          
+                        <div class="panel-heading col " >
+                            <h4 >Edit Name</h4></div>
                     <span onclick="hideRename();"
-                          class="w3-button w3-display-topright">&times;</span>
-                    <h3  >Edit Name</h3>
-                </header>
-                <div class="w3-container" style=" padding-left:40px;padding-top:40px;">
+                          class="w3-button w3-display-topright">&times;</span>                    
+                </div>
+                <div class="row space" style=" padding-left:40px;padding-top:40px;">
                 <asp:Label runat="server" Text="New Name: " AssociatedControlID="tbRename"></asp:Label>
                 <br />
                 <asp:TextBox ID="tbRename" runat="server" CssClass="form-control"  ></asp:TextBox>
@@ -446,33 +351,42 @@ var c = document.getElementById('<%=idClass.ClientID%>');
                     </div>
                 </div>
             </div>
-             </div>
 
         <script>
+            function Rename() {
+                document.getElementById('DivRename').style.display = 'block';
+            }
+            function EditCam() {
+                document.getElementById('edit').style.display = 'block';
+            }
             function hideEdit() {
-                document.getElementById('<%=edit.ClientID%>').style.display = 'none';
+                document.getElementById('edit').style.display = 'none';
             }
             function hideRename() {
-                document.getElementById('<%=DivRename.ClientID %>').style.display = 'none';
+                document.getElementById('DivRename').style.display = 'none';
             }
-
+            function DeviceNotEdit() {
+                alert('Device Ip Can not be edited!! Please add a new device\n and delete the current device to make the changes');
+            }
+            function donothing() {
+                alert('You cannot edit this!! Please expand more to edit devices!!');
+            }
         </script>
 
  <%--Edit all detals finished--%>
 
-        <%--Delete Starts--%>
-       
-
-         <div class="w3-container"  >
+        <%--Delete Starts--%>    
         
-        <div id="del" class="w3-modal" runat="server">
-            <div class="w3-modal-content w3-card-4" style="width:250px; min-height:150px" >
-                <header class="w3-container w3-teal">
+        <div id="del" class="modal" >
+            <div class="modal-content" style="width:250px; min-height:150px" >
+               <div class=" row " style=" padding-right:20px; " >          
+                        <div class="panel-heading col " >
+                            <h4>Delete!!!</h4>
+                            </div>
                    <span onclick="hideDelConfirm();"
-                          class="w3-button w3-display-topright">&times;</span>
-                    <h3>Delete!!!</h3>
-                </header>
-                <div class="w3-container"  >
+                          class="w3-button w3-display-topright">&times;</span>                    
+                </div>
+                <div class="row space"  >
                   <asp:TextBox runat="server" ID="delvalue" Visible="false"></asp:TextBox>
                     
                       <p class="text-danger">Are you sure you want to delete this?</p>
@@ -480,31 +394,24 @@ var c = document.getElementById('<%=idClass.ClientID%>');
                <asp:Button ID="btndel" runat="server" Text="Yes, Delete" OnClick="btndel_Click"  />
                     <asp:Button ID="delcancel" runat="server" Text="cancel" OnClientClick="hideDelConfirm(); return false;" />
                     </div>
-                
-               
-            </div>
         </div>
-     
-</div>
-        
-           <div class="w3-container"  >
-        
-        <div id="delnot" class="w3-modal" runat="server">
-            <div class="w3-modal-content w3-card-4" style="width:250px" >
-                <header class="w3-container w3-teal">
+            </div>
+        <div id="delnot" class="modal" >
+            <div class="modal-content" style="width:250px" >
+               <div class=" row " style=" padding-right:20px; " >          
+                        <div class="panel-heading col " >
+                            <h4>Delete!!</h4></div>
                     <span onclick="hideDelNot();"
                           class="w3-button w3-display-topright">&times;</span>
-                    <h3>Delete!!</h3>
-                </header>
-                <div class="w3-container" >
+                    
+                </div>
+                <div class="row space" >
                   
                     <asp:TextBox runat="server" ID="TextBox1" Visible="false"></asp:TextBox>
                     
                       <p class="text-danger">You are not allowed to delete this. Please delete sub categories first!!</p>
                     <br />
                <asp:Button ID="Button1" runat="server" Text="Ok, got it!"  OnClientClick="hideDelNot(); return false;" />
-                  
-                        
                
                     </div>
                 
@@ -513,15 +420,21 @@ var c = document.getElementById('<%=idClass.ClientID%>');
         </div>
      
 </div>   
-            </div>
-        
+     
+        </div>
+             
         <script>
-            
+            function ConfirmDel() {
+                document.getElementById('del').style.display = 'block';
+            }
             function hideDelConfirm() {
-                document.getElementById('<%=del.ClientID%>').style.display = 'none';
+                document.getElementById('del').style.display = 'none';
             }
             function hideDelNot() {
-                document.getElementById('<%=delnot.ClientID%>').style.display = 'none';
+                document.getElementById('delnot').style.display = 'none';
+            }
+            function nodelete() {
+                alert('This cannot be deleted!! Please expand more to delete devices!!')
             }
         </script>
         <%--Delete finished--%>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeBehind="controlRemote.aspx.cs" Inherits="trythis.controlRemote" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeBehind="controlRemote.aspx.cs" Inherits="WebCresij.controlRemote" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterBody" runat="server">

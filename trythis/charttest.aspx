@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="charttest.aspx.cs" Inherits="trythis.charttest" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="charttest.aspx.cs" Inherits="WebCresij.charttest" %>
 
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->

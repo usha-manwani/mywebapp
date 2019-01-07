@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace trythis
+namespace WebCresij
 {
     public partial class Registration : System.Web.UI.Page
     {
@@ -26,7 +26,7 @@ namespace trythis
                 {
                     no = no.Replace(c, string.Empty);
                 }
-                long phone = Convert.ToInt64(no);
+                 long phone = Convert.ToInt64(no);
                 string connString = null;
                 connString = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(connString);
@@ -37,14 +37,17 @@ namespace trythis
                 cmd.Parameters.AddWithValue("Password", Password.Text);
                 cmd.Parameters.AddWithValue("Phone_Number", phone);
                 cmd.Parameters.AddWithValue("Request_Status", "Pending");
-                int k = cmd.ExecuteNonQuery();
+                cmd.Parameters.Add("@k", SqlDbType.Int);
+                cmd.Parameters["@k"].Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+                int k = Convert.ToInt32( cmd.Parameters["@k"].Value);
                 con.Close();
 
                 if (k > 0 )
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('Registered Successfully')", true);
 
-                    Response.Redirect("Login.aspx", false);
+                    Response.Redirect("Index.aspx", false);
                 }
 
                 else
@@ -57,19 +60,7 @@ namespace trythis
             {
                 string message = ex.Message;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('" + message + "')", true);
-            }
-            //var manager = new UserManager();
-            //var user = new ApplicationUser() { UserName = UserName.Text };
-            //IdentityResult result = manager.Create(user, Password.Text);
-            //if (result.Succeeded)
-            //{
-            //    IdentityHelper.SignIn(manager, user, isPersistent: false);
-            //    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-            //}
-            ////else 
-            ////{
-            ////    ErrorMessage.Text = result.Errors.FirstOrDefault();
-            ////}
+            }           
         }
     }
 }

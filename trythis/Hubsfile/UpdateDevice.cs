@@ -7,7 +7,7 @@ using System.Data.Sql;
 using System.Data;
 
 
-namespace trythis.Hubsfile
+namespace WebCresij.Hubsfile
 {
     public class UpdateDevice
     {

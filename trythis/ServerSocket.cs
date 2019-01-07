@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Text;
 
-namespace trythis
+namespace WebCresij
 {
     public class ServerSocket
     {

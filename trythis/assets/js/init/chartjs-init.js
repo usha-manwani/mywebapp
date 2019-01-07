@@ -16,8 +16,11 @@
     var chat = $.connection.myHub;
     chat.client.broadcastMessage = function (name, message) {
         //document.getElementById("tempdata").style.display = "block";
+     
         var ipName = $("#ipgraph").val();
-        
+        var ip1 = document.getElementById("MainContent_masterchildBody_lblip");
+        var ips = '<%= session["ipforgraph"].ToString()%>';
+
         if (name == ipName)
         {                    
         var arraydata = message.split(',');
@@ -36,6 +39,21 @@
                 temp.push(arraydata[1]);
                 var tempo = Math.ceil(arraydata[1]);
                 myChart.options.scales = {
+                    xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            drawBorder: true
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Time',
+                            fontSize: 20,
+                        },
+                        ticks: {
+                            fontSize: 9,
+                        }
+                    }],
                     yAxes: [{
                         display: true,
                         gridLines: {
@@ -50,7 +68,7 @@
                         ticks: {
                             min: tempo - 8,
                             stepSize: 1,
-                            fontSize: 10,
+                            fontSize: 9,
                         }
                     }]
                 };
@@ -74,37 +92,37 @@
                     else
                     mini = Math.ceil(arraydata[2]);               
                     myChart2.options.scales = {
-                         xAxes: [{
-                        display: true,
-                        gridLines: {
+                        xAxes: [{
+                            display: true,
+                            gridLines: {
                             display: true,
                             drawBorder: true
-                        },
-                        scaleLabel: {
+                            },
+                            scaleLabel: {
                             display: true,
                             labelString: 'Time',
                             fontSize: 20,
-                        },
-                        ticks: {
+                            },
+                            ticks: {
                             fontSize: 9,
-                        }
-                    }],
+                            }
+                        }],
                         yAxes: [{
-                        display: true,
-                        gridLines: {
+                            display: true,
+                            gridLines: {
                             display: true,
                             drawBorder: true
-                        },
-                        scaleLabel: {
+                            },
+                            scaleLabel: {
                             display: true,
                             labelString: 'Value'
-                        },
-                        ticks: {
+                            },
+                            ticks: {
                             min: mini-8,
                             stepSize: 5,
                             fontSize: 7,
-                        }
-                    }]
+                            }
+                        }]
                     }
                 }
             
@@ -119,7 +137,7 @@
     };
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         alert("connected");
-       
+        updateChart();
         $(document).on("change", "select", function () {
             $('#nameip').text = $(this).val();
             document.getElementById("tempvalue").innerText = 0;
@@ -153,8 +171,8 @@
                     datasets: [{
                         //data: [0, 7, 3, 5, 2, 8, 6],
                         label: "Temprature",
-                        backgroundColor: 'rgba(0,200,155,.35)',
-                        borderColor: 'rgba(0,200,155,0.60)',
+                        backgroundColor: 'rgba(0,200,155,.3)',
+                        borderColor: 'rgba(0,200,155,0.70)',
                         borderWidth: 1,
                         pointStyle: 'circle',
                         pointRadius: 2,
@@ -199,7 +217,7 @@
                                 fontSize: 20,
                             },
                             ticks: {
-                                fontSize: 10,
+                                fontSize: 9,
                             }
                         }],
                         yAxes: [{
@@ -211,12 +229,11 @@
                             scaleLabel: {
                                 display: true,
                                 labelString: 'Temperature (°C)',
-
                             },
                             ticks: {
                                 min: -10,
                                 stepSize: 1,
-                                fontSize: 10,
+                                fontSize: 9,
                             }
                         }]
                     },
@@ -331,7 +348,7 @@
                             label: "Humidity",
                             borderColor: "rgba(115,99,148,.9)",
                             borderWidth: "1",
-                            backgroundColor: "rgba(115,99,148,.7)",
+                            backgroundColor: "rgba(115,99,148,.4)",
                             pointStyle: 'circle',
                             pointRadius: 0
                             // data: [20, 47, 35, 43, 65, 45, 35]
@@ -340,7 +357,7 @@
                             label: "PM2.5(µg/m3)",
                             borderColor: "rgba(0,200,155, 0.9)",
                             borderWidth: "1",
-                            backgroundColor: "rgba(0,200,155, 0.5)",
+                            backgroundColor: "rgba(0,200,155, 0.4)",
                             pointHighlightStroke: "rgba(0,200,155,1)",
                             pointStyle: 'circle',
                             pointRadius: 0
@@ -350,7 +367,7 @@
                             label: "PM10(µg/m3)",
                             borderColor: "rgba(219,120,118, 0.9)",
                             borderWidth: "1",
-                            backgroundColor: "rgba(219,120,118, 0.5)",
+                            backgroundColor: "rgba(219,120,118, 0.4)",
                             pointHighlightStroke: "rgba(219,120,118,1)",
                             pointStyle: 'circle',
                             pointRadius: 0
@@ -409,17 +426,159 @@
     });
 })(jQuery);
 
-function findGraph() {
-    
-    document.getElementById("tempdata").style.display = "block";
+function updateChart() {
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var myChart4 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Power',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
    
-    //myChart.data.datasets.data = [];
-    //myChart2.data.datasets.data[0] = [];
-    //myChart2.data.datasets.data[1] = [];
-    //myChart2.data.datasets.data[2] = [];
-    //myChart.update();
-    //myChart2.update();
-    return false;
+    var ctx1 = document.getElementById("myChart1").getContext('2d');
+    var myChart5 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Voltage',
+                data: [12, 19, 13, 15, 10, 17],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    var ctx2 = document.getElementById("myChart2").getContext('2d');
+    var myChart6 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Hours',
+                data: [2, 9, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    var ctx3 = document.getElementById("myChart3").getContext('2d');
+    var myChart7 = new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Hours',
+                data: [2, 7, 6, 12, 9, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+   
 }
 
-// Counter Number
+
+
+

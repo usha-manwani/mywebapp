@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace trythis
+namespace WebCresij
 {
     public class PopulateTree
     {
@@ -81,7 +81,8 @@ namespace trythis
                 TreeNode child = new TreeNode
                 {
                     Text = row[0].ToString(),
-                    Value = row[1].ToString()
+                    Value = row[1].ToString(),
+                    ToolTip = row[2].ToString(),
                 };
                 if (ParentId == 0)
                 {
@@ -166,7 +167,7 @@ namespace trythis
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using(SqlCommand cmd= new SqlCommand(Query, con))
-                {
+                 {
                     try { con.Open();
                         cmd.ExecuteNonQuery();
                     }
@@ -214,25 +215,21 @@ namespace trythis
         }
         public int InsertGrade(string insID, string Grade)
         {
-            Int32 result = 0;
-            Int32 i = Convert.ToInt32(insID);
+            int result = 0;            
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_Grade", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Grade", Grade);
-                    cmd.Parameters.AddWithValue("@InsID", i);
+                    cmd.Parameters.AddWithValue("@InsID", insID);
                     cmd.Parameters.Add("@Ids", SqlDbType.Int);
                     cmd.Parameters["@Ids"].Direction = ParameterDirection.Output;
-
                     try
                     {
                         con.Open();
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@Ids"].Value);
-
-
                     }
                     catch
                     {
@@ -243,21 +240,20 @@ namespace trythis
                         con.Close();
                     }
                 }
-
             }
             return result;
         }
 
         public int InsertClass(string gid, string className)
         {
-            Int32 result = 0;
+             int result = 0;
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_Class", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Class", className);
-                    cmd.Parameters.AddWithValue("@Grade_ID", gid);
+                    cmd.Parameters.AddWithValue("@grade", gid);
                     cmd.Parameters.Add("@Ids", SqlDbType.Int);
                     cmd.Parameters["@Ids"].Direction = ParameterDirection.Output;
                     try
@@ -298,7 +294,6 @@ namespace trythis
                             cmd.Parameters.AddWithValue("@id", loc);
                             cmd.Parameters.AddWithValue("@portNo", port);
                             cmd.Parameters.AddWithValue("@CamProvider", "HikVision");
-
                             cmd.Parameters.Add("@camName", SqlDbType.NVarChar, -1);
                             cmd.Parameters["@camName"].Direction = ParameterDirection.Output;
                             con.Open();
@@ -361,9 +356,39 @@ namespace trythis
 
             #region Delete details
 
-            public Int32 delCam(string camIP)
+        public int DelCC(string ccip, string loc)
+        {
+            int result = -1;
+            using(SqlConnection con= new SqlConnection(constr))
             {
-                Int32 cid = 2;
+                using(SqlCommand cmd = new SqlCommand("sp_delCC", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ip", ccip);
+                    cmd.Parameters.AddWithValue("@loc", loc);
+                    try
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        result=cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return 0;
+        }
+            public int delCam(string camIP,string loc)
+            {
+                int cid = 2;
                 if (camIP != null)
                 {
                     using (SqlConnection con = new SqlConnection(constr))
@@ -376,6 +401,7 @@ namespace trythis
                                 cmd.Parameters.Add("@r", SqlDbType.Int);
                                 cmd.Parameters["@r"].Direction = ParameterDirection.Output;
                                 cmd.Parameters.AddWithValue("@Cam", camIP);
+                                cmd.Parameters.AddWithValue("@classID", loc);
                                 con.Open();
                                 cmd.ExecuteNonQuery();
                                 cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
@@ -394,9 +420,9 @@ namespace trythis
                 return cid;
             }
 
-            public Int32 DeleteClass(string classId)
+            public int DeleteClass(string classId)
             {
-                Int32 cid = Convert.ToInt32(classId);
+            int result = -1;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlCommand cmd = new SqlCommand("sp_DelClass", con))
@@ -404,12 +430,12 @@ namespace trythis
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.Add("@r", SqlDbType.Int);
                         cmd.Parameters["@r"].Direction = ParameterDirection.Output;
-                        cmd.Parameters.AddWithValue("@class", cid);
+                        cmd.Parameters.AddWithValue("@class", classId);
                         try
                         {
                             con.Open();
                             cmd.ExecuteNonQuery();
-                            cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                            result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                         }
                         catch
                         {
@@ -421,27 +447,27 @@ namespace trythis
                         }
                     }
                 }
-                return cid;
+                return result;
             }
 
 
-            public Int32 DelGrade(string GradeId)
+            public int DelGrade(string GradeId)
             {
-                Int32 cid = Convert.ToInt32(GradeId);
+            int result = -1;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlCommand cmd = new SqlCommand("sp_DelGrade", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@id", cid);
+                        cmd.Parameters.AddWithValue("@GradeID",GradeId);
                         cmd.Parameters.Add("@r", SqlDbType.Int);
                         cmd.Parameters["@r"].Direction = ParameterDirection.Output;
                         try
                         {
                             con.Open();
                             cmd.ExecuteNonQuery();
-                            cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                           result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                         }
                         catch
                         {
@@ -453,26 +479,26 @@ namespace trythis
                         }
                     }
                 }
-                return cid;
+                return result;
             }
 
-            public Int32 DelInstitute(string insId)
+            public int DelInstitute(string insId)
             {
-                Int32 cid = Convert.ToInt32(insId);
+            int result = -1;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlCommand cmd = new SqlCommand("sp_delInstitute", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("@id", cid);
+                        cmd.Parameters.AddWithValue("@insID", insId);
                         cmd.Parameters.Add("@r", SqlDbType.Int);
                         cmd.Parameters["@r"].Direction = ParameterDirection.Output;
                         try
                         {
                             con.Open();
                             cmd.ExecuteNonQuery();
-                            cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                            result= Convert.ToInt32(cmd.Parameters["@r"].Value);
                         }
                         catch
                         {
@@ -484,7 +510,7 @@ namespace trythis
                         }
                     }
                 }
-                return cid;
+                return result;
             }
 
             #endregion
@@ -518,7 +544,7 @@ namespace trythis
                 return dt;
             }
 
-            public void updateCam(string ip, string pass, string id, string port)
+            public void updateCam(string ip, string pass, string id, string port,string loc)
             {
                 int portNo = Convert.ToInt32(port);
                 DataTable dt = new DataTable();
@@ -531,6 +557,7 @@ namespace trythis
                         cmd.Parameters.AddWithValue("@ip", ip);
                         cmd.Parameters.AddWithValue("@pass", pass);
                         cmd.Parameters.AddWithValue("@port", portNo);
+                        cmd.Parameters.AddWithValue("@loc", loc);
                         try
                         {
                             con.Open();
@@ -548,7 +575,7 @@ namespace trythis
                     }
                 }
             }
-            public void updateIns(Int32 id, string insName)
+            public void updateIns(string id, string insName)
             {
                 using (SqlConnection con = new SqlConnection(constr))
                 {
@@ -574,7 +601,7 @@ namespace trythis
                 }
             }
 
-            public void updateGrade(Int32 id, string gradeName)
+            public void updateGrade(string id, string gradeName)
             {
                 using (SqlConnection con = new SqlConnection(constr))
                 {
@@ -600,7 +627,7 @@ namespace trythis
 
                 }
             }
-            public void updateClass(Int32 id, string className)
+            public void updateClass(string id, string className)
             {
                 using (SqlConnection con = new SqlConnection(constr))
                 {
@@ -808,7 +835,7 @@ namespace trythis
                     }
                 }catch(Exception ex)
                 {
-                    result = "-1";
+                    result = "";
                 }
                 finally
                 {
@@ -903,6 +930,87 @@ namespace trythis
                 }
             }
             return dt;
+        }
+
+        public int UpdateRegCard( string cardID, string name, string memberid, string loc, string comment, string pending,string locids)
+        {
+            int result = -1;
+
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using(SqlCommand cmd= new SqlCommand("UpdateRegCard", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@cardId", cardID);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@memid", memberid);
+                    cmd.Parameters.AddWithValue("@loc", loc);
+                    cmd.Parameters.AddWithValue("@pending", pending);
+                    cmd.Parameters.AddWithValue("@comment", comment);
+                    cmd.Parameters.AddWithValue("@locid", locids);
+                    try
+                    {
+                        if(con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        result = cmd.ExecuteNonQuery();
+
+                    }
+                    catch(Exception ex)
+                    {
+                        result = -2;
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return result;
+
+        }
+        #endregion
+
+        #region Schedule
+        public void setSchedule(string ip,string classID,string starttime, string stoptime,string mon,string tue,string wed,string thu,
+            string fri, string sat,string sun)
+        {
+            using(SqlConnection con = new SqlConnection(constr))
+            {
+                try
+                {
+                    using(SqlCommand cmd = new SqlCommand("updateSchedule", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ip", ip);
+                        cmd.Parameters.AddWithValue("@ClassID", classID);
+                        cmd.Parameters.AddWithValue("@time", starttime);
+                        cmd.Parameters.AddWithValue("@stoptime", stoptime);
+                        cmd.Parameters.AddWithValue("@mon", mon);
+                        cmd.Parameters.AddWithValue("@tue",tue);
+                        cmd.Parameters.AddWithValue("@wed",wed);
+                        cmd.Parameters.AddWithValue("@thu",thu);
+                        cmd.Parameters.AddWithValue("@fri",fri);
+                        cmd.Parameters.AddWithValue("@sat",sat);
+                        cmd.Parameters.AddWithValue("@sun",sun);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+
+            }
         }
         #endregion
     }

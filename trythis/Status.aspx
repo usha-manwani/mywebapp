@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.Master" AutoEventWireup="true" CodeBehind="Status.aspx.cs" Inherits="trythis.Status" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.Master" AutoEventWireup="true" CodeBehind="Status.aspx.cs" Inherits="WebCresij.Status" %>
 <%@ MasterType VirtualPath="~/Master.master" %>
 <asp:Content ID="Head" ContentPlaceHolderID="masterchildHead" runat="server">
     <%--<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">--%>

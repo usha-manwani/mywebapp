@@ -5,8 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
+using System.Net;
 
-namespace trythis
+namespace WebCresij
 {
     public partial class UploadFile : System.Web.UI.Page
     {
@@ -47,6 +48,7 @@ namespace trythis
                 {
                     fuSample.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fileName);
                     Response.Redirect(Request.Url.AbsoluteUri);
+                    
                 }
                 catch (HttpException)
                 {
@@ -56,12 +58,13 @@ namespace trythis
         }
 
         protected void DownloadFile(object sender, EventArgs e)
-        {
+        {            
             string filePath = (sender as LinkButton).CommandArgument;
             Response.ContentType = ContentType;
             Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
             Response.WriteFile(filePath);
             Response.End();
+            
         }
        
     }

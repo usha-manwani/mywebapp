@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AddUser.aspx.cs" Inherits="trythis.AddUser" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="AddUser.aspx.cs" Inherits="WebCresij.AddUser" %>
 <%@ MasterType VirtualPath="~/Master.master" %>
 <%@Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
  <asp:Content ID="Head" ContentPlaceHolderID="masterHead" runat="server">
@@ -36,20 +36,15 @@
      <script>
         function RequirePhone()
         {
-            var x = document.getElementById('PhoneNo').value;
-            
+            var x = document.getElementById('PhoneNo').value;            
             if(x=="")
             {
                 alert("Please enter a phone No ");
                 return false;
             }            
-        }
-        
+        }        
     </script>
 </asp:Content>
-
-
-
 
 <asp:Content ID="Content3" ContentPlaceHolderID="masterBody" runat="server">
    

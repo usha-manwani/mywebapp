@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="tempratureCharts.aspx.cs" Inherits="trythis.tempratureCharts" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="tempratureCharts.aspx.cs" Inherits="WebCresij.tempratureCharts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     
@@ -15,20 +15,22 @@
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
         <div class="row " id="ddl" style="background-color: #7fe0c8; top:100px;" >
+            
+            
       <asp:UpdatePanel runat="server">
                          <ContentTemplate>
                  <div class="row" >
-                    <div class="col-lg-6 col-6 col-sm-12 float-left">
+                    <div class="col-lg-6  col-sm-12 float-left">
                         <h4>Temperature, Humidity & PM(Particulate Matter) Graph for </h4>
                     </div>
-                     <div class="col-2 col-lg-2 col-sm-6 float-left">
+                     <div class=" col-lg-2 col-sm-6 float-left">
                     <asp:DropDownList Width="150px" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                         CssClass="btn btn-default dropdown "  ID="ddlInstitute" 
                         data-toggle="dropdown"  runat="server" >
                         <asp:ListItem Text="select" Value=""></asp:ListItem>
                         </asp:DropDownList></div>
-                    <div class="col-2 col-lg-2 col-sm-6 float-none">
+                    <div class="col-lg-2 col-sm-6 float-none">
                         <asp:DropDownList Width="150px" ID="ddlGrade" AutoPostBack="true"
                             CssClass="btn btn-default dropdown" data-toggle="dropdown"  
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" >
@@ -36,7 +38,7 @@
                         </asp:DropDownList>
                         
                     </div>
-                     <div class="col-2 col-lg-2 col-sm-6 float-left">
+                     <div class="col-lg-2 col-sm-6 float-left">
                         <asp:DropDownList  ID="ddlClass" Width="150px" AutoPostBack="true" 
                               runat="server" CssClass="btn btn-default dropdown" 
                             data-toggle="dropdown" OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" >
@@ -44,8 +46,8 @@
                         </asp:DropDownList>
                     </div>
                     
-                         <input id="ipgraph" type="hidden" value='<%=Session["ipforgraph"] %>'/>
-                     
+                        <asp:Label ID="lblip" runat="server" CssClass="displaynone" Text='<%#Session["ipforgraph"]%>' ></asp:Label> 
+                     <input id="ipgraph" type="hidden" value='<%=Session["ipforgraph"] %>'/>
             </div>
                              </ContentTemplate>
                      </asp:UpdatePanel>
@@ -151,7 +153,7 @@
                 <div class="clearfix"></div>
                 <!-- /Widgets -->
                 <div class="row "  >
-                    <div class="col-lg-6 col-md-12 col-6 col-sm-12" >
+                    <div class="col-lg-6 col-md-12  col-sm-12" >
                         <div class="card">
                             <div class="card-body" id="teamdiv" style="background-color:white">
                                 <h4 class="mb-3">Temperature </h4>
@@ -161,7 +163,7 @@
                     </div><!-- /# column -->
                    
                 
-                 <div class="col-lg-6 col-md-12 col-6 col-sm-12">
+                 <div class="col-lg-6 col-md-12  col-sm-12">
                 <div class="card">
                             <div class="card-body" id="humdiv" style="background-color:white">
                                 <h4 class="mb-3">Humidity </h4>
@@ -169,20 +171,70 @@
                             </div>
                         </div>
                      </div>
-                <div class="col-lg-6 col-md-12 col-6 col-sm-12" style="display:none">
+
+                <div class="col-lg-6 col-md-12  col-sm-12" style="display:none">
                         <div class="card">
                             <div class="card-body" id="humdiv1">
                                 <h4 class="mb-3">Yearly Sales </h4>
-                                <canvas id="sales-chart"></canvas>
+                                <canvas id="sales-chart" height="100"></canvas>
                             </div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-lg-6 col-md-12  col-sm-12" >
+                        <div class="card">
+                            <div class="card-body"  style="background-color:white">
+                                <h4 class="mb-3">Electricity </h4>
+                                 <canvas id="myChart"  height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12  col-sm-12" >
+                        <div class="card">
+                            <div class="card-body"  style="background-color:white">
+                                <h4 class="mb-3">Voltage </h4>
+                                 <canvas id="myChart1"  height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-lg-6 col-md-12  col-sm-12" >
+                        <div class="card">
+                            <div class="card-body"  style="background-color:white">
+                                <h4 class="mb-3">Projector Uses </h4>
+                                 <canvas id="myChart2"  height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12  col-sm-12" >
+                        <div class="card">
+                            <div class="card-body"  style="background-color:white">
+                                <h4 class="mb-3">PC Uses </h4>
+                                 <canvas id="myChart3"  height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div><!-- .animated -->
        </div>
         <!-- /.content -->
      </div>
+    <div class="row">
+       
+       
+<script>
+
+</script>
+    </div>
      <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script src="assets/js/main.js"></script>
     <!--  Chart js -->
