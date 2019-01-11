@@ -136,7 +136,7 @@
         };
     };
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-        alert("connected");
+        
         updateChart();
         $(document).on("change", "select", function () {
             $('#nameip').text = $(this).val();

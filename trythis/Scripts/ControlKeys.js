@@ -63,11 +63,11 @@
                         break;
                     case 'Digital Curtain':
                         document.getElementById('platform').checked = true;
-                        $('#platform').closest("td").find("img").attr('src', "Images/platform.png");
+                        $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
                         break;
                     case 'Digital Screen':
                         document.getElementById('digitalEquipment').checked = true;
-                        $('#digitalEquipment').closest("td").find("img").attr('src', "Images/platform.png");
+                        $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
                         break;
                     case 'DVD':
                         document.getElementById('dvd').checked = true;
@@ -93,10 +93,10 @@
 
                 if (arraydata[6] == 'Closed') {
                     var src = document.getElementById("projectorOn");
-                    src.src = "Images/onimages/projectoron1.png";
+                    src.src = "Images/offimages/proj1.png";
                 } else {
                     var src = document.getElementById("projectorOn");
-                    src.src = "Images/offimages/proj1.png";
+                    src.src = "Images/onimages/projectoron1.png";
                 }
 
             }
@@ -112,6 +112,7 @@
                                 var img = document.getElementById("systempower");
                                 img.src = "Images/offimages/sysof.png";
                                 break;
+                            
                             default:
                                 break
                         }
@@ -146,11 +147,11 @@
                                     break;
                                 case 'DigitalCurtain':
                                     document.getElementById('platform').checked = true;
-                                    $('#platform').closest("td").find("img").attr('src', "Images/platform.png");
+                                    $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
                                     break;
                                 case 'DigitalScreen':
                                     document.getElementById('digitalEquipment').checked = true;
-                                    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/platform.png");
+                                    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
                                     break;
                                 case 'DVD':
                                     document.getElementById('dvd').checked = true;
@@ -216,7 +217,7 @@
     });
 
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-        alert("connection done");
+       
         createDivs();
         var chkbox = document.getElementsByName("toggle");
         
@@ -268,8 +269,9 @@
             alert(proj);
         });
         $(document).on('click', '.aclass', function () {
-            alert(this.innerHTML);             
-            ipAddress = $(this).closest('tr').find('input').val();         
+                      
+            ipAddress = $(this).closest('tr').find('input').val();  
+            
             openRemote(ipAddress);
             chat.server.sendData(); 
         });        
@@ -560,6 +562,8 @@ function isRemote(ipofdevice, chknot) {
 }
 
 function openRemote(ipofremote) {
+    uncheck();
+    offdevices();
     var iplabel = document.getElementById("MainContent_masterchildBody_masterBody_deviceips");
     iplabel.innerText = ipofremote;
     document.getElementById("control").style.display = "block";
@@ -610,8 +614,7 @@ function tbleupdate(name, message) {
                     syslocked.addClass("red");
                 }
                 else {
-                    var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");
-                    
+                    var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");                    
                     syslocked.addClass("fa-unlock");
                     syslocked.addClass("iconColor");
                     syslocked.removeClass("fa-lock");
@@ -696,7 +699,7 @@ function tbleupdate(name, message) {
                         var rec = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         rec.removeClass("^='fa-'");
                         rec.addClass("iconColor");
-                        rec.addClass("fa-video-camera");
+                        rec.addClass("fa-camera");
                         break;
                         
                 }
@@ -812,9 +815,9 @@ function uncheck() {
 
     $('#laptop').closest("td").find("img").attr('src', "Images/offimages/laptop.png");
 
-    $('#platform').closest("td").find("img").attr('src', "Images/platform.png");
+    $('#platform').closest("td").find("img").attr('src', "Images/offimages/screen.png");
 
-    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/platform.png");
+    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/offimages/screen.png");
 
     $('#dvd').closest("td").find("img").attr('src', "Images/offimages/dvd.png");
 
@@ -823,8 +826,16 @@ function uncheck() {
     $('#tv').closest("td").find("img").attr('src', "Images/offimages/tv.png");
 
     $('#camera').closest("td").find("img").attr('src', "Images/offimages/camera.png");
-
     $('#recorder').closest("td").find("img").attr('src', "Images/offimages/recorder.png");
+}
+
+function offdevices() {
+    
+    $('#systempower').closest("td").find("img").attr('src', "Images/offimages/sysof.png");
+    $('#pcpower').closest("td").find("img").attr('src', "Images/offimages/pcof.png");
+    $('#syslock').closest("td").find("img").attr('src', "Images/offimages/sysunlock.png");
+    $('#podiumlock').closest("td").find("img").attr('src', "Images/offimages/podiumunlock.png");
+    $('#classlock').closest("td").find("img").attr('src', "Images/offimages/classunlock.png");
 }
 
 

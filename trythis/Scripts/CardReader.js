@@ -7,7 +7,7 @@
         var text1 = document.getElementById("MainContent_masterchildBody_masterBody_info");
         text1.innerHTML = "";
         var mymodal = document.getElementById('myModal');
-        mymodal.style.display = 'block';
+        mymodal.style.display = 'Flex';
         var tbscan = document.getElementById('tablescan');
         tbscan.style.display = "block";
         var gridmodal = document.getElementById('griddiv');
@@ -27,7 +27,6 @@
         }
     }
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-        alert("Hub Connection started");
        
         $(document).on("change", "input:checkbox", function () {
 

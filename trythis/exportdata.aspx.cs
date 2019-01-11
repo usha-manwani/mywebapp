@@ -19,9 +19,9 @@ namespace WebCresij
                 Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
                 Response.WriteFile(filePath);
                 Response.Flush();
+                HttpContext.Current.Session["fileName"] = "";
                 File.Delete(filePath);                
-            }
-            Response.Redirect("CardLogs.aspx");
+            }            
         }
     }
 }

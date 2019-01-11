@@ -31,13 +31,13 @@ namespace WebCresij {
         protected global::System.Web.UI.HtmlControls.HtmlInputText name;
         
         /// <summary>
-        /// txtemail control.
+        /// email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtemail;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText email;
         
         /// <summary>
         /// txtPhone control.
@@ -58,13 +58,13 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.DropDownList issueList;
         
         /// <summary>
-        /// IssueSubject control.
+        /// otherissue control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl IssueSubject;
+        protected global::System.Web.UI.WebControls.TextBox otherissue;
         
         /// <summary>
         /// issuemessage control.
@@ -83,15 +83,6 @@ namespace WebCresij {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button sendEmail;
-        
-        /// <summary>
-        /// emailsent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl emailsent;
         
         /// <summary>
         /// TextBox1 control.

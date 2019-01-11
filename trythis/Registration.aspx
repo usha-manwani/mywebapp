@@ -4,16 +4,13 @@
     <script>
         function RequirePhone()
         {
-            var x = document.getElementById('PhoneNo').value;
-            
+            var x = document.getElementById('PhoneNo').value;            
             if(x=="")
             {
                 alert("Please enter a phone No ");
                 return false;
-            }
-            
-        }
-        
+            }            
+        }        
     </script>
 
     <h2>Register</h2>
@@ -21,11 +18,11 @@
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>--%>
 
-    <div class="form-horizontal" >
+    <div class="form-horizontal"  >
         <h4>Create a new account.</h4>
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
-        <div class="form-group">
+        <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="User_Name" CssClass="col-md-2 control-label">User name</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="User_Name" CssClass="form-control" />
@@ -33,7 +30,7 @@
                     CssClass="text-danger" ErrorMessage="The user name field is required." />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="UserID" CssClass="col-md-2 control-label">User ID</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="UserID" CssClass="form-control" ToolTip=" UpperCase, Lowercase and numbers are allowed" />
@@ -44,7 +41,7 @@
             </div>
         </div>
         
-        <div class="form-group">
+        <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" ToolTip="Uppercase, Lowercase, Numbers and Symbols '@!_$#%' are allowed" />
@@ -54,7 +51,7 @@
                     CssClass="text-danger" ErrorMessage="The password field is required." />
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="ConfirmPassword" CssClass="col-md-2 control-label">Confirm password</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control" />
@@ -65,7 +62,7 @@
             </div>
         </div>
         <br />
-        <div class="form-group">
+        <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="PhoneNo" CssClass="col-md-2 control-label">Phone No.</asp:Label>
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="PhoneNo" placeHolder="+86-123-12345678" CssClass="form-control" ClientIDMode="Static"   />
@@ -81,8 +78,8 @@
                 
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+        <div class="form-group row">
+            <div class="col-md-offset-2 col-md-10" >
                 <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="btn btn-default" />
             </div>
         </div>

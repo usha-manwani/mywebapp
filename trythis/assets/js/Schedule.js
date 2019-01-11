@@ -37,3 +37,13 @@ function timevalue() {
 function timeset() {
 alert("Please enter correct time!!\n Time is in 24 hour Format!! Start time should be earlier than stop time!!\n eg. - 22:00 - 23:59")
 }
+
+function importFile() {
+    document.getElementById('uploadDiv').style.display = "block";
+}
+function importEmptyFile() {
+    alert("Schedule data in excel file is not in required format.\n Please create excel file as below table format!!");
+}
+function fileFormat() {
+    alert("Please insert data in excel without leave initial row(s)and column(s)!!");
+}

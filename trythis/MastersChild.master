@@ -9,8 +9,8 @@
          
         <!-- sidebar menu start-->          
         <ul class="sidebar-menu" id="nav-accordion" >  
-             <div style="height:100px; margin-left:-10px; width:250px; background-color:#4ecdc4;align-items:center">
-                 <h3 class="centered" style="margin-right:10px" >Devices Management</h3>
+             <div style="height:150px; margin-left:-10px; width:250px; background-color:#4ecdc4;align-items:center">
+                 <h3 class="centered" style="margin-right:10px; padding-top:30px" >Devices Management</h3>
              </div>
 
           <li class="mt" >  

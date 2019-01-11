@@ -10,7 +10,7 @@
             <legend>Upload Files</legend>
         <div  class="form-group">
             <div style="border:thin">
-            <p style="font-size:x-small" class="control-label">Max File Size allowed to upload is 2GB</p>
+            <p style="font-size:x-small" class="control-label">Max File Size allowed to upload is 500 MB</p>
         <asp:FileUpload runat="server" ID="fuSample"   />
             </div>
         <asp:Button  runat="server" ID="btnUpload" Text="Upload" 

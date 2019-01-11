@@ -43,7 +43,7 @@ namespace WebCresij
             DataTable dtuser = new DataTable();
             using (SqlConnection con = new SqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("select * from dbo.fn_GetUserDetailsPending()", con))
+                using (SqlCommand cmd = new SqlCommand("select * from GetuserDetailsPending()", con))
                 {
                    
                     try

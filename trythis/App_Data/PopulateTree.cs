@@ -275,11 +275,11 @@ namespace WebCresij
             return result;
         }
 
-        public string InsertCam(string camIP, string camId, string camPass, string port, string loc)
+        public int InsertCam(string camIP, string userId, string camPass, string port, string loc,string insID)
         {
-            int camloc = Convert.ToInt32(loc);
-            string camName = "";
-            if (camIP != null && camId != null && camPass != null && port != null && loc != null)
+
+            int result = -1;
+            if (camIP != null && userId != null && camPass != null && port != null && loc != null)
             {
                 using (SqlConnection con = new SqlConnection(constr))
                 {
@@ -288,17 +288,18 @@ namespace WebCresij
                         using (SqlCommand cmd = new SqlCommand("sp_InsertCam", con))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@CameraIP", camIP);
-                            cmd.Parameters.AddWithValue("@CameraID", camId);
+                            cmd.Parameters.AddWithValue("@CameraIP", camIP);                           
                             cmd.Parameters.AddWithValue("@password", camPass);
-                            cmd.Parameters.AddWithValue("@id", loc);
+                            cmd.Parameters.AddWithValue("@loc", loc);
+                            cmd.Parameters.AddWithValue("@id", userId);
                             cmd.Parameters.AddWithValue("@portNo", port);
                             cmd.Parameters.AddWithValue("@CamProvider", "HikVision");
-                            cmd.Parameters.Add("@camName", SqlDbType.NVarChar, -1);
-                            cmd.Parameters["@camName"].Direction = ParameterDirection.Output;
+                            cmd.Parameters.AddWithValue("@insId", insID);
+                            cmd.Parameters.Add("@result", SqlDbType.NVarChar, -1);
+                            cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                             con.Open();
                             cmd.ExecuteNonQuery();
-                            camName = cmd.Parameters["@camName"].Value.ToString();
+                           result= Convert.ToInt32(cmd.Parameters["@result"].Value);
                         }
                     }
                     catch
@@ -312,10 +313,10 @@ namespace WebCresij
 
                 }
             }
-            return camName;
+            return result;
         }
 
-        public int InsertCentralControl(string ccIP, string loc)
+        public int InsertCentralControl(string ccIP, string loc, string insId)
         {
             int result = 0;
 
@@ -323,12 +324,13 @@ namespace WebCresij
             {
                 try
                 {
-                    string query = "Insert  into CentralControl (CCIP,location, PortNo) values('" + ccIP + "','" + loc + "',1200)";
+                    
                     using (SqlCommand cmd = new SqlCommand("InsCentralControl", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ccip", ccIP);
                         cmd.Parameters.AddWithValue("@loc", loc);
+                        cmd.Parameters.AddWithValue("@insId", insId);
                         cmd.Parameters.Add("@result", SqlDbType.Int);
                         cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                         if (con.State != ConnectionState.Open)
@@ -376,7 +378,7 @@ namespace WebCresij
                     }
                     catch (Exception)
                     {
-
+                        result = -1;
                     }
                     finally
                     {
@@ -384,7 +386,7 @@ namespace WebCresij
                     }
                 }
             }
-            return 0;
+            return result;
         }
             public int delCam(string camIP,string loc)
             {
@@ -517,17 +519,19 @@ namespace WebCresij
 
             #region Edit details
 
-            public DataTable camDetails(string ip)
+            public DataTable camDetails(string ip, string loc)
             {
                 DataTable dt = new DataTable();
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    using (SqlCommand cmd = new SqlCommand("select * from fn_camDetails(@camIP)", con))
+                    using (SqlCommand cmd = new SqlCommand("select * from fn_camDetails(@camIP,@loc)", con))
                     {
+                        cmd.Parameters.Clear();
+                    
                         cmd.Parameters.AddWithValue("@camIP", ip);
+                        cmd.Parameters.AddWithValue("@loc", loc);
                         try
                         {
-
                             SqlDataAdapter da = new SqlDataAdapter(cmd);
                             da.Fill(dt);
                         }
@@ -1018,14 +1022,19 @@ namespace WebCresij
     {
         string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
 
-        public DataSet ControlDetails()
+        public DataSet ControlDetails(string InsID)
         {
 
             DataSet ds = new DataSet();
             //DataTable dt;
             using (SqlConnection connection = new SqlConnection(constr))
             {
-                string query = "SELECT * from dbo.[CentralControl]";
+                string query = "SELECT CCIP,cd.ClassName as loc,PortNo,Status,PowerStatus,TimerService,ComputerPower,projectorPower, "+
+                    " ProjectorUsedHour, CurtainStatus, ScreenStatus, light, MediaSignal, LockStatus, " +
+                   " PodiumLock, ClassLocked, Temperature, Humidity, PM25, PM10 from CentralControl cc "+
+                    " join Class_Details cd on cc.location = cd.ClassID where cc.location in "+
+                    " (select ClassID from Class_Details where GradeID in"+
+                    "(select GradeID from Grade_Details where InsID = '"+InsID+"'))";
                 try
                 {
                     connection.Open();

@@ -3,34 +3,34 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-     <h2>Login</h2>
-    
+     <h2>Login</h2>    
     <div class="row">
         <div class="col-md-8">
             <section id="loginForm">
                 <div class="form-horizontal">
                     <h4>Use a local account to log in.</h4>
                     <hr />
-                      <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
+                        <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
                         <p class="text-danger">
                             <asp:Literal runat="server" ID="FailureText" />
                         </p>
-                    </asp:PlaceHolder>
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="UserName" CssClass="col-md-2 control-label">UserId / Phone No.</asp:Label>
+                        </asp:PlaceHolder>
+                    <div class="form-group row">
+                        <asp:Label runat="server" AssociatedControlID="UserName" 
+                            CssClass="col-md-2 control-label" Text="UserId / Phone No."></asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="UserName" CssClass="form-control"  />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName"
                                 CssClass="text-danger" ErrorMessage="The user name field is required." />
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
+                    </div>                    
+                    <div class="form-group row">
+                        <asp:Label runat="server" AssociatedControlID="Password" 
+                            CssClass="col-md-2 control-label">Password</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Password" TextMode="Password"  CssClass="form-control" />
-                           
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" CssClass="text-danger" ErrorMessage="The password field is required." />
+                            <asp:TextBox runat="server" ID="Password" TextMode="Password"  CssClass="form-control" />                           
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" 
+                                CssClass="text-danger" ErrorMessage="The password field is required." />
                         </div>
                     </div>
                     <div class="form-group">
@@ -43,17 +43,18 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <asp:Button runat="server" CommandName="Login" OnClick="LogIn" Text="Login" Font-Size="Medium" BorderColor="Gray" CssClass="btn btn-default" />
+                            <asp:Button runat="server" CommandName="Login" OnClick="LogIn" Text="Login" 
+                                Font-Size="Medium" BorderColor="Gray" CssClass="btn btn-default" />
                         </div>
                     </div>
                 </div>
                 <p>
-                    <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled" NavigateUrl="~/Registration.aspx">Register here</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled"
+                        NavigateUrl="~/Registration.aspx">Register here</asp:HyperLink>
                     if you don't have a local account.
                 </p>
             </section>
         </div>
-
         <%--<div class="col-md-4">
             <section id="socialLoginForm">
                 <uc:OpenAuthProviders runat="server" ID="OpenAuthLogin" />

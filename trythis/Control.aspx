@@ -68,6 +68,13 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
         cursor:pointer;
        
     }
+    .table1234 {
+    float:left;
+    border-radius: 10px;
+    max-width: 250px;
+    height: 250px;
+    background: #202838;
+}
     </style>                                                                                
     <link href="Content/ControlStyle.css" rel="stylesheet" />   
     <link href="css/toggleswitch.css" rel="stylesheet" />
@@ -78,240 +85,11 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
         <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <script src="Scripts/ControlKeys.js"></script>
+        <script src="Scripts/ControlKeys.js?v=10"></script>
     <div class="container-fluid">
     <div class="row clearfix" id="smallcontrol" style="width:100%; min-width:600px" >
         <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
-        <%--   <div class="col-md-3">   
-            <table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;">
-            <tr id="first" style=" text-align:center">
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name aur bada h</h3>
-                    </td>
-                <td>
-                    <div class="switch">
 
-  <input type="checkbox" name="toggle" />
-
-  <label for="toggle"><i></i></label>
-
-  <span></span>
-
-</div>
-
-                </td>
-            </tr>
-            <tr style="  height:50px; border:solid; border-color:white; border-width:1px">
-                <td colspan="2" ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td title="proj" colspan="2" style="color:greenyellow" ><i style="font-size:24px; color:white" class="fa" >&#xf0a0;</i></td>
-                <td colspan="2" ><i class="fa fa-hdd" style="color:pink"></i></td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td colspan="2" ><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td colspan="2" ><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td colspan="2" ><i class="fa fa-desktop fa-2x  " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>--%>
-        
-        <%-- <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
-            <tr style=" text-align:center" >
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name 2</h3>
-                    <div class="switch">
-
-                      <span class="checking"></span>  
-  
-   </div>
-                </td>
-            </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>
-         <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
-            <tr style=" text-align:center" >
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name 2</h3>
-                    <div class="switch">
- 
-                      <span class="checking"></span>  
-
-   </div>
-                </td>
-            </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>
-         <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
-            <tr style=" text-align:center" >
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name 2</h3>
-                    <div class="switch">
-  
-                      <span class="checking"></span>  
-
-   </div>
-                </td>
-            </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>
-         <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
-            <tr style=" text-align:center" >
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name 2</h3>
-                    <div class="switch">
- 
-                      <span class="checking"></span>  
- 
-   </div>
-                </td>
-            </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>
-         <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
-            <tr style=" text-align:center" >
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name 2</h3>
-                    <div class="switch">
-  
-                      <span class="checking"></span>  
- 
-   </div>
-                </td>
-            </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>
-         <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
-            <tr style=" text-align:center" >
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name 2</h3>
-                    <div class="switch">
-  
-                      <span class="checking"></span>  
- 
-   </div>
-                </td>
-            </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>
-         <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
-            <tr style=" text-align:center" >
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name 2</h3>
-                    <div class="switch">
- 
-                      <span class="checking"></span>  
-  
-   </div>
-                </td>
-            </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>
-         <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
-            <tr style=" text-align:center" >
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name 2</h3>
-                    <div class="switch">
-  
-                      <span class="checking"></span>  
-  
-   </div>
-                </td>
-            </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>
-         <div class="col-md-3"><table class="1234" style=" border-radius:10px; width:250px; height:200px;background: #202838;" >
-            <tr style=" text-align:center" >
-                <td colspan="3" style="text-align:center">                    
-                    <h3 style="color:white">Class Name 2</h3>
-                    <div class="switch">
-  
-                      <span class="checking"></span>  
-  
-   </div>
-                </td>
-            </tr>
-            <tr style=" height:50px; height:50px; border:solid; border-color:white; border-width:1px">
-                <td ><img class="fa-2x " src="Images/proj.png" style="color:white" /></td>
-                <td><i class="fi-projection-screen " style="color:#283446">dfd</i></td>
-                <td>p</td>
-            </tr>
-            <tr style="height:50px;  text-align:center;border:solid; border-color:white; border-width:1px">
-                <td><i class="fa fa-volume-off fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-lock fa-2x " aria-hidden="true" style="color:white"></i></td>
-                <td><i class="fa fa-desktop fa-2x " aria-hidden="true" style="color:white"></i></td>
-            </tr>
-        </table></div>
-           --%>
     </div>
         </div>  
     <div id="control" class="modal">
@@ -376,8 +154,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                                 <img src="Images/offimages/classunlock.png"  id="classlock" 
                                     height="40" width="40" class="imgclick"/></span>
                              </td>
-                    </tr>
-                  
+                    </tr>                  
                 </table> 
                </div>          
                 </div>
@@ -474,41 +251,41 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     class="fa fa-angle-down trying" ></span>
             </header>
             <div id="media" class="divcontrols" style=" border-color:#916d3b">
-                <table style="width:160px;">                 
+                <table style="width:160px; color:#202838">                 
                     <tr  style="width:130px;">
                         <td  style="text-align:center">
                             <label>
                             <input type="radio" value="1" name="test" id="desktop" data-target=".displaynone" checked/>
-                            <img src="Images/offimages/desktop.png" height="40" width="40" class="imgclick">
+                           <img src="Images/offimages/desktop.png" height="40" width="40" class="imgclick">
                             </label>
                             </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <label>
                             <input type="radio" value="2" name="test" id="laptop" data-target=".displaynone" checked>
-                            <img src="Images/offimages/laptop.png" height="40" width="40" class="imgclick">
+                           <img src="Images/offimages/laptop.png" height="40" width="40" class="imgclick">
                             </label>
                             </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center">
                             <label>
                             <input type="radio" value="3" name="test" id="platform" data-target=".displaynone" checked>
-                            <img src="Images/platform.png" height="40" width="40" class="imgclick">
+                            <img src="Images/offimages/screen.png" height="40" width="40" class="imgclick">
                             </label>
                            </tr>
                     <tr  style="width:130px;">
                         <td style="text-align:center" >
                              <label>
                             <input type="radio" value="4" name="test" id="digitalEquipment" data-target=".displaynone" checked>
-                            <img src="Images/platform.png" height="40" width="40" class="imgclick">
+                            <img src="Images/offimages/screen.png" height="40" width="40" class="imgclick">
                             </label>
                         </td>
                     </tr>
                     <tr  style="width:130px;">
-                        <td style="text-align:center">
+                        <td style="text-align:center" >
                             <label>
                             <input type="radio" value="5" name="test" id="dvd" data-target="#dvdcontrols" checked>
-                            <img src="Images/offimages/dvd.png" height="40" width="40" class="imgclick">
+                            <img src="Images/offimages/dvd.png" height="40" width="40" class="imgclick" >
                             </label>
                         </td>
                     </tr>
@@ -540,7 +317,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                         <td style="text-align:center" >
                             <label>
                             <input type="radio" value="9" name="test" id="recorder" data-target="#recordercontrol" checked>
-                            <img src="Images/offimages/video.png" height="40" width="40" class="imgclick">
+                            <img src="Images/offimages/recorder.png" height="40" width="40" class="imgclick">
                             </label>    
                         </td></tr>
                 </table>
@@ -773,7 +550,6 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                                             width="40" id="exittv" class="imgclick"/>
                                     </td>
                                     <td>
-
                                     </td>
                                 </tr>
                             </table>
@@ -824,17 +600,15 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
             </tr>
             <tr>
                 <td>
-                <div style="height:250px;width:250px; border:none">
-             
+                <div style="height:250px;width:250px; border:none">             
                 <header style=" background-color:#dff0d8;color:black; text-align:center;
                         border:solid; border-color:#dff0d8 ">Screen & curtain&nbsp;
                     <span data-toggle="collapse" data-target="#ScreenCurtain" 
                         style="color:#3c763d"class="fa fa-angle-down trying" ></span>
                 </header>
                 <div id="ScreenCurtain" class="divcontrols" style=" border-color:#3c763d">
-                <table style="width:220px; height:180px;">
-                
-                 <tr  >
+                <table style="width:220px; height:180px;">                
+                 <tr>
                     <td  style=" font-size:small; text-align:center">
                         Digital Screen                        
                     </td>
@@ -842,7 +616,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                        Digital Curtain
                     </td>
                 </tr>
-                <tr  >
+                <tr>
                     <td  style="text-align:center">
                         <span>
                                 <img src="Images/offimages/up.PNG" id="dsup" 
@@ -888,8 +662,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     border:solid; border-color:#d9edf7 ">Microphone Control&nbsp;
                     <span class="fa fa-angle-down trying" data-toggle="collapse" 
                         data-target="#Microphone" style="color:#31708f;"></span>
-                </header>
-                    
+                </header>                    
                 <div id="Microphone" class="divcontrols" style=" border-color: #31708f;">
                     <table style="width:250px; height:180px;">
                 <tr>
@@ -948,8 +721,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                          class="fa fa-angle-down trying" ></span>
                 </header>
                 <div id="volume" class="divcontrols" style=" border-color:#916d3b">
-                     <table style="width:160px; height:180px;">
-               
+                     <table style="width:160px; height:180px;">               
                 <tr>
                     <td style="text-align:center" >
                         <span>
@@ -972,23 +744,19 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                         </td>
                 </tr>
             </table>
-                    </div>
-                 
+                    </div>                 
                     </div>
                 </td>
             </tr>
-        </table>   
-        
+        </table>           
     </div>
      </div>
-    <script type="text/javascript">
-       
+    <script type="text/javascript">       
         window.onclick = function (event) {
             if (event.target == modal) {
                 document.getElementById("control").style.display = "none";
             }
         }        
-    </script>
-    
+    </script>   
 </asp:Content>
 

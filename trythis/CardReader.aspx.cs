@@ -153,16 +153,7 @@ namespace WebCresij
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "MyKey2", "HideTree();", true);
             }            
         }
-        protected void TreeView1_TreeNodeCheckChanged(object sender, TreeNodeEventArgs e)
-        {
-            string[] nodes = new string[TreeView1.CheckedNodes.Count];
-            int i = 0;
-            foreach (TreeNode node in TreeView1.CheckedNodes)
-            {
-                nodes[i] = node.Text.ToString();
-                i++;
-            }
-        }        
+          
         protected void openaccess_Click(object sender, EventArgs e)
         {
             LinkButton lb = (LinkButton)sender;

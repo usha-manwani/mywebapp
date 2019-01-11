@@ -303,6 +303,7 @@
     <Content Include="assets\js\Schedule.js" />
     <Content Include="assets\js\vmap.sampledata.js" />
     <Content Include="assets\js\widgets.js" />
+    <Content Include="authorize.aspx" />
     <Content Include="CardLogs.aspx" />
     <Content Include="CardReader.aspx" />
     <Content Include="charttest.aspx" />
@@ -372,9 +373,44 @@
     <Content Include="Images\down.PNG" />
     <Content Include="Images\DVD.png" />
     <Content Include="Images\HDMI.png" />
+    <Content Include="Images\icons\blu1.png" />
+    <Content Include="Images\icons\blu2.png" />
+    <Content Include="Images\icons\blu3.png" />
+    <Content Include="Images\icons\blu4.png" />
+    <Content Include="Images\icons\camvideo.png" />
+    <Content Include="Images\icons\curtain1.png" />
+    <Content Include="Images\icons\curtain2.png" />
+    <Content Include="Images\icons\curtain3.png" />
+    <Content Include="Images\icons\curtain4.png" />
+    <Content Include="Images\icons\curtain5.png" />
+    <Content Include="Images\icons\download.png" />
+    <Content Include="Images\icons\dvd1.png" />
+    <Content Include="Images\icons\dvd2.png" />
+    <Content Include="Images\icons\dvd3.png" />
+    <Content Include="Images\icons\dvd4.png" />
+    <Content Include="Images\icons\proj1.png" />
+    <Content Include="Images\icons\proj2.png" />
+    <Content Include="Images\icons\project1.png" />
+    <Content Include="Images\icons\project2.png" />
+    <Content Include="Images\icons\project3.png" />
+    <Content Include="Images\icons\project4.png" />
+    <Content Include="Images\icons\sc1.png" />
+    <Content Include="Images\icons\sc2.png" />
+    <Content Include="Images\icons\sc3.png" />
+    <Content Include="Images\icons\sc4.png" />
+    <Content Include="Images\icons\scdown.png" />
+    <Content Include="Images\icons\scdown1.png" />
+    <Content Include="Images\icons\scup.png" />
+    <Content Include="Images\icons\scup1.png" />
+    <Content Include="Images\imgs\addlogs.png" />
+    <Content Include="Images\imgs\chart1.png" />
+    <Content Include="Images\imgs\chart2.png" />
     <Content Include="Images\imgs\curtain32.png" />
     <Content Include="Images\imgs\curtainclose32.png" />
     <Content Include="Images\imgs\curtainopen32.png" />
+    <Content Include="Images\imgs\editlogs.png" />
+    <Content Include="Images\imgs\smcard-hover.png" />
+    <Content Include="Images\imgs\smCard.png" />
     <Content Include="Images\laptop.png" />
     <Content Include="Images\Light.png" />
     <Content Include="Images\lock.png" />
@@ -711,11 +747,11 @@
     <Content Include="Index.aspx" />
     <Content Include="MyService.svc" />
     <Content Include="Options.aspx" />
-    <Content Include="Reader.aspx" />
     <Content Include="Registration.aspx" />
     <Content Include="RemoveUsers.aspx" />
     <Content Include="roles.xml" />
     <Content Include="Schedule.aspx" />
+    <Content Include="Scripts\approve.js" />
     <Content Include="Scripts\Blob.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -889,6 +925,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="authorize.aspx.cs">
+      <DependentUpon>authorize.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="authorize.aspx.designer.cs">
+      <DependentUpon>authorize.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CameraOnline.cs" />
     <Compile Include="CardLogs.aspx.cs">
       <DependentUpon>CardLogs.aspx</DependentUpon>
@@ -1007,13 +1050,6 @@
     </Compile>
     <Compile Include="App_Data\PopulateTree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reader.aspx.cs">
-      <DependentUpon>Reader.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Reader.aspx.designer.cs">
-      <DependentUpon>Reader.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1137,9 +1173,6 @@
   <ItemGroup>
     <Folder Include="Members\" />
     <Folder Include="Uploads\" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

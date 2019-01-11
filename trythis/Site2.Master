@@ -53,12 +53,14 @@
                     <div class="navbar-header navbar-brand" style="font-size:large; float:left; color:white">
                         Welcome to Cresij Cam 
                     </div>
-                    <ul class="nav navbar-nav float-right " >
-                                <li><a runat="server" href="~/Registration" style="color:white">Register</a></li>
-                                <li><a runat="server" href="~/Login" style="color:white">Log In</a></li>
+                    <div>
+                    <ul class="nav navbar-nav float-right  " >
+                                <li><a runat="server" href="~/Registration"  style="color:white">Register</a></li>
+                                <li><a runat="server" href="~/Index.aspx" style="color:white" >Log In</a></li>
                             </ul>
+                        </div>
                 </div>
-            </nav>
+           </nav>
         </div>
   
         <div class="container body-content" style="font-size:medium">

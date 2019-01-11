@@ -19,8 +19,9 @@
             
       <asp:UpdatePanel runat="server">
                          <ContentTemplate>
+                            
                  <div class="row" >
-                    <div class="col-lg-6  col-sm-12 float-left">
+                    <div class="col-lg-6 col-sm-12 ">
                         <h4>Temperature, Humidity & PM(Particulate Matter) Graph for </h4>
                     </div>
                      <div class=" col-lg-2 col-sm-6 float-left">
@@ -240,7 +241,7 @@
     <!--  Chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
     
-    <script src="assets/js/init/chartjs-init.js"></script>
+    <script src="assets/js/init/chartjs-init.js?v=1"></script>
     <script src="assets/js/widgets.js"></script>
 </asp:Content>
 

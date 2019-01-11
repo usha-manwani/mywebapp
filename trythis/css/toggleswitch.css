@@ -141,19 +141,10 @@
     cursor:pointer;
     width:33.3%;
 }
-.table1234 {
-    float:left;
-    border-radius: 10px;
-    width: 200px;
-    height: 200px;
-    background: #202838;
-}
+
 .trstyle {
     height: 50px;
-   align-content:center;
-   
-   
-    
+   align-content:center; 
 }
 
 .aclass{

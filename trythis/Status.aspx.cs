@@ -17,16 +17,30 @@ namespace WebCresij
         {                  
             if (!IsPostBack)
             {
-                loadGrid();                
+                string query = "select * from Institute_Details";
+                DataTable dt = PopulateTree.ExecuteCommand(query);
+                ddlins.DataSource = dt;
+                ddlins.DataTextField = "InstituteName";
+                ddlins.DataValueField = "InstituteID";
+                ddlins.DataBind();
+                ddlins.Items.Insert(0, new ListItem("Select Institute", "NA"));
+                loadGrid("NA");                
             }
         }
 
-        private void loadGrid()
+        private void loadGrid( string insID)
         {
             CentralControl cc = new CentralControl();
-            DataSet ds = cc.ControlDetails();
-            GridView1.DataSource = ds;
-            GridView1.DataBind();            
+            DataSet ds = cc.ControlDetails( insID);
+            try
+            {
+                GridView1.DataSource = ds;
+                GridView1.DataBind();
+            }
+            catch
+            {
+
+            }        
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
@@ -34,7 +48,12 @@ namespace WebCresij
          //   DataTable ScoresTable = Application["ScoreTable"] as DataTable;          
         }
 
-        
+        protected void ddlins_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadGrid(ddlins.SelectedValue);
+        }
+
+
         //protected void Timer1_Tick()
         //{
         //    DataTable ScoresTable = Application["ScoreTable"] as DataTable;

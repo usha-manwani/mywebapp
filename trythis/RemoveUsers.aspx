@@ -35,9 +35,12 @@
 </asp:Content>
 <asp:Content ID="Main" ContentPlaceHolderID="masterBody" runat="server">
         <div class="divopt">
-            <asp:GridView ID="GridView1" runat="server"  Width="80%" GridLines="Horizontal" OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
-                BorderStyle="None" AutoGenerateColumns="false" CellPadding="20" CellSpacing="20"   ForeColor="Black" HeaderStyle-BackColor="#009688" EmptyDataText = "No Registered Users">
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+            <asp:GridView ID="GridView1" runat="server"  Width="80%" GridLines="Horizontal" OnRowDeleting="GridView1_RowDeleting" 
+                BorderStyle="None" AutoGenerateColumns="false" CellPadding="20" CellSpacing="20" HeaderStyle-BackColor="#009688" EmptyDataText = "No Registered Users">
                 <RowStyle Height="50" />
+                <HeaderStyle ForeColor="Black" />
                 <Columns >
                     
                     <asp:BoundField DataField="User_Id" HeaderText="User ID" HeaderStyle-HorizontalAlign="Left" />
@@ -45,40 +48,38 @@
                    
                      <asp:TemplateField >
                             <ItemTemplate>
-                                 <asp:linkButton ID="btnEdit"  runat="server" Text="Delete" CommandName="Edit" CssClass="asplink" />
+                                 <asp:linkButton ID="btnEdit"  runat="server" Text="Delete" CommandName="Delete"  CssClass="asplink" />
                             </ItemTemplate>
                      </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+                     </ContentTemplate>
+            </asp:UpdatePanel>
             </div>
              <div class="w3-container"  >
         
-        <div id="deleteuser" class="w3-modal" runat="server">
-            <div class="w3-modal-content w3-card-4" style="width:200px" >
-                <header class="w3-container w3-teal">
+        <div id="deleteuser" class="modal" >
+            <div class="modal-content w3-card-4" style="width:200px" >
+                <header class="container ">
                     <span onclick="del();"
                           class="w3-button w3-display-topright">&times;</span>
                     <h3>Delete!!</h3>
                 </header>
                 <div class="w3-container" >
-
                       <p class="text-danger">User Successfully Deleted !!</p>
                     <br />
-               <asp:Button ID="Button1" runat="server" Text="Ok"  OnClientClick="del(); return false;" />
-                  
-                        
-               
+               <asp:Button ID="Button1" runat="server" Text="Ok"  OnClientClick="del(); return false;" />            
                     </div>
-                
-                
             </div>
-        </div>
-     
+        </div>     
 </div>
     
     <script type="text/javascript">
         function del() {
-            document.getElementById("<%=deleteuser.ClientID%>").style.display = "none";
+            document.getElementById("deleteuser").style.display = "none";
+        }
+        function show() {
+            document.getElementById("deleteuser".style.display = "block");
         }
     </script>
 </asp:Content>

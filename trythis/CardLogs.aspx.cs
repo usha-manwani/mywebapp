@@ -12,9 +12,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using OfficeOpenXml;
 
-
-
-
 namespace WebCresij
 {
     public partial class CardLogs : System.Web.UI.Page

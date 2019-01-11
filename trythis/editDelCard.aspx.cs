@@ -200,13 +200,13 @@ namespace WebCresij
         protected void gvCard_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             gvCard.EditIndex = -1;
-            this.bindData();
+            bindData();
         }
 
         protected void gvCard_RowEditing(object sender, GridViewEditEventArgs e)
         {
             gvCard.EditIndex = e.NewEditIndex;
-            this.bindData();
+            bindData();
         }
 
         protected void gvCard_RowUpdating(object sender, GridViewUpdateEventArgs e)

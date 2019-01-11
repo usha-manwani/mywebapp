@@ -141,12 +141,16 @@
 
     };
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-        alert('connected');
+       
         chat.server.sendData();
         $(document).on("click", "#refresh", function () {
            
             //Call the Send method on the hub.
             chat.server.sendData();            
         });
+        $(document).on("change", "#MainContent_masterchildBody_ddlins", function () {
+            chat.server.sendData();
+        });
     });
 });
+

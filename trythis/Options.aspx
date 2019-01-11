@@ -10,10 +10,7 @@
        <link href="Content/options.css" rel="stylesheet" />
        <script src="Scripts/bootstrap.js"></script>
         
-       <link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="Stylesheet"
-        type="text/css" />
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+      
 
    </asp:Content>
    
@@ -27,7 +24,7 @@
            <ContentTemplate>        
        <cc1:TabContainer runat="server" BorderStyle="None" CssClass="TabHeaderCSS" >
            <cc1:TabPanel ID="addpaneltab"  runat="server"   BorderStyle="None" >
-                <HeaderTemplate >
+                <HeaderTemplate>
            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add
        </HeaderTemplate>
                <ContentTemplate>                  
@@ -65,12 +62,9 @@
                </ContentTemplate>
        </asp:UpdatePanel>
           </div>     
-      
-       
-
  <%--Add all details--%>
 
-           <div style="position:center; margin-top:400px"> 
+           <div style="position:center;"> 
                  <div id="id01" class="modal">
             <div class="modal-content" >
                 <header class="row" >
@@ -83,14 +77,15 @@
                 </div>
             </div>
         </div>
-                <div id="idGrade" class="modal" >
+                <div id="idGrade" class="modal " >
   <!-- Modal content -->
-  <div class="modal-content">
+                    
+  <div class="modal-content" >
       <div class=" row " style=" padding-right:20px; " >          
                         <div class="panel-heading col " >
                             <h4>Add Grades</h4>                            
                         </div> 
-          <span class="close col" onclick="xx();" style="text-align:right">&times;</span>
+          <span  onclick="xx();" style="cursor:pointer">&times;</span>
                         </div>
       <div class="row space">
             <asp:UpdatePanel runat="server">
@@ -102,8 +97,7 @@
             <div >
                 <asp:TextBox runat="server" ID="Grade_Name" CssClass="form-control"  />
             </div>
-        </div>
-                       
+        </div>                       
         </div>
         <asp:Button ID="btnaddgrade" Text="Add Grade" runat="server"  OnClientClick="AddTextGrade(); return false;" />
         <asp:Button ID="save" Text="Save" runat="server" OnClientClick="hideGrade();"  OnClick="btnGradesave_Click" />
@@ -112,6 +106,7 @@
           
       </div>
       </div>
+            
                     </div>
       
 
@@ -121,7 +116,7 @@
                         <div class="panel-heading col " >
                     <h4>Add Class</h4>
                             </div>
-                    <span class="close col" onclick="hideClass();" style="text-align:right">&times;</span>
+                    <span  onclick="hideClass();" style="cursor:pointer">&times;</span>
                 </div>
                 <div class="row space" >                  
         <asp:UpdatePanel runat="server" ID="UpdatePanel1">
@@ -150,7 +145,7 @@
                         <div class="panel-heading col " >
                              <h4>Add Device Details</h4></div>
                     <span onclick="hideCam();"
-                          class="w3-button w3-display-topright">&times;</span>
+                          style="cursor:pointer">&times;</span>
                    
                 </div>
                 <div class="row space" >
@@ -174,18 +169,19 @@
         </div>
         </div> 
     <script>
+       
         function displayGrade()
         {
-            document.getElementById('idGrade').style.display = 'block';
+            document.getElementById('idGrade').style.display = 'Flex';
         }
         function displayClass() {
-            document.getElementById('idClass').style.display = 'block';
+            document.getElementById('idClass').style.display = 'Flex';
         }
         function displayCam() {
-            document.getElementById('idCamera').style.display = 'block';
+            document.getElementById('idCamera').style.display = 'Flex';
         }
     function displayPopup() {
-        document.getElementById('id01').style.display = 'block';
+        document.getElementById('id01').style.display = 'Flex';
         }
         function xx() {
         document.getElementById('idGrade').style.display = 'none';
@@ -197,8 +193,14 @@
         document.getElementById('idCamera').style.display = 'none';            
         }
         function duplicateIP() {
-            alert("Can not have same IP address in this institute!!\n Please enter different one!!")
-        }   
+            alert("Can not have more than 1 IP address same in an Institute!!\n Please insert different IP(s)!!")
+        }
+        function CamIns(){
+            alert("Device Details saved successfully!!")
+        }
+        function camError() {
+            alert("OOPS!! Something went wrong. Please try again!!")
+        }
 // Get the modal
     var c = document.getElementById('idClass');
              var modal = document.getElementById('id01');
@@ -260,14 +262,21 @@
     }
 
     function GetDynamicCamDetails(value) {
-        return '<p style="color: #C0C0C0">Add Camera Details</p><section><div class="form-horizontal"><table style="width:100%;"><tr><td style="text-align:center"> <div class = "form-group">' + '<asp:label runat="server" Text="Camera IP" CssClass=" control-label" Fond-Bold="True"/>' +
+        return '<p style="color: #C0C0C0">Add Camera Details</p><section><div class="form-horizontal">'
+            + '<table style="width:100%;"><tr><td style="text-align:center"> <div class = "form-group">' +
+            '<asp:label runat="server" Text="Camera IP" CssClass=" control-label" Fond-Bold="True"/>' +
                      '<div ><input name="IP" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
-                 '<td style="text-align:center"><div class = "form-group">' + '<asp:label runat="server" Text="Port No" CssClass=" control-label" Fond-Bold="True"/>' +
-                     '<div ><input name="Port" class="form-control" type="text" value="' + value + '"/></div></div></td></tr>' +
-                 '<tr><td style="text-align:center"><div class = "form-group">' + '<asp:label runat="server" Text="UserID" CssClass=" control-label" Fond-Bold="True"/>' +
-                     '<div ><input name="User" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
-                 '<td style="text-align:center"><div class = "form-group">' + '<asp:label runat="server" Text="Password" CssClass=" control-label" Fond-Bold="True"/>' +
-                     '<div ><input name="Pass" class="form-control" type="text" value="' + value + '"/></div></div></td></tr></table></div><section>'
+            '<td style="text-align:center"><div class = "form-group">' +
+            '<asp:label runat="server" Text="Port No" CssClass=" control-label" Fond-Bold="True"/>' +
+            '<div ><input name="Port" class="form-control" type="text" value="' + value + '"' +
+            '</div></div></td></tr>' +
+            '<tr><td style="text-align:center"><div class = "form-group">' +
+            '<asp:label runat="server" Text="UserID" CssClass=" control-label" Fond-Bold="True"/>' +
+            '<div ><input name="User" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
+            '<td style="text-align:center"><div class = "form-group">' +
+            '<asp:label runat="server" Text="Password" CssClass=" control-label" Fond-Bold="True"/>' +
+            '<div ><input name="Pass" class="form-control" type="text" value="'
+            + value + '"/></div></div></td></tr></table></div><section>'
     }
     function AddTextCam() {
         var div = document.createElement('DIV');
@@ -326,38 +335,42 @@
                         </ContentTemplate>
 
                     </asp:UpdatePanel>
-                </div>
-                
+                </div>               
             </div>
-        </div>
-               
-                  
-        <asp:HiddenField id="renameText" runat="server" />
+        </div>                 
+        <asp:TextBox runat="server" ID="txtRename" Visible="false"></asp:TextBox>
         <div id="DivRename" class="modal">
-            <div class="modal-content" style="width:500px; height:250px;  text-align:center; " >
+            <div class="modal-content" style="width:500px; height:400px;  text-align:center; " >
                  <div class=" row " style=" padding-right:20px; " >          
                         <div class="panel-heading col " >
                             <h4 >Edit Name</h4></div>
                     <span onclick="hideRename();"
                           class="w3-button w3-display-topright">&times;</span>                    
                 </div>
-                <div class="row space" style=" padding-left:40px;padding-top:40px;">
+                <div class="row space" style=" padding-left:20px;padding-top:40px;">
                 <asp:Label runat="server" Text="New Name: " AssociatedControlID="tbRename"></asp:Label>
-                <br />
+                &nbsp;
+                   
                 <asp:TextBox ID="tbRename" runat="server" CssClass="form-control"  ></asp:TextBox>
                 <br />
+                  </div>  
+                <div class="row">
+                    <div class="col">
                 <asp:Button ID="saveRename" runat="server" Text="Save" OnClick="saveRename_Click" />
+                        </div>
+                    <div class="col" >
                 <asp:Button ID="cancelRename" runat="server" Text="Cancel" OnClientClick="hideRename(); return false;" />
+                    </div>
                     </div>
                 </div>
             </div>
 
         <script>
             function Rename() {
-                document.getElementById('DivRename').style.display = 'block';
+                document.getElementById('DivRename').style.display = 'Flex';
             }
             function EditCam() {
-                document.getElementById('edit').style.display = 'block';
+                document.getElementById('edit').style.display = 'Flex';
             }
             function hideEdit() {
                 document.getElementById('edit').style.display = 'none';
@@ -425,7 +438,7 @@
              
         <script>
             function ConfirmDel() {
-                document.getElementById('del').style.display = 'block';
+                document.getElementById('del').style.display = 'Flex';
             }
             function hideDelConfirm() {
                 document.getElementById('del').style.display = 'none';

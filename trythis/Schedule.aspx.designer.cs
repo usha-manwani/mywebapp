@@ -40,6 +40,24 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.DropDownList ddlClass;
         
         /// <summary>
+        /// fuSample control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fuSample;
+        
+        /// <summary>
+        /// importExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button importExcel;
+        
+        /// <summary>
         /// excelgrd control.
         /// </summary>
         /// <remarks>
@@ -56,5 +74,14 @@ namespace WebCresij {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button svbtn;
+        
+        /// <summary>
+        /// export control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button export;
     }
 }

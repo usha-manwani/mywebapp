@@ -2,22 +2,22 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
     <style type="text/css">
         .headerstyle{
-            -webkit-box-shadow: inset 0px -6px 96px -14px rgba(0,0,0,0.75);
--moz-box-shadow: inset 0px -6px 96px -14px rgba(0,0,0,0.75);
-box-shadow: inset 0px -6px 96px -14px rgba(0,0,0,0.75);
+            -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+-moz-box-shadow: inset 0px -6px 86px -14px rgba(0,0,0,0.75);
+box-shadow: inset 0px -6px 86px -14px rgba(0,0,0,0.75);
 color:white;
         }
         .rowstyle{
-            -webkit-box-shadow: inset 0px -6px 96px -14px rgba(0,0,0,0.75);
--moz-box-shadow: inset 0px -6px 96px -14px rgba(0,0,0,0.75);
-box-shadow: inset 0px -6px 96px -14px rgba(0,0,0,0.75);
+            -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+-moz-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
 color:white;
 background-color:#e7a61a;
         }
          .rowstylealt{
-            -webkit-box-shadow: inset 0px -6px 96px -14px rgba(0,0,0,0.75);
--moz-box-shadow: inset 0px -6px 96px -14px rgba(0,0,0,0.75);
-box-shadow: inset 0px -6px 96px -14px rgba(0,0,0,0.75);
+            -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+-moz-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
 color:white;
 background-color:white;
         }
@@ -32,75 +32,86 @@ background-color:white;
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
     
-    <script src="assets/js/Schedule.js"></script>
+    <script src="assets/js/Schedule.js?v=2"></script>
    
-       <div >
-           <div class="row">
+       <div style="background:#fff;">
+           <div  style="background-color: #7fe0c8; top:100px;">
             <asp:UpdatePanel runat="server">
+                 <Triggers>
+    <asp:PostBackTrigger ControlID="importExcel" /> 
+  </Triggers>
             <ContentTemplate>
                
-                <div class="thead-dark" ><h3>Schedule</h3>
-                    <table>
-                        <tr>
-
-                       <td class="col-md-4 col-sm-12 col-lg-4">
-                    <div  >
-                        <asp:DropDownList max-width="200px" AutoPostBack="true" OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
-                            CssClass="btn btn-default dropdown "  ID="ddlInstitute" data-toggle="dropdown"  runat="server" >
+               
+                    <div class="row">
+                    <h3>Schedule</h3>
+                  </div>
+                    <div class="row" style="max-width:1000px">
+                        <div class="col-lg-3 col-sm-12">
+                            <h5>Select options to create Schedule</h5>
+                        </div>
+                       <div class=" col-sm-12 col-lg-3">
+                  
+                        <asp:DropDownList  AutoPostBack="true" OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
+                            CssClass="btn btn-default dropdown " Width="180px"  ID="ddlInstitute" data-toggle="dropdown"  runat="server" >
                             <asp:ListItem Text="Select Institute" Value=""></asp:ListItem>
                         </asp:DropDownList>
-                        
-                    </div>
-                           </td>
-                            <td><span><i class="fa fa-angle-double-right"></i></span></td> 
-                            <td class="col-md-4 col-sm-12 col-lg-4">
-                    <div >
-                        <asp:DropDownList max-width="200px" ID="ddlGrade" AutoPostBack="true"
+                           </div>
+                           
+                            <div class="col-sm-12 col-lg-3">
+                    
+                        <asp:DropDownList  ID="ddlGrade" AutoPostBack="true" Width="150px"
                             CssClass="btn btn-default dropdown" data-toggle="dropdown" 
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" >
                             <asp:ListItem Text="Select" Value=""></asp:ListItem>
                         </asp:DropDownList>
                         
-                    </div>
-                         </td>
-                            <td><span><i class="fa fa-angle-double-right"></i></span></td>  
-                            <td class="col-md-4 col-sm-12 col-lg-4">
-                    <div >
-                        <asp:DropDownList  ID="ddlClass" max-width="200px"  AutoPostBack="true"
+                   
+                         </div>
+                             
+                            <div class=" col-sm-12 col-lg-3">
+                    
+                        <asp:DropDownList  ID="ddlClass" AutoPostBack="true" Width="150px"
                             AppendDataBoundItems="true" runat="server" CssClass="btn btn-default  dropdown" 
                             data-toggle="dropdown" 
                             OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" >
                             <asp:ListItem Text="Select" Value=""></asp:ListItem>
                         </asp:DropDownList>
-                    </div>
-                         </td>   
-
-                        </tr>
-                        <tr>
-                            <td colspan="3">
+                    
+                         </div>   
+                        
+                        </div>
+                  
+                           <%-- <div class="row" >
                              <span style="font-size:small">   
                <i class="fa fa-info-circle"></i>&nbsp;&nbsp;<span style="color:red">Please select above options to create the Schedule</span></span> 
 
            
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                  
-                
-             </div>
+                            </div>--%>
+
+                       
+                            <div class="row">
+                                <div style="display:none;" id="uploadDiv">
+                         Select a File&nbsp;<asp:FileUpload runat="server" ID="fuSample"  />
+        <asp:Button ID="importExcel" runat="server" Text="Upload" CssClass="btn btn-group-toggle" OnClick="importExcel_Click" /> 
+                                    </div>
+                            </div>
+                       
     </ContentTemplate>
           </asp:UpdatePanel>
            </div>
-         
+         <div class="row">
           <asp:UpdatePanel runat="server">
+              <Triggers>
+                  <asp:AsyncPostBackTrigger ControlID="excelgrd" />
+              </Triggers>
               <ContentTemplate>
-     <div style=" margin-top:-50px;">
+     <div style=" margin-top:-20px;">
           
                
                     
                  <asp:GridView ID="excelgrd" runat="server" Font-Size="Small" ViewStateMode="Enabled"
-                     EmptyDataRowStyle-BackColor="Black" ShowFooter="true" 
+                     EmptyDataRowStyle-BackColor="Black" ShowFooter="true" Width="100%"
                      ShowHeaderWhenEmpty="true" RowStyle-HorizontalAlign="Center" EmptyDataRowStyle-ForeColor="White" AutoGenerateColumns="false">
                     <HeaderStyle CssClass="headerstyle" />
         <rowstyle CssClass="rowstyle"  />
@@ -165,17 +176,20 @@ background-color:white;
                     </ItemTemplate>                                       
                       <FooterStyle HorizontalAlign="Right" />
                       <FooterTemplate>                          
-                       <asp:Button ID="ButtonAdd" CssClass="btn btn-info" runat="server" Text="Add New Row" OnClick="ButtonAdd_Click" />
+                       <asp:Button ID="ButtonAdd" CssClass="btn btn-info" runat="server" 
+                           ClientIDMode="Static" Text="Add New Row" OnClick="svbtn_Click" />
                       </FooterTemplate>
               </asp:TemplateField>
             </Columns>
         </asp:GridView>
-        <asp:Button ID="svbtn" runat="server" Text="Save" OnClick="svbtn_Click" Visible="false" />
-                                                  
+        <asp:Button ID="svbtn" runat="server" Text="Save" OnClick="svbtn_Click" Visible="false" CssClass="btn btn-info"/>
+        <asp:Button ID="export" runat="server" Text="Export Schedule to Excel" Visible="false" CssClass="btn btn-info"
+             OnClick="export_Click"/>                           
             </div>
             
        </ContentTemplate>
         </asp:UpdatePanel>
+             </div>
         </div>
     
 </asp:Content>

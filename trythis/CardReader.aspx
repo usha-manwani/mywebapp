@@ -9,7 +9,7 @@
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
     
    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
-    <script src="Scripts/CardReader.js"></script>
+    <script src="Scripts/CardReader.js?v=3"></script>
       <div>
            <div class="panel-heading col " >
                             <h4><p>Card Registration</p></h4> 
@@ -50,7 +50,7 @@
         <p class="lead text-muted pb-3">Please check the current status of card(s) that you register. 
             <h6> You might want to check if the scanned card is registered to all locations or is in pending state.
                 You can check and try to update it &nbsp;<a class=" linkstyle"
-                    style=" color: blue; text-decoration: underline;" onclick="openGrid();">here</a> 
+                    style=" color: blue; text-decoration: underline;" href="editDelCard.aspx">here</a> 
             </h6>
         </p>
       </div>
@@ -60,7 +60,7 @@
 
           <asp:Label ID="iptosend" runat="server" CssClass="displaynone" Text=""></asp:Label>
           <asp:Label ID="datatosend" runat="server" CssClass="displaynone" Text=""></asp:Label>
-         <div id="myModal" class="modal" >
+         <div id="myModal" class="modal fade" >
   <!-- Modal content -->
   <div class="modal-content">
     
@@ -146,15 +146,7 @@
                                   OnClientClick="openTreeModal(); return false;" OnClick="openaccess_Click"></asp:LinkButton>
                            </ItemTemplate>
                       </asp:TemplateField>
-                      <asp:TemplateField HeaderText="Edit" ShowHeader="false">
-                    <ItemTemplate>
-                        <asp:LinkButton ID="btnedit" runat="server" CommandName="Edit" Text="Edit" ></asp:LinkButton>
-                    </ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:LinkButton ID="btnupdate" runat="server" CommandName="Update" Text="Update" ></asp:LinkButton>
-                        <asp:LinkButton ID="btncancel" runat="server" CommandName="Cancel" Text="Cancel"></asp:LinkButton>
-                    </EditItemTemplate>
-                  </asp:TemplateField>
+                      
                   </Columns>                 
               </asp:GridView>
                             </div>
@@ -175,7 +167,7 @@
                       
                                  <div class="modal-content" style="width:600px">
                                      <span class="close1" id="modalClose" style="text-align:right"><i class="fa fa-times" aria-hidden="true"></i></span>
-                                     <h3> open</h3>
+                                     <h3> Select</h3>
                                      <asp:UpdatePanel runat="server" ID="selectAccessPanel">
                                          <ContentTemplate>
                                      <asp:TreeView  ShowCheckBoxes="All" ID="TreeView1" NodeStyle-NodeSpacing="1" runat="server"></asp:TreeView>

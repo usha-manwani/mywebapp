@@ -18,19 +18,29 @@ namespace WebCresij
             {
                 GridView1.DataSource = ud.getUserDetails(s);
                 GridView1.DataBind();
-                HideDeleteButton();
+               // HideDeleteButton();
             }
 
         }
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             string userid = GridView1.Rows[e.RowIndex].Cells[0].Text;
-
-            ud.DeleteUser(userid);
-
-            GridView1.DataSource = ud.getUserDetails(s);
-            GridView1.DataBind();
-            deleteuser.Style.Add("display", "block");
+            try
+            {
+                ud.DeleteUser(userid);
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "MyKey", "show(); return false;", true);
+            }
+            catch
+            {
+                
+            }
+            finally
+            {
+                GridView1.DataSource = ud.getUserDetails(s);
+                GridView1.DataBind();
+            }
+            
+           
         }
         private void HideDeleteButton()
         {
@@ -49,7 +59,7 @@ namespace WebCresij
             ud.DeleteUser(userid);
             GridView1.DataSource = ud.getUserDetails(s);
             GridView1.DataBind();
-            deleteuser.Style.Add("display", "block");
+            
         }
     }
 }

@@ -10,28 +10,26 @@ namespace WebCresij
     public partial class Approve : System.Web.UI.Page
     {
         Userdetails ud = new Userdetails();
-        string userid = "";
+        
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
-                GridView1.DataSource = ud.getUserDetailsPending();
-                GridView1.DataBind();
-                HideDeleteButton();
+                
+                //GridView1.DataSource = ud.getUserDetailsPending();
+                //GridView1.DataBind();
+                gv2.DataSource = ud.getUserDetailsPending();
+                gv2.DataBind();
             }
-
         }
-        protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-             userid = GridView1.Rows[e.NewEditIndex].Cells[0].Text;
-            Permissions.Style.Add("display", "block");
- 
-        }
+        //protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+        //{
+        //     userIdhid.Value = GridView1.Rows[e.NewEditIndex].Cells[0].Text;             
+        //}
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            if (userid != null)
+            if (!string.IsNullOrEmpty(userIdhid.Value))
             {
                 string i = "";
                 System.Collections.IList list = CheckBoxList1.Items;
@@ -43,19 +41,20 @@ namespace WebCresij
                         i = i + item.Value;
                     }
                 }
-
-                ud.SaveUser(userid, i);
+                ud.SaveUser(userIdhid.Value, i);
             }
         }
 
-        private void HideDeleteButton()
+        protected void btnEdit_Click(object sender, EventArgs e)
         {
-            
-                if (GridView1.Rows == null)
-                {
-                    Button deleteCommand = (Button)GridView1.Rows[0].FindControl("btnEdit");
-                    deleteCommand.Visible = false;
-                }
+            LinkButton btn = (LinkButton)sender;
+
+            //Get the row that contains this button
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+
+            //Get rowindex
+            int rowindex = gvr.RowIndex;
+            userIdhid.Value = gv2.Rows[rowindex].Cells[0].Text;
             
         }
     }

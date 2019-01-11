@@ -14,8 +14,6 @@ namespace WebCresij
 {
     public partial class Login : System.Web.UI.Page
     {
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -43,7 +41,6 @@ namespace WebCresij
             }
             try
             {
-
                 string connString = null;
                 connString = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(connString);
@@ -74,7 +71,7 @@ namespace WebCresij
                 HttpContext.Current.Session["UserName"] = n;
                 HttpContext.Current.Session["role"] = k;
                 HttpContext.Current.Session["UserId"] = u;
-                Response.Redirect("~/status.aspx");
+                Response.Redirect("~/tempratureCharts.aspx");
             }
             else if (k == -9)
             {
@@ -85,5 +82,6 @@ namespace WebCresij
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg", "alert('Wrong ID or Password!! Please try again!');", true);
             }                       
         }
+        
     }
 }
