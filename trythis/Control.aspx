@@ -72,7 +72,9 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
     float:left;
     border-radius: 10px;
     max-width: 250px;
-    height: 250px;
+    min-width:240px;
+    min-height: 280px;
+    max-height:300px;
     background: #202838;
 }
     </style>                                                                                
@@ -85,7 +87,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
         <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <script src="Scripts/ControlKeys.js?v=10"></script>
+        <script src="Scripts/ControlKeys.js?v=11"></script>
     <div class="container-fluid">
     <div class="row clearfix" id="smallcontrol" style="width:100%; min-width:600px" >
         <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />

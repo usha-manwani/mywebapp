@@ -99,7 +99,7 @@ namespace WebCresij
             for(int i=0; i < cardIDs.Length; i++)
             {
                 int p = -1;
-                if (!string.IsNullOrEmpty(names[i]))
+                if (!string.IsNullOrEmpty(names[i])&& !string.IsNullOrEmpty(memberID[i]))
                 {
                     p = pp.inserTempCard(SerialNo[i], memberID[i], names[i], cardIDs[i], comments[i]);
                     if (p == 1)
@@ -115,6 +115,11 @@ namespace WebCresij
                         _dt.Rows[counter][5] = "Unregistered";
                         _dt.Rows[counter][6] = "--";
                     }
+                    else
+                    {
+                        info.Text = "The card(s) you have scanned might have already registered!! Please check and scan again.";
+                        break;
+                    }
                 }               
             }
             if (_dt.Rows.Count > 0)
@@ -125,7 +130,8 @@ namespace WebCresij
             }
             else
             {
-                info.Text = "The card(s) you have scanned might have already registered!! Please check and scan again.";
+                info.Text = "Please enter proper details of user(s)!!";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "removecardID", "delcc();", true);
             }
            
             

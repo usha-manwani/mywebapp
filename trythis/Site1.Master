@@ -14,12 +14,8 @@
     <asp:PlaceHolder runat="server">
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <link href="Content/bootstrap.css" rel="stylesheet" />      
-        <link href="css/table-responsive.css" rel="stylesheet" />              
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
-    
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--%>
- <%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
+    <link href="Content/bootstrap.css" rel="stylesheet" />      
+    <link href="css/table-responsive.css" rel="stylesheet" />
      <link href="Content/bootstrap.min.css" rel="stylesheet" />
          <link rel="stylesheet" type="text/css" href="css/zabuto_calendar.css">
   <link rel="stylesheet" type="text/css" href="lib/gritter/css/jquery.gritter.css" />
@@ -78,12 +74,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">     
     <ul class="navbar-nav  float-left ">        
       <li class="nav-item active">
-        <a class="nav-link" href="home.aspx"><i class="fa fa-th " aria-hidden="true"></i>&nbsp;Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="home.aspx"><i class="fa fa-th" aria-hidden="true"></i>&nbsp;Home <span class="sr-only">(current)</span></a>
       </li>    
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" runat="server" href="#" id="navbarDropdown" 
             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-         <i class="fa fa-users "></i> Users
+         <i class="fa fa-users"></i> Users
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" runat="server" id="approveUser" href="authorize.aspx">
@@ -105,13 +101,12 @@
           <a class="dropdown-item" id="downloadDoc" runat="server" href="UploadFile.aspx">
               <i class="fa fa-download" aria-hidden="true"></i>&nbsp;Download Documents</a>
             <a class="dropdown-item" id="delDoc" runat="server" href="DeleteDocument.aspx">
-                <i class="fa fa-minus-square" aria-hidden="true"></i>&nbsp;Delete Documents</a>
-          
+                <i class="fa fa-minus-square" aria-hidden="true"></i>&nbsp;Delete Documents</a>          
         </div>
       </li>
         <li class="nav-item dropdown">
              <a class="nav-link dropdown-toggle" runat="server" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-tasks " aria-hidden="true"></i>&nbsp;Settings                 
+          <i class="fas fa-tasks" aria-hidden="true"></i>&nbsp;Settings                 
         </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown2">
                 <a class="dropdown-item" id="addDevice" runat="server" href="Options.aspx">
@@ -131,17 +126,16 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ICCard">
                 <a class="dropdown-item" id="icread" runat="server" href="CardReader.aspx">
-                 <img src="Images/imgs/addlogs.png" height="24" width="24" />&nbsp;New Card Register
+                 <img src="Images/imgs/addlogs.png" height="24" width="24"/>&nbsp;New Card Register
                 </a>
                  <a class="dropdown-item" id="icedit" runat="server" href="editDelCard.aspx">
-                 <img src="Images/imgs/editlogs.png" height="24" width="24" />&nbsp;Edit Card Details
+                 <img src="Images/imgs/editlogs.png" height="24" width="24"/>&nbsp;Edit Card Details
                 </a>
                  <a class="dropdown-item" id="iclogs" runat="server" href="Cardlogs.aspx">
-                 <img src="Images/imgs/icCard.png" height="24" width="24" />&nbsp;Card Logs
+                 <img src="Images/imgs/icCard.png" height="24" width="24"/>&nbsp;Card Logs
                 </a>
             </div>
-        </li>
-       
+        </li>       
          <li class="nav-item dropdown">
              <a class="nav-link dropdown-toggle" runat="server" href="#" id="navbarDropdown4" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -171,22 +165,13 @@
                  <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp;Sign Out</a>   
                 </div>
             <div>
-
             </div>
-        </li>
-        
+        </li>        
     </ul>  
       </div>
  </div>
 </nav>
- 
-  <%--  <div class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </div>--%>
-  
-         <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="true" EnableCdn="true">
-            
+        <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="true" EnableCdn="true">            
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -206,8 +191,7 @@
             </Scripts>
         </asp:ScriptManager>
         <div>
-            <section id="container">
-     
+            <section id="container">     
            <%-- <div style="float:right; flex:1; overflow-x:auto; " class=" col-sm-12 col-md-12 col-lg-12 ">--%>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
          </asp:ContentPlaceHolder>
@@ -216,21 +200,14 @@
         <p>
           &copy; Copyrights <strong>Cresij</strong>. All Rights Reserved
         </p>
-        <div class="credits" style="font-size:small">
-        
+        <div class="credits" style="font-size:small">        
           Created By  <a href="https://google.com/" >Usha Phulwani</a>
-        </div>
-        
+        </div>        
       </div>
     </footer>
-                <%--</div>--%>
-                </section>
-            
+                </section>            
         </div>
     </form>
-   
-
- 
   <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
   <script src="lib/jquery.scrollTo.min.js"></script>
   <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
@@ -244,39 +221,37 @@
   <script src="lib/zabuto_calendar.js"></script>
       <script type="application/javascript">
     $(document).ready(function() {
-      $("#date-popover").popover({
-        html: true,
-        trigger: "manual"
-      });
-      $("#date-popover").hide();
-      $("#date-popover").click(function(e) {
-        $(this).hide();
-      });
-
-      $("#my-calendar").zabuto_calendar({
-        action: function() {
-          return myDateFunction(this.id, false);
+        $("#date-popover").popover({
+            html: true,
+            trigger: "manual"
+        });
+        $("#date-popover").hide();
+        $("#date-popover").click(function(e) {
+            $(this).hide();
+        });
+        $("#my-calendar").zabuto_calendar({
+            action: function() {
+            return myDateFunction(this.id, false);
         },
         action_nav: function() {
-          return myNavFunction(this.id);
+            return myNavFunction(this.id);
         },
         ajax: {
-          url: "show_data.php?action=1",
-          modal: true
+            url: "show_data.php?action=1",
+            modal: true
         },
         legend: [{
             type: "text",
             label: "Special event",
             badge: "00"
-          },
-          {
+            },
+            {
             type: "block",
             label: "Regular event",
-          }
+            }
         ]
       });
     });
-
     function myNavFunction(id) {
       $("#date-popover").hide();
       var nav = $("#" + id).data("navigation");

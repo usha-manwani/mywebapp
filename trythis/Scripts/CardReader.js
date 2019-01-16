@@ -1,4 +1,6 @@
-﻿$(function () {
+﻿var cc = "";
+$(function () {
+    
     var chat = $.connection.myHub;
     chat.client.confirmRegister = function () {
         alert('Card Successfully Registered!!');
@@ -15,13 +17,15 @@
         var arrayData = message.split(',');
         if (arrayData[0] == 'Reader') {
             if (arrayData[1] == 'Toregister') {
-                
-                var cc = "";
-                cc = document.getElementById("checkcard").value;
-                if (!cc.includes(arrayData[2])) {
+                if (!cc.includes(arrayData[2])) {                    
                         cc = cc + " " + arrayData[2];
-                        document.getElementById("checkcard").value = cc;
+                    document.getElementById("checkcard").value = cc;
+                    try {
                         addNewCardID(arrayData[2]);
+                    }
+                    catch (error) {
+                        alert(error);
+                    }
                     }    
             }
         }
@@ -76,6 +80,7 @@ function xx() {
     tbscan.style.display = "none";
     document.getElementById("checkcard").value = "";
     $("#tablescan").find("tr:not(:first)").remove();
+    cc = "";
 }
 function trysolve(id, states) {
     var rownum = 0;
@@ -184,11 +189,11 @@ function showGrid() {
     return false;
 }
 function hideGrid() {
-    document.getElementById("checkcard").value = "";
-    var gridmodal = document.getElementById('griddiv');
-    gridmodal.style.display = "none";
+    document.getElementById("checkcard").value = "";  
     var mymodal = document.getElementById('myModal');
     mymodal.style.display = 'none';
+    var gridmodal = document.getElementById('griddiv');
+    gridmodal.style.display = "none";
     alert("Please check status of card !! ");
     return false;
 }
@@ -237,5 +242,9 @@ $(document).on('change', "*[name='memID']", function () {
         }
     }
 });
+
+function delcc() {
+    cc = "";
+}
 
 

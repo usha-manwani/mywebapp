@@ -112,7 +112,21 @@
                                 var img = document.getElementById("systempower");
                                 img.src = "Images/offimages/sysof.png";
                                 break;
-                            
+                            case 'DSDown':
+                                $('#dsdown').closest("td").find("img").attr('src', "Images/onimages/down.png");
+                                $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
+                                $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
+                                break;
+                            case 'DSUp':
+                                $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
+                                $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
+                                $('#dsup').closest("td").find("img").attr('src', "Images/onimages/up.png");
+                                break;
+                            case 'DSStop':
+                                $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
+                                $('#dsstop').closest("td").find("img").attr('src', "Images/onimages/stop.png");
+                                $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
+                                break;
                             default:
                                 break
                         }
@@ -313,7 +327,7 @@
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
         });
         $(document).on("click", "#dsstop", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 77 81");
         });
         $(document).on("click", "#dcstop", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
@@ -629,7 +643,6 @@ function tbleupdate(name, message) {
                     var proj = $(chkbox[k]).closest('table').find("*[name='projIcon']");
                     proj.addClass("iconColor");
                     proj.removeClass("red");
-
                 }
                
                 switch (arraydata[11]) {
@@ -653,15 +666,18 @@ function tbleupdate(name, message) {
                         curtain.addClass("iconColor");  
                         var cur = $(chkbox[k]).closest('table').find("#curtainMain");
                         if (arraydata[8] == 'Stop') {
-                            $(cur).attr('src', 'Images/imgs/curtainclose32.png');                           
-                        }
-                        else if (arraydata[8] == 'close') {
-                            ur.src = 'Images/imgs/curtain32.png';
+
+                            $(cur).attr('src', 'Images/imgs/curtainclose32.png');
                         }
                         else {
-                            cur.src = 'Images/imgs/curtainopen32.png';
+                            if (arraydata[8] == 'close') {
+
+                                cur.src = 'Images/imgs/curtain32.png';
+                            }
+                            else {
+                                cur.src = 'Images/imgs/curtainopen32.png';
+                            }
                         }
-                        
                         break;
                     case "Video Camera":
                         var camera = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
@@ -784,19 +800,16 @@ function tbleupdate(name, message) {
                             var rec = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                             rec.removeClass("^='fa-'");
                             rec.addClass("iconColor");
-                            rec.addClass("fa-video-camera");
+                            rec.addClass("fa-camera");
                             break;
-
-                    }
-                   
+                    }                   
                 }
                 else {
                     chkbox[k].checked = false;
                     var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
                     desktop.removeClass("iconColor");
                     desktop.addClass("red");
-                }
-            
+                }            
             }
             else if (arraydata[1] == "KeyValue") {
                 if (arraydata[2] == 'SystemON') {

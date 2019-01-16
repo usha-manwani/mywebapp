@@ -9,7 +9,7 @@
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
     
    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
-    <script src="Scripts/CardReader.js?v=3"></script>
+    <script src="Scripts/CardReader.js?v=4"></script>
       <div>
            <div class="panel-heading col " >
                             <h4><p>Card Registration</p></h4> 
@@ -60,7 +60,7 @@
 
           <asp:Label ID="iptosend" runat="server" CssClass="displaynone" Text=""></asp:Label>
           <asp:Label ID="datatosend" runat="server" CssClass="displaynone" Text=""></asp:Label>
-         <div id="myModal" class="modal fade" >
+         <div id="myModal" class="modal" >
   <!-- Modal content -->
   <div class="modal-content">
     

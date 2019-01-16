@@ -2,18 +2,23 @@
 var chat = $.connection.myHub; 
 chat.client.logs = function (newrow) {   
     var newdata = newrow.split(',');    
-    var grid = document.getElementById("MainContent_masterchildBody_gv1");    
-    var row1 = grid.insertRow(1);
-    var cell = row1.insertCell(0);
-    cell.innerHTML = newdata[1];
-    var cell1 = row1.insertCell(1);
-    cell1.innerHTML = newdata[0];
-    var cell2 = row1.insertCell(2);
-    cell2.innerHTML = newdata[2];
-    var cell3 = row1.insertCell(3);    
-    cell3.innerHTML = newdata[3];
-    var cell4 = row1.insertCell(4);
-    cell4.innerHTML = newdata[4];  
+    var grid = document.getElementById("MainContent_masterchildBody_gv1");  
+    try {
+        var row1 = grid.insertRow(1);
+        var cell = row1.insertCell(0);
+        cell.innerHTML = newdata[1];
+        var cell1 = row1.insertCell(1);
+        cell1.innerHTML = newdata[0];
+        var cell2 = row1.insertCell(2);
+        cell2.innerHTML = newdata[2];
+        var cell3 = row1.insertCell(3);
+        cell3.innerHTML = newdata[3];
+        var cell4 = row1.insertCell(4);
+        cell4.innerHTML = newdata[4];
+    }
+    catch (err) {
+        alert(err);
+    }
 };
 
 $.connection.hub.start({ waitForPageLoad: false }).done(function () {
