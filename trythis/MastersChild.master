@@ -6,21 +6,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
       <aside>
       <div id="sidebar" class="nav-collapse" style="overflow-y:auto" >  
-         
         <!-- sidebar menu start-->          
         <ul class="sidebar-menu" id="nav-accordion" >  
              <div style="height:150px; margin-left:-10px; width:250px; background-color:#4ecdc4;align-items:center">
-                 <h3 class="centered" style="margin-right:10px; padding-top:30px" >Devices Management</h3>
+                 <h3 class="centered" style="margin-right:10px; padding-top:50px" >Devices Management</h3>
              </div>
-
           <li class="mt" >  
-              
-                      <asp:TreeView runat="server"  OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
+               <asp:TreeView runat="server"  OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
                           ID="TreeMenuView" NodeStyle-NodeSpacing="1px"  
                           RootNodeStyle-CssClass="text-bold" ForeColor="White" >
                  </asp:TreeView>  
-                  
-                                 
               </li>
           </ul>             
         <!-- sidebar menu end-->     
@@ -29,7 +24,6 @@
      <section id="main-content">
       <section class="wrapper">
           <asp:ContentPlaceHolder ID="masterchildBody" runat="server"></asp:ContentPlaceHolder>
-             
           </section>
          </section>
 </asp:Content>

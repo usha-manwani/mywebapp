@@ -2,18 +2,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %> 
 <%@ MasterType VirtualPath="~/Master.master" %>
    <asp:Content ID="Head" ContentPlaceHolderID="MasterHead" runat="server">
-       
- 
-        <link href="Content/bootstrap.css" rel="stylesheet" />
-       <link href="Content/font-awesome.css" rel="stylesheet" />
-      
-       <link href="Content/options.css" rel="stylesheet" />
-       <script src="Scripts/bootstrap.js"></script>
-        
-      
-
-   </asp:Content>
-   
+    <link href="Content/options.css" rel="stylesheet" />
+     </asp:Content>   
     <asp:Content ID="Main" ContentPlaceHolderID="masterBody" runat="server">
         <asp:ScriptManagerProxy ID="sc1" runat="server"></asp:ScriptManagerProxy>
         
@@ -22,7 +12,7 @@
        <div class="leftspace" oncontextmenu="return false;" >
        <asp:UpdatePanel runat="server">
            <ContentTemplate>        
-       <cc1:TabContainer runat="server" BorderStyle="None" CssClass="TabHeaderCSS" >
+       <cc1:TabContainer runat="server" BorderStyle="None" CssClass="fancy fancy-green" >
            <cc1:TabPanel ID="addpaneltab"  runat="server"   BorderStyle="None" >
                 <HeaderTemplate>
            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Add

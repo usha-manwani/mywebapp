@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
       
           <div class="row">
-          <div class="col-lg-9  main-chart">
+          <div class="col-lg-9 main-chart">
     <asp:ContentPlaceHolder ID="masterBody" runat="server"></asp:ContentPlaceHolder>
               </div>
                     <div class="col-lg-3  ds">

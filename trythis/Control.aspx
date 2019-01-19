@@ -118,8 +118,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                 <td>   
                 <div  style="height:250px;width:250px;  border:none">    
              <header style=" background-color:#2680a7;color:black; text-align:center;border:solid;
-                border-color:#428bca " 
-                  >System Control&nbsp; 
+                border-color:#428bca " >System Control&nbsp; 
                  <span data-toggle="collapse" data-target="#system" style="color:white" 
                      class="fa fa-angle-down trying" aria-expanded="true" aria-controls="system" ></span>
              </header>          
@@ -753,6 +752,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
         </table>           
     </div>
      </div>
+        </div>
     <script type="text/javascript">       
         window.onclick = function (event) {
             if (event.target == modal) {

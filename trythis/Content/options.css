@@ -11,7 +11,60 @@
     cursor: pointer;
     color: #2f323a;
 }
+.fancy-green .ajax__tab_header {
+    cursor: pointer;
+}
 
+/*.fancy-green .ajax__tab_hover .ajax__tab_outer, .fancy-green .ajax__tab_active .ajax__tab_outer {
+}
+
+.fancy-green .ajax__tab_hover .ajax__tab_inner, .fancy-green .ajax__tab_active .ajax__tab_inner {
+}*/
+
+.fancy .ajax__tab_header {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    font-family: 'Ruda', sans-serif;
+    cursor: pointer;
+    background-color: chocolate;
+    border: 1px solid aquamarine !important;
+    border-radius: 10px !important;
+    border-bottom: none !important;
+}
+
+    .fancy .ajax__tab_active .ajax__tab_outer, .fancy .ajax__tab_header .ajax__tab_outer, .fancy .ajax__tab_hover .ajax__tab_outer {
+        color: black;
+        background-color: chocolate;
+    }
+
+    .fancy .ajax__tab_active .ajax__tab_inner, .fancy .ajax__tab_header .ajax__tab_inner, .fancy .ajax__tab_hover .ajax__tab_inner {
+        color: black;
+        background-color: chocolate;
+        /*margin-left: 16px;*/ /* offset the width of the left image */
+    }
+
+    .fancy .ajax__tab_active .ajax__tab_tab, .fancy .ajax__tab_hover .ajax__tab_tab, .fancy .ajax__tab_header .ajax__tab_tab {
+        /*margin: 16px 16px 0px 0px;*/
+        color: black;
+        background-color: chocolate;
+    }
+
+.fancy .ajax__tab_hover .ajax__tab_tab, .fancy .ajax__tab_active .ajax__tab_tab {
+    color: cadetblue;
+    background-color: chocolate;
+}
+
+.fancy .ajax__tab_body {
+    font-family: Arial;
+    font-size:small !important;
+    border-top: 0;
+    border: 1px solid aquamarine !important;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #999 !important;
+    border-top: none !important;
+}
 .modal {
     display: none; /* Hidden by default */
     position: center; /* Stay in place */

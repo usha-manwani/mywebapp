@@ -4,11 +4,11 @@
     // Create a function that the hub can call to broadcast messages.
     chat.client.broadcastMessage = function (name, message) {
         // Html encode display name and message.
-        var [] data = message;
+        var[] data = message.split(",");
         var table = document.getElementById("MainContent_GridView1");
         var tbody = document.createElement("tbody");
         var tr = document.createElement("tr");
-        for (int j = 0; j < message.length)
+        for (j = 0; j < message.length; j++)
         // Add the message to the page. 
         $('#discussion').append('<li><strong>' + encodedName
             + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
