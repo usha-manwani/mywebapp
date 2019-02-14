@@ -79,7 +79,7 @@ namespace WebCresij.Hubsfile
             SendData();
            
         }
-        public void SendMessage(string sender, string data)           
+        public void SendMessage(string sender, string data)  
         {
             if (data.Contains("Toregister"))
             {

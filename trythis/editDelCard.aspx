@@ -15,10 +15,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
     <div>
-         <div class=" row mb" style="width:100%">
+        <div class=" row mb" style="width:100%">
          <div class="content-panel ">
          <asp:UpdatePanel runat="server">
-            <ContentTemplate >
+         <ContentTemplate >
                 <div class="row mb">
                     <table border="0" cellpadding="0" cellspacing="0" width="50%">
                         <tr>  
@@ -30,8 +30,8 @@
                     </table>
               </div>
               <br/>                
-            <div class=" row mb">                    
-            <div class="adv-table">
+        <div class=" row mb">                    
+        <div class="adv-table">
 <asp:GridView ID="gvCard" runat="server" AutoGenerateColumns="false" 
         OnPageIndexChanging="gvCard_PageIndexChanging" 
      PageSize="10"  AllowPaging="true" class="display table table-bordered" 
@@ -92,13 +92,13 @@
        </asp:TemplateField>
     </Columns>
 </asp:GridView>
-                </div>
-            </div>
-           </ContentTemplate>
+        </div>
+        </div>
+        </ContentTemplate>
         </asp:UpdatePanel>
         </div>
-       </div>
-       <div class="modal" id="modalAccess" style="max-height:600px; display:none;
+        </div>
+        <div class="modal" id="modalAccess" style="max-height:600px; display:none;
         overflow-y:auto; position:center; margin-left:300px; margin-top:200px">
             <div class="modal-content" style="width:600px">
                  <span class="close1" id="modalClose" style="text-align:right">

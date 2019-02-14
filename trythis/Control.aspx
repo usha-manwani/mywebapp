@@ -1,37 +1,34 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Control.aspx.cs" Inherits="WebCresij.Control" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
-    <style type="text/css">
-
-        .imgclick:active{
-            box-shadow: 0 5px #666;
-            transform: translateY(4px);
-        }
-        .imgclick:hover{
-            -webkit-border-radius: 10px;
+<style type="text/css">
+.imgclick:active{
+   box-shadow: 0 5px #666;
+   transform: translateY(4px);
+}
+.imgclick:hover{
+    -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
- -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 245, 0.67);
--moz-box-shadow:    0px 0px 30px 0px rgba(0, 0, 245, 0.67);
-box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
-        }
-       [type=radio] { 
+    -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 245, 0.67);
+    -moz-box-shadow:    0px 0px 30px 0px rgba(0, 0, 245, 0.67);
+    box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
+}
+[type=radio] { 
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
-
 /* IMAGE STYLES */
 [type=radio] + img {
   cursor: pointer;
 }
-
 /* CHECKED STYLES */
 [type=radio]:checked + img {
   outline: 2px solid #f00;
 }
- .modal 
- {
+.modal 
+{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -43,32 +40,30 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
- }
-        .modal-content {
+}
+.modal-content {
     background-color:aliceblue;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 60%;
-        }
-    .pp{
+}
+.pp{
     background-color: #565656;
     color: transparent;
     text-shadow: 0px 2px 3px rgba(255,255,255,0.3);
     -webkit-background-clip: text;
-     -moz-background-clip: text;
-          background-clip: text;
-    }
-    .displaynone{
+    -moz-background-clip: text;
+    background-clip: text;
+}
+.displaynone{
         display:none;
-
-    }
-    .displayblock{
-        display:inline-block;
-        cursor:pointer;
-       
-    }
-    .table1234 {
+}
+.displayblock{
+   display:inline-block;
+   cursor:pointer;
+}
+.table1234 {
     float:left;
     border-radius: 10px;
     max-width: 250px;
@@ -77,7 +72,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
     max-height:300px;
     background: #202838;
 }
-    </style>                                                                                
+</style>                                                                                
     <link href="Content/ControlStyle.css" rel="stylesheet" />   
     <link href="css/toggleswitch.css" rel="stylesheet" />
     <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
@@ -91,12 +86,11 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
     <div class="container-fluid">
     <div class="row clearfix" id="smallcontrol" style="width:100%; min-width:600px" >
         <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
-
     </div>
-        </div>  
+    </div>  
     <div id="control" class="modal">
     <div class=" modal-content" style="font-family: 'Ruda', sans-serif" >        
-  <div style="width:100%; color:#3c763d; border:solid;border-color:#3c763d; background-color:#dff0d8; 
+        <div style="width:100%; color:#3c763d; border:solid;border-color:#3c763d; background-color:#dff0d8; 
              border-radius:5px" class="row " onmouseover="this.style.background='white';"
              onmouseout="this.style.background='#dff0d8';">
         <header>
@@ -203,7 +197,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                             <span>
                                 <img src="Images/offimages/vga.png" id="vga" 
                                     height="40" width="40" class="imgclick"/></span>
-                             </td>
+                        </td>
                     </tr>                
                 </table>
              </div>
@@ -328,12 +322,12 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                 <td  rowspan="2">                   
                 <div  style=" width:200px; height:500px "> 
                     <div id="dvdcontrols" class="displaynone">
-            <header style=" background-color:#428bca;color:black; text-align:center;
+                    <header style=" background-color:#428bca;color:black; text-align:center;
                     border:solid; border-color:#428bca ">DVD Controls&nbsp;
-                <span data-toggle="collapse" data-target="#dvdsubmenu" style="color:white" 
+                    <span data-toggle="collapse" data-target="#dvdsubmenu" style="color:white" 
                     class="fa fa-angle-down trying" ></span>
-            </header>
-            <div id="dvdsubmenu" class="divcontrols" style=" border-color:#428bca">
+                    </header>
+                         <div id="dvdsubmenu" class="divcontrols" style=" border-color:#428bca">
                 <table style="width:180px; height:400px">                 
                     <tr>
                         <td  style="text-align:center">
@@ -344,8 +338,8 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                             <img src="Images/submenu/dvd/stop.png" id="dvdstop"
                                 height="40" width="40" class="imgclick"/>
                         </td>
-                            </tr>
-                   <tr>
+                    </tr>
+                    <tr>
                         <td  style="text-align:center">
                             <img src="Images/submenu/dvd/play.png" id="playdvd"
                                 height="40" width="40" class="imgclick"/>
@@ -355,7 +349,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                                 height="40" width="40" class="imgclick" />
                         </td>
                             </tr>
-                   <tr>
+                    <tr>
                         <td  style="text-align:center">
                             <img src="Images/submenu/dvd/backward.png" id="dvdback" 
                                 height="40" width="40" class="imgclick"/>
@@ -374,23 +368,23 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                             <img src="Images/submenu/dvd/next.png" id="dvdnext"
                                 height="40" width="40" class="imgclick"/>
                         </td>
-                  <tr>                       
+                    </tr>
+                    <tr>                       
                         <td style="text-align:center">
                             <img src="Images/submenu/dvd/exit.png" id="dvdexit" 
                                 height="40" width="40" class="imgclick" />
                         </td>
-                            </tr>
-                   
+                  </tr>
                 </table>
-                </div>
-                        </div>
+            </div>
+                    </div>
                     <div id="bluraydvd" class="displaynone">
                         <header style=" background-color:#428bca;color:black; text-align:center;
-                    border:solid; border-color:#428bca "> Blu-ray DVD Controls&nbsp;
-                <span data-toggle="collapse" data-target="#bludvdsubmenu" style="color:white" 
-                    class="fa fa-angle-down trying" ></span>
-            </header>
-            <div id="bludvdsubmenu" class="divcontrols" style=" border-color:#428bca">
+                        border:solid; border-color:#428bca "> Blu-ray DVD Controls&nbsp;
+                        <span data-toggle="collapse" data-target="#bludvdsubmenu" style="color:white" 
+                        class="fa fa-angle-down trying" ></span>
+                        </header>
+                    <div id="bludvdsubmenu" class="divcontrols" style=" border-color:#428bca">
                 <table style="width:180px; height:400px">                 
                     <tr>
                         <td  style="text-align:center">
@@ -402,7 +396,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                                 height="40" width="40" class="imgclick"/>
                         </td>
                             </tr>
-                   <tr>
+                    <tr>
                         <td  style="text-align:center">
                             <img src="Images/submenu/dvd/play.png" id="bluplaydvd" 
                                 height="40" width="40" class="imgclick"/>
@@ -412,7 +406,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                                 height="40" width="40" class="imgclick"/>
                         </td>
                             </tr>
-                   <tr>
+                    <tr>
                         <td  style="text-align:center">
                             <img src="Images/submenu/dvd/backward.png" id="bludvdback" 
                                 height="40" width="40" class="imgclick"/>
@@ -431,21 +425,21 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                             <img src="Images/submenu/dvd/next.png" id="bludvdnext"
                                 height="40" width="40" class="imgclick"/>
                         </td>
-                  <tr>                       
+                    </tr>
+                    <tr>                       
                         <td style="text-align:center">
                             <img src="Images/submenu/dvd/exit.png" id="bludvdexit"
                                 height="40" width="40" class="imgclick"/>
                         </td>
                             </tr>
-                   
                 </table>
                 </div>
                     </div>
                     <div id="Camera" class="displaynone">
                         <header style=" background-color:#428bca;color:black; text-align:center;
-                    border:solid; border-color:#428bca "> Camera Sub-Menu&nbsp;
-                <span data-toggle="collapse" data-target="#camerasubmenu" style="color:white" 
-                    class="fa fa-angle-down trying" ></span></header>
+                        border:solid; border-color:#428bca "> Camera Sub-Menu&nbsp;
+                        <span data-toggle="collapse" data-target="#camerasubmenu" style="color:white" 
+                        class="fa fa-angle-down trying" ></span></header>
                         <div id="camerasubmenu" class="divcontrols">
                             <table style="width:180px; height:400px">                 
                                 <tr>
@@ -510,9 +504,9 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     </div>
                     <div id="tvcontrols" class="displaynone">
                         <header style=" background-color:#428bca;color:black; text-align:center;
-                    border:solid; border-color:#428bca "> TV Controls&nbsp;
-                <span data-toggle="collapse" data-target="#tvsubmenu" style="color:white" 
-                    class="fa fa-angle-down trying" ></span></header>
+                        border:solid; border-color:#428bca "> TV Controls&nbsp;
+                        <span data-toggle="collapse" data-target="#tvsubmenu" style="color:white" 
+                        class="fa fa-angle-down trying" ></span></header>
                         <div id="tvsubmenu" class="divcontrols" >
                             <table style="width:180px; height:250px">                 
                                 <tr>
@@ -558,9 +552,9 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                     </div>
                     <div id="recordercontrol" class="displaynone">
                          <header style=" background-color:#428bca;color:black; text-align:center;
-                    border:solid; border-color:#428bca "> Recorder Control&nbsp;
-                <span data-toggle="collapse" data-target="#recordermenu" style="color:white" 
-                    class="fa fa-angle-down trying" ></span></header>
+                        border:solid; border-color:#428bca "> Recorder Control&nbsp;
+                        <span data-toggle="collapse" data-target="#recordermenu" style="color:white" 
+                        class="fa fa-angle-down trying" ></span></header>
                          <div id="recordermenu" class="divcontrols" >
                             <table style="width:180px; height:250px">                 
                                 <tr>
@@ -594,7 +588,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                                     </td>
                                 </tr>
                             </table>
-                    </div>
+                        </div>
                      </div>   
                 </div>
                 </td>
@@ -609,7 +603,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                 </header>
                 <div id="ScreenCurtain" class="divcontrols" style=" border-color:#3c763d">
                 <table style="width:220px; height:180px;">                
-                 <tr>
+                <tr>
                     <td  style=" font-size:small; text-align:center">
                         Digital Screen                        
                     </td>
@@ -629,7 +623,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                                     height="40" width="40" class="imgclick"/></span>
                          </td>
                 </tr>
-                 <tr>
+                <tr>
                     <td  style="text-align:center">
                         <span>
                                 <img src="Images/offimages/stopscreen.PNG" 
@@ -641,7 +635,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                                     id="dcstop" height="40" width="40" class="imgclick"/></span>
                         </td>
                      </tr>
-                      <tr >
+                <tr >
                     <td style="text-align:center">
                         <span>
                                 <img src="Images/offimages/screendown.PNG" id="dsdown" 
@@ -651,7 +645,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
                         <span>
                                 <img src="Images/offimages/curtainclose.PNG" id="dcclose"
                                     height="40" width="40" class="imgclick"/></span>
-                       </td>
+                   </td>
                 </tr>                
             </table>
                 </div>
@@ -751,8 +745,7 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
             </tr>
         </table>           
     </div>
-     </div>
-        </div>
+     </div>       
     <script type="text/javascript">       
         window.onclick = function (event) {
             if (event.target == modal) {
@@ -761,4 +754,3 @@ box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
         }        
     </script>   
 </asp:Content>
-

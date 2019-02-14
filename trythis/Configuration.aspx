@@ -9,7 +9,7 @@
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
     <script src="Scripts/Config.js"></script>
 <div>          
-    <div style="background-color: #bff5e9; top:50px;">
+    <div style="background-color: #bff5e9; top:50px;"> 
          <asp:UpdatePanel runat="server">
             <ContentTemplate>
      <div class="row" >
@@ -35,7 +35,7 @@
          <cc1:TabContainer ID="tb1" runat="server" CssClass="fancy fancy-green" >
             <cc1:TabPanel runat="server" >
                 <HeaderTemplate>
-                    <img src="Images/icons/deskblack.png" height="15px" width="15px" />&nbsp;
+                    <img src="Images/icons/deskblack.png" height="15" width="15" />&nbsp;
                     System Setup</HeaderTemplate>
                 <ContentTemplate>                   
                   <fieldset class="group" style=" width:80%"> 
@@ -44,30 +44,31 @@
                         <div class="col-lg-6 col-sm-12 col-md-12" style="font-size:small">                      
                           <ul class="checkbox"> 
                             <li><input type="checkbox" id="cb1" name="sys" value="pepperoni" />
-                                <label for="cb1">Projector On</label></li> 
+                                <label for="cb1">Projector auto Boot</label></li> 
                             <li><input type="checkbox" id="cb2" name="sys" value="sausage" />
-                                <label for="cb2">Projector Off</label></li> 
+                                <label for="cb2">Projector auto Shutdown</label></li> 
                             <li><input type="checkbox" id="cb3" name="sys" value="mushrooms" />
-                                <label for="cb3">Projector Shutdown</label></li> 
+                                <label for="cb3">Screen Down</label></li> 
                             <li><input type="checkbox" id="cb4" name="sys" value="onions" />
                                 <label for="cb4">Computer Auto Boot</label></li> 
                             <li><input type="checkbox" id="cb5" name="sys" value="gpeppers" />
-                                <label for="cb5">Computer Shutdown</label></li> 
+                                <label for="cb5">Computer Auto Shutdown</label></li> 
                             <li><input type="checkbox" id="cb6" name="sys" value="xcheese" />
                                 <label for="cb6>">Projector Auto Switch</label></li>
                               <li><input type="checkbox" id="cb7" name="sys" value="pepperoni" />
-                                <label for="cb7">Projector linked curtain open</label></li> 
+                                <label for="cb7">Screen down with Projector On</label></li> 
                             <li><input type="checkbox" id="cb8" name="sys" value="sausage" />
-                                <label for="cb8">Curtain linkage Projection</label></li> 
+                                <label for="cb8">Screen up with Projector Off</label></li> 
                             <li><input type="checkbox" id="cb9" name="sys" value="mushrooms" />
                                 <label for="cb9">Volume On</label></li> 
                             <li><input type="checkbox" id="cb10" name="sys" value="onions" />
-                                <label for="cb10">Buzz On</label></li> 
+                                <label for="cb10">Buzzer On</label></li> 
                             <li><input type="checkbox" id="cb11" name="sys" value="gpeppers" />
                                 <label for="cb11">IO Detection and Shutdown</label></li>
+                               
                               <li>
-                                  <label for="delayminutes">Projector Machine Delay</label>
-                                 <select name="delayminutes" class="btn btn-default dropdown" style="border:1px solid chocolate;">
+                                  <label for="delayminutes">Projector Shutdown Delay</label>
+                                 <select name="delayminutes" id="delaymin" class="btn btn-default dropdown" style="border:1px solid chocolate;">
                                      <option value="1">1 minute</option>
                                      <option value="2">2 minutes</option>
                                      <option value="3">3 minutes</option>
@@ -84,21 +85,21 @@
                         <div class="col-lg-6 col-sm-12 col-md-12" style="font-size:small">                      
                           <ul class="checkbox"> 
                             <li><input type="checkbox" id="cb12" name="sys" value="pepperoni" />
-                                <label for="cb12">Computer On</label></li> 
+                                <label for="cb12">Projector 232 code</label></li> 
                             <li><input type="checkbox" id="cb13" name="sys" value="sausage" />
-                                <label for="cb13">Computer Off</label></li> 
-                            <li><input type="checkbox" id="cb14" name="sys" value="mushrooms" />
-                                <label for="cb14">Projector Infrared</label></li> 
+                                <label for="cb13">Send IR Code to Projector</label></li> 
+                             <li><input type="checkbox" id="cb14" name="sys" value="gpeppers" />
+                                <label for="cb14">IO Detection and Boot</label></li>
                             <li><input type="checkbox" id="cb15" name="sys" value="onions" />
-                                <label for="cb15">Swipe Open</label></li> 
+                                <label for="cb15">Swipe to Open System</label></li> 
                             <li><input type="checkbox" id="cb16" name="sys" value="peppers" />
-                                <label for="cb16">Swipe Off</label></li> 
+                                <label for="cb16">Swipe to Shutdown System</label></li> 
                             <li><input type="checkbox" id="cb17" name="sys" value="xcheese" />
-                                <label for="cb17">Fingerprint Open</label></li> 
+                                <label for="cb17">Biometric to Open System</label></li> 
                               <li><input type="checkbox" id="cb18" name="sys" value="xcheese" />
-                                <label for="cb18">Fingerprint Off</label></li> 
+                                <label for="cb18">Biometric to Shutdown System</label></li> 
                               <li><input type="checkbox" id="cb19" name="sys" value="xcheese" />
-                                <label for="cb19">Computer linkage System Shutdown</label></li>
+                                <label for="cb19">Auto shutdown system with Computer</label></li>
                               <li><input type="checkbox" id="cb20" name="sys" value="xcheese" />
                                 <label for="cb20">HDMI audio separation</label></li>
                               <li><input type="checkbox" id="cb21" name="sys" value="xcheese" />
@@ -148,7 +149,6 @@
                                 <label for="cb28">IO7</label></li> 
                               <li><input type="checkbox" id="cb29" name="sys" value="xcheese" />
                                 <label for="cb29">IO8</label></li>
-                                      
                           </ul>
                               </div>
                               <div class="col-lg-6 col-md-6 col-sm-6" style="font-size:x-small">
@@ -224,10 +224,10 @@
                       </div>
                      <div class="row" >
                      <div class="col" style="text-align:center">
-                        <input type="button" class="btn-info customButton"  value="Read Configurations" />
+                        <input type="button" class="btn-info customButton" id="readConfig" value="Read Configurations" />
                      </div>
                      <div class="col" style="text-align:center">
-                        <input type="button" class="btn-info customButton" id="btnsetup" value="Write Configurations" />
+                        <input type="button" class="btn-info customButton" id="writeConfig" value="Write Configurations" />
                      </div>
                      </div>
                   </fieldset>                    
@@ -599,11 +599,10 @@
                             </fieldset>
                     </div>
                     <div class="row" style="margin-left:5px;">
-                         <fieldset class="group" style=" box-shadow: 0 0 10px #999; width:80%;">
-                            <legend align="center" style="width:auto">Group Code</legend>
+                      <fieldset class="group" style=" box-shadow: 0 0 10px #999; width:80%;">
+                        <legend align="center" style="width:auto">Group Code</legend>
                     <div class="row" style="  margin-right:5px;">
-                         <div class="col-lg-6 col-md-6 col-sm-12" style="font-size:small;">
-                               
+                        <div class="col-lg-6 col-md-6 col-sm-12" style="font-size:small;">                               
                                     <label for="cam11" style="margin-left:10px;">Zoom In(Hexadecimal code)</label>
                                     <input type="text" style="margin-left:10px;" id="cam11" class="form-control" />
                                     <label for="cam12" style="margin-left:10px; margin-top:10px">Zoom Out(Hexadecimal code)</label>
@@ -618,8 +617,8 @@
                                     <input type="text" style="margin-left:10px; " id="cam16" class="form-control" />
                                     <label for="cam17" style="margin-left:10px; margin-top:10px">Turn Off System(Hexadecimal code)</label>
                                     <input type="text" style="margin-left:10px;Margin-bottom:20px;" id="cam17" class="form-control" />
-                                    </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12" style="font-size:small;">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12" style="font-size:small;">
                                     <label for="cam18" style="margin-left:10px; margin-top:10px">On(Hexadecimal code)</label>
                                     <input type="text" style="margin-left:10px;" id="cam18" class="form-control" />
                                     <label for="cam19" style="margin-left:10px; margin-top:10px">Down(Hexadecimal code)</label>
@@ -632,10 +631,10 @@
                                     <input type="text" style="margin-left:10px;" id="cam22" class="form-control" />
                                     <label for="cam23" style="margin-left:10px; margin-top:10px">Turn On System(Hexadecimal code)</label>
                                     <input type="text" style="margin-left:10px; Margin-bottom:20px;" id="cam23" class="form-control" />
-                                 </div>
-                            </div>
-                             </fieldset>
                         </div>
+                    </div>
+                     </fieldset>
+                    </div>
                     <div class="row" style="text-align:center;width:80%;margin-left:5px;">
                                     <div class="col-lg-4 col-md-4 col-sm-12">
                                         <input type="button" class="btn btn-group" value="ok"/>
@@ -655,11 +654,11 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="masterSideBody" runat="server">
     <asp:UpdatePanel runat="server">
-       <ContentTemplate>   
-            <div class="row " style="background-color: #bff5e9; margin-left:-25px;">
+       <ContentTemplate>
+           <div class="row " style="background-color: #bff5e9; margin-left:-25px;">
                 Select Class for Configuration Settings - &nbsp;
                 <asp:CheckBoxList runat="server" ID="ddlClass" ></asp:CheckBoxList>
-            </div>
+           </div>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>

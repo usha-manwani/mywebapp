@@ -231,7 +231,7 @@
     });
 
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-       
+        
         createDivs();
         var chkbox = document.getElementsByName("toggle");
         
