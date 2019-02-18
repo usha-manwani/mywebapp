@@ -37,7 +37,8 @@
                 <HeaderTemplate>
                     <img src="Images/icons/deskblack.png" height="15" width="15" />&nbsp;
                     System Setup</HeaderTemplate>
-                <ContentTemplate>                   
+                <ContentTemplate>   
+                        
                   <fieldset class="group" style=" width:80%"> 
                     <legend align="center" style="width:auto">Configuration Settings</legend> 
                      <div class="row" >
@@ -69,15 +70,15 @@
                               <li>
                                   <label for="delayminutes">Projector Shutdown Delay</label>
                                  <select name="delayminutes" id="delaymin" class="btn btn-default dropdown" style="border:1px solid chocolate;">
-                                     <option value="1">1 minute</option>
-                                     <option value="2">2 minutes</option>
-                                     <option value="3">3 minutes</option>
-                                     <option value="4">4 minutes</option>
-                                     <option value="5">5 minutes</option>
-                                     <option value="6">6 minutes</option>
-                                     <option value="7">7 minutes</option>
-                                     <option value="8">8 minutes</option>
-                                     <option value="9">9 minutes</option>
+                                     <option value="01">1 minute</option>
+                                     <option value="02">2 minutes</option>
+                                     <option value="03">3 minutes</option>
+                                     <option value="04">4 minutes</option>
+                                     <option value="05">5 minutes</option>
+                                     <option value="06">6 minutes</option>
+                                     <option value="07">7 minutes</option>
+                                     <option value="08">8 minutes</option>
+                                     <option value="09">9 minutes</option>
                                  </select>
                               </li>
                              </ul> 
@@ -106,16 +107,16 @@
                                 <label for="cb21">System Alarm</label></li>
                                <li>
                                  <label for="delaySeconds">Projector Boot Delay</label>
-                                 <select name="delaySeconds" class="btn btn-default dropdown" style="border:1px solid chocolate;">
-                                     <option value="1">1 seconds</option>
-                                     <option value="2">2 seconds</option>
-                                     <option value="3">3 seconds</option>
-                                     <option value="4">4 seconds</option>
-                                     <option value="5">5 seconds</option>
-                                     <option value="6">6 seconds</option>
-                                     <option value="7">7 seconds</option>
-                                     <option value="8">8 seconds</option>
-                                     <option value="9">9 seconds</option>
+                                 <select id="delaysec" name="delaySeconds" class="btn btn-default dropdown" style="border:1px solid chocolate;">
+                                     <option value="01">1 seconds</option>
+                                     <option value="02">2 seconds</option>
+                                     <option value="03">3 seconds</option>
+                                     <option value="04">4 seconds</option>
+                                     <option value="05">5 seconds</option>
+                                     <option value="06">6 seconds</option>
+                                     <option value="07">7 seconds</option>
+                                     <option value="08">8 seconds</option>
+                                     <option value="09">9 seconds</option>
                                      <option value="10">10 seconds</option>
                                      <option value="11">11 seconds</option>
                                      <option value="12">12 seconds</option>
@@ -230,7 +231,8 @@
                         <input type="button" class="btn-info customButton" id="writeConfig" value="Write Configurations" />
                      </div>
                      </div>
-                  </fieldset>                    
+                  </fieldset>   
+                           
                 </ContentTemplate>
             </cc1:TabPanel>
             <cc1:TabPanel runat="server" >
