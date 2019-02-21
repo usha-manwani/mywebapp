@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -72,6 +71,7 @@ namespace WebCresij
             svbtn.Visible = true;
             export.Visible = true;
             BindGriddata();
+            chkTimer.Checked = false;
             ScriptManager.RegisterStartupScript(this, typeof(Page), "import", "importFile();", true);
         }
 
@@ -313,6 +313,11 @@ namespace WebCresij
                 PopulateTree populateTree = new PopulateTree();
                 try
                 {
+                    string timer = "";
+                    if (chkTimer.Checked == true)
+                        timer = "true";
+                    else
+                        timer = "false";
                     foreach (GridViewRow r in excelgrd.Rows)
                     {
 
@@ -364,7 +369,8 @@ namespace WebCresij
                         {
                             sun = "";
                         }
-                        populateTree.setSchedule(ip, ClassID, starttime, stoptime, mon, tue, wed, thu, fri, sat, sun);
+                        
+                        populateTree.setSchedule(ip, ClassID, starttime, stoptime, timer, mon, tue, wed, thu, fri, sat, sun);
                     }
                 }
                 catch (Exception ex)

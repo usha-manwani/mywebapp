@@ -977,7 +977,9 @@ namespace WebCresij
         #endregion
 
         #region Schedule
-        public void setSchedule(string ip,string classID,string starttime, string stoptime,string mon,string tue,string wed,string thu,
+        public void setSchedule(string ip,string classID,string starttime, 
+            string stoptime, string timer,
+            string mon,string tue,string wed,string thu,
             string fri, string sat,string sun)
         {
             using(SqlConnection con = new SqlConnection(constr))
@@ -991,6 +993,7 @@ namespace WebCresij
                         cmd.Parameters.AddWithValue("@ClassID", classID);
                         cmd.Parameters.AddWithValue("@time", starttime);
                         cmd.Parameters.AddWithValue("@stoptime", stoptime);
+                        cmd.Parameters.AddWithValue("@timer", timer);
                         cmd.Parameters.AddWithValue("@mon", mon);
                         cmd.Parameters.AddWithValue("@tue",tue);
                         cmd.Parameters.AddWithValue("@wed",wed);

@@ -40,6 +40,33 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.DropDownList ddlClass;
         
         /// <summary>
+        /// chkTimer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkTimer;
+        
+        /// <summary>
+        /// txtmin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtmin;
+        
+        /// <summary>
+        /// txtdelay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtdelay;
+        
+        /// <summary>
         /// fuSample control.
         /// </summary>
         /// <remarks>

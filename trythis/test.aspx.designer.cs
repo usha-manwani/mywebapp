@@ -7,39 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebCresij {
+namespace trythis {
     
     
-    public partial class WebForm2 {
+    public partial class test {
         
         /// <summary>
-        /// GridView1 control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// scc control.
+        /// chk1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManagerProxy scc;
+        protected global::System.Web.UI.WebControls.CheckBoxList chk1;
         
         /// <summary>
-        /// Master property.
+        /// btn control.
         /// </summary>
         /// <remarks>
-        /// Auto-generated property.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        public new WebCresij.SiteMaster Master {
-            get {
-                return ((WebCresij.SiteMaster)(base.Master));
-            }
-        }
+        protected global::System.Web.UI.WebControls.Button btn;
     }
 }
