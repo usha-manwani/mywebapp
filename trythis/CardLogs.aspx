@@ -24,7 +24,8 @@
                 </div>
                 <div class="row mb" >
        <div class="col">
-           <asp:DropDownList ID="ddlsort" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlsort_SelectedIndexChanged">
+           <asp:DropDownList ID="ddlsort" runat="server" AutoPostBack="true" 
+               CssClass="btn btn-default border dropdown" OnSelectedIndexChanged="ddlsort_SelectedIndexChanged">
                <asp:ListItem Value="Name" Text="Name"></asp:ListItem>
                <asp:ListItem Value="Time" Text="Time"></asp:ListItem>
                <asp:ListItem Value="Location" Text="Location"></asp:ListItem>
@@ -34,7 +35,9 @@
                Text='<i class="fa fa-sort-alpha-down"></i>'></asp:LinkButton>
        </div>
         <div class="col">
-            <asp:DropDownList ID="ddlPageSize" runat="server" AutoPostBack="true" OnSelectedIndexChanged="PageSize_Changed">
+            <asp:DropDownList ID="ddlPageSize" runat="server" 
+                AutoPostBack="true" CssClass="btn btn-default border dropdown" 
+                OnSelectedIndexChanged="PageSize_Changed">
     <asp:ListItem Text="10" Value="10" />
     <asp:ListItem Text="25" Value="25" />
     <asp:ListItem Text="50" Value="50" />

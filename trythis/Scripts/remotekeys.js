@@ -27,40 +27,49 @@
                     var img = document.getElementById("systempower");
                     img.src = "Images/icons/switchred.png";
                 }
-                if (arraydata[5] == 'On') {
+                if (arraydata[5] == 'On')
+                {
                     var imgpc = document.getElementById("pcpower");
                     imgpc.src = "Images/icons/pcgreen.png";
                 }
-                else {
+                else
+                {
                     var imgpc = document.getElementById("pcpower");
                     imgpc.src = "Images/icons/pcred.png";
                 }
-                if (arraydata[12] == 'Locked') {
+                if (arraydata[12] == 'Locked')
+                {
                     var src = document.getElementById('syslock');
                     src.src = "Images/icons/lockred.png";
                 }
-                else {
+                else
+                {
                     var src = document.getElementById('syslock');
                     src.src = "Images/icons/unlockgreen.png";
                 }
-                if (arraydata[13] == 'Locked') {
+                if (arraydata[13] == 'Locked')
+                {
                     var src = document.getElementById('podiumlock');
                     src.src = "Images/icons/lockred.png";
                 }
-                else {
+                else
+                {
                     var src = document.getElementById('podiumlock');
                     src.src = "Images/icons/unlockgreen.png";
                 }
-                if (arraydata[14] == 'Locked') {
+                if (arraydata[14] == 'Locked')
+                {
                     var src = document.getElementById('classlock');
                     src.src = "Images/icons/lockred.png";
                 }
-                else {
+                else
+                {
                     var src = document.getElementById('classlock');
                     src.src = "Images/icons/unlockgreen.png";
                 }
                 uncheck();
-                switch (arraydata[11]) {
+                switch (arraydata[11])
+                {
                     case 'Desktop':
                         var desk = document.getElementById('desktop');
                         document.getElementById('desktop').checked = true;
@@ -102,16 +111,19 @@
                         $('#recorder').closest("td").find("img").attr('src', "Images/icons/vidgreen.png");
                         break;
                 }
-
-                if (arraydata[6] == 'Closed') {
+                if (arraydata[6] == 'Closed')
+                {
                     var src = document.getElementById("projectorOn");
                     src.src = "Images/icons/project3.png";
-                } else {
+                }
+                else
+                {
                     var src = document.getElementById("projectorOn");
                     src.src = "Images/icons/project2.png";
                 }
             }
-            else {                
+            else
+            {                
                     if (arraydata[1] == "KeyValue") {
                         switch (arraydata[2]) {
                             case 'SystemON':
@@ -142,7 +154,6 @@
                         }
                     }
                     else if (arraydata[1] == "LEDIndicator") {
-
                         if (arraydata[2] == "SystemSwitchOn") {
                             var img = document.getElementById("systempower");
                             img.src = "Images/icons/switchgreen.png";
@@ -150,14 +161,12 @@
                                 var imgpc = document.getElementById("pcpower");
                                 switch (arraydata[4]) {
                                     case 'ComputerOff':
-
                                         imgpc.src = "Images/icons/pcred.png";
                                         break;
                                     case 'ComputerOn':
                                         imgpc.src = "Images/icons/pcgreen.png";
                                         break;
                                 }
-
                             }
                             uncheck();
                             switch (arraydata[3]) {
@@ -216,23 +225,19 @@
             $(this).next().collapse('toggle');
         });
         $(document).on("click", "#desktop", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 10 1A");
-            
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 10 1A");            
         });
         $(document).on("click", "#laptop", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 11 1b");
-            
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 11 1b");           
         });
         $(document).on("click", "#platform", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 12 1c");
-            
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 12 1c");           
         });
         $(document).on("click", "#digitalEquipment", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 13 1d");
             //$('[class^="displaynone"]').hide();
         });
-        $(document).on("click", "#dvd", function () {
-            
+        $(document).on("click", "#dvd", function () {            
             $('[class^="displaynone"]').hide();
             var target = $(this).attr('data-target')
             $(target).show();
@@ -249,7 +254,6 @@
             $('[class^="displaynone"]').hide();
             var target = $(this).attr('data-target');
             $(target).show();
-
         });
         $(document).on("click", "#systempower", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");            
@@ -262,7 +266,6 @@
             $('[class^="displaynone"]').hide();
             var target = $(this).attr('data-target')
             $(target).show();
-
         });
         $(document).on("click", "#recorder", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 19 23");
@@ -270,14 +273,12 @@
             var target = $(this).attr('data-target')
             $(target).show();
         });
-        $(document).on("click", "#volctrl", function () {
-            
+        $(document).on("click", "#volctrl", function () {            
             $('[class^="displaynone"]').hide();
             var target = $(this).attr('data-target')
             $(target).show();
         })
         $(document).on("click", "#sysctrl", function () {
-
             $('[class^="displaynone"]').hide();
             var target = $(this).attr('data-target')
             $(target).show();
@@ -311,24 +312,17 @@
             $('[class^="displaynone"]').hide();
             var target = $(this).attr('data-target')
             $(target).show();
-        })
+        });
     })
     
     function uncheck() {
         $('#desktop').closest("td").find("img").attr('src', "Images/icons/deskwhite.png");
-
         $('#laptop').closest("td").find("img").attr('src', "Images/icons/lapwhite.png");
-
         $('#platform').closest("td").find("img").attr('src', "Images/icons/curtain1.png");
-
         $('#digitalEquipment').closest("td").find("img").attr('src', "Images/icons/scwhite.png");
-
         $('#dvd').closest("td").find("img").attr('src', "Images/icons/dvd1.png");
-
         $('#bluray').closest("td").find("img").attr('src', "Images/icons/blu1.png");
-
         $('#tv').closest("td").find("img").attr('src', "Images/icons/tvwhite.png");
-
         $('#camera').closest("td").find("img").attr('src', "Images/icons/camwhite.png");
         $('#recorder').closest("td").find("img").attr('src', "Images/icons/vidwhite.png");
     };   

@@ -274,7 +274,6 @@
             if (iohigh1[7] == "1") {
                 document.getElementById('cb46').checked = true;
             }
-           
         }     
     };
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
@@ -630,8 +629,162 @@
             chksum = chksum & 255;
             var checksum = chksum.toString(16);
             data = data1 + data + checksum;
-            chat.server.sendControlKeys("192.168.1.38", data);
+            chat.server.sendControlKeys("192.168.1.38", data);            
+        });
+        $(document).on('click', "#projok", function () {
+           
+        });
+        $(document).on('click', "powerok", function () {
+            if (document.getElementById("bc1").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 78 82");
+            }
+            if (document.getElementById("bc2").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 68 72");
+            }
+            if (document.getElementById("bc3").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 58 62");
+            }
+            if (document.getElementById("bc4").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 53 5d");
+            }
+            if (document.getElementById("bc5").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 54 5e");
+            }
+            if (document.getElementById("bc6").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 55 5F");
+            }
+            if (document.getElementById("bc7").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 78 82");
+            }
+            if (document.getElementById("bc8").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 68 72");
+            }
+            if (document.getElementById("bc9").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 58 62");
+            }
+            if (document.getElementById("bc10").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 53 5d");
+            }
+            if (document.getElementById("bc11").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 54 5e");
+            }
+            if (document.getElementById("bc12").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 55 5F");
+
+            }
+            if (document.getElementById("bc13").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4c 56");
+            }
+            if (document.getElementById("bc14").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4d 53");
+            }
+            if (document.getElementById("bc15").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4e 58");
+            }
+            if (document.getElementById("bc16").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4f 59");
+            }
+            if (document.getElementById("bc17").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 56 60");
+            }
+            if (document.getElementById("bc18").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 5e 68");
+            }
+            if (document.getElementById("bc19").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4c 56");
+            }
+            if (document.getElementById("bc20").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4d 53");
+            }
+            if (document.getElementById("bc21").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4e 58");
+            }
+            if (document.getElementById("bc22").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4f 59");
+            }
+            if (document.getElementById("bc23").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 56 60");
+            }
+            if (document.getElementById("bc24").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 5e 68");
+            }
+            if (document.getElementById("w1").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 77 81");
+            }
+            if (document.getElementById("w11").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 57 61");
+            }
+            if (document.getElementById("w2").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 63 6d");
+            }
+            if (document.getElementById("w22").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 64 6e");
+            }
+            if (document.getElementById("w3").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 46 50");
+            }
+            if (document.getElementById("w33").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 47 51");
+            }
+            if (document.getElementById("w4").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 49 53");
+            }
+            if (document.getElementById("w44").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4a 54");
+            }
+            if (document.getElementById("air1").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 39 43");
+            }
+            if (document.getElementById("air11").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 3a 44");
+            }
+            if (document.getElementById("air2").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 59 63");
+            }
+            if (document.getElementById("air22").checked == true) {
+                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 5a 64");
+            }
+        });
+        $(document).on('click', "camok", function () {
             
+            if (document.getElementById("cam11").value!='')
+                chat.server.sendControlKeys("", "");            
+            if (document.getElementById("cam12").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam13").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam14").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam15").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam16").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam17").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam18").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam19").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam20").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam21").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam22").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("cam23").value != '')
+                chat.server.sendControlKeys("", "");
+        });
+        $(document).on('click', "recok", function () {
+            if (document.getElementById("sys1").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("sys2").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("sys3").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("sys4").value != '')
+                chat.server.sendControlKeys("", "");
+            if (document.getElementById("sys5").value != '')
+                chat.server.sendControlKeys("", "");
         });
     });
 });

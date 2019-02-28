@@ -165,12 +165,13 @@
                 <a class="dropdown-item" id="Schedule" runat="server" href="Schedule.aspx">
                     <i class="fa fa-calendar-alt" aria-hidden="true"></i>&nbsp; Schedule</a>
                <a id="charts" class="dropdown-item" runat="server" href="tempratureCharts.aspx" role="button">
-              <img src="Images/imgs/chart1.png"  height="20" width="20"/>Environmental Status
-            </a>            
+              <img src="Images/imgs/chart1.png"  height="20" width="20"/>Environmental Status</a>            
                  <a id="status" class="dropdown-item" runat="server" href="Status.aspx">
-                <i class="fa fa-th " aria-hidden="true"></i>&nbsp;Devices Status</a>  
+                <i class="fa fa-th " aria-hidden="true"></i>&nbsp;Devices Status</a> 
+                <a id="config" class="dropdown-item" runat="server" href="Configuration.aspx">
+                <i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;Configuration Settings</a>
                 <a class="dropdown-item" href="logout.aspx" id="logouts" runat="server">
-                 <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp;Sign Out</a>   
+                 <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp;Sign Out</a>                  
                 </div>
             <div>
             </div>

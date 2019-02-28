@@ -1,31 +1,31 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="Schedule.aspx.cs" Inherits="WebCresij.Schedule" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
-    <style type="text/css">
-        .headerstyle{
-            -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
--moz-box-shadow: inset 0px -6px 86px -14px rgba(0,0,0,0.75);
-box-shadow: inset 0px -6px 86px -14px rgba(0,0,0,0.75);
-color:white;
-        }
-        .rowstyle{
-            -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
--moz-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
-color:white;
-background-color:#e7a61a;
-        }
-         .rowstylealt{
-            -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
--moz-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
-color:white;
-background-color:white;
-         }        
-          .rowstyle:hover, .rowstylealt:hover,.selected{
-              color:white;
-              background-color:darkcyan
-          }        
-    </style>
+<style type="text/css">
+    .headerstyle{
+        -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 0px -6px 86px -14px rgba(0,0,0,0.75);
+        box-shadow: inset 0px -6px 86px -14px rgba(0,0,0,0.75);
+        color:white;
+    }
+    .rowstyle{
+        -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+        box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+        color:white;
+        background-color:#e7a61a;
+    }
+    .rowstylealt{
+        -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+        box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
+        color:white;
+        background-color:white;
+    }        
+    .rowstyle:hover, .rowstylealt:hover,.selected{
+        color:white;
+        background-color:darkcyan
+    }        
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">    
     <script src="assets/js/Schedule.js?v=2"></script>
@@ -47,27 +47,29 @@ background-color:white;
                             <h5>Select options to create Schedule</h5>
                         </div>
                         <div class=" col-sm-12 col-lg-3">                 
-                        <asp:DropDownList  AutoPostBack="true" OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
-                            CssClass="btn btn-default dropdown " Width="180px"  ID="ddlInstitute" data-toggle="dropdown"  runat="server" >
+                        <asp:DropDownList  AutoPostBack="true" 
+                            OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
+                            CssClass="btn btn-default dropdown border" Width="180px"  
+                            ID="ddlInstitute" data-toggle="dropdown"  runat="server" >
                             <asp:ListItem Text="Select Institute" Value=""></asp:ListItem>
                         </asp:DropDownList>
                            </div>                           
                             <div class="col-sm-12 col-lg-3">
                     
                         <asp:DropDownList  ID="ddlGrade" AutoPostBack="true" Width="150px"
-                            CssClass="btn btn-default dropdown" data-toggle="dropdown" 
+                            CssClass="btn btn-default border dropdown" data-toggle="dropdown" 
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" >
                             <asp:ListItem Text="Select" Value=""></asp:ListItem>
                         </asp:DropDownList>
                          </div>                             
                             <div class=" col-sm-12 col-lg-3">                    
                         <asp:DropDownList  ID="ddlClass" AutoPostBack="true" Width="150px"
-                            AppendDataBoundItems="true" runat="server" CssClass="btn btn-default  dropdown" 
+                            AppendDataBoundItems="true" runat="server" 
+                            CssClass="btn btn-default border dropdown" 
                             data-toggle="dropdown" 
                             OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" >
                             <asp:ListItem Text="Select" Value=""></asp:ListItem>
-                        </asp:DropDownList>
-                    
+                        </asp:DropDownList>                    
                          </div> 
                              </div>
                         </div>
@@ -93,16 +95,7 @@ background-color:white;
                             </div>
                         </div>
                         </div>
-                  
-                           <%-- <div class="row" >
-                             <span style="font-size:small">   
-               <i class="fa fa-info-circle"></i>&nbsp;&nbsp;<span style="color:red">Please select above options to create the Schedule</span></span> 
-
-           
-                            </div>--%>
-
-                       
-                            <div class="row">
+                        <div class="row">
                                 <div style="display:none;" id="uploadDiv">
                          Select a File&nbsp;<asp:FileUpload runat="server" ID="fuSample"  />
         <asp:Button ID="importExcel" runat="server" Text="Upload" CssClass="btn btn-group-toggle" OnClick="importExcel_Click" /> 

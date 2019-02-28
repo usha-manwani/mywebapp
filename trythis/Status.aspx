@@ -54,9 +54,10 @@
                           <tr>
                               <td style="width:100%">
                                   <br />
-                                 <label for="ddlins">&nbsp;Select Institute&nbsp;</label> <asp:DropDownList ID="ddlins" runat="server" AutoPostBack="true" 
+                                 <label for="ddlins">&nbsp;Select Institute&nbsp;</label> 
+                                  <asp:DropDownList ID="ddlins" runat="server" AutoPostBack="true" 
                                       OnSelectedIndexChanged="ddlins_SelectedIndexChanged" data-toggle="dropdown" 
-                                      CssClass="btn btn-default " BackColor="WhiteSmoke"></asp:DropDownList>
+                                      CssClass="btn btn-default border dropdown" BackColor="WhiteSmoke"></asp:DropDownList>
                               </td>
                           </tr>
                           <tr>

@@ -29,7 +29,6 @@ namespace WebCresij
                 excelgrd.Enabled = false;
             }
         }
-
         protected void ddlInstitute_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlGrade.Items.Clear();
@@ -46,7 +45,6 @@ namespace WebCresij
             excelgrd.Enabled = false;
             svbtn.Visible = false;
         }
-
         protected void ddlGrade_SelectedIndexChanged(object sender, EventArgs e)
         {
             ddlClass.Items.Clear();
@@ -64,25 +62,28 @@ namespace WebCresij
             excelgrd.Enabled = false;
             svbtn.Visible = false;
         }
-
         protected void ddlClass_SelectedIndexChanged(object sender, EventArgs e)
         {
             excelgrd.Enabled = true;
             svbtn.Visible = true;
             export.Visible = true;
             BindGriddata();
-            chkTimer.Checked = false;
             ScriptManager.RegisterStartupScript(this, typeof(Page), "import", "importFile();", true);
         }
-
         private void BindGriddata()
         {
             string ClassID = ddlClass.SelectedValue;
-            string query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon] as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ,[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday FROM[CresijCam].[dbo].[Schedule] "
-         + " where ClassID = '" + ClassID + "' order by StartTime asc";
+            string query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+                " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
+                "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
+         + " where ClassID = '"+ ClassID +"' order by StartTime asc";
             DataTable dt = PopulateTree.ExecuteCommand(query);
             if (dt.Rows.Count > 0)
             {
+                if(dt.Rows[0]["timer"].ToString() == "true")
+                {
+                    chkTimer.Checked = true;
+                }
                 dt.Columns.Add("Time");
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
@@ -96,7 +97,7 @@ namespace WebCresij
                 }
                 catch (Exception ex)
                 {
-
+                    Response.Redirect("Schedule.aspx");
                 }
             }
             else
@@ -107,11 +108,10 @@ namespace WebCresij
                 }
                 catch (Exception ex)
                 {
-
+                    Response.Redirect("Schedule.aspx");
                 }
             }
         }
-
         private void bindgrd()
         {
             DataTable dt = new DataTable();
@@ -125,8 +125,8 @@ namespace WebCresij
             dt.Columns.Add(new DataColumn("Friday", typeof(string)));
             dt.Columns.Add(new DataColumn("Saturday", typeof(string)));
             dt.Columns.Add(new DataColumn("Sunday", typeof(string)));
-            dr = dt.NewRow();
 
+            dr = dt.NewRow();
             dr["Time"] = "07:00-07:55";
             dr["Monday"] = string.Empty;
             dr["Tuesday"] = string.Empty;
@@ -136,8 +136,8 @@ namespace WebCresij
             dr["Saturday"] = string.Empty;
             dr["Sunday"] = string.Empty;
             dt.Rows.Add(dr);
-            DataRow dr1 = dt.NewRow();
 
+            DataRow dr1 = dt.NewRow();
             dr1["Time"] = "08:00-08:55";
             dr1["Monday"] = string.Empty;
             dr1["Tuesday"] = string.Empty;
@@ -147,8 +147,8 @@ namespace WebCresij
             dr1["Saturday"] = string.Empty;
             dr1["Sunday"] = string.Empty;
             dt.Rows.Add(dr1);
-            DataRow dr2 = dt.NewRow();
 
+            DataRow dr2 = dt.NewRow();
             dr2["Time"] = "09:00-09:55";
             dr2["Monday"] = string.Empty;
             dr2["Tuesday"] = string.Empty;
@@ -158,8 +158,8 @@ namespace WebCresij
             dr2["Saturday"] = string.Empty;
             dr2["Sunday"] = string.Empty;
             dt.Rows.Add(dr2);
-            DataRow dr3 = dt.NewRow();
 
+            DataRow dr3 = dt.NewRow();
             dr3["Time"] = "10:00-10:55";
             dr3["Monday"] = string.Empty;
             dr3["Tuesday"] = string.Empty;
@@ -169,8 +169,8 @@ namespace WebCresij
             dr3["Saturday"] = string.Empty;
             dr3["Sunday"] = string.Empty;
             dt.Rows.Add(dr3);
-            DataRow dr4 = dt.NewRow();
 
+            DataRow dr4 = dt.NewRow();
             dr4["Time"] = "11:00-11:55";
             dr4["Monday"] = string.Empty;
             dr4["Tuesday"] = string.Empty;
@@ -180,8 +180,8 @@ namespace WebCresij
             dr4["Saturday"] = string.Empty;
             dr4["Sunday"] = string.Empty;
             dt.Rows.Add(dr4);
-            DataRow dr5 = dt.NewRow();
 
+            DataRow dr5 = dt.NewRow();
             dr5["Time"] = "12:00-12:55";
             dr5["Monday"] = string.Empty;
             dr5["Tuesday"] = string.Empty;
@@ -191,8 +191,8 @@ namespace WebCresij
             dr5["Saturday"] = string.Empty;
             dr5["Sunday"] = string.Empty;
             dt.Rows.Add(dr5);
-            DataRow dr6 = dt.NewRow();
 
+            DataRow dr6 = dt.NewRow();
             dr6["Time"] = "13:00-13:55";
             dr6["Monday"] = string.Empty;
             dr6["Tuesday"] = string.Empty;
@@ -202,8 +202,8 @@ namespace WebCresij
             dr6["Saturday"] = string.Empty;
             dr6["Sunday"] = string.Empty;
             dt.Rows.Add(dr6);
-            DataRow dr7 = dt.NewRow();
 
+            DataRow dr7 = dt.NewRow();
             dr7["Time"] = "14:00-14:55";
             dr7["Monday"] = string.Empty;
             dr7["Tuesday"] = string.Empty;
@@ -213,8 +213,8 @@ namespace WebCresij
             dr7["Saturday"] = string.Empty;
             dr7["Sunday"] = string.Empty;
             dt.Rows.Add(dr7);
-            DataRow dr8 = dt.NewRow();
 
+            DataRow dr8 = dt.NewRow();
             dr8["Time"] = "15:00-15:55";
             dr8["Monday"] = string.Empty;
             dr8["Tuesday"] = string.Empty;
@@ -239,7 +239,6 @@ namespace WebCresij
                 try
                 {
                    // SetPreviousData();
-
                     DataTable dt = (DataTable)excelgrd.DataSource;
                     drCurrentRow = dt.NewRow();
                     drCurrentRow["Time"] = "00:00-00:00";
@@ -272,7 +271,7 @@ namespace WebCresij
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         //extract the TextBox values
-                        TextBox txtTime = (TextBox)excelgrd.Rows[rowIndex].Cells[1].FindControl("txtTime");
+                        TextBox txtTime=(TextBox)excelgrd.Rows[rowIndex].Cells[1].FindControl("txtTime");
                         TextBox txtMon = (TextBox)excelgrd.Rows[rowIndex].Cells[2].FindControl("txtMon");
                         TextBox txtTue = (TextBox)excelgrd.Rows[rowIndex].Cells[3].FindControl("txtTue");
                         TextBox txtWed = (TextBox)excelgrd.Rows[rowIndex].Cells[4].FindControl("txtWed");
@@ -280,7 +279,7 @@ namespace WebCresij
                         TextBox txtFri = (TextBox)excelgrd.Rows[rowIndex].Cells[6].FindControl("txtFri");
                         TextBox txtSat = (TextBox)excelgrd.Rows[rowIndex].Cells[7].FindControl("txtSat");
                         TextBox txtSun = (TextBox)excelgrd.Rows[rowIndex].Cells[8].FindControl("txtSun");
-                        txtTime.Text = dt.Rows[i]["Time"].ToString();
+                        txtTime.Text= dt.Rows[i]["Time"].ToString();
                         txtMon.Text = dt.Rows[i]["Monday"].ToString();
                         txtTue.Text = dt.Rows[i]["Tuesday"].ToString();
                         txtWed.Text = dt.Rows[i]["Wednesday"].ToString();
@@ -308,29 +307,34 @@ namespace WebCresij
             string ClassID = ddlClass.SelectedValue;
             Button btn = (Button)sender;
             if (!string.IsNullOrEmpty(ClassID))
-            {
-                string ip = PopulateTree.getIP(ClassID);
+            {                              
+                string ip = PopulateTree.getIP(ClassID);                
                 PopulateTree populateTree = new PopulateTree();
+                populateTree.DelOldSchedule(ClassID);
                 try
                 {
                     string timer = "";
                     if (chkTimer.Checked == true)
                         timer = "true";
                     else
-                        timer = "false";
+                        timer = "false";                    
                     foreach (GridViewRow r in excelgrd.Rows)
                     {
-
                         string time = (r.FindControl("txtTime") as TextBox).Text;
                         int h1 = Convert.ToInt32(time.Substring(0, 2));
                         int m1 = Convert.ToInt32(time.Substring(3, 2));
                         int h2 = Convert.ToInt32(time.Substring(6, 2));
-                        int m2 = Convert.ToInt32(time.Substring(9, 2));
-                        if (h1 > h2 || h1 > 23 || h2 > 23 || m1 > 59 || m2 > 59)
-                        {
+                        int m2 = Convert.ToInt32(time.Substring(9, 2));                        
+                        if (h1 > h2 || h1 > 23 || h2 > 23 || m1 > 59 || m2 > 59 )
+                        {                           
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "time2", "timeset();", true);
-                            break;
+                            continue;                                                       
                         }
+                        if(btn.Text=="Save" && h1==h2 && m1 == m2)
+                        {
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "time3", "timesetSame();", true);
+                            continue;
+                        }                       
                         string mon = (r.FindControl("txtMon") as TextBox).Text;
                         string tue = (r.FindControl("txtTue") as TextBox).Text;
                         string wed = (r.FindControl("txtWed") as TextBox).Text;
@@ -338,7 +342,6 @@ namespace WebCresij
                         string fri = (r.FindControl("txtFri") as TextBox).Text;
                         string sat = (r.FindControl("txtSat") as TextBox).Text;
                         string sun = (r.FindControl("txtSun") as TextBox).Text;
-
                         string starttime = time.Substring(0, 5);
                         string stoptime = time.Substring(6, 5);
                         if (string.IsNullOrEmpty(mon) && string.IsNullOrWhiteSpace(mon))
@@ -368,9 +371,16 @@ namespace WebCresij
                         if (string.IsNullOrEmpty(sun) && string.IsNullOrWhiteSpace(sun))
                         {
                             sun = "";
+                        }                        
+                        int success = populateTree.setSchedule(ip, ClassID, starttime, stoptime, timer, mon, tue, wed, thu, fri, sat, sun);
+                        if (success >= 0 && btn.Text=="Save")
+                        {
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "Success", "AlertSuccess();", true);
+                        }                        
+                        else if(success<0 && btn.Text=="Save")
+                        {
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "Fail", "AlertFail();", true);
                         }
-                        
-                        populateTree.setSchedule(ip, ClassID, starttime, stoptime, timer, mon, tue, wed, thu, fri, sat, sun);
                     }
                 }
                 catch (Exception ex)
@@ -387,7 +397,6 @@ namespace WebCresij
                 addnewrow();
             } 
         }
-
         protected void ButtonAdd_Click(object sender, EventArgs e)
         {
             addnewrow();
@@ -413,7 +422,7 @@ namespace WebCresij
                 ws.Cells[rowstart, colstart, rowend, colend].Style.Fill.BackgroundColor.SetColor(Color.LightGray);
                 rowstart += 2;
                 rowend = rowstart + dt1.Rows.Count;
-                ws.Cells[rowstart, colstart].LoadFromDataTable(dt1, true);
+                ws.Cells[rowstart, colstart].LoadFromDataTable(dt1, false);
                 ws.Cells[ws.Dimension.Address].AutoFitColumns();
                 ws.Cells[rowstart, colstart, rowend, colend].Style.Border.Top.Style =
                    ws.Cells[rowstart, colstart, rowend, colend].Style.Border.Bottom.Style =
@@ -426,7 +435,6 @@ namespace WebCresij
                 Response.Redirect("exportdata.aspx");
             }
         }
-
         protected void importExcel_Click(object sender, EventArgs e)
         {
             string fileName="";
@@ -466,7 +474,6 @@ namespace WebCresij
                 File.Delete(Server.MapPath("~/Uploads/") + fileName);
             }
         }
-
         public static DataTable GetDataTableFromExcel(string path, bool hasHeader = true)
         {
             using (var pck = new ExcelPackage())
@@ -496,8 +503,7 @@ namespace WebCresij
                 
               
                 return tbl;
-            }
-           
+            }           
         }
     }
 }

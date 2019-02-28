@@ -9,27 +9,31 @@
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
     <script src="Scripts/Config.js"></script>
 <div>          
-    <div style="background-color: #bff5e9; top:50px;"> 
+    <div style="background-color: #7fe0c8; top:20px;"> 
          <asp:UpdatePanel runat="server">
             <ContentTemplate>
-     <div class="row" >
-         <div class="col-lg-3 col-sm-12 col-md-12 ">
-             Select Institute and Grade - &nbsp;
-         </div>
+         <div class="row" >
+             <div class="col-lg-3 col-sm-12 col-md-12 ">
+                 Select Institute and Grade - &nbsp;
+             </div>
          <div class=" col-lg-2 col-sm-6 col-md-6 float-left">
-             <asp:DropDownList Width="150px" AutoPostBack="true" OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
-              CssClass="btn btn-default dropdown "  ID="ddlInstitute" data-toggle="dropdown"  runat="server" >
+             <asp:DropDownList Width="150px" AutoPostBack="true" 
+                 OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
+              CssClass="btn btn-default border dropdown"  ID="ddlInstitute" 
+                 data-toggle="dropdown"  runat="server" >
               <asp:ListItem Text="select" Value=""></asp:ListItem></asp:DropDownList>
          </div>
          &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;
          <div class="col-lg-2 col-sm-6 col-md-6 float-none">
-              <asp:DropDownList Width="150px" ID="ddlGrade" OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"
-              CssClass="btn btn-default dropdown" data-toggle="dropdown" AutoPostBack="true" runat="server" >
+              <asp:DropDownList Width="150px" ID="ddlGrade" 
+                  OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"
+              CssClass="btn btn-default border dropdown" data-toggle="dropdown" 
+                  AutoPostBack="true" runat="server" >
               <asp:ListItem Text="select" Value=""></asp:ListItem></asp:DropDownList>                        
          </div>
          </div>         
          </ContentTemplate>
-    </asp:UpdatePanel>
+        </asp:UpdatePanel>
      </div>
     <div>        
          <cc1:TabContainer ID="tb1" runat="server" CssClass="fancy fancy-green" >
@@ -37,11 +41,10 @@
                 <HeaderTemplate>
                     <img src="Images/icons/deskblack.png" height="15" width="15" />&nbsp;
                     System Setup</HeaderTemplate>
-                <ContentTemplate>   
-                        
+                <ContentTemplate>                           
                   <fieldset class="group" style=" width:80%"> 
                     <legend align="center" style="width:auto">Configuration Settings</legend> 
-                     <div class="row" >
+                      <div class="row" >
                         <div class="col-lg-6 col-sm-12 col-md-12" style="font-size:small">                      
                           <ul class="checkbox"> 
                             <li><input type="checkbox" id="cb1" name="sys" value="pepperoni" />
@@ -56,7 +59,7 @@
                                 <label for="cb5">Computer Auto Shutdown</label></li> 
                             <li><input type="checkbox" id="cb6" name="sys" value="xcheese" />
                                 <label for="cb6>">Projector Auto Switch</label></li>
-                              <li><input type="checkbox" id="cb7" name="sys" value="pepperoni" />
+                            <li><input type="checkbox" id="cb7" name="sys" value="pepperoni" />
                                 <label for="cb7">Screen down with Projector On</label></li> 
                             <li><input type="checkbox" id="cb8" name="sys" value="sausage" />
                                 <label for="cb8">Screen up with Projector Off</label></li> 
@@ -65,10 +68,9 @@
                             <li><input type="checkbox" id="cb10" name="sys" value="onions" />
                                 <label for="cb10">Buzzer On</label></li> 
                             <li><input type="checkbox" id="cb11" name="sys" value="gpeppers" />
-                                <label for="cb11">IO Detection and Shutdown</label></li>
-                               
-                              <li>
-                                  <label for="delayminutes">Projector Shutdown Delay</label>
+                                <label for="cb11">IO Detection and Shutdown</label></li>                               
+                            <li>
+                                <label for="delayminutes">Projector Shutdown Delay</label>
                                  <select name="delayminutes" id="delaymin" class="btn btn-default dropdown" style="border:1px solid chocolate;">
                                      <option value="01">1 minute</option>
                                      <option value="02">2 minutes</option>
@@ -80,8 +82,8 @@
                                      <option value="08">8 minutes</option>
                                      <option value="09">9 minutes</option>
                                  </select>
-                              </li>
-                             </ul> 
+                            </li>
+                           </ul> 
                         </div>
                         <div class="col-lg-6 col-sm-12 col-md-12" style="font-size:small">                      
                           <ul class="checkbox"> 
@@ -89,7 +91,7 @@
                                 <label for="cb12">Projector 232 code</label></li> 
                             <li><input type="checkbox" id="cb13" name="sys" value="sausage" />
                                 <label for="cb13">Send IR Code to Projector</label></li> 
-                             <li><input type="checkbox" id="cb14" name="sys" value="gpeppers" />
+                            <li><input type="checkbox" id="cb14" name="sys" value="gpeppers" />
                                 <label for="cb14">IO Detection and Boot</label></li>
                             <li><input type="checkbox" id="cb15" name="sys" value="onions" />
                                 <label for="cb15">Swipe to Open System</label></li> 
@@ -97,16 +99,16 @@
                                 <label for="cb16">Swipe to Shutdown System</label></li> 
                             <li><input type="checkbox" id="cb17" name="sys" value="xcheese" />
                                 <label for="cb17">Biometric to Open System</label></li> 
-                              <li><input type="checkbox" id="cb18" name="sys" value="xcheese" />
+                            <li><input type="checkbox" id="cb18" name="sys" value="xcheese" />
                                 <label for="cb18">Biometric to Shutdown System</label></li> 
-                              <li><input type="checkbox" id="cb19" name="sys" value="xcheese" />
+                            <li><input type="checkbox" id="cb19" name="sys" value="xcheese" />
                                 <label for="cb19">Auto shutdown system with Computer</label></li>
-                              <li><input type="checkbox" id="cb20" name="sys" value="xcheese" />
+                            <li><input type="checkbox" id="cb20" name="sys" value="xcheese" />
                                 <label for="cb20">HDMI audio separation</label></li>
-                              <li><input type="checkbox" id="cb21" name="sys" value="xcheese" />
+                            <li><input type="checkbox" id="cb21" name="sys" value="xcheese" />
                                 <label for="cb21">System Alarm</label></li>
-                               <li>
-                                 <label for="delaySeconds">Projector Boot Delay</label>
+                            <li>
+                               <label for="delaySeconds">Projector Boot Delay</label>
                                  <select id="delaysec" name="delaySeconds" class="btn btn-default dropdown" style="border:1px solid chocolate;">
                                      <option value="01">1 seconds</option>
                                      <option value="02">2 seconds</option>
@@ -123,54 +125,54 @@
                                      <option value="13">13 seconds</option>
                                      <option value="14">14 seconds</option>
                                  </select> 
-                               </li>
-                          </ul> 
+                           </li>
+                         </ul> 
                         </div>
-                      </div>
-                     <div class="row" style="padding-right:10px;">
+                       </div>
+                      <div class="row" style="padding-right:10px;">
                           <div class="col-lg-6 col-sm-12 col-md-12" >
                               <fieldset class="group" style=" box-shadow: 0 0 10px #999;">
                                   <legend style="width:auto" align="center">Alarm</legend>
                               <div class="row">
                               <div class="col-lg-6 col-md-6 col-sm-6" style="font-size:x-small">
-                                   <ul class="checkbox"> 
-                            <li><input type="checkbox" id="cb22" name="sys" value="pepperoni" />
-                                <label for="cb22">IO1</label></li> 
-                            <li><input type="checkbox" id="cb23" name="sys" value="sausage" />
-                                <label for="cb23">IO2</label></li> 
-                            <li><input type="checkbox" id="cb24" name="sys" value="mushrooms" />
-                                <label for="cb24">IO3</label></li> 
-                            <li><input type="checkbox" id="cb25" name="sys" value="onions" />
-                                <label for="cb25">IO4</label></li> 
-                            <li><input type="checkbox" id="cb26" name="sys" value="gpeppers" />
-                                <label for="cb26">IO5</label></li> 
-                            <li><input type="checkbox" id="cb27" name="sys" value="xcheese" />
-                                <label for="cb27">IO6</label></li> 
-                              <li><input type="checkbox" id="cb28" name="sys" value="xcheese" />
-                                <label for="cb28">IO7</label></li> 
-                              <li><input type="checkbox" id="cb29" name="sys" value="xcheese" />
-                                <label for="cb29">IO8</label></li>
-                          </ul>
+                               <ul class="checkbox"> 
+                                <li><input type="checkbox" id="cb22" name="sys" value="pepperoni" />
+                                 <label for="cb22">IO1</label></li> 
+                                <li><input type="checkbox" id="cb23" name="sys" value="sausage" />
+                                 <label for="cb23">IO2</label></li> 
+                                <li><input type="checkbox" id="cb24" name="sys" value="mushrooms" />
+                                 <label for="cb24">IO3</label></li> 
+                                <li><input type="checkbox" id="cb25" name="sys" value="onions" />
+                                 <label for="cb25">IO4</label></li> 
+                                <li><input type="checkbox" id="cb26" name="sys" value="gpeppers" />
+                                 <label for="cb26">IO5</label></li> 
+                                <li><input type="checkbox" id="cb27" name="sys" value="xcheese" />
+                                 <label for="cb27">IO6</label></li> 
+                                <li><input type="checkbox" id="cb28" name="sys" value="xcheese" />
+                                 <label for="cb28">IO7</label></li> 
+                                <li><input type="checkbox" id="cb29" name="sys" value="xcheese" />
+                                 <label for="cb29">IO8</label></li>
+                               </ul>
                               </div>
                               <div class="col-lg-6 col-md-6 col-sm-6" style="font-size:x-small">
-                                   <ul class="checkbox"> 
-                            <li><input type="checkbox" id="cb30" name="sys" value="pepperoni" />
-                                <label for="cb30">IO9</label></li> 
-                            <li><input type="checkbox" id="cb31" name="sys" value="sausage" />
-                                <label for="cb31">IO10</label></li> 
-                            <li><input type="checkbox" id="cb32" name="sys" value="mushrooms" />
-                                <label for="cb32">IO11</label></li> 
-                            <li><input type="checkbox" id="cb33" name="sys" value="onions" />
-                                <label for="cb33">IO12</label></li> 
-                            <li><input type="checkbox" id="cb34" name="sys" value="gpeppers" />
-                                <label for="cb34">IO13</label></li> 
-                            <li><input type="checkbox" id="cb35" name="sys" value="xcheese" />
-                                <label for="cb35">IO14</label></li> 
-                              <li><input type="checkbox" id="cb36" name="sys" value="xcheese" />
-                                <label for="cb36">IO15</label></li> 
-                              <li><input type="checkbox" id="cb37" name="sys" value="xcheese" />
-                                <label for="cb37">IO16</label></li>
-                          </ul>
+                               <ul class="checkbox"> 
+                                <li><input type="checkbox" id="cb30" name="sys" value="pepperoni" />
+                                 <label for="cb30">IO9</label></li> 
+                                <li><input type="checkbox" id="cb31" name="sys" value="sausage" />
+                                 <label for="cb31">IO10</label></li> 
+                                <li><input type="checkbox" id="cb32" name="sys" value="mushrooms" />
+                                 <label for="cb32">IO11</label></li> 
+                                <li><input type="checkbox" id="cb33" name="sys" value="onions" />
+                                 <label for="cb33">IO12</label></li> 
+                                <li><input type="checkbox" id="cb34" name="sys" value="gpeppers" />
+                                 <label for="cb34">IO13</label></li> 
+                                <li><input type="checkbox" id="cb35" name="sys" value="xcheese" />
+                                 <label for="cb35">IO14</label></li> 
+                                <li><input type="checkbox" id="cb36" name="sys" value="xcheese" />
+                                 <label for="cb36">IO15</label></li> 
+                                <li><input type="checkbox" id="cb37" name="sys" value="xcheese" />
+                                 <label for="cb37">IO16</label></li>
+                               </ul>
                               </div>
                               </div>
                               </fieldset>
@@ -244,20 +246,20 @@
                         <div class="col-lg-6">
                             <div class="row">
                                 <fieldset class="group" style=" box-shadow: 0 0 10px #999;">
-                                <legend align="center" style="width:auto">first</legend>
+                                <legend align="center" style="width:auto">Options</legend>
                                 <div style="min-width:300px;"></div>
                             </fieldset>
                                 </div>
                             <div class="row">
                             <fieldset class="group" style=" box-shadow: 0 0 10px #999;">
-                                <legend align="center" style="width:auto">first</legend>
+                                <legend align="center" style="width:auto">Data</legend>
                                 <div style="min-width:300px;" ></div>
                             </fieldset>
                             </div>
                          </div>    
                         <div class="col-lg-6">
                             <fieldset class="group" style=" box-shadow: 0 0 10px #999;">
-                                <legend align="center" style="width:auto">first</legend> 
+                                <legend align="center" style="width:auto">Settings</legend> 
                                 <div style="margin-left:5px; margin-right:5px;font-size:small">
                                     <label for="baud" >BaudRate</label>&nbsp;
                                     <select id="baud" class="btn dropdown btn-group" style="border:1px solid chocolate;font-size:small">
@@ -278,33 +280,49 @@
                                         <option value="0">Even</option>
                                     </select>&nbsp;&nbsp;
                                     </div>
+                                <div>
+                                    <asp:Label runat="server" Text="16-bit HexCode"></asp:Label>
+                                </div>
+                                
+                                <div class="row" style="margin-left:5px; margin-right:15px;font-size:small">
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <label for="tb1">Projector ON</label>&nbsp;</div>
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <input type="text" class="form-control" /></div></div>
+                                 <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <label for="tb2">Projector OFF</label>&nbsp;</div>
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <input type="text" class="form-control" /></div></div>
+                                 <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <label for="tb3">Video</label>&nbsp;</div>
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <input type="text" class="form-control" /></div></div>
+                                 <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <label for="tb4">VGA</label>&nbsp;</div>
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <input type="text" class="form-control" /></div></div>
+                                 <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <label for="tb5">HDMI</label>&nbsp;</div>
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <input type="text" class="form-control" /></div></div>
                                 <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
-                                <label for="tb1">tb1</label>&nbsp;
-                                <input type="text" class="form-control" /></div>
-                                 <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
-                                <label for="tb2">tb2</label>&nbsp;
-                                <input type="text" class="form-control" /></div>
-                                 <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
-                                <label for="tb3">tb3</label>&nbsp;
-                                <input type="text" class="form-control" /></div>
-                                 <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
-                                <label for="tb4">tb4</label>&nbsp;
-                                <input type="text" class="form-control" /></div>
-                                 <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
-                                <label for="tb5">tb5</label>&nbsp;
-                                <input type="text" class="form-control" /></div>
-                                <div class="row" style="margin-left:5px; margin-right:5px;font-size:small">
-                                <label for="tb6">tb6</label>&nbsp;
-                                <input type="text" class="form-control" /></div>
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <label for="tb6">SLEEP</label>&nbsp;</div>
+                                <div class="col" style="margin-left:5px; margin-right:15px;font-size:small">
+                                    <input type="text" class="form-control" /></div></div>
                                 <div class="row" style=" text-align:center">
                                     <div class="col">
-                                        <input type="button" class="btn btn-group" value="ok"/>
+                                        <input type="button" id="projok" class="btn btn-group border-dark" value="ok"/>
                                     </div>
                                     <div class="col">
-                                        <input type="button" class="btn btn-group" value="save" />
+                                        <input type="button" id="projsave" class="btn btn-group border-dark" value="save" />
                                     </div>
                                     <div class="col">
-                                        <input type="button" class="btn btn-group" value="Cancel" />
+                                        <input type="button" id="projcancle" class="btn btn-group border-dark" value="Cancel" />
                                     </div>
                                 </div>
                             </fieldset>
@@ -474,10 +492,10 @@
                     </div>
                     <div class="row" style="width:80%" >
                       <div class="col" style="text-align:center">
-                    <input type="button" class="btn-info customButton"  value="Read Configurations" />
+                    <input type="button" class="btn btn-default  customButton border-dark" id="powerok"  value="save" />
                     </div>
                     <div class="col" style="text-align:center">
-                    <input type="button" class="btn-info customButton"  value="Write Configurations" />
+                    <input type="button" class="btn btn-default customButton border-dark" id="powercancel" value="Cancel" />
                      </div>
                           </div>
                 </ContentTemplate>
@@ -537,13 +555,13 @@
                             </div>
                     <div class="row" style=" text-align:center;width:80%">
                                     <div class="col">
-                                        <input type="button" class="btn btn-group" value="ok"/>
+                                        <input type="button" class="btn btn-group border-dark" id="recok" value="ok"/>
                                     </div>
                                     <div class="col">
-                                        <input type="button" class="btn btn-group" value="save" />
+                                        <input type="button" class="btn btn-group border-dark" id="recsave" value="save" />
                                     </div>
                                     <div class="col">
-                                        <input type="button" class="btn btn-group" value="Cancel" />
+                                        <input type="button" class="btn btn-group border-dark" id="reccancel" value="Cancel" />
                                     </div>
                                 </div>
                 </ContentTemplate>
@@ -590,8 +608,8 @@
                             </select>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12">
-                            <label for="parity3" style="font-size:small">Parity &nbsp;</label>
-                            <select id="parity3" class="btn dropdown btn-group" style="border:1px solid chocolate;font-size:small">
+                            <label for="parity2" style="font-size:small">Parity &nbsp;</label>
+                            <select id="parity2" class="btn dropdown btn-group" style="border:1px solid chocolate;font-size:small">
                                 <option value="-1">none</option>
                                 <option value="1">Odd</option>
                                 <option value="0">Even</option>
@@ -639,13 +657,13 @@
                     </div>
                     <div class="row" style="text-align:center;width:80%;margin-left:5px;">
                                     <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <input type="button" class="btn btn-group" value="ok"/>
+                                        <input type="button" class="btn btn-group  border-dark" id="camok" value="ok"/>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <input type="button" class="btn btn-group" value="save" />
+                                        <input type="button" class="btn btn-group border-dark" id="camsave" value="save" />
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-12">
-                                        <input type="button" class="btn btn-group" value="Cancel" />
+                                        <input type="button" class="btn btn-group border-dark" id="camcancel" value="Cancel" />
                                     </div>
                                 </div>
                  </ContentTemplate>
@@ -657,7 +675,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="masterSideBody" runat="server">
     <asp:UpdatePanel runat="server">
        <ContentTemplate>
-           <div class="row " style="background-color: #bff5e9; margin-left:-25px;">
+           <div class="row " id="classchk" style="background-color: #7fe0c8; margin-left:-25px;">
                 Select Class for Configuration Settings - &nbsp;
                 <asp:CheckBoxList runat="server" ID="ddlClass" ></asp:CheckBoxList>
            </div>

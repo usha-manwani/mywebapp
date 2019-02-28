@@ -14,7 +14,7 @@
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <div class="row " id="ddl" style="background-color: #bff5e9; top:100px;" >        
+        <div class="row " id="ddl" style="background-color: #7fe0c8; top:100px;" >        
       <asp:UpdatePanel runat="server">
                          <ContentTemplate>                            
                  <div class="row" >
@@ -24,20 +24,20 @@
                      <div class=" col-lg-2 col-sm-6 float-left">
                         <asp:DropDownList Width="150px" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
-                        CssClass="btn btn-default dropdown "  ID="ddlInstitute" 
+                        CssClass="btn btn-default border dropdown"  ID="ddlInstitute" 
                         data-toggle="dropdown"  runat="server" >
                         <asp:ListItem Text="select" Value=""></asp:ListItem>
                         </asp:DropDownList></div>
                     <div class="col-lg-2 col-sm-6 float-none">
                         <asp:DropDownList Width="150px" ID="ddlGrade" AutoPostBack="true"
-                            CssClass="btn btn-default dropdown" data-toggle="dropdown"  
+                            CssClass="btn btn-default border dropdown" data-toggle="dropdown"  
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" >
                             <asp:ListItem Text="select" Value=""></asp:ListItem>
                         </asp:DropDownList>                        
                     </div>
                     <div class="col-lg-2 col-sm-6 float-left">
                         <asp:DropDownList  ID="ddlClass" Width="150px" AutoPostBack="true" 
-                              runat="server" CssClass="btn btn-default dropdown" 
+                              runat="server" CssClass="btn btn-default border dropdown" 
                             data-toggle="dropdown" OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" >
                             <asp:ListItem Text="select" Value=""></asp:ListItem>
                         </asp:DropDownList>
@@ -160,7 +160,7 @@
                                  <canvas id="myChart"  height="100"></canvas>
                             </div>
                         </div>
-                         <br /><br /><br />
+                         <br /><br /><br /><br /><br />
                     </div>
                     
                     <div class="col-lg-6 col-md-12  col-sm-12" >
@@ -170,7 +170,7 @@
                                  <canvas id="myChart1"  height="100"></canvas>
                             </div>
                         </div>
-                         <br /><br /><br />                    
+                         <br /><br /><br /><br /><br />                    
                     </div>
                 </div>                              
                 <div class="row">
@@ -181,7 +181,7 @@
                                  <canvas id="myChart2"  height="100"></canvas>
                             </div>
                         </div>
-                         <br /><br /><br />
+                         <br /><br /><br /><br /><br />
                     </div>
                     
                     <div class="col-lg-6 col-md-12  col-sm-12" >
@@ -191,7 +191,7 @@
                                  <canvas id="myChart3"  height="100"></canvas>
                             </div>
                         </div>
-                         <br /><br /><br />                    
+                         <br /><br /><br /> <br /><br />                   
                     </div>
                 </div>              
                 <div class="row">
@@ -202,7 +202,7 @@
                                  <canvas id="myChart4"  height="100"></canvas>
                             </div>
                         </div>
-                         <br /><br /> <br />
+                         <br /><br /> <br /><br /><br />
                     </div>
                     
                     <div class="col-lg-6 col-md-12  col-sm-12" >
@@ -212,7 +212,7 @@
                                  <canvas id="myChart5"  height="100"></canvas>
                             </div>
                         </div>
-                       <br /><br />
+                       <br /><br /><br />
                     </div>
                 </div>
             </div><!-- .animated -->

@@ -977,15 +977,17 @@ namespace WebCresij
         #endregion
 
         #region Schedule
-        public void setSchedule(string ip,string classID,string starttime, 
+        public int setSchedule(string ip,string classID,string starttime, 
             string stoptime, string timer,
             string mon,string tue,string wed,string thu,
             string fri, string sat,string sun)
         {
+            int success = 0;
             using(SqlConnection con = new SqlConnection(constr))
             {
                 try
                 {
+                    
                     using(SqlCommand cmd = new SqlCommand("updateSchedule", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -1004,8 +1006,38 @@ namespace WebCresij
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
-                            cmd.ExecuteNonQuery();
                         }
+                        success = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception)
+                {
+                    success = -1;
+                }
+                finally
+                {
+                    con.Close();
+                }
+
+            }
+            return success;
+        }
+
+        public void DelOldSchedule(string ClassID)
+        {
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand("DelSchedule", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ClassID", ClassID);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        cmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception)
@@ -1016,7 +1048,6 @@ namespace WebCresij
                 {
                     con.Close();
                 }
-
             }
         }
         #endregion

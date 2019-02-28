@@ -15,6 +15,12 @@ function checkTime() {
         alert("gone");
     }
 }
+function timeset2() {
+    alert("same time");
+}
+function timesetSame() {
+    alert("Start Time and End Time should be different !!");
+}
 function timewrong() {
     alert("Please insert time in right format\n Correct Format Should be for example - '00:00-00:00'");
 }
@@ -32,6 +38,12 @@ function importFile() {
 }
 function importEmptyFile() {
     alert("Schedule data in excel file is not in required format.\n Please create excel file as below table format!!");
+}
+function AlertSuccess() {
+    alert("Schedule successfully saved!!");
+}
+function AlertFail() {
+    alert("Some error occured!! Please try again!!");
 }
 function fileFormat() {
     alert("Please insert data in excel without leave initial row(s)and column(s)!!");

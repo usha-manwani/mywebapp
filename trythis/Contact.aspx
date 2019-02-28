@@ -70,8 +70,9 @@
                                      <div class="col" style="width:250px; ">                            
                             <div class="form-group" style="padding-top:2em;">
                                 <asp:Label runat="server" Text="Issue" AssociatedControlID="issueList"></asp:Label>
-                                <asp:DropDownList runat="server" ID="issueList" onChange="javascript:selectedval();" 
-                                    CssClass="form-control" Width="250px">
+                                <asp:DropDownList runat="server" ID="issueList" 
+                                    onChange="javascript:selectedval();" 
+                                    CssClass="btn btn-default border dropdown form-control" Width="250px">
                                     <asp:ListItem Text="Camera Offline" Value="1"></asp:ListItem>
                                     <asp:ListItem Text="Unable to manage Camera Details" Value="2"></asp:ListItem>
                                     <asp:ListItem Text="Unable to manage User Details" Value="3"></asp:ListItem>
