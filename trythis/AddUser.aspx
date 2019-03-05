@@ -2,7 +2,7 @@
 <%@ MasterType VirtualPath="~/Master.master" %>
 <%@Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
  <asp:Content ID="Head" ContentPlaceHolderID="masterHead" runat="server">
-     <style>       
+        <style>       
           .leftspace{
               margin-left:20px;
               width:inherit;
@@ -27,7 +27,7 @@
               outline:0;
               width:600px;
           }
-    </style>
+        </style>
     <link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="Stylesheet" type="text/css" />
     <script src="http://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>

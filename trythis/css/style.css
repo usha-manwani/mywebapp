@@ -238,7 +238,7 @@ ul.top-menu > li > .logout {
 #sidebar {
     width: 250px;
     display: inline-block;
-    height: 90%;
+    height: 100%;
     position: fixed;
     background: #2f323a;    
     font-family: 'Ruda', sans-serif;

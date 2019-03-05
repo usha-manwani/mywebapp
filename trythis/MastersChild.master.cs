@@ -58,22 +58,19 @@ namespace WebCresij
                     dtGrade.Merge(dtChild);
                     PopulateTreeView(dtChild, int.Parse(child.Value), child);
                 }
-                //else
-                //{
-                //    if (ParentId != 0)
-                //    {
-                //        treeNode.ChildNodes.Add(child);
-                //        DataTable dtclass = ExecuteCommand("Select ClassName, Id,ClassID from Class_Details where GradeID='" + val + "'");
-                //        dtClass.Merge(dtclass);
-                //        if (dtclass.Rows.Count == 0)
-                //        {
-                //            tree.cam(TreeMenuView, val, child);
-                //        }
-                //        PopulateTreeView(dtclass, int.Parse(child.Value), child);
-                //    }
                 else
-                    treeNode.ChildNodes.Add(child);
-                //}
+                {
+                    if (ParentId != 0)
+                    {
+                        treeNode.ChildNodes.Add(child);
+                        DataTable dtclass = ExecuteCommand("Select ClassName, Id,ClassID from Class_Details where GradeID='" + val + "'");
+                        dtClass.Merge(dtclass);
+                        
+                        PopulateTreeView(dtclass, int.Parse(child.Value), child);
+                    }
+                    else
+                        treeNode.ChildNodes.Add(child);
+                }
             }
             TreeMenuView.CollapseAll();
         }

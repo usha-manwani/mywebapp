@@ -399,16 +399,25 @@
     <Content Include="Images\button_stop.png" />
     <Content Include="Images\Camera.png" />
     <Content Include="Images\close.png" />
+    <Content Include="Images\CurtainOpenWhite.png" />
+    <Content Include="Images\icons\ACBlack.png" />
+    <Content Include="Images\icons\ACGreen.png" />
+    <Content Include="Images\icons\ACRed.png" />
+    <Content Include="Images\icons\ACWhite.png" />
+    <Content Include="Images\icons\Airblack.png" />
+    <Content Include="Images\icons\AirGreen.png" />
+    <Content Include="Images\icons\AirRed.png" />
+    <Content Include="Images\icons\AirWhite.png" />
     <Content Include="Images\icons\curtainCloseGreen.png" />
     <Content Include="Images\icons\curtainCloseRed.png" />
     <Content Include="Images\curtainCloseWhite.png" />
+    <Content Include="Images\icons\CurtainCloseWhite.png" />
     <Content Include="Images\icons\CurtainOpenGreen.png" />
     <Content Include="Images\icons\curtainOpenRed.png" />
+    <Content Include="Images\icons\CurtainOpenWhite.png" />
     <Content Include="Images\icons\curtainStopGreen.png" />
     <Content Include="Images\icons\curtainStopRed.png" />
     <Content Include="Images\curtainStopwhite.png" />
-    <Content Include="Images\icons\curtainOpenWhite.png" />
-    <Content Include="Images\icons\curtainStopwhite.png" />
     <Content Include="Images\Desktop.png" />
     <Content Include="Images\down.PNG" />
     <Content Include="Images\DVD.png" />
@@ -433,7 +442,7 @@
     <Content Include="Images\icons\curtain3.png" />
     <Content Include="Images\icons\curtain4.png" />
     <Content Include="Images\icons\curtain5.png" />
-    <Content Include="Images\icons\curtainCloseWhite.png" />
+    <Content Include="Images\icons\CurtainStopWhite.png" />
     <Content Include="Images\icons\deskblack.png" />
     <Content Include="Images\icons\deskgreen.png" />
     <Content Include="Images\icons\deskred.png" />
@@ -584,7 +593,6 @@
     <Content Include="Images\icons\teachcamblack.png" />
     <Content Include="Images\icons\teachcamgreen.png" />
     <Content Include="Images\icons\teachcamwhite.png" />
-    <Content Include="Images\icons\tvblack.png" />
     <Content Include="Images\icons\tvbtnblack.png" />
     <Content Include="Images\icons\tvbtngreen.png" />
     <Content Include="Images\icons\tvbtnred.png" />
@@ -1344,6 +1352,16 @@
     <Compile Include="RemoveUsers.aspx.designer.cs">
       <DependentUpon>RemoveUsers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Chinese-Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Chinese-Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\English-Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>English-Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1476,6 +1494,18 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Chinese-Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Chinese-Resource.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\English-Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>English-Resource.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -108,7 +108,7 @@
         text-align: left;
     }
     #sidebar > ul > li > a i{
-        /*display: none !important;*/
+        display: none !important;
     }
     .mail-info, .mail-info:hover {
         display: none !important;

@@ -76,11 +76,11 @@ namespace WebCresij
             string query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
                 " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
                 "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
-         + " where ClassID = '"+ ClassID +"' order by StartTime asc";
+         + " where ClassID = '" + ClassID + "' order by StartTime asc";
             DataTable dt = PopulateTree.ExecuteCommand(query);
             if (dt.Rows.Count > 0)
             {
-                if(dt.Rows[0]["timer"].ToString() == "true")
+                if (dt.Rows[0]["timer"].ToString() == "true")
                 {
                     chkTimer.Checked = true;
                 }
@@ -238,7 +238,7 @@ namespace WebCresij
                 DataRow drCurrentRow = null;
                 try
                 {
-                   // SetPreviousData();
+                    // SetPreviousData();
                     DataTable dt = (DataTable)excelgrd.DataSource;
                     drCurrentRow = dt.NewRow();
                     drCurrentRow["Time"] = "00:00-00:00";
@@ -271,7 +271,7 @@ namespace WebCresij
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         //extract the TextBox values
-                        TextBox txtTime=(TextBox)excelgrd.Rows[rowIndex].Cells[1].FindControl("txtTime");
+                        TextBox txtTime = (TextBox)excelgrd.Rows[rowIndex].Cells[1].FindControl("txtTime");
                         TextBox txtMon = (TextBox)excelgrd.Rows[rowIndex].Cells[2].FindControl("txtMon");
                         TextBox txtTue = (TextBox)excelgrd.Rows[rowIndex].Cells[3].FindControl("txtTue");
                         TextBox txtWed = (TextBox)excelgrd.Rows[rowIndex].Cells[4].FindControl("txtWed");
@@ -279,7 +279,7 @@ namespace WebCresij
                         TextBox txtFri = (TextBox)excelgrd.Rows[rowIndex].Cells[6].FindControl("txtFri");
                         TextBox txtSat = (TextBox)excelgrd.Rows[rowIndex].Cells[7].FindControl("txtSat");
                         TextBox txtSun = (TextBox)excelgrd.Rows[rowIndex].Cells[8].FindControl("txtSun");
-                        txtTime.Text= dt.Rows[i]["Time"].ToString();
+                        txtTime.Text = dt.Rows[i]["Time"].ToString();
                         txtMon.Text = dt.Rows[i]["Monday"].ToString();
                         txtTue.Text = dt.Rows[i]["Tuesday"].ToString();
                         txtWed.Text = dt.Rows[i]["Wednesday"].ToString();
@@ -293,7 +293,7 @@ namespace WebCresij
                     drCurrentRow["Time"] = "00:00-00:00";
                     dt.Rows.Add(drCurrentRow);
                     excelgrd.DataSource = dt;
-                    excelgrd.DataBind();                    
+                    excelgrd.DataBind();
                     ViewState["CurrentTable"] = dt;
                 }
             }
@@ -307,8 +307,8 @@ namespace WebCresij
             string ClassID = ddlClass.SelectedValue;
             Button btn = (Button)sender;
             if (!string.IsNullOrEmpty(ClassID))
-            {                              
-                string ip = PopulateTree.getIP(ClassID);                
+            {
+                string ip = PopulateTree.getIP(ClassID);
                 PopulateTree populateTree = new PopulateTree();
                 populateTree.DelOldSchedule(ClassID);
                 try
@@ -317,24 +317,24 @@ namespace WebCresij
                     if (chkTimer.Checked == true)
                         timer = "true";
                     else
-                        timer = "false";                    
+                        timer = "false";
                     foreach (GridViewRow r in excelgrd.Rows)
                     {
                         string time = (r.FindControl("txtTime") as TextBox).Text;
                         int h1 = Convert.ToInt32(time.Substring(0, 2));
                         int m1 = Convert.ToInt32(time.Substring(3, 2));
                         int h2 = Convert.ToInt32(time.Substring(6, 2));
-                        int m2 = Convert.ToInt32(time.Substring(9, 2));                        
-                        if (h1 > h2 || h1 > 23 || h2 > 23 || m1 > 59 || m2 > 59 )
-                        {                           
+                        int m2 = Convert.ToInt32(time.Substring(9, 2));
+                        if (h1 > h2 || h1 > 23 || h2 > 23 || m1 > 59 || m2 > 59)
+                        {
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "time2", "timeset();", true);
-                            continue;                                                       
+                            continue;
                         }
-                        if(btn.Text=="Save" && h1==h2 && m1 == m2)
+                        if (btn.Text == "Save" && h1 == h2 && m1 == m2)
                         {
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "time3", "timesetSame();", true);
                             continue;
-                        }                       
+                        }
                         string mon = (r.FindControl("txtMon") as TextBox).Text;
                         string tue = (r.FindControl("txtTue") as TextBox).Text;
                         string wed = (r.FindControl("txtWed") as TextBox).Text;
@@ -371,13 +371,13 @@ namespace WebCresij
                         if (string.IsNullOrEmpty(sun) && string.IsNullOrWhiteSpace(sun))
                         {
                             sun = "";
-                        }                        
+                        }
                         int success = populateTree.setSchedule(ip, ClassID, starttime, stoptime, timer, mon, tue, wed, thu, fri, sat, sun);
-                        if (success >= 0 && btn.Text=="Save")
+                        if (success >= 0 && btn.Text == "Save")
                         {
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "Success", "AlertSuccess();", true);
-                        }                        
-                        else if(success<0 && btn.Text=="Save")
+                        }
+                        else if (success < 0 && btn.Text == "Save")
                         {
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "Fail", "AlertFail();", true);
                         }
@@ -395,7 +395,7 @@ namespace WebCresij
             if (btn.Text != "Save")
             {
                 addnewrow();
-            } 
+            }
         }
         protected void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -437,7 +437,7 @@ namespace WebCresij
         }
         protected void importExcel_Click(object sender, EventArgs e)
         {
-            string fileName="";
+            string fileName = "";
             try
             {
                 int count = 0;
@@ -453,7 +453,7 @@ namespace WebCresij
                 }
                 fileName = fn;
                 fuSample.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fileName);
-                DataTable dt= GetDataTableFromExcel(Server.MapPath("~/Uploads/") + fileName, true);
+                DataTable dt = GetDataTableFromExcel(Server.MapPath("~/Uploads/") + fileName, true);
                 excelgrd.DataSource = dt;
                 excelgrd.DataBind();
                 if (excelgrd.Rows.Count == 0)
@@ -471,7 +471,7 @@ namespace WebCresij
             {
                 export.Visible = true;
                 if (!string.IsNullOrEmpty(fileName))
-                File.Delete(Server.MapPath("~/Uploads/") + fileName);
+                    File.Delete(Server.MapPath("~/Uploads/") + fileName);
             }
         }
         public static DataTable GetDataTableFromExcel(string path, bool hasHeader = true)
@@ -489,21 +489,21 @@ namespace WebCresij
                     tbl.Columns.Add(hasHeader ? firstRowCell.Text : string.Format("Column {0}", firstRowCell.Start.Column));
                 }
                 var startRow = hasHeader ? 2 : 1;
-                
-                   
-                    for (int rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
+
+
+                for (int rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
+                {
+                    var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
+                    DataRow row = tbl.Rows.Add();
+                    foreach (var cell in wsRow)
                     {
-                        var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
-                        DataRow row = tbl.Rows.Add();
-                        foreach (var cell in wsRow)
-                        {
-                            row[cell.Start.Column - 1] = cell.Text;
-                        }
+                        row[cell.Start.Column - 1] = cell.Text;
                     }
-                
-              
+                }
+
+
                 return tbl;
-            }           
+            }
         }
     }
 }
