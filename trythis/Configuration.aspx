@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeBehind="Configuration.aspx.cs" Inherits="WebCresij.Configuration" %>
-
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
     <link href="css/Configcss.css" rel="stylesheet" />
@@ -10,12 +9,12 @@
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
     <script src="Scripts/Config.js"></script>
     <div>
-        <div style="background-color: #7fe0c8; top: 20px;">
+        <div style="background-color: #4ecdc4; margin-left:-25px;">
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <div class="row">
                         <div class="col-lg-3 col-sm-12 col-md-12 ">
-                            Select Institute and Grade - &nbsp;
+                            <span><%=Resources.Resource.SelectInsGrade%></span> - &nbsp;
                         </div>
                         <div class=" col-lg-2 col-sm-6 col-md-6 float-left">
                             <asp:DropDownList Width="150px" AutoPostBack="true"
@@ -43,60 +42,60 @@
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
                         <img src="Images/icons/deskblack.png" height="15" width="15" />&nbsp;
-                    System Setup
+                    <span><%=Resources.Resource.SystemSetup%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
                         <fieldset class="group" style="width: 80%">
-                            <legend align="center" style="width: auto">Configuration Settings</legend>
+                            <legend align="center" style="width: auto"><span><%=Resources.Resource.ConfigSettings%></span></legend>
                             <div class="row">
                                 <div class="col-lg-6 col-sm-12 col-md-12" style="font-size: small">
                                     <ul class="checkbox">
                                         <li>
                                             <input type="checkbox" id="cb1" name="sys" value="pepperoni" />
-                                            <label for="cb1">Projector auto Boot</label></li>
+                                            <label for="cb1"><span><%=Resources.Resource.ProjAutoBoot%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb2" name="sys" value="sausage" />
-                                            <label for="cb2">Projector auto Shutdown</label></li>
+                                            <label for="cb2"><span><%=Resources.Resource.ProjAutoShut%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb3" name="sys" value="mushrooms" />
-                                            <label for="cb3">Screen Down</label></li>
+                                            <label for="cb3"><span><%=Resources.Resource.ScDownProj%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb4" name="sys" value="onions" />
-                                            <label for="cb4">Computer Auto Boot</label></li>
+                                            <label for="cb4"><span><%=Resources.Resource.CompAutoBoot%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb5" name="sys" value="gpeppers" />
-                                            <label for="cb5">Computer Auto Shutdown</label></li>
+                                            <label for="cb5"><span><%=Resources.Resource.CompAutoShut%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb6" name="sys" value="xcheese" />
-                                            <label for="cb6>">Projector Auto Switch</label></li>
+                                            <label for="cb6>"><span><%=Resources.Resource.ProjAutoSwitch%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb7" name="sys" value="pepperoni" />
-                                            <label for="cb7">Screen down with Projector On</label></li>
+                                            <label for="cb7"><span><%=Resources.Resource.ScreenDownWithProj%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb8" name="sys" value="sausage" />
-                                            <label for="cb8">Screen up with Projector Off</label></li>
+                                            <label for="cb8"><span><%=Resources.Resource.ScreenUPWithProj%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb9" name="sys" value="mushrooms" />
-                                            <label for="cb9">Volume On</label></li>
+                                            <label for="cb9"><span><%=Resources.Resource.VolumeOn%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb10" name="sys" value="onions" />
-                                            <label for="cb10">Buzzer On</label></li>
+                                            <label for="cb10"><span><%=Resources.Resource.TurnOnBuzzer%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb11" name="sys" value="gpeppers" />
-                                            <label for="cb11">IO Detection and Shutdown</label></li>
+                                            <label for="cb11"><span><%=Resources.Resource.IOShutDown%></span></label></li>
                                         <li>
-                                            <label for="delayminutes">Projector Shutdown Delay</label>
+                                            <label for="delayminutes"><span><%=Resources.Resource.projectorDelayShut%></span></label>
                                             <select name="delayminutes" id="delaymin" class="btn btn-default dropdown"
                                                 style="border: 1px solid chocolate;">
-                                                <option value="01">1 minute</option>
-                                                <option value="02">2 minutes</option>
-                                                <option value="03">3 minutes</option>
-                                                <option value="04">4 minutes</option>
-                                                <option value="05">5 minutes</option>
-                                                <option value="06">6 minutes</option>
-                                                <option value="07">7 minutes</option>
-                                                <option value="08">8 minutes</option>
-                                                <option value="09">9 minutes</option>
+                                                <option value="01">1 <span><%=Resources.Resource.Mins%></span></option>
+                                                <option value="02">2 <span><%=Resources.Resource.Mins%></span></option>
+                                                <option value="03">3 <span><%=Resources.Resource.Mins%></span></option>
+                                                <option value="04">4 <span><%=Resources.Resource.Mins%></span></option>
+                                                <option value="05">5 <span><%=Resources.Resource.Mins%></span></option>
+                                                <option value="06">6 <span><%=Resources.Resource.Mins%></span></option>
+                                                <option value="07">7 <span><%=Resources.Resource.Mins%></span></option>
+                                                <option value="08">8 <span><%=Resources.Resource.Mins%></span></option>
+                                                <option value="09">9 <span><%=Resources.Resource.Mins%></span></option>
                                             </select>
                                         </li>
                                     </ul>
@@ -105,52 +104,52 @@
                                     <ul class="checkbox">
                                         <li>
                                             <input type="checkbox" id="cb12" name="sys" value="pepperoni" />
-                                            <label for="cb12">Projector 232 code</label></li>
+                                            <label for="cb12"><span><%=Resources.Resource.Proj232%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb13" name="sys" value="sausage" />
-                                            <label for="cb13">Send IR Code to Projector</label></li>
+                                            <label for="cb13"><span><%=Resources.Resource.ProjInfraRed%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb14" name="sys" value="gpeppers" />
-                                            <label for="cb14">IO Detection and Boot</label></li>
+                                            <label for="cb14"><span><%=Resources.Resource.IOBoot%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb15" name="sys" value="onions" />
-                                            <label for="cb15">Swipe to Open System</label></li>
+                                            <label for="cb15"><span><%=Resources.Resource.SwipeOpen%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb16" name="sys" value="peppers" />
-                                            <label for="cb16">Swipe to Shutdown System</label></li>
+                                            <label for="cb16"><span><%=Resources.Resource.SwipeClose%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb17" name="sys" value="xcheese" />
-                                            <label for="cb17">Biometric to Open System</label></li>
+                                            <label for="cb17"><span><%=Resources.Resource.FingerPrintOpen%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb18" name="sys" value="xcheese" />
-                                            <label for="cb18">Biometric to Shutdown System</label></li>
+                                            <label for="cb18"><span><%=Resources.Resource.FingerPrintClose%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb19" name="sys" value="xcheese" />
-                                            <label for="cb19">Auto shutdown system with Computer</label></li>
+                                            <label for="cb19"><span><%=Resources.Resource.CompLinkageOff%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb20" name="sys" value="xcheese" />
-                                            <label for="cb20">HDMI audio separation</label></li>
+                                            <label for="cb20"><span><%=Resources.Resource.HDMIAudioSep%></span></label></li>
                                         <li>
                                             <input type="checkbox" id="cb21" name="sys" value="xcheese" />
-                                            <label for="cb21">System Alarm</label></li>
+                                            <label for="cb21"><span><%=Resources.Resource.SystemAlarm%></span></label></li>
                                         <li>
-                                            <label for="delaySeconds">Projector Boot Delay</label>
+                                            <label for="delaySeconds"><span><%=Resources.Resource.ProjectorDelayBoot%></span></label>
                                             <select id="delaysec" name="delaySeconds" class="btn btn-default dropdown" 
                                                 style="border: 1px solid chocolate;">
-                                                <option value="01">1 seconds</option>
-                                                <option value="02">2 seconds</option>
-                                                <option value="03">3 seconds</option>
-                                                <option value="04">4 seconds</option>
-                                                <option value="05">5 seconds</option>
-                                                <option value="06">6 seconds</option>
-                                                <option value="07">7 seconds</option>
-                                                <option value="08">8 seconds</option>
-                                                <option value="09">9 seconds</option>
-                                                <option value="10">10 seconds</option>
-                                                <option value="11">11 seconds</option>
-                                                <option value="12">12 seconds</option>
-                                                <option value="13">13 seconds</option>
-                                                <option value="14">14 seconds</option>
+                                                <option value="01">1 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="02">2 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="03">3 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="04">4 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="05">5 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="06">6 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="07">7 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="08">8 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="09">9 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="10">10 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="11">11 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="12">12 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="13">13 <span><%=Resources.Resource.Seconds%></span></option>
+                                                <option value="14">14 <span><%=Resources.Resource.Seconds%></span>s</option>
                                             </select>
                                         </li>
                                     </ul>
@@ -159,7 +158,7 @@
                             <div class="row" style="padding-right: 10px;">
                                 <div class="col-lg-6 col-sm-12 col-md-12">
                                     <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                        <legend style="width: auto" align="center">Alarm</legend>
+                                        <legend style="width: auto" align="center"><span><%=Resources.Resource.Alarm%></span></legend>
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: x-small">
                                                 <ul class="checkbox">
@@ -222,7 +221,7 @@
                                 </div>
                                 <div class="col-lg-6 col-sm-12 col-md-12">
                                     <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                        <legend style="width: auto" align="center">Input/Output</legend>
+                                        <legend style="width: auto" align="center"><span><%=Resources.Resource.IO%></span></legend>
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: x-small;">
                                                 <ul class="checkbox">
@@ -286,10 +285,12 @@
                             </div>
                             <div class="row">
                                 <div class="col" style="text-align: center">
-                                    <input type="button" class="btn-info customButton" id="readConfig" value="Read Configurations" />
+                                    <button class="btn-info customButton" id="readConfig"
+                                        value="Read Configuration"  ><span><%=Resources.Resource.ReadConfig%></span></button>
                                 </div>
                                 <div class="col" style="text-align: center">
-                                    <input type="button" class="btn-info customButton" id="writeConfig" value="Write Configurations" />
+                                    <button class="btn-info customButton" id="writeConfig"
+                                        value="Write Configuration" ><span><%=Resources.Resource.WriteConfig%></span></button>
                                 </div>
                             </div>
                         </fieldset>
@@ -299,29 +300,29 @@
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
                         <img src="Images/icons/project4.png" height="15px" width="15px" />&nbsp;
-                    Projector
+                    <span><%=Resources.Resource.Projector%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
                         <div class="row" style="margin-right: 5px;">
                             <div class="col-lg-6">
                                 <div class="row">
                                     <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                        <legend align="center" style="width: auto">Options</legend>
+                                        <legend align="center" style="width: auto"><span><%=Resources.Resource.Options%></span></legend>
                                         <div style="min-width: 300px;"></div>
                                     </fieldset>
                                 </div>
                                 <div class="row">
                                     <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                        <legend align="center" style="width: auto">Data</legend>
+                                        <legend align="center" style="width: auto"><span><%=Resources.Resource.Data%></span></legend>
                                         <div style="min-width: 300px;"></div>
                                     </fieldset>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                    <legend align="center" style="width: auto">Settings</legend>
+                                    <legend align="center" style="width: auto"><span><%=Resources.Resource.SettingsMenu%></span></legend>
                                     <div style="margin-left: 5px; margin-right: 5px; font-size: small">
-                                        <label for="baud">BaudRate</label>&nbsp;
+                                        <label for="baud"><span><%=Resources.Resource.BaudRate%></span></label>&nbsp;
                                     <select id="baud" class="btn dropdown btn-group" 
                                         style="border: 1px solid chocolate; font-size: small">
                                         <option value="1">1200</option>
@@ -334,21 +335,21 @@
                                         <option value="8">76800</option>
                                         <option value="9">115200</option>
                                     </select>&nbsp;&nbsp;
-                                    <label for="parity">Parity</label>&nbsp;
+                                    <label for="parity"><span><%=Resources.Resource.Parity%></span></label>&nbsp;
                                     <select id="parity" class="btn dropdown btn-group" 
                                         style="border: 1px solid chocolate; font-size: small; margin-right: 5px;">
-                                        <option value="-1">none</option>
-                                        <option value="1">Odd</option>
-                                        <option value="0">Even</option>
+                                        <option value="-1"><span><%=Resources.Resource.none%></span></option>
+                                        <option value="1"><span><%=Resources.Resource.Odd%></span></option>
+                                        <option value="0"><span><%=Resources.Resource.Even%></span></option>
                                     </select>&nbsp;&nbsp;
                                     </div>
                                     <div>
-                                        <asp:Label runat="server" Text="16-bit HexCode"></asp:Label>
+                                        <asp:Label runat="server" Text="<%$Resources:Resource, HexCode %>"></asp:Label>
                                     </div>
 
                                     <div class="row" style="margin-left: 5px; margin-right: 15px; font-size: small">
                                         <div class="col" style="margin-left: 5px; margin-right: 15px; font-size: small">
-                                            <label for="tb1">Projector ON</label>&nbsp;
+                                            <label for="tb1"><span><%=Resources.Resource.ProjOn%></span></label>&nbsp;
                                         </div>
                                         <div class="col" style="margin-left: 5px; margin-right: 15px; font-size: small">
                                             <input type="text" class="form-control" />
@@ -356,7 +357,7 @@
                                     </div>
                                     <div class="row" style="margin-left: 5px; margin-right: 5px; font-size: small">
                                         <div class="col" style="margin-left: 5px; margin-right: 15px; font-size: small">
-                                            <label for="tb2">Projector OFF</label>&nbsp;
+                                            <label for="tb2"><span><%=Resources.Resource.ProjOff%></span></label>&nbsp;
                                         </div>
                                         <div class="col" style="margin-left: 5px; margin-right: 15px; font-size: small">
                                             <input type="text" class="form-control" />
@@ -364,7 +365,7 @@
                                     </div>
                                     <div class="row" style="margin-left: 5px; margin-right: 5px; font-size: small">
                                         <div class="col" style="margin-left: 5px; margin-right: 15px; font-size: small">
-                                            <label for="tb3">Video</label>&nbsp;
+                                            <label for="tb3"><span><%=Resources.Resource.Video%></span></label>&nbsp;
                                         </div>
                                         <div class="col" style="margin-left: 5px; margin-right: 15px; font-size: small">
                                             <input type="text" class="form-control" />
@@ -388,7 +389,7 @@
                                     </div>
                                     <div class="row" style="margin-left: 5px; margin-right: 5px; font-size: small">
                                         <div class="col" style="margin-left: 5px; margin-right: 15px; font-size: small">
-                                            <label for="tb6">SLEEP</label>&nbsp;
+                                            <label for="tb6"><span><%=Resources.Resource.Sleep%></span></label>&nbsp;
                                         </div>
                                         <div class="col" style="margin-left: 5px; margin-right: 15px; font-size: small">
                                             <input type="text" class="form-control" />
@@ -396,13 +397,18 @@
                                     </div>
                                     <div class="row" style="text-align: center">
                                         <div class="col">
-                                            <input type="button" id="projok" class="btn btn-group border-dark" value="ok" />
+                                            <button id="projok" class="btn btn-group border-dark" value="Cancel" >
+                                                <span><%=Resources.Resource.Ok%></span></button>
                                         </div>
                                         <div class="col">
-                                            <input type="button" id="projsave" class="btn btn-group border-dark" value="save" />
+                                            <button id="projsave" class="btn btn-group border-dark" value="Cancel" >
+                                                <span><%=Resources.Resource.Save%></span>
+                                            </button>
                                         </div>
                                         <div class="col">
-                                            <input type="button" id="projcancle" class="btn btn-group border-dark" value="Cancel" />
+                                            <button id="projcancle" class="btn btn-group border-dark" value="Cancel" >
+                                                <span><%=Resources.Resource.Cancel%></span>
+                                            </button>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -413,56 +419,56 @@
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
                         <img src="Images/icons/lightblack.png" height="15px" width="15px" />&nbsp;
-                    Power
+                    <span><%=Resources.Resource.Power%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
                         <div class="row" style="margin-right: 5px;">
                             <div class="col-lg-6">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                    <legend align="center" style="width: auto" runat="server">Light 1</legend>
+                                    <legend align="center" style="width: auto" runat="server"><span><%=Resources.Resource.Light%></span>1</legend>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: small">
                                             <ul class="checkbox">
                                                 <li>
                                                     <input type="checkbox" id="bc1" name="light1" value="pepperoni" />
-                                                    <label for="bc1">Light 1 On</label></li>
+                                                    <label for="bc1"><span><%=Resources.Resource.Light%></span> 1 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc2" name="light1" value="pepperoni" />
-                                                    <label for="bc2">Light 2 On</label></li>
+                                                    <label for="bc2"><span><%=Resources.Resource.Light%></span> 2 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc3" name="light1" value="pepperoni" />
-                                                    <label for="bc3">Light 3 On</label></li>
+                                                    <label for="bc3"><span><%=Resources.Resource.Light%></span> 3 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc4" name="light1" value="pepperoni" />
-                                                    <label for="bc4">Light 4 On</label></li>
+                                                    <label for="bc4"><span><%=Resources.Resource.Light%></span> 4 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc5" name="light1" value="pepperoni" />
-                                                    <label for="bc5">Light 5 On</label></li>
+                                                    <label for="bc5"><span><%=Resources.Resource.Light%></span> 5 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc6" name="light1" value="pepperoni" />
-                                                    <label for="bc6">Light 6 On</label></li>
+                                                    <label for="bc6"><span><%=Resources.Resource.Light%></span> 6<span><%=Resources.Resource.AutoOn%></span></label></li>
                                             </ul>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: small">
                                             <ul class="checkbox">
                                                 <li>
                                                     <input type="checkbox" id="bc7" name="light1" value="pepperoni" />
-                                                    <label for="bc7">Light 1 Off</label></li>
+                                                    <label for="bc7"><span><%=Resources.Resource.Light%></span> 1 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc8" name="light1" value="pepperoni" />
-                                                    <label for="bc8">Light 2 Off</label></li>
+                                                    <label for="bc8"><span><%=Resources.Resource.Light%></span> 2 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc9" name="light1" value="pepperoni" />
-                                                    <label for="bc9">Light 3 Off</label></li>
+                                                    <label for="bc9"><span><%=Resources.Resource.Light%></span> 3 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc10" name="light1" value="pepperoni" />
-                                                    <label for="bc10">Light 4 Off</label></li>
+                                                    <label for="bc10"><span><%=Resources.Resource.Light%></span> 4 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc11" name="light1" value="pepperoni" />
-                                                    <label for="bc11">Light 5 Off</label></li>
+                                                    <label for="bc11"><span><%=Resources.Resource.Light%></span> 5 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc12" name="light1" value="pepperoni" />
-                                                    <label for="bc12">Light 6 Off</label></li>
+                                                    <label for="bc12"><span><%=Resources.Resource.Light%></span> 6 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -471,50 +477,50 @@
                             </div>
                             <div class="col-lg-6">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                    <legend align="center" style="width: auto">Light 2</legend>
+                                    <legend align="center" style="width: auto"><span><%=Resources.Resource.Light%></span> 2</legend>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: small">
                                             <ul class="checkbox">
                                                 <li>
                                                     <input type="checkbox" id="bc13" name="light2" value="pepperoni" />
-                                                    <label for="bc13">Light 7 On</label></li>
+                                                    <label for="bc13"><%=Resources.Resource.Light%></span> 7 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc14" name="light2" value="pepperoni" />
-                                                    <label for="bc14">Light 8 On</label></li>
+                                                    <label for="bc14"><%=Resources.Resource.Light%></span> 8 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc15" name="light2" value="pepperoni" />
-                                                    <label for="bc15">Light 9 On</label></li>
+                                                    <label for="bc15"><%=Resources.Resource.Light%></span> 9 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc16" name="light2" value="pepperoni" />
-                                                    <label for="bc16">Light 10 On</label></li>
+                                                    <label for="bc16"><%=Resources.Resource.Light%></span> 10 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc17" name="light2" value="pepperoni" />
-                                                    <label for="bc17">Light 11 On</label></li>
+                                                    <label for="bc17"><%=Resources.Resource.Light%></span> 11 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc18" name="light2" value="pepperoni" />
-                                                    <label for="bc18">Light 12 On</label></li>
+                                                    <label for="bc18"><%=Resources.Resource.Light%></span> 12 <span><%=Resources.Resource.AutoOn%></span></label></li>
                                             </ul>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: small">
                                             <ul class="checkbox">
                                                 <li>
                                                     <input type="checkbox" id="bc19" name="light2" value="pepperoni" />
-                                                    <label for="bc19">Light 7 Off</label></li>
+                                                    <label for="bc19"><%=Resources.Resource.Light%></span> 7 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc20" name="light2" value="pepperoni" />
-                                                    <label for="bc20">Light 8 Off</label></li>
+                                                    <label for="bc20"><%=Resources.Resource.Light%></span> 8 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc21" name="light2" value="pepperoni" />
-                                                    <label for="bc21">Light 9 Off</label></li>
+                                                    <label for="bc21"><%=Resources.Resource.Light%></span> 9 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc22" name="light2" value="pepperoni" />
-                                                    <label for="bc22">Light 10 Off</label></li>
+                                                    <label for="bc22"><%=Resources.Resource.Light%></span> 10 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc23" name="light2" value="pepperoni" />
-                                                    <label for="bc23">Light 11 Off</label></li>
+                                                    <label for="bc23"><%=Resources.Resource.Light%></span> 11 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                                 <li>
                                                     <input type="checkbox" id="bc24" name="light2" value="pepperoni" />
-                                                    <label for="bc24">Light 12 Off</label></li>
+                                                    <label for="bc24"><%=Resources.Resource.Light%></span> 12 <span><%=Resources.Resource.AutoOff%></span></label></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -524,53 +530,53 @@
                         <div class="row" style="margin-right: 5px;">
                             <div class="col-lg-3 col-md-6 col-sm-12" style="font-size: small">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                    <legend style="width: auto" align="center">Curtain 1</legend>
+                                    <legend style="width: auto" align="center"><span><%=Resources.Resource.Curtain%></span> 1</legend>
                                     <ul class="checkbox">
                                         <li>
                                             <input type="checkbox" id="w1" name="w1" value="pepperoni" />
-                                            <label for="w1">Curtain 1 Open</label></li>
+                                            <label for="w1"><%=Resources.Resource.Curtain%> 1 <%=Resources.Resource.AutoOn%></label></li>
                                         <li>
                                             <input type="checkbox" id="w11" name="w1" value="pepperoni" />
-                                            <label for="w11">Curtain 1 Shutdown</label></li>
+                                            <label for="w11"><%=Resources.Resource.Curtain%> 1 <%=Resources.Resource.AutoOff%></label></li>
                                     </ul>
                                 </fieldset>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12" style="font-size: small">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                    <legend style="width: auto" align="center">Curtain 2</legend>
+                                    <legend style="width: auto" align="center"><%=Resources.Resource.Curtain%> 2</legend>
                                     <ul class="checkbox">
                                         <li>
                                             <input type="checkbox" id="w2" name="w2" value="pepperoni" />
-                                            <label for="w2">Curtain 2 Open</label></li>
+                                            <label for="w2"><%=Resources.Resource.Curtain%> 2 <%=Resources.Resource.AutoOn%></label></li>
                                         <li>
                                             <input type="checkbox" id="w22" name="w2" value="pepperoni" />
-                                            <label for="w22">Curtain 2 Shutdown</label></li>
+                                            <label for="w22"><%=Resources.Resource.Curtain%> 2 <%=Resources.Resource.AutoOff%></label></li>
                                     </ul>
                                 </fieldset>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12" style="font-size: small">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                    <legend style="width: auto" align="center">Curtain 3</legend>
+                                    <legend style="width: auto" align="center"><%=Resources.Resource.Curtain%> 3</legend>
                                     <ul class="checkbox">
                                         <li>
                                             <input type="checkbox" id="w3" name="w3" value="pepperoni" />
-                                            <label for="w3">Curtain 3 Open</label></li>
+                                            <label for="w3"><%=Resources.Resource.Curtain%> 3 <%=Resources.Resource.AutoOn%></label></li>
                                         <li>
                                             <input type="checkbox" id="w33" name="w33" value="pepperoni" />
-                                            <label for="w33">Curtain 3 Shutdown</label></li>
+                                            <label for="w33"><%=Resources.Resource.Curtain%> 3 <%=Resources.Resource.AutoOff%></label></li>
                                     </ul>
                                 </fieldset>
                             </div>
                             <div class="col-lg-3 col-md-6 col-sm-12" style="font-size: small">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                    <legend style="width: auto" align="center">Curtain 4</legend>
+                                    <legend style="width: auto" align="center"><%=Resources.Resource.Curtain%> 4</legend>
                                     <ul class="checkbox">
                                         <li>
                                             <input type="checkbox" id="w4" name="w4" value="pepperoni" />
-                                            <label for="w4">Curtain 4 Open</label></li>
+                                            <label for="w4"><%=Resources.Resource.Curtain%> 4 <%=Resources.Resource.AutoOn%></label></li>
                                         <li>
                                             <input type="checkbox" id="w44" name="w4" value="pepperoni" />
-                                            <label for="w44">Curtain 4 Shutdown</label></li>
+                                            <label for="w44"><%=Resources.Resource.Curtain%> 4 <%=Resources.Resource.AutoOff%></label></li>
                                     </ul>
                                 </fieldset>
                             </div>
@@ -578,30 +584,30 @@
                         <div class="row" style="margin-right: 5px;">
                             <div class=" col-lg-6">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                    <legend style="width: auto" align="center">Fresh Air System</legend>
+                                    <legend style="width: auto" align="center"><%=Resources.Resource.FreshAirSystem%></legend>
                                     <ul class="checkbox" style="font-size: small">
                                         <li style="display: inline-block">
                                             <input type="checkbox" id="air1" name="air1" value="" />
-                                            <label for="air1">Auto On</label>
+                                            <label for="air1"><%=Resources.Resource.AutoOn%></label>
                                         </li>
                                         &nbsp;&nbsp;&nbsp;<li style="display: inline-block">
                                             <input type="checkbox" id="air11" name="air1" value="" />
-                                            <label for="air11">Auto Off</label>
+                                            <label for="air11"><%=Resources.Resource.AutoOff%></label>
                                         </li>
                                     </ul>
                                 </fieldset>
                             </div>
                             <div class=" col-lg-6">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
-                                    <legend style="width: auto" align="center">Air Control System</legend>
+                                    <legend style="width: auto" align="center"><%=Resources.Resource.AC%></legend>
                                     <ul class="checkbox" style="font-size: small">
                                         <li style="display: inline-block">
                                             <input type="checkbox" id="air2" name="air2" value="" />
-                                            <label for="air2">Auto On</label>
+                                            <label for="air2"><%=Resources.Resource.AutoOn%></label>
                                         </li>
                                         &nbsp;&nbsp;&nbsp;<li style="display: inline-block">
                                             <input type="checkbox" id="air22" name="air2" value="" />
-                                            <label for="air22">Auto Off</label>
+                                            <label for="air22"><%=Resources.Resource.AutoOff%></label>
                                         </li>
                                     </ul>
                                 </fieldset>
@@ -609,10 +615,14 @@
                         </div>
                         <div class="row" style="width: 80%">
                             <div class="col" style="text-align: center">
-                                <input type="button" class="btn btn-default  customButton border-dark" id="powerok" value="save" />
+                                <button class="btn btn-default  customButton border-dark" id="powerok" value="Save" >
+                                    <span><%=Resources.Resource.Save%></span>
+                                </button>
                             </div>
                             <div class="col" style="text-align: center">
-                                <input type="button" class="btn btn-default customButton border-dark" id="powercancel" value="Cancel" />
+                                <button class="btn btn-default customButton border-dark" id="powercancel" value="Cancel" >
+                                    <span><%=Resources.Resource.Cancel%></span>
+                                </button>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -620,15 +630,15 @@
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
                         <img src="Images/icons/vidblack.png" height="15px" width="15px" />&nbsp;
-                    Recording
+                    <span><%=Resources.Resource.Recording%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
                         <div class="row" style="width: 80%">
                             <fieldset class="group" style="width: 100%; box-shadow: 0 0 10px #999; margin-left: 5px;">
-                                <legend align="center" style="width: auto">Baudrate and Parity</legend>
+                                <legend align="center" style="width: auto"><span><%=Resources.Resource.BaudParity%></span></legend>
                                 <div class="row" style="margin-left: 5px; margin-right: 5px; font-size: small">
                                     <div class="col">
-                                        <label for="baud1" style="font-size: small">Baudrate &nbsp;</label>
+                                        <label for="baud1" style="font-size: small"><span><%=Resources.Resource.BaudRate%></span> &nbsp;</label>
                                         <select id="baud1" class="btn dropdown btn-group" 
                                             style="border: 1px solid chocolate; font-size: small">
                                             <option value="1">1200</option>
@@ -643,12 +653,12 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <label for="parity1" style="font-size: small">Parity &nbsp;</label>
+                                        <label for="parity1" style="font-size: small"><span><%=Resources.Resource.Parity%></span> &nbsp;</label>
                                         <select id="parity1" class="btn dropdown btn-group"
                                             style="border: 1px solid chocolate; font-size: small">
-                                            <option value="-1">none</option>
-                                            <option value="1">Odd</option>
-                                            <option value="0">Even</option>
+                                            <option value="-1"><span><%=Resources.Resource.none%></span></option>
+                                            <option value="1"><span><%=Resources.Resource.Odd%></span></option>
+                                            <option value="0"><span><%=Resources.Resource.Even%></span></option>
                                         </select>
                                     </div>
                                 </div>
@@ -657,35 +667,42 @@
                         <div class="row" style="width: 80%;">
                             <div class="col">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999; width: 100%; font-size: small">
-                                    <legend align="center" style="width: auto">Group Code</legend>
-                                    <label for="sys1" style="margin-left: 10px;">Turn On System(Hexadecimal code)</label>
+                                    <legend align="center" style="width: auto"><span><%=Resources.Resource.GroupCode%></span></legend>
+                                    <label for="sys1" style="margin-left: 10px;"><span><%=Resources.Resource.SystemHexOn%></span></label>
                                     <input type="text" style="margin-left: 10px;" id="sys1" class="form-control" />
                                     <label for="sys2" style="margin-left: 10px; 
-                                        margin-top: 10px">Turn Off System(Hexadecimal code)</label>
+                                        margin-top: 10px"><span><%=Resources.Resource.SystemHexOff%></span></label>
                                     <input type="text" style="margin-left: 10px;" id="sys2" class="form-control" />
                                     <label for="sys3" style="margin-left: 10px; margin-top: 10px">
-                                        Turn On Recording(Hexadecimal code)</label>
+                                        <span><%=Resources.Resource.RecordingOn%></span></label>
                                     <input type="text" style="margin-left: 10px;" id="sys3" class="form-control" />
                                     <label for="sys4" style="margin-left: 10px; margin-top: 10px">
-                                        Stop Recording(Hexadecimal code)</label>
+                                        <span><%=Resources.Resource.RecordingOff%></span></label>
                                     <input type="text" style="margin-left: 10px;" id="sys4" class="form-control" />
                                     <label for="sys5" style="margin-left: 10px; margin-top: 10px">
-                                        Transfer(Hexadecimal code)</label>
+                                        <span><%=Resources.Resource.Recall%></span></label>
                                     <input type="text" style="margin-left: 10px;" id="sys5" class="form-control" />
-                                    <label for="sys6" style="margin-left: 10px; margin-top: 10px">Save(Hexadecimal code)</label>
+                                    <label for="sys6" style="margin-left: 10px; margin-top: 10px">
+                                        <span><%=Resources.Resource.SaveHex%></span></label>
                                     <input type="text" style="margin-left: 10px; margin-bottom: 20px;" id="sys6" class="form-control" />
                                 </fieldset>
                             </div>
                         </div>
                         <div class="row" style="text-align: center; width: 80%">
                             <div class="col">
-                                <input type="button" class="btn btn-group border-dark" id="recok" value="ok" />
+                                <button class="btn btn-group border-dark" id="recok" value="Ok" >
+                                    <span><%=Resources.Resource.Ok%></span>
+                                </button>
                             </div>
                             <div class="col">
-                                <input type="button" class="btn btn-group border-dark" id="recsave" value="save" />
+                                <button class="btn btn-group border-dark" id="recsave" value="Save" >
+                                    <span><%=Resources.Resource.Save%></span>
+                                </button>
                             </div>
                             <div class="col">
-                                <input type="button" class="btn btn-group border-dark" id="reccancel" value="Cancel" />
+                                <button class="btn btn-group border-dark" id="reccancel" value="Cancel" >
+                                    <span><%=Resources.Resource.Cancel%></span>
+                                </button>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -693,17 +710,17 @@
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
                         <img src="Images/icons/camblack.png" height="15px" width="15px" />&nbsp;
-                    Camera
+                    <span><%=Resources.Resource.Camera%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
                         <div class="row">
                             <div class="col" style="font-size: small">
                                 <input type="radio" style="display: inline-block" name="cam" id="radio1" value="" />
-                                <label for="radio1">Teacher Camera</label>
+                                <label for="radio1"><span><%=Resources.Resource.TeacherCam%></span></label>
                             </div>
                             <div class="col" style="font-size: small">
                                 <input type="radio" id="radio2" style="display: inline-block" name="cam" value="" />
-                                <label for="radio2">Student Camera</label>
+                                <label for="radio2"><span><%=Resources.Resource.StudentCam%></span></label>
                             </div>
                             <div class="col" style="font-size: small">
                                 <input type="radio" style="display: inline-block" id="radio3" name="cam" value="" />
@@ -716,10 +733,11 @@
                         </div>
                         <div class="row" style="margin-left: 5px;">
                             <fieldset class="group" style="box-shadow: 0 0 10px #999; width: 80%">
-                                <legend align="center" style="width: auto">Baudrate and Parity</legend>
+                                <legend align="center" style="width: auto"><span><%=Resources.Resource.BaudParity%></span></legend>
                                 <div class="row" style="margin-left: 5px; margin-right: 5px; font-size: small">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <label for="baud2" style="font-size: small">Baudrate &nbsp;</label>
+                                        <label for="baud2" style="font-size: small">
+                                            <span><%=Resources.Resource.BaudRate%></span> &nbsp;</label>
                                         <select id="baud2" class="btn dropdown btn-group" 
                                             style="border: 1px solid chocolate; font-size: small">
                                             <option value="1">1200</option>
@@ -734,12 +752,13 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <label for="parity2" style="font-size: small">Parity &nbsp;</label>
+                                        <label for="parity2" style="font-size: small">
+                                            <span><%=Resources.Resource.Parity%></span> &nbsp;</label>
                                         <select id="parity2" class="btn dropdown btn-group" 
                                             style="border: 1px solid chocolate; font-size: small">
-                                            <option value="-1">none</option>
-                                            <option value="1">Odd</option>
-                                            <option value="0">Even</option>
+                                            <option value="-1"><span><%=Resources.Resource.none%></span></option>
+                                            <option value="1"><span><%=Resources.Resource.Odd%></span></option>
+                                            <option value="0"><span><%=Resources.Resource.Even%></span></option>
                                         </select>
                                     </div>
                                 </div>
@@ -747,44 +766,50 @@
                         </div>
                         <div class="row" style="margin-left: 5px;">
                             <fieldset class="group" style="box-shadow: 0 0 10px #999; width: 80%;">
-                                <legend align="center" style="width: auto">Group Code</legend>
+                                <legend align="center" style="width: auto"><span><%=Resources.Resource.GroupCode%></span></legend>
                                 <div class="row" style="margin-right: 5px;">
                                     <div class="col-lg-6 col-md-6 col-sm-12" style="font-size: small;">
-                                        <label for="cam11" style="margin-left: 10px;">Zoom In(Hexadecimal code)</label>
+                                        <label for="cam11" style="margin-left: 10px;">
+                                            <span><%=Resources.Resource.ZoomIn%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam11" class="form-control" />
                                         <label for="cam12" style="margin-left: 10px; margin-top: 10px">
-                                            Zoom Out(Hexadecimal code)</label>
+                                            <span><%=Resources.Resource.ZoomOut%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam12" class="form-control" />
                                         <label for="cam13" style="margin-left: 10px; margin-top: 10px">
-                                            Automatic white balance(Hexadecimal code)</label>
+                                            <span><%=Resources.Resource.AutoWhiteBalance%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam13" class="form-control" />
                                         <label for="cam14" style="margin-left: 10px; margin-top: 10px">
-                                            Automatic Recording(Hexadecimal code)</label>
+                                            <span><%=Resources.Resource.AutoRecord%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam14" class="form-control" />
                                         <label for="cam15" style="margin-left: 10px; margin-top: 10px">
-                                            Transfer(Hexadecimal code)</label>
+                                            <span><%=Resources.Resource.Recall%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam15" class="form-control" />
                                         <label for="cam16" style="margin-left: 10px; margin-top: 10px">
-                                            Save(Hexadecimal code)</label>
+                                            <span><%=Resources.Resource.SaveHex%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam16" class="form-control" />
                                         <label for="cam17" style="margin-left: 10px; margin-top: 10px">
-                                            Turn Off System(Hexadecimal code)</label>
+                                            <span><%=Resources.Resource.SystemHexOff%></span></label>
                                         <input type="text" style="margin-left: 10px; margin-bottom: 20px;" 
                                             id="cam17" class="form-control" />
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12" style="font-size: small;">
-                                        <label for="cam18" style="margin-left: 10px; margin-top: 10px">On(Hexadecimal code)</label>
+                                        <label for="cam18" style="margin-left: 10px; margin-top: 10px">
+                                            <span><%=Resources.Resource.Up%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam18" class="form-control" />
-                                        <label for="cam19" style="margin-left: 10px; margin-top: 10px">Down(Hexadecimal code)</label>
+                                        <label for="cam19" style="margin-left: 10px; margin-top: 10px">
+                                            <span><%=Resources.Resource.Down%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam19" class="form-control" />
-                                        <label for="cam20" style="margin-left: 10px; margin-top: 10px">left(Hexadecimal code)</label>
+                                        <label for="cam20" style="margin-left: 10px; margin-top: 10px">
+                                            <span><%=Resources.Resource.Left%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam20" class="form-control" />
-                                        <label for="cam21" style="margin-left: 10px; margin-top: 10px">Right(Hexadecimal code)</label>
+                                        <label for="cam21" style="margin-left: 10px; margin-top: 10px">
+                                           <span><%=Resources.Resource.Right%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam21" class="form-control" />
-                                        <label for="cam22" style="margin-left: 10px; margin-top: 10px">Ok(Hexadecimal code)</label>
+                                        <label for="cam22" style="margin-left: 10px; margin-top: 10px">
+                                            <span><%=Resources.Resource.OkHex%></span></label>
                                         <input type="text" style="margin-left: 10px;" id="cam22" class="form-control" />
                                         <label for="cam23" style="margin-left: 10px; margin-top: 10px">
-                                            Turn On System(Hexadecimal code)</label>
+                                           <span><%=Resources.Resource.SystemHexOn%></span></label>
                                         <input type="text" style="margin-left: 10px; margin-bottom: 20px;" 
                                             id="cam23" class="form-control" />
                                     </div>
@@ -793,13 +818,19 @@
                         </div>
                         <div class="row" style="text-align: center; width: 80%; margin-left: 5px;">
                             <div class="col-lg-4 col-md-4 col-sm-12">
-                                <input type="button" class="btn btn-group  border-dark" id="camok" value="ok" />
+                                <button class="btn btn-group  border-dark" id="camok" value="Ok">
+                                    <span><%=Resources.Resource.Ok%></span>
+                                </button>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
-                                <input type="button" class="btn btn-group border-dark" id="camsave" value="save" />
+                                <button class="btn btn-group border-dark" id="camsave" value="Save">
+                                    <span><%=Resources.Resource.Save%></span>
+                                </button>
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12">
-                                <input type="button" class="btn btn-group border-dark" id="camcancel" value="Cancel" />
+                                <button class="btn btn-group border-dark" id="camcancel" value="Cancel">
+                                    <span><%=Resources.Resource.Cancel%></span>
+                                </button>
                             </div>
                         </div>
                     </ContentTemplate>
@@ -811,8 +842,8 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="masterSideBody" runat="server">
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <div class="row " id="classchk" style="background-color: #7fe0c8; margin-left: -25px;">
-                Select Class for Configuration Settings - &nbsp;
+            <div class="row " id="classchk" style="background-color: #4ecdc4; margin-left: -30px; margin-top:20px;">
+                <span><%=Resources.Resource.SelectClassConfig%></span> - &nbsp;
                 <asp:CheckBoxList runat="server" ID="ddlClass"></asp:CheckBoxList>
             </div>
         </ContentTemplate>

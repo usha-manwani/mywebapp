@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class DeleteDocument : System.Web.UI.Page
+    public partial class DeleteDocument : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class AddUser : System.Web.UI.Page
+    public partial class AddUser : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

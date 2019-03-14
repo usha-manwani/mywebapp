@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class home : System.Web.UI.Page
+    public partial class home : BasePage
     {
         CameraOnline stat = new CameraOnline();
         

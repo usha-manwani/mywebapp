@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace WebCresij
 {
-    public partial class Control : System.Web.UI.Page
+    public partial class Control : BasePage
     {
        
         protected void Page_Load(object sender, EventArgs e)

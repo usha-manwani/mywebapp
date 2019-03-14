@@ -9,7 +9,7 @@
           <div class="col-lg-9 main-chart">
     <asp:ContentPlaceHolder ID="masterBody" runat="server"></asp:ContentPlaceHolder>
               </div>
-                    <div class="col-lg-3  ds">
+                    <div class="col-lg-3  ">
                      <asp:ContentPlaceHolder ID="masterSideBody" runat="server"></asp:ContentPlaceHolder>
                     </div>
               </div>

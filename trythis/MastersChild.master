@@ -8,8 +8,8 @@
       <div id="sidebar" class="nav-collapse" style="overflow-y:auto" >  
         <!-- sidebar menu start-->          
         <ul class="sidebar-menu" id="nav-accordion" >  
-             <div style="height:150px; margin-left:-10px; width:250px; background-color:#4ecdc4;align-items:center">
-                 <h3 class="centered" style="margin-right:10px; padding-top:50px" >Devices Management</h3>
+             <div style="height:150px; margin-left:-10px; width:300px; background-color:#1e1e36;align-items:center">
+                 <h3 class="centered" style="padding-top:50px;color:whitesmoke" ><span><%=Resources.Resource.DeviceManagement%></span></h3>
              </div>
           <li class="mt" >
                <asp:TreeView runat="server"  OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
@@ -21,7 +21,7 @@
         <!-- sidebar menu end-->     
           </div>
     </aside>   
-     <section id="main-content">
+     <section id="main-content" class="MainContent-Color">
       <section class="wrapper">
           <asp:ContentPlaceHolder ID="masterchildBody" runat="server"></asp:ContentPlaceHolder>
           </section>

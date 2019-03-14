@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class Approve : System.Web.UI.Page
+    public partial class Approve : BasePage
     {
         Userdetails ud = new Userdetails();
         

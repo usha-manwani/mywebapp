@@ -30,21 +30,21 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">    
     <script src="assets/js/Schedule.js?v=2"></script>
    
-       <div style="background:#fff;">
-           <div style="background-color: #7fe0c8; top:100px;">
+       <div>
+           <div style="background-color: #4ecdc4; top:100px;">
             <asp:UpdatePanel runat="server">
                  <Triggers>
                     <asp:PostBackTrigger ControlID="importExcel" /> 
                 </Triggers>
                 <ContentTemplate>                              
                     <div class="row">
-                    <h3>Schedule</h3>
+                    <h3><span><%=Resources.Resource.Schedule%></span></h3>
                   </div>
                     <div class="row" >
                         <div class="col-lg-7 col-md-12 col-sm-12">
                             <div class="row">
                         <div class="col-lg-3 col-sm-12">
-                            <h5>Select options to create Schedule</h5>
+                            <h5><span><%=Resources.Resource.CreateSchedule%></span></h5>
                         </div>
                         <div class=" col-sm-12 col-lg-3">                 
                         <asp:DropDownList  AutoPostBack="true" 
@@ -76,29 +76,62 @@
                         <div class="col-lg-5 col-md-6 col-sm-12" >
                             <div class="row" >
                                 <div class="col" style="font-size:16px">
-                                    <asp:CheckBox ID="chkTimer" runat="server" Text="Timer"/>
+                                    <asp:CheckBox ID="chkTimer" runat="server" Text="<%$Resources:Resource, Timer %>"/>
                                 </div>
                                 <div class="col">
-                                    <label for="txtmin" style="font-size:16px">Early boot</label>
-                                    <asp:TextBox runat="server" ID="txtmin" 
+                                    <label for="txtmin" style="font-size:16px">
+                                        <span><%=Resources.Resource.EarlyBoot%></span></label>
+                                     <select name="EarlyBoot" id="EarlyBootMins" class="btn btn-default dropdown"
+                                                style="border: 1px solid white;">
+                                                <option value="01">1 </option>
+                                                <option value="02">2 </option>
+                                                <option value="03">3 </option>
+                                                <option value="04">4 </option>
+                                                <option value="05">5 </option>
+                                                <option value="06">6 </option>
+                                                <option value="07">7 </option>
+                                                <option value="08">8 </option>
+                                                <option value="09">9 </option>
+                                                <option value="09">10</option>
+                                      </select>
+                                    <%--<asp:TextBox runat="server" ID="txtmin" 
                                         onchange="javascript:text_changed(this);"
-                                        Height="25px" Width="60px"></asp:TextBox>
-                                    <label for="txtmin" style="font-size:11px">mins</label>                                        
+                                        Height="25px" Width="60px"></asp:TextBox>--%>
+                                    <label for="txtmin" style="font-size:14px">
+                                        <span><%=Resources.Resource.Mins%></span>
+                                    </label>                                        
                                 </div>
                                 <div class="col">
-                                    <label for="txtmin" style="font-size:16px">Delay boot</label>
-                                    <asp:TextBox runat="server" ID="txtdelay"
+                                    <label for="txtmin" style="font-size:16px">
+                                        <span><%=Resources.Resource.DelayBoot%></span></label>
+                                    <select name="DelayBoot" id="DelayBootMins" class="btn btn-default dropdown"
+                                                style="border: 1px solid white;">
+                                                <option value="01">1 </option>
+                                                <option value="02">2 </option>
+                                                <option value="03">3 </option>
+                                                <option value="04">4 </option>
+                                                <option value="05">5 </option>
+                                                <option value="06">6 </option>
+                                                <option value="07">7 </option>
+                                                <option value="08">8 </option>
+                                                <option value="09">9 </option>
+                                                <option value="09">10</option>
+                                      </select>
+                                    <%--<asp:TextBox runat="server" ID="txtdelay"
                                         onchange="javascript:text_changed(this);"
-                                        Height="25px" Width="60px"></asp:TextBox>
-                                    <label for="txtmin" style="font-size:11px">mins</label>
+                                        Height="25px" Width="60px"></asp:TextBox>--%>
+                                    <label for="txtmin" style="font-size:14px">
+                                        <span><%=Resources.Resource.Mins%></span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
                         </div>
                         <div class="row">
                                 <div style="display:none;" id="uploadDiv">
-                         Select a File&nbsp;<asp:FileUpload runat="server" ID="fuSample"  />
-        <asp:Button ID="importExcel" runat="server" Text="Upload" CssClass="btn btn-group-toggle" OnClick="importExcel_Click" /> 
+                         <span><%=Resources.Resource.SelectFile%></span>&nbsp;<asp:FileUpload runat="server" ID="fuSample"  />
+        <asp:Button ID="importExcel" runat="server" Text="<%$Resources:Resource, Upload %>"
+            CssClass="btn btn-group-toggle" OnClick="importExcel_Click" /> 
                                     </div>
                             </div>
                        
@@ -116,10 +149,10 @@
            EmptyDataRowStyle-BackColor="Black" ShowFooter="true" Width="100%"
            ShowHeaderWhenEmpty="true" RowStyle-HorizontalAlign="Center"
            EmptyDataRowStyle-ForeColor="White" AutoGenerateColumns="false">
-                    <HeaderStyle CssClass="headerstyle" />
-        <rowstyle CssClass="rowstyle"  />
+                    <HeaderStyle CssClass="hidden-phone" ForeColor="#7f919f" />
+        <rowstyle CssClass="rowstyle" BackColor="White"  />
 
-        <alternatingrowstyle CssClass="rowstylealt" />
+        <alternatingrowstyle CssClass="rowstylealt" BackColor="WhiteSmoke" />
             <Columns>              
                 <asp:TemplateField HeaderText="SNo">
                     <ItemStyle Width="4%" />
@@ -128,49 +161,49 @@
                     </ItemTemplate>
                 </asp:TemplateField>
               <%--  <asp:BoundField DataField="Slno" HeaderText="SL No" ItemStyle-Width="4%"  />--%>
-                <asp:TemplateField HeaderText="Time">
+                <asp:TemplateField HeaderText="<%$Resources:Resource, Time %>">
                     <ItemStyle Width="12%" Height="100%"/><ControlStyle Width="100%" />
                     <ItemTemplate>
                         <asp:TextBox ID="txtTime" Text='<%#Eval("Time") %>' runat="server"></asp:TextBox>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Monday">
+                <asp:TemplateField HeaderText="<%$Resources:Resource, Monday %>">
                     <ItemStyle Width="12%" /><ControlStyle Width="100%" />
                     <ItemTemplate>
                         <asp:TextBox ID="txtMon" Text='<%#Eval("Monday") %>' runat="server"></asp:TextBox>
                     </ItemTemplate>
                  </asp:TemplateField>
-                 <asp:TemplateField HeaderText="Tuesday">
+                 <asp:TemplateField HeaderText="<%$Resources:Resource, Tuesday %>">
                       <ItemStyle Width="12%" /><ControlStyle Width="100%" />
                     <ItemTemplate>
                         <asp:TextBox ID="txtTue" Text='<%#Eval("Tuesday") %>' runat="server"></asp:TextBox>
                     </ItemTemplate>
                      </asp:TemplateField>
-                 <asp:TemplateField HeaderText="Wednesday">
+                 <asp:TemplateField HeaderText="<%$Resources:Resource, Wednesday %>">
                       <ItemStyle Width="12%" /><ControlStyle Width="100%" />
                     <ItemTemplate>
                         <asp:TextBox ID="txtWed" Text='<%#Eval("Wednesday") %>' runat="server"></asp:TextBox>
                     </ItemTemplate>
                      </asp:TemplateField>
-                 <asp:TemplateField HeaderText="Thursday">
+                 <asp:TemplateField HeaderText="<%$Resources:Resource, Thursday %>">
                       <ItemStyle Width="12%" /><ControlStyle Width="100%" />
                     <ItemTemplate>
                         <asp:TextBox ID="txtThu" Text='<%#Eval("Thursday") %>' runat="server"></asp:TextBox>
                     </ItemTemplate>
                      </asp:TemplateField>
-                 <asp:TemplateField HeaderText="Friday">
+                 <asp:TemplateField HeaderText="<%$Resources:Resource, Friday %>">
                       <ItemStyle Width="12%" /><ControlStyle Width="100%" />
                     <ItemTemplate>
                         <asp:TextBox ID="txtFri" Text='<%#Eval("Friday") %>' runat="server"></asp:TextBox>
                     </ItemTemplate>
                      </asp:TemplateField>
-                 <asp:TemplateField HeaderText="Saturday">
+                 <asp:TemplateField HeaderText="<%$Resources:Resource, Saturday %>">
                       <ItemStyle Width="12%" /><ControlStyle Width="100%" />
                     <ItemTemplate>
                         <asp:TextBox ID="txtSat" Text='<%#Eval("Saturday") %>' runat="server"></asp:TextBox>
                     </ItemTemplate>
                      </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Sunday">
+                    <asp:TemplateField HeaderText="<%$Resources:Resource, Sunday %>">
                          <ItemStyle Width="12%" /><ControlStyle Width="100%" />
                         <ItemTemplate>
                         <asp:TextBox ID="txtSun" Text='<%#Eval("Sunday") %>' runat="server"></asp:TextBox>
@@ -178,13 +211,13 @@
                       <FooterStyle HorizontalAlign="Right" />
                       <FooterTemplate>                          
                        <asp:Button ID="ButtonAdd" CssClass="btn btn-info" runat="server" 
-                           ClientIDMode="Static" Text="Add New Row" OnClick="svbtn_Click" />
+                           ClientIDMode="Static" Text="<%$Resources:Resource, NewRow %>" OnClick="svbtn_Click" />
                       </FooterTemplate>
               </asp:TemplateField>
             </Columns>
         </asp:GridView>
-        <asp:Button ID="svbtn" runat="server" Text="Save" OnClick="svbtn_Click" Visible="false" CssClass="btn btn-info"/>
-        <asp:Button ID="export" runat="server" Text="Export Schedule to Excel" Visible="false" CssClass="btn btn-info"
+        <asp:Button ID="svbtn" runat="server" Text="<%$Resources:Resource, Save %>" OnClick="svbtn_Click" Visible="false" CssClass="btn btn-info"/>
+        <asp:Button ID="export" runat="server" Text="<%$Resources:Resource, ExportToExcel %>" Visible="false" CssClass="btn btn-info"
              OnClick="export_Click"/>                           
             </div>
             

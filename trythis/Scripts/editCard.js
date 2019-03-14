@@ -9,7 +9,8 @@ function hideGrid() {
     document.getElementById("checkcard").value = "";    
     var mymodal = document.getElementById('myModal');
     mymodal.style.display = 'none';
-    alert("Please check status of card !! ");
+    var message = ' <%=Resources.Resource.AlertCardStatus%>'
+    alert(message);
     return false;
 }
 function HideTree() {

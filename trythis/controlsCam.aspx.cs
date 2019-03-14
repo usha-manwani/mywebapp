@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace trythis
+namespace WebCresij
 {
-    public partial class controlsCam : System.Web.UI.Page
+    public partial class controlsCam : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

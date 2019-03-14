@@ -16,7 +16,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
     <div>
         <div class=" row mb" style="width:100%">
-         <div class="content-panel ">
+         <div >
          <asp:UpdatePanel runat="server">
          <ContentTemplate >
                 <div class="row mb">
@@ -24,7 +24,7 @@
                         <tr>  
                             <td>
                             <asp:TextBox ID="txtloc" runat="server" AutoPostBack="true" Width="70%"
-                            placeHolder="search" CssClass="form-control" OnTextChanged="txtloc_TextChanged" /></td>
+                            placeHolder="<%$Resources:Resource, Search %>" CssClass="form-control" OnTextChanged="txtloc_TextChanged" /></td>
        <%-- <span style="color:darkslategray"><i class="fa fa-search" aria-hidden="true"></i></span>--%>
                        </tr>
                     </table>
@@ -41,25 +41,28 @@
      OnRowUpdating="gvCard_RowUpdating" 
     AllowSorting="true" OnSorting="gvCard_Sorting" 
     DataKeyNames="CardID" 
-      BorderStyle="None" Width="95%" 
+      BorderStyle="None" Width="100%" 
     PagerSettings-Mode="Numeric" >
-     <HeaderStyle CssClass="hidden-phone"  Height="60px" />
-        <rowstyle CssClass="gradeX center" Height="60px"  />
-        <alternatingrowstyle CssClass="gradeC center" Height="60px"  />
+     <HeaderStyle CssClass="hidden-phone"  Height="60px" BackColor="#4ecdc4" />
+        <rowstyle CssClass=" center" Height="60px" BackColor="White"  />
+        <alternatingrowstyle CssClass="center" Height="60px" BackColor="WhiteSmoke" />
     <Columns>
-       <asp:BoundField HeaderText="MemberID" SortExpression="memberID" ItemStyle-Width="10%" DataField="memberID" ControlStyle-Width="100%"  />     
-        <asp:BoundField HeaderText="Name" ItemStyle-Width="15%" SortExpression="Name" ControlStyle-Width="100%" DataField="Name" />
-        <asp:BoundField HeaderText="Card ID" SortExpression="CardID"
+       <asp:BoundField HeaderText="<%$Resources:Resource, MemberID %>" 
+           SortExpression="memberID" ItemStyle-Width="10%" DataField="memberID" ControlStyle-Width="100%"  />     
+        <asp:BoundField HeaderText="<%$Resources:Resource, Name %>" 
+            ItemStyle-Width="15%" SortExpression="Name" ControlStyle-Width="100%" DataField="Name" />
+        <asp:BoundField HeaderText="<%$Resources:Resource, CardID %>" SortExpression="CardID"
              ItemStyle-Width="10%" DataField="CardID" ReadOnly="true" ControlStyle-Width="100%" />       
-        <asp:BoundField HeaderText="Status" SortExpression="State"  
+        <asp:BoundField HeaderText="<%$Resources:Resource, Status %>" SortExpression="State"  
             DataField="State" ReadOnly="true" ItemStyle-Width="15%"  ControlStyle-Width="100%" >
         </asp:BoundField>     
-        <asp:BoundField HeaderText="Access Granted(To)" SortExpression="locnames"
+        <asp:BoundField HeaderText="<%$Resources:Resource, Accesspermitted %>" SortExpression="locnames"
             ItemStyle-Width="20%" DataField="locnames" ControlStyle-Width="100%" ReadOnly="true" />
         <%--<asp:BoundField Visible="false" DataField="locids" />--%>     
-        <asp:BoundField HeaderText="Pending Access(For)" SortExpression="pending"        
-        ItemStyle-Width="20%" ReadOnly="true" ControlStyle-Width="100%" DataField="pending" />     
-        <asp:BoundField ItemStyle-Width="10%" ControlStyle-Width="100%" HeaderText="Comments" DataField="Comment" />      
+        <asp:BoundField HeaderText="<%$Resources:Resource, PendingAccess %>" SortExpression="pending"        
+        ItemStyle-Width="15%" ReadOnly="true" ControlStyle-Width="100%" DataField="pending" />     
+        <asp:BoundField ItemStyle-Width="5%" ControlStyle-Width="100%" 
+            HeaderText="<%$Resources:Resource, Comments %>" DataField="Comment" />      
         <%-- <asp:TemplateField>
              <ControlStyle Width="100%" />
         <ItemTemplate>
@@ -77,15 +80,15 @@
         <asp:TemplateField>
             <ItemTemplate>
                 <ControlStyle Width="100%" />
-                <asp:LinkButton runat="server" Text="Resend" ToolTip="Resend to Register" OnClick="Unnamed_Click" />
+                <asp:LinkButton runat="server" Text="<%$Resources:Resource, Resend %>" ToolTip="<%$Resources:Resource, toolTipResend %>" OnClick="Unnamed_Click" />
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField HeaderText="Change Location">
+        <asp:TemplateField HeaderText="<%$Resources:Resource, ChangeLocation %>">
             <ItemStyle width="10%"/>
                 <ControlStyle Width="100%" />
                  <ItemTemplate>
-                     <asp:LinkButton ID="selectAccessTree" ToolTip="Click to change location access"
-                         runat="server" text="select" CssClass="linkcursor"
+                     <asp:LinkButton ID="selectAccessTree" ToolTip="<%$Resources:Resource, ToolTipLocation %>"
+                         runat="server" text="<%$Resources:Resource, Select %>" CssClass="linkcursor"
                          OnClientClick="openTreeModal(); return false;"
                          OnClick="openaccess_Click"></asp:LinkButton>
             </ItemTemplate>
@@ -103,13 +106,13 @@
             <div class="modal-content" style="width:600px">
                  <span class="close1" id="modalClose" style="text-align:right">
                      <i class="fa fa-times" aria-hidden="true"></i></span>
-                     <h3> Select Locations</h3>
+                     <h3> <span><%=Resources.Resource.SelectLocation%></span></h3>
                      <asp:UpdatePanel runat="server" ID="selectAccessPanel">
                      <ContentTemplate>
                      <asp:TreeView  ShowCheckBoxes="All" ID="TreeView1" NodeStyle-NodeSpacing="1"
                          runat="server"></asp:TreeView>
                                    <%-- <button onclick="GetSelected()">select</button>--%>
-                     <asp:Button Text="Get Selected" runat="server" ID="btnToSelect"  OnClick="addAccess_Click"/>
+                     <asp:Button Text="<%$Resources:Resource, GetSelected %>" runat="server" ID="btnToSelect"  OnClick="addAccess_Click"/>
                      </ContentTemplate>
                      </asp:UpdatePanel>
                      <%--<input type="button" id=" btnselect" title="select" value="select" />--%>

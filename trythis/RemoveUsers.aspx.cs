@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class RemoveUsers : System.Web.UI.Page
+    public partial class RemoveUsers : BasePage
     {
         Userdetails ud = new Userdetails();
         string s = "";

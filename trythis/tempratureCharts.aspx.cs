@@ -9,7 +9,7 @@ using Microsoft.AspNet.SignalR;
 
 namespace WebCresij
 {
-    public partial class tempratureCharts : System.Web.UI.Page
+    public partial class tempratureCharts : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

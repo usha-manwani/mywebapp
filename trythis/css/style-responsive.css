@@ -75,20 +75,27 @@
     .chat-room .mid-side {
         margin-bottom: 0!important;
     }
-    
+    .customNav {
+        padding-top: 0px;
+    }
 
 }
 
 @media (max-width: 768px) {
-
+    body{
+        max-width:700px;
+    }
     .header {
         position: absolute;
+    }
+    .customNav{
+        padding-top:0px;
     }
     /*sidebar*/
     #sidebar {
         height: auto;
-        overflow: hidden;      
-        width: 100%;      
+        overflow: hidden;
+        width: 100%;
     }
     /* body container */
     #main-content {

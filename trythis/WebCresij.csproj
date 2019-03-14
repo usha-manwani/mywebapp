@@ -14,8 +14,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>trythis</RootNamespace>
-    <AssemblyName>trythis</AssemblyName>
+    <RootNamespace>WebCresij</RootNamespace>
+    <AssemblyName>WebCresij</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -361,6 +361,7 @@
     <Content Include="css\Card.css" />
     <Content Include="css\chart.css" />
     <Content Include="css\Configcss.css" />
+    <Content Include="css\DropDownStyle.css" />
     <Content Include="css\getCardData.css" />
     <Content Include="css\logs.css" />
     <Content Include="css\stepper.css" />
@@ -382,24 +383,8 @@
     <Content Include="DeleteDocument.aspx" />
     <Content Include="editDelCard.aspx" />
     <Content Include="exportdata.aspx" />
+    <Content Include="HomePage.aspx" />
     <Content Include="HtmlPage2.html" />
-    <Content Include="Images\bg2.jpg" />
-    <Content Include="Images\bg1.jpg" />
-    <Content Include="Images\bck2.png" />
-    <Content Include="Images\bg3.jpg" />
-    <Content Include="Images\Blu-Ray.png" />
-    <Content Include="Images\button_forward %281%29.png" />
-    <Content Include="Images\button_next.png" />
-    <Content Include="Images\button_open.png" />
-    <Content Include="Images\button_pause.png" />
-    <Content Include="Images\button_play.png" />
-    <Content Include="Images\button_power.png" />
-    <Content Include="Images\button_previous.png" />
-    <Content Include="Images\button_rewind.png" />
-    <Content Include="Images\button_stop.png" />
-    <Content Include="Images\Camera.png" />
-    <Content Include="Images\close.png" />
-    <Content Include="Images\CurtainOpenWhite.png" />
     <Content Include="Images\icons\ACBlack.png" />
     <Content Include="Images\icons\ACGreen.png" />
     <Content Include="Images\icons\ACRed.png" />
@@ -410,21 +395,12 @@
     <Content Include="Images\icons\AirWhite.png" />
     <Content Include="Images\icons\curtainCloseGreen.png" />
     <Content Include="Images\icons\curtainCloseRed.png" />
-    <Content Include="Images\curtainCloseWhite.png" />
     <Content Include="Images\icons\CurtainCloseWhite.png" />
     <Content Include="Images\icons\CurtainOpenGreen.png" />
     <Content Include="Images\icons\curtainOpenRed.png" />
     <Content Include="Images\icons\CurtainOpenWhite.png" />
     <Content Include="Images\icons\curtainStopGreen.png" />
     <Content Include="Images\icons\curtainStopRed.png" />
-    <Content Include="Images\curtainStopwhite.png" />
-    <Content Include="Images\Desktop.png" />
-    <Content Include="Images\down.PNG" />
-    <Content Include="Images\DVD.png" />
-    <Content Include="Images\green_bg_Tab.gif" />
-    <Content Include="Images\green_left_tab.gif" />
-    <Content Include="Images\green_right_Tab.gif" />
-    <Content Include="Images\HDMI.png" />
     <Content Include="Images\icons\backblack.png" />
     <Content Include="Images\icons\backgreen.png" />
     <Content Include="Images\icons\backred.png" />
@@ -469,6 +445,46 @@
     <Content Include="Images\icons\hdmired.png" />
     <Content Include="Images\icons\hdmiwhite.png" />
     <Content Include="Images\icons\icons8-first-48 %282%29.png" />
+    <Content Include="Images\icons\icons\ddd.png" />
+    <Content Include="Images\icons\icons\背景图-（03_07.png" />
+    <Content Include="Images\icons\icons\背景图-（03_09.png" />
+    <Content Include="Images\icons\icons\背景图-（03_17.png" />
+    <Content Include="Images\icons\icons\背景图-（03_19.png" />
+    <Content Include="Images\icons\icons\背景图-（03_27.png" />
+    <Content Include="Images\icons\icons\背景图-（03_29.png" />
+    <Content Include="Images\icons\icons\背景图-（03_37.png" />
+    <Content Include="Images\icons\icons\背景图-（03_39.png" />
+    <Content Include="Images\icons\images\主音量.png" />
+    <Content Include="Images\icons\images\提示栏.png" />
+    <Content Include="Images\icons\images\滑动条.png" />
+    <Content Include="Images\icons\images\环境.png" />
+    <Content Include="Images\icons\images\背景图-（03_03.png" />
+    <Content Include="Images\icons\images\背景图-（03_05.png" />
+    <Content Include="Images\icons\images\背景图-（03_07.png" />
+    <Content Include="Images\icons\images\背景图-（03_11.png" />
+    <Content Include="Images\icons\images\背景图-（03_13.png" />
+    <Content Include="Images\icons\images\背景图-（03_15.png" />
+    <Content Include="Images\icons\images\背景图-（03_18.png" />
+    <Content Include="Images\icons\images\背景图-（03_20.png" />
+    <Content Include="Images\icons\images\背景图-（03_22.png" />
+    <Content Include="Images\icons\images\背景图-（03_24.png" />
+    <Content Include="Images\icons\images\背景图-（03_26.png" />
+    <Content Include="Images\icons\images\背景图-（03_29.png" />
+    <Content Include="Images\icons\images\背景图-（03_38.png" />
+    <Content Include="Images\icons\images\背景图-（03_40.png" />
+    <Content Include="Images\icons\images\背景图-（03_42.png" />
+    <Content Include="Images\icons\images\背景图-（03_47.png" />
+    <Content Include="Images\icons\images\背景图-（03_49.png" />
+    <Content Include="Images\icons\images\背景图-（03_51.png" />
+    <Content Include="Images\icons\images\背景图-（03_53.png" />
+    <Content Include="Images\icons\images\背景图-（03_55.png" />
+    <Content Include="Images\icons\images\背景图-（03_57.png" />
+    <Content Include="Images\icons\images\背景图-（03_60.png" />
+    <Content Include="Images\icons\images\背景图-（03_63.png" />
+    <Content Include="Images\icons\images\视频大.png" />
+    <Content Include="Images\icons\images\视频小.png" />
+    <Content Include="Images\icons\images\视频栏.png" />
+    <Content Include="Images\icons\images\话筒音量.png" />
     <Content Include="Images\icons\lapblack.png" />
     <Content Include="Images\icons\lapgreen.png" />
     <Content Include="Images\icons\lapred.png" />
@@ -665,22 +681,6 @@
     <Content Include="Images\icons\zoomoutgreen.png" />
     <Content Include="Images\icons\zoomoutred.png" />
     <Content Include="Images\icons\zoomoutwhite.png" />
-    <Content Include="Images\imgs\addlogs.png" />
-    <Content Include="Images\imgs\chart1.png" />
-    <Content Include="Images\imgs\chart2.png" />
-    <Content Include="Images\imgs\curtain32.png" />
-    <Content Include="Images\imgs\curtainclose32.png" />
-    <Content Include="Images\imgs\curtainopen32.png" />
-    <Content Include="Images\imgs\editlogs.png" />
-    <Content Include="Images\imgs\smcard-hover.png" />
-    <Content Include="Images\imgs\smCard.png" />
-    <Content Include="Images\laptop.png" />
-    <Content Include="Images\Light.png" />
-    <Content Include="Images\lock.png" />
-    <Content Include="Images\nextblack.png" />
-    <Content Include="Images\nextgreen.png" />
-    <Content Include="Images\nextred.png" />
-    <Content Include="Images\nextwhite.png" />
     <Content Include="Images\offimages\bluraydvd.png" />
     <Content Include="Images\offimages\camera.png" />
     <Content Include="Images\offimages\classlock.png" />
@@ -763,8 +763,8 @@
     <Content Include="Images\onimages\wirelessmute.png" />
     <Content Include="Images\onimages\wirelessvolminus.png" />
     <Content Include="Images\onimages\wirelessvolplus.png" />
-    <Content Include="Images\proj.png" />
     <Content Include="Images\refresh.png" />
+    <Content Include="Images\submenu\backgroundOfVideo.jpg" />
     <Content Include="Images\submenu\cam\change.png" />
     <Content Include="Images\submenu\cam\change1.png" />
     <Content Include="Images\submenu\cam\minus.png" />
@@ -832,20 +832,330 @@
     <Content Include="Images\submenu\tv\plus.png" />
     <Content Include="Images\submenu\tv\plus1.png" />
     <Content Include="Images\submenu\子菜单.jpg" />
-    <Content Include="Images\unlock.png" />
-    <Content Include="Images\mute.png" />
-    <Content Include="Images\open.png" />
-    <Content Include="Images\platform.png" />
-    <Content Include="Images\power.png" />
-    <Content Include="Images\powerOff.png" />
-    <Content Include="Images\powerOn.png" />
-    <Content Include="Images\stop.png" />
-    <Content Include="Images\TV.png" />
-    <Content Include="Images\up.PNG" />
-    <Content Include="Images\VGA.png" />
-    <Content Include="Images\video.png" />
-    <Content Include="Images\volminus.png" />
-    <Content Include="Images\volplus.png" />
+    <Content Include="Images\中控首页按钮\信号切换.png" />
+    <Content Include="Images\中控首页按钮\全部菜单.png" />
+    <Content Include="Images\中控首页按钮\屏幕.png" />
+    <Content Include="Images\中控首页按钮\投影机.png" />
+    <Content Include="Images\中控首页按钮\环境图标\背景图-（03_07.png" />
+    <Content Include="Images\中控首页按钮\环境图标\背景图-（03_09.png" />
+    <Content Include="Images\中控首页按钮\环境图标\背景图-（03_17.png" />
+    <Content Include="Images\中控首页按钮\环境图标\背景图-（03_19.png" />
+    <Content Include="Images\中控首页按钮\环境图标\背景图-（03_27.png" />
+    <Content Include="Images\中控首页按钮\环境图标\背景图-（03_29.png" />
+    <Content Include="Images\中控首页按钮\环境图标\背景图-（03_37.png" />
+    <Content Include="Images\中控首页按钮\环境图标\背景图-（03_39.png" />
+    <Content Include="Images\中控首页按钮\窗帘.png" />
+    <Content Include="Images\中控首页按钮\系统.png" />
+    <Content Include="Images\中控首页按钮\视频\1.png" />
+    <Content Include="Images\中控首页按钮\视频\2.png" />
+    <Content Include="Images\中控首页按钮\视频\3.png" />
+    <Content Include="Images\中控首页按钮\视频\4.png" />
+    <Content Include="Images\中控首页按钮\视频\5.png" />
+    <Content Include="Images\中控首页按钮\视频\相机控制.png" />
+    <Content Include="Images\中控首页按钮\视频\视频放大.png" />
+    <Content Include="Images\中控首页按钮\视频\视频放大镜.png" />
+    <Content Include="Images\中控首页按钮\视频\视频条.png" />
+    <Content Include="Images\中控首页按钮\视频\视频缩小.png" />
+    <Content Include="Images\中控首页按钮\音量.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态2_01.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态_02.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态_28.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态_30.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态_32.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态_34.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态_54.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态_56.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态_58.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\控制页面-显示状态_90.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\面板锁定_07.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-显示状态\面板锁定_09.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\总音量.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\总音量静音.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_106.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_108.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_110.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_112.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_132.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_134.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_136.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_158.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_160.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_162.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_168.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_184.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_186.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_188.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_210.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\控制页面_212.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\无线麦静音.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\无线麦音量.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\系统_07.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-默认状态\系统_09.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_106.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_108.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_110.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_132.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_134.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_28.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_30.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_32.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_34.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_54.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_56.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_58.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_80.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_82.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_84.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_90.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\面板锁定_07.png" />
+    <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\面板锁定_09.png" />
+    <Content Include="Images\详细页图标\images\图标_106.png" />
+    <Content Include="Images\详细页图标\images\图标_108.png" />
+    <Content Include="Images\详细页图标\images\图标_110.png" />
+    <Content Include="Images\详细页图标\images\图标_112.png" />
+    <Content Include="Images\详细页图标\images\图标_132.png" />
+    <Content Include="Images\详细页图标\images\图标_134.png" />
+    <Content Include="Images\详细页图标\images\图标_136.png" />
+    <Content Include="Images\详细页图标\images\图标_138.png" />
+    <Content Include="Images\详细页图标\images\图标_158.png" />
+    <Content Include="Images\详细页图标\images\图标_160.png" />
+    <Content Include="Images\详细页图标\images\图标_162.png" />
+    <Content Include="Images\详细页图标\images\图标_164.png" />
+    <Content Include="Images\详细页图标\images\图标_168.png" />
+    <Content Include="Images\详细页图标\images\图标_184.png" />
+    <Content Include="Images\详细页图标\images\图标_186.png" />
+    <Content Include="Images\详细页图标\images\图标_188.png" />
+    <Content Include="Images\详细页图标\images\图标_190.png" />
+    <Content Include="Images\详细页图标\images\图标_194.png" />
+    <Content Include="Images\详细页图标\images\图标_210.png" />
+    <Content Include="Images\详细页图标\images\图标_212.png" />
+    <Content Include="Images\详细页图标\images\图标_214.png" />
+    <Content Include="Images\详细页图标\images\图标_216.png" />
+    <Content Include="Images\详细页图标\images\图标_220.png" />
+    <Content Include="Images\详细页图标\images\图标_236.png" />
+    <Content Include="Images\详细页图标\images\图标_238.png" />
+    <Content Include="Images\详细页图标\images\图标_246.png" />
+    <Content Include="Images\详细页图标\images\图标_262.png" />
+    <Content Include="Images\详细页图标\images\图标_264.png" />
+    <Content Include="Images\详细页图标\images\图标_272.png" />
+    <Content Include="Images\详细页图标\images\图标_298.png" />
+    <Content Include="Images\详细页图标\images\图标_324.png" />
+    <Content Include="Images\详细页图标\images\图标_344.png" />
+    <Content Include="Images\详细页图标\images\图标_346.png" />
+    <Content Include="Images\详细页图标\images\图标_348.png" />
+    <Content Include="Images\详细页图标\images\图标_350.png" />
+    <Content Include="Images\详细页图标\images\总音量.png" />
+    <Content Include="Images\详细页图标\images\有线麦克风.png" />
+    <Content Include="Images\详细页图标\images\麦克风按钮.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态2_01.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_02.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_116.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_142.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_168.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_194.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_220.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_246.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_272.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_28.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_30.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_32.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_34.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_54.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_56.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_58.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_90.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\总音量.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\总音量静音.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_106.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_108.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_110.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_112.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_132.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_134.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_136.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_138.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_158.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_160.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_164.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_168.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_184.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_186.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_188.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_190.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_194.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_210.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_212.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_214.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_216.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_220.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_236.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_238.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_246.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_262.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_264.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_272.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_298.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_324.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_350.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\无线麦静音.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\无线麦音量.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\有线麦静音.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\有线麦音量.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_106.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_108.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_110.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_112.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_116.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_132.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_134.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_136.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_138.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_142.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_158.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_160.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_168.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_184.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_186.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_194.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_220.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_246.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_272.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_28.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_30.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_32.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_34.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_54.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_56.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_58.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_60.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_80.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_82.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_86.png" />
+    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_90.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_121.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_123.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_155.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_19.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_21.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_53.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_55.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_87.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_89.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_101.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_31.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_33.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_65.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_67.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_99.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_129.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_131.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_163.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_165.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_197.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_27.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_29.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_61.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_63.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_95.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_97.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_125.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_23.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_25.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_57.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_59.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_91.png" />
+    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_93.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_121.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_123.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_155.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_19.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_21.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_53.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_55.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_87.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_89.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_101.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_31.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_33.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_65.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_67.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_99.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_129.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_131.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_163.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_165.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_197.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_27.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_29.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_61.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_63.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_95.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_97.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_125.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_23.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_25.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_57.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_59.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_91.png" />
+    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_93.png" />
+    <Content Include="Images\详细页图标\新风\默认状态\新风_09.png" />
+    <Content Include="Images\详细页图标\新风\默认状态\新风_11.png" />
+    <Content Include="Images\详细页图标\新风\默认状态\新风_21.png" />
+    <Content Include="Images\详细页图标\新风\默认状态\新风_23.png" />
+    <Content Include="Images\详细页图标\新风\默认状态\新风_33.png" />
+    <Content Include="Images\详细页图标\新风\默认状态\新风_35.png" />
+    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_09.png" />
+    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_11.png" />
+    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_21.png" />
+    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_23.png" />
+    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_33.png" />
+    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_35.png" />
+    <Content Include="Images\详细页图标\空调\images\images\空调_09_01.png" />
+    <Content Include="Images\详细页图标\空调\images\images\空调_09_02.png" />
+    <Content Include="Images\详细页图标\空调\images\images\空调_09_03.png" />
+    <Content Include="Images\详细页图标\空调\images\images\空调_09_04.png" />
+    <Content Include="Images\详细页图标\空调\images\空调_07.png" />
+    <Content Include="Images\详细页图标\空调\images\空调_09_04.png" />
+    <Content Include="Images\详细页图标\空调\images\空调_17.png" />
+    <Content Include="Images\详细页图标\空调\images\空调_19.png" />
+    <Content Include="Images\详细页图标\空调\images\空调_27.png" />
+    <Content Include="Images\详细页图标\空调\images\空调_29.png" />
+    <Content Include="Images\详细页图标\空调\images\空调_37.png" />
+    <Content Include="Images\详细页图标\空调\images\空调_39.png" />
+    <Content Include="Images\详细页图标\空调\默认状态\空调_07.png" />
+    <Content Include="Images\详细页图标\空调\默认状态\空调_09.png" />
+    <Content Include="Images\详细页图标\空调\默认状态\空调_12.png" />
+    <Content Include="Images\详细页图标\空调\默认状态\空调_14.png" />
+    <Content Include="Images\详细页图标\空调\默认状态\空调_22.png" />
+    <Content Include="Images\详细页图标\空调\默认状态\空调_24.png" />
+    <Content Include="Images\详细页图标\空调\默认状态\空调_32.png" />
+    <Content Include="Images\详细页图标\空调\默认状态\空调_34.png" />
+    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_07.png" />
+    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_09.png" />
+    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_12.png" />
+    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_14.png" />
+    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_22.png" />
+    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_24.png" />
+    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_32.png" />
+    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_34.png" />
+    <Content Include="Images\详细页图标\绿色框\1.png" />
+    <Content Include="Images\详细页图标\绿色框\2.png" />
+    <Content Include="Images\详细页图标\绿色框\3.png" />
+    <Content Include="Images\详细页图标\绿色框\4.png" />
+    <Content Include="Images\详细页图标\绿色框\5 %281%29.png" />
+    <Content Include="Images\详细页图标\绿色框\5 %282%29.png" />
+    <Content Include="Images\详细页图标\绿色框\5 %283%29.png" />
+    <Content Include="Images\详细页图标\绿色框\5 %284%29.png" />
+    <Content Include="Images\详细页图标\绿色框\6.png" />
+    <Content Include="Images\详细页图标\绿色框\7 %281%29.png" />
+    <Content Include="Images\详细页图标\绿色框\7 %282%29.png" />
+    <Content Include="Images\详细页图标\绿色框\7 %283%29.png" />
+    <Content Include="Images\详细页图标\绿色框\全停按钮.png" />
+    <Content Include="Images\详细页图标\绿色框\全关按钮.png" />
+    <Content Include="Images\详细页图标\绿色框\全升按钮.png" />
+    <Content Include="Images\详细页图标\绿色框\全开按钮.png" />
+    <Content Include="Images\详细页图标\绿色框\全降按钮.png" />
+    <Content Include="Images\详细页图标\背景图-.jpg" />
     <Content Include="img\404.png" />
     <Content Include="img\500.png" />
     <Content Include="img\apple-touch-icon.png" />
@@ -1049,6 +1359,7 @@
     <Content Include="Scripts\fontawesome\v4-shims.js" />
     <Content Include="Scripts\fontawesome\v4-shims.min.js" />
     <Content Include="Scripts\holder.min.js" />
+    <Content Include="Scripts\HomePageJS.js" />
     <Content Include="Scripts\ie-emulation-modes-warning.js" />
     <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
     <Content Include="Scripts\jquery-migrate-3.0.0.js" />
@@ -1070,6 +1381,7 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\remotekeys.js" />
+    <Content Include="Scripts\RemoteModal.js" />
     <Content Include="Scripts\tablesorter\jquery.tablesorter.combined.js" />
     <Content Include="Scripts\tablesorter\jquery.tablesorter.combined.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
@@ -1115,6 +1427,16 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="App_GlobalResources\Resource.zh.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.zh.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\详细页图标\images\Thumbs.db" />
+    <Content Include="Images\详细页图标\Thumbs.db" />
+    <Content Include="Images\详细页图标\空调\images\images\Thumbs.db" />
+    <Content Include="Images\详细页图标\空调\images\Thumbs.db" />
     <None Include="Properties\PublishProfiles\CresijProfile.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
@@ -1193,6 +1515,18 @@
     <Compile Include="Approve.aspx.designer.cs">
       <DependentUpon>Approve.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_GlobalResources\Resource.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="App_GlobalResources\Resource.zh.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.zh.resx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -1208,6 +1542,9 @@
     </Compile>
     <Compile Include="authorize.aspx.designer.cs">
       <DependentUpon>authorize.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CameraOnline.cs" />
     <Compile Include="CardLogs.aspx.cs">
@@ -1287,6 +1624,13 @@
     <Compile Include="exportdata.aspx.designer.cs">
       <DependentUpon>exportdata.aspx</DependentUpon>
     </Compile>
+    <Compile Include="HomePage.aspx.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HomePage.aspx.designer.cs">
+      <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Hubsfile\MyHub.cs" />
     <Compile Include="Hubsfile\Startup.cs" />
     <Compile Include="Hubsfile\UpdateDevice.cs" />
@@ -1351,16 +1695,6 @@
     </Compile>
     <Compile Include="RemoveUsers.aspx.designer.cs">
       <DependentUpon>RemoveUsers.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\Chinese-Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Chinese-Resource.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\English-Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>English-Resource.resx</DependentUpon>
     </Compile>
     <Compile Include="Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>
@@ -1470,6 +1804,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Members\" />
+    <Folder Include="Resources\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
@@ -1496,16 +1831,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Chinese-Resource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Chinese-Resource.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\English-Resource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>English-Resource.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
-    </EmbeddedResource>
+    <Content Include="App_GlobalResources\Resource.resx">
+      <Generator>PublicGlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Resource.designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

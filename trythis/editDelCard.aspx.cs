@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class editDelCard : Page
+    public partial class editDelCard : BasePage
     {
         static List<KeyValuePair<string, string>> idsloc = new List<KeyValuePair<string, string>>();
         

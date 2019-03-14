@@ -5,12 +5,6 @@ VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCresij", "trythis\WebCresij.csproj", "{FC27A9E6-3931-4548-ADB3-BE9F81783CB9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimerSchedule", "TimerSchedule\TimerSchedule.csproj", "{EED05BE3-0461-47EE-A2E8-802F81446FEA}"
-EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TimerSetup", "TimerSetup\TimerSetup.vdproj", "{DAEE05B0-4EB4-4797-BF7D-D4D624958B45}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vlcVideo", "vlcVideo\vlcVideo.csproj", "{479CA817-A929-4FE7-8EA1-34A2FB282A1D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,36 +27,6 @@ Global
 		{FC27A9E6-3931-4548-ADB3-BE9F81783CB9}.Release|x64.Build.0 = Release|Any CPU
 		{FC27A9E6-3931-4548-ADB3-BE9F81783CB9}.Release|x86.ActiveCfg = Release|Any CPU
 		{FC27A9E6-3931-4548-ADB3-BE9F81783CB9}.Release|x86.Build.0 = Release|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Debug|x64.Build.0 = Debug|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Debug|x86.Build.0 = Debug|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Release|x64.ActiveCfg = Release|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Release|x64.Build.0 = Release|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Release|x86.ActiveCfg = Release|Any CPU
-		{EED05BE3-0461-47EE-A2E8-802F81446FEA}.Release|x86.Build.0 = Release|Any CPU
-		{DAEE05B0-4EB4-4797-BF7D-D4D624958B45}.Debug|Any CPU.ActiveCfg = Debug
-		{DAEE05B0-4EB4-4797-BF7D-D4D624958B45}.Debug|x64.ActiveCfg = Debug
-		{DAEE05B0-4EB4-4797-BF7D-D4D624958B45}.Debug|x86.ActiveCfg = Debug
-		{DAEE05B0-4EB4-4797-BF7D-D4D624958B45}.Release|Any CPU.ActiveCfg = Release
-		{DAEE05B0-4EB4-4797-BF7D-D4D624958B45}.Release|x64.ActiveCfg = Release
-		{DAEE05B0-4EB4-4797-BF7D-D4D624958B45}.Release|x86.ActiveCfg = Release
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Debug|x64.Build.0 = Debug|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Debug|x86.Build.0 = Debug|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Release|x64.ActiveCfg = Release|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Release|x64.Build.0 = Release|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Release|x86.ActiveCfg = Release|Any CPU
-		{479CA817-A929-4FE7-8EA1-34A2FB282A1D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

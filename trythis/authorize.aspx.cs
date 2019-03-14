@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class authorize : System.Web.UI.Page
+    public partial class authorize : BasePage
     {
         Userdetails ud = new Userdetails();
         protected void Page_Load(object sender, EventArgs e)

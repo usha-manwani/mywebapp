@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -14,17 +15,18 @@ using OfficeOpenXml;
 
 namespace WebCresij
 {
-    public partial class CardLogs : System.Web.UI.Page
+    public partial class CardLogs : BasePage
     {
         static SortDirection sortdirection = SortDirection.Ascending;
         
-        static DataTable dt ;
+        static DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                bindData();
+                BindData();
             }
+            LblText();
         }
         protected void PageSize_Changed(object sender, EventArgs e)
         {
@@ -32,12 +34,9 @@ namespace WebCresij
             gv1.PageSize = pagesize;
             gv1.DataSource = dt;
             gv1.DataBind();
-            int _TotalRecs = dt.Rows.Count;
-            int _CurrentRecStart = gv1.PageIndex * gv1.PageSize + 1;
-            int _CurrentRecEnd = gv1.PageIndex * gv1.PageSize + gv1.Rows.Count;
-            lblTitle.Text = string.Format("Displaying {0} to {1} of {2} records found", _CurrentRecStart, _CurrentRecEnd, _TotalRecs);
+            LblText();          
         }
-        protected void bindData()
+        protected void BindData()
         {
             string query = "Select cc.Name as name, cc.MemberID as memberID, rd.data as cardID, " +
                 "cd.ClassName as Location,  rd.date as Time from CardRegister cc " +
@@ -47,16 +46,12 @@ namespace WebCresij
             gv1.DataSource = dt;
             dt.TableName = "cardLogs";
             gv1.DataBind();
-            int _TotalRecs = dt.Rows.Count;
-            int _CurrentRecStart = gv1.PageIndex * gv1.PageSize + 1;
-            int _CurrentRecEnd = gv1.PageIndex * gv1.PageSize + gv1.Rows.Count;
-
-            lblTitle.Text = string.Format("Displaying {0} to {1} of {2} records found", _CurrentRecStart, _CurrentRecEnd, _TotalRecs);
+            LblText();
         }
 
-        protected void gv1_Sorting(object sender, GridViewSortEventArgs e)
+        protected void Gv1_Sorting(object sender, GridViewSortEventArgs e)
         {
-            bindData();
+            BindData();
             DataTable dtSortTable = dt;
             if (dtSortTable != null)
             {
@@ -64,15 +59,15 @@ namespace WebCresij
                 DataTable dt1 = new DataTable();
                 {
                     string SortDir = string.Empty;
-                    if (dir == SortDirection.Ascending)
+                    if (Dir == SortDirection.Ascending)
                     {
-                        dir = SortDirection.Descending;
+                        Dir = SortDirection.Descending;
                         SortDir = "Desc";
                         btnAsc.Text = "<i class=\"fa fa-sort-alpha-up\"></i>";
                     }
                     else
                     {
-                        dir = SortDirection.Ascending;
+                        Dir = SortDirection.Ascending;
                         SortDir = "Asc";
                         btnAsc.Text = "<i class=\"fa fa-sort-alpha-down\"></i>";
                     }
@@ -98,7 +93,7 @@ namespace WebCresij
                 }
             }
         }
-        public SortDirection dir
+        public SortDirection Dir
         {
             get
             {
@@ -113,17 +108,17 @@ namespace WebCresij
                 ViewState["dirState"] = value;
             }
         }
-        protected void ddlsort_SelectedIndexChanged(object sender, EventArgs e)
+        protected void Ddlsort_SelectedIndexChanged(object sender, EventArgs e)
         {
             gv1.Sort(ddlsort.SelectedValue, SortDirection.Ascending);
         }
-        protected void btnAsc_Click(object sender, EventArgs e)
+        protected void BtnAsc_Click(object sender, EventArgs e)
         {
             sortdirection = SortDirection.Ascending;
             gv1.Sort(ddlsort.SelectedValue, sortdirection);
         }
 
-        protected void gv1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void Gv1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gv1.PageIndex = e.NewPageIndex;
             ViewState["pageindex"] = e.NewPageIndex;
@@ -136,10 +131,10 @@ namespace WebCresij
             lblTitle.Text = string.Format("Displaying {0} to {1} of {2} records found", _CurrentRecStart, _CurrentRecEnd, _TotalRecs);
         }
        
-        protected void exportexcel_Click(object sender, EventArgs e)
+        protected void Exportexcel_Click(object sender, EventArgs e)
         {
             gv1.AllowPaging = false;
-            bindData();
+            BindData();
             DataTable dt1 = gv1.DataSource as DataTable;
             
             dt1.Columns.Add("Date & Time");
@@ -180,5 +175,13 @@ namespace WebCresij
                     Response.Redirect("exportdata.aspx");             
                 }           
         }       
+        protected void LblText()
+        {
+            int _TotalRecs = dt.Rows.Count;
+            int _CurrentRecStart = gv1.PageIndex * gv1.PageSize + 1;
+            int _CurrentRecEnd = gv1.PageIndex * gv1.PageSize + gv1.Rows.Count;
+            string text1 = Resources.Resource.DisplayRecords;
+            lblTitle.Text = string.Format(text1, _CurrentRecStart, _CurrentRecEnd, _TotalRecs);
+        }
     }
 }

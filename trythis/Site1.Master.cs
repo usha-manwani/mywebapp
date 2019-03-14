@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -14,6 +15,13 @@ namespace WebCresij
        
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.IsPostBack)
+            {
+                if (ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name) != null)
+                {
+                    ddlLanguages.Items.FindByValue(CultureInfo.CurrentCulture.Name).Selected = true;
+                }
+            }
             try
             {
                 string s = HttpContext.Current.Session["UserName"].ToString();

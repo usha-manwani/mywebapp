@@ -8,7 +8,7 @@ using System.IO;
 
 namespace WebCresij
 {
-    public partial class exportdata : System.Web.UI.Page
+    public partial class exportdata : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

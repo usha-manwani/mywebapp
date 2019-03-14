@@ -64,6 +64,7 @@
     border-radius: 10px;
     box-shadow: 0 0 10px #999 !important;
     border-top: none !important;
+    background-color:white
 }
 .modal {
     display: none; /* Hidden by default */

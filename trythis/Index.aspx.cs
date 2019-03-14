@@ -8,15 +8,16 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Security;
 using System.Security.Cryptography;
-
+using System.Threading;
+using System.Globalization;
 
 namespace WebCresij
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Login : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
         protected void LogIn(object sender, EventArgs e)
         {

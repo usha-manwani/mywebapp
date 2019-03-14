@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 namespace WebCresij
 {
     
-    public partial class CardReader : System.Web.UI.Page
+    public partial class CardReader : BasePage
     {
         string nodesval = "";
         

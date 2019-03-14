@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace WebCresij
 {
-    public partial class Options : System.Web.UI.Page
+    public partial class Options : BasePage
     {
         protected string Values;
        
@@ -301,27 +301,35 @@ namespace WebCresij
         {
             try
             {
-                if (TreeViewDelete.SelectedNode.Depth == 3)
-                {
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "nodelete", "nodelete();", true);
-                }
-                else
-                    delvalue.Text = TreeViewDelete.SelectedValue;
+               
+                delvalue.Text = TreeViewDelete.SelectedValue;
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "ConfirmDel", "ConfirmDel();", true);
             }
             catch
             {
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "error1", "camError();", true);
                 bindTree();
-            }   
+            }           
         }
-        protected void btndel_Click(object sender, EventArgs e)
+        protected void Btndel_Click(object sender, EventArgs e)
         {
             try
             {
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "HideDel", "hideDelConfirm();", true);
                 string cam = delvalue.Text;
                 int result = 2;
+                if (TreeViewDelete.SelectedNode.Depth == 3)
+                {
+                    if (TreeViewDelete.SelectedNode.Text=="Camera")
+                    {
+                        
+                        result = fillTree.DelAllCam(TreeViewDelete.SelectedNode.Parent.ToolTip);
+                    }
+                    else
+                    {
+                        result = fillTree.DelAllCC(loc: TreeViewDelete.SelectedNode.Parent.ToolTip);
+                    }
+                }
                 if (TreeViewDelete.SelectedNode.Depth == 4)
                 {
                     if (TreeViewDelete.SelectedNode.Parent.Text == "Camera")

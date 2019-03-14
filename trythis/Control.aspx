@@ -70,7 +70,7 @@
     min-width:240px;
     min-height: 280px;
     max-height:300px;
-    background: #202838;
+    background-color:#23233f;
 }
 </style>                                                                                
     <link href="Content/ControlStyle.css" rel="stylesheet" />   
@@ -82,7 +82,7 @@
         <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <script src="Scripts/ControlKeys.js?v=11"></script>
+        <script src="Scripts/ControlKeys.js?v=13"></script>
     <div class="container-fluid">
     <div class="row clearfix" id="smallcontrol" style="width:100%; min-width:600px" >
         <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
@@ -746,11 +746,5 @@
         </table>           
     </div>
      </div>       
-    <script type="text/javascript">       
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                document.getElementById("control").style.display = "none";
-            }
-        }        
-    </script>   
+       
 </asp:Content>

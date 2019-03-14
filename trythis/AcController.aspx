@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeBehind="AcController.aspx.cs" Inherits="trythis.AcController" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeBehind="AcController.aspx.cs" Inherits="WebCresij.AcController" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
     <style>
         .TableBorder {

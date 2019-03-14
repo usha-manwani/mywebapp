@@ -15,7 +15,8 @@ namespace WebCresij
         //int i = 0;
         // public event EventHandler selected;
         //int role = Convert.ToInt32(HttpContext.Current.Session["role"]);
-        TreeNode root = new TreeNode("Institutes");
+       
+        TreeNode root = new TreeNode(Resources.Resource.Institutes);
         static SqlConnection con;
         public static DataTable dtIns = new DataTable("InsDetails");
         public static DataTable dtGrade = new DataTable("GradeDetails");
@@ -36,6 +37,8 @@ namespace WebCresij
                 this.PopulateTreeView(dt, 0, null);
                 nodenames = new string[TreeMenuView.Nodes.Count];
             }
+            
+            
         }
         public void PopulateTreeView(DataTable dtParent, int ParentId, TreeNode treeNode)
         {
@@ -72,7 +75,7 @@ namespace WebCresij
                         treeNode.ChildNodes.Add(child);
                 }
             }
-            TreeMenuView.CollapseAll();
+            TreeMenuView.ExpandDepth = 3;
         }
 
         public static DataTable ExecuteCommand(string Text)
@@ -140,6 +143,31 @@ namespace WebCresij
                 }
                 Response.Redirect("~/Control.aspx");
             }
+            if (TreeMenuView.SelectedNode.Depth == 3)
+            {
+                HttpContext.Current.Session["LocToDisplay"] = TreeMenuView.SelectedNode.Text;
+                string ip = "";
+                try
+                {
+                    string query = "select CCIP from CentralControl where location in (select classID from Class_Details where ID = '" + TreeMenuView.SelectedValue + "')";
+                    con = new SqlConnection(constr);
+                    SqlCommand cmd = new SqlCommand(query, con);
+                    //Opening Connection  
+                    if (con.State != ConnectionState.Open)
+                        con.Open();
+                    ip= cmd.ExecuteScalar().ToString();                   
+                    HttpContext.Current.Session["DeviceIP"] = ip;
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    con.Close();
+                    Response.Redirect("~/HomePage.aspx");
+                }    
+            }
             //if (TreeMenuView.SelectedNode.Depth == 5)
             //{
             //    c = TreeMenuView.SelectedValue.ToString();
@@ -163,11 +191,6 @@ namespace WebCresij
             {
                 TreeMenuView.SelectedNode.Expand();
             }
-
-
-
-
-            //this.TreeMenuView.SelectedNode.Selected = false;
         }
     }
 }

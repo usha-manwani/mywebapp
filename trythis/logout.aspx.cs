@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class Logout : System.Web.UI.Page
+    public partial class Logout : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

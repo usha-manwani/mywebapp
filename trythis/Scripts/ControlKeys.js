@@ -1,6 +1,6 @@
 ﻿﻿$(function () {
 
-     var ipAddress = document.getElementById("MainContent_masterchildBody_masterBody_deviceips").innerText;
+    var ipAddress = document.getElementById("MainContent_masterchildBody_masterBody_deviceips").innerText;
     var chat = $.connection.myHub;
     chat.client.broadcastMessage = function (name, message) {
          tbleupdate(name, message);
@@ -94,7 +94,8 @@
                 if (arraydata[6] == 'Closed') {
                     var src = document.getElementById("projectorOn");
                     src.src = "Images/offimages/proj1.png";
-                } else {
+                }
+                else {
                     var src = document.getElementById("projectorOn");
                     src.src = "Images/onimages/projectoron1.png";
                 }
@@ -136,9 +137,11 @@
                         if (arraydata[2] == "SystemSwitchOn") {
                             var img = document.getElementById("systempower");
                             img.src = "Images/onimages/syspoweron.png";
-                            if (arraydata.length > 4) {
+                            if (arraydata.length > 4)
+                            {
                                 var imgpc = document.getElementById("pcpower");
-                                switch (arraydata[4]) {
+                                switch (arraydata[4])
+                                {
                                     case 'ComputerOff':
 
                                         imgpc.src = "Images/offimages/pcof.png";
@@ -509,7 +512,7 @@ function createDivs() {
             cell22.className = "tdcenter";
             cell22.title = "Curtain/Screen Status";
             cell22.style.color = "white";
-            cell22.innerHTML = '<img src= "Images/imgs/curtain32.png" id="curtainMain" />';
+            cell22.innerHTML = '<img src= "Images/imgs/curtain32.png" height="32" width="32" id="curtainMain" />';
           
             //ss
             var cell23 = row2.insertCell(2);

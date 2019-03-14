@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class Schedule : System.Web.UI.Page
+    public partial class Schedule : BasePage
     {
         static DataTable dtStatic = new DataTable();
         protected void Page_Load(object sender, EventArgs e)

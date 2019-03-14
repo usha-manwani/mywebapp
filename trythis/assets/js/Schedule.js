@@ -19,34 +19,42 @@ function timeset2() {
     alert("same time");
 }
 function timesetSame() {
-    alert("Start Time and End Time should be different !!");
+    var message = ' <%=Resources.Resource.AlertTime%>'
+    alert(message);
 }
 function timewrong() {
-    alert("Please insert time in right format\n Correct Format Should be for example - '00:00-00:00'");
+    var message = ' <%=Resources.Resource.AlertTime2%>'
+    alert(message);
 }
 function confirm() {
-    alert("Schedule Saved Successfully!!");
+    var message = ' <%=Resources.Resource.AlertTime3%>'
+    alert(message);
 }
 function timevalue() {
     alert("please use different time hours!!")
 }
 function timeset() {
-    alert("Please enter correct time!!\n Time is in 24 hour Format!! Start time should be earlier than stop time!!\n eg. - 22:00 - 23:59")
+    var message = ' <%=Resources.Resource.AlertTime4%>'
+    alert(message);
 }
 function importFile() {
     document.getElementById('uploadDiv').style.display = "block";
 }
 function importEmptyFile() {
-    alert("Schedule data in excel file is not in required format.\n Please create excel file as below table format!!");
+    var message = ' <%=Resources.Resource.AlertTime5%>'
+    alert(message);
 }
 function AlertSuccess() {
-    alert("Schedule successfully saved!!");
+    var message = ' <%=Resources.Resource.AlertTime3%>'
+    alert(message);
 }
 function AlertFail() {
-    alert("Some error occured!! Please try again!!");
+    var message = ' <%=Resources.Resource.AlertError1%>'
+    alert(message);
 }
 function fileFormat() {
-    alert("Please insert data in excel without leave initial row(s)and column(s)!!");
+    var message = ' <%=Resources.Resource.AlertTime6%>'
+    alert(message);
 }
 function text_changed(textobj) {
     var val = textobj.value;
@@ -59,7 +67,8 @@ function text_changed(textobj) {
     }
     else {
         if (val != "") {
-            alert("please enter valid number!");
+            var message = ' <%=Resources.Resource.AlertError2%>'
+            alert(message);
             textobj.value = "";
         }
     }

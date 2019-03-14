@@ -6,21 +6,22 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Threading;
 
 namespace WebCresij
 {
-    public partial class Registration : System.Web.UI.Page
+    public partial class Registration : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+          
         }
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             try
             {
                 string no = PhoneNo.Text.ToString();
-
                 var charsToRemove = new string[] { "+", "-", " " };
                 foreach (var c in charsToRemove)
                 {
@@ -42,19 +43,17 @@ namespace WebCresij
                 cmd.ExecuteNonQuery();
                 int k = Convert.ToInt32( cmd.Parameters["@k"].Value);
                 con.Close();
-
                 if (k > 0 )
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('Registered Successfully')", true);
-
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", 
+                        "alert('Registered Successfully')", true);
                     Response.Redirect("Index.aspx", false);
                 }
-
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('UserID or phone Number already in use. Please try using different UserId and Number')", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage",
+                        "alert('UserID or phone Number already in use. Please try using different UserId and Number')", true);
                 }
-
             }
             catch (Exception ex)
             {

@@ -2,8 +2,9 @@
 $(function () {
     
     var chat = $.connection.myHub;
-    chat.client.confirmRegister = function () {
-        alert('Card Successfully Registered!!');
+    chat.client.confirmRegister = function () { 
+        var message = ' <%=Resources.Resource.CardSuccessRegister%>'
+        alert(message);
     }    
     chat.client.registerCard = function (name, message) {
         var text1 = document.getElementById("MainContent_masterchildBody_masterBody_info");
@@ -106,8 +107,6 @@ function getRowIndex(lnk) {
     var rowIndex = row.rowIndex ;
     var r = document.getElementById('MainContent_masterchildBody_masterBody_indexselect');
     r.value = rowIndex;
-    alert(r.value);
-    
     return false;
 }
 //function GetSelected() {
@@ -176,7 +175,8 @@ function addNewCardID(cardID)
 function isNumberKey(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        alert("Please enter a valid number")
+        var message = ' <%=Resources.Resource.ValidNo%>'
+        alert(message);
         return false;
     }
     return true;
@@ -194,7 +194,8 @@ function hideGrid() {
     mymodal.style.display = 'none';
     var gridmodal = document.getElementById('griddiv');
     gridmodal.style.display = "none";
-    alert("Please check status of card !! ");
+    var message = ' <%=Resources.Resource.AlertCardStatus%>'
+    alert(message);
     return false;
 }
 function HideTree() {
@@ -214,7 +215,8 @@ function isNameKey(evt) {
         return true;
     }
     else {
-        alert("A name can contain letters, dot, hyphen and underscore only");
+        var message = ' <%=Resources.Resource.AlertNameFormat%>'
+        alert(message);
         return false;
     }
 }
@@ -224,7 +226,8 @@ $(document).on('change', "*[name='txtSno']", function () {
     outerloop: for (i = 0; i < text.length; i++) {
         for (j = i + 1; j < text.length; j++) {
             if (text[i].value == text[j].value && text[i].value != "" && text[j]!="") {
-                alert("Please enter different Serial Number Values!!")
+                var message = ' <%=Resources.Resource.AlertSerialNumber%>'
+                alert(message);
                 break outerloop;
             }
         }       
@@ -236,7 +239,8 @@ $(document).on('change', "*[name='memID']", function () {
     outerloop: for (i = 0; i < text.length; i++) {
         for (j = i + 1; j < text.length; j++) {
             if (text[i].value == text[j].value && text[i].value != "" && text[j] != "") {
-                alert("Please enter different Member IDs Values!!")
+                var message = ' <%=Resources.Resource.AlertMemberID%>'
+                alert(message);
                 break outerloop;
             }
         }

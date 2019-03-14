@@ -514,12 +514,69 @@ namespace WebCresij
                 }
                 return result;
             }
+        public int DelAllCam(string loc)
+        {
+            int result = -1;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_DelAllCam", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@r", SqlDbType.Int);
+                    cmd.Parameters["@r"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.AddWithValue("@loc", loc);
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        result = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                    }
+                    catch
+                    {
 
-            #endregion
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return result;
+        }
+        public int DelAllCC(string loc)
+        {
+            int result = -1;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_DelAllCC", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@r", SqlDbType.Int);
+                    cmd.Parameters["@r"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.AddWithValue("@loc", loc);
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        result = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                    }
+                    catch
+                    {
 
-            #region Edit details
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return result;
+        }
+        #endregion
 
-            public DataTable camDetails(string ip, string loc)
+        #region Edit details
+
+        public DataTable camDetails(string ip, string loc)
             {
                 DataTable dt = new DataTable();
                 using (SqlConnection con = new SqlConnection(constr))

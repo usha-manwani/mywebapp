@@ -136,7 +136,7 @@
         }
     };
     chat.client.updatelog = function () {
-        alert("inside grid");
+        //alert("inside grid");
         _doPostBack("<%=up1.UniqueID %>", "");
 
     };

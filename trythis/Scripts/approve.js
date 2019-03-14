@@ -8,6 +8,7 @@ function close3() {
     modal.style.display = "none";
 }
 function norole() {
-    alert("Cannot authorize user without providing any role!!");
+    var message = ' <%=Resources.Resource.ApproveError%>'
+    alert(message);
 }
 

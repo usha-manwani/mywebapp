@@ -13,6 +13,24 @@ namespace WebCresij {
     public partial class Login {
         
         /// <summary>
+        /// loginHead control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label loginHead;
+        
+        /// <summary>
+        /// heading1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label heading1;
+        
+        /// <summary>
         /// ErrorMessage control.
         /// </summary>
         /// <remarks>
@@ -31,6 +49,15 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.Literal FailureText;
         
         /// <summary>
+        /// userLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label userLabel;
+        
+        /// <summary>
         /// UserName control.
         /// </summary>
         /// <remarks>
@@ -38,6 +65,15 @@ namespace WebCresij {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox UserName;
+        
+        /// <summary>
+        /// passLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label passLabel;
         
         /// <summary>
         /// Password control.
@@ -58,6 +94,24 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.CheckBox RememberMe;
         
         /// <summary>
+        /// rememberLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label rememberLabel;
+        
+        /// <summary>
+        /// btnLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLogin;
+        
+        /// <summary>
         /// RegisterHyperLink control.
         /// </summary>
         /// <remarks>
@@ -65,5 +119,14 @@ namespace WebCresij {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink RegisterHyperLink;
+        
+        /// <summary>
+        /// registerLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label registerLabel;
     }
 }

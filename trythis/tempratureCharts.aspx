@@ -10,16 +10,16 @@
     <link href="assets/css/weather-icons.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
-    <script src="Scripts/esm/popper.min.js"></script>
+    
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <div class="row " id="ddl" style="background-color: #7fe0c8; top:100px;" >        
+        <div class="row " id="ddl" style="background-color: #4ecdc4; top:100px;" >        
       <asp:UpdatePanel runat="server">
                          <ContentTemplate>                            
-                 <div class="row" >
+                 <div class="row"  >
                     <div class="col-lg-6 col-sm-12 ">
-                        <h4>Temperature, Humidity & PM(Particulate Matter) Graph for </h4>
+                        <h4><span><%=Resources.Resource.TempratureChartHead%></span> </h4>
                     </div>
                      <div class=" col-lg-2 col-sm-6 float-left">
                         <asp:DropDownList Width="150px" AutoPostBack="true"
@@ -35,7 +35,7 @@
                             <asp:ListItem Text="select" Value=""></asp:ListItem>
                         </asp:DropDownList>                        
                     </div>
-                    <div class="col-lg-2 col-sm-6 float-left">
+                    <div class="col-lg-2 col-sm-6 float-right">
                         <asp:DropDownList  ID="ddlClass" Width="150px" AutoPostBack="true" 
                               runat="server" CssClass="btn btn-default border dropdown" 
                             data-toggle="dropdown" OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" >
@@ -58,7 +58,7 @@
                         <div class="card bg-flat-color-1" style="background-color:#cab9e9">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
-                                   <h3> Temperature</h3>
+                                   <h3> <span><%=Resources.Resource.Temperature%></span></h3>
                                     <h3 class="mb-0 ">                                        
                                         <span id="tempvalue" class="count float-left ">0</span>
                                         <span >°C</span>
@@ -75,7 +75,7 @@
                         <div class="card  bg-flat-color-6" style="background-color:#99e9d7">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left" >
-                                    <h3>Humidity</h3>
+                                    <h3><span><%=Resources.Resource.Humidity%></span></h3>
                                     <h3 class="mb-0 fw-r">                                        
                                         <span id="humidvalue" class="count float-left">0</span>
                                         <span>%</span>
@@ -126,7 +126,7 @@
                     <div class="col-lg-6 col-md-12  col-sm-12" >
                         <div class="card">
                             <div class="card-body" id="teamdiv" style="background-color:white">
-                                <h4 class="mb-3">Temperature </h4>
+                                <h4 class="mb-3"> <span><%=Resources.Resource.Temperature%></span></h4>
                                 <canvas id="team-chart"></canvas>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                  <div class="col-lg-6 col-md-12  col-sm-12">
                 <div class="card">
                             <div class="card-body" id="humdiv" style="background-color:white">
-                                <h4 class="mb-3">Humidity </h4>
+                                <h4 class="mb-3"> <span><%=Resources.Resource.Humidity%></span> </h4>
                                 <canvas id="lineChart"></canvas>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                     <div class="col-lg-6 col-md-12  col-sm-12" >
                         <div class="card">
                             <div class="card-body"  style="background-color:white">
-                                <h4 class="mb-3">Electricity </h4>
+                                <h4 class="mb-3"> <span><%=Resources.Resource.Electricity%></span></h4>
                                  <canvas id="myChart"  height="100"></canvas>
                             </div>
                         </div>
@@ -166,7 +166,7 @@
                     <div class="col-lg-6 col-md-12  col-sm-12" >
                         <div class="card">
                             <div class="card-body"  style="background-color:white">
-                                <h4 class="mb-3">Voltage </h4>
+                                <h4 class="mb-3"> <span><%=Resources.Resource.Voltage%></span></h4>
                                  <canvas id="myChart1"  height="100"></canvas>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
                     <div class="col-lg-6 col-md-12  col-sm-12" >
                         <div class="card">
                             <div class="card-body"  style="background-color:white">
-                                <h4 class="mb-3">Projector Uses </h4>
+                                <h4 class="mb-3"> <span><%=Resources.Resource.ProjectorUses%></span></h4>
                                  <canvas id="myChart2"  height="100"></canvas>
                             </div>
                         </div>
@@ -187,7 +187,7 @@
                     <div class="col-lg-6 col-md-12  col-sm-12" >
                         <div class="card">
                             <div class="card-body"  style="background-color:white">
-                                <h4 class="mb-3">PC Uses </h4>
+                                <h4 class="mb-3"> <span><%=Resources.Resource.PCUses%></span></h4>
                                  <canvas id="myChart3"  height="100"></canvas>
                             </div>
                         </div>
@@ -198,7 +198,7 @@
                     <div class="col-lg-6 col-md-12  col-sm-12" >
                         <div class="card">
                             <div class="card-body"  style="background-color:white">
-                                <h4 class="mb-3">CO2 Level </h4>
+                                <h4 class="mb-3"> <span><%=Resources.Resource.CO2%></span></h4>
                                  <canvas id="myChart4"  height="100"></canvas>
                             </div>
                         </div>
@@ -208,7 +208,7 @@
                     <div class="col-lg-6 col-md-12  col-sm-12" >
                         <div class="card">
                             <div class="card-body"  style="background-color:white">
-                                <h4 class="mb-3">Methanal Level </h4>
+                                <h4 class="mb-3"> <span><%=Resources.Resource.Methanal%></span> </h4>
                                  <canvas id="myChart5"  height="100"></canvas>
                             </div>
                         </div>

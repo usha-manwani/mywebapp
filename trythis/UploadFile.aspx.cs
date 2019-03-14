@@ -9,7 +9,7 @@ using System.Net;
 
 namespace WebCresij
 {
-    public partial class UploadFile : System.Web.UI.Page
+    public partial class UploadFile : BasePage
     {
         
         protected void Page_Load(object sender, EventArgs e)

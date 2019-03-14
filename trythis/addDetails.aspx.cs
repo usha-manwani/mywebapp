@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class addDetails : System.Web.UI.Page
+    public partial class addDetails : BasePage
     {
         PopulateTree pt = new PopulateTree();
         protected string Values;

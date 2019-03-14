@@ -9,7 +9,7 @@ using System.Web.Script.Serialization;
 
 namespace WebCresij
 {
-    public partial class Contact : Page
+    public partial class Contact : BasePage
     {
         protected string Values;
         protected void Page_Load(object sender, EventArgs e)

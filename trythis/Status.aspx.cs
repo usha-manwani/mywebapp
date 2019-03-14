@@ -9,7 +9,7 @@ using System.Data;
 
 namespace WebCresij
 {
-    public partial class Status : Page
+    public partial class Status : BasePage
     {
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         

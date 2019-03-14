@@ -43,12 +43,15 @@
                 <HeaderStyle ForeColor="Black" />
                 <Columns >
                     
-                    <asp:BoundField DataField="User_Id" HeaderText="User ID" HeaderStyle-HorizontalAlign="Left" />
-                    <asp:BoundField DataField="User_Name" HeaderText="Name" HeaderStyle-HorizontalAlign="Left" />
+                    <asp:BoundField DataField="User_Id" HeaderText="<%$Resources:Resource, userID %>" 
+                        HeaderStyle-HorizontalAlign="Left" />
+                    <asp:BoundField DataField="User_Name" HeaderText="<%$Resources:Resource, Name %>" 
+                        HeaderStyle-HorizontalAlign="Left" />
                    
                      <asp:TemplateField >
                             <ItemTemplate>
-                                 <asp:linkButton ID="btnEdit"  runat="server" Text="Delete" CommandName="Delete"  CssClass="asplink" />
+                                 <asp:linkButton ID="btnEdit"  runat="server" Text="<%$Resources:Resource, Delete %>"
+                                     CommandName="Delete"  CssClass="asplink" />
                             </ItemTemplate>
                      </asp:TemplateField>
                 </Columns>
@@ -63,12 +66,12 @@
                 <header class="container ">
                     <span onclick="del();"
                           class="w3-button w3-display-topright">&times;</span>
-                    <h3>Delete!!</h3>
+                    <h3><span><%=Resources.Resource.Delete1%></span></h3>
                 </header>
                 <div class="w3-container" >
-                      <p class="text-danger">User Successfully Deleted !!</p>
+                      <p class="text-danger"><span><%=Resources.Resource.DeleteSuccess%></span></p>
                     <br />
-               <asp:Button ID="Button1" runat="server" Text="Ok"  OnClientClick="del(); return false;" />            
+               <asp:Button ID="Button1" runat="server" Text="<%$Resources:Resource, Ok %>"  OnClientClick="del(); return false;" />            
                     </div>
             </div>
         </div>     

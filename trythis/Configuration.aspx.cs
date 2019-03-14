@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class Configuration : System.Web.UI.Page
+    public partial class Configuration : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

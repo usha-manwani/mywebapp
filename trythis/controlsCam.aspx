@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="controlsCam.aspx.cs" Inherits="trythis.controlsCam" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="controlsCam.aspx.cs" Inherits="WebCresij.controlsCam" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -52,7 +52,7 @@
             padding: 1em 1em 1em 1em;
         }
         .one {
-            grid-column: 1 /span 2;
+            grid-column: 1 /span 2;                                                                                 
             grid-row: 1/ span 6;
             -ms-grid-column:1 ;
             -ms-grid-column-span:2;

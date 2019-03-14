@@ -45,90 +45,85 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="masterBody" runat="server">   
-       <div class="form-horizontal divopt" >
-        <h4>Add a new User..!</h4>
+       <div class="form-horizontal" >
+        <h4><span><%=Resources.Resource.AddNewUser1%></span></h4>
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
-        <div class="form-group row">
+        <div class="form-group row" >
             <asp:Label runat="server" AssociatedControlID="User_Name" 
-                CssClass="col-md-2 control-label">User name</asp:Label>
-            <div class="col-md-10">
-                <asp:TextBox runat="server" ID="User_Name" CssClass="form-control" />
+                CssClass="col-lg-2 control-label">
+                <span><%=Resources.Resource.User%></span></asp:Label>            
+                <asp:TextBox runat="server" ID="User_Name" CssClass="form-control col-lg-3" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="User_Name"
-                    CssClass="text-danger" ErrorMessage="The user name field is required." />
-            </div>
+                    CssClass="text-danger" ErrorMessage="The user name field is required." />            
         </div>
         <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="UserID" 
-                CssClass="col-md-2 control-label">User ID</asp:Label>
-            <div class="col-md-10">
-                <asp:TextBox runat="server" ID="UserID" CssClass="form-control" 
+                CssClass="col-lg-2 control-label"> <span><%=Resources.Resource.UserID%></span></asp:Label>           
+                <asp:TextBox runat="server" ID="UserID" CssClass="form-control col-lg-3" 
                     ToolTip=" UpperCase, Lowercase and numbers are allowed" />
                  <cc1:FilteredTextBoxExtender runat="server" ID="filterId" 
                      FilterType="UppercaseLetters,LowercaseLetters,Numbers" TargetControlID="UserID" />                          
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="UserID"
-                    CssClass="text-danger" ErrorMessage="The User ID field is required." />
-            </div>
+                    CssClass="text-danger" ErrorMessage="The User ID field is required." />            
         </div>        
         <div class="form-group row">
-            <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
-            <div class="col-md-10">
-                <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control"
+            <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-lg-2 control-label">
+                 <span><%=Resources.Resource.Password%></span></asp:Label>            
+                <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control col-lg-3"
                     ToolTip="Uppercase, Lowercase, Numbers and Symbols '@!_$#%' are allowed" />
                 <cc1:FilteredTextBoxExtender runat="server" ID="filterPass" 
                     FilterType="UppercaseLetters,LowercaseLetters,Numbers, Custom" 
                     TargetControlID="Password" ValidChars="@!_%$#" />                           
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Password"
-                    CssClass="text-danger" ErrorMessage="The password field is required." />
-            </div>
+                    CssClass="text-danger" ErrorMessage="The password field is required." />            
         </div>
         <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="ConfirmPassword" 
-                CssClass="col-md-2 control-label">Confirm password</asp:Label>
-            <div class="col-md-10">
-                <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control" />
+                CssClass="col-lg-2 control-label">
+                 <span><%=Resources.Resource.ConfirmPassword%></span></asp:Label>           
+                <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control col-lg-3" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPassword"
                     CssClass="text-danger" Display="Dynamic" ErrorMessage="The confirm password field is required." />
                 <asp:CompareValidator runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword"
                     CssClass="text-danger" Display="Dynamic"
-                    ErrorMessage="The password and confirmation password do not match." />
-            </div>
-        </div><br />
+                    ErrorMessage="The password and confirmation password do not match." />           
+        </div>
         <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="CheckBoxList1" 
-                CssClass="col-md-2 control-label" Text="Role"></asp:Label>
-            <div class="col-md-10">
-                <asp:CheckBoxList ID="CheckBoxList1" runat="server">
-                        <asp:ListItem Text="Administrator(Full Access)" Value="1" ></asp:ListItem>
-                        <asp:ListItem Text="Live Feed " Value="2"></asp:ListItem>
-                        <asp:ListItem Text="Manage Devices Details(Add,Edit,Delete)" Value="3"></asp:ListItem>
-                        <asp:ListItem Text="Document upload & Download" Value="4"></asp:ListItem>
-                        <asp:ListItem Text="Document Deletion" Value="5"></asp:ListItem>
-                        <asp:ListItem Text="Add, Authenticate and Delete Users" Value="6"></asp:ListItem>                       
-                    </asp:CheckBoxList>
-                </div>
+                CssClass="col-lg-2 control-label" >
+                <span><%=Resources.Resource.Role%></span>
+            </asp:Label>            
+                <asp:CheckBoxList ID="CheckBoxList1" runat="server" CssClass="col-lg-5">
+                        <asp:ListItem Text="<%$Resources:Resource, Admin %>" Value="1" ></asp:ListItem>
+                        <asp:ListItem Text="<%$Resources:Resource, LiveFeed %>" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="<%$Resources:Resource, manageDevice %>" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="<%$Resources:Resource, DocUploadDownload %>" Value="4"></asp:ListItem>
+                        <asp:ListItem Text="<%$Resources:Resource, DocDelete %>" Value="5"></asp:ListItem>
+                        <asp:ListItem Text="<%$Resources:Resource, EditUsers %>" Value="6"></asp:ListItem>                       
+                    </asp:CheckBoxList>                
             </div>
         <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="PhoneNo" 
-                    CssClass="col-md-2 control-label" Text="Phone"></asp:Label>
-            <div class="col-md-10">
+                    CssClass="col-lg-2 control-label" > <span><%=Resources.Resource.Phone%></span></asp:Label>
+            
                 <asp:TextBox runat="server" ID="PhoneNo" placeHolder="+86-123-12345678" 
-                    CssClass="form-control" ClientIDMode="Static"   />
+                    CssClass="form-control col-lg-3" ClientIDMode="Static"   />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="PhoneNo"
                     CssClass="text-danger" ErrorMessage="The Phone Number is required." />
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="PhoneNo"
                     ValidationExpression = "\+(\(|)[\d]{2}(\)|)\-(\(|)[\d]{3}(\)|)\-(\(|)[\d]{8}(\)|)"
                     CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number ">
-                </asp:RegularExpressionValidator>
-                <br />                
+                </asp:RegularExpressionValidator>                               
                 <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true"
                     OnClientClick="RequirePhone(); return false"  ClientIDMode="Static" 
-                    CausesValidation="True"  ForeColor="#336699" CssClass="asplink"> Verify Phone Number</asp:LinkButton>
-            </div>                   
+                    CausesValidation="True"  ForeColor="#336699" CssClass="asplink">
+                   <span><%=Resources.Resource.PhoneVerify%></span></asp:LinkButton>                               
         </div>        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Add" CssClass="btn btn-default" />
+                <asp:Button runat="server" OnClick="CreateUser_Click" 
+                    Text="<%$Resources:Resource, Register %>" BorderColor="Gray" CssClass="btn btn-default" />
             </div>
         </div>
    </div>

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class controlRemote : System.Web.UI.Page
+    public partial class controlRemote : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
