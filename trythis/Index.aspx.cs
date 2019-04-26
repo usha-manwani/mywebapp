@@ -62,9 +62,9 @@ namespace WebCresij
                 u = cmd.Parameters["@id"].Value.ToString();
                 con.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                FailureText.Text = "Exception occured";
+                FailureText.Text = ex.Message;
                 ErrorMessage.Visible = true;
             }
             if (k > 0)
@@ -72,7 +72,7 @@ namespace WebCresij
                 HttpContext.Current.Session["UserName"] = n;
                 HttpContext.Current.Session["role"] = k;
                 HttpContext.Current.Session["UserId"] = u;
-                Response.Redirect("~/tempratureCharts.aspx");
+                Response.Redirect("~/home.aspx");
             }
             else if (k == -9)
             {

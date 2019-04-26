@@ -1,45 +1,47 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="tempratureCharts.aspx.cs" Inherits="WebCresij.tempratureCharts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    
+    <%--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">--%>
+    <link href="Content/normalize.min.css" rel="stylesheet" />
    <%-- <link rel="stylesheet" href="assets/css/style.css">  --%> 
     <link href="assets/css/charts.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+    <link href="Content/Chart.min.css" rel="stylesheet" />
+    <%--<link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">--%>
+    <%--<link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">--%>
     <link href="assets/css/weather-icons-wind.min.css" rel="stylesheet" />
     <link href="assets/css/weather-icons.min.css" rel="stylesheet" />
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
     
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <div class="row " id="ddl" style="background-color: #4ecdc4; top:100px;" >        
+        <div  id="ddl" style="background-color: #1e1e36;height:150px;" >        
       <asp:UpdatePanel runat="server">
                          <ContentTemplate>                            
-                 <div class="row"  >
-                    <div class="col-lg-6 col-sm-12 ">
-                        <h4><span><%=Resources.Resource.TempratureChartHead%></span> </h4>
+                 <div class="row" style="min-height:100px; width:70%" >
+                    <div class="col-lg-4 col-sm-12 ">
+                        <h6 ><span style="color:white"><%=Resources.Resource.TempratureChartHead%></span> </h6>
                     </div>
-                     <div class=" col-lg-2 col-sm-6 float-left">
+                     <div class=" col-lg-2 col-sm-6 float-left" >
                         <asp:DropDownList Width="150px" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                         CssClass="btn btn-default border dropdown"  ID="ddlInstitute" 
-                        data-toggle="dropdown"  runat="server" >
-                        <asp:ListItem Text="select" Value=""></asp:ListItem>
+                        data-toggle="dropdown"  runat="server" ForeColor="White" BackColor="#1E1E36">
+                         <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList></div>
-                    <div class="col-lg-2 col-sm-6 float-none">
+                    <div class="col-lg-2 col-sm-6 float-left" >
                         <asp:DropDownList Width="150px" ID="ddlGrade" AutoPostBack="true"
                             CssClass="btn btn-default border dropdown" data-toggle="dropdown"  
-                            OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" >
-                            <asp:ListItem Text="select" Value=""></asp:ListItem>
+                            OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" ForeColor="White" BackColor="#1E1E36">
+                            <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>                        
                     </div>
-                    <div class="col-lg-2 col-sm-6 float-right">
+                    <div class="col-lg-2 col-sm-6 float-left">
                         <asp:DropDownList  ID="ddlClass" Width="150px" AutoPostBack="true" 
                               runat="server" CssClass="btn btn-default border dropdown" 
-                            data-toggle="dropdown" OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" >
-                            <asp:ListItem Text="select" Value=""></asp:ListItem>
+                            data-toggle="dropdown" OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" ForeColor="White" BackColor="#1E1E36">
+                            <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>
                     </div>                    
                         <asp:Label ID="lblip" runat="server" CssClass="displaynone" Text='<%#Session["ipforgraph"]%>' ></asp:Label> 
@@ -219,10 +221,11 @@
        </div>
         <!-- /.content -->
      </div>
-     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    
+    <script src="Scripts/jquery.matchHeight.js"></script>
     <script src="assets/js/main.js"></script>
     <!--  Chart js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>    
+    <script src="Scripts/Chart.bundle.min.js"></script>   
     <script src="assets/js/init/chartjs-init.js?v=1"></script>
     <script src="assets/js/widgets.js"></script>
 </asp:Content>

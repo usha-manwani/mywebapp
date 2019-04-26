@@ -22,22 +22,22 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.TextBox txtIns;
         
         /// <summary>
-        /// btnaddgrade control.
+        /// btnaddgrade1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnaddgrade;
+        protected global::System.Web.UI.WebControls.Button btnaddgrade1;
         
         /// <summary>
-        /// save control.
+        /// saveg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button save;
+        protected global::System.Web.UI.WebControls.Button saveg;
         
         /// <summary>
         /// Cancle control.
@@ -47,32 +47,5 @@ namespace WebCresij {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Cancle;
-        
-        /// <summary>
-        /// AddIns control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AddIns;
-        
-        /// <summary>
-        /// delvalue control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox delvalue;
-        
-        /// <summary>
-        /// delcancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button delcancel;
     }
 }

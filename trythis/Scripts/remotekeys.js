@@ -4,15 +4,15 @@
     var tryingToReconnect = false;
     $.connection.hub.reconnecting(function () {
         tryingToReconnect = true;
-        alert("trying to reconnect");
+        console.log("trying to reconnect");
     });
     $.connection.hub.reconnected(function () {
         tryingToReconnect = false;
-        alert("reconnected");
+        console.log("reconnected");
     });
     $.connection.hub.disconnected(function () {
         if (tryingToReconnect) {
-            alert("hub disconnected");
+            console.log("hub disconnected");
         }
     });
     chat.client.broadcastMessage = function (name, message) {
@@ -217,7 +217,7 @@
         };
     };
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-        alert("connection started");
+        console.log("connection started");
         $(document).on('click', '.toggle', function () {
             if (!$(this).next().hasClass('in')) {
                 $(this).parent().children('.collapse').collapse('hide');

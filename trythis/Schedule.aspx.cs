@@ -25,7 +25,8 @@ namespace WebCresij
                 ddlInstitute.DataTextField = "InstituteName";
                 ddlInstitute.DataValueField = "InstituteID";
                 ddlInstitute.DataBind();
-                ddlInstitute.Items.Insert(0, new ListItem("Select Institute", "NA"));
+                string select = Resources.Resource.Select;
+                ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));
                 excelgrd.Enabled = false;
             }
         }
@@ -33,7 +34,8 @@ namespace WebCresij
         {
             ddlGrade.Items.Clear();
             ddlClass.Items.Clear();
-            ddlClass.Items.Insert(0, new ListItem("Select", "NA"));
+            string select = Resources.Resource.Select;
+            ddlClass.Items.Insert(0, new ListItem(select, "NA"));
             string insID = ddlInstitute.SelectedValue;
             string query = "select GradeID, GradeName from Grade_Details where InsID='" + insID + "'";
             DataTable dt = PopulateTree.ExecuteCommand(query);
@@ -41,7 +43,7 @@ namespace WebCresij
             ddlGrade.DataTextField = "GradeName";
             ddlGrade.DataValueField = "GradeID";
             ddlGrade.DataBind();
-            ddlGrade.Items.Insert(0, new ListItem("Select Grade", "NA"));
+            ddlGrade.Items.Insert(0, new ListItem(select, "NA"));
             excelgrd.Enabled = false;
             svbtn.Visible = false;
         }
@@ -58,7 +60,8 @@ namespace WebCresij
             ddlClass.DataTextField = "ClassName";
             ddlClass.DataValueField = "ClassID";
             ddlClass.DataBind();
-            ddlClass.Items.Insert(0, new ListItem("Select Class", "NA"));
+            string select = Resources.Resource.Select;
+            ddlClass.Items.Insert(0, new ListItem(select, "NA"));
             excelgrd.Enabled = false;
             svbtn.Visible = false;
         }

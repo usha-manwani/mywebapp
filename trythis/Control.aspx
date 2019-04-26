@@ -29,17 +29,17 @@
 }
 .modal 
 {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 150px; /* Location of the box */
+    display: none;  /*Hidden by default*/ 
+    position: fixed;  /*Stay in place*/ 
+    z-index: 1;  /*Sit on top*/ 
+    padding-top: 150px;  /*Location of the box*/ 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;  /*Full width*/ 
+    height: 100%;  /*Full height*/ 
+    overflow: auto;  /*Enable scroll if needed*/ 
+    background-color: rgb(0,0,0);  /*Fallback color*/ 
+    background-color: rgba(0,0,0,0.4);  /*Black w/ opacity*/ 
 }
 .modal-content {
     background-color:aliceblue;
@@ -48,6 +48,8 @@
     border: 1px solid #888;
     width: 60%;
 }
+
+ 
 .pp{
     background-color: #565656;
     color: transparent;
@@ -73,7 +75,7 @@
     background-color:#23233f;
 }
 </style>                                                                                
-    <link href="Content/ControlStyle.css" rel="stylesheet" />   
+    <link href="Content/ControlStyle.css?v=1" rel="stylesheet" />   
     <link href="css/toggleswitch.css" rel="stylesheet" />
     <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
     <!--Reference the SignalR library. -->  
@@ -82,12 +84,19 @@
         <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <script src="Scripts/ControlKeys.js?v=13"></script>
-    <div class="container-fluid">
+        <script src="Scripts/ControlKeys.js?v=16"></script>
+    <div class="container-fluid"  >
     <div class="row clearfix" id="smallcontrol" style="width:100%; min-width:600px" >
         <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
     </div>
     </div>  
+
+    <input id="sessionInput" type="hidden" value='<%= Session["DeviceIP"] %>' />
+        <input id="sessionInput1" type="hidden" value='<%= Session["loc"] %>' />
+        <input id="dev1" type="hidden" value='<%= Session["devices"] %>' />
+    <input id="InputIP" type="hidden" value='<%= Session["DeviceIP"] %>' />
+        <asp:TextBox style="display:none" ID="ipAddressToSend" runat="server"></asp:TextBox>
+        <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" ></asp:ScriptManagerProxy>
     <div id="control" class="modal">
     <div class=" modal-content" style="font-family: 'Ruda', sans-serif" >        
         <div style="width:100%; color:#3c763d; border:solid;border-color:#3c763d; background-color:#dff0d8; 
@@ -102,11 +111,7 @@
                  style="text-align:right;cursor:pointer"></i>
          </div>
         </div>        
-        <input id="sessionInput" type="hidden" value='<%= Session["DeviceIP"] %>' />
-        <input id="sessionInput1" type="hidden" value='<%= Session["loc"] %>' />
-        <input id="dev" type="hidden" value='<%=Session["devices"] %>' />
-        <asp:TextBox style="display:none" ID="ipAddressToSend" runat="server"></asp:TextBox>
-        <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" ></asp:ScriptManagerProxy>
+        
         <table  class="container " >
             <tr>
                 <td>   
@@ -125,28 +130,29 @@
                     <tr style="align-items:center; align-content:center;">
                         <td colspan="3" style="text-align:center">
                             <span>
-                                <img src="Images/offimages/sysof.png" id="systempower" 
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png" id="systempower" 
                                     height="60" width="60" class="imgclick"/></span>
                              </td>
                         <td colspan="3" style="text-align:center">
                             <span>
-                                <img src="Images/offimages/pcof.png" id="pcpower" 
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png" id="pcpower" 
                                     height="60" width="60" class="imgclick"/></span>                          
                     </tr>                               
                     <tr >
                         <td colspan="2" style="text-align:center">
                             <span>
-                                <img src="Images/offimages/sysunlock.png"  id="syslock" 
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_216.png"  id="syslock" 
                                     height="40" width="40" class="imgclick"/></span>                            
                            </td>                      
                         <td colspan="2" style="text-align:center"  >
+                           
                             <span>
-                                <img src="Images/offimages/podiumunlock.png" id="podiumlock"
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_238.png" id="podiumlock"
                                     height="40" width="40" class="imgclick"/></span>
                             </td>                       
                         <td colspan="2" style="text-align:center" >
                             <span>
-                                <img src="Images/offimages/classunlock.png"  id="classlock" 
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png"  id="classlock" 
                                     height="40" width="40" class="imgclick"/></span>
                              </td>
                     </tr>                  
@@ -165,37 +171,38 @@
                      <table style=" height:180px; width:230px">                  
                     <tr style="width:220px">
                         <td style="text-align:center">
+                            
                              <span>
-                                <img src="Images/offimages/proj1.png" id="projectorOn" 
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_184.png" id="projectorOn" 
                                     height="40" width="40" class="imgclick"/></span>                
                         </td>
                         <td style="text-align:center">
                             <a  href="#" style=" color:white;">
-                                <img src="Images/offimages/hdmi.png" id="hdmi" height="40" 
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_138.png" id="hdmi" height="40" 
                                     width="40" class="imgclick"/></a>                            
                         </td>
                     </tr>
                     <tr style="width:220px">
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/offimages/proj2.png" id="projectorOff" 
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_186.png" id="projectorOff" 
                                     height="40" width="40" class="imgclick"/></span>                            
                         </td>
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/offimages/videooff.png" id="projVideo"
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_164.png" id="projVideo"
                                     height="40" width="40" class="imgclick"/></span>
                            </td>
                     </tr>
                     <tr style="width:220px">
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/offimages/proj3.png" id="projSleep"
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_188.png" id="projSleep"
                                     height="40" width="40" class="imgclick"/></span>
                             </td>
                         <td style="text-align:center">
                             <span>
-                                <img src="Images/offimages/vga.png" id="vga" 
+                                <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_190.png" id="vga" 
                                     height="40" width="40" class="imgclick"/></span>
                         </td>
                     </tr>                
@@ -747,4 +754,17 @@
     </div>
      </div>       
        
+    <%--<div id="control" class="modal">
+        <div class="modal-content">
+            <header class="row" style="position: center;">
+                <span onclick="closexx();"
+                    class="w3-button w3-display-topright">&times;</span>
+            </header>
+            
+            <div class="row">
+                <iframe id="Iframe1" style="background-color: #1e1e36" src="~/controlRemote.aspx" height="700" width="100%" runat="server" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>--%>
+    
 </asp:Content>

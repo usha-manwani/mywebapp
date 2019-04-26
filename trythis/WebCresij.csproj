@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.3.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.3.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -53,18 +53,32 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="CresijCamConnectionString-Deployment" Order="1" Enabled="False">
+          <Destination Path="Data Source=SKY-20190409VDI\SQLEXPRESS%3bInitial Catalog=CresijCam%3bIntegrated Security=True" />
+          <Object Type="DbFullSql" Enabled="False">
+            <PreSource Path="Data Source=SKY-20190409VDI\SQLEXPRESS%3bInitial Catalog=CresijCam%3bIntegrated Security=True%3bPersist Security Info=False" ScriptSchema="True" ScriptData="True" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\CresijCamConnectionString-Deployment_SchemaAndData.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <PublishDatabases>false</PublishDatabases>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AjaxControlToolkit, Version=18.1.1.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <HintPath>..\packages\AjaxControlToolkit.18.1.1\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="AspNet.ScriptManager.bootstrap, Version=4.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.4.2.1\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
+    <Reference Include="AspNet.ScriptManager.bootstrap, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AspNet.ScriptManager.bootstrap.4.3.1\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -74,6 +88,9 @@
     </Reference>
     <Reference Include="EPPlus, Version=4.5.3.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.5.3.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.5.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.5\lib\net20\ExcelNumberFormat.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
@@ -335,9 +352,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\brands.css" />
     <Content Include="Content\brands.min.css" />
+    <Content Include="Content\Chart.min.css" />
     <Content Include="Content\ControlStyle.css" />
     <Content Include="Content\custom-styles.css" />
-    <Content Include="Content\demo.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fontawesome-all.css" />
@@ -345,7 +362,7 @@
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\ie10-viewport-bug-workaround.css" />
-    <Content Include="Content\normalize.css" />
+    <Content Include="Content\normalize.min.css" />
     <Content Include="Content\options.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
@@ -381,9 +398,146 @@
     <Content Include="css\toggleswitch.css" />
     <Content Include="css\zabuto_calendar.css" />
     <Content Include="DeleteDocument.aspx" />
+    <Content Include="Download.aspx" />
     <Content Include="editDelCard.aspx" />
     <Content Include="exportdata.aspx" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\desk1.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\lap1.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\lock1.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\lock1open.png" />
+    <Content Include="Images\greyed\cclosegrey.png" />
+    <Content Include="Images\greyed\copenGrey.png" />
+    <Content Include="Images\greyed\cstopgrey.png" />
+    <Content Include="Images\greyed\desktop.png" />
+    <Content Include="Images\greyed\laptop.png" />
+    <Content Include="Images\greyed\lightgrey.png" />
+    <Content Include="Images\greyed\lock1.png" />
+    <Content Include="Images\greyed\lock2.png" />
+    <Content Include="Images\greyed\lock3.png" />
+    <Content Include="Images\greyed\lock4.png" />
+    <Content Include="Images\greyed\more.png" />
+    <Content Include="Images\greyed\pc.png" />
+    <Content Include="Images\greyed\pcgrey.png" />
+    <Content Include="Images\greyed\proj1.png" />
+    <Content Include="Images\greyed\proj2.png" />
+    <Content Include="Images\greyed\proj3.png" />
+    <Content Include="Images\greyed\proj4.png" />
+    <Content Include="Images\greyed\proj5.png" />
+    <Content Include="Images\greyed\proj6.png" />
+    <Content Include="Images\greyed\scdown.png" />
+    <Content Include="Images\greyed\scstop.png" />
+    <Content Include="Images\greyed\scup.png" />
+    <Content Include="Images\greyed\sys.png" />
+    <Content Include="Images\greyed\sysgrey.png" />
+    <Content Include="Images\imgs\smCard.png" />
+    <Content Include="Images\中控首页按钮\on\blu.png" />
+    <Content Include="Images\中控首页按钮\on\cam.png" />
+    <Content Include="Images\中控首页按钮\on\curtainclose.png" />
+    <Content Include="Images\中控首页按钮\on\curtainopen.png" />
+    <Content Include="Images\中控首页按钮\on\curtainstop.png" />
+    <Content Include="Images\中控首页按钮\on\desk1.png" />
+    <Content Include="Images\中控首页按钮\on\dvd.png" />
+    <Content Include="Images\中控首页按钮\on\hdmi.png" />
+    <Content Include="Images\中控首页按钮\on\lap1.png" />
+    <Content Include="Images\中控首页按钮\on\lightblack.png" />
+    <Content Include="Images\中控首页按钮\on\lightyellow.png" />
+    <Content Include="Images\中控首页按钮\on\lock1.png" />
+    <Content Include="Images\中控首页按钮\on\lock1open.png" />
+    <Content Include="Images\中控首页按钮\on\lock2.png" />
+    <Content Include="Images\中控首页按钮\on\lock2open.png" />
+    <Content Include="Images\中控首页按钮\on\lock3.png" />
+    <Content Include="Images\中控首页按钮\on\lock3open.png" />
+    <Content Include="Images\中控首页按钮\on\mediadevice.png" />
+    <Content Include="Images\中控首页按钮\on\pcon.png" />
+    <Content Include="Images\中控首页按钮\on\projgreen.png" />
+    <Content Include="Images\中控首页按钮\on\projorange.png" />
+    <Content Include="Images\中控首页按钮\on\projred.png" />
+    <Content Include="Images\中控首页按钮\on\recorder.png" />
+    <Content Include="Images\中控首页按钮\on\screendown.png" />
+    <Content Include="Images\中控首页按钮\on\screenstop.png" />
+    <Content Include="Images\中控首页按钮\on\screenup.png" />
+    <Content Include="Images\中控首页按钮\on\systemon.png" />
+    <Content Include="Images\中控首页按钮\on\tv.png" />
+    <Content Include="Images\中控首页按钮\on\vga.png" />
+    <Content Include="Images\中控首页按钮\on\video.png" />
+    <Content Include="Images\中控首页按钮\on\videocam.png" />
+    <Content Include="Maintainance.aspx" />
+    <Content Include="ScriptsLInks\highcharts-3d.js" />
+    <Content Include="ScriptsLInks\highcharts-more.js" />
+    <Content Include="ScriptsLInks\highcharts.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Chart.bundle.min.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\fontawesome\all.js" />
+    <Content Include="Scripts\fontawesome\all.min.js" />
+    <Content Include="Scripts\fontawesome\brands.js" />
+    <Content Include="Scripts\fontawesome\brands.min.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.min.js" />
+    <Content Include="Scripts\fontawesome\regular.js" />
+    <Content Include="Scripts\fontawesome\regular.min.js" />
+    <Content Include="Scripts\fontawesome\solid.js" />
+    <Content Include="Scripts\fontawesome\solid.min.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.min.js" />
+    <Content Include="Scripts\jquery.matchHeight.js" />
+    <Content Include="src\Chimera.cpp" />
+    <Content Include="src\Chimera.h" />
+    <Content Include="src\Chimera.htm" />
+    <Content Include="src\ChimeraAPI.cpp" />
+    <Content Include="src\ChimeraAPI.h" />
+    <Content Include="src\CMakeLists.txt" />
+    <Content Include="src\Factory.cpp" />
+    <Content Include="src\FBVLC_Mac\FBVLC_Mac.cpp" />
+    <Content Include="src\FBVLC_Mac\FBVLC_Mac.h" />
+    <Content Include="src\FBVLC_X11\FBVLC_X11.cpp" />
+    <Content Include="src\FBVLC_X11\FBVLC_X11.h" />
+    <Content Include="src\FBVLC_X11\X11.h" />
+    <Content Include="src\FBVLC_X11\X11ExposeEvent.cpp" />
+    <Content Include="src\FBVLC_X11\X11ExposeEvent.h" />
+    <Content Include="src\FBVLC_X11\X11WindowlessPlugin.cpp" />
+    <Content Include="src\FBVLC_X11\X11WindowlessPlugin.h" />
+    <Content Include="src\FBVLC_X11\X11WindowlessWindow.cpp" />
+    <Content Include="src\FBVLC_X11\X11WindowlessWindow.h" />
+    <Content Include="src\HtmlColorUtils.cpp" />
+    <Content Include="src\HtmlColorUtils.h" />
+    <Content Include="src\JSRootQmlAPI.cpp" />
+    <Content Include="src\JSRootQmlAPI.h" />
+    <Content Include="src\Mac\Chimera_Mac.h" />
+    <Content Include="src\QmlChimera.cpp" />
+    <Content Include="src\QmlChimera.h" />
+    <Content Include="src\qtconf.cpp" />
+    <Content Include="src\qtconf.h" />
+    <Content Include="src\QuickViewChimera.cpp" />
+    <Content Include="src\QuickViewChimera.h" />
+    <Content Include="src\StdAfx.cpp" />
+    <Content Include="src\StdAfx.h" />
+    <Content Include="src\vlc_player_options.cpp" />
+    <Content Include="src\vlc_player_options.h" />
+    <Content Include="src\Win\Chimera_Win.cpp" />
+    <Content Include="src\Win\Chimera_Win.h" />
+    <Content Include="src\Win\fbvlc.rc" />
+    <Content Include="src\Win\FBVLC_Win.cpp" />
+    <Content Include="src\Win\FBVLC_Win.h" />
+    <Content Include="src\Win\resource.h" />
+    <Content Include="src\Win\win32_fullscreen.cpp" />
+    <Content Include="src\Win\win32_fullscreen.h" />
+    <Content Include="src\Win\win32_vlcwnd.cpp" />
+    <Content Include="src\Win\win32_vlcwnd.h" />
+    <Content Include="src\Win\WiX\Chimera.inf" />
+    <Content Include="src\Win\WiX\DirectX\x86\d3dcompiler_47.dll" />
+    <Content Include="src\Win\WiX\qt_quick_controls.xslt" />
+    <Content Include="src\Win\WiX\vlc.xslt" />
+    <Content Include="src\X11\Chimera_X11.cpp" />
+    <Content Include="src\X11\Chimera_X11.h" />
+    <Content Include="src\basic_1.htm" />
+    <Content Include="VideoPlay\FAQ.aspx" />
     <Content Include="HomePage.aspx" />
+    <Content Include="HtmlDemo.html" />
     <Content Include="HtmlPage2.html" />
     <Content Include="Images\icons\ACBlack.png" />
     <Content Include="Images\icons\ACGreen.png" />
@@ -393,14 +547,6 @@
     <Content Include="Images\icons\AirGreen.png" />
     <Content Include="Images\icons\AirRed.png" />
     <Content Include="Images\icons\AirWhite.png" />
-    <Content Include="Images\icons\curtainCloseGreen.png" />
-    <Content Include="Images\icons\curtainCloseRed.png" />
-    <Content Include="Images\icons\CurtainCloseWhite.png" />
-    <Content Include="Images\icons\CurtainOpenGreen.png" />
-    <Content Include="Images\icons\curtainOpenRed.png" />
-    <Content Include="Images\icons\CurtainOpenWhite.png" />
-    <Content Include="Images\icons\curtainStopGreen.png" />
-    <Content Include="Images\icons\curtainStopRed.png" />
     <Content Include="Images\icons\backblack.png" />
     <Content Include="Images\icons\backgreen.png" />
     <Content Include="Images\icons\backred.png" />
@@ -418,6 +564,14 @@
     <Content Include="Images\icons\curtain3.png" />
     <Content Include="Images\icons\curtain4.png" />
     <Content Include="Images\icons\curtain5.png" />
+    <Content Include="Images\icons\curtainCloseGreen.png" />
+    <Content Include="Images\icons\curtainCloseRed.png" />
+    <Content Include="Images\icons\CurtainCloseWhite.png" />
+    <Content Include="Images\icons\CurtainOpenGreen.png" />
+    <Content Include="Images\icons\curtainOpenRed.png" />
+    <Content Include="Images\icons\CurtainOpenWhite.png" />
+    <Content Include="Images\icons\curtainStopGreen.png" />
+    <Content Include="Images\icons\curtainStopRed.png" />
     <Content Include="Images\icons\CurtainStopWhite.png" />
     <Content Include="Images\icons\deskblack.png" />
     <Content Include="Images\icons\deskgreen.png" />
@@ -445,46 +599,6 @@
     <Content Include="Images\icons\hdmired.png" />
     <Content Include="Images\icons\hdmiwhite.png" />
     <Content Include="Images\icons\icons8-first-48 %282%29.png" />
-    <Content Include="Images\icons\icons\ddd.png" />
-    <Content Include="Images\icons\icons\背景图-（03_07.png" />
-    <Content Include="Images\icons\icons\背景图-（03_09.png" />
-    <Content Include="Images\icons\icons\背景图-（03_17.png" />
-    <Content Include="Images\icons\icons\背景图-（03_19.png" />
-    <Content Include="Images\icons\icons\背景图-（03_27.png" />
-    <Content Include="Images\icons\icons\背景图-（03_29.png" />
-    <Content Include="Images\icons\icons\背景图-（03_37.png" />
-    <Content Include="Images\icons\icons\背景图-（03_39.png" />
-    <Content Include="Images\icons\images\主音量.png" />
-    <Content Include="Images\icons\images\提示栏.png" />
-    <Content Include="Images\icons\images\滑动条.png" />
-    <Content Include="Images\icons\images\环境.png" />
-    <Content Include="Images\icons\images\背景图-（03_03.png" />
-    <Content Include="Images\icons\images\背景图-（03_05.png" />
-    <Content Include="Images\icons\images\背景图-（03_07.png" />
-    <Content Include="Images\icons\images\背景图-（03_11.png" />
-    <Content Include="Images\icons\images\背景图-（03_13.png" />
-    <Content Include="Images\icons\images\背景图-（03_15.png" />
-    <Content Include="Images\icons\images\背景图-（03_18.png" />
-    <Content Include="Images\icons\images\背景图-（03_20.png" />
-    <Content Include="Images\icons\images\背景图-（03_22.png" />
-    <Content Include="Images\icons\images\背景图-（03_24.png" />
-    <Content Include="Images\icons\images\背景图-（03_26.png" />
-    <Content Include="Images\icons\images\背景图-（03_29.png" />
-    <Content Include="Images\icons\images\背景图-（03_38.png" />
-    <Content Include="Images\icons\images\背景图-（03_40.png" />
-    <Content Include="Images\icons\images\背景图-（03_42.png" />
-    <Content Include="Images\icons\images\背景图-（03_47.png" />
-    <Content Include="Images\icons\images\背景图-（03_49.png" />
-    <Content Include="Images\icons\images\背景图-（03_51.png" />
-    <Content Include="Images\icons\images\背景图-（03_53.png" />
-    <Content Include="Images\icons\images\背景图-（03_55.png" />
-    <Content Include="Images\icons\images\背景图-（03_57.png" />
-    <Content Include="Images\icons\images\背景图-（03_60.png" />
-    <Content Include="Images\icons\images\背景图-（03_63.png" />
-    <Content Include="Images\icons\images\视频大.png" />
-    <Content Include="Images\icons\images\视频小.png" />
-    <Content Include="Images\icons\images\视频栏.png" />
-    <Content Include="Images\icons\images\话筒音量.png" />
     <Content Include="Images\icons\lapblack.png" />
     <Content Include="Images\icons\lapgreen.png" />
     <Content Include="Images\icons\lapred.png" />
@@ -530,6 +644,10 @@
     <Content Include="Images\icons\nocamgreen.png" />
     <Content Include="Images\icons\nocamred.png" />
     <Content Include="Images\icons\nocamwhite.png" />
+    <Content Include="Images\icons\okblack.png" />
+    <Content Include="Images\icons\okgreen.png" />
+    <Content Include="Images\icons\okred.png" />
+    <Content Include="Images\icons\okwhite.png" />
     <Content Include="Images\icons\pauseblack.png" />
     <Content Include="Images\icons\pausegreen.png" />
     <Content Include="Images\icons\pausered.png" />
@@ -631,10 +749,6 @@
     <Content Include="Images\icons\unlockgreen.png" />
     <Content Include="Images\icons\unlockred.png" />
     <Content Include="Images\icons\unlockwhite.png" />
-    <Content Include="Images\icons\okred.png" />
-    <Content Include="Images\icons\okgreen.png" />
-    <Content Include="Images\icons\okwhite.png" />
-    <Content Include="Images\icons\okblack.png" />
     <Content Include="Images\icons\vgablack.png" />
     <Content Include="Images\icons\vgagreen.png" />
     <Content Include="Images\icons\vgared.png" />
@@ -681,88 +795,15 @@
     <Content Include="Images\icons\zoomoutgreen.png" />
     <Content Include="Images\icons\zoomoutred.png" />
     <Content Include="Images\icons\zoomoutwhite.png" />
-    <Content Include="Images\offimages\bluraydvd.png" />
-    <Content Include="Images\offimages\camera.png" />
-    <Content Include="Images\offimages\classlock.png" />
-    <Content Include="Images\offimages\classunlock.png" />
-    <Content Include="Images\offimages\curtainclose.png" />
-    <Content Include="Images\offimages\desktop.png" />
-    <Content Include="Images\offimages\dvd.png" />
-    <Content Include="Images\offimages\hdmi.png" />
-    <Content Include="Images\offimages\laptop.png" />
-    <Content Include="Images\offimages\light1off.png" />
-    <Content Include="Images\offimages\light2off.png" />
-    <Content Include="Images\offimages\light3.png" />
-    <Content Include="Images\offimages\mute.png" />
-    <Content Include="Images\offimages\open.png" />
-    <Content Include="Images\offimages\pcof.png" />
-    <Content Include="Images\offimages\podiumlock.png" />
-    <Content Include="Images\offimages\podiumunlock.png" />
-    <Content Include="Images\offimages\proj1.png" />
-    <Content Include="Images\offimages\proj2.png" />
-    <Content Include="Images\offimages\proj3.png" />
-    <Content Include="Images\offimages\recorder.png" />
-    <Content Include="Images\offimages\screen.png" />
-    <Content Include="Images\offimages\screendown.png" />
-    <Content Include="Images\offimages\stopcurtain.png" />
-    <Content Include="Images\offimages\stopscreen.png" />
-    <Content Include="Images\offimages\syslock.png" />
-    <Content Include="Images\offimages\sysof.png" />
-    <Content Include="Images\offimages\sysunlock.png" />
-    <Content Include="Images\offimages\tv.png" />
-    <Content Include="Images\offimages\up.png" />
-    <Content Include="Images\offimages\vga.png" />
-    <Content Include="Images\offimages\video.png" />
-    <Content Include="Images\offimages\videooff.png" />
-    <Content Include="Images\offimages\volminus.png" />
-    <Content Include="Images\offimages\volplus.png" />
-    <Content Include="Images\offimages\wiredmute.png" />
-    <Content Include="Images\offimages\wiredvolminus.png" />
-    <Content Include="Images\offimages\wiredvolplus.png" />
-    <Content Include="Images\offimages\wirelessmute.png" />
-    <Content Include="Images\offimages\wirelessvolminus.png" />
-    <Content Include="Images\offimages\wirelessvolplus.png" />
-    <Content Include="Images\onimages\bluraydvd.png" />
-    <Content Include="Images\onimages\camera.png" />
-    <Content Include="Images\onimages\classlock.png" />
-    <Content Include="Images\onimages\classunlock.png" />
-    <Content Include="Images\onimages\closecurtain.png" />
-    <Content Include="Images\onimages\desktop.png" />
-    <Content Include="Images\onimages\down.png" />
-    <Content Include="Images\onimages\dvdon.png" />
-    <Content Include="Images\onimages\hdmion.png" />
-    <Content Include="Images\onimages\laptopon.png" />
-    <Content Include="Images\onimages\light1on.png" />
-    <Content Include="Images\onimages\light2on.png" />
-    <Content Include="Images\onimages\light3.png" />
-    <Content Include="Images\onimages\mute.png" />
-    <Content Include="Images\onimages\open.png" />
-    <Content Include="Images\onimages\pcpoweron.png" />
-    <Content Include="Images\onimages\podiumlock.png" />
-    <Content Include="Images\onimages\podiumunlock.png" />
-    <Content Include="Images\onimages\projector.png" />
-    <Content Include="Images\onimages\projectoron1.png" />
-    <Content Include="Images\onimages\projectoron2.png" />
-    <Content Include="Images\onimages\projectoron3.png" />
-    <Content Include="Images\onimages\recorder.png" />
-    <Content Include="Images\onimages\stop.png" />
-    <Content Include="Images\onimages\stopcurtain.png" />
-    <Content Include="Images\onimages\syslock.png" />
-    <Content Include="Images\onimages\syspoweron.png" />
-    <Content Include="Images\onimages\sysunlock.png" />
-    <Content Include="Images\onimages\tv.png" />
-    <Content Include="Images\onimages\up.png" />
-    <Content Include="Images\onimages\vga.png" />
-    <Content Include="Images\onimages\videion.png" />
-    <Content Include="Images\onimages\video.png" />
-    <Content Include="Images\onimages\volminus.png" />
-    <Content Include="Images\onimages\volplus.png" />
-    <Content Include="Images\onimages\wiredmute.png" />
-    <Content Include="Images\onimages\wiredvolminus.png" />
-    <Content Include="Images\onimages\wiredvolplus.png" />
-    <Content Include="Images\onimages\wirelessmute.png" />
-    <Content Include="Images\onimages\wirelessvolminus.png" />
-    <Content Include="Images\onimages\wirelessvolplus.png" />
+    <Content Include="Images\imgs\addlogs.png" />
+    <Content Include="Images\imgs\chart1.png" />
+    <Content Include="Images\imgs\chart2.png" />
+    <Content Include="Images\imgs\curtain32.png" />
+    <Content Include="Images\imgs\curtainclose32.png" />
+    <Content Include="Images\imgs\curtainopen32.png" />
+    <Content Include="Images\imgs\editlogs.png" />
+    <Content Include="Images\imgs\icCard.png" />
+    <Content Include="Images\imgs\smcard-hover.png" />
     <Content Include="Images\refresh.png" />
     <Content Include="Images\submenu\backgroundOfVideo.jpg" />
     <Content Include="Images\submenu\cam\change.png" />
@@ -836,6 +877,8 @@
     <Content Include="Images\中控首页按钮\全部菜单.png" />
     <Content Include="Images\中控首页按钮\屏幕.png" />
     <Content Include="Images\中控首页按钮\投影机.png" />
+    <Content Include="Images\中控首页按钮\环境图标\imgelec.png" />
+    <Content Include="Images\中控首页按钮\环境图标\imgvoltage.png" />
     <Content Include="Images\中控首页按钮\环境图标\背景图-（03_07.png" />
     <Content Include="Images\中控首页按钮\环境图标\背景图-（03_09.png" />
     <Content Include="Images\中控首页按钮\环境图标\背景图-（03_17.png" />
@@ -909,253 +952,253 @@
     <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\控制页面-鼠标经过页面_01_90.png" />
     <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\面板锁定_07.png" />
     <Content Include="Images\中控首页按钮\首页按钮-鼠标经过状态\面板锁定_09.png" />
-    <Content Include="Images\详细页图标\images\图标_106.png" />
-    <Content Include="Images\详细页图标\images\图标_108.png" />
-    <Content Include="Images\详细页图标\images\图标_110.png" />
-    <Content Include="Images\详细页图标\images\图标_112.png" />
-    <Content Include="Images\详细页图标\images\图标_132.png" />
-    <Content Include="Images\详细页图标\images\图标_134.png" />
-    <Content Include="Images\详细页图标\images\图标_136.png" />
-    <Content Include="Images\详细页图标\images\图标_138.png" />
-    <Content Include="Images\详细页图标\images\图标_158.png" />
-    <Content Include="Images\详细页图标\images\图标_160.png" />
-    <Content Include="Images\详细页图标\images\图标_162.png" />
-    <Content Include="Images\详细页图标\images\图标_164.png" />
-    <Content Include="Images\详细页图标\images\图标_168.png" />
-    <Content Include="Images\详细页图标\images\图标_184.png" />
-    <Content Include="Images\详细页图标\images\图标_186.png" />
-    <Content Include="Images\详细页图标\images\图标_188.png" />
-    <Content Include="Images\详细页图标\images\图标_190.png" />
-    <Content Include="Images\详细页图标\images\图标_194.png" />
-    <Content Include="Images\详细页图标\images\图标_210.png" />
-    <Content Include="Images\详细页图标\images\图标_212.png" />
-    <Content Include="Images\详细页图标\images\图标_214.png" />
-    <Content Include="Images\详细页图标\images\图标_216.png" />
-    <Content Include="Images\详细页图标\images\图标_220.png" />
-    <Content Include="Images\详细页图标\images\图标_236.png" />
-    <Content Include="Images\详细页图标\images\图标_238.png" />
-    <Content Include="Images\详细页图标\images\图标_246.png" />
-    <Content Include="Images\详细页图标\images\图标_262.png" />
-    <Content Include="Images\详细页图标\images\图标_264.png" />
-    <Content Include="Images\详细页图标\images\图标_272.png" />
-    <Content Include="Images\详细页图标\images\图标_298.png" />
-    <Content Include="Images\详细页图标\images\图标_324.png" />
-    <Content Include="Images\详细页图标\images\图标_344.png" />
-    <Content Include="Images\详细页图标\images\图标_346.png" />
-    <Content Include="Images\详细页图标\images\图标_348.png" />
-    <Content Include="Images\详细页图标\images\图标_350.png" />
-    <Content Include="Images\详细页图标\images\总音量.png" />
-    <Content Include="Images\详细页图标\images\有线麦克风.png" />
-    <Content Include="Images\详细页图标\images\麦克风按钮.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态2_01.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_02.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_116.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_142.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_168.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_194.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_220.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_246.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_272.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_28.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_30.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_32.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_34.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_54.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_56.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_58.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-显示状态\控制页面-显示状态_90.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\总音量.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\总音量静音.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_106.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_108.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_110.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_112.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_132.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_134.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_136.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_138.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_158.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_160.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_164.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_168.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_184.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_186.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_188.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_190.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_194.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_210.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_212.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_214.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_216.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_220.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_236.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_238.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_246.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_262.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_264.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_272.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_298.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_324.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\控制页面_350.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\无线麦静音.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\无线麦音量.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\有线麦静音.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-默认状态\有线麦音量.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_106.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_108.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_110.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_112.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_116.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_132.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_134.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_136.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_138.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_142.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_158.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_160.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_168.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_184.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_186.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_194.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_220.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_246.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_272.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_28.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_30.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_32.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_34.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_54.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_56.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_58.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_60.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_80.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_82.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_86.png" />
-    <Content Include="Images\详细页图标\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_90.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_121.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_123.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_155.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_19.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_21.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_53.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_55.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_87.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\DVD、蓝光控制\子菜单_89.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_101.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_31.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_33.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_65.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_67.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\录播系统控制\子菜单_99.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_129.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_131.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_163.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_165.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_197.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_27.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_29.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_61.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_63.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_95.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\摄像机控制\子菜单_97.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_125.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_23.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_25.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_57.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_59.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_91.png" />
-    <Content Include="Images\详细页图标\子菜单\默认状态\电视机控制\子菜单_93.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_121.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_123.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_155.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_19.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_21.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_53.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_55.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_87.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_89.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_101.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_31.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_33.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_65.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_67.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_99.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_129.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_131.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_163.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_165.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_197.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_27.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_29.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_61.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_63.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_95.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_97.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_125.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_23.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_25.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_57.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_59.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_91.png" />
-    <Content Include="Images\详细页图标\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_93.png" />
-    <Content Include="Images\详细页图标\新风\默认状态\新风_09.png" />
-    <Content Include="Images\详细页图标\新风\默认状态\新风_11.png" />
-    <Content Include="Images\详细页图标\新风\默认状态\新风_21.png" />
-    <Content Include="Images\详细页图标\新风\默认状态\新风_23.png" />
-    <Content Include="Images\详细页图标\新风\默认状态\新风_33.png" />
-    <Content Include="Images\详细页图标\新风\默认状态\新风_35.png" />
-    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_09.png" />
-    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_11.png" />
-    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_21.png" />
-    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_23.png" />
-    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_33.png" />
-    <Content Include="Images\详细页图标\新风\鼠标经过状态\新风-鼠标经过状态_35.png" />
-    <Content Include="Images\详细页图标\空调\images\images\空调_09_01.png" />
-    <Content Include="Images\详细页图标\空调\images\images\空调_09_02.png" />
-    <Content Include="Images\详细页图标\空调\images\images\空调_09_03.png" />
-    <Content Include="Images\详细页图标\空调\images\images\空调_09_04.png" />
-    <Content Include="Images\详细页图标\空调\images\空调_07.png" />
-    <Content Include="Images\详细页图标\空调\images\空调_09_04.png" />
-    <Content Include="Images\详细页图标\空调\images\空调_17.png" />
-    <Content Include="Images\详细页图标\空调\images\空调_19.png" />
-    <Content Include="Images\详细页图标\空调\images\空调_27.png" />
-    <Content Include="Images\详细页图标\空调\images\空调_29.png" />
-    <Content Include="Images\详细页图标\空调\images\空调_37.png" />
-    <Content Include="Images\详细页图标\空调\images\空调_39.png" />
-    <Content Include="Images\详细页图标\空调\默认状态\空调_07.png" />
-    <Content Include="Images\详细页图标\空调\默认状态\空调_09.png" />
-    <Content Include="Images\详细页图标\空调\默认状态\空调_12.png" />
-    <Content Include="Images\详细页图标\空调\默认状态\空调_14.png" />
-    <Content Include="Images\详细页图标\空调\默认状态\空调_22.png" />
-    <Content Include="Images\详细页图标\空调\默认状态\空调_24.png" />
-    <Content Include="Images\详细页图标\空调\默认状态\空调_32.png" />
-    <Content Include="Images\详细页图标\空调\默认状态\空调_34.png" />
-    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_07.png" />
-    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_09.png" />
-    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_12.png" />
-    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_14.png" />
-    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_22.png" />
-    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_24.png" />
-    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_32.png" />
-    <Content Include="Images\详细页图标\空调\鼠标经过状态\空调-鼠标经过状态_34.png" />
-    <Content Include="Images\详细页图标\绿色框\1.png" />
-    <Content Include="Images\详细页图标\绿色框\2.png" />
-    <Content Include="Images\详细页图标\绿色框\3.png" />
-    <Content Include="Images\详细页图标\绿色框\4.png" />
-    <Content Include="Images\详细页图标\绿色框\5 %281%29.png" />
-    <Content Include="Images\详细页图标\绿色框\5 %282%29.png" />
-    <Content Include="Images\详细页图标\绿色框\5 %283%29.png" />
-    <Content Include="Images\详细页图标\绿色框\5 %284%29.png" />
-    <Content Include="Images\详细页图标\绿色框\6.png" />
-    <Content Include="Images\详细页图标\绿色框\7 %281%29.png" />
-    <Content Include="Images\详细页图标\绿色框\7 %282%29.png" />
-    <Content Include="Images\详细页图标\绿色框\7 %283%29.png" />
-    <Content Include="Images\详细页图标\绿色框\全停按钮.png" />
-    <Content Include="Images\详细页图标\绿色框\全关按钮.png" />
-    <Content Include="Images\详细页图标\绿色框\全升按钮.png" />
-    <Content Include="Images\详细页图标\绿色框\全开按钮.png" />
-    <Content Include="Images\详细页图标\绿色框\全降按钮.png" />
-    <Content Include="Images\详细页图标\背景图-.jpg" />
+    <Content Include="Images\AllImages\images\图标_106.png" />
+    <Content Include="Images\AllImages\images\图标_108.png" />
+    <Content Include="Images\AllImages\images\图标_110.png" />
+    <Content Include="Images\AllImages\images\图标_112.png" />
+    <Content Include="Images\AllImages\images\图标_132.png" />
+    <Content Include="Images\AllImages\images\图标_134.png" />
+    <Content Include="Images\AllImages\images\图标_136.png" />
+    <Content Include="Images\AllImages\images\图标_138.png" />
+    <Content Include="Images\AllImages\images\图标_158.png" />
+    <Content Include="Images\AllImages\images\图标_160.png" />
+    <Content Include="Images\AllImages\images\图标_162.png" />
+    <Content Include="Images\AllImages\images\图标_164.png" />
+    <Content Include="Images\AllImages\images\图标_168.png" />
+    <Content Include="Images\AllImages\images\图标_184.png" />
+    <Content Include="Images\AllImages\images\图标_186.png" />
+    <Content Include="Images\AllImages\images\图标_188.png" />
+    <Content Include="Images\AllImages\images\图标_190.png" />
+    <Content Include="Images\AllImages\images\图标_194.png" />
+    <Content Include="Images\AllImages\images\图标_210.png" />
+    <Content Include="Images\AllImages\images\图标_212.png" />
+    <Content Include="Images\AllImages\images\SystemLock.png" />
+    <Content Include="Images\AllImages\images\图标_216.png" />
+    <Content Include="Images\AllImages\images\图标_220.png" />
+    <Content Include="Images\AllImages\images\图标_236.png" />
+    <Content Include="Images\AllImages\images\图标_238.png" />
+    <Content Include="Images\AllImages\images\图标_246.png" />
+    <Content Include="Images\AllImages\images\图标_262.png" />
+    <Content Include="Images\AllImages\images\图标_264.png" />
+    <Content Include="Images\AllImages\images\图标_272.png" />
+    <Content Include="Images\AllImages\images\图标_298.png" />
+    <Content Include="Images\AllImages\images\图标_324.png" />
+    <Content Include="Images\AllImages\images\图标_344.png" />
+    <Content Include="Images\AllImages\images\图标_346.png" />
+    <Content Include="Images\AllImages\images\图标_348.png" />
+    <Content Include="Images\AllImages\images\图标_350.png" />
+    <Content Include="Images\AllImages\images\总音量.png" />
+    <Content Include="Images\AllImages\images\有线麦克风.png" />
+    <Content Include="Images\AllImages\images\麦克风按钮.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态2_01.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_02.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_116.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_142.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_168.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_194.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_220.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_246.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_272.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_28.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_30.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_32.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_34.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_54.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_56.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_58.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\控制页面-显示状态_90.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\总音量.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\总音量静音.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_106.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_108.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_110.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_112.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_132.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_134.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_136.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_138.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_158.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_160.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_164.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_168.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_184.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_186.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_188.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_190.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_194.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_210.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_212.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_214.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_216.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_220.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_236.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_238.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_246.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_262.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_264.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_272.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_298.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_324.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\控制页面_350.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\无线麦静音.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\无线麦音量.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\有线麦静音.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-默认状态\有线麦音量.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_106.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_108.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_110.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_112.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_116.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_132.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_134.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_136.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_138.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_142.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_158.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_160.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_168.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_184.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_186.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_194.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_220.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_246.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_272.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_28.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_30.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_32.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_34.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_54.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_56.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_58.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_60.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_80.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_82.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_86.png" />
+    <Content Include="Images\AllImages\全部按钮\控制全页面-鼠标经过状态\控制页面-鼠标经过页面_01_90.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\DVD、蓝光控制\子菜单_121.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\DVD、蓝光控制\子菜单_123.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\DVD、蓝光控制\子菜单_155.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\DVD、蓝光控制\子菜单_19.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\DVD、蓝光控制\子菜单_21.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\DVD、蓝光控制\子菜单_53.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\DVD、蓝光控制\子菜单_55.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\DVD、蓝光控制\子菜单_87.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\DVD、蓝光控制\子菜单_89.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\录播系统控制\子菜单_101.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\录播系统控制\子菜单_31.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\录播系统控制\子菜单_33.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\录播系统控制\子菜单_65.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\录播系统控制\子菜单_67.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\录播系统控制\子菜单_99.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_129.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_131.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_163.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_165.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_197.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_27.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_29.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_61.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_63.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_95.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\摄像机控制\子菜单_97.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\电视机控制\子菜单_125.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\电视机控制\子菜单_23.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\电视机控制\子菜单_25.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\电视机控制\子菜单_57.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\电视机控制\子菜单_59.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\电视机控制\子菜单_91.png" />
+    <Content Include="Images\AllImages\子菜单\默认状态\电视机控制\子菜单_93.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_121.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_123.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_155.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_19.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_21.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_53.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_55.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_87.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\DVD、蓝光控制\子菜单-鼠标经过状态_89.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_101.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_31.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_33.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_65.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_67.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\录播系统控制\子菜单-鼠标经过状态_99.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_129.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_131.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_163.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_165.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_197.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_27.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_29.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_61.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_63.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_95.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\摄像机控制\子菜单-鼠标经过状态_97.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_125.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_23.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_25.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_57.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_59.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_91.png" />
+    <Content Include="Images\AllImages\子菜单\鼠标经过状态\电视机控制\子菜单-鼠标经过状态_93.png" />
+    <Content Include="Images\AllImages\新风\默认状态\新风_09.png" />
+    <Content Include="Images\AllImages\新风\默认状态\新风_11.png" />
+    <Content Include="Images\AllImages\新风\默认状态\新风_21.png" />
+    <Content Include="Images\AllImages\新风\默认状态\新风_23.png" />
+    <Content Include="Images\AllImages\新风\默认状态\新风_33.png" />
+    <Content Include="Images\AllImages\新风\默认状态\新风_35.png" />
+    <Content Include="Images\AllImages\新风\鼠标经过状态\新风-鼠标经过状态_09.png" />
+    <Content Include="Images\AllImages\新风\鼠标经过状态\新风-鼠标经过状态_11.png" />
+    <Content Include="Images\AllImages\新风\鼠标经过状态\新风-鼠标经过状态_21.png" />
+    <Content Include="Images\AllImages\新风\鼠标经过状态\新风-鼠标经过状态_23.png" />
+    <Content Include="Images\AllImages\新风\鼠标经过状态\新风-鼠标经过状态_33.png" />
+    <Content Include="Images\AllImages\新风\鼠标经过状态\新风-鼠标经过状态_35.png" />
+    <Content Include="Images\AllImages\空调\images\images\空调_09_01.png" />
+    <Content Include="Images\AllImages\空调\images\images\空调_09_02.png" />
+    <Content Include="Images\AllImages\空调\images\images\空调_09_03.png" />
+    <Content Include="Images\AllImages\空调\images\images\空调_09_04.png" />
+    <Content Include="Images\AllImages\空调\images\空调_07.png" />
+    <Content Include="Images\AllImages\空调\images\空调_09_04.png" />
+    <Content Include="Images\AllImages\空调\images\空调_17.png" />
+    <Content Include="Images\AllImages\空调\images\空调_19.png" />
+    <Content Include="Images\AllImages\空调\images\空调_27.png" />
+    <Content Include="Images\AllImages\空调\images\空调_29.png" />
+    <Content Include="Images\AllImages\空调\images\空调_37.png" />
+    <Content Include="Images\AllImages\空调\images\空调_39.png" />
+    <Content Include="Images\AllImages\空调\默认状态\空调_07.png" />
+    <Content Include="Images\AllImages\空调\默认状态\空调_09.png" />
+    <Content Include="Images\AllImages\空调\默认状态\空调_12.png" />
+    <Content Include="Images\AllImages\空调\默认状态\空调_14.png" />
+    <Content Include="Images\AllImages\空调\默认状态\空调_22.png" />
+    <Content Include="Images\AllImages\空调\默认状态\空调_24.png" />
+    <Content Include="Images\AllImages\空调\默认状态\空调_32.png" />
+    <Content Include="Images\AllImages\空调\默认状态\空调_34.png" />
+    <Content Include="Images\AllImages\空调\鼠标经过状态\空调-鼠标经过状态_07.png" />
+    <Content Include="Images\AllImages\空调\鼠标经过状态\空调-鼠标经过状态_09.png" />
+    <Content Include="Images\AllImages\空调\鼠标经过状态\空调-鼠标经过状态_12.png" />
+    <Content Include="Images\AllImages\空调\鼠标经过状态\空调-鼠标经过状态_14.png" />
+    <Content Include="Images\AllImages\空调\鼠标经过状态\空调-鼠标经过状态_22.png" />
+    <Content Include="Images\AllImages\空调\鼠标经过状态\空调-鼠标经过状态_24.png" />
+    <Content Include="Images\AllImages\空调\鼠标经过状态\空调-鼠标经过状态_32.png" />
+    <Content Include="Images\AllImages\空调\鼠标经过状态\空调-鼠标经过状态_34.png" />
+    <Content Include="Images\AllImages\绿色框\1.png" />
+    <Content Include="Images\AllImages\绿色框\2.png" />
+    <Content Include="Images\AllImages\绿色框\3.png" />
+    <Content Include="Images\AllImages\绿色框\4.png" />
+    <Content Include="Images\AllImages\绿色框\5 %281%29.png" />
+    <Content Include="Images\AllImages\绿色框\5 %282%29.png" />
+    <Content Include="Images\AllImages\绿色框\5 %283%29.png" />
+    <Content Include="Images\AllImages\绿色框\5 %284%29.png" />
+    <Content Include="Images\AllImages\绿色框\6.png" />
+    <Content Include="Images\AllImages\绿色框\7 %281%29.png" />
+    <Content Include="Images\AllImages\绿色框\7 %282%29.png" />
+    <Content Include="Images\AllImages\绿色框\7 %283%29.png" />
+    <Content Include="Images\AllImages\绿色框\全停按钮.png" />
+    <Content Include="Images\AllImages\绿色框\全关按钮.png" />
+    <Content Include="Images\AllImages\绿色框\全升按钮.png" />
+    <Content Include="Images\AllImages\绿色框\全开按钮.png" />
+    <Content Include="Images\AllImages\绿色框\全降按钮.png" />
+    <Content Include="Images\AllImages\背景图-.jpg" />
     <Content Include="img\404.png" />
     <Content Include="img\500.png" />
     <Content Include="img\apple-touch-icon.png" />
@@ -1287,6 +1330,7 @@
     <Content Include="lib\form-validation-script.js" />
     <Content Include="lib\fullcalendar\bootstrap-fullcalendar.css" />
     <Content Include="lib\fullcalendar\fullcalendar.min.js" />
+    <Content Include="lib\gauge.js" />
     <Content Include="lib\google-maps\data\points.js" />
     <Content Include="lib\google-maps\maplace.js" />
     <Content Include="lib\gritter-conf.js" />
@@ -1323,6 +1367,320 @@
     <Content Include="home.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Options.aspx" />
+    <Content Include="plugins\AUTHORS.txt" />
+    <Content Include="plugins\COPYING.txt" />
+    <Content Include="plugins\d3dcompiler_47.dll" />
+    <Content Include="plugins\libeay32.dll" />
+    <Content Include="plugins\libvlc.dll" />
+    <Content Include="plugins\libvlccore.dll" />
+    <Content Include="plugins\msvcr90.dll" />
+    <Content Include="plugins\npWebChimera.dll" />
+    <Content Include="plugins\plugins\access\libaccess_bd_plugin.dll" />
+    <Content Include="plugins\plugins\access\libaccess_mms_plugin.dll" />
+    <Content Include="plugins\plugins\access\libaccess_realrtsp_plugin.dll" />
+    <Content Include="plugins\plugins\access\libattachment_plugin.dll" />
+    <Content Include="plugins\plugins\access\libbluray-j2se-0.7.0.jar" />
+    <Content Include="plugins\plugins\access\libcdda_plugin.dll" />
+    <Content Include="plugins\plugins\access\libdshow_plugin.dll" />
+    <Content Include="plugins\plugins\access\libdtv_plugin.dll" />
+    <Content Include="plugins\plugins\access\libdvdnav_plugin.dll" />
+    <Content Include="plugins\plugins\access\libdvdread_plugin.dll" />
+    <Content Include="plugins\plugins\access\libfilesystem_plugin.dll" />
+    <Content Include="plugins\plugins\access\libftp_plugin.dll" />
+    <Content Include="plugins\plugins\access\libhttp_plugin.dll" />
+    <Content Include="plugins\plugins\access\libidummy_plugin.dll" />
+    <Content Include="plugins\plugins\access\libimem_plugin.dll" />
+    <Content Include="plugins\plugins\access\liblibbluray_plugin.dll" />
+    <Content Include="plugins\plugins\access\liblive555_plugin.dll" />
+    <Content Include="plugins\plugins\access\librar_plugin.dll" />
+    <Content Include="plugins\plugins\access\librtp_plugin.dll" />
+    <Content Include="plugins\plugins\access\libscreen_plugin.dll" />
+    <Content Include="plugins\plugins\access\libsdp_plugin.dll" />
+    <Content Include="plugins\plugins\access\libsftp_plugin.dll" />
+    <Content Include="plugins\plugins\access\libshm_plugin.dll" />
+    <Content Include="plugins\plugins\access\libsmb_plugin.dll" />
+    <Content Include="plugins\plugins\access\libtcp_plugin.dll" />
+    <Content Include="plugins\plugins\access\libtimecode_plugin.dll" />
+    <Content Include="plugins\plugins\access\libudp_plugin.dll" />
+    <Content Include="plugins\plugins\access\libvcd_plugin.dll" />
+    <Content Include="plugins\plugins\access\libvdr_plugin.dll" />
+    <Content Include="plugins\plugins\access\libzip_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\liba52tofloat32_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\liba52tospdif_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libaudiobargraph_a_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libaudio_format_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libchorus_flanger_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libcompressor_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libdolby_surround_decoder_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libdtstofloat32_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libdtstospdif_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libequalizer_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libgain_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libheadphone_channel_mixer_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libkaraoke_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libmono_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libmpgatofixed32_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libnormvol_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libparam_eq_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libremap_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libsamplerate_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libscaletempo_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libsimple_channel_mixer_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libspatializer_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libspeex_resampler_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libstereo_widen_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libtrivial_channel_mixer_plugin.dll" />
+    <Content Include="plugins\plugins\audio_filter\libugly_resampler_plugin.dll" />
+    <Content Include="plugins\plugins\audio_mixer\libfloat_mixer_plugin.dll" />
+    <Content Include="plugins\plugins\audio_mixer\libinteger_mixer_plugin.dll" />
+    <Content Include="plugins\plugins\audio_output\libadummy_plugin.dll" />
+    <Content Include="plugins\plugins\audio_output\libafile_plugin.dll" />
+    <Content Include="plugins\plugins\audio_output\libamem_plugin.dll" />
+    <Content Include="plugins\plugins\audio_output\libdirectsound_plugin.dll" />
+    <Content Include="plugins\plugins\audio_output\libmmdevice_plugin.dll" />
+    <Content Include="plugins\plugins\audio_output\libwasapi_plugin.dll" />
+    <Content Include="plugins\plugins\audio_output\libwaveout_plugin.dll" />
+    <Content Include="plugins\plugins\codec\liba52_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libadpcm_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libaes3_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libaraw_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libavcodec_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libcc_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libcdg_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libcrystalhd_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libcvdsub_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libddummy_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libdmo_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libdts_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libdvbsub_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libdxva2_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libedummy_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libfaad_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libflac_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libg711_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libjpeg_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libkate_plugin.dll" />
+    <Content Include="plugins\plugins\codec\liblibass_plugin.dll" />
+    <Content Include="plugins\plugins\codec\liblibmpeg2_plugin.dll" />
+    <Content Include="plugins\plugins\codec\liblpcm_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libmft_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libmpeg_audio_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libopus_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libpng_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libqsv_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libquicktime_plugin.dll" />
+    <Content Include="plugins\plugins\codec\librawvideo_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libschroedinger_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libscte27_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libspeex_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libspudec_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libstl_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libsubsdec_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libsubstx3g_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libsubsusf_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libsvcdsub_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libt140_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libtheora_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libtwolame_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libuleaddvaudio_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libvorbis_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libvpx_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libx264_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libx265_plugin.dll" />
+    <Content Include="plugins\plugins\codec\libzvbi_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libaiff_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libasf_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libau_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libavi_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libcaf_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libdemuxdump_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libdemux_cdg_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libdemux_stl_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libdiracsys_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libes_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libflacsys_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libgme_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libh264_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libhevc_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libimage_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libmjpeg_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libmkv_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libmod_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libmp4_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libmpc_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libmpgv_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libnsc_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libnsv_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libnuv_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libogg_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libplaylist_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libps_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libpva_plugin.dll" />
+    <Content Include="plugins\plugins\demux\librawaud_plugin.dll" />
+    <Content Include="plugins\plugins\demux\librawdv_plugin.dll" />
+    <Content Include="plugins\plugins\demux\librawvid_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libreal_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libsid_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libsmf_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libsubtitle_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libts_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libtta_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libty_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libvc1_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libvobsub_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libvoc_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libwav_plugin.dll" />
+    <Content Include="plugins\plugins\demux\libxa_plugin.dll" />
+    <Content Include="plugins\plugins\lua\liblua_plugin.dll" />
+    <Content Include="plugins\plugins\meta_engine\libfolder_plugin.dll" />
+    <Content Include="plugins\plugins\meta_engine\libtaglib_plugin.dll" />
+    <Content Include="plugins\plugins\misc\libaddonsfsstorage_plugin.dll" />
+    <Content Include="plugins\plugins\misc\libaddonsvorepository_plugin.dll" />
+    <Content Include="plugins\plugins\misc\libaudioscrobbler_plugin.dll" />
+    <Content Include="plugins\plugins\misc\libexport_plugin.dll" />
+    <Content Include="plugins\plugins\misc\libfingerprinter_plugin.dll" />
+    <Content Include="plugins\plugins\misc\libgnutls_plugin.dll" />
+    <Content Include="plugins\plugins\misc\liblogger_plugin.dll" />
+    <Content Include="plugins\plugins\misc\libstats_plugin.dll" />
+    <Content Include="plugins\plugins\misc\libvod_rtsp_plugin.dll" />
+    <Content Include="plugins\plugins\misc\libxml_plugin.dll" />
+    <Content Include="plugins\plugins\mux\libmux_asf_plugin.dll" />
+    <Content Include="plugins\plugins\mux\libmux_avi_plugin.dll" />
+    <Content Include="plugins\plugins\mux\libmux_dummy_plugin.dll" />
+    <Content Include="plugins\plugins\mux\libmux_mp4_plugin.dll" />
+    <Content Include="plugins\plugins\mux\libmux_mpjpeg_plugin.dll" />
+    <Content Include="plugins\plugins\mux\libmux_ogg_plugin.dll" />
+    <Content Include="plugins\plugins\mux\libmux_ps_plugin.dll" />
+    <Content Include="plugins\plugins\mux\libmux_ts_plugin.dll" />
+    <Content Include="plugins\plugins\mux\libmux_wav_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_copy_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_dirac_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_flac_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_h264_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_hevc_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_mlp_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_mpeg4audio_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_mpeg4video_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_mpegvideo_plugin.dll" />
+    <Content Include="plugins\plugins\packetizer\libpacketizer_vc1_plugin.dll" />
+    <Content Include="plugins\plugins\stream_filter\libdash_plugin.dll" />
+    <Content Include="plugins\plugins\stream_filter\libhttplive_plugin.dll" />
+    <Content Include="plugins\plugins\stream_filter\librecord_plugin.dll" />
+    <Content Include="plugins\plugins\stream_filter\libsmooth_plugin.dll" />
+    <Content Include="plugins\plugins\text_renderer\libfreetype_plugin.dll" />
+    <Content Include="plugins\plugins\text_renderer\libtdummy_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libchain_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libgrey_yuv_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi420_rgb_mmx_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi420_rgb_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi420_rgb_sse2_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi420_yuy2_mmx_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi420_yuy2_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi420_yuy2_sse2_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi422_i420_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi422_yuy2_mmx_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi422_yuy2_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libi422_yuy2_sse2_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\librv32_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libswscale_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libyuy2_i420_plugin.dll" />
+    <Content Include="plugins\plugins\video_chroma\libyuy2_i422_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libadjust_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libalphamask_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libanaglyph_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libantiflicker_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libatmo_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libaudiobargraph_v_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libball_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libblendbench_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libblend_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libbluescreen_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libcanvas_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libcolorthres_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libcroppadd_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libdeinterlace_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\liberase_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libextract_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libfreeze_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libgaussianblur_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libgradfun_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libgradient_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libgrain_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libhqdn3d_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libinvert_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\liblogo_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libmagnify_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libmarq_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libmirror_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libmosaic_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libmotionblur_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libmotiondetect_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\liboldmovie_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libposterize_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libpostproc_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libpsychedelic_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libpuzzle_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libremoteosd_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libripple_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\librotate_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\librss_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libscale_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libscene_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libsepia_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libsharpen_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libsubsdelay_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libtransform_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libvhs_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libwave_plugin.dll" />
+    <Content Include="plugins\plugins\video_filter\libyuvp_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libcaca_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libdirect2d_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libdirect3d_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libdirectdraw_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libdrawable_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libglwin32_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libgl_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libvdummy_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libvmem_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libwingdi_plugin.dll" />
+    <Content Include="plugins\plugins\video_output\libyuv_plugin.dll" />
+    <Content Include="plugins\plugins\video_splitter\libclone_plugin.dll" />
+    <Content Include="plugins\plugins\video_splitter\libpanoramix_plugin.dll" />
+    <Content Include="plugins\plugins\video_splitter\libwall_plugin.dll" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\CalendarUtils.js" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\StackView.js" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\style.js" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\arrow-down%402x.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\arrow-down.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\arrow-left%402x.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\arrow-left.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\arrow-right%402x.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\arrow-right.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\arrow-up%402x.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\arrow-up.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\button.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\button_down.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\check%402x.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\check.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\editbox.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\focusframe.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\groupbox.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\header.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\leftanglearrow.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\progress-indeterminate.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\rightanglearrow.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\scrollbar-handle-horizontal.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\scrollbar-handle-transient.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\scrollbar-handle-vertical.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\slider-groove.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\slider-handle.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\spinner_large.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\spinner_medium.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\spinner_small.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\tab.png" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\images\tab_selected.png" />
+    <Content Include="plugins\ssleay32.dll" />
+    <Content Include="plugins\THANKS.txt" />
     <Content Include="Registration.aspx" />
     <Content Include="RemoveUsers.aspx" />
     <Content Include="roles.xml" />
@@ -1330,10 +1688,6 @@
     <Content Include="Scripts\acController.js" />
     <Content Include="Scripts\approve.js" />
     <Content Include="Scripts\Blob.js" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\cardlogs.js" />
     <Content Include="Scripts\CardReader.js" />
     <Content Include="Scripts\Config.js" />
@@ -1346,18 +1700,6 @@
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\fontawesome\all.js" />
-    <Content Include="Scripts\fontawesome\all.min.js" />
-    <Content Include="Scripts\fontawesome\brands.js" />
-    <Content Include="Scripts\fontawesome\brands.min.js" />
-    <Content Include="Scripts\fontawesome\fontawesome.js" />
-    <Content Include="Scripts\fontawesome\fontawesome.min.js" />
-    <Content Include="Scripts\fontawesome\regular.js" />
-    <Content Include="Scripts\fontawesome\regular.min.js" />
-    <Content Include="Scripts\fontawesome\solid.js" />
-    <Content Include="Scripts\fontawesome\solid.min.js" />
-    <Content Include="Scripts\fontawesome\v4-shims.js" />
-    <Content Include="Scripts\fontawesome\v4-shims.min.js" />
     <Content Include="Scripts\holder.min.js" />
     <Content Include="Scripts\HomePageJS.js" />
     <Content Include="Scripts\ie-emulation-modes-warning.js" />
@@ -1382,6 +1724,7 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\remotekeys.js" />
     <Content Include="Scripts\RemoteModal.js" />
+    <Content Include="Scripts\StatusData.js" />
     <Content Include="Scripts\tablesorter\jquery.tablesorter.combined.js" />
     <Content Include="Scripts\tablesorter\jquery.tablesorter.combined.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
@@ -1403,7 +1746,6 @@
     <Content Include="Status.aspx" />
     <Content Include="tempratureCharts.aspx" />
     <Content Include="test.aspx" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="lib\advanced-datatable\images\Sorting icons.psd" />
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
@@ -1422,21 +1764,175 @@
     <Content Include="assets\font\weathericons-regular-webfont.woff" />
     <Content Include="assets\font\weathericons-regular-webfont.woff2" />
     <Content Include="css\StyleSheet1.less" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="App_GlobalResources\Resource.zh.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.zh.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\详细页图标\images\Thumbs.db" />
-    <Content Include="Images\详细页图标\Thumbs.db" />
-    <Content Include="Images\详细页图标\空调\images\images\Thumbs.db" />
-    <Content Include="Images\详细页图标\空调\images\Thumbs.db" />
+    <Content Include="plugins\libvlc.dll.manifest" />
+    <Content Include="plugins\lua\modules\common.luac" />
+    <Content Include="plugins\lua\modules\dkjson.luac" />
+    <Content Include="plugins\lua\modules\sandbox.luac" />
+    <Content Include="plugins\lua\modules\simplexml.luac" />
+    <Content Include="plugins\lua\playlist\anevia_streams.luac" />
+    <Content Include="plugins\lua\playlist\anevia_xml.luac" />
+    <Content Include="plugins\lua\playlist\appletrailers.luac" />
+    <Content Include="plugins\lua\playlist\bbc_co_uk.luac" />
+    <Content Include="plugins\lua\playlist\break.luac" />
+    <Content Include="plugins\lua\playlist\canalplus.luac" />
+    <Content Include="plugins\lua\playlist\cue.luac" />
+    <Content Include="plugins\lua\playlist\dailymotion.luac" />
+    <Content Include="plugins\lua\playlist\extreme.luac" />
+    <Content Include="plugins\lua\playlist\france2.luac" />
+    <Content Include="plugins\lua\playlist\googlevideo.luac" />
+    <Content Include="plugins\lua\playlist\jamendo.luac" />
+    <Content Include="plugins\lua\playlist\joox.luac" />
+    <Content Include="plugins\lua\playlist\katsomo.luac" />
+    <Content Include="plugins\lua\playlist\koreus.luac" />
+    <Content Include="plugins\lua\playlist\lelombrik.luac" />
+    <Content Include="plugins\lua\playlist\liveleak.luac" />
+    <Content Include="plugins\lua\playlist\metacafe.luac" />
+    <Content Include="plugins\lua\playlist\metachannels.luac" />
+    <Content Include="plugins\lua\playlist\mpora.luac" />
+    <Content Include="plugins\lua\playlist\pinkbike.luac" />
+    <Content Include="plugins\lua\playlist\playlist_youtube.lua" />
+    <Content Include="plugins\lua\playlist\pluzz.luac" />
+    <Content Include="plugins\lua\playlist\rockbox_fm_presets.luac" />
+    <Content Include="plugins\lua\playlist\soundcloud.luac" />
+    <Content Include="plugins\lua\playlist\vimeo.luac" />
+    <Content Include="plugins\lua\playlist\youtube.luac" />
+    <Content Include="plugins\lua\playlist\youtube_homepage.luac" />
+    <Content Include="plugins\lua\playlist\zapiks.luac" />
+    <Content Include="plugins\qml\QtGraphicalEffects\Blend.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\BrightnessContrast.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\Colorize.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\ColorOverlay.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\ConicalGradient.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\Desaturate.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\DirectionalBlur.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\Displace.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\DropShadow.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\FastBlur.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\GammaAdjust.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\GaussianBlur.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\Glow.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\HueSaturation.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\InnerShadow.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\LevelAdjust.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\LinearGradient.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\MaskedBlur.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\OpacityMask.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\private\FastGlow.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\private\FastInnerShadow.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\private\FastMaskedBlur.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\private\GaussianDirectionalBlur.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\private\GaussianGlow.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\private\GaussianInnerShadow.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\private\GaussianMaskedBlur.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\private\SourceProxy.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\qmldir" />
+    <Content Include="plugins\qml\QtGraphicalEffects\RadialBlur.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\RadialGradient.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\RectangularGlow.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\RecursiveBlur.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\ThresholdMask.qml" />
+    <Content Include="plugins\qml\QtGraphicalEffects\ZoomBlur.qml" />
+    <Content Include="plugins\qml\QtQuick.2\plugins.qmltypes" />
+    <Content Include="plugins\qml\QtQuick.2\qmldir" />
+    <Content Include="plugins\qml\QtQuick\Controls\ApplicationWindow.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\BusyIndicator.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Button.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Calendar.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\CheckBox.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\ComboBox.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\GroupBox.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Label.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Menu.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\MenuBar.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\plugins.qmltypes" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\AbstractCheckable.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\BasicButton.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\CalendarHeaderModel.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\ColumnMenuContent.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\ContentItem.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\Control.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\EditMenu.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\EditMenu_base.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\EditMenu_ios.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\FastGlow.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\FocusFrame.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\HoverButton.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\MenuContentItem.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\MenuContentScroller.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\MenuItemSubControls.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\ModalPopupBehavior.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\qmldir" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\ScrollBar.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\ScrollViewHelper.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\SourceProxy.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\StackViewSlideDelegate.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\Style.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\SystemPaletteSingleton.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\TabBar.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\TableViewSelection.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\TextHandle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\TextInputWithHandles.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\TextSingleton.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Private\ToolMenuButton.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\ProgressBar.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\qmldir" />
+    <Content Include="plugins\qml\QtQuick\Controls\RadioButton.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\ScrollView.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Slider.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\SpinBox.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\SplitView.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\StackView.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\StackViewDelegate.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\StackViewTransition.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\StatusBar.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\ApplicationWindowStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\BusyIndicatorStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\ButtonStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\CalendarStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\CheckBoxStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\ComboBoxStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\FocusFrameStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\GroupBoxStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\MenuBarStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\MenuStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\ProgressBarStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\RadioButtonStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\ScrollViewStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\SliderStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\SpinBoxStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\StatusBarStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\SwitchStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\TableViewStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\TabViewStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\TextAreaStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\TextFieldStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\ToolBarStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\Base\ToolButtonStyle.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Styles\qmldir" />
+    <Content Include="plugins\qml\QtQuick\Controls\Switch.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\Tab.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\TableView.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\TableViewColumn.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\TabView.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\TextArea.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\TextField.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\ToolBar.qml" />
+    <Content Include="plugins\qml\QtQuick\Controls\ToolButton.qml" />
+    <Content Include="plugins\qml\QtQuick\Layouts\plugins.qmltypes" />
+    <Content Include="plugins\qml\QtQuick\Layouts\qmldir" />
+    <Content Include="VideoPlay\basic_1.qml" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="Properties\PublishProfiles\CresijProfile.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
@@ -1446,6 +1942,8 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\WebProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1610,6 +2108,13 @@
     <Compile Include="DeleteDocument.aspx.designer.cs">
       <DependentUpon>DeleteDocument.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Download.aspx.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Download.aspx.designer.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+    </Compile>
     <Compile Include="editDelCard.aspx.cs">
       <DependentUpon>editDelCard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1623,6 +2128,20 @@
     </Compile>
     <Compile Include="exportdata.aspx.designer.cs">
       <DependentUpon>exportdata.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintainance.aspx.cs">
+      <DependentUpon>Maintainance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintainance.aspx.designer.cs">
+      <DependentUpon>Maintainance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VideoPlay\FAQ.aspx.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VideoPlay\FAQ.aspx.designer.cs">
+      <DependentUpon>FAQ.aspx</DependentUpon>
     </Compile>
     <Compile Include="HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
@@ -1786,6 +2305,28 @@
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="src\Chrome\chromepackage\manifest.json" />
+    <Content Include="src\default.qml" />
+    <Content Include="src\FBVLC_Mac\projectDef.cmake" />
+    <Content Include="src\FBVLC_X11\projectDef.cmake" />
+    <Content Include="src\Mac\bundle_template\Info.plist" />
+    <Content Include="src\Mac\bundle_template\InfoPlist.strings" />
+    <Content Include="src\Mac\bundle_template\Localized.r" />
+    <Content Include="src\Mac\Chimera_Mac.mm" />
+    <Content Include="src\Mac\dmgdesign.applescript" />
+    <Content Include="src\Mac\installer.cmake" />
+    <Content Include="src\Mac\projectDef.cmake" />
+    <Content Include="src\PluginConfig.cmake" />
+    <Content Include="src\resources.qrc" />
+    <Content Include="src\Win\projectDef.cmake" />
+    <Content Include="src\Win\WiX\.gitignore" />
+    <Content Include="src\Win\WiX\Chimera.ddf" />
+    <Content Include="src\Win\WiX\ChimeraInstaller.wxs" />
+    <Content Include="src\Win\WiX\heat_qt_quick_controls.bat" />
+    <Content Include="src\Win\WiX\qt.wxs" />
+    <Content Include="src\X11\projectDef.cmake" />
+    <Content Include="src\xpi\content\chrome.manifest" />
+    <Content Include="src\xpi\content\install.rdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1803,32 +2344,15 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\offimages\" />
+    <Folder Include="Images\onimages\" />
     <Folder Include="Members\" />
     <Folder Include="Resources\" />
     <Folder Include="Uploads\" />
+    <Folder Include="VideoPlay\Help\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>8</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Resource.resx">
@@ -1840,6 +2364,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
@@ -1859,8 +2386,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-          <servers defaultServer="">
+          <servers defaultServer="SelfHostServer">
             <server name="OwinHost" exePath="{solutiondir}\packages\OwinHost.4.0.1\tools\OwinHost.exe" cmdArgs="-u {url}" url="http://localhost:12345/" workingDir="{projectdir}" />
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:17263/" workingDir="" />
           </servers>
         </WebProjectProperties>
       </FlavorProperties>
@@ -1871,13 +2399,13 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.3.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.3.0.0\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
   <Import Project="..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />

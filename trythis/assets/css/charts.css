@@ -1,7 +1,6 @@
-﻿body {
-}
+﻿
 .card {
-    margin-bottom: 1.875em;    
+    margin-bottom: 1em;    
     padding: 0;  
     border: 0px solid transparent;
     -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
@@ -10,7 +9,7 @@
     .card .card-body {
         border-radius: 5px;
         float: left;
-        padding: 1.25em;
+        padding: 1em;
         position: relative;
         width: 100%;
     }

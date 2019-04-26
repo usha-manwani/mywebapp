@@ -11,10 +11,10 @@
 
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
     <script src="Scripts/CardReader.js?v=4"></script>
-    <div>
+    <div style="color:whitesmoke">
         <div class="panel-heading col ">
-            <h4>
-                <p><span><%=Resources.Resource.CardRegistration%></span></p>
+            <h4 style="color:whitesmoke">
+                <p><span ><%=Resources.Resource.CardRegistration%></span></p>
             </h4>
         </div>
         <div class="stepper d-flex flex-column mt-5 ml-2">
@@ -24,10 +24,10 @@
                     <div class="line h-100"></div>
                 </div>
                 <div>
-                    <h5 class="text-dark"><span><%=Resources.Resource.ScanCard%></span></h5>
+                    <h5 class="text-light"><span><%=Resources.Resource.ScanCard%></span></h5>
                     <p class="lead text-muted pb-3">
                         <span><%=Resources.Resource.ScanCardPara1%></span>
-                        <h6><span><%=Resources.Resource.ScanCardPara2%></span></h6>
+                        <h6 class="text-light"><span><%=Resources.Resource.ScanCardPara2%></span></h6>
                     </p>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <div class="line h-100 "></div>
                 </div>
                 <div>
-                    <h5 class="text-dark"><span><%=Resources.Resource.ScanCardPara3%></span></h5>
+                    <h5 class="text-light"><span><%=Resources.Resource.ScanCardPara3%></span></h5>
                     <p class="lead text-muted pb-3">
                         <span><%=Resources.Resource.ScanCardPara4%></span>
                         <h6><span><%=Resources.Resource.ScanCardPara5%></span></h6>
@@ -50,11 +50,11 @@
                     <div class="line h-100 d-none"></div>
                 </div>
                 <div>
-                    <h5 class="text-dark"><span><%=Resources.Resource.ScanCardPara6%></span></h5>
+                    <h5 class="text-light"><span><%=Resources.Resource.ScanCardPara6%></span></h5>
                     <p class="lead text-muted pb-3">
                         <span><%=Resources.Resource.ScanCardPara7%></span>
                         <h6><span><%=Resources.Resource.ScanCardPara8%></span> &nbsp;<a class=" linkstyle"
-                            style="color: blue; text-decoration: underline;" href="editDelCard.aspx">
+                            style="color: white; text-decoration: underline;" href="editDelCard.aspx">
                             <span><%=Resources.Resource.Here%></span></a>
                         </h6>
                     </p>

@@ -61,13 +61,13 @@ namespace WebCresij.Hubsfile
             }
         }
 
-        //[HubMethodName("sendMessages")]
-        //public static void SendMessages()
-        //{
-        //    IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
-        //    context.Clients.All.updateMessages();     
-        //}
-        //DataTable ScoresTable = HttpContext.Current.Application["ScoresTable"] as DataTable;
+        ///[HubMethodName("sendMessages")]
+        ///public static void SendMessages()
+        ///{
+        ///    IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
+        ///    context.Clients.All.updateMessages();     
+        ///}
+        ///DataTable ScoresTable = HttpContext.Current.Application["ScoresTable"] as DataTable;
         string constr = ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         public void Hello()
         {
@@ -79,6 +79,7 @@ namespace WebCresij.Hubsfile
             SendData();
            
         }
+        ///show status of all machines
         public void SendMessage(string sender, string data)  
         {
             if (data.Contains("Toregister"))
@@ -97,22 +98,29 @@ namespace WebCresij.Hubsfile
             }
               Clients.All.broadcastMessage(sender, data);
         }
-
+        ///send to server to get status of all machines
         public void SendData()
         {            
             Clients.All.SendToMachine(1);
         }
+        ///check status of a selected ip
+        public void CheckStatus(string ip)
+        {
+            Clients.All.RefreshStatus(ip);
+        }
+        ///send ip and data to console server
        public void SendControlKeys(string machine, string code)
         {
             Clients.All.SendControl(machine, code);
         }
+
         public void GetStatus(string sender, string Message )
         {
             int dis;
             byte[] statusRec=  HexEncoding.GetBytes(Message, out dis);
             Clients.All.broadcastMessage(sender, statusRec);
         }
-
+        ///card status
         public void updatecardstatus(string ip,string data)
         {
             string[] msg=  data.Split(',');
@@ -120,6 +128,7 @@ namespace WebCresij.Hubsfile
             PopulateTree tree = new PopulateTree();
             tree.updateStatus(ip, cardID);
         }
+        ///card logs
         public void updateCardLogs(string ip, string data)
         {
             string[] msg = data.Split(',');

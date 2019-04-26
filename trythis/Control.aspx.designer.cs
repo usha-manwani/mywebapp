@@ -13,15 +13,6 @@ namespace WebCresij {
     public partial class Control {
         
         /// <summary>
-        /// deviceips control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label deviceips;
-        
-        /// <summary>
         /// ipAddressToSend control.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace WebCresij {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManagerProxy ScriptManagerProxy1;
+        
+        /// <summary>
+        /// deviceips control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label deviceips;
         
         /// <summary>
         /// Label3 control.

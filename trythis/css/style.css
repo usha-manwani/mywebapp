@@ -16,13 +16,13 @@ Website: http://Alvarez.is/
 
 /* BASIC THEME CONFIGURATION */
 body {
-    width:100%;
+    width: 100%;
     color: #797979;
-	background: #eaeaea;
+    background: #1e1e36;
     font-family: 'Ruda', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
-    font-size:13px;
+    font-size: 13px;
 }
 
 ul li {
@@ -46,6 +46,7 @@ a, a:hover, a:focus {
 #container {
     width: 100%;
     height: 100%;
+    background-color: #1e1e36
 }
 
 /* Bootstrap Modifications */

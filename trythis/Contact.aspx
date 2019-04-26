@@ -68,7 +68,7 @@
                                     <asp:Label runat="server" Text="Issue" AssociatedControlID="issueList"></asp:Label>
                                     <asp:DropDownList runat="server" ID="issueList"
                                         onChange="javascript:selectedval();"
-                                        CssClass="btn btn-default border dropdown form-control" Width="250px">
+                                        CssClass=" border dropdown form-control btn-light" Width="250px">
                                         <asp:ListItem Text="Camera Offline" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Unable to manage Camera Details" Value="2"></asp:ListItem>
                                         <asp:ListItem Text="Unable to manage User Details" Value="3"></asp:ListItem>
@@ -108,29 +108,13 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-    <div id="emailsent" class="modal" style="align-items: center;">
-        <div class="modal-content" style="width: 300px">
-            <header class="w3-container ">
-                <span onclick="hideDelNot();"
-                    class="w3-button w3-display-topright">&times;</span>
-                <h3>Successful!!</h3>
-            </header>
-            <div class="w3-container">
-                <asp:TextBox runat="server" ID="TextBox1" Visible="false"></asp:TextBox>
-                <p>Email Sent successfully.. Our Executive will contact you back Soon.</p>
-                <br />
-                <asp:Button ID="Button1" runat="server" Text="Ok, got it!" OnClientClick="hideSent(); return false;" />
-            </div>
-        </div>
-    </div>
+  
     <%--<asp:RequiredFieldValidator runat="server" ControlToValidate="txtemail"
    CssClass="text-danger" ErrorMessage="Email address is required." /> --%>
     <script type="text/javascript">
-        function hideSent() {
-            document.getElementById('emailsent').style.display = "none";
-        }
+        
         function showMail() {
-            document.getElementById('emailsent').style.display = "block";
+            alert("Email Sent successfully.. Our Executive will contact you back Soon.");
         }
         function selectedval() {
             var rr = document.getElementById('<%=issueList.ClientID%>');

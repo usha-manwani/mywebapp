@@ -15,7 +15,7 @@ namespace WebCresij
         //int i = 0;
         // public event EventHandler selected;
         //int role = Convert.ToInt32(HttpContext.Current.Session["role"]);
-       
+
         TreeNode root = new TreeNode(Resources.Resource.Institutes);
         static SqlConnection con;
         public static DataTable dtIns = new DataTable("InsDetails");
@@ -37,8 +37,7 @@ namespace WebCresij
                 this.PopulateTreeView(dt, 0, null);
                 nodenames = new string[TreeMenuView.Nodes.Count];
             }
-            
-            
+           
         }
         public void PopulateTreeView(DataTable dtParent, int ParentId, TreeNode treeNode)
         {
@@ -52,7 +51,7 @@ namespace WebCresij
                     Value = row[1].ToString()
                 };
                 child.ToolTip = row[2].ToString();
-                
+
                 if (ParentId == 0)
                 {
                     child.SelectAction = TreeNodeSelectAction.Expand;
@@ -68,7 +67,7 @@ namespace WebCresij
                         treeNode.ChildNodes.Add(child);
                         DataTable dtclass = ExecuteCommand("Select ClassName, Id,ClassID from Class_Details where GradeID='" + val + "'");
                         dtClass.Merge(dtclass);
-                        
+
                         PopulateTreeView(dtclass, int.Parse(child.Value), child);
                     }
                     else
@@ -124,7 +123,7 @@ namespace WebCresij
                             ipsloc.Add(row[1].ToString(), row[0].ToString());
                         }
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
 
                     }
@@ -155,42 +154,37 @@ namespace WebCresij
                     //Opening Connection  
                     if (con.State != ConnectionState.Open)
                         con.Open();
-                    ip= cmd.ExecuteScalar().ToString();                   
+                    var result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        ip = result.ToString();
+                    }
                     HttpContext.Current.Session["DeviceIP"] = ip;
                 }
-                catch
+                catch(Exception)
                 {
-                    throw;
+                   // HttpContext.Current.Session["DeviceIP"] = ip;
                 }
                 finally
                 {
                     con.Close();
                     Response.Redirect("~/HomePage.aspx");
-                }    
+                }
             }
-            //if (TreeMenuView.SelectedNode.Depth == 5)
-            //{
-            //    c = TreeMenuView.SelectedValue.ToString();
-            //    if (TreeMenuView.SelectedNode.Parent.Value == "Camera")
-            //    {
-
-            //    }
-            //    else if (TreeMenuView.SelectedNode.Parent.Value == "Multimedia")
-            //    {
-            //        HttpContext.Current.Session["DeviceIP"] = c;
-            //        HttpContext.Current.Session["loc"] = TreeMenuView.SelectedNode.Parent.Parent.Text;
-            //        Response.Redirect("~/Control.aspx");
-            //    }
-
-            //    if (selected != null)
-            //    {
-            //        selected(this, EventArgs.Empty);
-            //    }
-            //}
             else
             {
                 TreeMenuView.SelectedNode.Expand();
             }
+        }
+
+        protected void TreeMenuView_TreeNodeExpanded(object sender, TreeNodeEventArgs e)
+        {
+            e.Node.Expand();
+        }
+
+        protected void TreeMenuView_TreeNodeCollapsed(object sender, TreeNodeEventArgs e)
+        {
+            e.Node.Collapse();
         }
     }
 }

@@ -123,7 +123,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <asp:Button runat="server" OnClick="CreateUser_Click" 
-                    Text="<%$Resources:Resource, Register %>" BorderColor="Gray" CssClass="btn btn-default" />
+                    Text="<%$Resources:Resource, Register %>" BorderColor="white" ForeColor="WhiteSmoke" CssClass="btn btn-default" />
             </div>
         </div>
    </div>

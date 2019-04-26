@@ -31,18 +31,18 @@
     <script src="assets/js/Schedule.js?v=2"></script>
    
        <div>
-           <div style="background-color: #4ecdc4; top:100px;">
+           <div style="background-color: #4ecdc4; ">
             <asp:UpdatePanel runat="server">
                  <Triggers>
                     <asp:PostBackTrigger ControlID="importExcel" /> 
                 </Triggers>
                 <ContentTemplate>                              
-                    <div class="row">
-                    <h3><span><%=Resources.Resource.Schedule%></span></h3>
-                  </div>
-                    <div class="row" >
+                   
+                    <h4 style="margin-bottom:-10px"><span><%=Resources.Resource.Schedule%></span></h4>
+                  
+                    <div class="row" style="margin-bottom:-20px; margin-top:-20px">
                         <div class="col-lg-7 col-md-12 col-sm-12">
-                            <div class="row">
+                            <div class="row" style="margin-bottom:-30px">
                         <div class="col-lg-3 col-sm-12">
                             <h5><span><%=Resources.Resource.CreateSchedule%></span></h5>
                         </div>
@@ -51,7 +51,7 @@
                             OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                             CssClass="btn btn-default dropdown border" Width="180px"  
                             ID="ddlInstitute" data-toggle="dropdown"  runat="server" >
-                            <asp:ListItem Text="Select Institute" Value=""></asp:ListItem>
+                            <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>
                            </div>                           
                             <div class="col-sm-12 col-lg-3">
@@ -59,7 +59,7 @@
                         <asp:DropDownList  ID="ddlGrade" AutoPostBack="true" Width="150px"
                             CssClass="btn btn-default border dropdown" data-toggle="dropdown" 
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" >
-                            <asp:ListItem Text="Select" Value=""></asp:ListItem>
+                            <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>
                          </div>                             
                             <div class=" col-sm-12 col-lg-3">                    
@@ -68,13 +68,13 @@
                             CssClass="btn btn-default border dropdown" 
                             data-toggle="dropdown" 
                             OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" >
-                            <asp:ListItem Text="Select" Value=""></asp:ListItem>
+                            <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>                    
                          </div> 
                              </div>
                         </div>
                         <div class="col-lg-5 col-md-6 col-sm-12" >
-                            <div class="row" >
+                            <div class="row" style="margin-bottom:-30px">
                                 <div class="col" style="font-size:16px">
                                     <asp:CheckBox ID="chkTimer" runat="server" Text="<%$Resources:Resource, Timer %>"/>
                                 </div>
@@ -131,7 +131,7 @@
                                 <div style="display:none;" id="uploadDiv">
                          <span><%=Resources.Resource.SelectFile%></span>&nbsp;<asp:FileUpload runat="server" ID="fuSample"  />
         <asp:Button ID="importExcel" runat="server" Text="<%$Resources:Resource, Upload %>"
-            CssClass="btn btn-group-toggle" OnClick="importExcel_Click" /> 
+            CssClass="btn btn-info" OnClick="importExcel_Click" /> 
                                     </div>
                             </div>
                        
@@ -154,7 +154,7 @@
 
         <alternatingrowstyle CssClass="rowstylealt" BackColor="WhiteSmoke" />
             <Columns>              
-                <asp:TemplateField HeaderText="SNo">
+                <asp:TemplateField HeaderText="<%$Resources:Resource, Sno %>">
                     <ItemStyle Width="4%" />
                     <ItemTemplate>
                         <span> <%#Container.DataItemIndex + 1%></span>

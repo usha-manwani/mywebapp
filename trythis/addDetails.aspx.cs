@@ -14,7 +14,7 @@ namespace WebCresij
         protected string Values;
         protected void Page_Load(object sender, EventArgs e)
         {
-            AddIns.Style.Add("display", "none");
+           
         }
         
 
@@ -34,9 +34,9 @@ namespace WebCresij
                 }
             }
             
-            if(r>0)
+            if(r!=1 || v!=1)
             {
-                AddIns.Style.Add("display", "block");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "successIns", "alert('Some error occured. Please try again')", true);
             }
         }
 

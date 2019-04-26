@@ -2,7 +2,7 @@
 
 <%@ MasterType VirtualPath="~/Master.master" %>
 <asp:Content ID="Head" ContentPlaceHolderID="masterchildHead" runat="server">
-    <%--<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">--%>
+    
 
     <style type="text/css">
         .imgclick {
@@ -27,7 +27,7 @@
     <%--</asp:Content>--%>
 </asp:Content>
 <asp:Content ID="Main" ContentPlaceHolderID="masterchildBody" runat="server">
-    <%--<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">--%>
+    
     <!--Reference the SignalR library. -->
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
     <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
@@ -36,6 +36,7 @@
     <script src="Scripts/MessagesToClient.js?v=4" type="text/javascript"></script>
     <div class="row" style="padding-right: 20px; margin-top: 8px;">
         <br>
+        
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <table style="width: 100%;">
@@ -64,7 +65,7 @@
                                 EmptyDataRowStyle-BackColor="Black"
                                 ShowHeaderWhenEmpty="true" RowStyle-HorizontalAlign="Center"
                                 EmptyDataRowStyle-ForeColor="White" AutoGenerateColumns="false">
-                                <HeaderStyle Font-Bold="True" HorizontalAlign="Center" CssClass="table table-striped table-bordered table-hover" />
+                                <HeaderStyle Font-Bold="True" ForeColor="white" HorizontalAlign="Center" CssClass="table table-striped table-bordered table-hover" />
                                 <RowStyle BackColor="WhiteSmoke" ForeColor="black" Height="50" />
                                 <AlternatingRowStyle BackColor="White" ForeColor="black" Height="50" />
                                 <Columns>

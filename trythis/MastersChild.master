@@ -12,10 +12,19 @@
                  <h3 class="centered" style="padding-top:50px;color:whitesmoke" ><span><%=Resources.Resource.DeviceManagement%></span></h3>
              </div>
           <li class="mt" >
-               <asp:TreeView runat="server"  OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
-                          ID="TreeMenuView" NodeStyle-NodeSpacing="1px"  
-                          RootNodeStyle-CssClass="text-bold" ForeColor="White" >
-               </asp:TreeView>  
+              <asp:UpdatePanel runat="server" >
+                  <ContentTemplate>
+                      <asp:TreeView runat="server" OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
+                          ID="TreeMenuView" NodeStyle-NodeSpacing="1px" OnTreeNodeExpanded="TreeMenuView_TreeNodeExpanded"
+                           OnTreeNodeCollapsed="TreeMenuView_TreeNodeCollapsed"
+                          RootNodeStyle-CssClass="text-bold" ForeColor="White">
+               </asp:TreeView> 
+                  </ContentTemplate>
+                  
+              </asp:UpdatePanel>
+                       
+                  
+               
               </li>
           </ul>             
         <!-- sidebar menu end-->     
@@ -26,4 +35,7 @@
           <asp:ContentPlaceHolder ID="masterchildBody" runat="server"></asp:ContentPlaceHolder>
           </section>
          </section>
+    <script>
+
+    </script>
 </asp:Content>

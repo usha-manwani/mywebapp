@@ -193,7 +193,7 @@
     <value>设备状态</value>
   </data>
   <data name="DocumentMenu" xml:space="preserve">
-    <value>文件</value>
+    <value>资源</value>
   </data>
   <data name="DownloadDocument" xml:space="preserve">
     <value>下载文件</value>
@@ -721,7 +721,7 @@
     <value>左</value>
   </data>
   <data name="NewName" xml:space="preserve">
-    <value>用户姓名</value>
+    <value>班级名称</value>
   </data>
   <data name="none" xml:space="preserve">
     <value>无校验</value>
@@ -917,5 +917,167 @@
   </data>
   <data name="Up" xml:space="preserve">
     <value>上</value>
+  </data>
+  <data name="brightness" xml:space="preserve">
+    <value>亮度</value>
+  </data>
+  <data name="BuildingMgmt" xml:space="preserve">
+    <value>楼宇管理</value>
+  </data>
+  <data name="BuildingName" xml:space="preserve">
+    <value>教学楼</value>
+  </data>
+  <data name="DispatchMgmt" xml:space="preserve">
+    <value>维保管理</value>
+  </data>
+  <data name="EnerygyNVoltage" xml:space="preserve">
+    <value>电力能耗</value>
+  </data>
+  <data name="export" xml:space="preserve">
+    <value>输出</value>
+  </data>
+  <data name="FaultInfo" xml:space="preserve">
+    <value>故障信息</value>
+  </data>
+  <data name="FaultMgmt" xml:space="preserve">
+    <value>故障管理</value>
+  </data>
+  <data name="FaultyDevices" xml:space="preserve">
+    <value>故障待派工</value>
+  </data>
+  <data name="FixedToday" xml:space="preserve">
+    <value>今日已解决的故障数量</value>
+  </data>
+  <data name="formaldehyde" xml:space="preserve">
+    <value>甲醛</value>
+  </data>
+  <data name="InspectionLog" xml:space="preserve">
+    <value>巡检日志</value>
+  </data>
+  <data name="InspectionMgmt" xml:space="preserve">
+    <value>巡检管理</value>
+  </data>
+  <data name="Issue" xml:space="preserve">
+    <value>占总比例</value>
+  </data>
+  <data name="IssuesResolved" xml:space="preserve">
+    <value>未处理工单数</value>
+  </data>
+  <data name="Maintainance" xml:space="preserve">
+    <value>运维管理</value>
+  </data>
+  <data name="MyTasks" xml:space="preserve">
+    <value>我的任务</value>
+  </data>
+  <data name="Stat" xml:space="preserve">
+    <value>维修统计</value>
+  </data>
+  <data name="TotalResolved" xml:space="preserve">
+    <value>任务已认领</value>
+  </data>
+  <data name="unresolvedbyBuilding" xml:space="preserve">
+    <value>各教学楼未处理工单统计</value>
+  </data>
+  <data name="UnresolvedIssues" xml:space="preserve">
+    <value>未解决故障数量</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>最新</value>
+  </data>
+  <data name="building" xml:space="preserve">
+    <value>楼宇</value>
+  </data>
+  <data name="SystemStat" xml:space="preserve">
+    <value>系统现状</value>
+  </data>
+  <data name="btnwork" xml:space="preserve">
+    <value>派工</value>
+  </data>
+  <data name="CentralControl" xml:space="preserve">
+    <value>中控</value>
+  </data>
+  <data name="Computer" xml:space="preserve">
+    <value>电脑</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>故障描述</value>
+  </data>
+  <data name="DistrictName" xml:space="preserve">
+    <value>楼宇名称</value>
+  </data>
+  <data name="FaultStatus" xml:space="preserve">
+    <value>故障状态</value>
+  </data>
+  <data name="FaultVia" xml:space="preserve">
+    <value>上报类型</value>
+  </data>
+  <data name="issueStats" xml:space="preserve">
+    <value>统计图</value>
+  </data>
+  <data name="mgmttab1" xml:space="preserve">
+    <value>全校工单统计</value>
+  </data>
+  <data name="mgmttab2" xml:space="preserve">
+    <value>各教学楼工单统计</value>
+  </data>
+  <data name="mgmttab3" xml:space="preserve">
+    <value>小组工单统计</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>未处理</value>
+  </data>
+  <data name="PersonToHandle" xml:space="preserve">
+    <value>报修人</value>
+  </data>
+  <data name="platform" xml:space="preserve">
+    <value>讲台</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>时限要求</value>
+  </data>
+  <data name="Resolved" xml:space="preserve">
+    <value>已处理</value>
+  </data>
+  <data name="SchoolName" xml:space="preserve">
+    <value>学校名字</value>
+  </data>
+  <data name="Screen" xml:space="preserve">
+    <value>电动屏</value>
+  </data>
+  <data name="Speaker" xml:space="preserve">
+    <value>音响</value>
+  </data>
+  <data name="WiredMic" xml:space="preserve">
+    <value>无线麦</value>
+  </data>
+  <data name="Wirelessmic" xml:space="preserve">
+    <value>固定麦</value>
+  </data>
+  <data name="audio" xml:space="preserve">
+    <value>音频</value>
+  </data>
+  <data name="details" xml:space="preserve">
+    <value>详情</value>
+  </data>
+  <data name="image" xml:space="preserve">
+    <value>图像</value>
+  </data>
+  <data name="play" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="FileDate" xml:space="preserve">
+    <value>文件创建日期</value>
+  </data>
+  <data name="Filemod" xml:space="preserve">
+    <value>最后修改日期</value>
+  </data>
+  <data name="filen" xml:space="preserve">
+    <value>文件名</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>文件大小</value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>文件类型</value>
   </data>
 </root>

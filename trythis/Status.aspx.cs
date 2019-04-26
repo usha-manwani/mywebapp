@@ -23,7 +23,8 @@ namespace WebCresij
                 ddlins.DataTextField = "InstituteName";
                 ddlins.DataValueField = "InstituteID";
                 ddlins.DataBind();
-                ddlins.Items.Insert(0, new ListItem("Select Institute", "NA"));
+                string select = Resources.Resource.Select;
+                ddlins.Items.Insert(0, new ListItem(select, "NA"));
                 loadGrid("NA");                
             }
         }

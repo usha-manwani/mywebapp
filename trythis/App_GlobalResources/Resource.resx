@@ -918,4 +918,166 @@
   <data name="Up" xml:space="preserve">
     <value>Up</value>
   </data>
+  <data name="brightness" xml:space="preserve">
+    <value>Brightness</value>
+  </data>
+  <data name="BuildingMgmt" xml:space="preserve">
+    <value>Building Management</value>
+  </data>
+  <data name="BuildingName" xml:space="preserve">
+    <value>Building Name</value>
+  </data>
+  <data name="DispatchMgmt" xml:space="preserve">
+    <value>Dispatch Management</value>
+  </data>
+  <data name="EnerygyNVoltage" xml:space="preserve">
+    <value>Energy and Voltage</value>
+  </data>
+  <data name="export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="FaultInfo" xml:space="preserve">
+    <value>Fault Information</value>
+  </data>
+  <data name="FaultMgmt" xml:space="preserve">
+    <value>Fault management</value>
+  </data>
+  <data name="FaultyDevices" xml:space="preserve">
+    <value>Faulty Devices</value>
+  </data>
+  <data name="FixedToday" xml:space="preserve">
+    <value>Fixed Today</value>
+  </data>
+  <data name="formaldehyde" xml:space="preserve">
+    <value>Methanal</value>
+  </data>
+  <data name="InspectionLog" xml:space="preserve">
+    <value>Inspection Log</value>
+  </data>
+  <data name="InspectionMgmt" xml:space="preserve">
+    <value>Inspection Management</value>
+  </data>
+  <data name="Issue" xml:space="preserve">
+    <value>Issues</value>
+  </data>
+  <data name="IssuesResolved" xml:space="preserve">
+    <value>Issues Resolved</value>
+  </data>
+  <data name="Maintainance" xml:space="preserve">
+    <value>Maintainance</value>
+  </data>
+  <data name="MyTasks" xml:space="preserve">
+    <value>My Tasks</value>
+  </data>
+  <data name="Stat" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="TotalResolved" xml:space="preserve">
+    <value>Total Resolved</value>
+  </data>
+  <data name="unresolvedbyBuilding" xml:space="preserve">
+    <value>Unresolved Issues(by Building)</value>
+  </data>
+  <data name="UnresolvedIssues" xml:space="preserve">
+    <value>Unresolved Issues</value>
+  </data>
+  <data name="update" xml:space="preserve">
+    <value>Update Status</value>
+  </data>
+  <data name="building" xml:space="preserve">
+    <value>Building</value>
+  </data>
+  <data name="SystemStat" xml:space="preserve">
+    <value>System Status</value>
+  </data>
+  <data name="btnwork" xml:space="preserve">
+    <value>Work</value>
+  </data>
+  <data name="CentralControl" xml:space="preserve">
+    <value>CentralControl</value>
+  </data>
+  <data name="Computer" xml:space="preserve">
+    <value>电脑</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DistrictName" xml:space="preserve">
+    <value>District Name</value>
+  </data>
+  <data name="FaultStatus" xml:space="preserve">
+    <value>Fault Status</value>
+  </data>
+  <data name="FaultVia" xml:space="preserve">
+    <value>Fault Info(Via)</value>
+  </data>
+  <data name="issueStats" xml:space="preserve">
+    <value>Issue Stats</value>
+  </data>
+  <data name="mgmttab1" xml:space="preserve">
+    <value>Statistics(By School)</value>
+  </data>
+  <data name="mgmttab2" xml:space="preserve">
+    <value>Statistics(By Building)</value>
+  </data>
+  <data name="mgmttab3" xml:space="preserve">
+    <value>Statistics(By Work Group)</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="PersonToHandle" xml:space="preserve">
+    <value>Handled By</value>
+  </data>
+  <data name="platform" xml:space="preserve">
+    <value>Platform</value>
+  </data>
+  <data name="Priority" xml:space="preserve">
+    <value>Priority</value>
+  </data>
+  <data name="Resolved" xml:space="preserve">
+    <value>Resolved</value>
+  </data>
+  <data name="SchoolName" xml:space="preserve">
+    <value>School Name</value>
+  </data>
+  <data name="Screen" xml:space="preserve">
+    <value>Screen</value>
+  </data>
+  <data name="Speaker" xml:space="preserve">
+    <value>Speaker</value>
+  </data>
+  <data name="WiredMic" xml:space="preserve">
+    <value>Wired Mic</value>
+  </data>
+  <data name="Wirelessmic" xml:space="preserve">
+    <value>Wireless Mic</value>
+  </data>
+  <data name="audio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="play" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="FileDate" xml:space="preserve">
+    <value>Creation Date</value>
+  </data>
+  <data name="Filemod" xml:space="preserve">
+    <value>Last Modified Date</value>
+  </data>
+  <data name="filen" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>File Size</value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>File Type</value>
+  </data>
 </root>

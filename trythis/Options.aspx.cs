@@ -194,7 +194,27 @@ namespace WebCresij
             }
            
         }
-       
+
+        protected void save_Click(object sender, EventArgs e)
+        {
+            int r = fillTree.InsertInstitute(txtIns.Text);
+            int v = 0;
+            string[] textboxValues = Request.Form.GetValues("DynamicTextBox");
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            this.Values = serializer.Serialize(textboxValues);
+            if (textboxValues != null)
+            {
+                foreach (string textboxValue in textboxValues)
+                {
+                    v = fillTree.InsertGrade(r.ToString(), textboxValue);
+
+                }
+            }
+
+            
+            bindTree();
+        }
+
         #endregion
 
         #region Edit
@@ -353,15 +373,12 @@ namespace WebCresij
                 {
                     result = fillTree.DelInstitute(TreeViewDelete.SelectedNode.ToolTip);
                 }
-                if (result == 1 || result == 0)
+                if (result != 1 && result != 0)
                 {
-                    
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('Deleted Successfully');", true);
-                }
-                else
-                {
+
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('The requested Item can not be deleted at this moment. Please try later'); ", true);
                 }
+                
             }
             catch
             {

@@ -90,7 +90,7 @@
         <div class="form-group row">
             <div class="col-md-offset-2 col-md-10" >
                 <asp:Button runat="server" OnClick="CreateUser_Click" 
-                    Text="<%$Resources:Resource, Register %>" CssClass="btn btn-default" Font-Size="Medium" BorderColor="Gray" />
+                    Text="<%$Resources:Resource, Register %>" CssClass="btn btn-default" ForeColor="White" Font-Size="Medium" BorderColor="Gray" />
             </div>
         </div>
     </div>

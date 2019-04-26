@@ -85,13 +85,40 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.TreeView TreeViewDelete;
         
         /// <summary>
-        /// Iframe1 control.
+        /// txtIns control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlIframe Iframe1;
+        protected global::System.Web.UI.WebControls.TextBox txtIns;
+        
+        /// <summary>
+        /// btnaddgrade1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnaddgrade1;
+        
+        /// <summary>
+        /// saveg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button saveg;
+        
+        /// <summary>
+        /// Cancle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Cancle;
         
         /// <summary>
         /// instext control.
@@ -130,15 +157,6 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.Button save;
         
         /// <summary>
-        /// UpdatePanel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
-        /// <summary>
         /// TextGrade control.
         /// </summary>
         /// <remarks>
@@ -175,15 +193,6 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.Button BtnClassSave;
         
         /// <summary>
-        /// AddCam control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel AddCam;
-        
-        /// <summary>
         /// tbSelectedClass control.
         /// </summary>
         /// <remarks>
@@ -218,15 +227,6 @@ namespace WebCresij {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCamSave;
-        
-        /// <summary>
-        /// UpdatePanel2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
         /// camEditIP control.

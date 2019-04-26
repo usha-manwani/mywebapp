@@ -1,8 +1,10 @@
 ﻿﻿$(function () {
 
-    var ipAddress = document.getElementById("MainContent_masterchildBody_masterBody_deviceips").innerText;
+   
+     var ipAddress = "";
     var chat = $.connection.myHub;
-    chat.client.broadcastMessage = function (name, message) {
+     chat.client.broadcastMessage = function (name, message) {
+         
          tbleupdate(name, message);
         if (name == ipAddress) {
             var arraydata = message.split(',');
@@ -285,13 +287,14 @@
             }
             alert(proj);
         });
-        $(document).on('click', '.aclass', function () {
+        //$(document).on('click', '.aclass', function () {
                       
-            ipAddress = $(this).closest('tr').find('input').val();  
-            
-            openRemote(ipAddress);
-            chat.server.sendData(); 
-        });        
+        //    ipAddress = $(this).closest('tr').find('input').val();
+        //    sessionStorage.setItem('ipofremote', ipAddress);
+        //    console.log(ipAddress);
+        //    openRemote(ipAddress);
+        //    chat.server.sendData(); 
+        //});        
         $(document).on('click', '.trying', function () {
             
             if ($(this).hasClass("fa-angle-up")) {                
@@ -448,8 +451,9 @@
 function createDivs() {
     var chkds = $("input[name='toggle']:checkbox");
     chkds.checked = true;
-   
-    var deviceidsloc = $('#dev').val();
+    
+    var deviceidsloc = $('#dev1').val();
+    console.log(deviceidsloc);
     if (deviceidsloc != "" && deviceidsloc != undefined) {
         var dev = deviceidsloc.split(",");
         var counter = 0;
@@ -570,11 +574,11 @@ function changeColor() {
 }
 
 function isRemote(ipofdevice, chknot) {
-    if (chknot ) {
-        alert(ipofdevice + "  " + chknot);
+    if (chknot) {
+        console.log(ipofdevice + "  " + chknot);
     }
     else {
-        alert("you are wrong");
+        console.log("you are wrong");
     }
 }
 
@@ -583,19 +587,25 @@ function openRemote(ipofremote) {
     offdevices();
     var iplabel = document.getElementById("MainContent_masterchildBody_masterBody_deviceips");
     iplabel.innerText = ipofremote;
-    document.getElementById("control").style.display = "block";
-    document.getElementById("smallcontrol").style.display = "none";    
+    
+   
+   document.getElementById("control").style.display = "block";
+   document.getElementById("smallcontrol").style.display = "none";    
 }
 window.onclick = function (event) {
     if (event.target == modal) {
-        document.getElementById("control").style.display = "none";
+        
+       document.getElementById("control").style.display = "none";
+       
     }
 }
 
- function closexx () {
-     document.getElementById("control").style.display = "none";
+function closexx() {
+    
+    document.getElementById("control").style.display = "none";
      document.getElementById("smallcontrol").style.display ="flex";
     document.getElementById("smallcontrol").addClass = "clearfix";
+    
 }
 
 function tbleupdate(name, message) {

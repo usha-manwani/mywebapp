@@ -55,8 +55,8 @@
                             <asp:GridView runat="server" CellPadding="0" CellSpacing="0" ID="gv1" 
                                 border="0" class="display table table-bordered" AutoGenerateColumns="false"
                                 AllowPaging="true" AllowSorting="true" OnSorting="Gv1_Sorting"
-                                PageSize="10" PagerSettings-Mode="Numeric" OnPageIndexChanging="Gv1_PageIndexChanging">
-                                <HeaderStyle CssClass="hidden-phone" />
+                                PageSize="10" PagerSettings-Mode="Numeric" OnPageIndexChanging="Gv1_PageIndexChanging" PagerStyle-ForeColor="White">
+                                <HeaderStyle CssClass="hidden-phone" ForeColor="WhiteSmoke" />
                                 <RowStyle CssClass=" center" BackColor="White" />
                                 <AlternatingRowStyle CssClass=" center" BackColor="WhiteSmoke" />
                                 <Columns>

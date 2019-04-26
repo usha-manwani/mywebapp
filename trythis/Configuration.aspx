@@ -9,7 +9,7 @@
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
     <script src="Scripts/Config.js"></script>
     <div>
-        <div style="background-color: #4ecdc4; margin-left:-25px;">
+        <div style="background-color: #4ecdc4; margin-left:-25px; margin-top:-30px">
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <div class="row">
@@ -21,7 +21,7 @@
                                 OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                                 CssClass="btn btn-default border dropdown" ID="ddlInstitute"
                                 data-toggle="dropdown" runat="server">
-                                <asp:ListItem Text="select" Value=""></asp:ListItem>
+                                <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;
@@ -30,7 +30,7 @@
                  OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"
                  CssClass="btn btn-default border dropdown" data-toggle="dropdown"
                  AutoPostBack="true" runat="server">
-                 <asp:ListItem Text="select" Value=""></asp:ListItem>
+                 <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
              </asp:DropDownList>
          </div>
                     </div>
@@ -842,7 +842,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="masterSideBody" runat="server">
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <div class="row " id="classchk" style="background-color: #4ecdc4; margin-left: -30px; margin-top:20px;">
+            <div class="row " id="classchk" style="background-color: #4ecdc4; margin-left: -30px; margin-top:-20px;">
                 <span><%=Resources.Resource.SelectClassConfig%></span> - &nbsp;
                 <asp:CheckBoxList runat="server" ID="ddlClass"></asp:CheckBoxList>
             </div>

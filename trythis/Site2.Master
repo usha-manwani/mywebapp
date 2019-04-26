@@ -24,7 +24,7 @@
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
 </head>
-<body style="background:none">
+<body style="background-color:#232140">
     
     <form id="form1" runat="server" >
         <asp:ScriptManager runat="server">
@@ -48,7 +48,7 @@
             </Scripts>
         </asp:ScriptManager>
         <div class="navbar-form" style="font-size:large">
-            <nav class="navbar navbar-fixed-top navbar-light" style="background-color:black;">
+            <nav class="navbar navbar-fixed-top navbar-light" style="background-color:#1e1e36;">
                 <div class="container-fluid">
                     <div class="navbar-header navbar-brand" style="font-size:large; float:left; color:white">
                         Welcome to Cresij Cam 
@@ -70,7 +70,7 @@
                 </div>
            </nav>
         </div>  
-        <div class="container body-content" style="font-size:medium">
+        <div class="container body-content" style="font-size:medium;background-color:#232140; color:white!important; ">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>

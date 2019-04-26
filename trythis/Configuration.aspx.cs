@@ -20,7 +20,8 @@ namespace WebCresij
                 ddlInstitute.DataTextField = "InstituteName";
                 ddlInstitute.DataValueField = "InstituteID";
                 ddlInstitute.DataBind();
-                ddlInstitute.Items.Insert(0, new ListItem("Select", "NA"));                
+                string select = Resources.Resource.Select;
+                ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));                
             }
         }
         protected void ddlInstitute_SelectedIndexChanged(object sender, EventArgs e)
@@ -36,7 +37,8 @@ namespace WebCresij
             ddlGrade.DataTextField = "GradeName";
             ddlGrade.DataValueField = "GradeID";
             ddlGrade.DataBind();
-            ddlGrade.Items.Insert(0, new ListItem("Select", "NA"));           
+            string select = Resources.Resource.Select;
+            ddlGrade.Items.Insert(0, new ListItem(select, "NA"));           
         }
         protected void ddlGrade_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -1,275 +1,825 @@
-﻿var ipAddress="";
+﻿
+var ipAddress = "";
 function uncheck() {
-    $('#desktop').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_158.png");
+    $('#desktop').closest("td").find("img").attr('src', "Images/AllImages/images/图标_158.png");
 
-    $('#laptop').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_160.png");
+    $('#laptop').closest("td").find("img").attr('src', "Images/AllImages/images/图标_160.png");
 
-    $('#platform').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_194.png");
+    $('#platform').closest("td").find("img").attr('src', "Images/AllImages/images/图标_194.png");
 
-    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_194.png");
+    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/AllImages/images/图标_194.png");
 
-    $('#dvd').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_246.png");
+    $('#dvd').closest("td").find("img").attr('src', "Images/AllImages/images/图标_246.png");
 
-    $('#bluray').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_272.png");
+    $('#bluray').closest("td").find("img").attr('src', "Images/AllImages/images/图标_272.png");
 
-    $('#tv').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_298.png");
+    $('#tv').closest("td").find("img").attr('src', "Images/AllImages/images/图标_298.png");
 
-    $('#camera').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_220.png");
-    $('#recorder').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_324.png");
+    $('#camera').closest("td").find("img").attr('src', "Images/AllImages/images/图标_220.png");
+    $('#recorder').closest("td").find("img").attr('src', "Images/AllImages/images/图标_324.png");
 }
 
 function offdevices() {
-
-    $('#systempower').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_212.png");
-    $('#pcpower').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_212.png");
-    $('#syslock').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_214.png");
-    $('#podiumlock').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_262.png");
-    $('#classlock').closest("td").find("img").attr('src', "Images/详细页图标/images/图标_236.png");
+    $('#systempower').closest("td").find("img").attr('src', "Images/AllImages/images/图标_212.png");
+    $('#pcpower').closest("td").find("img").attr('src', "Images/AllImages/images/图标_212.png");
+    $('#sysLock').closest("td").find("img").attr('src', "Images/AllImages/images/图标_214.png");
+    $('#podiumLock').closest("td").find("img").attr('src', "Images/AllImages/images/图标_262.png");
+    $('#classLock').closest("td").find("img").attr('src', "Images/AllImages/images/图标_236.png");
 }
-
-
-$(function () {   
-     
+$(function () {
+    $("#lightIcons8").hide();
+    $("#lightIcons3").hide();
+    $("#lightIcons4").hide();
+    $("#lightIcons5").hide();
+    $("#lightIcons6").hide();
+    $("#lightIcons7").hide();
+    $("#lightIcons2").hide();
+    $("#light1").closest("td").css("background-color", "#4ecdc4");
+    $("#screenIcons2").hide();
+    $("#curtainIcons1").hide();
+    $("#curtainIcons2").hide();
+    $("#curtainIcons3").hide();
+    $("#curtainIcons4").hide();
+    $("#curtainIcons5").hide();
+    $("#curtainIcons6").hide();
+    $("#screen1").closest("td").css("background-color", "#4ecdc4");
+    $("#screenOptions").show();
+    $("#curtainOptions").hide();
+    $("#ac1div").show();
+    $("#ac2div").hide();
+    $("#ac3div").hide();
+    $("#ac4div").hide();
+    $("#air1div").hide();
+    $("#air2div").hide();
+    $("#air3div").hide();
+    $("#air4div").hide();
+    $("#ac1").closest("td").css("background-color", "#4ecdc4");
     var chat = $.connection.myHub;
+  //ipAddress = parent.getElementById("InputIP").value;
+   // ipAddress = sessionStorage.getItem('ipofremote');
     ipAddress = document.getElementById("sessionInputIP").value;
+    console.log(ipAddress);
     chat.client.broadcastMessage = function (name, message) {
-       
+        console.log(name + "    and  " + ipAddress);
         if (name == ipAddress) {
+            
             var arraydata = message.split(',');
             if (arraydata[1] == "Heartbeat") {
                 if (arraydata[3] == 'OPEN') {
                     var img = document.getElementById("systempower");
-                    img.src = "Images/详细页图标/全部按钮/控制全页面-显示状态/控制页面-显示状态_02.png";
+                    img.src = "Images/中控首页按钮/on/systemon.png";
                 }
                 else {
                     var img = document.getElementById("systempower");
-                    img.src = "Images/详细页图标/全部按钮/控制全页面-显示状态/控制页面-显示状态2_01.png"  ;
+                    img.src = "Images/AllImages/images/图标_210.png";
                 }
                 if (arraydata[5] == 'On') {
                     var imgpc = document.getElementById("pcpower");
-                    imgpc.src = "Images/详细页图标/全部按钮/控制全页面-显示状态/控制页面-显示状态_02.png";
+                    imgpc.src = "Images/中控首页按钮/on/pcon.png";
                 }
                 else {
                     var imgpc = document.getElementById("pcpower");
-                    imgpc.src = "Images/详细页图标/全部按钮/控制全页面-显示状态/控制页面-显示状态2_01.png"  ;
+                    imgpc.src = "Images/AllImages/images/图标_212.png";
                 }
                 if (arraydata[12] == 'Locked') {
-                    var src = document.getElementById('syslock');
-                    src.src = "Images/中控首页按钮/首页按钮-显示状态/面板锁定_07.png";
+                    var src = document.getElementById('sysLock');
+                    src.src = "Images/中控首页按钮/on/lock1.png";
                 }
                 else {
-                    var src = document.getElementById('syslock');
-                    src.src = "Images/中控首页按钮/首页按钮-显示状态/面板锁定_09.png";
+                    var src = document.getElementById('sysLock');
+                    src.src = "Images/中控首页按钮/on/lock1open.png";
                 }
                 if (arraydata[13] == 'Locked') {
-                    var src = document.getElementById('podiumlock');
-                    src.src = "Images/中控首页按钮/首页按钮-显示状态/面板锁定_07.png";
+                    var src = document.getElementById('podiumLock');
+                    src.src = "Images/中控首页按钮/on/lock2.png";
                 }
                 else {
-                    var src = document.getElementById('podiumlock');
-                    src.src = "Images/中控首页按钮/首页按钮-显示状态/面板锁定_09.png";
+                    var src = document.getElementById('podiumLock');
+                    src.src = "Images/中控首页按钮/on/lock2open.png";
                 }
                 if (arraydata[14] == 'Locked') {
-                    var src = document.getElementById('classlock');
-                    src.src = "Images/中控首页按钮/首页按钮-显示状态/面板锁定_07.png";
+                    var src = document.getElementById('classLock');
+                    src.src = "Images/中控首页按钮/on/lock3.png";
                 }
                 else {
-                    var src = document.getElementById('classlock');
-                    src.src = "Images/中控首页按钮/首页按钮-显示状态/面板锁定_09.png";
+                    var src = document.getElementById('classLock');
+                    src.src = "Images/中控首页按钮/on/lock3open.png";
                 }
                 uncheck();
                 switch (arraydata[11]) {
                     case 'Desktop':
                         var desk = document.getElementById('desktop');
                         document.getElementById('desktop').checked = true;
-                        $(desk).closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-鼠标经过状态/控制页面-鼠标经过页面_01_80.png");
+                        $(desk).closest("td").find("img").attr('src', "Images/中控首页按钮/on/desk1.png");
 
                         break;
                     case 'Laptop':
                         document.getElementById('laptop').checked = true;
                         var laptop = document.getElementById('laptop');
-                        $(laptop).closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-鼠标经过状态/控制页面-鼠标经过页面_01_82.png");
+                        $(laptop).closest("td").find("img").attr('src', "Images/中控首页按钮/on/lap1.png");
 
                         break;
                     case 'Digital Curtain':
                         document.getElementById('platform').checked = true;
-                        $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
+                        $('#platform').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
                         break;
                     case 'Digital Screen':
                         document.getElementById('digitalEquipment').checked = true;
-                        $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
+                        $('#digitalEquipment').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
                         break;
                     case 'DVD':
                         document.getElementById('dvd').checked = true;
-                        $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
+                        $('#dvd').closest("td").find("img").attr('src', "Images/中控首页按钮/on/dvd.png");
                         break;
                     case 'TV':
                         document.getElementById('tv').checked = true;
-                        $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
+                        $('#tv').closest("td").find("img").attr('src', "Images/中控首页按钮/on/tv.png");
                         break;
                     case 'Video Camera':
                         document.getElementById('camera').checked = true;
-                        $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
+                        $('#camera').closest("td").find("img").attr('src', "Images/中控首页按钮/on/cam.png");
                         break;
                     case 'Blu-Ray DVD':
                         document.getElementById('bluray').checked = true;
-                        $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
+                        $('#bluray').closest("td").find("img").attr('src', "Images/中控首页按钮/on/blu.png");
                         break;
                     case 'Recording System':
                         document.getElementById('recorder').checked = true;
-                        $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
+                        $('#recorder').closest("td").find("img").attr('src', "Images/中控首页按钮/on/recorder.png");
                         break;
                 }
-
+                console.log(arraydata[6]);
                 if (arraydata[6] == 'Closed') {
-                    var src = document.getElementById("projectorOn");
-                    src.src = "Images/offimages/proj1.png";
+                    
+                    var src = document.getElementById("projectorOff");
+                    src.src = "Images/中控首页按钮/on/projred.png";
                 } else {
                     var src = document.getElementById("projectorOn");
-                    src.src = "Images/onimages/projectoron1.png";
+                    src.src = "Images/中控首页按钮/on/projgreen.png";
                 }
 
             }
             else {
-                for (j = 2; j < arraydata.length; j++) {
-                    if (arraydata[1] == "KeyValue") {
-                        switch (arraydata[2]) {
-                            case 'SystemON':
-                                var img = document.getElementById("systempower");
-                                img.src = "Images/onimages/syspoweron.png";
-                                break;
-                            case 'SystemOff':
-                                var img = document.getElementById("systempower");
-                                img.src = "Images/offimages/sysof.png";
-                                break;
-                            case 'DSDown':
-                                $('#dsdown').closest("td").find("img").attr('src', "Images/onimages/down.png");
-                                $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
-                                $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
-                                break;
-                            case 'DSUp':
-                                $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
-                                $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
-                                $('#dsup').closest("td").find("img").attr('src', "Images/onimages/up.png");
-                                break;
-                            case 'DSStop':
-                                $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
-                                $('#dsstop').closest("td").find("img").attr('src', "Images/onimages/stop.png");
-                                $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
-                                break;
-                            default:
-                                break
-                        }
-                    }
-                    else if (arraydata[1] == "LEDIndicator") {
 
-                        if (arraydata[2] == "SystemSwitchOn") {
+                if (arraydata[1] == "KeyValue") {
+                    switch (arraydata[2]) {
+                        case 'SystemON':
                             var img = document.getElementById("systempower");
-                            img.src = "Images/onimages/syspoweron.png";
-                            if (arraydata.length > 4) {
-                                var imgpc = document.getElementById("pcpower");
-                                switch (arraydata[4]) {
-                                    case 'ComputerOff':
-
-                                        imgpc.src = "Images/offimages/pcof.png";
-                                        break;
-                                    case 'ComputerOn':
-                                        imgpc.src = "Images/onimages/pcpoweron.png";
-                                        break;
-                                }
-
-                            }
-                            uncheck();
-                            switch (arraydata[3]) {
-                                case 'Desktop':
-                                    document.getElementById('desktop').checked = true;
-                                    $('#desktop').closest("td").find("img").attr('src', "Images/onimages/desktop.png");
-                                    break;
-                                case 'Laptop':
-                                    document.getElementById('laptop').checked = true;
-                                    $('#laptop').closest("td").find("img").attr('src', "Images/onimages/laptopon.png");
-                                    break;
-                                case 'DigitalCurtain':
-                                    document.getElementById('platform').checked = true;
-                                    $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-                                    break;
-                                case 'DigitalScreen':
-                                    document.getElementById('digitalEquipment').checked = true;
-                                    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-                                    break;
-                                case 'DVD':
-                                    document.getElementById('dvd').checked = true;
-                                    $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
-                                    break;
-                                case 'TV':
-                                    document.getElementById('tv').checked = true;
-                                    $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
-                                    break;
-                                case 'VideoCamera':
-                                    document.getElementById('camera').checked = true;
-                                    $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
-                                    break;
-                                case 'Blu-RayDVD':
-                                    document.getElementById('bluray').checked = true;
-                                    $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
-                                    break;
-                                case 'RecordingSystem':
-                                    document.getElementById('recorder').checked = true;
-                                    $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
-                                    break;
-                                case 'TurnOffLights':
-                                    tab.rows[i].cells[10].innerHTML = 'Off';
-                                    break;
-                                case 'CentralLocking':
-                                    tab.rows[i].cells[12].innerHTML = 'Locked';
-                                    break;
-                                case 'PodiumLock':
-                                    tab.rows[i].cells[13].innerHTML = 'Locked';
-                                    break;
-                                case 'ClassLock':
-                                    tab.rows[i].cells[14].innerHTML = 'Locked';
-                                    break;
-
-                            }
-                        }
-                        else if (arraydata[2] == "SystemSwitchOff") {
+                            img.src = "Images/中控首页按钮/on/systemon.png";
+                            break;
+                        case 'SystemOff':
                             var img = document.getElementById("systempower");
-                            img.src = "Images/offimages/sysof.png";
-                        }
+                            img.src = "Images/AllImages/images/图标_210.png";
+                            break;
+                        case 'DSDown':
+                            $('#screendown1').closest("td").find("img").attr('src', "Images/中控首页按钮/on/screendown.png");
+                            $('#screenstop1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png" );
+                            $('#screenup1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_132.png");
+                            break;
+                        case 'DSUp':
+                            $('#screendown1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_134.png");
+                            $('#screenstop1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png");
+                            $('#screenup1').closest("td").find("img").attr('src', "Images/中控首页按钮/on/screenup.png");
+                            break;
+                        case 'DSStop':
+                            $('#screendown1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_134.png");
+                            $('#screenstop1').closest("td").find("img").attr('src',"Images/中控首页按钮/on/screenstop.png");
+                            $('#screenup1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_132.png");
+                            break;
+                        case 'volplus':
+                            if (document.getElementById("volValue").innerText >= 50) {
+                                var img = document.getElementById("volicons");
+                                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
+                            }
+                            break;
+                        case 'volminus':
+                            if (document.getElementById("volValue").innerText <= 50) {
+                                var img = document.getElementById("volicons");
+                                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
+                            }
+                            break;
+                        case 'mute':
+                            if (document.getElementById("volValue").innerText == 0) {
+                                var img = document.getElementById("volicons");
+                                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量静音.png";
+                            }
+                            break;
+                        case 'wirelessvolplus':
+                            if (document.getElementById("wirelessValue").innerText >= 50) {
+                                var img = document.getElementById("wirelessicons");
+                                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
+                            }
+                            break;
+                        case 'wirelessvolminus':
+                            if (document.getElementById("wirelessValue").innerText <= 50) {
+                                var img = document.getElementById("wirelessicons");
+                                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
+                            }
+                            break;
+                        case 'wirelessmute':
+                            if (document.getElementById("wirelessValue").innerText == 0) {
+                                var img = document.getElementById("wirelessicons");
+                                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦静音.png";
+                            }
+                            break;
+                        case 'wiredvolplus':
+                            if (document.getElementById("wiredValue").innerText >= 50) {
+                                var img = document.getElementById("wiredicons");
+                                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
+                            }
+                            break;
+                        case 'wiredvolminus':
+                            if (document.getElementById("wiredValue").innerText <= 50) {
+                                var img = document.getElementById("wiredicons");
+                                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
+                            }
+                            break;
+                        case 'wiredmute':
+                            if (document.getElementById("wiredValue").innerText == 0) {
+                                var img = document.getElementById("wiredicons");
+                                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦静音.png";
+                            }
+                            break;
+                        default:
+                            break
                     }
-
                 }
+                else if (arraydata[1] == "LEDIndicator") {
+
+                    if (arraydata[2] == "SystemSwitchOn") {
+                        var img = document.getElementById("systempower");
+                        img.src = "Images/中控首页按钮/on/systemon.png";
+                        if (arraydata.length > 4) {
+                            var imgpc = document.getElementById("pcpower");
+                            switch (arraydata[4]) {
+                                case 'ComputerOff':
+
+                                    imgpc.src = "Images/AllImages/images/图标_212.png";
+                                    break;
+                                case 'ComputerOn':
+                                    imgpc.src = "Images/中控首页按钮/on/pcon.png";
+                                    break;
+                            }
+
+                        }
+                        uncheck();
+                        switch (arraydata[3]) {
+                            case 'Desktop':
+                                document.getElementById('desktop').checked = true;
+                                $('#desktop').closest("td").find("img").attr('src', "Images/中控首页按钮/on/desk1.png");
+                                break;
+                            case 'Laptop':
+                                document.getElementById('laptop').checked = true;
+                                $('#laptop').closest("td").find("img").attr('src', "Images/中控首页按钮/on/lap1.png");
+                                break;
+                            case 'DigitalCurtain':
+                                document.getElementById('platform').checked = true;
+                                $('#platform').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
+                                break;
+                            case 'DigitalScreen':
+                                document.getElementById('digitalEquipment').checked = true;
+                                $('#digitalEquipment').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
+                                break;
+                            case 'DVD':
+                                document.getElementById('dvd').checked = true;
+                                $('#dvd').closest("td").find("img").attr('src', "Images/中控首页按钮/on/dvd.png");
+                                break;
+                            case 'TV':
+                                document.getElementById('tv').checked = true;
+                                $('#tv').closest("td").find("img").attr('src', "Images/中控首页按钮/on/tv.png");
+                                break;
+                            case 'VideoCamera':
+                                document.getElementById('camera').checked = true;
+                                $('#camera').closest("td").find("img").attr('src', "Images/中控首页按钮/on/cam.png");
+                                break;
+                            case 'Blu-RayDVD':
+                                document.getElementById('bluray').checked = true;
+                                $('#bluray').closest("td").find("img").attr('src', "Images/中控首页按钮/on/blu.png");
+                                break;
+                            case 'RecordingSystem':
+                                document.getElementById('recorder').checked = true;
+                                $('#recorder').closest("td").find("img").attr('src', "Images/中控首页按钮/on/recorder.png");
+                                break;
+                            case 'TurnOffLights':
+                                tab.rows[i].cells[10].innerHTML = 'Off';
+                                break;
+                            case 'CentralLocking':
+                                tab.rows[i].cells[12].innerHTML = 'Locked';
+                                break;
+                            case 'PodiumLock':
+                                tab.rows[i].cells[13].innerHTML = 'Locked';
+                                break;
+                            case 'ClassLock':
+                                tab.rows[i].cells[14].innerHTML = 'Locked';
+                                break;
+
+                        }
+                    }
+                    else if (arraydata[2] == "SystemSwitchOff") {
+                        var img = document.getElementById("systempower");
+                        img.src = "Images/AllImages/images/图标_210.png";
+                    }
+                }
+
+
             }
         };
     };
     var tryingToReconnect = false;
 
-   
-
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-   
-        ipAddress=document.getElementById("sessionInputIP").value;               
-        chat.server.sendData();
-       
-       
-       
-        $(document).on("click", "#syslock", function () {
-            var src = document.getElementById('syslock');
-            if (src.src.indexOf("Images/详细页图标/images/图标_236.png") != -1)
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
-            else
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");
+        console.log("connected to server signalR");
+        ipAddress = document.getElementById("sessionInputIP").value;
+        //ipAddress = sessionStorage.getItem('ipofremote');
+        chat.server.checkStatus(ipAddress);
+        $(document).on("click", "#screen1", function () {
+            var tble = document.getElementById("curtainTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#screenIcons1").show();
+            $("#screenIcons2").hide();
+            $("#curtainIcons1").hide();
+            $("#curtainIcons2").hide();
+            $("#curtainIcons3").hide();
+            $("#curtainIcons4").hide();
+            $("#curtainIcons5").hide();
+            $("#curtainIcons6").hide();
+            $("#screenOptions").show();
+            $("#curtainOptions").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
         });
-        $(document).on("click", "#podiumlock", function () {
-            var src = document.getElementById('podiumlock');
-            if (src.src.indexOf("Images/详细页图标/images/图标_238.png") != -1)
+
+        $(document).on("click", "#screen2", function () {
+            var tble = document.getElementById("curtainTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#screenIcons1").hide();
+            $("#screenIcons2").show();
+            $("#curtainIcons1").hide();
+            $("#curtainIcons2").hide();
+            $("#curtainIcons3").hide();
+            $("#curtainIcons4").hide();
+            $("#curtainIcons5").hide();
+            $("#curtainIcons6").hide();
+            $("#screenOptions").show();
+            $("#curtainOptions").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#curtain1", function () {
+            var tble = document.getElementById("curtainTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#screenIcons1").hide();
+            $("#screenIcons2").hide();
+            $("#curtainIcons1").show();
+            $("#curtainIcons2").hide();
+            $("#curtainIcons3").hide();
+            $("#curtainIcons4").hide();
+            $("#curtainIcons5").hide();
+            $("#curtainIcons6").hide();
+            $("#screenOptions").hide();
+            $("#curtainOptions").show();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#curtain2", function () {
+            var tble = document.getElementById("curtainTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#screenIcons1").hide();
+            $("#screenIcons2").hide();
+            $("#curtainIcons1").hide();
+            $("#curtainIcons2").show();
+            $("#curtainIcons3").hide();
+            $("#curtainIcons4").hide();
+            $("#curtainIcons5").hide();
+            $("#curtainIcons6").hide();
+            $("#screenOptions").hide();
+            $("#curtainOptions").show();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#curtain3", function () {
+            var tble = document.getElementById("curtainTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#screenIcons1").hide();
+            $("#screenIcons2").hide();
+            $("#curtainIcons1").hide();
+            $("#curtainIcons2").hide();
+            $("#curtainIcons3").show();
+            $("#curtainIcons4").hide();
+            $("#curtainIcons5").hide();
+            $("#curtainIcons6").hide();
+            $("#screenOptions").hide();
+            $("#curtainOptions").show();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#curtain4", function () {
+            var tble = document.getElementById("curtainTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#screenIcons1").hide();
+            $("#screenIcons2").hide();
+            $("#curtainIcons1").hide();
+            $("#curtainIcons2").hide();
+            $("#curtainIcons3").hide();
+            $("#curtainIcons4").show();
+            $("#curtainIcons5").hide();
+            $("#curtainIcons6").hide();
+            $("#screenOptions").hide();
+            $("#curtainOptions").show();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#curtain5", function () {
+            var tble = document.getElementById("curtainTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#screenIcons1").hide();
+            $("#screenIcons2").hide();
+            $("#curtainIcons1").hide();
+            $("#curtainIcons2").hide();
+            $("#curtainIcons3").hide();
+            $("#curtainIcons4").hide();
+            $("#curtainIcons5").show();
+            $("#curtainIcons6").hide();
+            $("#screenOptions").hide();
+            $("#curtainOptions").show();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#curtain6", function () {
+            var tble = document.getElementById("curtainTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#screenIcons1").hide();
+            $("#screenIcons2").hide();
+            $("#curtainIcons1").hide();
+            $("#curtainIcons2").hide();
+            $("#curtainIcons3").hide();
+            $("#curtainIcons4").hide();
+            $("#curtainIcons5").hide();
+            $("#curtainIcons6").show();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#light1", function () {
+            var tble = document.getElementById("myTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#lightIcons1").show();
+            $("#lightIcons8").hide();
+            $("#lightIcons3").hide();
+            $("#lightIcons4").hide();
+            $("#lightIcons5").hide();
+            $("#lightIcons6").hide();
+            $("#lightIcons7").hide();
+            $("#lightIcons2").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+            console.log("click worked");
+        });
+
+        $(document).on("click", "#light2", function () {
+            var tble = document.getElementById("myTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#lightIcons1").hide();
+            $("#lightIcons8").hide();
+            $("#lightIcons3").hide();
+            $("#lightIcons4").hide();
+            $("#lightIcons5").hide();
+            $("#lightIcons6").hide();
+            $("#lightIcons7").hide();
+            $("#lightIcons2").show();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+            console.log("click worked");
+        });
+
+        $(document).on("click", "#light3", function () {
+            $("#lightIcons1").hide();
+            $("#lightIcons8").hide();
+            $("#lightIcons3").show();
+            $("#lightIcons4").hide();
+            $("#lightIcons5").hide();
+            $("#lightIcons6").hide();
+            $("#lightIcons7").hide();
+            $("#lightIcons2").hide();
+            var tble = document.getElementById("myTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $(this).closest("td").css("background-color", "#4ecdc4");
+            console.log("click worked");
+        });
+
+        $(document).on("click", "#light4", function () {
+            $("#lightIcons1").hide();
+            $("#lightIcons8").hide();
+            $("#lightIcons3").hide();
+            $("#lightIcons4").show();
+            $("#lightIcons5").hide();
+            $("#lightIcons6").hide();
+            $("#lightIcons7").hide();
+            $("#lightIcons2").hide();
+            var tble = document.getElementById("myTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $(this).closest("td").css("background-color", "#4ecdc4");
+            console.log("click worked");
+        });
+
+        $(document).on("click", "#light5", function () {
+            $("#lightIcons1").hide();
+            $("#lightIcons8").hide();
+            $("#lightIcons3").hide();
+            $("#lightIcons4").hide();
+            $("#lightIcons5").show();
+            $("#lightIcons6").hide();
+            $("#lightIcons7").hide();
+            $("#lightIcons2").hide();
+            var tble = document.getElementById("myTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $(this).closest("td").css("background-color", "#4ecdc4");
+            console.log("click worked");
+        });
+
+        $(document).on("click", "#light6", function () {
+            $("#lightIcons1").hide();
+            $("#lightIcons8").hide();
+            $("#lightIcons3").hide();
+            $("#lightIcons4").hide();
+            $("#lightIcons5").hide();
+            $("#lightIcons6").show();
+            $("#lightIcons7").hide();
+            $("#lightIcons2").hide();
+            var tble = document.getElementById("myTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $(this).closest("td").css("background-color", "#4ecdc4");
+            console.log("click worked");
+        });
+
+        $(document).on("click", "#light7", function () {
+            $("#lightIcons1").hide();
+            $("#lightIcons8").hide();
+            $("#lightIcons3").hide();
+            $("#lightIcons4").hide();
+            $("#lightIcons5").hide();
+            $("#lightIcons6").hide();
+            $("#lightIcons7").show();
+            $("#lightIcons2").hide();
+            var tble = document.getElementById("myTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $(this).closest("td").css("background-color", "#4ecdc4");
+            console.log("click worked");
+        });
+
+        $(document).on("click", "#light8", function () {
+            $("#lightIcons1").hide();
+            $("#lightIcons8").show();
+            $("#lightIcons3").hide();
+            $("#lightIcons4").hide();
+            $("#lightIcons5").hide();
+            $("#lightIcons6").hide();
+            $("#lightIcons7").hide();
+            $("#lightIcons2").hide();
+            var tble = document.getElementById("myTable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $(this).closest("td").css("background-color", "#4ecdc4");
+            console.log("click worked");
+        });
+
+        $(document).on("click", "#ac1", function () {
+            var tble = document.getElementById("actable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#ac1div").show();
+            $("#ac2div").hide();
+            $("#ac3div").hide();
+            $("#ac4div").hide();
+            $("#air1div").hide();
+            $("#air2div").hide();
+            $("#air3div").hide();
+            $("#air4div").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#ac2", function () {
+            var tble = document.getElementById("actable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#ac1div").hide();
+            $("#ac2div").show();
+            $("#ac3div").hide();
+            $("#ac4div").hide();
+            $("#air1div").hide();
+            $("#air2div").hide();
+            $("#air3div").hide();
+            $("#air4div").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#ac3", function () {
+            var tble = document.getElementById("actable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#ac1div").hide();
+            $("#ac2div").hide();
+            $("#ac3div").show();
+            $("#ac4div").hide();
+            $("#air1div").hide();
+            $("#air2div").hide();
+            $("#air3div").hide();
+            $("#air4div").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#ac4", function () {
+            var tble = document.getElementById("actable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#ac1div").hide();
+            $("#ac2div").hide();
+            $("#ac3div").hide();
+            $("#ac4div").show();
+            $("#air1div").hide();
+            $("#air2div").hide();
+            $("#air3div").hide();
+            $("#air4div").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#air1", function () {
+            var tble = document.getElementById("actable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#ac1div").hide();
+            $("#ac2div").hide();
+            $("#ac3div").hide();
+            $("#ac4div").hide();
+            $("#air1div").show();
+            $("#air2div").hide();
+            $("#air3div").hide();
+            $("#air4div").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#air2", function () {
+            var tble = document.getElementById("actable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#ac1div").hide();
+            $("#ac2div").hide();
+            $("#ac3div").hide();
+            $("#ac4div").hide();
+            $("#air1div").hide();
+            $("#air2div").show();
+            $("#air3div").hide();
+            $("#air4div").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#air3", function () {
+            var tble = document.getElementById("actable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#ac1div").hide();
+            $("#ac2div").hide();
+            $("#ac3div").hide();
+            $("#ac4div").hide();
+            $("#air1div").hide();
+            $("#air2div").hide();
+            $("#air3div").show();
+            $("#air4div").hide();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#air4", function () {
+            var tble = document.getElementById("actable");
+            $(tble).find('td').each(function (column, td) {
+                $(td).css("background-color", "transparent");
+            });
+            $("#ac1div").hide();
+            $("#ac2div").hide();
+            $("#ac3div").hide();
+            $("#ac4div").hide();
+            $("#air1div").hide();
+            $("#air2div").hide();
+            $("#air3div").hide();
+            $("#air4div").show();
+            $(this).closest("td").css("background-color", "#4ecdc4");
+        });
+
+        $(document).on("click", "#tvoff", function () {
+            var src1 = this;
+            if (this.src.indexOf("Images/AllImages/子菜单/默认状态/电视机控制/子菜单_23.png") != -1) {
+                console.log("comparison ok");
+                console.log(this.src);
+            }
+            console.log("first " + src1.src);
+            console.log("second " + this.src);
+
+        });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "", function () { });
+
+        $(document).on("click", "#sysLock", function () {
+            var src = document.getElementById('sysLock');
+            if (this.src.indexOf("Images/AllImages/images/SystemLock.png") != -1) {
+                console.log("name in english");
+                console.log(src.src);
+            }
+            else {
+                console.log("false is right " + this.src);
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
+            }
+        });
+        $(document).on("click", "#podiumLock", function () {
+            var src = document.getElementById('podiumLock');
+            if (src.src.indexOf("Images/AllImages/images/图标_238.png") != -1)
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2e 38");
             else
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2f 39");
         });
-        $(document).on("click", "#classlock", function () {
-            var src = document.getElementById('classlock');
-            if (src.src.indexOf("Images/详细页图标/images/图标_264.png") != -1)
+        $(document).on("click", "#classLock", function () {
+            var src = document.getElementById('classLock');
+            if (src.src.indexOf("Images/AllImages/images/图标_264.png") != -1)
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 69");
             else
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 60 6A");
@@ -355,33 +905,7 @@ $(function () {
         $(document).on("click", "#vga", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 44 4e");
         });
-        $(document).on("click", "#volminus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2b");
-        });
-        $(document).on("click", "#volplus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2a");
-        });
-        $(document).on("click", "#mute", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 2c");
-        });
-        $(document).on("click", "#wiredvolplus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 23 2d");
-        });
-        $(document).on("click", "#wiredmute", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 25 2f");
-        });
-        $(document).on("click", "#wiredvolminus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 24 2e");
-        });
-        $(document).on("click", "#wirelessvolplus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 73 7d");
-        });
-        $(document).on("click", "#wirelessvolminus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");
-        });
-        $(document).on("click", "#wirelessmute", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
-        });
+
         $(document).on("click", "#systempower", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");
         });
@@ -389,11 +913,66 @@ $(function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");
         });
         $(document).on("change", "*[name ='test']", function () {
-
-
-
-
         });
+        RemoteVol = function (val) {
+            var lastVal = this.document.getElementById("volValue").innerText;
+            if (lastVal > val) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 25");
+            }
+            else if (val == 0) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 26");
+            }
+            else if (lastVal < val) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 24");
+            }
+            this.document.getElementById("volValue").innerText = val;
+            console.log('After: ' + val);
+        };
+        WirelessRemoteMic = function (val) {
+            var lastVal = this.document.getElementById("wirelessValue").innerText;
+            if (lastVal > val) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");
+            }
+            else if (val == 0) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
+            }
+            else if (lastVal < val) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 73 7d");
+            }
+            this.document.getElementById("wirelessValue").innerText = val;
+            console.log('After: ' + val);
+        };
+        WiredRemoteMic = function (val) {
+            var lastVal = this.document.getElementById("wiredValue").innerText;
+            if (lastVal > val) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 24 2e");
+            }
+            else if (val == 0) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 25 2f");
+            }
+            else if (lastVal < val) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 23 2d");
+            }
+            this.document.getElementById("wiredValue").innerText = val;
+            console.log('After: ' + val);
+        };
     });
 
-}) 
+});
+window.SetVolume = function (val) {
+    console.log('After: ' + val / 100);
+}
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+

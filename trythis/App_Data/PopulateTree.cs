@@ -556,6 +556,7 @@ namespace WebCresij
                     cmd.Parameters.AddWithValue("@loc", loc);
                     try
                     {
+                        if(con.State!=ConnectionState.Open)
                         con.Open();
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@r"].Value);
@@ -571,6 +572,29 @@ namespace WebCresij
                 }
             }
             return result;
+        }
+        public static void AnyTask(string query)
+        {
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    try
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        int result= cmd.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
         }
         #endregion
 
@@ -892,7 +916,12 @@ namespace WebCresij
                         {
                             con.Open();
                         }
-                        result = cmd.ExecuteScalar().ToString();
+                        var i = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            result = i.ToString();
+                        }
+                        
                     }
                 }catch(Exception ex)
                 {
@@ -1108,6 +1137,37 @@ namespace WebCresij
             }
         }
         #endregion
+
+        #region status
+        public DataTable GetStatus()
+        {
+            DataTable dtStatus = new DataTable();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "select MachineStatus, WorkStatus, PCStatus from Status ";
+                try
+                {
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(query,con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        da.Fill(dtStatus);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dtStatus;
+        }
+
+        #endregion
     }
     public class CentralControl
     {
@@ -1181,5 +1241,7 @@ namespace WebCresij
             return dt;
         }
     }   
+
+   
     
 }

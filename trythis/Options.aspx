@@ -3,14 +3,16 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ MasterType VirtualPath="~/Master.master" %>
 <asp:Content ID="Head" ContentPlaceHolderID="MasterHead" runat="server">
+
     <link href="Content/options.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Main" ContentPlaceHolderID="masterBody" runat="server">
     <asp:ScriptManagerProxy ID="sc1" runat="server"></asp:ScriptManagerProxy>
     <div>
-        <div class="leftspace" oncontextmenu="return false;">
-            <asp:UpdatePanel runat="server">
+        <asp:UpdatePanel runat="server" >
                 <ContentTemplate>
+        <div class="leftspace" oncontextmenu="return false;">
+            
                     <cc1:TabContainer runat="server"  BorderStyle="None"  CssClass="fancy fancy-green">
                         <cc1:TabPanel ID="addpaneltab" runat="server" BorderStyle="None">
                             <HeaderTemplate>
@@ -46,26 +48,54 @@
                             </ContentTemplate>
                         </cc1:TabPanel>
                     </cc1:TabContainer>
-                </ContentTemplate>
-            </asp:UpdatePanel>
+                
         </div>
-        <%--Add all details--%>
+        <%--Add all details--%>        
         <div style="position: center;">
+            
             <div id="id01" class="modal">
                 <div class="modal-content">
-                    <header class="row" style="position: center; margin-top: 100px;">
+                    <header class="row" style="position: center; ">
                         <span onclick="document.getElementById('id01').style.display='none'"
                             class="w3-button w3-display-topright">&times;</span>
                         <h2><span><%=Resources.Resource.AddInsgrade%></span></h2>
                     </header>
-                    <div class="row">
-                        <iframe width="100%" height="500" id="Iframe1" src="~/addDetails.aspx" runat="server" frameborder="0"></iframe>
-                    </div>
+                    <div  >
+                         <div class="form-group" style="width:30%;float:left">
+            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="txtIns" CssClass="col-lg-3 control-label" Text="<%$Resources:Resource, InsName %>"></asp:Label>
+                </div>
+            <div style="width:40%; float:left">
+                <asp:TextBox runat="server" ID="txtIns" CssClass="form-control" />
+            </div>
+                        </div>
+        <div style="clear:both"></div>
+        <div>
+            <h4><span><%=Resources.Resource.AddNewgrade%></span></h4>
+            <hr />
+            <div id="TextBoxContainer1">
+            </div>
+            <asp:Button ID="btnaddgrade1" Text="<%$Resources:Resource, AddGrades %>" runat="server" OnClientClick="AddTextGrade1(); return false;" />
+            <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
+                <div class="col">
+                    <asp:Button ID="saveg" Text="<%$Resources:Resource, Save %>" runat="server" OnClick="save_Click" />
+                </div>
+                <div class="col">
+                    <asp:Button ID="Cancle" Text="<%$Resources:Resource, Cancel %>" runat="server"
+                        OnClientClick="closeframe(); return false;" />
                 </div>
             </div>
-
+        </div>
+                        <%--<iframe width="100%" height="500" id="Iframe1" src="~/addDetails.aspx" runat="server" frameborder="0"></iframe>--%>
+                    
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+            
+            <div style="clear:both"></div>
+            
             <div id="idGrade" class="modal ">
                 <!-- Modal content -->
+                
                 <div class="modal-content">
                     <div class=" row " style="padding-right: 20px;">
                         <div class="panel-heading col ">
@@ -73,10 +103,10 @@
                         </div>
                         <span onclick="xx();" style="cursor: pointer">&times;</span>
                     </div>
+                    
+                    <div>
                     <div class="row space">
-                        <asp:UpdatePanel runat="server">
-                            <ContentTemplate>
-                                <asp:TextBox ID="instext" runat="server" Visible="false"></asp:TextBox>
+                        <asp:TextBox ID="instext" runat="server" Visible="false"></asp:TextBox>
                                 <div id="TextBoxContainer" class="form-horizontal">
                                     <div class="form-group">
                                         <asp:Label runat="server" Font-Bold="true" AssociatedControlID="Grade_Name"
@@ -86,14 +116,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <asp:Button ID="btnaddgrade" Text="<%$Resources:Resource, Add %>" runat="server" OnClientClick="AddTextGrade(); return false;" />
-                                <asp:Button ID="save" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideGrade();" OnClick="btnGradesave_Click" />
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+                        </div>
+                        <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
+                            <div class="col"><asp:Button ID="btnaddgrade" Text="<%$Resources:Resource, Add %>" runat="server" OnClientClick="AddTextGrade(); return false;" /></div>
+                            <div class="col"><asp:Button ID="save" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideGrade();" OnClick="btnGradesave_Click" /></div>
+                        </div>
                     </div>
-                </div>
+                   
+                   </div>
+                   
             </div>
-
+            
+            
             <div id="idClass" class="modal">
                 <div class="modal-content">
                     <div class=" row " style="padding-right: 20px;">
@@ -103,8 +137,7 @@
                         <span onclick="hideClass();" style="cursor: pointer">&times;</span>
                     </div>
                     <div class="row space">
-                        <asp:UpdatePanel runat="server" ID="UpdatePanel1">
-                            <ContentTemplate>
+                        
                                 <asp:TextBox runat="server" ID="TextGrade" Visible="false" />
                                 <div id="TextContainer" class="form-horizontal">
                                     <div class="form-group">
@@ -115,27 +148,26 @@
                                         </div>
                                     </div>
                                 </div>
-                                <asp:Button ID="BtnClass" Text="<%$Resources:Resource, AddClass %>" runat="server" OnClientClick="AddTextClass(); return false;" />
-                                <asp:Button ID="BtnClassSave" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideClass();" OnClick="BtnClassSave_Click" />
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </div>
-                </div>
+                        </div>
+                        <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
+                            <div class="col"><asp:Button ID="BtnClass" Text="<%$Resources:Resource, Add %>" runat="server" OnClientClick="AddTextClass(); return false;" /></div>
+                            <div class="col"><asp:Button ID="BtnClassSave" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideClass();" OnClick="BtnClassSave_Click" /></div>
+                        </div>
+                  </div>
             </div>
+
+                    
             <div id="idCamera" class="modal">
                 <div class="modal-content">
-                    <div class=" row " style="padding-right: 20px;">
+                    <div class=" row " style="padding-right: 20px; padding-top:50px">
                         <div class="panel-heading col ">
                             <h4><span><%=Resources.Resource.AddDeviceDetails%></span></h4>
                         </div>
                         <span onclick="hideCam();"
                             style="cursor: pointer">&times;</span>
                     </div>
-                    <div class="row space">
-                        <asp:UpdatePanel runat="server" ID="AddCam">
-                            <ContentTemplate>
-                                <hr />
-                                <asp:TextBox Visible="false" runat="server" ID="tbSelectedClass"></asp:TextBox>
+                    <div class="row space" style="float:left">
+                         <asp:TextBox Visible="false" runat="server" ID="tbSelectedClass"></asp:TextBox>
                                 <div class="form-group">
                                     <asp:Label Text="<%$Resources:Resource, CCIPAddress %>" AssociatedControlID="ccSystem" runat="server" CssClass=" control-label" Font-Bold="True"></asp:Label>
                                     <asp:TextBox runat="server" CssClass="form-control" ID="ccSystem"></asp:TextBox>
@@ -143,14 +175,20 @@
                                 <div id="camdiv">
                                 </div>
                                 <br />
-                                <asp:Button ID="btncam" Text="<%$Resources:Resource, AddCam %>" runat="server" OnClientClick="AddTextCam(); return false;" />
-                                <asp:Button ID="BtnCamSave" Text="<%$Resources:Resource, Save %>" runat="server" OnClick="BtnCamSave_Click" />
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </div>
+                        </div>
+                         <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
+                            <div class="col">   <asp:Button ID="btncam" Text="<%$Resources:Resource, AddCam %>" runat="server" OnClientClick="AddTextCam(); return false;" />
+                               </div>  
+                             <div class="col">
+                                   <asp:Button ID="BtnCamSave" Text="<%$Resources:Resource, Save %>" runat="server" OnClick="BtnCamSave_Click" />
+                                 <div class="col">
+                            </div>
                 </div>
             </div>
+                </div>
+                </div>
 
+              
             <script>
 
 
@@ -187,39 +225,19 @@
                     var message = ' <%=Resources.Resource.AlertError%>'
                      alert(message);
                 }
-                // Get the modal
-                var c = document.getElementById('idClass');
-                var modal = document.getElementById('id01');
-                var m = document.getElementById('idGrade');
-                var cam = document.getElementById('idCamera');
-                var del = document.getElementById('del');
-                var dn = document.getElementById('delnot');
-                var ec = document.getElementById('edit');
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function (event) {
+                
+                //Get Modal for Ins Grade
+                
+        
+                function GetDynamicTextBoxIns(value) {
+                return '<div class="form-group">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Grade %>" CssClass="col-sm-2 control-label" Font-Bold="True"/>' +
+                    '<div class="col-sm-10"><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
+            }
 
-                    if (event.target == del) {
-                        del.style.display = "none";
-                    }
-
-                    else if (event.target == cam) {
-                        cam.style.display = "none";
-                    }
-                    else if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                    else if (event.target == m) {
-                        m.style.display = "none";
-                    }
-                    else if (event.target == c) {
-                        c.style.display = "none";
-                    }
-                    else if (event.target == dn) {
-                        dn.style.display = "none";
-                    }
-                    else if (event.target == ec) {
-                        ec.style.display = 'none';
-                    }
+            function AddTextGrade1() {
+                var div = document.createElement('DIV');
+                div.innerHTML = GetDynamicTextBoxIns("");
+                document.getElementById("TextBoxContainer1").appendChild(div);
                 }
 
                 // Get the modal
@@ -271,6 +289,7 @@
             </script>
             <%--add all details finished--%>
             <%--Edit all details--%>
+            
             <div id="edit" class="modal">
                 <div class="modal-content">
                     <div class=" row " style="padding-right: 20px;">
@@ -281,9 +300,9 @@
                         <span onclick="hideEdit();"
                             class="w3-button w3-display-topright">&times;</span>
                     </div>
+
                     <div class="row space">
-                        <asp:UpdatePanel runat="server" ID="UpdatePanel2">
-                            <ContentTemplate>
+                        
                                 <div class="form-group">
                                     <asp:Label runat="server" Text="<%$Resources:Resource, CamIP %>" CssClass=" control-label" AssociatedControlID="camEditIP"></asp:Label>
                                     <div>
@@ -309,15 +328,20 @@
                                     </div>
                                 </div>
                                 <br />
-                                <asp:Button ID="cancelCamEdit" Text="<%$Resources:Resource, Cancel %>" runat="server" OnClientClick="hideEdit(); return false;" />
+                        </div>
+                        <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
+                             <div class="col">   <asp:Button ID="cancelCamEdit" Text="<%$Resources:Resource, Cancel %>" runat="server" OnClientClick="hideEdit(); return false;" />
+                                </div>
+                            <div class="col">
                                 <asp:Button ID="saveCamEdit" Text="<%$Resources:Resource, Save %>" runat="server" OnClick="saveCamEdit_Click" />
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </div>
+                                </div>
+                            </div>
                 </div>
             </div>
-            <asp:TextBox runat="server" ID="txtRename" Visible="false"></asp:TextBox>
+                               
+            
             <div id="DivRename" class="modal">
+                <asp:TextBox runat="server" ID="txtRename" Visible="false"></asp:TextBox>
                 <div class="modal-content" style="width: 500px; height: 400px; text-align: center;">
                     <div class=" row " style="padding-right: 20px;">
                         <div class="panel-heading col ">
@@ -343,7 +367,9 @@
                         </div>
                     </div>
                 </div>
+                    
             </div>
+            
 
             <script>
                 function Rename() {
@@ -371,9 +397,9 @@
             <%--Edit all detals finished--%>
 
             <%--Delete Starts--%>
-
+              
             <div id="del" class="modal">
-                <div class="modal-content" style="width: 250px; min-height: 150px">
+                <div class="modal-content" style="width: 350px; min-height: 150px">
                     <div class=" row " style="padding-right: 20px;">
                        
                         <span onclick="hideDelConfirm();"
@@ -383,16 +409,18 @@
                         <asp:TextBox runat="server" ID="delvalue" Visible="false"></asp:TextBox>
                         <p class="text-danger"><span><%=Resources.Resource.ConfirmDelete%></span></p>
                         </div>
-                    <div class="row" style="width:80%">
-                        <div class="col">
+                    <div class="row">
+                        <div style="width:50%">
                         <asp:Button ID="btndel" runat="server" Text="<%$Resources:Resource, YesDelete %>" OnClick="Btndel_Click" />
                         </div>
-                            <div class="row">
+                            <div style="width:50%">
                             <asp:Button ID="delcancel" runat="server" Text="<%$Resources:Resource, Cancel %>" OnClientClick="hideDelConfirm(); return false;" />
                     
                             </div></div>
                 </div>
             </div>
+
+
             <div id="delnot" class="modal">
                 <div class="modal-content" style="width: 250px">
                     <div class=" row " style="padding-right: 20px;">
@@ -412,11 +440,12 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-
+                    
+                
+        </div> 
+           </ContentTemplate>
+            </asp:UpdatePanel>     
     </div>
-
     <script>
         function ConfirmDel() {
             document.getElementById('del').style.display = 'Flex';
@@ -432,5 +461,46 @@
             alert(message);
         }
     </script>
+      <script>
+                    // Get the modal
+                var c = document.getElementById('idClass');
+                var modal = document.getElementById('id01');
+                var m = document.getElementById('idGrade');
+                var cam = document.getElementById('idCamera');
+                var del = document.getElementById('del');
+                var dn = document.getElementById('delnot');
+          var ec = document.getElementById('edit');
+          
+          // When the user clicks anywhere outside of the modal, close it
+          window.onclick = function (event) {
+                    if (event.target == del) {
+                        del.style.display = "none";
+                    }
+
+                    else if (event.target == cam) {
+                        
+                        cam.style.display = "none";
+                       
+                    }
+                    else if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                    else if (event.target == m) {
+                        m.style.display = "none";
+                    }
+                    else if (event.target == c) {
+                        c.style.display = "none";
+                    }
+                    else if (event.target == dn) {
+                        dn.style.display = "none";
+                    }
+                    else if (event.target == ec) {
+                        ec.style.display = 'none';
+                    }
+                }
+                function closeframe() {
+                    document.getElementById('id01').style.display = "none";
+                }
+                </script>
     <%--Delete finished--%>
 </asp:Content>
