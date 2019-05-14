@@ -10,33 +10,51 @@
 namespace WebCresij {
     
     
-    public partial class test {
+    public partial class Dashboard {
         
         /// <summary>
-        /// form1 control.
+        /// userNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label userNo;
         
         /// <summary>
-        /// chk1 control.
+        /// totalUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList chk1;
+        protected global::System.Web.UI.WebControls.Label totalUser;
         
         /// <summary>
-        /// btn control.
+        /// ddlsort control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn;
+        protected global::System.Web.UI.WebControls.DropDownList ddlsort;
+        
+        /// <summary>
+        /// btnAsc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnAsc;
+        
+        /// <summary>
+        /// gv1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gv1;
     }
 }

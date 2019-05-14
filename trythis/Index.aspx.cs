@@ -17,11 +17,12 @@ namespace WebCresij
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            if(!IsPostBack)
+            Session.Clear();
         }
         protected void LogIn(object sender, EventArgs e)
         {
-
+            
             int k = 0;
             string n = "";
             string u = "";
@@ -69,9 +70,13 @@ namespace WebCresij
             }
             if (k > 0)
             {
+                UserActivities.UserLogs.LoggedinUser(u);
                 HttpContext.Current.Session["UserName"] = n;
                 HttpContext.Current.Session["role"] = k;
                 HttpContext.Current.Session["UserId"] = u;
+                HttpContext.Current.Session["LocToDisplay"] = "";
+                UserActivities.UserLogs.Task1(u,n,1); /// Saving login Task
+                //bool sessionAdd =  AddSession(u);
                 Response.Redirect("~/home.aspx");
             }
             else if (k == -9)
@@ -83,6 +88,40 @@ namespace WebCresij
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg", "alert('Wrong ID or Password!! Please try again!');", true);
             }                       
         }
-        
+
+        protected bool AddSession(string user_id)
+        {
+            List<string> d = Application["UsersLoggedIn"] as List<string>;
+            if (d != null)
+            {
+                lock (d)
+                {
+                    if (d.Contains(user_id))
+                    {
+                        // User is already logged in!!!
+                        string userLoggedIn = Session["UserId"] == null ? string.Empty : (string)Session["UserId"];
+                        if (userLoggedIn == user_id)
+                        {
+                            Session["UserId"] = user_id;
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        string userLoggedIn = Session["UserId"] == null ? string.Empty : (string)Session["UserId"];
+
+                        if (userLoggedIn != user_id)
+                        {
+                            d.Add(user_id);
+                        }
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

@@ -11,14 +11,15 @@ display:none;
     cursor: pointer;
 }
 
-/*.fancy-green .ajax__tab_hover .ajax__tab_outer, .fancy-green .ajax__tab_active .ajax__tab_outer {
+.fancy-green .ajax__tab_hover .ajax__tab_outer, .fancy-green .ajax__tab_active .ajax__tab_outer {
+   
 }
 
 .fancy-green .ajax__tab_hover .ajax__tab_inner, .fancy-green .ajax__tab_active .ajax__tab_inner {
-}*/
+}
 
 .fancy .ajax__tab_header {
-    font-size: 20px;
+    font-size: 11px!important;
     font-weight: bold;
     color: #000;
     font-family: 'Ruda', sans-serif;

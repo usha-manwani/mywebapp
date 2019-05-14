@@ -11,7 +11,7 @@
     <link href="lib/advanced-datatable/css/demo_page.css" rel="stylesheet" />
   <link href="lib/advanced-datatable/css/demo_table.css" rel="stylesheet" />
   <link rel="stylesheet" href="lib/advanced-datatable/css/DT_bootstrap.css" />
-    <script src="Scripts/editCard.js?v=3"></script>
+    <script src="Scripts/editCard.js?v=4"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
     <div>
@@ -43,9 +43,9 @@
     DataKeyNames="CardID" 
       BorderStyle="None" Width="100%" 
     PagerSettings-Mode="Numeric" >
-     <HeaderStyle CssClass="hidden-phone"  Height="60px" BackColor="#4ecdc4" />
-        <rowstyle CssClass=" center" Height="60px" BackColor="White"  />
-        <alternatingrowstyle CssClass="center" Height="60px" BackColor="WhiteSmoke" />
+     <HeaderStyle CssClass="hidden-phone" ForeColor="WhiteSmoke" />
+                                <RowStyle CssClass=" center" BackColor="White" />
+                                <AlternatingRowStyle CssClass=" center" BackColor="WhiteSmoke" />
     <Columns>
        <asp:BoundField HeaderText="<%$Resources:Resource, MemberID %>" 
            SortExpression="memberID" ItemStyle-Width="10%" DataField="memberID" ControlStyle-Width="100%"  />     
@@ -112,7 +112,7 @@
                      <asp:TreeView  ShowCheckBoxes="All" ID="TreeView1" NodeStyle-NodeSpacing="1"
                          runat="server"></asp:TreeView>
                                    <%-- <button onclick="GetSelected()">select</button>--%>
-                     <asp:Button Text="<%$Resources:Resource, GetSelected %>" runat="server" ID="btnToSelect"  OnClick="addAccess_Click"/>
+                     <asp:Button Text="<%$Resources:Resource, GetSelected %>" runat="server" ID="btnToSelect"  OnClick="addAccess_Click" ClientIDMode="Static"/>
                      </ContentTemplate>
                      </asp:UpdatePanel>
                      <%--<input type="button" id=" btnselect" title="select" value="select" />--%>

@@ -75,6 +75,7 @@
                         }
                     }]
                 };
+                
                 myChart.data.datasets[0].data = temp;
                 myChart.data.labels = timenow;
                 myChart.update(0);
@@ -95,6 +96,7 @@
                     else
                         mini = Math.ceil(arraydata[2]);
                     myChart2.options.scales = {
+                       
                         xAxes: [{
                             display: true,
                             gridLines: {
@@ -130,6 +132,7 @@
                 }
 
                 //2nd Chart
+               
                 myChart2.data.datasets[0].data = humidity;
                 myChart2.data.datasets[1].data = hum2;
                 myChart2.data.datasets[2].data = hum10;
@@ -172,6 +175,7 @@
                 ]
             },
             options: {
+                maintainAspectRatio: false,
                 responsive: true,
                 tooltips: {
                     mode: 'index',
@@ -269,6 +273,7 @@
                 ]
             },
             options: {
+                maintainAspectRatio: false,
                 responsive: true,
                 tooltips: {
                     mode: 'index',
@@ -318,7 +323,7 @@
         });        
 
         var ctx = document.getElementById("UsedBarChart");
-        ctx.height = 120;
+        //ctx.height = 130;
         myChart4 = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -346,7 +351,12 @@
                 }]
             },
             options: {
+                maintainAspectRatio: false,
                 zeroLineColor: 'white',
+                legend: {
+                    display: true,
+                    position: 'bottom',
+                },
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -363,6 +373,10 @@
                         gridLines: {
                             zeroLineColor: '#fff',
                             display: false,
+                        },
+                        ticks: {
+                            fontSize: 12,
+                            fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
                         }
                     }],
                     
@@ -372,8 +386,9 @@
         });
 
         var ctx = document.getElementById('c1');
-        ctx.height = 70;
-        var chart5 = new Chart(ctx, {
+       // ctx.height = 130;
+        
+        chart5 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
 
@@ -391,6 +406,7 @@
 
             // Configuration options go here
             options: {
+                maintainAspectRatio: false,
                 cutoutPercentage: 80,
                 title: {
                     display: false,
@@ -408,8 +424,9 @@
         });
 
         var ctx = document.getElementById('c2');
-        ctx.height = 70;
-        var chart6 = new Chart(ctx, {
+       // ctx.height = 130;
+        
+        chart6 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
 
@@ -427,6 +444,7 @@
 
             // Configuration options go here
             options: {
+                maintainAspectRatio: false,
                 cutoutPercentage: 80,
                 title: {
                     display: false,
@@ -444,8 +462,9 @@
         });
 
         var ctx = document.getElementById('c3');
-        ctx.height = 70;
-        var chart7 = new Chart(ctx, {
+       // ctx.height = 130;
+       
+        chart7 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
 
@@ -463,6 +482,7 @@
 
             // Configuration options go here
             options: {
+                maintainAspectRatio: false,
                 cutoutPercentage: 80,
                 title: {
                     display: false,
@@ -479,8 +499,9 @@
             }
         });
         var ctx = document.getElementById('c4');
-        ctx.height = 70;
-        var chart8 = new Chart(ctx, {
+        //ctx.height = 130;
+        
+        chart8 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
 
@@ -498,6 +519,7 @@
 
             // Configuration options go here
             options: {
+                maintainAspectRatio: false,
                 cutoutPercentage: 80,
                 title: {
                     display: false,
@@ -515,8 +537,9 @@
         });
 
         var ctx = document.getElementById('c5');
-        ctx.height = 70;
-        var chart9 = new Chart(ctx, {
+       // ctx.height = 130;
+        
+        chart9 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
 
@@ -534,6 +557,7 @@
 
             // Configuration options go here
             options: {
+                maintainAspectRatio: false,
                 cutoutPercentage: 80,
                 title: {
                     display: false,
@@ -550,8 +574,9 @@
             }
         });
         var ctx = document.getElementById('c6');
-        ctx.height = 70;
-        var chart10 = new Chart(ctx, {
+        //ctx.height = 130;
+        
+        chart10 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
 
@@ -569,6 +594,7 @@
 
             // Configuration options go here
             options: {
+                maintainAspectRatio: false,
                 cutoutPercentage: 80,
                 title: {
                     display: false,
@@ -588,7 +614,7 @@
         });
       
         var ctx = document.getElementById("brightdonut");
-        
+        //ctx.height = 120;
         myChart12 = new Chart(ctx, {
             type: 'doughnut',
             data: {
@@ -603,6 +629,7 @@
                 ]
             },
             options: {
+                maintainAspectRatio: false,
                 cutoutPercentage: 65,
                 title: {
                     display: false,
@@ -613,6 +640,7 @@
                 },
                 legend: {
                     display: true,
+                    position:'bottom',
                 },
                 toolTips: {
                     display: true,
@@ -620,6 +648,7 @@
             }
 
         });
+
         var ctx = document.getElementById("carbondonut");
         
         myChart13 = new Chart(ctx, {
@@ -636,6 +665,7 @@
                 ]
             },
             options: {
+                maintainAspectRatio: false,
                 responsive: true,
                 tooltips: {
                     mode: 'index',
@@ -766,7 +796,7 @@ var configSpeed = {
             "scaleColor": "rgb(255, 255, 255)",
             "scaleBackgroundColor": "rgb(252,114,131)",
             "scaleTextRadius": 70,
-            "scaleTextSize": 5,
+            "scaleTextSize": 9,
             "scaleTextColor": "rgba(255, 255, 255, 1)",
             "scaleOuterRadius": 99,
             "scaleInnerRadius": 93,
@@ -792,7 +822,8 @@ var configSpeed = {
             "display": true,
             "text": "总能耗",
             "position": "bottom",
-             "fontColor":"white",
+            "fontColor": "white",
+            "fontWeight": "normal",
         },
         "animation": {
             "animateRotate": true,
@@ -830,7 +861,7 @@ var configDirection = {
             "scaleColor": "rgb(0, 0, 0)",
             "scaleBackgroundColor": "rgb(111,238,147)",
             "scaleTextRadius": 70,
-            "scaleTextSize": 5,
+            "scaleTextSize": 9,
             "scaleTextColor": "rgba(255, 255, 255, 1)",
             "scaleOuterRadius": 99,
             "scaleInnerRadius": 93,
@@ -937,6 +968,7 @@ var Carbon = {
 window.onload = function () {
     var ctx = document.getElementById('Speedometer').getContext('2d');
     
+   
     window.speed = new Chart(ctx, configSpeed);
     var ctx = document.getElementById('Speedometer1').getContext('2d');
     
@@ -964,12 +996,44 @@ function func() {
     
 };
 setInterval(func, 30 * 1000);
-//document.getElementById('randomizeData').addEventListener('click', function () {
-//    configSpeed.data.current = Math.round(Math.random() * 240);
-//    window.speed.update();
-//    configDirection.data.current = Math.round(Math.random() * 180);
-//    window.direction.update();
-//});
+$(window).on('load', setWidth);
+$(window).on('resize', setWidth);
 
+function setWidth() {
+    var width = $(window).width();
+    console.log("homepage width " + width);
+    if (width > 1180 && width < 1500) {
+        $('.fullWidth1').removeClass('col-xl-5').addClass('col-xl-6');
+        $('.fullWidth2').removeClass('col-xl-4').addClass('col-xl-6');
+        $('.fullWidth3').removeClass('col-xl-10').addClass('col-xl-12');
+        
+    }
+    else {
+        $('.fullWidth2').removeClass('col-xl-6').addClass('col-xl-4');
+        $('.fullWidth1').removeClass('col-xl-6').addClass('col-xl-5');
+        $('.fullWidth3').removeClass('col-xl-12').addClass('col-xl-10');
+        
+    }
+    //if (width < 990) {
+    //    $('#Speedometer').Height = "130";
+    //    $('#Speedometer').Width = "130";
+    //    $('#Speedometer1').Height = "130";
+    //    $('#Speedometer1').Width = "130";
+        
 
+    //}
+    
+    //else if (width > 1279 && width <= 768) {
+    //    $('.fullWidth').removeClass('col-md-6').addClass('col-md-12');
+    //    $('.fullWidth').removeClass('col-md-4').addClass('col-md-12');
 
+    //}
+    //else if (width > 1600) {
+    //    $('.fullWidth').removeClass('col-lg-12').addClass('col-lg-5');
+    //    $('.fullWidth').removeClass('col-lg-11').addClass('col-lg-4');
+    //}
+    //else if (width < 768) {
+
+    //}
+    console.log("homepage width " + width);
+}

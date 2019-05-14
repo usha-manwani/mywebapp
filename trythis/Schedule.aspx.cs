@@ -314,6 +314,8 @@ namespace WebCresij
                 string ip = PopulateTree.getIP(ClassID);
                 PopulateTree populateTree = new PopulateTree();
                 populateTree.DelOldSchedule(ClassID);
+                UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                HttpContext.Current.Session["UserName"].ToString(), 11);
                 try
                 {
                     string timer = "";
@@ -330,12 +332,14 @@ namespace WebCresij
                         int m2 = Convert.ToInt32(time.Substring(9, 2));
                         if (h1 > h2 || h1 > 23 || h2 > 23 || m1 > 59 || m2 > 59)
                         {
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "time2", "timeset();", true);
+                            string text = Resources.Resource.AlertTime4;
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "time2", "timeset('" + text + "');", true);
                             continue;
                         }
-                        if (btn.Text == "Save" && h1 == h2 && m1 == m2)
+                        if ((btn.Text == "Save" || btn.Text == "保存") && h1 == h2 && m1 == m2)
                         {
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "time3", "timesetSame();", true);
+                            string text = Resources.Resource.AlertTime;
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "time3", "timesetSame('" + text + "');", true);
                             continue;
                         }
                         string mon = (r.FindControl("txtMon") as TextBox).Text;
@@ -376,26 +380,29 @@ namespace WebCresij
                             sun = "";
                         }
                         int success = populateTree.setSchedule(ip, ClassID, starttime, stoptime, timer, mon, tue, wed, thu, fri, sat, sun);
-                        if (success >= 0 && btn.Text == "Save")
+                        if (success >= 0 && (btn.Text == "Save" || btn.Text == "保存"))
                         {
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "Success", "AlertSuccess();", true);
+                            string text = Resources.Resource.AlertTime3;
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "Success", "AlertSuccess('"+text+"');", true);
                         }
-                        else if (success < 0 && btn.Text == "Save")
+                        else if (success < 0 && (btn.Text == "Save" || btn.Text == "保存"))
                         {
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "Fail", "AlertFail();", true);
+                            string text = Resources.Resource.AlertError1;
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "Fail", "AlertFail('" + text + "');", true);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "time", "timewrong();", true);
+                    string text = Resources.Resource.AlertTime2;
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "time", "timewrong('" + text + "');", true);
                 }
                 finally
                 {
                     BindGriddata();
                 }
             }
-            if (btn.Text != "Save")
+            if (btn.Text != "Save" || btn.Text != "保存")
             {
                 addnewrow();
             }
@@ -461,13 +468,15 @@ namespace WebCresij
                 excelgrd.DataBind();
                 if (excelgrd.Rows.Count == 0)
                 {
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "importempty", "importEmptyFile();", true);
+                    string text = Resources.Resource.AlertTime5;
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "importempty", "importEmptyFile('" + text + "');", true);
                 }
 
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "fileformat", "fileFormat();", true);
+                string text= Resources.Resource.AlertTime6;
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "fileformat", "fileFormat('" + text + "');", true);
                 BindGriddata();
             }
             finally
@@ -509,4 +518,6 @@ namespace WebCresij
             }
         }
     }
+
+    
 }

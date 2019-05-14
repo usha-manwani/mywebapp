@@ -114,6 +114,8 @@ namespace WebCresij
                         _dt.Rows[counter][4] = comments[i];
                         _dt.Rows[counter][5] = "Unregistered";
                         _dt.Rows[counter][6] = "--";
+                        UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                HttpContext.Current.Session["UserName"].ToString(), 9);
                     }
                     else
                     {

@@ -38,9 +38,9 @@
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
             <asp:GridView ID="GridView1" runat="server"  Width="80%" GridLines="Horizontal" OnRowDeleting="GridView1_RowDeleting" 
-                BorderStyle="None" AutoGenerateColumns="false" CellPadding="20" CellSpacing="20" HeaderStyle-BackColor="#009688" EmptyDataText = "No Registered Users">
-                <RowStyle Height="50" />
-                <HeaderStyle ForeColor="Black" />
+                BorderStyle="None" AutoGenerateColumns="false" CellPadding="20" CellSpacing="20"  EmptyDataText = "No Registered Users">
+                <RowStyle />
+                <HeaderStyle ForeColor="white" />
                 <Columns >
                     
                     <asp:BoundField DataField="User_Id" HeaderText="<%$Resources:Resource, userID %>" 
@@ -48,9 +48,11 @@
                     <asp:BoundField DataField="User_Name" HeaderText="<%$Resources:Resource, Name %>" 
                         HeaderStyle-HorizontalAlign="Left" />
                    
-                     <asp:TemplateField >
+                     <asp:TemplateField HeaderText="Option">
+                         
                             <ItemTemplate>
-                                 <asp:linkButton ID="btnEdit"  runat="server" Text="<%$Resources:Resource, Delete %>"
+                               
+                                 <asp:linkButton ID="btnEdit"  runat="server"  Text="<%$Resources:Resource, Delete %>"
                                      CommandName="Delete"  CssClass="asplink" />
                             </ItemTemplate>
                      </asp:TemplateField>

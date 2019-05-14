@@ -14,18 +14,11 @@ namespace WebCresij
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                
-                //GridView1.DataSource = ud.getUserDetailsPending();
-                //GridView1.DataBind();
+            {                                
                 gv2.DataSource = ud.getUserDetailsPending();
                 gv2.DataBind();
             }
-        }
-        //protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
-        //{
-        //     userIdhid.Value = GridView1.Rows[e.NewEditIndex].Cells[0].Text;             
-        //}
+        }        
 
         protected void Button2_Click(object sender, EventArgs e)
         {
@@ -42,6 +35,8 @@ namespace WebCresij
                     }
                 }
                 ud.SaveUser(userIdhid.Value, i);
+                UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                HttpContext.Current.Session["UserName"].ToString(), 4);
             }
         }
 

@@ -22,16 +22,21 @@ namespace WebCresij
             
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-          
-            //SqlDependency.Start(constr);
-            //WebCresij.connection.ReceiveData();
+            Application["UsersLoggedIn"] = new List<string>();
+
         }
         protected void Application_End()
         {
+
+        }
+        protected void Session_Start(object sender, EventArgs e)
+        {
             
-           
-            //Stop SQL dependency
-           // SqlDependency.Stop(constr);
+        }
+        protected void Session_OnEnd(object sender, EventArgs e)
+        {
+            
+
         }
         //public void Application_AuthenticateRequest(Object src, EventArgs e)
         //{
@@ -48,7 +53,7 @@ namespace WebCresij
         //        }
         //    }
         //}
-        
+
 
     }
 }

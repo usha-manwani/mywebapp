@@ -12,23 +12,32 @@
             border-radius: 15px;
         }*/
         .imgsize {
-            height: 60px;
-            width: 60px;
-        }
 
+            width: 100%;
+        }
+        .imgsize1
+        {
+            width: 40%;
+
+        }
+        .sizePlugin{
+            width:80%;
+            height:60%;
+            margin-bottom:-40px;
+        }
         .imgclick:hover {
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-            border-radius: 15px;
+            -webkit-border-radius: 20%;
+            -moz-border-radius: 20%;
+            border-radius: 20%;
             -webkit-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
             -moz-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
             box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
         }
 
         .imgclick:active {
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-            border-radius: 15px;
+            -webkit-border-radius: 20%;
+            -moz-border-radius: 20%;
+            border-radius: 20%;
             -webkit-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
             -moz-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
             box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
@@ -100,9 +109,9 @@
             padding-left: 5%;
         }
 
-        body {
-            overflow: hidden 
-        }
+        /*body {
+            overflow: hidden
+        }*/
 
         input[type=range] {
             -webkit-appearance: none;
@@ -229,14 +238,14 @@
 
         #doc{
             width:700px
-        }        
+        }
         #dev{
             width:650px
-        }        
+        }
         #queryMenu{
             width:250px
         }
-        #allmenu{            
+        #allmenu{
             width:600px
         }
 
@@ -260,8 +269,20 @@
                 overflow:scroll;
             }
         }
-        
-    </style>   
+        .marginBottom{
+            margin-bottom:5px
+        }
+        .marginTop{
+            margin:-10px
+        }
+        iframe.width-changed {
+    width: 100%;
+    display: block;
+    border: 0;
+    height: 0;
+    margin: 0;
+}
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
@@ -269,26 +290,24 @@
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
     <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
-    <script src="Scripts/HomePageJS.js?v=11"></script>
+    <script src="Scripts/HomePageJS.js?v=14"></script>
 
-    <div class="row" style="padding-left: 100px; max-width: 100%; min-width: 70%;">
-        <div class="col-lg-8 col-md-8 col-sm-12">
-            <div class="row">                
-                <div class="row shadowRow" style="width: 100%; height: 460px">
+    <div class="row " style="padding-left: 20px; max-width: 100%; min-width: 70%;">
+        <div class="col-lg-8 col-md-12 col-sm-12" id="pluginsrow">
+            <div class="row">
+                <div class="row shadowRow" style="width: 100%;">
                     <div class="col-lg-9 col-md-9 col-sm-12" >
                         <div style="-moz-box-shadow: inset 0 0 15px #000000; -webkit-box-shadow: inset 0 0 15px #000000;
-                            box-shadow: inset 0 0 15px #000000; width:660px; height:380px; overflow:hidden ; " >
+                            box-shadow: inset 0 0 15px #000000;  overflow:hidden ; display:inline-block" id="divplugin1">
                             <%--<iframe src="src/Chimera.htm" height="390" width="640" frameborder="0" wmode="opaque"></iframe>--%>
-                            <object id="plugin_inst_1" type="application/x-chimera-plugin" width="640" height="360" >
+                            <object id="plugin_inst_1" type="application/x-chimera-plugin"  height="360" width="640">
                                 <param name="autoplay" value="true" />
-                                <param name="src" id="src1" value="rtsp://admin:admin123@192.168.1.94:554/" />
+                                <param name="src" id="src1" value="" />
                                 <param name="network-caching" value="300" />
                                 <param name="allow-fullscreen" value="true" />
-                                
+                                <param name="mute" value="true" />
                                <%-- <param name="audio" value="100" />--%>
                             </object>
-                           
-                           
                            <div style="display:none">
     <textarea id="qml_edit" cols="80" rows="20">
 import QtQuick 2.1
@@ -303,7 +322,7 @@ Rectangle {
     }
     MouseArea {
         anchors.fill: videoOutput;
-        onClicked: vlcPlayer.toggleFullscreen();                
+        onClicked: vlcPlayer.toggleFullscreen();
     }
     Text {
         id: text;
@@ -324,131 +343,140 @@ Rectangle {
     <span id="qml_error" style="color: red;" />
 </div>
                         </div>
-                        
+                        <div>
                         <span class="btn btn-outline-light font-weight-bolder" onclick="goToFull();" style="margin-top:5px" >[&nbsp;&nbsp;]</span>
                             &nbsp;&nbsp;
                             <span class="btn  font-weight-bolder" id="imgspan" onclick="muteVideo();" style="margin-top:5px">
                                 <img id="muteimg" src="Images/中控首页按钮/首页按钮-默认状态/总音量.png" height="40" width="40" />
-                                </span>
+                                </span></div>
                     </div>
-                    <div class="col-lg-3 col-md-3 col-sm-12 " style="color: white; ">
+                    <div class="col-lg-3 col-md-12 col-sm-12 " style="color: white; ">
                         <div class="row" >
+                            <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
                             <object id="plugin_inst_2"
-                                type="application/x-chimera-plugin" height="80" width="160" >
+                                type="application/x-chimera-plugin"  class="sizePlugin">
                                 <param name="autoplay" value="true" />
-                                <param name="mrl" id="src2" value="rtsp://admin:admin123@192.168.1.94:554/cam/realmonitor?channel=1&subtype=1" />
+                                <param name="mrl" id="src2" value="" />
                                 <param name="network-caching" value="300" />
                                 <param name="mute" value="true" />
                             </object>
-                        </div>
-                        <div class="row " >
+                                </div>
+                        
+                            <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
                             <object id="plugin_inst_3"
-                                type="application/x-chimera-plugin" height="80" width="160" >
+                                type="application/x-chimera-plugin" class="sizePlugin">
                                 <param name="autoplay" value="true" />
-                                <param name="mrl" id="src3" value="rtsp://admin:admin123@192.168.1.91:554/cam/realmonitor?channel=1&subtype=1" />
+                                <param name="mrl" id="src3" value="" />
                                 <param name="network-caching" value="300" />
                                 <param name="mute" value="true" />
                             </object>
-                        </div>
-                        <div class="row" >
+                                </div>
+                        
+                            <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
                             <object id="plugin_inst_4"
-                                type="application/x-chimera-plugin" height="80" width="160" >
+                                type="application/x-chimera-plugin" class="sizePlugin">
                                 <param name="autoplay" value="true" />
-                                <param name="mrl" id="src4" value="rtsp://admin:admin123@192.168.1.94:554/cam/realmonitor?channel=1&subtype=1" />
+                                <param name="mrl" id="src4" value="" />
                                 <param name="network-caching" value="300" />
                                 <param name="mute" value="true" />
                             </object>
-                        </div>
-                        <div class="row" >
+                                </div>
+                        
+                            <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
                             <object id="plugin_inst_5"
-                                type="application/x-chimera-plugin" height="80" width="160" >
+                                type="application/x-chimera-plugin" class="sizePlugin">
                                 <param name="autoplay" value="true" />
-                                <param name="mrl" id="src5" value="rtsp://admin:admin123@192.168.1.91:554/cam/realmonitor?channel=1&subtype=1" />
+                                <param name="mrl" id="src5" value="" />
                                 <param name="network-caching" value="300" />
                                 <param name="mute" value="true" />
                             </object>
-                        </div>
+                                </div>
+                        
                     </div>
+                        </div>
                 </div>
-                  
+
             </div>
-            <div class="row" style="margin-bottom: -150px; margin-left: -50px">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <fieldset class="fieldSetControl">
+            <div class="row" style=" margin-left: -50px;">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+
+                    <div class="row marginBottom" >
+                        <fieldset class="fieldSetControl">
                         <legend align="center" style="width: auto; font-size: 16px;">&nbsp;系统&nbsp;</legend>
                     </fieldset>
-                    <div class="row">
-                        
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <span>
                                 <img src="Images/greyed/sysgrey.png" id="syspower"
                                     class="imgclick imgsize" /></span>
                         </div>
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <img src="Images/greyed/pcgrey.png" id="ppower"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
 
                             <img src="Images/greyed/lock1.png" id="lock"
                                 class="imgclick imgsize" />
                         </div>
-                        
+
                     </div>
-                    <fieldset class="fieldSetControl">
+
+                    <div class="row">
+                        <fieldset class="fieldSetControl">
                         <legend align="center" style="width: auto; font-size: 16px;">&nbsp;屏幕&nbsp;</legend>
                     </fieldset>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <img src="Images/greyed/scup.png" id="Scup"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <img src="Images/greyed/scdown.png" id="Scdown"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <img src="Images/greyed/scstop.png" id="scStop"
                                 class="imgclick imgsize" />
                         </div>
                     </div>
 
                 </div>
-                
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <fieldset class="fieldSetControl">
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+
+                    <div class="row marginBottom">
+                        <fieldset class="fieldSetControl">
                         <legend align="center" style="width: auto; font-size: 16px;">&nbsp;信号切换&nbsp;</legend>
                     </fieldset>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <img src="Images/greyed/desktop.png"
                                 id="desktop1"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <img src="Images/greyed/laptop.png" id="laptop1"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-1 col-sm-1">
-                            
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+
                             <img src="Images/greyed/more.png" id="Moremedia"
                                 class="imgclick imgsize" />
                         </div>
                     </div>
-                   
-                    <fieldset class="fieldSetControl">
+
+
+                    <div class="row">
+                        <fieldset class="fieldSetControl">
                         <legend align="center" style="width: auto; font-size: 16px;">&nbsp;窗帘&nbsp;</legend>
                     </fieldset>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <img src="Images/greyed/copengrey.png" id="CurtainOpen"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <img src="Images/greyed/cclosegrey.png" id="CurtainClose"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-1 col-sm-1">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
                             <img src="Images/greyed/cstopgrey.png" id="CurtainStop"
                                 class="imgclick imgsize" />
                         </div>
@@ -456,42 +484,45 @@ Rectangle {
 
                 </div>
 
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <fieldset class="fieldSetControl">
+                <div class="col-lg-2 col-md-6 col-sm-12">
+
+                    <div class="row marginBottom" style="text-align: center">
+                        <fieldset class="fieldSetControl">
                         <legend align="center" style="width: auto; font-size: 16px;">&nbsp;投影机&nbsp;</legend>
                     </fieldset>
-                    <div class="row" style="text-align: center">
-                        <div class="col-lg-6  col-md-1 col-sm-1">
+                        <div class="col-lg-6  col-md-4 col-sm-4">
                             <img src="Images/greyed/proj1.png" id="projgreen"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-6 col-md-1 col-sm-1">
+                        <div class="col-lg-6 col-md-4 col-sm-4">
                             <img src="Images/greyed/proj2.png" id="projred"
                                 class="imgclick  imgsize" />
                         </div>
                     </div>
-                    <fieldset class="fieldSetControl" >
+
+                    <div class="row marginBottom" style="text-align: center">
+                        <fieldset class="fieldSetControl" >
                         <legend align="center" style="width: auto; font-size: 16px;">&nbsp;<%=Resources.Resource.Light%>&nbsp;</legend>
                     </fieldset>
-                    <div class="row" style="text-align: center">
-                        <div class="col-lg-6  col-md-1 col-sm-1">
+                        <div class="col-lg-6  col-md-4 col-sm-4">
                             <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
                                 id="lighton" class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-6 col-md-1 col-sm-1">
+                        <div class="col-lg-6 col-md-4 col-sm-4">
                             <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
                                 id="lightoff" class="imgclick imgsize" />
                         </div>
 
                     </div>
-                        
-                    <input id="InputIP" type="hidden" value='<%= Session["DeviceIP"] %>' />
+
+                    <input id="InputIP" type="hidden" value='<%= Session["DeviceIP"] %>'  />
+                    <asp:HiddenField ID="iptocam" Value="" runat="server"/>
                 </div>
-                <div class="col-lg-3">
-                    <fieldset class="fieldSetControl"  id="volfieldset">
-                        <legend align="center" style="width: auto; font-size: 16px;">&nbsp;音量&nbsp;</legend>
-                    
-                    <div class="row">
+
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="row marginBottom">
+                        <fieldset class="fieldSetControl"  id="volfieldset">
+                        <legend align="center" style="width: auto; font-size: 16px;">&nbsp;音量&nbsp;</legend></fieldset>
                         <table style="height: auto; width: 100%;">
                             <tr style="align-items: center; align-content: center;">
                                 <td style="text-align: center; background-color: #1e1e36; width: 5%">
@@ -520,7 +551,7 @@ Rectangle {
                             </tr>
                         </table>
                     </div>
-                       </fieldset> 
+
                     <div class="row" style="text-align: center">
                         <div class="col-lg-12" style="text-align: center;">
                             <span>
@@ -530,12 +561,12 @@ Rectangle {
                         </div>
 
                     </div>
-                        
+
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-2 col-md-3 col-sm-12" style="max-height: 90%;">
+        <div class="col-lg-2 col-md-6 col-sm-8" style="max-height: 90%; padding-top:30px" id="sidesrow">
             <div class="row " style="border: 1px solid white; margin-bottom: 10px; font-size: 14px;">
                 <p style="color: white">
                     <script> document.write(new Date().toDateString()); </script>
@@ -546,51 +577,53 @@ Rectangle {
                     <%=Resources.Resource.Status%>: &nbsp;<span id="devicestatus" style="font-weight: bold">Offline</span>
                 </p>
             </div>
-            <div class="row" style="border: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:110px">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_07.png" height="40" width="40" />
+            <div class="row marginTop" style="border: 1px dashed #aeb2b7; ">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+                <span style="text-align: left; width:50%">
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_07.png" class="imgsize1"/>
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;" id="tempvalue">21°C</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="tempvalue">21°C</span>
             </div>
-            <div class="row" style="border: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:110px">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_09.png" height="40" width="55" />
+            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+                <span style="text-align: left; width:50%">
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_09.png"  class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;" id="humidvalue">45%</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="humidvalue">45%</span>
             </div>
-            <div class="row" style="border: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:110px">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_17.png" height="40" width="40" />
+            <div class="row  marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+                <span style="text-align: left; width:50%">
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_17.png"  class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;" id="pmvalue">12µg/m3</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="pmvalue">12µg/m3</span>
             </div>
-            <div class="row" style="border: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:110px">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_19.png" height="40" width="60" />
+            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+                <span style="text-align: left; width:50%">
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_19.png"  class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;" id="co2">350ppm</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="co2">350ppm</span>
             </div>
-            <div class="row" style="border: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:110px">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_27.png" height="40" width="50" />
+            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+                <span style="text-align: left; width:50%">
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_27.png"  class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;" id="intensityvalue">1500nits</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="intensityvalue">1500nits</span>
             </div>
-            <div class="row" style="border: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:110px">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_29.png" height="40" width="60" />
+            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+                <span style="text-align: left; width:50%">
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_29.png"  class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;" id="methanalvalue">8.1mg/m3</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="methanalvalue">8.1mg/m3</span>
             </div>
-            <div class="row" style="border: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:110px">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_37.png" height="40" width="50" />
+            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+                <span style="text-align: left; width:50%">
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_37.png"  class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;" id="voltvalue">220V</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="voltvalue">220V</span>
             </div>
-            <div class="row" style="border: 1px dashed #aeb2b7; ">
-                <div style="width:40%;float:left;text-align: left; margin:auto;">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_39.png" height="50" width="70" />
+            <div class="row marginBottom marginTop" >
+                <div style="width:40%;float:left;text-align: left;margin:auto">
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_39.png"  class="imgsize1" />
                 </div>
                 <div style="width:60%">
                     <div style="border-bottom: 1px solid #aeb2b7;width:100%;margin-top:-20px">
@@ -609,11 +642,14 @@ Rectangle {
                     <span id="I4">0.05KW</span></span>
                 </div>
                 </div>
-               
+
+            </div>
+                    </div>
             </div>
         </div>
-        <div class="col-lg-2 col-md-1"></div>
+
     </div>
+
     <div id="RemoteControl" class="modal">
         <div class="modal-content">
             <header class="row" style="position: center;">
@@ -627,6 +663,96 @@ Rectangle {
     </div>
 
     <script>
+        $(window).on('load', onLoad);
+        $(window).on('resize', setWidth);
+
+        function mainchange() {
+
+            var mainContentWidth = document.getElementById("main-content").offsetWidth;
+            if (mainContentWidth > 950 && mainContentWidth < 1100) {
+                $('#pluginsrow').removeClass('col-lg-8');
+                $('#pluginsrow').addClass('col-lg-10');
+
+                console.log("inside maincontent width calculation");
+                document.getElementById('plugin_inst_1').width = 480;
+                document.getElementById('plugin_inst_1').height = 270;
+            }
+
+        }
+
+        function setWidth() {
+
+            var width = $(window).width();
+            var heightwindow = $(window).height();
+            console.log("window resixe");
+            console.log("screen height " + heightwindow);
+            if (heightwindow < 922) {
+                console.log("inside height column");
+                 $("body").css("overflow", "Scroll");
+            }
+            else {
+                $("body").css("overflow", "hidden");
+            }
+            var mainContentWidth = document.getElementById("main-content").offsetWidth;
+            console.log("window width for plugin " + width);
+            console.log("main content width " + mainContentWidth);
+
+
+            if (width > 900 && width < 1500) {
+                document.getElementById('plugin_inst_1').width = 480;
+                document.getElementById('plugin_inst_1').height = 270;
+                $('#sidesrow').removeClass('col-lg-2').addClass('col-lg-3');
+                if (width < 1300) {
+                    $('#pluginsrow').removeClass('col-lg-8');
+                    $('#pluginsrow').removeClass('col-lg-10');
+                    $('#pluginsrow').addClass('col-lg-12');
+
+                }
+                else {
+                    $('#pluginsrow').removeClass('col-lg-8');
+                    $('#pluginsrow').removeClass('col-lg-12');
+                    $('#pluginsrow').addClass('col-lg-10');
+                }
+
+                $("body").css("overflow", "Scroll");
+
+            }
+            else if (width > 1500 && width <= 1600) {
+                document.getElementById('plugin_inst_1').width = 640;
+                document.getElementById('plugin_inst_1').height = 360;
+                $('#pluginsrow').removeClass('col-lg-8');
+                $('#pluginsrow').removeClass('col-lg-12');
+                $('#pluginsrow').addClass('col-lg-10');
+                $("body").css("overflow", "Scroll");
+                $('#sidesrow').removeClass('col-lg-3').addClass('col-lg-2');
+            }
+            else if (width > 1600) {
+                document.getElementById('plugin_inst_1').width = 640;
+                document.getElementById('plugin_inst_1').height = 360;
+                $('#pluginsrow').removeClass('col-lg-10');
+                $('#pluginsrow').addClass('col-lg-8');
+                $('#pluginsrow').removeClass('col-lg-12');
+                $("body").css("overflow", "hidden");
+                $('#sidesrow').removeClass('col-lg-3').addClass('col-lg-2');
+            }
+            else if (width > 500 && width < 900) {
+                document.getElementById('plugin_inst_1').width = 320;
+                document.getElementById('plugin_inst_1').height = 180;
+                $('#pluginsrow').removeClass('col-lg-8');
+                $('#pluginsrow').removeClass('col-lg-10');
+                $('#pluginsrow').addClass('col-lg-12');
+                $("body").css("overflow", "Scroll");
+
+            }
+            else if (width < 500) {
+                document.getElementById('plugin_inst_1').width = 160;
+                document.getElementById('plugin_inst_1').height = 90;
+                 $("body").css("overflow", "Scroll");
+            }
+        }
+
+
+
         var modal = document.getElementById("RemoteControl");
         function DisplayModal() {
             if (document.getElementById("devicestatus").innerHTML == "Offline") {
@@ -642,8 +768,8 @@ Rectangle {
                 modal.style.display = "none";
             }
         };
-        
-        window.onload = onLoad;
+
+        //window.onload = onLoad;
         function addEvent(obj, name, func) {
             if (obj.attachEvent) {
                 obj.attachEvent("on" + name, func);
@@ -652,7 +778,8 @@ Rectangle {
             }
             console.log(name);
         }
-        function onLoad(){
+        function onLoad() {
+            setWidth();
             addEvent(document.getElementById('plugin_inst_1'), 'MediaPlayerPaused', onPause1);
             addEvent(document.getElementById('plugin_inst_2'), 'MediaPlayerPaused', onPause2);
             addEvent(document.getElementById('plugin_inst_3'), 'MediaPlayerPaused', onPause3);
@@ -688,7 +815,7 @@ Rectangle {
            var video1 = document.getElementById('src1').value;
             var sub = video1+video2.substring(39);
             player2.play(video2);
-            player1.play(video2.substring(0, video2.length-35)); 
+            player1.play(video2.substring(0, video2.length-35));
             document.getElementById('src1').value = video2.substring(0, 39);
             console.log("player2 " + sub);
             console.log("player1" + video2.substring(0, 39));
@@ -712,23 +839,23 @@ Rectangle {
             var player2 = document.getElementById('plugin_inst_5');
             var video2 = document.getElementById('src5').value;
             player2.play(video2);
-            player1.play(video2.substring(0, video2.length-35)); 
+            player1.play(video2.substring(0, video2.length-35));
             document.getElementById('src1').value = video2.substring(0, 39);
             console.log("player1" + video2.substring(0, video2.length-35));
         }
 
-        function muteVideo() {           
-            document.getElementById('plugin_inst_1').toggleMute();            
+        function muteVideo() {
+            document.getElementById('plugin_inst_1').toggleMute();
             var imgmute = document.getElementById('muteimg');
             var src1 = $(imgmute).attr('src');
             if (src1 == "Images/中控首页按钮/首页按钮-默认状态/总音量静音.png") {
-                $(imgmute).attr('src', "Images/中控首页按钮/首页按钮-默认状态/总音量.png");                
+                $(imgmute).attr('src', "Images/中控首页按钮/首页按钮-默认状态/总音量.png");
             }
             else {
-                $(imgmute).attr('src', "Images/中控首页按钮/首页按钮-默认状态/总音量静音.png");                
-            }                            
+                $(imgmute).attr('src', "Images/中控首页按钮/首页按钮-默认状态/总音量静音.png");
+            }
         }
-        
+
         function goToFull() {
             var src = document.getElementById('src1').value;
             sessionStorage.setItem('videosrc', src);
@@ -736,6 +863,42 @@ Rectangle {
             win.focus();
             //window.location = "src/chimera.htm" ;
         }
+
+
+
+        $.event.special.widthChanged = {
+        remove: function() {
+            $(this).children('iframe.width-changed').remove();
+        },
+        add: function () {
+            var elm = $(this);
+            var iframe = elm.children('iframe.width-changed');
+            if (!iframe.length) {
+                iframe = $('<iframe/>').addClass('width-changed').prependTo(this);
+            }
+            var oldWidth = elm.width();
+            function elmResized() {
+                var width = elm.width();
+                if (oldWidth != width) {
+                    elm.trigger('widthChanged', [width, oldWidth]);
+                    oldWidth = width;
+                }
+            }
+
+            var timer = 0;
+            var ielm = iframe[0];
+            (ielm.contentWindow || ielm).onresize = function() {
+                clearTimeout(timer);
+                timer = setTimeout(elmResized, 20);
+            };
+        }
+    }
+
+
+        $('#pluginsrow').on('widthChanged', function () {
+            mainchange();
+        });
+
     </script>
-  
+
 </asp:Content>

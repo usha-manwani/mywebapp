@@ -229,6 +229,15 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.Button BtnCamSave;
         
         /// <summary>
+        /// hiddencamName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label hiddencamName;
+        
+        /// <summary>
         /// camEditIP control.
         /// </summary>
         /// <remarks>

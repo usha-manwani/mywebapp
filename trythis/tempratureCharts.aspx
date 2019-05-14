@@ -9,36 +9,42 @@
     <%--<link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">--%>
     <link href="assets/css/weather-icons-wind.min.css" rel="stylesheet" />
     <link href="assets/css/weather-icons.min.css" rel="stylesheet" />
-    
+    <style>
+         .row{
+    margin-bottom:-40px;
+}
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
     
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <div  id="ddl" style="background-color: #1e1e36;height:150px;" >        
+
+    
+        <div class="row" id="ddl" style="background-color: #1e1e36; min-height: 100px" >        
       <asp:UpdatePanel runat="server">
                          <ContentTemplate>                            
-                 <div class="row" style="min-height:100px; width:70%" >
-                    <div class="col-lg-4 col-sm-12 ">
-                        <h6 ><span style="color:white"><%=Resources.Resource.TempratureChartHead%></span> </h6>
+                 <div class="row" style="min-height:100px;" >
+                    <div class="col-lg-6 col-sm-12 col-md-3  mbcustom" style="margin-top: -15px">
+                        <h5><span style="color: white;"><%=Resources.Resource.TempratureChartHead%></span> </h5>
                     </div>
-                     <div class=" col-lg-2 col-sm-6 float-left" >
-                        <asp:DropDownList Width="150px" AutoPostBack="true"
+                     <div class=" col-lg-2 col-md-3 col-sm-12 float-left  mbcustom">
+                        <asp:DropDownList Width="100px" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                         CssClass="btn btn-default border dropdown"  ID="ddlInstitute" 
                         data-toggle="dropdown"  runat="server" ForeColor="White" BackColor="#1E1E36">
                          <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList></div>
-                    <div class="col-lg-2 col-sm-6 float-left" >
-                        <asp:DropDownList Width="150px" ID="ddlGrade" AutoPostBack="true"
+                    <div class="col-lg-2 col-md-3 col-sm-12 float-none  mbcustom" >
+                        <asp:DropDownList Width="100px" ID="ddlGrade" AutoPostBack="true"
                             CssClass="btn btn-default border dropdown" data-toggle="dropdown"  
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" ForeColor="White" BackColor="#1E1E36">
                             <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>                        
                     </div>
-                    <div class="col-lg-2 col-sm-6 float-left">
-                        <asp:DropDownList  ID="ddlClass" Width="150px" AutoPostBack="true" 
+                  <div class="col-lg-2 col-md-3 col-sm-12 float-right  mbcustom" >
+                        <asp:DropDownList  ID="ddlClass" Width="100px" AutoPostBack="true" 
                               runat="server" CssClass="btn btn-default border dropdown" 
                             data-toggle="dropdown" OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" ForeColor="White" BackColor="#1E1E36">
                             <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
@@ -56,8 +62,9 @@
             <div class="animated fadeIn">
                   <!-- Widgets  -->
                 <div class="row" >
-                 <div class="col-sm-6  col-md-6 col-lg-3" title="Temperature" >
-                        <div class="card bg-flat-color-1" style="background-color:#cab9e9">
+                 <div class="col-sm-6  col-md-6 col-lg-6 col-xl-3" title="Temperature" >
+                 
+                        <div class="card bg-flat-color-1" style="background-color:#cab9e9; height: 120px!important; border: 1px solid #8863f0">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                    <h3> <span><%=Resources.Resource.Temperature%></span></h3>
@@ -73,8 +80,8 @@
                         </div>
                     </div>
                     <!--/.col-->
-                    <div class="col-sm-6  col-md-6 col-lg-3" title="Humidity" >
-                        <div class="card  bg-flat-color-6" style="background-color:#99e9d7">
+                    <div class="col-sm-6  col-md-6 col-lg-6 col-xl-3" title="Humidity" >
+                        <div class="card  bg-flat-color-6" style=" background-color:#99e9d7; height: 120px!important; border: 1px solid #8863f0">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left" >
                                     <h3><span><%=Resources.Resource.Humidity%></span></h3>
@@ -90,8 +97,8 @@
                         </div>
                     </div>
                     <!--/.col-->
-                    <div class="col-sm-6  col-md-6 col-lg-3" title="PM2.5(µg/m3)" >
-                        <div class="card  bg-flat-color-3" style="background-color:#f1c9c8">
+                    <div class="col-sm-6  col-md-6 col-lg-6 col-xl-3" title="PM2.5(µg/m3)" >
+                        <div class="card  bg-flat-color-3" style=" background-color:#f1c9c8;  height: 120px!important; border: 1px solid #8863f0">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3> PM2.5(µg/m3)</h3>
@@ -106,8 +113,8 @@
                         </div>
                     </div>
                     <!--/.col-->
-                    <div class="col-sm-6 col-md-6 col-lg-3" title="PM10(µg/m3)" >
-                        <div class="card  bg-flat-color-2" style="background-color:#c2e9c4">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3" title="PM10(µg/m3)" >
+                        <div class="card  bg-flat-color-2" style=" background-color:#c2e9c4;  height: 120px!important; border: 1px solid #8863f0">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
                                     <h3>PM10(µg/m3)</h3>

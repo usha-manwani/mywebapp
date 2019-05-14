@@ -4,11 +4,12 @@
     <asp:ContentPlaceHolder ID="masterchildHead" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-      <aside>
-      <div id="sidebar" class="nav-collapse" style="overflow-y:auto" >  
+         
+             <aside>
+      <div id="sidebar" class="nav-collapse" tabindex="5000" style="overflow-y:auto;margin-top:-20px; " >  
         <!-- sidebar menu start-->          
-        <ul class="sidebar-menu" id="nav-accordion" >  
-             <div style="height:150px; margin-left:-10px; width:300px; background-color:#1e1e36;align-items:center">
+        <ul class="sidebar-menu" id="nav-accordion" style="margin-left:-20px">  
+             <div style="height:150px; margin-left:-10px; width:250px; background-color:#1e1e36;align-items:center; ">
                  <h3 class="centered" style="padding-top:50px;color:whitesmoke" ><span><%=Resources.Resource.DeviceManagement%></span></h3>
              </div>
           <li class="mt" >
@@ -29,13 +30,14 @@
           </ul>             
         <!-- sidebar menu end-->     
           </div>
-    </aside>   
-     <section id="main-content" class="MainContent-Color">
+    </aside>          
+            <section id="main-content" class="MainContent-Color" >
       <section class="wrapper">
           <asp:ContentPlaceHolder ID="masterchildBody" runat="server"></asp:ContentPlaceHolder>
           </section>
-         </section>
+         </section>    
     <script>
 
     </script>
+    
 </asp:Content>

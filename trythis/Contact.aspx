@@ -29,22 +29,21 @@
     <div class="row " id="d1" runat="server" style="width: 100%">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-                <table class="row">
-                    <tr>
-                        <td>
-                            <div class="col">
+                <div class="row">
+                    
+                            <div class="col-lg-3 col-md-6 col-sm-12" style="min-width:400px; max-width:500px">
                                 <div class="form-group " style="padding-top: 1em;">
                                     <asp:Label Text="Name:" runat="server" AssociatedControlID="name"></asp:Label>
                                     <input type="text" runat="server" name="sname" class="form-control" placeholder="Your Name *" id="name"
-                                        required data-validation-required-message="Please enter your name." style="width: 250px;">
+                                        required data-validation-required-message="Please enter your name." style="width: 200px;">
                                     <p class="help-block text-danger"></p>
                                 </div>
-                                <br />
+                               
                                 <div class="form-group">
                                     <asp:Label Text="Email:" runat="server" AssociatedControlID="email"></asp:Label>
                                     <input type="text" runat="server" name="email" class="form-control"
                                         placeholder="abc@xyz.com" id="email" required
-                                        data-validation-required-message="Please enter your email address" style="width: 250px;" />
+                                        data-validation-required-message="Please enter your email address" style="width: 200px;" />
                                     <%--<asp:TextBox ID="txtemail" runat="server" TextMode="Email" placeHolder="Your Email*" 
                                    CssClass="form-control"></asp:TextBox>--%>
                                     <p class="help-block text-danger"></p>
@@ -52,7 +51,7 @@
                                 <div class="form-group">
                                     <asp:Label runat="server" AssociatedControlID="txtPhone" Text="Phone"></asp:Label>
                                     <asp:TextBox ID="txtPhone" runat="server" TextMode="Phone"
-                                        placeHolder="+86-123-12345678" CssClass="form-control" Width="250px"></asp:TextBox>
+                                        placeHolder="+86-123-12345678" CssClass="form-control" Width="200px"></asp:TextBox>
                                     <p class="help-block text-danger"></p>
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhone"
                                         CssClass="text-danger" ErrorMessage=" Phone Number is required." />
@@ -61,14 +60,13 @@
                                         CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number "></asp:RegularExpressionValidator>
                                 </div>
                             </div>
-                        </td>
-                        <td>
-                            <div class="col" style="width: 250px;">
+                        
+                            <div class="col-lg-3 col-md-6 col-sm-12" style="min-width:400px; max-width:500px">
                                 <div class="form-group" style="padding-top: 2em;">
                                     <asp:Label runat="server" Text="Issue" AssociatedControlID="issueList"></asp:Label>
                                     <asp:DropDownList runat="server" ID="issueList"
                                         onChange="javascript:selectedval();"
-                                        CssClass=" border dropdown form-control btn-light" Width="250px">
+                                        CssClass=" border dropdown form-control btn-light" Width="200px">
                                         <asp:ListItem Text="Camera Offline" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Unable to manage Camera Details" Value="2"></asp:ListItem>
                                         <asp:ListItem Text="Unable to manage User Details" Value="3"></asp:ListItem>
@@ -87,15 +85,14 @@
                                 <br />
                                 <div class="form-group">
                                     <asp:Label Text="Message" runat="server" AssociatedControlID="issuemessage"></asp:Label>
-                                    <textarea class="form-control" name="smessage" style="min-height: 150px; min-width: 250px"
+                                    <textarea class="form-control" name="smessage" style="min-height: 150px; width: 250px"
                                         runat="server" placeholder="Your Message *" id="issuemessage"
                                         required data-validation-required-message="Please enter a message."></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                </table>
+                        
+                </div>
                 <div class="row">
                     <div class="clearfix"></div>
                 </div>

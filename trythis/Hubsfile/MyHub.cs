@@ -137,6 +137,15 @@ namespace WebCresij.Hubsfile
             if(!string.IsNullOrEmpty(newdata))
             Clients.All.logs(newdata);
         }
+
+        public void CountMachines(int count)
+        {
+            Clients.All.TotalCount(count);
+        }
+        public void CountTotal()
+        {
+            Clients.All.Counts(1);
+        }
     }
     public class HexEncoding
     {

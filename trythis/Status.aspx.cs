@@ -5,28 +5,38 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-
+using Microsoft.AspNet.SignalR;
 
 namespace WebCresij
 {
     public partial class Status : BasePage
     {
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-        
+        IHubContext hubContext;
         protected void Page_Load(object sender, EventArgs e)
         {                  
             if (!IsPostBack)
             {
-                string query = "select * from Institute_Details";
-                DataTable dt = PopulateTree.ExecuteCommand(query);
-                ddlins.DataSource = dt;
-                ddlins.DataTextField = "InstituteName";
-                ddlins.DataValueField = "InstituteID";
-                ddlins.DataBind();
-                string select = Resources.Resource.Select;
-                ddlins.Items.Insert(0, new ListItem(select, "NA"));
-                loadGrid("NA");                
+                if(HttpContext.Current.Session["UserId"] != null)
+                {
+                    UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                                    HttpContext.Current.Session["UserName"].ToString(), 12);
+                    string query = "select * from Institute_Details";
+                    DataTable dt = PopulateTree.ExecuteCommand(query);
+                    ddlins.DataSource = dt;
+                    ddlins.DataTextField = "InstituteName";
+                    ddlins.DataValueField = "InstituteID";
+                    ddlins.DataBind();
+                    string select = Resources.Resource.Select;
+                    ddlins.Items.Insert(0, new ListItem(select, "NA"));
+                    loadGrid("NA");
+                }
+                else
+                {
+                    Response.Redirect("Logout.aspx");
+                }                
             }
+            
         }
 
         private void loadGrid( string insID)
@@ -37,6 +47,7 @@ namespace WebCresij
             {
                 GridView1.DataSource = ds;
                 GridView1.DataBind();
+                
             }
             catch
             {
@@ -52,6 +63,13 @@ namespace WebCresij
         protected void ddlins_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadGrid(ddlins.SelectedValue);
+            hubContext = GlobalHost.ConnectionManager.GetHubContext<Hubsfile.MyHub>();
+            foreach(GridViewRow row in GridView1.Rows)
+            {
+                string ip = row.Cells[1].Text;
+                string data = "8B B9 00 03 05 01 09";
+                hubContext.Clients.All.SendControl(ip, data);
+            }
         }
 
 

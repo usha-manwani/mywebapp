@@ -21,29 +21,36 @@
             box-shadow: 0px 0px 3px 3px #7ce;
             border-radius: 15px;
         }*/
-        .imgclick {
-            height: 65px;
-            width: 65px;
+        /*.imgclick {
+            
+            width: 55%;
+        }*/
+        .imgsize {
+            width: 55%;
         }
 
-            .imgclick:hover {
-                -webkit-border-radius: 10px;
-                -moz-border-radius: 10px;
-                border-radius: 10px;
-                -webkit-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
-                -moz-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
-                box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
-            }
+        .imgsize1 {
+            width: 90%;
+        }
 
-            .imgclick:active {
-                -webkit-border-radius: 10px;
-                -moz-border-radius: 10px;
-                border-radius: 10px;
-                -webkit-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
-                -moz-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
-                box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
-                transform: translateY(1px);                
-            }
+        .imgclick:hover {
+            -webkit-border-radius: 5%;
+            -moz-border-radius: 5%;
+            border-radius: 5%;
+            -webkit-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
+            -moz-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
+            box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
+        }
+
+        .imgclick:active {
+            -webkit-border-radius: 5%;
+            -moz-border-radius: 5%;
+            border-radius: 5%;
+            -webkit-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
+            -moz-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
+            box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
+            transform: translateY(1px);
+        }
 
         [type=radio] + img {
             cursor: pointer;
@@ -209,7 +216,7 @@
             background-color: #1e1e36;
             margin-left: -50px;
         }
-        
+
         /*.tab {
             float: left;
             border: 1px solid #4ecdc4;
@@ -265,14 +272,15 @@
                 box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
                 transform: translateY(1px);
             }
-        .buttonEffect:hover{
-            -webkit-border-radius: 5px;
+
+            .buttonEffect:hover {
+                -webkit-border-radius: 5px;
                 -moz-border-radius: 5px;
                 border-radius: 5px;
                 -webkit-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
                 -moz-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
                 box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
-        }
+            }
 
         .rowTrans {
             background-color: transparent;
@@ -289,17 +297,19 @@
             border-radius: 8px;
             color: whitesmoke
         }
-        .btnstyle:hover{
-             -webkit-border-radius: 8px;
+
+            .btnstyle:hover {
+                -webkit-border-radius: 8px;
                 -moz-border-radius: 8px;
                 border-radius: 8px;
                 -webkit-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
                 -moz-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
                 box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
-        }
+            }
+           
     </style>
 </head>
-<body style="overflow: hidden !important">
+<body style="overflow-x: hidden !important">
     <form runat="server">
 
         <div id="control">
@@ -308,9 +318,9 @@
             <input id="dev" type="hidden" value='<%=Session["devices"] %>' />
             <asp:TextBox Style="display: none" ID="ipAddressToSend" runat="server"></asp:TextBox>
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-xl-7 col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                             <div id="system" class="divcontrols tablestyle">
                                 <table style="height: 100%; width: 100%">
                                     <tr class="controlHeaderRow">
@@ -321,76 +331,76 @@
                                         <td colspan="3" style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_212.png" id="systempower"
-                                                    class="imgclick" /></span>
+                                                    class="imgclick imgsize" /></span>
                                         </td>
                                         <td colspan="3" style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_212.png" id="pcpower"
-                                                    class="imgclick" /></span></td>
+                                                    class="imgclick imgsize" /></span></td>
 
                                     </tr>
                                     <tr style="align-items: center; align-content: center;">
 
                                         <td colspan="2" style="text-align: center">
                                             <span>
-                                                
+
                                                 <img src="Images/AllImages/images/SystemLock.png" id="sysLock"
-                                                    class="imgclick" /></span>
+                                                    class="imgclick imgsize" /></span>
                                         </td>
                                         <td colspan="2" style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_236.png" id="classLock"
-                                                    class="imgclick" /></span>
+                                                    class="imgclick imgsize" /></span>
                                         </td>
                                         <td colspan="2" style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_262.png" id="podiumLock"
-                                                    class="imgclick" /></span>
+                                                    class="imgclick imgsize" /></span>
                                         </td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                             <div id="Projector" class="divcontrols tablestyle">
                                 <table style="height: 100%; width: 100%">
                                     <tr class="controlHeaderRow">
                                         <td colspan="6" style="text-align: center">Projector Control
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_184.png" id="projectorOn"
-                                                    class="imgclick" /></span>
+                                                    class="imgclick imgsize" /></span>
                                         </td>
                                         <td style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_186.png" id="projectorOff"
-                                                    class="imgclick" /></span>
+                                                    class="imgclick imgsize" /></span>
                                         </td>
                                         <td style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_188.png" id="projSleep"
-                                                    class="imgclick" /></span>
+                                                    class="imgclick imgsize" /></span>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: center">
                                             <a href="#" style="color: white;">
                                                 <img src="Images/AllImages/images/图标_138.png" id="hdmi"
-                                                    class="imgclick" /></a>
+                                                    class="imgclick imgsize" /></a>
                                         </td>
                                         <td style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_164.png" id="projVideo"
-                                                    class="imgclick" /></span>
+                                                    class="imgclick imgsize" /></span>
                                         </td>
                                         <td style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_190.png" id="vga"
-                                                    class="imgclick" /></span>
+                                                    class="imgclick imgsize" /></span>
                                         </td>
                                     </tr>
                                 </table>
@@ -399,7 +409,7 @@
                     </div>
                     <br />
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="divcontrols tablestyle ">
                                 <table style="width: 100%; height: 100%;">
                                     <tr class="controlHeaderRow">
@@ -409,7 +419,7 @@
                                     <tr>
                                         <td>
                                             <div style="width: 25%; height: 100%; border-right: 1px solid #4ecdc4; float: left">
-                                                <table style="width: 100%; height: 100%; font-size:14px;margin-top:-2px" id="myTable">
+                                                <table style="width: 100%; height: 100%; font-size: 14px; margin-top: -2px" id="myTable">
 
                                                     <tr class="buttonEffect">
                                                         <td id="light1">Light 1
@@ -447,11 +457,11 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
-                                                                        id="lightyellow1" class="imgclick" />
+                                                                        id="lightyellow1" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
-                                                                        id="lightgrey1" class="imgclick" /></td>
+                                                                        id="lightgrey1" class="imgclick imgsize" /></td>
                                                             </tr>
 
                                                         </table>
@@ -462,11 +472,11 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
-                                                                        id="lightyellow2" class="imgclick" />
+                                                                        id="lightyellow2" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
-                                                                        id="lightgrey2" class="imgclick" /></td>
+                                                                        id="lightgrey2" class="imgclick imgsize" /></td>
                                                             </tr>
 
                                                         </table>
@@ -477,12 +487,12 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
-                                                                        id="lightyellow3" class="imgclick"/>
+                                                                        id="lightyellow3" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
                                                                         id="lightgrey3"
-                                                                         class="imgclick" /></td>
+                                                                        class="imgclick imgsize" /></td>
                                                             </tr>
 
                                                         </table>
@@ -493,12 +503,12 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
-                                                                        id="lightyellow4" class="imgclick"/>
+                                                                        id="lightyellow4" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
                                                                         id="lightgrey4"
-                                                                        class="imgclick"/></td>
+                                                                        class="imgclick imgsize" /></td>
                                                             </tr>
 
                                                         </table>
@@ -510,12 +520,12 @@
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
                                                                         id="lightyellow5"
-                                                                         class="imgclick"/>
+                                                                        class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
                                                                         id="lightgrey5"
-                                                                        class="imgclick"/></td>
+                                                                        class="imgclick imgsize" /></td>
                                                             </tr>
 
                                                         </table>
@@ -527,12 +537,12 @@
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
                                                                         id="lightyellow6"
-                                                                        class="imgclick"/>
+                                                                        class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
                                                                         id="lightgrey6"
-                                                                        class="imgclick"/></td>
+                                                                        class="imgclick imgsize" /></td>
                                                             </tr>
 
                                                         </table>
@@ -544,12 +554,12 @@
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
                                                                         id="lightyellow7"
-                                                                         class="imgclick" />
+                                                                        class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
                                                                         id="lightgrey7"
-                                                                         class="imgclick" /></td>
+                                                                        class="imgclick imgsize" /></td>
                                                             </tr>
 
                                                         </table>
@@ -561,17 +571,17 @@
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
                                                                         id="lightyellow8"
-                                                                         class="imgclick" />
+                                                                        class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
                                                                         id="lightgrey8"
-                                                                         class="imgclick" /></td>
+                                                                        class="imgclick imgsize" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
                                                 </div>
-                                                <div style="height: 40%; margin-left: -20px; margin-top:-5px; background-color: #232140">
+                                                <div style="height: 40%; margin-left: -20px; margin-top: -5px; background-color: #232140">
                                                     <fieldset style="border-top: 1px solid #4ecdc4">
                                                         <legend align="center" style="width: auto; color: white; font-size: 15px;">Options</legend>
                                                     </fieldset>
@@ -595,7 +605,7 @@
                             </div>
 
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                             <div class="divcontrols tablestyle">
                                 <table style="width: 100%; height: 100%;">
                                     <tr class="controlHeaderRow">
@@ -605,8 +615,8 @@
                                     <tr>
                                         <td>
                                             <div style="width: 25%; height: 100%; border-right: 1px solid #4ecdc4; float: left">
-                                                <table style="width: 100%; height: 100%; font-size:14px;
-                                                    margin-top:-2px;" id="curtainTable">                                             
+                                                <table style="width: 100%; height: 100%; font-size: 14px; margin-top: -2px;"
+                                                    id="curtainTable">
                                                     <tr class="buttonEffect">
                                                         <td id="screen1">Screen 1</td>
                                                     </tr>
@@ -640,15 +650,15 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_132.png"
-                                                                        id="screenup1" class="imgclick"/>
+                                                                        id="screenup1" class="imgclick imgsize" />
                                                                 </td>
-                                                                
+
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png"
-                                                                        id="screendown1" class="imgclick"/></td>
+                                                                        id="screendown1" class="imgclick imgsize" /></td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png"
-                                                                        id="screenstop1" class="imgclick"/></td>
+                                                                        id="screenstop1" class="imgclick imgsize" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -657,14 +667,14 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_132.png"
-                                                                        id="screenup2" class="imgclick"/>
+                                                                        id="screenup2" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png"
-                                                                        id="screendown2" class="imgclick"/></td>
+                                                                        id="screendown2" class="imgclick imgsize" /></td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png"
-                                                                        id="screenstop2" class="imgclick"/></td>
+                                                                        id="screenstop2" class="imgclick imgsize" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -673,14 +683,14 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_106.png"
-                                                                        id="curtainopen1" class="imgclick"/>
+                                                                        id="curtainopen1" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png"
-                                                                        id="curtainclose1" class="imgclick"/></td>
+                                                                        id="curtainclose1" class="imgclick imgsize" /></td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png"
-                                                                        id="curtainstop1" class="imgclick"/></td>
+                                                                        id="curtainstop1" class="imgclick imgsize" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -689,14 +699,14 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_106.png"
-                                                                        id="curtainopen2" class="imgclick"/>
+                                                                        id="curtainopen2" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png"
-                                                                        id="curtainclose2" class="imgclick"/></td>
+                                                                        id="curtainclose2" class="imgclick imgsize" /></td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png"
-                                                                        id="curtainstop2" class="imgclick"/></td>
+                                                                        id="curtainstop2" class="imgclick imgsize" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -705,14 +715,14 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_106.png"
-                                                                        id="curtainopen3" class="imgclick"/>
+                                                                        id="curtainopen3" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png"
-                                                                        id="curtainclose3" class="imgclick"/></td>
+                                                                        id="curtainclose3" class="imgclick imgsize" /></td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png"
-                                                                        id="curtainstop3" class="imgclick"/></td>
+                                                                        id="curtainstop3" class="imgclick imgsize" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -721,14 +731,14 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_106.png"
-                                                                        id="curtainopen4" class="imgclick"/>
+                                                                        id="curtainopen4" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png"
-                                                                        id="curtainclose4" class="imgclick"/></td>
+                                                                        id="curtainclose4" class="imgclick imgsize" /></td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png"
-                                                                        id="curtainstop4" class="imgclick"/></td>
+                                                                        id="curtainstop4" class="imgclick imgsize" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -737,14 +747,14 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_106.png"
-                                                                        id="curtainopen5" class="imgclick"/>
+                                                                        id="curtainopen5" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png"
-                                                                        id="curtainclose5" class="imgclick"/></td>
+                                                                        id="curtainclose5" class="imgclick imgsize" /></td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png"
-                                                                        id="curtainstop5" class="imgclick"/></td>
+                                                                        id="curtainstop5" class="imgclick imgsize" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -753,24 +763,24 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_106.png"
-                                                                        id="curtainopen6" class="imgclick"/>
+                                                                        id="curtainopen6" class="imgclick imgsize" />
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png"
-                                                                        id="curtainclose6" class="imgclick"/></td>
+                                                                        id="curtainclose6" class="imgclick imgsize" /></td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png"
-                                                                        id="curtainstop6" class="imgclick"/></td>
+                                                                        id="curtainstop6" class="imgclick imgsize" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
                                                 </div>
-                                                <div style="height: 40%; background-color: #232140; margin-top:-5px;" id="curtainOptions">
+                                                <div style="height: 40%; background-color: #232140; margin-top: -5px;" id="curtainOptions">
                                                     <fieldset style="border-top: 1px solid #4ecdc4">
                                                         <legend align="center" style="width: auto; color: white; font-size: 15px;">Options</legend>
                                                     </fieldset>
 
-                                                    <table style="width: 100%;height:90%;margin-top:-15px;">
+                                                    <table style="width: 100%; height: 90%; margin-top: -15px;">
                                                         <tr>
                                                             <td style="text-align: center;">
                                                                 <button class="btnstyle" id="curtainbtnopen">
@@ -787,7 +797,7 @@
                                                         </tr>
                                                     </table>
                                                 </div>
-                                                <div style="height: 40%; background-color: #232140; margin-top:-5px;" id="screenOptions">
+                                                <div style="height: 40%; background-color: #232140; margin-top: -5px;" id="screenOptions">
                                                     <fieldset style="border-top: 1px solid #4ecdc4">
                                                         <legend align="center" style="width: auto; color: white; font-size: 15px;">Options</legend>
                                                     </fieldset>
@@ -817,9 +827,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                             <div id="media" class="divcontrols" style="border: 1px solid #4ecdc4; width: 200px; height: 450px;">
                                 <table style="height: 100%; width: 100%;">
                                     <tr class="controlHeaderRow">
@@ -831,15 +841,15 @@
                                             <label>
                                                 <input type="radio" value="1" name="test" id="desktop"
                                                     data-target=".displaynone" />
-                                                <img src="Images/AllImages/images/图标_158.png" class="imgclick">
+                                                <img src="Images/AllImages/images/图标_158.png" class="imgclick imgsize">
                                             </label>
                                         </td>
-                                        
+
                                         <td style="text-align: center">
                                             <label>
                                                 <input type="radio" value="2" name="test" id="laptop"
                                                     data-target=".displaynone">
-                                                <img src="Images/AllImages/images/图标_160.png" class="imgclick">
+                                                <img src="Images/AllImages/images/图标_160.png" class="imgclick imgsize">
                                             </label>
                                         </td>
                                     </tr>
@@ -849,7 +859,7 @@
                                             <label>
                                                 <input type="radio" value="3" name="test" id="platform"
                                                     data-target=".displaynone">
-                                                <img src="Images/AllImages/images/图标_194.png" class="imgclick">
+                                                <img src="Images/AllImages/images/图标_194.png" class="imgclick  imgsize">
                                             </label>
                                         </td>
 
@@ -857,7 +867,7 @@
                                             <label>
                                                 <input type="radio" value="4" name="test"
                                                     id="digitalEquipment" data-target=".displaynone">
-                                                <img src="Images/AllImages/images/图标_194.png" class="imgclick">
+                                                <img src="Images/AllImages/images/图标_194.png" class="imgclick  imgsize">
                                             </label>
                                         </td>
                                     </tr>
@@ -867,7 +877,7 @@
                                             <label>
                                                 <input type="radio" value="5" name="test" id="dvd"
                                                     data-target="#dvdcontrols">
-                                                <img src="Images/AllImages/images/图标_246.png" class="imgclick">
+                                                <img src="Images/AllImages/images/图标_246.png" class="imgclick  imgsize">
                                             </label>
                                         </td>
 
@@ -875,7 +885,7 @@
                                             <label>
                                                 <input type="radio" value="6" name="test" id="bluray"
                                                     data-target="#bluraydvd">
-                                                <img src="Images/AllImages/images/图标_272.png" class="imgclick">
+                                                <img src="Images/AllImages/images/图标_272.png" class="imgclick  imgsize">
                                             </label>
                                         </td>
                                     </tr>
@@ -885,7 +895,7 @@
                                             <label>
                                                 <input type="radio" value="7" name="test" id="tv"
                                                     data-target="#tvcontrols">
-                                                <img src="Images/AllImages/images/图标_298.png" class="imgclick">
+                                                <img src="Images/AllImages/images/图标_298.png" class="imgclick  imgsize">
                                             </label>
                                         </td>
 
@@ -893,7 +903,7 @@
                                             <label>
                                                 <input type="radio" value="8" name="test" id="camera"
                                                     data-target="#Camera">
-                                                <img src="Images/AllImages/images/图标_220.png" class="imgclick">
+                                                <img src="Images/AllImages/images/图标_220.png" class="imgclick  imgsize">
                                             </label>
                                         </td>
                                     </tr>
@@ -902,7 +912,7 @@
                                             <label>
                                                 <input type="radio" value="9" name="test" id="recorder"
                                                     data-target="#recordercontrol">
-                                                <img src="Images/AllImages/images/图标_324.png" class="imgclick">
+                                                <img src="Images/AllImages/images/图标_324.png" class="imgclick  imgsize">
                                             </label>
                                         </td>
                                         <td>no text</td>
@@ -910,7 +920,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
                             <div style="width: 200px;">
                                 <div id="dvdcontrols" class="displaynone">
                                     <div id="dvdsubmenu" class="divcontrols" style="border: 1px solid #4ecdc4; width: 100%;">
@@ -922,47 +932,47 @@
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_19.png" id="dvdpoweron"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick  imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_53.png" id="dvdstop"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick  imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_87.png" id="playdvd"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_55.png" id="dvdpause"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick  imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_121.png" id="dvdback"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_89.png" id="dvdforward"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_123.png" id="dvdpre"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_155.png" id="dvdnext"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_21.png" id="dvdexit"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -978,47 +988,47 @@
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_19.png" id="bludvdpoweron"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_53.png" id="bludvdstop"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_87.png" id="bluplaydvd"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_55.png" id="bludvdpause"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_121.png" id="bludvdback"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_89.png" id="bludvdforward"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_123.png" id="bludvdpre"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_155.png" id="bludvdnext"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_21.png" id="bludvdexit"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -1035,57 +1045,57 @@
                                                 <td class="text-center">
 
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_27.png" id="tcampoweroff"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_29.png" id="scampoweroff"
-                                                        height="40" width="40" class="imgclick" />
+                                                        height="40" width="40" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_61.png" height="40"
-                                                        width="40" id="rotate" class="imgclick" />
+                                                        width="40" id="rotate" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_63.png" height="40"
-                                                        width="40" id="wb" class="imgclick" />
+                                                        width="40" id="wb" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_95.png" height="40"
-                                                        width="40" id="plus" class="imgclick" />
+                                                        width="40" id="plus" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_97.png" height="40"
-                                                        width="40" id="minus" class="imgclick" />
+                                                        width="40" id="minus" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_129.png" height="40"
-                                                        width="40" id="savecam" class="imgclick" />
+                                                        width="40" id="savecam" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_131.png" height="40"
-                                                        width="40" id="changecam" class="imgclick" />
+                                                        width="40" id="changecam" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_163.png" height="40"
-                                                        width="40" id="stopcam" class="imgclick" />
+                                                        width="40" id="stopcam" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_165.png" height="40"
-                                                        width="40" id="novideo" class="imgclick" />
+                                                        width="40" id="novideo" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_197.png" height="40"
-                                                        width="40" id="nocam" class="imgclick" />
+                                                        width="40" id="nocam" class="imgclick imgsize" />
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -1102,37 +1112,37 @@
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_23.png" height="40"
-                                                        width="40" id="tvoff" class="imgclick" />
+                                                        width="40" id="tvoff" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_25.png" height="40"
-                                                        width="40" id="inputtv" class="imgclick" />
+                                                        width="40" id="inputtv" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_57.png" height="40"
-                                                        width="40" id="oktv" class="imgclick" />
+                                                        width="40" id="oktv" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_59.png" height="40"
-                                                        width="40" id="optiontv" class="imgclick" />
+                                                        width="40" id="optiontv" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_91.png" height="40"
-                                                        width="40" id="plustv" class="imgclick" />
+                                                        width="40" id="plustv" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_93.png" height="40"
-                                                        width="40" id="minustv" class="imgclick" />
+                                                        width="40" id="minustv" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_125.png" height="40"
-                                                        width="40" id="exittv" class="imgclick" />
+                                                        width="40" id="exittv" class="imgclick imgsize" />
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -1149,31 +1159,31 @@
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_31.png" height="40"
-                                                        width="40" id="recpoweron" class="imgclick" />
+                                                        width="40" id="recpoweron" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_33.png" height="40"
-                                                        width="40" id="recpoweroff" class="imgclick" />
+                                                        width="40" id="recpoweroff" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_65.png" height="40"
-                                                        width="40" id="recplay" class="imgclick" />
+                                                        width="40" id="recplay" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_67.png" height="40"
-                                                        width="40" id="recstop" class="imgclick" />
+                                                        width="40" id="recstop" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_99.png" height="40"
-                                                        width="40" id="recchange" class="imgclick" />
+                                                        width="40" id="recchange" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_101.png" height="40"
-                                                        width="40" id="recsave" class="imgclick" />
+                                                        width="40" id="recsave" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -1186,8 +1196,8 @@
             </div>
             <br />
             <div class="row">
-                <div class="col-lg-5">
-                    <div style="height: 200px; width: 100%; border: 1px solid #4ecdc4;">
+                <div class="col-xl-5 col-lg-8 col-md-12 col-sm-12">
+                    <div style="height: 200px; max-width: 500px; border: 1px solid #4ecdc4;">
                         <table style="width: 100%; height: 100%;">
                             <tr class="controlHeaderRow">
                                 <td colspan="6" style="text-align: center">AC & Fresh Air System Control
@@ -1195,298 +1205,299 @@
                             </tr>
                             <tr>
                                 <td>
- <div class="divcontrols ">
-                            <div style="width: 20%; height: 100%; border-right: 1px solid #4ecdc4; float: left">
-                                <table style="width: 100%; height: 100%; font-size:14px;margin-top:-2px;" id="actable">
-                                    <tr class="buttonEffect">
-                                        <td id="ac1">AC 1</td>
-                                    </tr>
-                                    <tr class="buttonEffect">
-                                        <td id="ac2">AC 2</td>
-                                    </tr>
-                                    <tr class="buttonEffect">
-                                        <td id="ac3">AC 3</td>
-                                    </tr>
-                                    <tr class="buttonEffect">
-                                        <td id="ac4">AC 4</td>
-                                    </tr>
-                                    <tr class="buttonEffect">
-                                        <td id="air1">AirSystem 1</td>
-                                    </tr>
-                                    <tr class="buttonEffect">
-                                        <td id="air2">AirSystem 2</td>
-                                    </tr>
-                                    <tr class="buttonEffect">
-                                        <td id="air3">AirSystem 3</td>
-                                    </tr>
-                                    <tr>
-                                        <td id="air4" style="color: white; cursor: pointer">AirSystem 4</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div style="width: 80%">
-                                <div style="width: 100%" id="ac1div">
-                                    <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick" id="ac1on" />
+                                    <div class="divcontrols " style="height:100%">
+                                        <div style="width: 20%; height: 100%; border-right: 1px solid #4ecdc4; float: left">
+                                            <table style="width: 100%; height: 100%; font-size: 14px; margin-top: -2px;" id="actable">
+                                                <tr class="buttonEffect">
+                                                    <td id="ac1">AC 1</td>
+                                                </tr>
+                                                <tr class="buttonEffect">
+                                                    <td id="ac2">AC 2</td>
+                                                </tr>
+                                                <tr class="buttonEffect">
+                                                    <td id="ac3">AC 3</td>
+                                                </tr>
+                                                <tr class="buttonEffect">
+                                                    <td id="ac4">AC 4</td>
+                                                </tr>
+                                                <tr class="buttonEffect">
+                                                    <td id="air1">AirSystem 1</td>
+                                                </tr>
+                                                <tr class="buttonEffect">
+                                                    <td id="air2">AirSystem 2</td>
+                                                </tr>
+                                                <tr class="buttonEffect">
+                                                    <td id="air3">AirSystem 3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td id="air4" style="color: white; cursor: pointer">AirSystem 4</td>
+                                                </tr>
+                                            </table>
                                         </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick" id="ac1off" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick" id="ac1cool" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick" id="ac1heat" />
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-left: 20px">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick" id="ac1plus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick" id="ac1minus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick" id="ac1fan" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick" id="ac1fanOn" />
-                                        </div>
-                                    </div>
-                                </div>
+                                        <div style="width: 80%; height: 100%;float:right">
+                                            <div style="width: 100%; height: 100%" id="ac1div">
+                                                <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="ac1on" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick imgsize1" id="ac1off" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick imgsize1" id="ac1cool" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="ac1heat" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-left: 20px">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="ac1plus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick imgsize1" id="ac1minus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick imgsize1" id="ac1fan" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="ac1fanOn" />
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div style="width: 100%" id="ac2div">
-                                    <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick" id="ac2on" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick" id="ac2off" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick" id="ac2cool" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick" id="ac2heat" />
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-left: 20px">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick" id="ac2plus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick" id="ac2minus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick" id="ac2fan" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick" id="ac2fanOn" />
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div style="width: 100%; height: 90%" id="ac2div">
+                                                <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="ac2on" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick imgsize1" id="ac2off" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick imgsize1" id="ac2cool" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="ac2heat" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-left: 20px">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="ac2plus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick imgsize1" id="ac2minus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick imgsize1" id="ac2fan" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="ac2fanOn" />
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div style="width: 100%" id="ac3div">
-                                    <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick" id="ac3on" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick" id="ac3off" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick" id="ac3cool" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick" id="ac3heat" />
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-left: 20px">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick" id="ac3plus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick" id="ac3minus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick" id="ac3fan" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick" id="ac3fanOn" />
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div style="width: 100%; height: 90%" id="ac3div">
+                                                <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="ac3on" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick imgsize1" id="ac3off" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick imgsize1" id="ac3cool" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="ac3heat" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-left: 20px">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="ac3plus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick imgsize1" id="ac3minus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick imgsize1" id="ac3fan" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="ac3fanOn" />
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div style="width: 100%" id="ac4div">
-                                    <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick" id="ac4on" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick" id="ac4off" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick" id="ac4cool" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick" id="ac4heat" />
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-left: 20px">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick" id="ac4plus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick" id="ac4minus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick" id="ac4fan" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick" id="ac4fanOn" />
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div style="width: 100%; height: 90%" id="ac4div">
+                                                <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="ac4on" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick imgsize1" id="ac4off" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick imgsize1" id="ac4cool" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="ac4heat" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-left: 20px">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="ac4plus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick imgsize1" id="ac4minus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick imgsize1" id="ac4fan" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="ac4fanOn" />
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div style="width: 100%" id="air1div">
-                                    <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick" id="air1on" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick" id="air1off" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick" id="air1cool" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick" id="air1heat" />
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-left: 20px">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick" id="air1plus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick" id="air1minus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick" id="air1fan" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick" id="air1fanOn" />
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div style="width: 100%; height: 90%" id="air1div">
+                                                <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="air1on" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick imgsize1" id="air1off" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick imgsize1" id="air1cool" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="air1heat" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-left: 20px">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="air1plus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick imgsize1" id="air1minus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick imgsize1" id="air1fan" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="air1fanOn" />
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div style="width: 100%" id="air2div">
-                                    <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick" id="air2on" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick" id="air2off" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick" id="air2cool" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick" id="air2heat" />
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-left: 20px">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick" id="air2plus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick" id="air2minus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick" id="air2fan" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick" id="air2fanOn" />
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div style="width: 100%; height: 90%" id="air2div">
+                                                <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="air2on" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick imgsize1" id="air2off" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick imgsize1" id="air2cool" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="air2heat" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-left: 20px">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="air2plus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick imgsize1" id="air2minus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick imgsize1" id="air2fan" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="air2fanOn" />
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div style="width: 100%" id="air3div">
-                                    <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick" id="air3on" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick" id="air3off" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick" id="air3cool" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick" id="air3heat" />
-                                        </div>
-                                    </div>
-                                    <div class="row" style="padding-left: 20px">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick" id="air3plus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick" id="air3minus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick" id="air3fan" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick" id="air3fanOn" />
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div style="width: 100%; height: 90%" id="air3div">
+                                                <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="air3on" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick imgsize1" id="air3off" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick imgsize1" id="air3cool" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="air3heat" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-left: 20px">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="air3plus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick imgsize1" id="air3minus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick imgsize1" id="air3fan" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="air3fanOn" />
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                <div style="width: 100%" id="air4div">
-                                    <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick" id="air4on" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick" id="air4off" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick" id="air4cool" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick" id="air4heat" />
+                                            <div style="width: 100%; height: 90%" id="air4div">
+                                                <div class="row" style="padding-bottom: 15px; padding-top: 10px; padding-left: 20px;">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="air4on" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick imgsize1" id="air4off" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick imgsize1" id="air4cool" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="air4heat" />
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-left: 20px">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="air4plus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick imgsize1" id="air4minus" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick imgsize1" id="air4fan" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3">
+                                                        <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="air4fanOn" />
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row" style="padding-left: 20px">
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick" id="air4plus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick" id="air4minus" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick" id="air4fan" />
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick" id="air4fanOn" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                                 </td>
                             </tr>
                         </table>
-                       
+
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-xl-4 col-lg-3 col-md-7 col-sm-10">
                     <div style="height: 200px; width: 300px; border: none">
                         <fieldset class="fieldSetControl" style="width: 100%; color: white;">
                             <legend align="center" style="width: auto; font-size: 16px;">
                                 <span>Sound Control</span></legend>
                         </fieldset>
-                        <div id="Microphone" class="divcontrols" >
+                        <div id="Microphone" class="divcontrols">
                             <table>
                                 <tr>
                                     <td style="text-align: center; width: 45px;">
@@ -1523,7 +1534,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3"></div>
+
             </div>
         </div>
     </form>

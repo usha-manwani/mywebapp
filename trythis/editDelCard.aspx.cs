@@ -224,6 +224,8 @@ namespace WebCresij
                 string comment = (row.Cells[7].Controls[0] as TextBox).Text;
                 string locid = (row.FindControl("hidlocID") as Label).Text;
                 int result = tree.UpdateRegCard(cardID,name,memid,loc,comment,pending, locid);
+                UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                HttpContext.Current.Session["UserName"].ToString(), 10);
                 gvCard.EditIndex = -1;
                 bindData();
             }

@@ -78,19 +78,10 @@ namespace WebCresij
             finally
             {
                 con.Close();
+                UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                HttpContext.Current.Session["UserName"].ToString(), 4);
             }
-            //var manager = new UserManager();
-            //var user = new ApplicationUser() { UserName = UserName.Text };
-            //IdentityResult result = manager.Create(user, Password.Text);
-            //if (result.Succeeded)
-            //{
-            //    IdentityHelper.SignIn(manager, user, isPersistent: false);
-            //    IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
-            //}
-            ////else 
-            ////{
-            ////    ErrorMessage.Text = result.Errors.FirstOrDefault();
-            ////}
+            
         }
     }
 }

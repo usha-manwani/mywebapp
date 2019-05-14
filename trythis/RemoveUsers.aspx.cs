@@ -13,14 +13,22 @@ namespace WebCresij
         string s = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            s = HttpContext.Current.Session["UserId"].ToString();
-            if (!IsPostBack)
+            try
             {
-                GridView1.DataSource = ud.getUserDetails(s);
-                GridView1.DataBind();
-               // HideDeleteButton();
+                s = HttpContext.Current.Session["UserId"].ToString();
+            
+            
+                if (!IsPostBack)
+                {
+                    GridView1.DataSource = ud.getUserDetails(s);
+                    GridView1.DataBind();
+                // HideDeleteButton();
+                }
             }
-
+            catch
+            {
+                Response.Redirect("Error/CustomError.aspx");
+            }
         }
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -28,6 +36,8 @@ namespace WebCresij
             try
             {
                 ud.DeleteUser(userid);
+                UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                HttpContext.Current.Session["UserName"].ToString(), 4);
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "MyKey", "show(); return false;", true);
             }
             catch
@@ -57,6 +67,7 @@ namespace WebCresij
         {
             string userid = GridView1.Rows[e.NewEditIndex].Cells[0].Text;
             ud.DeleteUser(userid);
+            
             GridView1.DataSource = ud.getUserDetails(s);
             GridView1.DataBind();
             

@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="Schedule.aspx.cs" Inherits="WebCresij.Schedule" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
+    
+    
 <style type="text/css">
     .headerstyle{
         -webkit-box-shadow: inset 0px -6px 76px -14px rgba(0,0,0,0.75);
@@ -28,8 +31,8 @@
 </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">    
-    <script src="assets/js/Schedule.js?v=2"></script>
-   
+    <script src="assets/js/Schedule.js?v=3"></script>
+  
        <div>
            <div style="background-color: #4ecdc4; ">
             <asp:UpdatePanel runat="server">
@@ -40,31 +43,31 @@
                    
                     <h4 style="margin-bottom:-10px"><span><%=Resources.Resource.Schedule%></span></h4>
                   
-                    <div class="row" style="margin-bottom:-20px; margin-top:-20px">
+                    <div class="row mbcustom" >
                         <div class="col-lg-7 col-md-12 col-sm-12">
-                            <div class="row" style="margin-bottom:-30px">
-                        <div class="col-lg-3 col-sm-12">
+                            <div class="row mbcustom" >
+                        <div class="col-lg-3 col-md-12 col-sm-12">
                             <h5><span><%=Resources.Resource.CreateSchedule%></span></h5>
                         </div>
-                        <div class=" col-sm-12 col-lg-3">                 
-                        <asp:DropDownList  AutoPostBack="true" 
+                        <div class=" col-sm-12 col-md-12 col-lg-3">                 
+                        <asp:DropDownList  AutoPostBack="true" Width="100px"
                             OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
-                            CssClass="btn btn-default dropdown border" Width="180px"  
+                            CssClass="btn btn-default dropdown border"   
                             ID="ddlInstitute" data-toggle="dropdown"  runat="server" >
                             <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>
                            </div>                           
-                            <div class="col-sm-12 col-lg-3">
+                            <div class="col-sm-12 col-md-12 col-lg-3">
                     
-                        <asp:DropDownList  ID="ddlGrade" AutoPostBack="true" Width="150px"
+                        <asp:DropDownList  ID="ddlGrade" AutoPostBack="true" Width="100px"
                             CssClass="btn btn-default border dropdown" data-toggle="dropdown" 
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" >
                             <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>
                          </div>                             
-                            <div class=" col-sm-12 col-lg-3">                    
-                        <asp:DropDownList  ID="ddlClass" AutoPostBack="true" Width="150px"
-                            AppendDataBoundItems="true" runat="server" 
+                            <div class=" col-sm-12 col-md-12 col-lg-3">                    
+                        <asp:DropDownList  ID="ddlClass" AutoPostBack="true" 
+                            AppendDataBoundItems="true" runat="server"  Width="100px" 
                             CssClass="btn btn-default border dropdown" 
                             data-toggle="dropdown" 
                             OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" >
@@ -74,7 +77,7 @@
                              </div>
                         </div>
                         <div class="col-lg-5 col-md-6 col-sm-12" >
-                            <div class="row" style="margin-bottom:-30px">
+                            <div class="row mbcustom" >
                                 <div class="col" style="font-size:16px">
                                     <asp:CheckBox ID="chkTimer" runat="server" Text="<%$Resources:Resource, Timer %>"/>
                                 </div>
@@ -224,7 +227,19 @@
        </ContentTemplate>
         </asp:UpdatePanel>
              </div>
+           <div style="display:none">
+               <asp:Literal runat="server" id="literal1"></asp:Literal>
+               <asp:Literal runat="server" id="literal2"></asp:Literal>
+               <asp:Literal runat="server" id="literal3"></asp:Literal>
+               <asp:Literal runat="server" id="literal4"></asp:Literal>
+               <asp:Literal runat="server" id="literal7"></asp:Literal>
+               <asp:Literal runat="server" id="literal6"></asp:Literal>
+               <asp:Literal runat="server" id="literal5"></asp:Literal>
+           </div>
         </div>
+    <script>
+        
+    </script>
     
 </asp:Content>
 

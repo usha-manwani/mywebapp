@@ -29,7 +29,7 @@ namespace WebCresij
                 if (s != null)
                 {
                     username.Text = "  " + s + "!!";
-                    int[] roleIds = roleids.ToCharArray().Select(x => (int)Char.GetNumericValue(x)).ToArray();
+                    int[] roleIds = roleids.ToCharArray().Select(x => (int)char.GetNumericValue(x)).ToArray();
                     displayRole(roleIds, roleids);
                 }
                 else
@@ -94,8 +94,7 @@ namespace WebCresij
                     }
                     else if (roleIds[i] == 5)
                     {
-                        navbarDropdown1.Visible = true;
-                        
+                        navbarDropdown1.Visible = true;                        
                         delDoc.Visible = true;
                     }
                     else if (roleIds[i] == 6)

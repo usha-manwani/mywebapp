@@ -143,7 +143,8 @@
             -webkit-box-shadow: inset 0 0 15px #000000;
             box-shadow: inset 0 0 15px #000000;
             border-width: 2px 10px 10px 2px;
-            margin-left: 15px
+            margin-left: 15px;
+            margin-right:15px
         }
 
         .progressbar {
@@ -165,12 +166,13 @@
         .pt-3-half {
             padding-top: 1.4rem;
         }
+       
     </style>
     <link href="assets/css/charts.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div class="sidenav1">
+    <div style="margin-top:20px">
+    <div class="sidenav1" style="margin-top:20px">
         <span><%=Resources.Resource.BuildingMgmt%></span>
         <span class="dropdown-btn"><%=Resources.Resource.InspectionLog%> 
     <i class="fa fa-caret-down"></i>
@@ -202,6 +204,9 @@
                     <span style="font-size: 12px;" class="btn btn-light"><i class="fa fa-edit" aria-hidden="true"></i>&nbsp;<%=Resources.Resource.update%></span>&nbsp;&nbsp;
                     <span style="font-size: 12px;" class="btn btn-light"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;<%=Resources.Resource.btnwork%></span>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-md-12">
+                </div>
                 <asp:GridView runat="server" ID="gv1" AutoGenerateColumns="false" PageSize="10" Width="95%"
                     AllowPaging="true" OnPageIndexChanging="Gv1_PageIndexChanging" PagerStyle-ForeColor="White"
                     PagerStyle-BorderStyle="None" OnRowDataBound="gv1_RowDataBound"
@@ -230,20 +235,20 @@
                         <asp:TemplateField HeaderText="<%$Resources:Resource, Options %>">
                             <ItemStyle />
                             <ItemTemplate>
-                                <asp:LinkButton ID="lnkdelete" runat="server" CssClass="btn btn-info"
+                              <div>  <asp:LinkButton ID="lnkdelete" runat="server" CssClass="btn btn-info"
                                     Font-Size="12px" OnClick="lnkdelete_Click">
                                     <i class="fa fa-minus-circle" aria-hidden="true"></i><%=Resources.Resource.Delete%>
                                 </asp:LinkButton>
-                                <asp:LinkButton ID="lnkedit" runat="server" CssClass="btn btn-info"
+                                  <asp:LinkButton ID="lnkedit" runat="server" CssClass="btn btn-info"
                                     Font-Size="12px" OnClick="lnkedit_Click">
                                     <i class="fa fa-edit" aria-hidden="true"></i><%=Resources.Resource.Edit%>
-                                </asp:LinkButton>
+                                </asp:LinkButton></div>
 
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-
+                </div>
                 <div class="modal" id="editDetailtoAssign">
                     <div class="modal-content">
                         <header class="row" style="position: center;">
@@ -382,30 +387,12 @@
     <div id="mainStats" class="main1 " style="padding-right: 40px;">
         <div class="row">
 
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card" style="height: 150px;">
-                    <div class="card-body" style="background-color: #dfc43a; color: white">
-                        <div class=" pt-1 float-left" style="width: 70%">
-                            <h4><span><%=Resources.Resource.UnresolvedIssues%></span></h4>
-                            <h4 class="mb-0 ">
-                                <span id="UnresolvedIssues" class="count float-left ">32</span>
-                            </h4>
-                        </div>
-                        <!-- /.card-left -->
-                        <div class=" float-right text-right" style="width: 30%">
-                            <i class="fa fa-cogs" style="font-size: 2em; color: #83752e"></i>
-                        </div>
-                        <!-- /.card-right -->
-                    </div>
-                </div>
-            </div>
-
-            <div class=" col-lg-3 col-md-3 col-sm-6">
-                <div class="card" style="height: 150px;">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card" style="height: 180px;">
                     <div class="card-body" style="background-color: #df683a; color: white">
-                        <div class=" pt-1 float-left" style="width: 70%">
+                        <div class=" float-left" style="width: 70%">
                             <h4><span><%=Resources.Resource.FaultyDevices%></span></h4>
-                            <h4 class="mb-0 ">
+                            <h4 >
                                 <span id="FaultyDevices" class="count float-left ">21</span>
                             </h4>
                         </div>
@@ -418,12 +405,31 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card" style="height: 150px;">
+            <div class=" col-lg-3 col-md-6 col-sm-6">
+                <div class="card" style="height: 180px;">
+                     <div class="card-body" style="background-color: #dfc43a; color: white">
+                        <div class=" float-left" style="width: 70%">
+                            <h4><span><%=Resources.Resource.UnresolvedIssues%></span></h4>
+                            <h4 >
+                                <span id="UnresolvedIssues" class="count float-left ">32</span>
+                            </h4>
+                        </div>
+                        <!-- /.card-left -->
+                        <div class=" float-right text-right" style="width: 30%">
+                            <i class="fa fa-cogs" style="font-size: 2em; color: #83752e"></i>
+                        </div>
+                        <!-- /.card-right -->
+                    </div>
+                   
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card" style="height: 180px;">
                     <div class="card-body" style="background-color: #2c95af; color: white">
-                        <div class=" pt-1 float-left" style="width: 70%">
+                        <div class="float-left" style="width: 70%">
                             <h4><span><%=Resources.Resource.TotalResolved%></span></h4>
-                            <h4 class="mb-0 ">
+                            <h4 >
                                 <span id="totalResolved" class="count float-left ">87</span>
                             </h4>
                         </div>
@@ -436,12 +442,12 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-3 col-sm-6">
-                <div class="card" style="height: 150px;">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card" style="height: 180px;">
                     <div class="card-body" style="background-color: #3c7526; color: white">
-                        <div class=" pt-1 float-left" style="width: 70%">
+                        <div class="float-left" style="width: 70%">
                             <h4><span><%=Resources.Resource.FixedToday%></span></h4>
-                            <h4 class="mb-0 ">
+                            <h4 >
                                 <span id="tempvalue" class="count float-left ">12</span>
                             </h4>
                         </div>
@@ -455,56 +461,64 @@
             </div>
         </div>
         <div style="clear: both"></div>
-        <div class=" divstyle" style="min-height: 300px; color: white">
+        <div class=" row divstyle" style=" color: white">
+            <div class="col-lg-12 col-sm-12 col-md-12" style="min-height: 300px;">
             <h5 style="border-bottom: 1px solid #3b3f39"><%=Resources.Resource.unresolvedbyBuilding%></h5>
-            <div style="width: 100%;">
-                <div style="width: 30%; float: left; border-bottom: 1px solid #3b3f39"><span><%=Resources.Resource.BuildingName%></span></div>
-                <div style="width: 60%; float: left; border-bottom: 1px solid #3b3f39"><%=Resources.Resource.Issue%></div>
-                <div style="width: 10%; float: left; border-bottom: 1px solid #3b3f39"><%=Resources.Resource.IssuesResolved%></div>
+            <div class="row" style="border-bottom: 1px solid #3b3f39; margin-bottom:-20px">
+                <div class="col-lg-3 col-md-3 col-sm-3" style="  float: left;" ><span><%=Resources.Resource.BuildingName%></span></div>
+                <div class="col-lg-7 col-md-7 col-sm-6" style=" float: left;"><%=Resources.Resource.Issue%></div>
+                <div class="col-lg-2 col-md-2 col-sm-3" style=" float: left;"><%=Resources.Resource.IssuesResolved%></div>
             </div>
-            <div style="width: 100%;">
-                <div style="width: 30%; float: left; border-bottom: 1px solid #3b3f39">1. 教三
+                <div class="row" style="border-bottom: 1px solid #3b3f39; margin-bottom:-20px">
+            <div style="width: 100%; height:50px">
+                <div style="width: 30%; float: left; ">1. 教三
 
                 </div>
-                <div style="width: 60%; height: 100%; float: left; border-bottom: 1px solid #3b3f39">
+                <div style="width: 60%; height: 100%; float: left;">
                     <div class="progressbar">
                         <div style="background-color: #482d72; width: 40%;">
                         </div>
                     </div>
                 </div>
-                <div style="width: 10%; float: left; border-bottom: 1px solid #3b3f39">
+                <div style="width: 10%; float: left;">
                     <span style="background-color: #dfc43a; border-radius: 6px; padding: 1px 8px 1px 8px">43</span>
                 </div>
             </div>
-            <div style="width: 100%;">
-                <div style="width: 30%; float: left; border-bottom: 1px solid #3b3f39">2. 教一
+                    </div>
+                 <div class="row" style="border-bottom: 1px solid #3b3f39; margin-bottom:-20px">
+            <div style="width: 100%;height:50px">
+                <div style="width: 30%; float: left; ">2. 教一
 
                 </div>
-                <div style="width: 60%; float: left; border-bottom: 1px solid #3b3f39">
+                <div style="width: 60%; float: left; ">
                     <div class="progressbar">
                         <div style="background-color: #214286; width: 60%;">
                         </div>
                     </div>
                 </div>
-                <div style="width: 10%; float: left; border-bottom: 1px solid #3b3f39;">
+                <div style="width: 10%; float: left; ">
                     <span style="background-color: #df683a; border-radius: 6px; padding: 1px 8px 1px 8px">70</span>
                 </div>
             </div>
-            <div style="width: 100%;">
-                <div style="width: 30%; float: left; border-bottom: 1px solid #3b3f39">3. 教四
+                     </div>
+                <div class="row" style="border-bottom: 1px solid #3b3f39; margin-bottom:-20px">
+            <div style="width: 100%;height:50px">
+                <div style="width: 30%; float: left">3. 教四
 
                 </div>
-                <div style="width: 60%; float: left; border-bottom: 1px solid #3b3f39">
+                <div style="width: 60%; float: left;">
                     <div class="progressbar">
                         <div style="background-color: #2c95af; width: 50%;">
                         </div>
                     </div>
                 </div>
-                <div style="width: 10%; float: left; border-bottom: 1px solid #3b3f39">
+                <div style="width: 10%; float: left;">
                     <span style="background-color: #2c95af; border-radius: 6px; padding: 1px 8px 1px 8px">65</span>
                 </div>
             </div>
-            <div style="width: 100%;">
+                    </div>
+                <div class="row" style=" margin-bottom:-20px">
+            <div style="width: 100%;height:50px">
                 <div style="width: 30%; float: left;">4. 教六 
 
                 </div>
@@ -518,13 +532,15 @@
                     <span style="background-color: #3c7526; border-radius: 6px; padding: 1px 8px 1px 8px">15</span>
                 </div>
             </div>
+                    </div>
+                </div>
         </div>
-        <div style="clear: both"></div>
-        <div class=" divstyle" style="margin-top: 20px">
+        <div style=" clear: both"></div>
+        <div class="row divstyle" style="margin-top: 20px">
+            <div class="col-lg-12 col-sm-12 col-md-12" style="min-height: 300px;">
             <h5><%=Resources.Resource.MyTasks%></h5>
             <!-- Editable table -->
-            <div>
-
+            
                 <div class="card-body">
                     <div id="table" class="table-editable">
                         <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x"
@@ -593,12 +609,15 @@
 
                     </div>
                 </div>
-            </div>
+            
+                </div>
             <!-- Editable table -->
         </div>
     </div>
+    </div>
 
-
+    
+    
     <script src="ScriptsLInks/highcharts.js"></script>
     <script src="ScriptsLInks/highcharts-more.js"></script>
     <script src="ScriptsLInks/highcharts-3d.js"></script>
@@ -753,6 +772,8 @@
 
     </script>
     <script>
+        console.log("Window width " +$(window).width());
+        console.log("Document width " + $(document).width());
         var $TABLE = $('#table');
         var $BTN = $('#export-btn');
         var $EXPORT = $('#export');

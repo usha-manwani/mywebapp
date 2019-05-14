@@ -48,7 +48,7 @@ window.onclick = function (event) {
     }
 }
 
-$(document).on("click", '<%#btnToSelect.ClientID%>', function () {
+$(document).on("click", '#MainContent_masterchildBody_btnToSelect', function () {
 
     var modal = document.getElementById('modalAccess');
     modal.style.display = "none";

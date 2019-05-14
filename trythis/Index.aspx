@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <asp:Button runat="server" ID="btnLogin" CommandName="Login" OnClick="LogIn"  
+                            <asp:Button runat="server" ID="btnLogin" CommandName="Login" OnClick="LogIn"
                                 Text="<%$Resources:Resource, Login %>" 
                                 Font-Size="Medium" BorderColor="Gray" ForeColor="White" CssClass="btn btn-default" />
                         </div>

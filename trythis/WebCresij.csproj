@@ -316,6 +316,14 @@
     <Content Include="AcController.aspx" />
     <Content Include="addDetails.aspx" />
     <Content Include="AddUser.aspx" />
+    <Content Include="ajaxfiles\Background.css" />
+    <Content Include="ajaxfiles\BaseScripts.debug.js" />
+    <Content Include="ajaxfiles\Common.debug.js" />
+    <Content Include="ajaxfiles\ComponentSet.debug.js" />
+    <Content Include="ajaxfiles\DynamicPopulate.debug.js" />
+    <Content Include="ajaxfiles\Localization.Resources.debug.js" />
+    <Content Include="ajaxfiles\Tabs.css" />
+    <Content Include="ajaxfiles\Tabs.debug.js" />
     <Content Include="Approve.aspx" />
     <Content Include="assets\css\charts.css" />
     <Content Include="assets\css\cs-skin-elastic.css" />
@@ -378,6 +386,7 @@
     <Content Include="css\Card.css" />
     <Content Include="css\chart.css" />
     <Content Include="css\Configcss.css" />
+    <Content Include="css\customstyle-responsive.css" />
     <Content Include="css\DropDownStyle.css" />
     <Content Include="css\getCardData.css" />
     <Content Include="css\logs.css" />
@@ -385,21 +394,23 @@
     <Content Include="css\style-responsive.css" />
     <Content Include="css\style.css" />
     <Content Include="css\table-responsive.css" />
-    <Content Include="css\tab_active.gif" />
-    <Content Include="css\tab_hover.gif" />
-    <Content Include="css\tab_Inactive.gif" />
-    <Content Include="css\tab_left_active.gif" />
-    <Content Include="css\tab_left_hover.gif" />
-    <Content Include="css\tab_left_inactive.gif" />
-    <Content Include="css\tab_right_active.gif" />
-    <Content Include="css\tab_right_hover.gif" />
-    <Content Include="css\tab_right_inactive.gif" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="Images\tab_active.gif" />
+    <Content Include="Images\tab_hover.gif" />
+    <Content Include="Images\tab_Inactive.gif" />
+    <Content Include="Images\tab_left_active.gif" />
+    <Content Include="Images\tab_left_hover.gif" />
+    <Content Include="Images\tab_left_inactive.gif" />
+    <Content Include="Images\tab_right_active.gif" />
+    <Content Include="Images\tab_right_hover.gif" />
+    <Content Include="Images\tab_right_inactive.gif" />
     <Content Include="css\to-do.css" />
     <Content Include="css\toggleswitch.css" />
     <Content Include="css\zabuto_calendar.css" />
     <Content Include="DeleteDocument.aspx" />
     <Content Include="Download.aspx" />
     <Content Include="editDelCard.aspx" />
+    <Content Include="Error\CustomError.aspx" />
     <Content Include="exportdata.aspx" />
     <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\desk1.png" />
     <Content Include="Images\AllImages\全部按钮\控制全页面-显示状态\lap1.png" />
@@ -472,6 +483,7 @@
     <Content Include="Scripts\Chart.bundle.min.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\Dashboard.js" />
     <Content Include="Scripts\fontawesome\all.js" />
     <Content Include="Scripts\fontawesome\all.min.js" />
     <Content Include="Scripts\fontawesome\brands.js" />
@@ -485,6 +497,8 @@
     <Content Include="Scripts\fontawesome\v4-shims.js" />
     <Content Include="Scripts\fontawesome\v4-shims.min.js" />
     <Content Include="Scripts\jquery.matchHeight.js" />
+    <Content Include="Scripts\tablesorter\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\WebForms\WebFormsBundle.js" />
     <Content Include="src\Chimera.cpp" />
     <Content Include="src\Chimera.h" />
     <Content Include="src\Chimera.htm" />
@@ -535,6 +549,7 @@
     <Content Include="src\X11\Chimera_X11.cpp" />
     <Content Include="src\X11\Chimera_X11.h" />
     <Content Include="src\basic_1.htm" />
+    <Content Include="UserControl\ResourcesControl.ascx" />
     <Content Include="VideoPlay\FAQ.aspx" />
     <Content Include="HomePage.aspx" />
     <Content Include="HtmlDemo.html" />
@@ -1745,7 +1760,6 @@
     <Content Include="Scripts\WebForms\MSAjax\MicrosoftAjaxWebServices.js" />
     <Content Include="Status.aspx" />
     <Content Include="tempratureCharts.aspx" />
-    <Content Include="test.aspx" />
     <Content Include="lib\advanced-datatable\images\Sorting icons.psd" />
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
@@ -2101,6 +2115,13 @@
     <Compile Include="controlsCam.aspx.designer.cs">
       <DependentUpon>controlsCam.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DeleteDocument.aspx.cs">
       <DependentUpon>DeleteDocument.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2122,6 +2143,13 @@
     <Compile Include="editDelCard.aspx.designer.cs">
       <DependentUpon>editDelCard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Error\CustomError.aspx.cs">
+      <DependentUpon>CustomError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error\CustomError.aspx.designer.cs">
+      <DependentUpon>CustomError.aspx</DependentUpon>
+    </Compile>
     <Compile Include="exportdata.aspx.cs">
       <DependentUpon>exportdata.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2135,6 +2163,14 @@
     </Compile>
     <Compile Include="Maintainance.aspx.designer.cs">
       <DependentUpon>Maintainance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserActivities\UserLogs.cs" />
+    <Compile Include="UserControl\ResourcesControl.ascx.cs">
+      <DependentUpon>ResourcesControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ResourcesControl.ascx.designer.cs">
+      <DependentUpon>ResourcesControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="VideoPlay\FAQ.aspx.cs">
       <DependentUpon>FAQ.aspx</DependentUpon>
@@ -2267,13 +2303,6 @@
     </Compile>
     <Compile Include="tempratureCharts.aspx.designer.cs">
       <DependentUpon>tempratureCharts.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="test.aspx.cs">
-      <DependentUpon>test.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="test.aspx.designer.cs">
-      <DependentUpon>test.aspx</DependentUpon>
     </Compile>
     <Compile Include="UploadFile.aspx.cs">
       <DependentUpon>UploadFile.aspx</DependentUpon>

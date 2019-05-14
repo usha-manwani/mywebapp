@@ -24,7 +24,12 @@ namespace WebCresij
                 fillTree.function(TreeMenuView1, e);
                 fillTree.function(TreeViewEdit, e);
                 fillTree.function(TreeViewDelete, e);
-            }        
+            }
+            else
+            {
+                UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                HttpContext.Current.Session["UserName"].ToString(), 3);
+            }
         }
 
         #region Add
@@ -172,11 +177,11 @@ namespace WebCresij
                         if(!string.IsNullOrEmpty(camip)&& !string.IsNullOrEmpty(id) &&!string.IsNullOrEmpty(pa) && !string.IsNullOrEmpty(portno))
                             result = fillTree.InsertCam(camip, id, pa, portno, tbSelectedClass.Text, instext.Text);
                     }
-                    if(result == 1)
+                    if(result == -2)
                     {
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "showcamins", "CamIns();", true);
                     }                                           
-                    else
+                    else if(result==-1)
                     {
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "alertip1", "duplicateIP();", true);
                     }
@@ -229,10 +234,11 @@ namespace WebCresij
                     tbSelectedClass.Text = TreeViewEdit.SelectedNode.Parent.Parent.ToolTip;
                     if (TreeViewEdit.SelectedNode.Parent.Text == "Camera")
                     {
-                        string p = TreeViewEdit.SelectedNode.Value;
+                        string p = TreeViewEdit.SelectedNode.Text;
                         try
                         {
                             DataTable dt = fillTree.camDetails(p, tbSelectedClass.Text);
+                            hiddencamName.Text = p;
                             camEditIP.Text = dt.Rows[0]["CameraIP"].ToString();
                             portEdit.Text = dt.Rows[0]["portNo"].ToString();
                             idEditcam.Text = dt.Rows[0]["ID"].ToString();
@@ -247,8 +253,9 @@ namespace WebCresij
                     }
                     else
                     {
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "noteditable", "DeviceNotEdit();", true);
-                        bindTree();
+                        txtRename.Text = TreeViewEdit.SelectedNode.Text;
+                        tbRename.Text = TreeViewEdit.SelectedNode.Text;
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowRename", "Rename();", true);
                     }
                 }
                 else if (level == 3)
@@ -258,6 +265,7 @@ namespace WebCresij
                 else
                 {
                     txtRename.Text = TreeViewEdit.SelectedNode.ToolTip;
+                    tbRename.Text = TreeViewEdit.SelectedNode.Text;
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowRename", "Rename();", true);
                 }
                 TreeViewEdit.SelectedNode.Selected = false;
@@ -272,7 +280,7 @@ namespace WebCresij
         {
             try
             {
-                string prent = tbSelectedClass.Text;
+                string prent = hiddencamName.Text;
                 fillTree.updateCam(camEditIP.Text, passEditcam.Text, idEditcam.Text, portEdit.Text, prent);
             }
             catch
@@ -301,6 +309,10 @@ namespace WebCresij
                 else if (v.Contains("Class"))
                 {
                     fillTree.updateClass(v, tbRename.Text);
+                }
+                else
+                {
+                    fillTree.UpdateCentralControl(tbRename.Text, tbSelectedClass.Text);
                 }
             }
             catch

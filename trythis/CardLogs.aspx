@@ -5,8 +5,7 @@
     <link href="lib/advanced-datatable/css/demo_table.css" rel="stylesheet" />
     <link rel="stylesheet" href="lib/advanced-datatable/css/DT_bootstrap.css" />
     <link href="css/DropDownStyle.css" rel="stylesheet" />
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.js"></script>
+    <script src="Scripts/tablesorter/jquery.tablesorter.min.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
@@ -26,7 +25,8 @@
                 <div class="row mb">
                     <div class="col">
                         <asp:DropDownList ID="ddlsort" runat="server" AutoPostBack="true"
-                            CssClass="btn btn-default border dropdown1" OnSelectedIndexChanged="Ddlsort_SelectedIndexChanged">
+                            CssClass="btn btn-default border dropdown1" 
+                            OnSelectedIndexChanged="Ddlsort_SelectedIndexChanged">
                             <asp:ListItem Value="Name" Text="<%$Resources:Resource, User %>"></asp:ListItem>
                             <asp:ListItem Value="Time" Text="<%$Resources:Resource, Time %>"></asp:ListItem>
                             <asp:ListItem Value="Location" Text="<%$Resources:Resource, Location %>"></asp:ListItem>
@@ -36,7 +36,7 @@
                             Text='<i class="fa fa-sort-alpha-down"></i>'></asp:LinkButton>
                     </div>
                     <div class="col">
-                        <asp:DropDownList ID="ddlPageSize" runat="server"
+                        <asp:DropDownList ID="ddlPageSize" runat="server"  Width="100px"
                             AutoPostBack="true" CssClass="btn btn-default border dropdown1"
                             OnSelectedIndexChanged="PageSize_Changed">
                             <asp:ListItem Text="10" Value="10" />

@@ -6,11 +6,15 @@ $(function () {
     }
     var chat = $.connection.myHub;
     ipAddress = document.getElementById("InputIP").value;
+    document.getElementById("MainContent_masterchildBody_iptocam").value = ipAddress;
+    
+    console.log("IP address from InputIP is " + document.getElementById("MainContent_masterchildBody_iptocam").value);
     //sessionStorage.setItem('ipofremote', ipAddress);
     chat.client.broadcastMessage = function (name, message) {
         var f = document.getElementById("devicestatus");
         var lastStatus = f.innerHTML;
         if (name == ipAddress) {
+            console.log("data received from " + ipAddress + "  " + message);
             if (lastStatus == "Offline") {
                 AllNormal();
             }            
@@ -56,37 +60,35 @@ $(function () {
                 if (arraydata[9] == 'Stop') {
                     var img = document.getElementById("Scdown");
                     img.src = "Images/greyed/scdown.png";
-                    $("#Scdown").removeClass('oncolor');
+                    $(img).removeClass('oncolor');
                     var img = document.getElementById("Scup");
                     img.src = "Images/greyed/scup.png";
-                    $("#Scup").removeClass('oncolor');
-                    
+                    $(img).removeClass('oncolor');
                     var img = document.getElementById("scStop");
                     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png";
-                    $("#scStop").addClass('oncolor');
-                    
+                    $(img).addClass('oncolor');                    
                 }
                 else if (arraydata[9] == 'Down') {
                     var img = document.getElementById("Scdown");
                     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png";
-                    $("#Scdown").addClass('oncolor');
+                    $(img).addClass('oncolor');
                     var img = document.getElementById("Scup");
                     img.src = "Images/greyed/scup.png";
-                    $("#Scup").removeClass('oncolor');
+                    $(img).removeClass('oncolor');
                     var img = document.getElementById("scStop");
                     img.src = "Images/greyed/scstop.png";
-                    $("#sctop").removeClass('oncolor');
+                    $(img).removeClass('oncolor');
                 }
                 else if (arraydata[9] == 'Up') {
                     var img = document.getElementById("Scup");
                     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_132.png";
-                    $("#Scup").addClass('oncolor');
+                    $(img).addClass('oncolor');
                     var img = document.getElementById("Scdown");
                     img.src = "Images/greyed/scdown.png";
-                    $("#Scdown").removeClass('oncolor');
+                    $(img).removeClass('oncolor');
                     var img = document.getElementById("scStop");
                     img.src = "Images/greyed/scstop.png";
-                    $("#sctop").removeClass('oncolor');
+                    $(img).removeClass('oncolor');
                 }
                 if (arraydata[8] == 'Open') {
                     var curtain = document.getElementById('CurtainOpen');
@@ -356,7 +358,7 @@ $(function () {
                     
                 }
             }
-            if (arraydata[2] == 'Offline') {
+            if (arraydata[2] == 'Offline' || arraydata[1] =='Unsuccessful') {
                 allGrey();
                 document.getElementById("devicestatus").innerHTML = "Offline";
                 document.getElementById("devicestatus").style.color = "white";
@@ -365,6 +367,7 @@ $(function () {
     };
 
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
+        chat.server.sendControlKeys(ipAddress, "8B B9 00 03 05 01 09");
         SetVolume = function (val) {
             var lastVal = this.document.getElementById("volchange").innerText;
             if (lastVal > val) {
@@ -551,6 +554,44 @@ function AllNormal() {
     $("#vol-control").prop("disabled", false);
     $("#mic-control").prop("disabled", false);
     $("#yellowbuttons").addClass("imgclick");
+}
+
+
+function Cam1(ipadd) {
+    var player1 = document.getElementById('plugin_inst_1');
+    document.getElementById('src1').value = ipadd;
+    player1.play(ipadd);
+    var player2 = document.getElementById('plugin_inst_2');
+
+    var src2 = document.getElementById("src2");
+    var videostream = ipadd + "cam/realmonitor?channel=1&subtype=1";
+    player2.play(videostream);
+    src2.value = videostream;
+    
+}
+function Cam2(ipadd) {
+    var player2 = document.getElementById('plugin_inst_3');
+    var src3 = document.getElementById("src3");
+    var videostream = ipadd + "cam/realmonitor?channel=1&subtype=1";
+    src3.value = videostream;
+    player2.play(videostream);
+    
+}
+function Cam3(ipadd) {
+    var player2 = document.getElementById('plugin_inst_4');
+    var src4 = document.getElementById("src4");
+    var videostream = ipadd + "cam/realmonitor?channel=1&subtype=1";
+    src4.value = videostream;
+    player2.play(videostream);
+    
+}
+function Cam4(ipadd) {
+    var player2 = document.getElementById('plugin_inst_5');
+    var src5 = document.getElementById("src5");
+    var videostream = ipadd + "cam/realmonitor?channel=1&subtype=1";
+    src5.value = videostream;
+    player2.play(videostream);
+    
 }
 
 

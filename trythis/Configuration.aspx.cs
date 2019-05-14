@@ -14,6 +14,8 @@ namespace WebCresij
         {
             if (!IsPostBack)
             {
+                UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                HttpContext.Current.Session["UserName"].ToString(), 13);
                 string query = "select * from Institute_Details";
                 DataTable dt = PopulateTree.ExecuteCommand(query);
                 ddlInstitute.DataSource = dt;
@@ -23,6 +25,7 @@ namespace WebCresij
                 string select = Resources.Resource.Select;
                 ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));                
             }
+            
         }
         protected void ddlInstitute_SelectedIndexChanged(object sender, EventArgs e)
         {

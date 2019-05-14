@@ -115,11 +115,17 @@
                 }
 
                 else if (arraydata[2] == 'Offline') {
-                    for (j = 2; j < arraydata.length - 1; j++) {
+                    tab.rows[i].cells[2].innerHTML = 'Offline';
+                    for (j = 3; j < arraydata.length - 1; j++) {
                         tab.rows[i].cells[j].innerHTML = arraydata[j];
                     }
                 }
-                break;
+                else if (arraydata[1] == 'Unsuccessful') {
+                    tab.rows[i].cells[2].innerHTML = 'Offline';
+                    for (j = 3; j < arraydata.length - 1; j++) {
+                        tab.rows[i].cells[j].innerHTML = arraydata[j];
+                    }
+                }
                 //else if (arraydata[1] == "PanelKey") {
                 //    switch (arraydata[2]) {
                 //        case 'ComputerSystemON':
@@ -140,7 +146,7 @@
         _doPostBack("<%=up1.UniqueID %>", "");
 
     };
-    $.connection.hub.start({ waitForPageLoad: false }).done(function () {
+    $.connection.hub.start().done(function () {
        
         chat.server.sendData();
         $(document).on("click", "#refresh", function () {

@@ -145,6 +145,7 @@ namespace WebCresij
             if (TreeMenuView.SelectedNode.Depth == 3)
             {
                 HttpContext.Current.Session["LocToDisplay"] = TreeMenuView.SelectedNode.Text;
+                HttpContext.Current.Session["LocForCam"] = TreeMenuView.SelectedValue;
                 string ip = "";
                 try
                 {

@@ -10,7 +10,9 @@
     font-family: 'Ruda', sans-serif;
     cursor: pointer;
     color: #2f323a;
+    /*font-size: 1em;*/
 }
+
 .fancy-green .ajax__tab_header {
     cursor: pointer;
 }
@@ -22,12 +24,12 @@
 }*/
 
 .fancy .ajax__tab_header {
-    font-size: 20px;
+    
     font-weight: bold;
     color: #000;
-    font-family: 'Ruda', sans-serif;
+    font-size:11px!important;
     cursor: pointer;
-    background-color: chocolate;
+    background-color: chocolate !important;
     border: 1px solid aquamarine !important;
     border-radius: 10px !important;
     border-bottom: none !important;
@@ -35,36 +37,35 @@
 
     .fancy .ajax__tab_active .ajax__tab_outer, .fancy .ajax__tab_header .ajax__tab_outer, .fancy .ajax__tab_hover .ajax__tab_outer {
         color: black;
-        background-color: chocolate;
+        /*background-color:blue !important;*/
     }
 
     .fancy .ajax__tab_active .ajax__tab_inner, .fancy .ajax__tab_header .ajax__tab_inner, .fancy .ajax__tab_hover .ajax__tab_inner {
         color: black;
-        background-color: chocolate;
+        /*background-color:brown !important;*/
         /*margin-left: 16px;*/ /* offset the width of the left image */
     }
 
     .fancy .ajax__tab_active .ajax__tab_tab, .fancy .ajax__tab_hover .ajax__tab_tab, .fancy .ajax__tab_header .ajax__tab_tab {
         /*margin: 16px 16px 0px 0px;*/
         color: black;
-        background-color: chocolate;
+        /*background-color: chocolate!important;*/
     }
 
 .fancy .ajax__tab_hover .ajax__tab_tab, .fancy .ajax__tab_active .ajax__tab_tab {
     color: cadetblue;
-    background-color: chocolate;
+    /*background-color:darkgreen !important;*/
 }
 
 .fancy .ajax__tab_body {
     font-family: Arial;
-    font-size:small !important;
+    font-size: 6pt !important;
     border-top: 0;
     border: 1px solid aquamarine !important;
     padding: 8px;
     border-radius: 10px;
     box-shadow: 0 0 10px #999 !important;
     border-top: none !important;
-    background-color:white
 }
 .modal {
     display: none; /* Hidden by default */

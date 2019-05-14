@@ -1,5 +1,6 @@
 /*---LEFT BAR ACCORDION----*/
-$(function() {
+$(function () {
+   
   $('#nav-accordion').dcAccordion({
     eventType: 'click',
     autoClose: true,
@@ -20,7 +21,7 @@ var Script = function () {
 
     jQuery('#sidebar .sub-menu > a').click(function () {
         var o = ($(this).offset());
-        diff = 300 - o.top;
+        diff = 250 - o.top;
         if (diff > 0)
             $("#sidebar").scrollTo("-=" + Math.abs(diff), 500);
         else
@@ -32,18 +33,39 @@ var Script = function () {
     //    sidebar toggle
 
     $(function () {
-        function responsiveView() {
+        function responsiveView()
+        {
+            console.log("Window width " +$(window).width());
+            console.log("Document width "+$(document).width())
             var wSize = $(window).width();
+            
             if (wSize <= 768) {
                 $('#container').addClass('sidebar-close');
-                $('#container').addClass('mattha');
+                
                 $('#sidebar > ul').hide();
+                
             }
 
             if (wSize > 768) {
                 $('#container').removeClass('sidebar-close');
-                $('#container').removeClass('mattha');
+              
                 $('#sidebar > ul').show();
+            }
+            if (wSize > 1050 && wSize < 1150)
+            {
+
+                $('div').css('font-size', "14px");
+                console.log("font decresed");
+            }
+            if (wSize > 1150)
+            {
+                $('div').css('font-size', "16px");
+                console.log("font incresed");
+            }
+            if (wSize<1050)
+            {
+                $('div').css('font-size', "12px");
+                console.log("font smallest");
             }
         }
         $(window).on('load', responsiveView);
@@ -57,14 +79,15 @@ var Script = function () {
                 'margin-left': '0px'
             });
             $('#sidebar').css({
-                'margin-left': '-300px'
+                'margin-left': '-250px'
             });
             $('#sidebar > ul').hide();
             $("#container").addClass("sidebar-closed");
-        } else {
+        }
+        else {
 
             $('#main-content').css({
-                'margin-left': '300px'
+                'margin-left': '250px'
             });
             $('#sidebar > ul').show();
             $('#sidebar').css({
@@ -72,6 +95,7 @@ var Script = function () {
             });
             $("#container").removeClass("sidebar-closed");
         }
+        
     });
 
 
@@ -139,3 +163,5 @@ jQuery(document).ready(function( $ ) {
     });
    
 });
+
+

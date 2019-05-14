@@ -2,8 +2,6 @@ Chart.defaults.gauge = Chart.defaults.doughnut;
 
 var gauge = Chart.controllers.doughnut.extend({
     draw: function (ease) {
-        
-
 
         Chart.controllers.doughnut.prototype.draw.call(this, ease);
         var meta = this.getMeta();
@@ -33,7 +31,7 @@ var gauge = Chart.controllers.doughnut.extend({
         var textRadius = outerRadius * panel.scaleTextRadius / 100;
         
         ctx.translate(cx, cy);
-        ctx.font = /*"" + panel.scaleTextSize +*/ "6px, Helvetica, Arial, sans-serif";
+        ctx.font = "" + panel.scaleTextSize + "px 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
         ctx.fillStyle = panel.scaleTextColor || 'rgba(255, 255, 255, 1)';
         
         panel.scales.forEach(function(value, index, arr) {
@@ -104,6 +102,8 @@ var gauge = Chart.controllers.doughnut.extend({
         chart.chart.config.data.datasets[0].backgroundColor = backgroundColor;
         chart.chart.config.data.datasets[0].hoverBackgroundColor = hoverBackgroundColor;
         chart.chart.config.data.datasets[0].values = values;
+        chart.chart.config.options.maintainAspectRatio = false;
+        //chart.chart.config.options.responsive = false;
 
         Chart.controllers.doughnut.prototype.initialize.call(this, chart, datasetIndex);
     }

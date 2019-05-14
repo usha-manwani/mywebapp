@@ -360,7 +360,7 @@ namespace WebCresij
 
         public int DelCC(string ccip, string loc)
         {
-            int result = -1;
+            int result ;
             using(SqlConnection con= new SqlConnection(constr))
             {
                 using(SqlCommand cmd = new SqlCommand("sp_delCC", con))
@@ -368,13 +368,16 @@ namespace WebCresij
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@ip", ccip);
                     cmd.Parameters.AddWithValue("@loc", loc);
+                    cmd.Parameters.Add("@result", SqlDbType.Int);
+                    cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                     try
                     {
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
                         }
-                        result=cmd.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
+                        result= Convert.ToInt32(cmd.Parameters["@result"].Value);
                     }
                     catch (Exception)
                     {
@@ -600,7 +603,7 @@ namespace WebCresij
 
         #region Edit details
 
-        public DataTable camDetails(string ip, string loc)
+        public DataTable camDetails(string camName, string loc)
             {
                 DataTable dt = new DataTable();
                 using (SqlConnection con = new SqlConnection(constr))
@@ -609,7 +612,7 @@ namespace WebCresij
                     {
                         cmd.Parameters.Clear();
                     
-                        cmd.Parameters.AddWithValue("@camIP", ip);
+                        cmd.Parameters.AddWithValue("@camIP", camName);
                         cmd.Parameters.AddWithValue("@loc", loc);
                         try
                         {
@@ -629,7 +632,7 @@ namespace WebCresij
                 return dt;
             }
 
-            public void updateCam(string ip, string pass, string id, string port,string loc)
+            public void updateCam(string ip, string pass, string id, string port,string camName)
             {
                 int portNo = Convert.ToInt32(port);
                 DataTable dt = new DataTable();
@@ -642,7 +645,7 @@ namespace WebCresij
                         cmd.Parameters.AddWithValue("@ip", ip);
                         cmd.Parameters.AddWithValue("@pass", pass);
                         cmd.Parameters.AddWithValue("@port", portNo);
-                        cmd.Parameters.AddWithValue("@loc", loc);
+                        cmd.Parameters.AddWithValue("@camName", camName);
                         try
                         {
                             con.Open();
@@ -738,6 +741,33 @@ namespace WebCresij
 
                 }
             }
+
+        public void UpdateCentralControl(string ip, string loc)
+        {
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_UpdateCentralControl", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Ip", ip);
+                    cmd.Parameters.AddWithValue("@className", loc);
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+
+                }
+            }
+        }
         #endregion
 
         #region cardReaderTree
@@ -902,7 +932,7 @@ namespace WebCresij
             }
             return result;
         }
-       public static string getIP(string loc)
+        public static string getIP(string loc)
         {
             string result = "";
             using (SqlConnection con = new SqlConnection(constr))
@@ -1208,6 +1238,39 @@ namespace WebCresij
             }
             return ds;
         }
+        #region cam
+        public DataTable CamDetails (string loc)
+        {
+            DataTable dtcam = new DataTable();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "select CameraIP, ID, password from Camera_Details where location in (select classID from Class_Details where ID = '" + loc+ "')";
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    try
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            da.Fill(dtcam);
+
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return dtcam;
+        }
+        #endregion
+
     }
     public class ScanReader
     {
@@ -1240,8 +1303,10 @@ namespace WebCresij
             }
             return dt;
         }
-    }   
+    }
 
    
-    
+
+
+
 }

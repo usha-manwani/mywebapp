@@ -18,12 +18,12 @@ function checkTime() {
 function timeset2() {
     alert("same time");
 }
-function timesetSame() {
-    var message = ' <%=Resources.Resource.AlertTime%>'
+function timesetSame(message) {
+    //var message = ' <%=Resources.Resource.AlertTime%>'
     alert(message);
 }
-function timewrong() {
-    var message = ' <%=Resources.Resource.AlertTime2%>'
+function timewrong(message) {
+   // var message = ' <%=Resources.Resource.AlertTime2%>'
     alert(message);
 }
 function confirm() {
@@ -33,27 +33,28 @@ function confirm() {
 function timevalue() {
     alert("please use different time hours!!")
 }
-function timeset() {
-    var message = ' <%=Resources.Resource.AlertTime4%>'
+function timeset(message) {
+    //var message = ' <%=Resources.Resource.AlertTime4%>'
     alert(message);
 }
 function importFile() {
     document.getElementById('uploadDiv').style.display = "block";
 }
-function importEmptyFile() {
-    var message = ' <%=Resources.Resource.AlertTime5%>'
+function importEmptyFile(message) {
+   // var message = ' <%=Resources.Resource.AlertTime5%>'
     alert(message);
 }
-function AlertSuccess() {
-    var message = ' <%=Resources.Resource.AlertTime3%>'
+function AlertSuccess(message) {
+    // var message = ' <%=Resources.Resource.AlertTime3%>'
+   
     alert(message);
 }
-function AlertFail() {
-    var message = ' <%=Resources.Resource.AlertError1%>'
+function AlertFail(message) {
+    //var message = ' <%=Resources.Resource.AlertError1%>'
     alert(message);
 }
-function fileFormat() {
-    var message = ' <%=Resources.Resource.AlertTime6%>'
+function fileFormat(message) {
+    //var message = ' <%=Resources.Resource.AlertTime6%>'
     alert(message);
 }
 function text_changed(textobj) {

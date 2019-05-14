@@ -2,8 +2,19 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
     <link href="css/Configcss.css" rel="stylesheet" />
+    <link href="ajaxfiles/Background.css" rel="stylesheet" />
+    <link href="ajaxfiles/Tabs.css" rel="stylesheet" />
+   <style>
+      
+   </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterBody" runat="server">
+    <script src="ajaxfiles/Localization.Resources.debug.js"></script>
+    <script src="ajaxfiles/Common.debug.js"></script>
+    <script src="ajaxfiles/ComponentSet.debug.js"></script>
+    <script src="ajaxfiles/BaseScripts.debug.js"></script>
+    <script src="ajaxfiles/Tabs.debug.js"></script>    
+    <script src="ajaxfiles/DynamicPopulate.debug.js"></script>
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
     <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
@@ -17,7 +28,7 @@
                             <span><%=Resources.Resource.SelectInsGrade%></span> - &nbsp;
                         </div>
                         <div class=" col-lg-2 col-sm-6 col-md-6 float-left">
-                            <asp:DropDownList Width="150px" AutoPostBack="true"
+                            <asp:DropDownList Width="100px" AutoPostBack="true"
                                 OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                                 CssClass="btn btn-default border dropdown" ID="ddlInstitute"
                                 data-toggle="dropdown" runat="server">
@@ -26,7 +37,7 @@
                         </div>
                         &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;
          <div class="col-lg-2 col-sm-6 col-md-6 float-none">
-             <asp:DropDownList Width="150px" ID="ddlGrade"
+             <asp:DropDownList Width="100px" ID="ddlGrade"
                  OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"
                  CssClass="btn btn-default border dropdown" data-toggle="dropdown"
                  AutoPostBack="true" runat="server">
@@ -37,7 +48,8 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
-        <div>
+        <div class="row" >
+            <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12">
             <cc1:TabContainer ID="tb1" runat="server" CssClass="fancy fancy-green">
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
@@ -45,7 +57,7 @@
                     <span><%=Resources.Resource.SystemSetup%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
-                        <fieldset class="group" style="width: 80%">
+                        <fieldset class="group" style="width: 80%;font-size:small">
                             <legend align="center" style="width: auto"><span><%=Resources.Resource.ConfigSettings%></span></legend>
                             <div class="row">
                                 <div class="col-lg-6 col-sm-12 col-md-12" style="font-size: small">
@@ -156,11 +168,11 @@
                                 </div>
                             </div>
                             <div class="row" style="padding-right: 10px;">
-                                <div class="col-lg-6 col-sm-12 col-md-12">
-                                    <fieldset class="group" style="box-shadow: 0 0 10px #999;">
+                                <div class="col-xl-6 col-lg-12 col-sm-12 col-md-12">
+                                    <fieldset class="group" style="box-shadow: 0 0 10px #999; ">
                                         <legend style="width: auto" align="center"><span><%=Resources.Resource.Alarm%></span></legend>
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: x-small">
+                                        <div class="row" >
+                                            <div class="col-lg-6 col-md-6 col-sm-6" style="font-size: small">
                                                 <ul class="checkbox">
                                                     <li>
                                                         <input type="checkbox" id="cb22" name="sys" value="pepperoni" />
@@ -219,7 +231,7 @@
                                         </div>
                                     </fieldset>
                                 </div>
-                                <div class="col-lg-6 col-sm-12 col-md-12">
+                                <div class="col-xl-6 col-lg-12 col-sm-12 col-md-12">
                                     <fieldset class="group" style="box-shadow: 0 0 10px #999;">
                                         <legend style="width: auto" align="center"><span><%=Resources.Resource.IO%></span></legend>
                                         <div class="row">
@@ -304,14 +316,14 @@
                     </HeaderTemplate>
                     <ContentTemplate>
                         <div class="row" style="margin-right: 5px;">
-                            <div class="col-lg-6">
-                                <div class="row">
+                            <div class="col-lg-6 " >
+                                <div class="row" style="padding-bottom:30px">
                                     <fieldset class="group" style="box-shadow: 0 0 10px #999;">
                                         <legend align="center" style="width: auto"><span><%=Resources.Resource.Options%></span></legend>
                                         <div style="min-width: 300px;"></div>
                                     </fieldset>
                                 </div>
-                                <div class="row">
+                                <div class="row" style="padding-bottom:30px">
                                     <fieldset class="group" style="box-shadow: 0 0 10px #999;">
                                         <legend align="center" style="width: auto"><span><%=Resources.Resource.Data%></span></legend>
                                         <div style="min-width: 300px;"></div>
@@ -347,7 +359,7 @@
                                         <asp:Label runat="server" Text="<%$Resources:Resource, HexCode %>"></asp:Label>
                                     </div>
 
-                                    <div class="row" style="margin-left: 5px; margin-right: 15px; font-size: small">
+                                    <div class="row" style="margin-left: 5px; margin-right: 5px; font-size: small">
                                         <div class="col" style="margin-left: 5px; margin-right: 15px; font-size: small">
                                             <label for="tb1"><span><%=Resources.Resource.ProjOn%></span></label>&nbsp;
                                         </div>
@@ -395,7 +407,8 @@
                                             <input type="text" class="form-control" />
                                         </div>
                                     </div>
-                                    <div class="row" style="text-align: center">
+
+                                    <div class="row" style="text-align: center;padding-bottom:30px">
                                         <div class="col">
                                             <button id="projok" class="btn btn-group border-dark" value="Cancel" >
                                                 <span><%=Resources.Resource.Ok%></span></button>
@@ -585,7 +598,7 @@
                             <div class=" col-lg-6">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
                                     <legend style="width: auto" align="center"><%=Resources.Resource.FreshAirSystem%></legend>
-                                    <ul class="checkbox" style="font-size: small">
+                                    <ul class="checkbox" >
                                         <li style="display: inline-block">
                                             <input type="checkbox" id="air1" name="air1" value="" />
                                             <label for="air1"><%=Resources.Resource.AutoOn%></label>
@@ -600,7 +613,7 @@
                             <div class=" col-lg-6">
                                 <fieldset class="group" style="box-shadow: 0 0 10px #999;">
                                     <legend style="width: auto" align="center"><%=Resources.Resource.AC%></legend>
-                                    <ul class="checkbox" style="font-size: small">
+                                    <ul class="checkbox" >
                                         <li style="display: inline-block">
                                             <input type="checkbox" id="air2" name="air2" value="" />
                                             <label for="air2"><%=Resources.Resource.AutoOn%></label>
@@ -633,14 +646,15 @@
                     <span><%=Resources.Resource.Recording%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
-                        <div class="row" style="width: 80%">
+                        <div class="row" style="width: 80%;padding-bottom:30px">
                             <fieldset class="group" style="width: 100%; box-shadow: 0 0 10px #999; margin-left: 5px;">
                                 <legend align="center" style="width: auto"><span><%=Resources.Resource.BaudParity%></span></legend>
-                                <div class="row" style="margin-left: 5px; margin-right: 5px; font-size: small">
+                                <div class="row" style="margin-left: 5px; margin-right: 5px; font-size: small;padding-bottom:30px">
                                     <div class="col">
-                                        <label for="baud1" style="font-size: small"><span><%=Resources.Resource.BaudRate%></span> &nbsp;</label>
+                                        <label for="baud1" ><span><%=Resources.Resource.BaudRate%></span> &nbsp;</label>
                                         <select id="baud1" class="btn dropdown btn-group" 
-                                            style="border: 1px solid chocolate; font-size: small">
+                                            style="border: 1px solid chocolate; font-size: small;width:80px!important">
+                                            
                                             <option value="1">1200</option>
                                             <option value="2">2400</option>
                                             <option value="3">4800</option>
@@ -653,7 +667,7 @@
                                         </select>
                                     </div>
                                     <div class="col">
-                                        <label for="parity1" style="font-size: small"><span><%=Resources.Resource.Parity%></span> &nbsp;</label>
+                                        <label for="parity1" ><span><%=Resources.Resource.Parity%></span> &nbsp;</label>
                                         <select id="parity1" class="btn dropdown btn-group"
                                             style="border: 1px solid chocolate; font-size: small">
                                             <option value="-1"><span><%=Resources.Resource.none%></span></option>
@@ -666,7 +680,7 @@
                         </div>
                         <div class="row" style="width: 80%;">
                             <div class="col">
-                                <fieldset class="group" style="box-shadow: 0 0 10px #999; width: 100%; font-size: small">
+                                <fieldset class="group" style="box-shadow: 0 0 10px #999; width: 100%;">
                                     <legend align="center" style="width: auto"><span><%=Resources.Resource.GroupCode%></span></legend>
                                     <label for="sys1" style="margin-left: 10px;"><span><%=Resources.Resource.SystemHexOn%></span></label>
                                     <input type="text" style="margin-left: 10px;" id="sys1" class="form-control" />
@@ -714,29 +728,29 @@
                     </HeaderTemplate>
                     <ContentTemplate>
                         <div class="row">
-                            <div class="col" style="font-size: small">
+                            <div class="col-lg-3 col-md-6 col-sm-6" style="font-size: small">
                                 <input type="radio" style="display: inline-block" name="cam" id="radio1" value="" />
                                 <label for="radio1"><span><%=Resources.Resource.TeacherCam%></span></label>
                             </div>
-                            <div class="col" style="font-size: small">
+                            <div class="col-lg-3 col-md-6 col-sm-6" style="font-size: small">
                                 <input type="radio" id="radio2" style="display: inline-block" name="cam" value="" />
                                 <label for="radio2"><span><%=Resources.Resource.StudentCam%></span></label>
                             </div>
-                            <div class="col" style="font-size: small">
+                            <div class="col-lg-3 col-md-6 col-sm-6" style="font-size: small">
                                 <input type="radio" style="display: inline-block" id="radio3" name="cam" value="" />
                                 <label for="radio3">Third Camera</label>
                             </div>
-                            <div class="col" style="font-size: small">
+                            <div class="col-lg-3 col-md-6 col-sm-6" style="font-size: small">
                                 <input type="radio" id="radio4" style="display: inline-block" name="cam" value="" />
                                 <label for="radio3">Fourth Camera</label>
                             </div>
                         </div>
-                        <div class="row" style="margin-left: 5px;">
+                        <div class="row" style="margin-left: 5px; margin-bottom:30px">
                             <fieldset class="group" style="box-shadow: 0 0 10px #999; width: 80%">
                                 <legend align="center" style="width: auto"><span><%=Resources.Resource.BaudParity%></span></legend>
-                                <div class="row" style="margin-left: 5px; margin-right: 5px; font-size: small">
+                                <div class="row" style="margin-left: 5px; margin-right: 5px; padding-bottom:30px">
                                     <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <label for="baud2" style="font-size: small">
+                                        <label for="baud2" >
                                             <span><%=Resources.Resource.BaudRate%></span> &nbsp;</label>
                                         <select id="baud2" class="btn dropdown btn-group" 
                                             style="border: 1px solid chocolate; font-size: small">
@@ -752,7 +766,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-12">
-                                        <label for="parity2" style="font-size: small">
+                                        <label for="parity2" >
                                             <span><%=Resources.Resource.Parity%></span> &nbsp;</label>
                                         <select id="parity2" class="btn dropdown btn-group" 
                                             style="border: 1px solid chocolate; font-size: small">
@@ -764,7 +778,7 @@
                                 </div>
                             </fieldset>
                         </div>
-                        <div class="row" style="margin-left: 5px;">
+                        <div class="row" style="margin-left: 5px;margin-bottom:5px">
                             <fieldset class="group" style="box-shadow: 0 0 10px #999; width: 80%;">
                                 <legend align="center" style="width: auto"><span><%=Resources.Resource.GroupCode%></span></legend>
                                 <div class="row" style="margin-right: 5px;">
@@ -817,17 +831,17 @@
                             </fieldset>
                         </div>
                         <div class="row" style="text-align: center; width: 80%; margin-left: 5px;">
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
                                 <button class="btn btn-group  border-dark" id="camok" value="Ok">
                                     <span><%=Resources.Resource.Ok%></span>
                                 </button>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
                                 <button class="btn btn-group border-dark" id="camsave" value="Save">
                                     <span><%=Resources.Resource.Save%></span>
                                 </button>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="col-lg-4 col-md-4 col-sm-4">
                                 <button class="btn btn-group border-dark" id="camcancel" value="Cancel">
                                     <span><%=Resources.Resource.Cancel%></span>
                                 </button>
@@ -836,6 +850,7 @@
                     </ContentTemplate>
                 </cc1:TabPanel>
             </cc1:TabContainer>
+             </div>
         </div>
     </div>
 </asp:Content>

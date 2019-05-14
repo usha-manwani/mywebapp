@@ -27,6 +27,7 @@
               outline:0;
               width:600px;
           }
+          
         </style>
     <link href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="Stylesheet" type="text/css" />
     <script src="http://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
@@ -49,7 +50,7 @@
         <h4><span><%=Resources.Resource.AddNewUser1%></span></h4>
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
-        <div class="form-group row" >
+        <div class="form-group row rowMargin" >
             <asp:Label runat="server" AssociatedControlID="User_Name" 
                 CssClass="col-lg-2 control-label">
                 <span><%=Resources.Resource.User%></span></asp:Label>            
@@ -57,7 +58,7 @@
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="User_Name"
                     CssClass="text-danger" ErrorMessage="The user name field is required." />            
         </div>
-        <div class="form-group row">
+        <div class="form-group row rowMargin">
             <asp:Label runat="server" AssociatedControlID="UserID" 
                 CssClass="col-lg-2 control-label"> <span><%=Resources.Resource.UserID%></span></asp:Label>           
                 <asp:TextBox runat="server" ID="UserID" CssClass="form-control col-lg-3" 
@@ -67,7 +68,7 @@
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="UserID"
                     CssClass="text-danger" ErrorMessage="The User ID field is required." />            
         </div>        
-        <div class="form-group row">
+        <div class="form-group row rowMargin">
             <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-lg-2 control-label">
                  <span><%=Resources.Resource.Password%></span></asp:Label>            
                 <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control col-lg-3"
@@ -78,7 +79,7 @@
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Password"
                     CssClass="text-danger" ErrorMessage="The password field is required." />            
         </div>
-        <div class="form-group row">
+        <div class="form-group row rowMargin">
             <asp:Label runat="server" AssociatedControlID="ConfirmPassword" 
                 CssClass="col-lg-2 control-label">
                  <span><%=Resources.Resource.ConfirmPassword%></span></asp:Label>           
@@ -89,7 +90,7 @@
                     CssClass="text-danger" Display="Dynamic"
                     ErrorMessage="The password and confirmation password do not match." />           
         </div>
-        <div class="form-group row">
+        <div class="form-group row rowMargin">
             <asp:Label runat="server" AssociatedControlID="CheckBoxList1" 
                 CssClass="col-lg-2 control-label" >
                 <span><%=Resources.Resource.Role%></span>
@@ -103,7 +104,7 @@
                         <asp:ListItem Text="<%$Resources:Resource, EditUsers %>" Value="6"></asp:ListItem>                       
                     </asp:CheckBoxList>                
             </div>
-        <div class="form-group row">
+        <div class="form-group row rowMargin">
             <asp:Label runat="server" AssociatedControlID="PhoneNo" 
                     CssClass="col-lg-2 control-label" > <span><%=Resources.Resource.Phone%></span></asp:Label>
             
@@ -114,14 +115,17 @@
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="PhoneNo"
                     ValidationExpression = "\+(\(|)[\d]{2}(\)|)\-(\(|)[\d]{3}(\)|)\-(\(|)[\d]{8}(\)|)"
                     CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number ">
-                </asp:RegularExpressionValidator>                               
-                <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true"
+                </asp:RegularExpressionValidator>  
+            
+                                           
+        </div> 
+           
+           <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true"
                     OnClientClick="RequirePhone(); return false"  ClientIDMode="Static" 
                     CausesValidation="True"  ForeColor="#336699" CssClass="asplink">
-                   <span><%=Resources.Resource.PhoneVerify%></span></asp:LinkButton>                               
-        </div>        
+                   <span><%=Resources.Resource.PhoneVerify%></span></asp:LinkButton> 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class=" col-lg-offset-1 col-md-offset-2 col-md-10">
                 <asp:Button runat="server" OnClick="CreateUser_Click" 
                     Text="<%$Resources:Resource, Register %>" BorderColor="white" ForeColor="WhiteSmoke" CssClass="btn btn-default" />
             </div>

@@ -1080,4 +1080,7 @@
   <data name="FileType" xml:space="preserve">
     <value>File Type</value>
   </data>
+  <data name="NoMoreCam" xml:space="preserve">
+    <value>Can not have more than 4 camera with same IP address. </value>
+  </data>
 </root>
