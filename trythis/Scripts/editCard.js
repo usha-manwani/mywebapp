@@ -1,4 +1,6 @@
-﻿function showGrid() {
+﻿var modal = document.getElementById('modalAccess');
+
+function showGrid() {
     var tbscan = document.getElementById('tablescan');
     tbscan.style.display = "none";
     var gridmodal = document.getElementById('griddiv');
@@ -24,7 +26,7 @@ function HideTree() {
     }
 }
 function xx() {
-    var modal = document.getElementById('myModal');
+   // var modal = document.getElementById('myModal');
     modal.style.display = "none";      
 }
 $(document).on("click", ".close1", function () {
@@ -50,7 +52,7 @@ window.onclick = function (event) {
 
 $(document).on("click", '#MainContent_masterchildBody_btnToSelect', function () {
 
-    var modal = document.getElementById('modalAccess');
+   // var modal = document.getElementById('modalAccess');
     modal.style.display = "none";
     inputs = document.getElementsByTagName("input");
     for (i = 0; i < inputs.length; i++) {

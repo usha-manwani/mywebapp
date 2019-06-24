@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="WebCresij.HomePage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" 
+    AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="WebCresij.HomePage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
     <link href="assets/css/weather-icons-wind.min.css" rel="stylesheet" />
@@ -14,6 +15,8 @@
         .imgsize {
 
             width: 100%;
+            max-width:65px;
+            min-width:25px;
         }
         .imgsize1
         {
@@ -21,8 +24,8 @@
 
         }
         .sizePlugin{
-            width:80%;
-            height:60%;
+            width:100%;
+            height:100%;
             margin-bottom:-40px;
         }
         .imgclick:hover {
@@ -83,7 +86,7 @@
             left: 0;
             top: 0;
             width: 100%; /* Full width */
-            height: 100%; /* Full height */
+            /*min-height: 100%;*/ /* Full height */
             overflow-y: no-display;
             /* Enable scroll if needed */
             background-color: rgb(0,0,0); /* Fallback color */
@@ -96,7 +99,8 @@
             padding: 20px;
             border: 1px solid #888;
             width: 70%;
-            height: 90%;
+           
+           min-height: 90%;
         }
 
         .blueDiv {
@@ -177,7 +181,8 @@
         input[type=range]::-ms-track {
             width: 100%;
             height: 15px;
-            /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+            /*remove bg colour from the track, we'll use ms-fill-lower 
+                and ms-fill-upper instead */
             background: transparent;
             /*leave room for the larger thumb to overflow with a transparent border */
             border-color: transparent;
@@ -257,9 +262,9 @@
             cursor:pointer;
         }
         .oncolor{
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-            border-radius: 15px;
+            -webkit-border-radius: 20%;
+            -moz-border-radius: 20%;
+            border-radius: 20%;
             -webkit-box-shadow: 0px 0px 6px 6px rgba(132,220,142, 0.67);
             -moz-box-shadow: 0px 0px 6px 6px rgba(132,220,142, 0.67);
             box-shadow: 0px 0px 6px 6px rgba(132,220,142, 0.67);
@@ -273,15 +278,18 @@
             margin-bottom:5px
         }
         .marginTop{
-            margin:-10px
+            margin:-15px
+        }
+        .marginTop1{
+            margin:-5px
         }
         iframe.width-changed {
-    width: 100%;
-    display: block;
-    border: 0;
-    height: 0;
-    margin: 0;
-}
+            width: 100%;
+            display: block;
+            border: 0;
+            height: 0;
+            margin: 0;
+        }
     </style>
 </asp:Content>
 
@@ -290,17 +298,22 @@
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
     <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
-    <script src="Scripts/HomePageJS.js?v=14"></script>
+    <script src="Scripts/HomePageJS.js?v=16"></script>
 
-    <div class="row " style="padding-left: 20px; max-width: 100%; min-width: 70%;">
+    <div class="row " style="padding-left: 50px; max-width: 100%; min-width: 70%;
+        margin-top:-10px; height:95%">
         <div class="col-lg-8 col-md-12 col-sm-12" id="pluginsrow">
             <div class="row">
-                <div class="row shadowRow" style="width: 100%;">
+                <div class="row shadowRow" style="width: 100%; min-width:220px">
                     <div class="col-lg-9 col-md-9 col-sm-12" >
-                        <div style="-moz-box-shadow: inset 0 0 15px #000000; -webkit-box-shadow: inset 0 0 15px #000000;
-                            box-shadow: inset 0 0 15px #000000;  overflow:hidden ; display:inline-block" id="divplugin1">
-                            <%--<iframe src="src/Chimera.htm" height="390" width="640" frameborder="0" wmode="opaque"></iframe>--%>
-                            <object id="plugin_inst_1" type="application/x-chimera-plugin"  height="360" width="640">
+                        <div style="-moz-box-shadow: inset 0 0 15px #000000; 
+                            -webkit-box-shadow: inset 0 0 15px #000000;
+                            box-shadow: inset 0 0 15px #000000;  overflow:hidden ;
+                            display:inline-block" id="divplugin1">
+                            <%--<iframe src="src/Chimera.htm" height="390" width="640" 
+                                frameborder="0" wmode="opaque"></iframe>--%>
+                            <object id="plugin_inst_1" type="application/x-chimera-plugin" 
+                                height="360" width="640">
                                 <param name="autoplay" value="true" />
                                 <param name="src" id="src1" value="" />
                                 <param name="network-caching" value="300" />
@@ -308,81 +321,91 @@
                                 <param name="mute" value="true" />
                                <%-- <param name="audio" value="100" />--%>
                             </object>
-                           <div style="display:none">
-    <textarea id="qml_edit" cols="80" rows="20">
-import QtQuick 2.1
-import QmlVlc 0.1
+                            <div style="display: none">
+                                <textarea id="qml_edit" cols="80" rows="20">
+                                    import QtQuick 2.1
+                                    import QmlVlc 0.1
 
-Rectangle {
-    color: bgcolor
-    VlcVideoSurface {
-        id: videoOutput;
-        source: vlcPlayer;
-        anchors.fill: parent;
-    }
-    MouseArea {
-        anchors.fill: videoOutput;
-        onClicked: vlcPlayer.toggleFullscreen();
-    }
-    Text {
-        id: text;
-        color: "white";
-    }
-    Component.onCompleted: {
-        vlcPlayer.onMediaPlayerBuffering.connect( onBuffering )
-    }
-    function onBuffering( percents ) {
-        if( percents < 100 )
-            text.text = "Buffering: " + percents +"%";
-        else
-            text.text = "no signal";
-    }
-}
-</textarea>
-    <button onclick="plugin1().qml = getByID('qml_edit').value; getByID('qml_error').innerHTML = plugin1().qmlError;">load qml</button> <br />
-    <span id="qml_error" style="color: red;" />
-</div>
+                                    Rectangle {
+                                        color: bgcolor
+                                        VlcVideoSurface {
+                                            id: videoOutput;
+                                            source: vlcPlayer;
+                                            anchors.fill: parent;
+                                        }
+                                        MouseArea {
+                                            anchors.fill: videoOutput;
+                                            onClicked: vlcPlayer.toggleFullscreen();
+                                        }
+                                        Text {
+                                            id: text;
+                                            color: "white";
+                                        }
+                                        Component.onCompleted: {
+                                            vlcPlayer.onMediaPlayerBuffering.connect( onBuffering )
+                                        }
+                                        function onBuffering( percents ) {
+                                            if( percents < 100 )
+                                            text.text = "Buffering: " + percents +"%";
+                                            else
+                                            text.text = "no signal";
+                                        }
+                                    }
+                                </textarea>
+                                <button onclick="plugin1().qml = getByID('qml_edit').value; 
+                                    getByID('qml_error').innerHTML = plugin1().qmlError;">
+                                    load qml</button>
+                                <br />
+                                <span id="qml_error" style="color: red;" />
+                            </div>
                         </div>
-                        <div>
-                        <span class="btn btn-outline-light font-weight-bolder" onclick="goToFull();" style="margin-top:5px" >[&nbsp;&nbsp;]</span>
+                        <div style="height:60px">
+                        <span class="btn btn-outline-light font-weight-bolder" 
+                            onclick="goToFull();" style="margin-top:5px" >[&nbsp;&nbsp;]</span>
                             &nbsp;&nbsp;
-                            <span class="btn  font-weight-bolder" id="imgspan" onclick="muteVideo();" style="margin-top:5px">
-                                <img id="muteimg" src="Images/中控首页按钮/首页按钮-默认状态/总音量.png" height="40" width="40" />
+                            <span class="btn  font-weight-bolder" id="imgspan" 
+                                onclick="muteVideo();" style="margin-top:5px">
+                                <img id="muteimg" 
+                                    src="Images/中控首页按钮/首页按钮-默认状态/总音量静音.png" 
+                                    height="40" width="40" />
                                 </span></div>
                     </div>
                     <div class="col-lg-3 col-md-12 col-sm-12 " style="color: white; ">
                         <div class="row" >
-                            <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
-                            <object id="plugin_inst_2"
-                                type="application/x-chimera-plugin"  class="sizePlugin">
-                                <param name="autoplay" value="true" />
-                                <param name="mrl" id="src2" value="" />
-                                <param name="network-caching" value="300" />
-                                <param name="mute" value="true" />
-                            </object>
-                                </div>
+                            <div class="col-lg-10 col-md-6 col-sm-10"
+                                style="margin-bottom: -15px; min-width: 144px">
+                                <object id="plugin_inst_2"
+                                    type="application/x-chimera-plugin" class="sizePlugin">
+                                    <param name="autoplay" value="true" />
+                                    <param name="mrl" id="src2" value="" />
+                                    <param name="network-caching" value="300" />
+                                    <param name="mute" value="true" />
+                                </object>
+                            </div>
                         
-                            <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
-                            <object id="plugin_inst_3"
-                                type="application/x-chimera-plugin" class="sizePlugin">
-                                <param name="autoplay" value="true" />
-                                <param name="mrl" id="src3" value="" />
-                                <param name="network-caching" value="300" />
-                                <param name="mute" value="true" />
-                            </object>
-                                </div>
+                            <div class="col-lg-10 col-md-6 col-sm-10"
+                                style="margin-bottom: -15px; min-width: 144px">
+                                <object id="plugin_inst_3"
+                                    type="application/x-chimera-plugin" class="sizePlugin">
+                                    <param name="autoplay" value="true" />
+                                    <param name="mrl" id="src3" value="" />
+                                    <param name="network-caching" value="300" />
+                                    <param name="mute" value="true" />
+                                </object>
+                            </div>
+
+                            <div class="col-lg-10 col-md-6 col-sm-10"
+                                style="margin-bottom: -15px; min-width: 144px">
+                                <object id="plugin_inst_4"
+                                    type="application/x-chimera-plugin" class="sizePlugin">
+                                    <param name="autoplay" value="true" />
+                                    <param name="mrl" id="src4" value="" />
+                                    <param name="network-caching" value="300" />
+                                    <param name="mute" value="true" />
+                                </object>
+                            </div>
                         
-                            <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
-                            <object id="plugin_inst_4"
-                                type="application/x-chimera-plugin" class="sizePlugin">
-                                <param name="autoplay" value="true" />
-                                <param name="mrl" id="src4" value="" />
-                                <param name="network-caching" value="300" />
-                                <param name="mute" value="true" />
-                            </object>
-                                </div>
-                        
-                            <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
+                           <%-- <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
                             <object id="plugin_inst_5"
                                 type="application/x-chimera-plugin" class="sizePlugin">
                                 <param name="autoplay" value="true" />
@@ -390,30 +413,31 @@ Rectangle {
                                 <param name="network-caching" value="300" />
                                 <param name="mute" value="true" />
                             </object>
-                                </div>
+                                </div>--%>
                         
                     </div>
                         </div>
                 </div>
 
             </div>
-            <div class="row" style=" margin-left: -50px;">
+            <div class="row marginTop" style=" margin-left: -50px;">
                 <div class="col-lg-3 col-md-6 col-sm-12">
 
-                    <div class="row marginBottom" >
+                    <div class="row marginBottom " >
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">&nbsp;系统&nbsp;</legend>
+                        <legend align="center" style="width: auto; font-size: 16px;">
+                            &nbsp;系统&nbsp;</legend>
                     </fieldset>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <span>
                                 <img src="Images/greyed/sysgrey.png" id="syspower"
                                     class="imgclick imgsize" /></span>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/pcgrey.png" id="ppower"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
 
                             <img src="Images/greyed/lock1.png" id="lock"
                                 class="imgclick imgsize" />
@@ -421,19 +445,20 @@ Rectangle {
 
                     </div>
 
-                    <div class="row">
+                    <div class="row  marginTop">
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">&nbsp;屏幕&nbsp;</legend>
+                        <legend align="center" style="width: auto; font-size: 16px;">
+                            &nbsp;屏幕&nbsp;</legend>
                     </fieldset>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/scup.png" id="Scup"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/scdown.png" id="Scdown"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/scstop.png" id="scStop"
                                 class="imgclick imgsize" />
                         </div>
@@ -441,22 +466,23 @@ Rectangle {
 
                 </div>
 
-                <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="col-lg-3 col-md-6 col-sm-12 ">
 
                     <div class="row marginBottom">
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">&nbsp;信号切换&nbsp;</legend>
+                        <legend align="center" style="width: auto; font-size: 16px;">
+                            &nbsp;信号切换&nbsp;</legend>
                     </fieldset>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/desktop.png"
                                 id="desktop1"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/laptop.png" id="laptop1"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
 
                             <img src="Images/greyed/more.png" id="Moremedia"
                                 class="imgclick imgsize" />
@@ -464,19 +490,20 @@ Rectangle {
                     </div>
 
 
-                    <div class="row">
+                    <div class="row  marginTop">
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">&nbsp;窗帘&nbsp;</legend>
+                        <legend align="center" style="width: auto; font-size: 16px;">
+                            &nbsp;窗帘&nbsp;</legend>
                     </fieldset>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/copengrey.png" id="CurtainOpen"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/cclosegrey.png" id="CurtainClose"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/cstopgrey.png" id="CurtainStop"
                                 class="imgclick imgsize" />
                         </div>
@@ -488,27 +515,29 @@ Rectangle {
 
                     <div class="row marginBottom" style="text-align: center">
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">&nbsp;投影机&nbsp;</legend>
+                        <legend align="center" style="width: auto; font-size: 16px;">
+                            &nbsp;投影机&nbsp;</legend>
                     </fieldset>
-                        <div class="col-lg-6  col-md-4 col-sm-4">
+                        <div class="col-lg-6  col-md-6 col-sm-6  col-6">
                             <img src="Images/greyed/proj1.png" id="projgreen"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-6 col-md-4 col-sm-4">
+                        <div class="col-lg-6 col-md-6 col-sm-6  col-6">
                             <img src="Images/greyed/proj2.png" id="projred"
                                 class="imgclick  imgsize" />
                         </div>
                     </div>
 
-                    <div class="row marginBottom" style="text-align: center">
+                    <div class="row marginTop" style="text-align: center">
                         <fieldset class="fieldSetControl" >
-                        <legend align="center" style="width: auto; font-size: 16px;">&nbsp;<%=Resources.Resource.Light%>&nbsp;</legend>
+                        <legend align="center" style="width: auto; font-size: 16px;">
+                            &nbsp;<%=Resources.Resource.Light%>&nbsp;</legend>
                     </fieldset>
-                        <div class="col-lg-6  col-md-4 col-sm-4">
+                        <div class="col-lg-6  col-md-6 col-sm-6  col-6">
                             <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
                                 id="lighton" class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-6 col-md-4 col-sm-4">
+                        <div class="col-lg-6 col-md-6 col-sm-6  col-6">
                             <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png"
                                 id="lightoff" class="imgclick imgsize" />
                         </div>
@@ -516,38 +545,47 @@ Rectangle {
                     </div>
 
                     <input id="InputIP" type="hidden" value='<%= Session["DeviceIP"] %>'  />
+                    <input id="deviceStatusHidden" type="hidden" value='Offline'  />
                     <asp:HiddenField ID="iptocam" Value="" runat="server"/>
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="row marginBottom">
                         <fieldset class="fieldSetControl"  id="volfieldset">
-                        <legend align="center" style="width: auto; font-size: 16px;">&nbsp;音量&nbsp;</legend></fieldset>
+                        <legend align="center" style="width: auto; font-size: 16px;">
+                            &nbsp;音量&nbsp;</legend></fieldset>
                         <table style="height: auto; width: 100%;">
                             <tr style="align-items: center; align-content: center;">
                                 <td style="text-align: center; background-color: #1e1e36; width: 5%">
                                     <span>
-                                        <img src="Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png" id="volsymbol" height="30" />
+                                        <img src="Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png"
+                                            id="volsymbol" height="30" />
                                     </span>
                                 </td>
                                 <td>
                                     <input id="vol-control" type="range" min="0" step="1" max="99"
-                                        oninput="SetVolume(this.value)" onchange="SetVolume(this.value)" />
-                                    &nbsp;<span id="volchange" style="color: white; font-size: 16px; width: 10%">50</span></td>
+                                        oninput="SetVolume(this.value)" onchange="SetVolume(this.value)" 
+                                        style="min-width:150px"/>
+                                    &nbsp;<span id="volchange" style="color: white; 
+                                        font-size: 16px; width: 10%">50</span></td>
 
                             </tr>
 
                             <tr style="align-items: center; align-content: center;">
                                 <td style="text-align: center; width: 5%">
                                     <span>
-                                        <img src="Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png" id="micIcon" height="40" />
+                                        <img src="Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png"
+                                             id="micIcon" height="40" />
                                     </span>
 
                                 </td>
                                 <td>
-                                    <input id="mic-control" type="range" min="0" step="1" max="99"
-                                        oninput="MicControl(this.value)" onchange="MicControl(this.value)" />
-                                    <span id="micchange" style="color: white; font-size: 16px; width: 10%;">50</span></td>
+                                    <input id="mic-control" type="range" min="0" 
+                                        step="1" max="99" oninput="MicControl(this.value)" 
+                                        onchange="MicControl(this.value)" 
+                                        style="min-width:150px" />
+                                    <span id="micchange" style="color: white; 
+                                    font-size: 16px; width: 10%;">50</span></td>
                             </tr>
                         </table>
                     </div>
@@ -555,8 +593,10 @@ Rectangle {
                     <div class="row" style="text-align: center">
                         <div class="col-lg-12" style="text-align: center;">
                             <span>
-                                <img src="Images/中控首页按钮/全部菜单.png" class="imgclick" id="yellowbuttons"
-                                    onclick="DisplayModal(); return false;" height="50" width="50" />
+                                <img src="Images/中控首页按钮/全部菜单.png" 
+                                    class="imgclick" id="yellowbuttons"
+                                    onclick="DisplayModal(); return false;" 
+                                    height="50" width="50" />
                             </span>
                         </div>
 
@@ -566,67 +606,97 @@ Rectangle {
             </div>
         </div>
 
-        <div class="col-lg-2 col-md-6 col-sm-8" style="max-height: 90%; padding-top:30px" id="sidesrow">
-            <div class="row " style="border: 1px solid white; margin-bottom: 10px; font-size: 14px;">
+        <div class="col-lg-2 col-md-6 col-sm-8" style="max-height: 90%; padding-top:30px;
+            min-width:200px" id="sidesrow;">
+            <div class="row " style="border: 1px solid white;">
+                <div class="col-lg-12 col-md-12 col-sm-12" style=" margin-bottom: 10px;
+                font-size: 14px;">
                 <p style="color: white">
                     <script> document.write(new Date().toDateString()); </script>
                     <br />
-                    <%=Resources.Resource.ClassName%>:  &nbsp;<script>document.write('<%= Session["LocToDisplay"] %>')</script>
+                    <%=Resources.Resource.ClassName%>:  &nbsp;
+                    <script>document.write('<%= Session["LocToDisplay"] %>')</script>
                     <br />
-                    <%=Resources.Resource.IPAddress%>: &nbsp;<script>document.write('<%= Session["DeviceIP"] %>')</script>&nbsp;<br />
-                    <%=Resources.Resource.Status%>: &nbsp;<span id="devicestatus" style="font-weight: bold">Offline</span>
+                    <%=Resources.Resource.IPAddress%>: &nbsp;
+                    <script>document.write('<%= Session["DeviceIP"] %>')</script>&nbsp;<br />
+                    <%=Resources.Resource.Status%>: &nbsp;<span id="devicestatus" 
+                        style="font-weight: bold">Offline</span>
                 </p>
+                    </div>
             </div>
-            <div class="row marginTop" style="border: 1px dashed #aeb2b7; ">
+            <div class="row" style="border: 1px dashed white; 
+border-top:none;min-width:200px">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+            <div class="row marginBottom marginTop1" 
+                style="border-bottom: 1px dashed #aeb2b7; ">
                 <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_07.png" class="imgsize1"/>
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_07.png" 
+                        class="imgsize1"/>
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="tempvalue">21°C</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
+                width:50%" id="tempvalue">21°C</span>
             </div>
-            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+            <div class="row marginBottom marginTop1" 
+                style="border-bottom: 1px dashed #aeb2b7; ">
                 <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_09.png"  class="imgsize1" />
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_09.png" 
+                        class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="humidvalue">45%</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
+                width:50%" id="humidvalue">45%</span>
             </div>
-            <div class="row  marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+            <div class="row  marginBottom marginTop1" 
+                style="border-bottom: 1px dashed #aeb2b7; ">
                 <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_17.png"  class="imgsize1" />
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_17.png" 
+                        class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="pmvalue">12µg/m3</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
+                    width:50%" id="pmvalue">12µg/m3</span>
             </div>
-            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+            <div class="row marginBottom marginTop1" 
+                style="border-bottom: 1px dashed #aeb2b7; ">
                 <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_19.png"  class="imgsize1" />
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_19.png"
+                        class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="co2">350ppm</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
+                width:50%" id="co2">350ppm</span>
             </div>
-            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+            <div class="row marginBottom marginTop1" 
+                style="border-bottom: 1px dashed #aeb2b7; ">
                 <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_27.png"  class="imgsize1" />
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_27.png"
+                        class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="intensityvalue">1500nits</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
+                    width:50%" id="intensityvalue">1500nits</span>
             </div>
-            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+            <div class="row marginBottom marginTop1" 
+                style="border-bottom: 1px dashed #aeb2b7; ">
                 <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_29.png"  class="imgsize1" />
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_29.png" 
+                        class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="methanalvalue">8.1mg/m3</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;
+                width:50%" id="methanalvalue">8.1mg/m3</span>
             </div>
-            <div class="row marginBottom marginTop" style="border-bottom: 1px dashed #aeb2b7; ">
+            <div class="row marginBottom marginTop1" 
+                style="border-bottom: 1px dashed #aeb2b7; ">
                 <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_37.png"  class="imgsize1" />
+                    <img src="Images/中控首页按钮/环境图标/背景图-（03_37.png"
+                        class="imgsize1" />
                 </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; width:50%" id="voltvalue">220V</span>
+                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;
+                    width:50%" id="voltvalue">220V</span>
             </div>
-            <div class="row marginBottom marginTop" >
+            <div class="row marginBottom marginTop1" >
                 <div style="width:40%;float:left;text-align: left;margin:auto">
                     <img src="Images/中控首页按钮/环境图标/背景图-（03_39.png"  class="imgsize1" />
                 </div>
                 <div style="width:60%">
-                    <div style="border-bottom: 1px solid #aeb2b7;width:100%;margin-top:-20px">
+                    <div style="border-bottom: 1px solid #aeb2b7;
+                    width:100%;margin-top:-20px">
                         <span style="font-size:18px; color:#ffaa4d;padding-top:10px;" >
                             1:&nbsp;&nbsp;<span id="I1">0.06KW</span></span>
                     </div>
@@ -653,21 +723,21 @@ Rectangle {
     <div id="RemoteControl" class="modal">
         <div class="modal-content">
             <header class="row" style="position: center;">
-                <span onclick="document.getElementById('RemoteControl').style.display='none'"
+                <span 
+                onclick="document.getElementById('RemoteControl').style.display='none'"
                     class="w3-button w3-display-topright">&times;</span>
             </header>
-            <div class="row">
-                <iframe id="Iframe1" style="background-color: #1e1e36" src="~/controlRemote.aspx" height="700" width="100%" runat="server" frameborder="0"></iframe>
-            </div>
+           
+                <iframe id="Iframe1" style="background-color: #1e1e36; 
+                min-height:700px" src="~/controlRemote.aspx" 
+                width="100%" runat="server" frameborder="0"></iframe>            
         </div>
     </div>
 
     <script>
         $(window).on('load', onLoad);
         $(window).on('resize', setWidth);
-
         function mainchange() {
-
             var mainContentWidth = document.getElementById("main-content").offsetWidth;
             if (mainContentWidth > 950 && mainContentWidth < 1100) {
                 $('#pluginsrow').removeClass('col-lg-8');
@@ -677,18 +747,16 @@ Rectangle {
                 document.getElementById('plugin_inst_1').width = 480;
                 document.getElementById('plugin_inst_1').height = 270;
             }
-
         }
 
         function setWidth() {
-
             var width = $(window).width();
-            var heightwindow = $(window).height();
-            console.log("window resixe");
-            console.log("screen height " + heightwindow);
+            var heightwindow = $(document).height();
+            console.log("window resize");
+            console.log("doc height " + heightwindow);
             if (heightwindow < 922) {
                 console.log("inside height column");
-                 $("body").css("overflow", "Scroll");
+                $("body").css("overflow", "Scroll");
             }
             else {
                 $("body").css("overflow", "hidden");
@@ -696,9 +764,7 @@ Rectangle {
             var mainContentWidth = document.getElementById("main-content").offsetWidth;
             console.log("window width for plugin " + width);
             console.log("main content width " + mainContentWidth);
-
-
-            if (width > 900 && width < 1500) {
+            if (width > 1020 && width < 1500) {
                 document.getElementById('plugin_inst_1').width = 480;
                 document.getElementById('plugin_inst_1').height = 270;
                 $('#sidesrow').removeClass('col-lg-2').addClass('col-lg-3');
@@ -713,9 +779,7 @@ Rectangle {
                     $('#pluginsrow').removeClass('col-lg-12');
                     $('#pluginsrow').addClass('col-lg-10');
                 }
-
                 $("body").css("overflow", "Scroll");
-
             }
             else if (width > 1500 && width <= 1600) {
                 document.getElementById('plugin_inst_1').width = 640;
@@ -735,7 +799,7 @@ Rectangle {
                 $("body").css("overflow", "hidden");
                 $('#sidesrow').removeClass('col-lg-3').addClass('col-lg-2');
             }
-            else if (width > 500 && width < 900) {
+            else if (width > 500 && width < 1020) {
                 document.getElementById('plugin_inst_1').width = 320;
                 document.getElementById('plugin_inst_1').height = 180;
                 $('#pluginsrow').removeClass('col-lg-8');
@@ -747,13 +811,12 @@ Rectangle {
             else if (width < 500) {
                 document.getElementById('plugin_inst_1').width = 160;
                 document.getElementById('plugin_inst_1').height = 90;
-                 $("body").css("overflow", "Scroll");
+                $("body").css("overflow", "Scroll");
             }
         }
 
-
-
         var modal = document.getElementById("RemoteControl");
+
         function DisplayModal() {
             if (document.getElementById("devicestatus").innerHTML == "Offline") {
                 $("#yellowbuttons").removeClass("imgclick");
@@ -763,6 +826,7 @@ Rectangle {
                 modal.style.display = "block";
             }
         };
+
         document.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
@@ -784,7 +848,7 @@ Rectangle {
             addEvent(document.getElementById('plugin_inst_2'), 'MediaPlayerPaused', onPause2);
             addEvent(document.getElementById('plugin_inst_3'), 'MediaPlayerPaused', onPause3);
             addEvent(document.getElementById('plugin_inst_4'), 'MediaPlayerPaused', onPause4);
-            addEvent(document.getElementById('plugin_inst_5'), 'MediaPlayerPaused', onPause5);
+            // addEvent(document.getElementById('plugin_inst_5'), 'MediaPlayerPaused', onPause5);
             console.log("function attacked");
         }
         function onPause1() {
@@ -802,7 +866,7 @@ Rectangle {
             var video1 = document.getElementById('src1').value;
             var sub = video1 + video2.substring(39);
             player2.play(video2);
-            player1.play(video2.substring(0, video2.length-35));
+            player1.play(video2.substring(0, video2.length - 35));
             document.getElementById('src1').value = video2.substring(0, 39);
             console.log("player2 " + sub);
             console.log("player1" + video2.substring(0, 39));
@@ -812,10 +876,10 @@ Rectangle {
             var player1 = document.getElementById('plugin_inst_1');
             var player2 = document.getElementById('plugin_inst_3');
             var video2 = document.getElementById('src3').value;
-           var video1 = document.getElementById('src1').value;
-            var sub = video1+video2.substring(39);
+            var video1 = document.getElementById('src1').value;
+            var sub = video1 + video2.substring(39);
             player2.play(video2);
-            player1.play(video2.substring(0, video2.length-35));
+            player1.play(video2.substring(0, video2.length - 35));
             document.getElementById('src1').value = video2.substring(0, 39);
             console.log("player2 " + sub);
             console.log("player1" + video2.substring(0, 39));
@@ -826,23 +890,23 @@ Rectangle {
             var player2 = document.getElementById('plugin_inst_4');
             var video2 = document.getElementById('src4').value;
             var video1 = document.getElementById('src1').value;
-            var sub = video1+video2.substring(39);
+            var sub = video1 + video2.substring(39);
             player2.play(video2);
-            player1.play(video2.substring(0, video2.length-35));
+            player1.play(video2.substring(0, video2.length - 35));
             document.getElementById('src1').value = video2.substring(0, 39);
             console.log("player2 " + sub);
             console.log("player1" + video2.substring(0, 39));
         }
-        function onPause5() {
-            console.log("paused");
-            var player1 = document.getElementById('plugin_inst_1');
-            var player2 = document.getElementById('plugin_inst_5');
-            var video2 = document.getElementById('src5').value;
-            player2.play(video2);
-            player1.play(video2.substring(0, video2.length-35));
-            document.getElementById('src1').value = video2.substring(0, 39);
-            console.log("player1" + video2.substring(0, video2.length-35));
-        }
+        //function onPause5() {
+        //    console.log("paused");
+        //    var player1 = document.getElementById('plugin_inst_1');
+        //    var player2 = document.getElementById('plugin_inst_5');
+        //    var video2 = document.getElementById('src5').value;
+        //    player2.play(video2);
+        //    player1.play(video2.substring(0, video2.length-35));
+        //    document.getElementById('src1').value = video2.substring(0, 39);
+        //    console.log("player1" + video2.substring(0, video2.length-35));
+        //}
 
         function muteVideo() {
             document.getElementById('plugin_inst_1').toggleMute();
@@ -863,38 +927,32 @@ Rectangle {
             win.focus();
             //window.location = "src/chimera.htm" ;
         }
-
-
-
         $.event.special.widthChanged = {
-        remove: function() {
-            $(this).children('iframe.width-changed').remove();
-        },
-        add: function () {
-            var elm = $(this);
-            var iframe = elm.children('iframe.width-changed');
-            if (!iframe.length) {
-                iframe = $('<iframe/>').addClass('width-changed').prependTo(this);
-            }
-            var oldWidth = elm.width();
-            function elmResized() {
-                var width = elm.width();
-                if (oldWidth != width) {
-                    elm.trigger('widthChanged', [width, oldWidth]);
-                    oldWidth = width;
+            remove: function () {
+                $(this).children('iframe.width-changed').remove();
+            },
+            add: function () {
+                var elm = $(this);
+                var iframe = elm.children('iframe.width-changed');
+                if (!iframe.length) {
+                    iframe = $('<iframe/>').addClass('width-changed').prependTo(this);
                 }
+                var oldWidth = elm.width();
+                function elmResized() {
+                    var width = elm.width();
+                    if (oldWidth != width) {
+                        elm.trigger('widthChanged', [width, oldWidth]);
+                        oldWidth = width;
+                    }
+                }
+                var timer = 0;
+                var ielm = iframe[0];
+                (ielm.contentWindow || ielm).onresize = function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(elmResized, 20);
+                };
             }
-
-            var timer = 0;
-            var ielm = iframe[0];
-            (ielm.contentWindow || ielm).onresize = function() {
-                clearTimeout(timer);
-                timer = setTimeout(elmResized, 20);
-            };
         }
-    }
-
-
         $('#pluginsrow').on('widthChanged', function () {
             mainchange();
         });

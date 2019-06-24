@@ -36,7 +36,8 @@ var Script = function () {
         function responsiveView()
         {
             console.log("Window width " +$(window).width());
-            console.log("Document width "+$(document).width())
+            console.log("Document width " + $(document).width());
+            console.log("Document Hieght " + $(document).height()); 
             var wSize = $(window).width();
             
             if (wSize <= 768) {

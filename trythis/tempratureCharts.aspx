@@ -33,12 +33,12 @@
                         <asp:DropDownList Width="100px" AutoPostBack="true"
                         OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                         CssClass="btn btn-default border dropdown"  ID="ddlInstitute" 
-                        data-toggle="dropdown"  runat="server" ForeColor="White" BackColor="#1E1E36">
+                         runat="server" ForeColor="White" BackColor="#1E1E36">
                          <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList></div>
                     <div class="col-lg-2 col-md-3 col-sm-12 float-none  mbcustom" >
                         <asp:DropDownList Width="100px" ID="ddlGrade" AutoPostBack="true"
-                            CssClass="btn btn-default border dropdown" data-toggle="dropdown"  
+                            CssClass="btn btn-default border dropdown" 
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" ForeColor="White" BackColor="#1E1E36">
                             <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>                        
@@ -46,7 +46,7 @@
                   <div class="col-lg-2 col-md-3 col-sm-12 float-right  mbcustom" >
                         <asp:DropDownList  ID="ddlClass" Width="100px" AutoPostBack="true" 
                               runat="server" CssClass="btn btn-default border dropdown" 
-                            data-toggle="dropdown" OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" ForeColor="White" BackColor="#1E1E36">
+                             OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" ForeColor="White" BackColor="#1E1E36">
                             <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>
                     </div>                    

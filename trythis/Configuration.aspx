@@ -31,7 +31,7 @@
                             <asp:DropDownList Width="100px" AutoPostBack="true"
                                 OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                                 CssClass="btn btn-default border dropdown" ID="ddlInstitute"
-                                data-toggle="dropdown" runat="server">
+                                 runat="server">
                                 <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                             </asp:DropDownList>
                         </div>
@@ -39,7 +39,7 @@
          <div class="col-lg-2 col-sm-6 col-md-6 float-none">
              <asp:DropDownList Width="100px" ID="ddlGrade"
                  OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"
-                 CssClass="btn btn-default border dropdown" data-toggle="dropdown"
+                 CssClass="btn btn-default border dropdown" 
                  AutoPostBack="true" runat="server">
                  <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
              </asp:DropDownList>

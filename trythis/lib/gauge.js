@@ -2,14 +2,11 @@ Chart.defaults.gauge = Chart.defaults.doughnut;
 
 var gauge = Chart.controllers.doughnut.extend({
     draw: function (ease) {
-
         Chart.controllers.doughnut.prototype.draw.call(this, ease);
         var meta = this.getMeta();
         var pt0 = meta.data[0];
-
         var ctx = this.chart.chart.ctx;
         ctx.save();
-
         var cx = pt0._view.x;
         var cy = pt0._view.y;
         var innerRadius = pt0._view.innerRadius;
@@ -28,8 +25,7 @@ var gauge = Chart.controllers.doughnut.extend({
         }
         var needleAngle = config.options.circumference * (current - min) / (max - min) + config.options.rotation;
         var radius = outerRadius * needle.lengthRadius / 100;
-        var textRadius = outerRadius * panel.scaleTextRadius / 100;
-        
+        var textRadius = outerRadius * panel.scaleTextRadius / 100;        
         ctx.translate(cx, cy);
         ctx.font = "" + panel.scaleTextSize + "px 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
         ctx.fillStyle = panel.scaleTextColor || 'rgba(255, 255, 255, 1)';
@@ -51,7 +47,6 @@ var gauge = Chart.controllers.doughnut.extend({
             ctx.stroke();
         });
         ctx.restore();
-
         ctx.save();
         ctx.translate(cx, cy);
         ctx.strokeStyle = panel.tickColor || 'rgba(0, 0, 0, 1)';
@@ -64,11 +59,10 @@ var gauge = Chart.controllers.doughnut.extend({
             var iy = (outerRadius * panel.tickInnerRadius / 100) * Math.sin(textAngle);
             var ix = (outerRadius * panel.tickInnerRadius / 100) * Math.cos(textAngle);
             ctx.moveTo(ix, iy);
-            ctx.lineTo(ox, oy);
+            ctx.lineTo(ox, oy);           
         });
         ctx.stroke();
         ctx.restore();
-
         ctx.save();
         ctx.translate(cx, cy);
         ctx.rotate(needleAngle);
@@ -90,25 +84,21 @@ var gauge = Chart.controllers.doughnut.extend({
     initialize: function(chart, datasetIndex) {
         var panel = chart.chart.config.options.panel;
         var data = [100];
-        var backgroundColor = [panel.scaleBackgroundColor || "rgb(120, 120, 120)"];
-        var hoverBackgroundColor = [panel.scaleBackgroundColor || "rgb(120, 120, 120)"];
-        
+        var backgroundColor;
+        backgroundColor = [panel.scaleBackgroundColor || "rgb(120, 120, 120)"];
+        var hoverBackgroundColor = [panel.scaleBackgroundColor || "rgb(120, 120, 120)"];        
         var values = [];
         for (var v = panel.min; v <= panel.max; v += panel.tickInterval) {
             values.push(v);
-        }
-
+        }      
         chart.chart.config.data.datasets[0].data = data;
         chart.chart.config.data.datasets[0].backgroundColor = backgroundColor;
         chart.chart.config.data.datasets[0].hoverBackgroundColor = hoverBackgroundColor;
         chart.chart.config.data.datasets[0].values = values;
         chart.chart.config.options.maintainAspectRatio = false;
         //chart.chart.config.options.responsive = false;
-
         Chart.controllers.doughnut.prototype.initialize.call(this, chart, datasetIndex);
-    }
-
-    
+    }    
 });
 
 Chart.controllers.gauge = gauge;

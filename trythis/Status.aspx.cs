@@ -28,8 +28,8 @@ namespace WebCresij
                     ddlins.DataValueField = "InstituteID";
                     ddlins.DataBind();
                     string select = Resources.Resource.Select;
-                    ddlins.Items.Insert(0, new ListItem(select, "NA"));
-                    loadGrid("NA");
+                    //ddlins.Items.Insert(0, new ListItem(select, "NA"));
+                    loadGrid(dt.Rows[0]["InstituteID"].ToString());
                 }
                 else
                 {

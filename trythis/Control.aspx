@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="Control.aspx.cs" Inherits="WebCresij.Control" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.Master" AutoEventWireup="true" CodeBehind="Control.aspx.cs" Inherits="WebCresij.Control" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
 <style type="text/css">
 .imgclick:active{
    box-shadow: 0 5px #666;
@@ -73,6 +73,12 @@
     min-height: 280px;
     max-height:300px;
     background-color:#23233f;
+    
+}
+
+.fixwidth{
+    width:100%;
+    text-align:center;
 }
 </style>                                                                                
     <link href="Content/ControlStyle.css?v=1" rel="stylesheet" />   
@@ -80,13 +86,13 @@
     <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
     <!--Reference the SignalR library. -->  
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="masterBody" runat="server">    
+<asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">    
         <script src="Scripts/jquery.signalR-2.4.0.js"></script>
         <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <script src="Scripts/ControlKeys.js?v=16"></script>
+        <script src="Scripts/ControlKeys.js?v=19"></script>
     <div class="container-fluid"  >
-    <div class="row clearfix" id="smallcontrol" style="width:100%; min-width:600px" >
+    <div class="row clearfix" id="smallcontrol" style="width:90%; min-width:800px; max-width:100%" >
         <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
     </div>
     </div>  

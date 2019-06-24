@@ -12,8 +12,9 @@ using System.Threading.Tasks;
 namespace WebCresij.Hubsfile
 {  
     [HubName("myHub")]
-    public class MyHub : Microsoft.AspNet.SignalR.Hub
+    public class MyHub : Hub
     {
+        static Dictionary<string, string> keyValues = new Dictionary<string, string>();        
         public void GetUsers()
         {
             DataTable dt;
@@ -51,7 +52,6 @@ namespace WebCresij.Hubsfile
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
             context.Clients.All.recieveNotification(dt);
         }
-
         void dependency_OnChange(object sender, SqlNotificationEventArgs e)
         {
             if (e.Type == SqlNotificationType.Change)
@@ -60,7 +60,6 @@ namespace WebCresij.Hubsfile
                 _dataHub.GetUsers();
             }
         }
-
         ///[HubMethodName("sendMessages")]
         ///public static void SendMessages()
         ///{
@@ -82,6 +81,18 @@ namespace WebCresij.Hubsfile
         ///show status of all machines
         public void SendMessage(string sender, string data)  
         {
+            if (data.Contains("Temp"))
+            {
+                if (keyValues.ContainsKey(sender))
+                {
+                    keyValues[sender] = data;
+                }
+                else
+                {
+                    keyValues.Add(sender, data);
+                }
+            }
+            
             if (data.Contains("Toregister"))
             {
                 Clients.All.registerCard(sender, data);
@@ -96,7 +107,18 @@ namespace WebCresij.Hubsfile
                 updateCardLogs(sender,data);
                 Clients.All.SendControl(sender, "8B B9 00 04 01 0B C4 D4");
             }
-              Clients.All.broadcastMessage(sender, data);
+            else if (data.Contains("KeyValue"))
+            {
+                string query = "";
+                string[] values = data.Split(',');
+                switch (values[2])
+                {
+                    case "SystemON":
+                        query = "Insert into ";
+                        break;
+                }
+            }
+            Clients.All.broadcastMessage(sender, data);
         }
         ///send to server to get status of all machines
         public void SendData()
@@ -109,11 +131,10 @@ namespace WebCresij.Hubsfile
             Clients.All.RefreshStatus(ip);
         }
         ///send ip and data to console server
-       public void SendControlKeys(string machine, string code)
+        public void SendControlKeys(string machine, string code)
         {
             Clients.All.SendControl(machine, code);
         }
-
         public void GetStatus(string sender, string Message )
         {
             int dis;
@@ -137,7 +158,6 @@ namespace WebCresij.Hubsfile
             if(!string.IsNullOrEmpty(newdata))
             Clients.All.logs(newdata);
         }
-
         public void CountMachines(int count)
         {
             Clients.All.TotalCount(count);
@@ -145,6 +165,19 @@ namespace WebCresij.Hubsfile
         public void CountTotal()
         {
             Clients.All.Counts(1);
+        }
+        public void SaveTempData(int d)
+        {
+            if (keyValues.Count>0)
+            {
+                foreach(KeyValuePair<string,string> pair in keyValues)
+                {
+                    List<string> data = new List<string>();
+                    data = pair.Value.Split(',').ToList();
+                    Chart chart = new Chart();
+                    chart.SaveTempData(pair.Key.ToString(), data);
+                }  
+            }                     
         }
     }
     public class HexEncoding

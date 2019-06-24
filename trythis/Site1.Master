@@ -25,13 +25,14 @@
         <link href="Content/fontawesome-all.min.css" rel="stylesheet" />
         <link href="Content/font-awesome.min.css" rel="stylesheet" />
         <link href="Content/solid.min.css" rel="stylesheet" />                
-        <script src="Scripts/jquery-3.3.1.min.js"></script>        
+        <script src="Scripts/jquery-3.3.1.min.js"></script>  
+        <script src="Scripts/umd/popper.min.js"></script>
         <script src="Scripts/bootstrap.min.js"></script>
         <script src="Scripts/fontawesome/brands.min.js"></script>
         <script src="Scripts/fontawesome/all.min.js"></script>
         <script src="Scripts/fontawesome/solid.min.js"></script>
         <script src="Scripts/fontawesome/fontawesome.min.js"></script>
-        <script src="Scripts/umd/popper.min.js"></script>
+        
         
         
     </asp:PlaceHolder>
@@ -58,10 +59,10 @@
         }
         .caret-off::before {
             display: none;
-}
+        }
         .caret-off::after {
             display: none;
-}
+        }
         ul.dropdown-menu {
             margin-top: -20px;
         }
@@ -239,6 +240,9 @@
                     </ul>
                 </div>
                 <ul class="navbar-nav float-right">
+                    <li class="nav-item" >
+                        <a class="nav-link" href="Dashboard.aspx" id="dashboard" runat="server">DashBoard</a>
+                    </li>
                     <li>
                        <asp:DropDownList runat="server" ID="ddlLanguages" AutoPostBack="true" >
                                 <asp:ListItem Text="English" Value="en-US" ></asp:ListItem>

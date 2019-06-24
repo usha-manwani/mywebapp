@@ -19,8 +19,7 @@
     <div>
         <asp:UpdatePanel runat="server">
                 <ContentTemplate> 
-        <div class="leftspace" oncontextmenu="return false;">
-            
+        <div class="leftspace" oncontextmenu="return false;">            
                     <cc1:TabContainer runat="server"  BorderStyle="None"  CssClass="fancy fancy-green">
                         <cc1:TabPanel ID="addpaneltab" runat="server" BorderStyle="None">
                             <HeaderTemplate>
@@ -166,6 +165,17 @@
                                             <asp:TextBox runat="server" ID="Class_Name" CssClass="form-control"></asp:TextBox>
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <asp:Label runat="server" 
+                                            Text="<%$Resources:Resource, CCIPAddress %>" 
+                                            AssociatedControlID="tbip"
+                                            CssClass=" control-label" Font-Bold="True"></asp:Label>
+                                        <div>
+                                            <asp:TextBox runat="server" ID="tbip" CssClass="form-control"></asp:TextBox>
+                                        </div>
+                                    </div>
+
                                 </div>
                         </div>
                         <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
@@ -173,9 +183,7 @@
                             <div class="col"><asp:Button ID="BtnClassSave" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideClass();" OnClick="BtnClassSave_Click" /></div>
                         </div>
                   </div>
-            </div>
-
-                    
+            </div>       
             <div id="idCamera" class="modal">
                 <div class="modal-content">
                     <div class=" row " style="padding-right: 20px; padding-top:50px">
@@ -187,15 +195,15 @@
                     </div>
                     <div class="row" style="float:left">
                          <asp:TextBox Visible="false" runat="server" ID="tbSelectedClass"></asp:TextBox>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <asp:Label Text="<%$Resources:Resource, CCIPAddress %>" AssociatedControlID="ccSystem" runat="server" CssClass=" control-label" Font-Bold="True"></asp:Label>
                                     <asp:TextBox runat="server" CssClass="form-control" ID="ccSystem"></asp:TextBox>
                                 </div>
-                                <div id="camdiv">
+                                <div id="camdiv" class="row">
                                 </div>
                                 <br />
-                        </div>
-                         <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
+                     </div>
+                     <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
                             <div class="col">   <asp:Button ID="btncam" Text="<%$Resources:Resource, AddCam %>" runat="server" OnClientClick="AddTextCam(); return false;" />
                                </div>  
                              <div class="col">
@@ -278,7 +286,10 @@
                 function GetDynamicTextClass(value) {
                     return '<div class="form-group">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Class %>" CssClass=" control-label" Font-Bold="True"/>' +
                         '<input name = "DynamicTextClass" class="form-control" type="text" value = "' + value + '" /></div>' +
-                        '<div class="form-group">'
+                        '<div class="form-group">' +
+                        '<div class="form-group">' + '<asp:Label runat="server" Text="<%$Resources:Resource, CCIPAddress %>" CssClass=" control-label" Font-Bold="True"/>' +
+                        '<input name = "DynamicIP" class="form-control" type="text" value = "' + value + '" /></div>' +
+                        '<div class="form-group">';
                 }
 
                 function AddTextClass() {

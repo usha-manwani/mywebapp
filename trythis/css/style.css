@@ -242,6 +242,7 @@ ul.top-menu > li > .logout {
     height: 100%;
     position: fixed;
     background: #23233f;
+    z-index: 1001;
 }
 
 #sidebar h5 {
@@ -292,7 +293,7 @@ ul.sidebar-menu , ul.sidebar-menu li ul.sub{
 }
 
 ul.sidebar-menu {
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 #sidebar > ul > li > ul.sub {
@@ -316,7 +317,7 @@ ul.sidebar-menu li ul.sub li:last-child{
 }
 
 ul.sidebar-menu li ul.sub li a {
-    font-size: 12px;
+    /*font-size: 14px;*/
     padding: 6px 0;
     line-height: 35px;
     height: 35px;
@@ -359,11 +360,11 @@ ul.sidebar-menu li a span{
 }
 
 ul.sidebar-menu li a{
-    color: #aeb2b7;
+    color: #fff;
     text-decoration: none;
     display: block;
-    padding: 15px 0 15px 10px;
-    font-size: 12px;
+    padding: 3px 0 3px 10px;
+    /*font-size: 14px;*/
     outline: none;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -397,7 +398,6 @@ ul.sidebar-menu li a:hover i, ul.sidebar-menu li a:focus i {
 ul.sidebar-menu li a.active i {
     color: #fff;
 }
-
 
 .mail-info, .mail-info:hover {
     margin: -3px 6px 0 0;

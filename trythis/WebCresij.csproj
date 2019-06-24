@@ -549,6 +549,7 @@
     <Content Include="src\X11\Chimera_X11.cpp" />
     <Content Include="src\X11\Chimera_X11.h" />
     <Content Include="src\basic_1.htm" />
+    <Content Include="Services\ChartData.asmx" />
     <Content Include="UserControl\ResourcesControl.ascx" />
     <Content Include="VideoPlay\FAQ.aspx" />
     <Content Include="HomePage.aspx" />
@@ -2073,6 +2074,7 @@
     <Compile Include="CardReader.aspx.designer.cs">
       <DependentUpon>CardReader.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\Chart.cs" />
     <Compile Include="charttest.aspx.cs">
       <DependentUpon>charttest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2163,6 +2165,10 @@
     </Compile>
     <Compile Include="Maintainance.aspx.designer.cs">
       <DependentUpon>Maintainance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ChartData.asmx.cs">
+      <DependentUpon>ChartData.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserActivities\UserLogs.cs" />
     <Compile Include="UserControl\ResourcesControl.ascx.cs">
@@ -2361,6 +2367,7 @@
     </None>
     <None Include="Web.FolderProfile.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.FolderProfile1.config">
       <DependentUpon>Web.config</DependentUpon>

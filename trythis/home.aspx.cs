@@ -28,6 +28,12 @@ namespace WebCresij
                 string select = Resources.Resource.Select;
                 ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));
                 HttpContext.Current.Session["ipforgraph"] = "";
+                //if (ddlClass.SelectedValue == "NA")
+                //{
+                //    ipgraph.Value = "NA";
+                //    ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartclear1", "clearCharts();", true);
+                //    ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey1", "CreateAllChart();", true);
+                //}
             }
         }
         private void bindgrd()
@@ -48,6 +54,7 @@ namespace WebCresij
         }
         protected void ddlInstitute_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartclear2", "clearCharts();", true);
             ddlGrade.Items.Clear();
             ddlClass.Items.Clear();
             string select = Resources.Resource.Select;
@@ -59,13 +66,25 @@ namespace WebCresij
             ddlGrade.DataTextField = "GradeName";
             ddlGrade.DataValueField = "GradeID";
             ddlGrade.DataBind();
-            
+            lbllive.Text = "";
+            ddlTime.SelectedItem.Selected = false;
+            ddlTime.Items.FindByValue("0").Selected = true;
             ddlGrade.Items.Insert(0, new ListItem(select, "NA"));
             HttpContext.Current.Session["ipforgraph"] = "";
+            if(ddlClass.SelectedValue == "NA")
+            {
+                ipgraph.Value = "NA";
+                ScriptManager.RegisterStartupScript(this, typeof(Page),
+                    "MyChartKey2", "CreateAllChart('"+insID+"');", true);
+            }
         }
 
         protected void ddlGrade_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lbllive.Text = "";
+            ddlTime.SelectedItem.Selected = false;
+            ddlTime.Items.FindByValue("0").Selected = true;
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartclear3", "clearCharts();", true);
             ddlClass.Items.Clear();
             ddlClass.DataSource = null;
             ddlClass.DataBind();
@@ -79,16 +98,28 @@ namespace WebCresij
             string select = Resources.Resource.Select;
             ddlClass.Items.Insert(0, new ListItem(select, "NA"));
             HttpContext.Current.Session["ipforgraph"] = "";
+            if (ddlClass.SelectedValue == "NA")
+            {
+                ipgraph.Value = "NA";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey3",
+                    "CreateAllChart('"+gradeID+"');", true);
+            }
         }
 
         protected void ddlClass_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartclear4", "clearCharts();", true);
             string classID = ddlClass.SelectedValue;
             string ip = PopulateTree.getIP(classID);
             HttpContext.Current.Session["ipforgraph"] = ip;
+            ipgraph.Value = ip;
             IHubContext hubContext = GlobalHost.ConnectionManager.GetHubContext<Hubsfile.MyHub>();
             hubContext.Clients.All.SendControl(ip, "8B B9 00 03 04 01 08");
-
+            lbllive.Text = "";           
+            ddlTime.SelectedItem.Selected = false;
+            ddlTime.Items.FindByValue("0").Selected = true;
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey", "CreateChart();", true);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey4", "ddlIndexChange('" + classID + "');", true);
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
@@ -99,6 +130,22 @@ namespace WebCresij
             work.InnerText = dt.Select("WorkStatus='OPEN'").Count().ToString();
             work1.InnerText = dt.Select("WorkStatus='CLOSED'").Count().ToString();
             total.InnerText = dt.Rows.Count.ToString();
+        }
+
+        protected void ddlTime_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lbllive.Text = "";
+            lbllive.ForeColor = System.Drawing.Color.Blue;
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartclear5", "clearCharts();", true);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey5", "ddlIndexChange('" + ddlTime.SelectedValue + "');", true);            
+        }
+
+        protected void LiveLink_Click(object sender, EventArgs e)
+        {
+            lbllive.Text = "Live";
+            lbllive.ForeColor = System.Drawing.Color.White;
+            ddlTime.SelectedItem.Selected=false;            
+            ddlTime.Items.FindByValue("0").Selected = true;            
         }
     }
 }

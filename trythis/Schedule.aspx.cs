@@ -18,16 +18,22 @@ namespace WebCresij
         {
             if (!IsPostBack)
             {
-                bindgrd();
+                
                 string query = "select * from Institute_Details";
                 DataTable dt = PopulateTree.ExecuteCommand(query);
                 ddlInstitute.DataSource = dt;
                 ddlInstitute.DataTextField = "InstituteName";
                 ddlInstitute.DataValueField = "InstituteID";
                 ddlInstitute.DataBind();
-                string select = Resources.Resource.Select;
-                ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));
-                excelgrd.Enabled = false;
+                // string select = Resources.Resource.Select;
+                // ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));
+                //excelgrd.Enabled = false;
+                excelgrd.Enabled = true;
+                svbtn.Visible = true;
+                export.Visible = true;
+                Fillgradeddl();
+                BindGriddata();
+                
             }
         }
         protected void ddlInstitute_SelectedIndexChanged(object sender, EventArgs e)
@@ -36,6 +42,12 @@ namespace WebCresij
             ddlClass.Items.Clear();
             string select = Resources.Resource.Select;
             ddlClass.Items.Insert(0, new ListItem(select, "NA"));
+
+            Fillgradeddl();
+        }
+        protected void Fillgradeddl()
+        {
+            string select = Resources.Resource.Select;
             string insID = ddlInstitute.SelectedValue;
             string query = "select GradeID, GradeName from Grade_Details where InsID='" + insID + "'";
             DataTable dt = PopulateTree.ExecuteCommand(query);
@@ -43,9 +55,23 @@ namespace WebCresij
             ddlGrade.DataTextField = "GradeName";
             ddlGrade.DataValueField = "GradeID";
             ddlGrade.DataBind();
+
             ddlGrade.Items.Insert(0, new ListItem(select, "NA"));
-            excelgrd.Enabled = false;
-            svbtn.Visible = false;
+            query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+              " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
+              "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
+              + " where ClassID = '" + ddlInstitute.SelectedValue + "' order by StartTime asc";
+
+            dt = PopulateTree.ExecuteCommand(query);
+            if (dt.Rows.Count > 0)
+            {
+                GetData(dt);
+            }
+            else
+            {
+                bindgrd();
+            }
+            //BindGriddata();
         }
         protected void ddlGrade_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -62,59 +88,141 @@ namespace WebCresij
             ddlClass.DataBind();
             string select = Resources.Resource.Select;
             ddlClass.Items.Insert(0, new ListItem(select, "NA"));
-            excelgrd.Enabled = false;
-            svbtn.Visible = false;
+            if (ddlGrade.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlGrade.SelectedValue))
+            {
+                query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+                " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
+                "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
+                + " where ClassID = '" + ddlGrade.SelectedValue + "' order by StartTime asc";
+
+            }
+            dt = PopulateTree.ExecuteCommand(query);
+            if (dt.Rows.Count > 0)
+            {
+                GetData(dt);
+            }
+            else
+            {
+                query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+               " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
+               "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
+               + " where ClassID = '" + ddlInstitute.SelectedValue + "' order by StartTime asc";
+
+                dt = PopulateTree.ExecuteCommand(query);
+                if (dt.Rows.Count > 0)
+                {
+                    GetData(dt);
+                }
+                else
+                {
+                    bindgrd();
+                }
+            }
+            //BindGriddata();
+
+
         }
         protected void ddlClass_SelectedIndexChanged(object sender, EventArgs e)
         {
-            excelgrd.Enabled = true;
-            svbtn.Visible = true;
-            export.Visible = true;
-            BindGriddata();
+            string query = "";
+            DataTable dt = new DataTable();
+
+            string ClassID = ddlClass.SelectedValue;
+            if (ClassID != "NA" && !string.IsNullOrEmpty(ClassID))
+            {
+                query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+                " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
+                "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
+                + " where ClassID = '" + ClassID + "' order by StartTime asc";
+
+                
+            }
+             dt= PopulateTree.ExecuteCommand(query);
+            if (dt.Rows.Count > 0)
+            {
+                GetData(dt);
+            }
+            else
+            {
+                
+                if (ddlGrade.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlGrade.SelectedValue))
+                {
+                    query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+                    " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
+                    "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
+                    + " where ClassID = '" + ddlGrade.SelectedValue + "' order by StartTime asc";
+                    
+                }
+                dt = PopulateTree.ExecuteCommand(query);
+                if (dt.Rows.Count > 0)
+                {
+                    GetData(dt);
+                }
+                else
+                {
+                    query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+                   " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
+                   "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
+                   + " where ClassID = '" + ddlInstitute.SelectedValue + "' order by StartTime asc";
+
+                    dt = PopulateTree.ExecuteCommand(query);
+                    if (dt.Rows.Count > 0)
+                    {
+                        GetData(dt);
+                    }
+                    else
+                    {
+                        bindgrd();
+                    }
+                }
+               
+            }
+            //BindGriddata();
             ScriptManager.RegisterStartupScript(this, typeof(Page), "import", "importFile();", true);
         }
         private void BindGriddata()
         {
+            string query = "";
+            
+            
             string ClassID = ddlClass.SelectedValue;
-            string query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+            if (ClassID != "NA" && !string.IsNullOrEmpty(ClassID))
+            {
+                query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
                 " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
                 "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
-         + " where ClassID = '" + ClassID + "' order by StartTime asc";
+                + " where ClassID = '" + ClassID + "' order by StartTime asc";
+                                
+            }
+            
+            else
+            {
+                if (ddlGrade.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlGrade.SelectedValue))
+                {
+                    query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+                    " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
+                    "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
+                    + " where ClassID = '" + ddlGrade.SelectedValue + "' order by StartTime asc";
+                }
+                else
+                {
+                    
+                    query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
+                    " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
+                    "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
+                    + " where ClassID = '" + ddlInstitute.SelectedValue + "' order by StartTime asc";
+                }
+            }
+
             DataTable dt = PopulateTree.ExecuteCommand(query);
             if (dt.Rows.Count > 0)
             {
-                if (dt.Rows[0]["timer"].ToString() == "true")
-                {
-                    chkTimer.Checked = true;
-                }
-                dt.Columns.Add("Time");
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    dt.Rows[i]["Time"] = dt.Rows[i]["starttime"] + "-" + dt.Rows[i]["stoptime"];
-                }
-                try
-                {
-                    excelgrd.DataSource = dt;
-                    excelgrd.DataBind();
-                    ViewState["CurrentTable"] = dt;
-                }
-                catch (Exception ex)
-                {
-                    Response.Redirect("Schedule.aspx");
-                }
+                GetData(dt);
             }
-            else
-            {
-                try
-                {
-                    bindgrd();
-                }
-                catch (Exception ex)
-                {
-                    Response.Redirect("Schedule.aspx");
-                }
-            }
+            
+            
         }
+
         private void bindgrd()
         {
             DataTable dt = new DataTable();
@@ -307,8 +415,25 @@ namespace WebCresij
         }
         protected void svbtn_Click(object sender, EventArgs e)
         {
-            string ClassID = ddlClass.SelectedValue;
-            Button btn = (Button)sender;
+            string ClassID = "";
+            ClassID= ddlClass.SelectedValue;
+            if (ClassID != "NA" && !string.IsNullOrEmpty(ClassID))
+            {
+                ClassID = ddlClass.SelectedValue;
+            }
+            else
+            {
+                if (ddlGrade.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlGrade.SelectedValue))
+                {
+                    ClassID = ddlGrade.SelectedValue;
+                }
+                else
+                {
+                    ClassID = ddlInstitute.SelectedValue;
+                }
+
+            }
+                Button btn = (Button)sender;
             if (!string.IsNullOrEmpty(ClassID))
             {
                 string ip = PopulateTree.getIP(ClassID);
@@ -380,12 +505,12 @@ namespace WebCresij
                             sun = "";
                         }
                         int success = populateTree.setSchedule(ip, ClassID, starttime, stoptime, timer, mon, tue, wed, thu, fri, sat, sun);
-                        if (success >= 0 && (btn.Text == "Save" || btn.Text == "保存"))
-                        {
-                            string text = Resources.Resource.AlertTime3;
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "Success", "AlertSuccess('"+text+"');", true);
-                        }
-                        else if (success < 0 && (btn.Text == "Save" || btn.Text == "保存"))
+                        //if (success >= 0 && (btn.Text == "Save" || btn.Text == "保存"))
+                        //{
+                        //    string text = Resources.Resource.AlertTime3;
+                        //    ScriptManager.RegisterStartupScript(this, typeof(Page), "Success", "AlertSuccess('"+text+"');", true);
+                        //}
+                        if (success < 0 && (btn.Text == "Save" || btn.Text == "保存"))
                         {
                             string text = Resources.Resource.AlertError1;
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "Fail", "AlertFail('" + text + "');", true);
@@ -402,10 +527,10 @@ namespace WebCresij
                     BindGriddata();
                 }
             }
-            if (btn.Text != "Save" || btn.Text != "保存")
-            {
-                addnewrow();
-            }
+            //if (btn.Text != "Save" || btn.Text != "保存")
+            //{
+            //    addnewrow();
+            //}
         }
         protected void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -515,6 +640,42 @@ namespace WebCresij
 
 
                 return tbl;
+            }
+        }
+        protected void GetData(DataTable dt)
+        {
+            if (dt.Rows.Count > 0)
+            {
+                if (dt.Rows[0]["timer"].ToString() == "true")
+                {
+                    chkTimer.Checked = true;
+                }
+                dt.Columns.Add("Time");
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dt.Rows[i]["Time"] = dt.Rows[i]["starttime"] + "-" + dt.Rows[i]["stoptime"];
+                }
+                try
+                {
+                    excelgrd.DataSource = dt;
+                    excelgrd.DataBind();
+                    ViewState["CurrentTable"] = dt;
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("Schedule.aspx");
+                }
+            }
+            else
+            {
+                try
+                {
+                    bindgrd();
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("Schedule.aspx");
+                }
             }
         }
     }

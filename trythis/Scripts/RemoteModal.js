@@ -58,9 +58,9 @@ $(function () {
   //ipAddress = parent.getElementById("InputIP").value;
    // ipAddress = sessionStorage.getItem('ipofremote');
     ipAddress = document.getElementById("sessionInputIP").value;
-    console.log(ipAddress);
+   // console.log(ipAddress);
     chat.client.broadcastMessage = function (name, message) {
-        console.log(name + "    and  " + ipAddress);
+       // console.log(name + "    and  " + ipAddress);
         if (name == ipAddress) {
             
             var arraydata = message.split(',');
@@ -148,7 +148,7 @@ $(function () {
                         $('#recorder').closest("td").find("img").attr('src', "Images/中控首页按钮/on/recorder.png");
                         break;
                 }
-                console.log(arraydata[6]);
+              
                 if (arraydata[6] == 'Closed') {
                     
                     var src = document.getElementById("projectorOff");
@@ -249,19 +249,17 @@ $(function () {
                     if (arraydata[2] == "SystemSwitchOn") {
                         var img = document.getElementById("systempower");
                         img.src = "Images/中控首页按钮/on/systemon.png";
-                        if (arraydata.length > 4) {
+                        if (arraydata[4] == "Computer") {
                             var imgpc = document.getElementById("pcpower");
-                            switch (arraydata[4]) {
-                                case 'ComputerOff':
-
-                                    imgpc.src = "Images/AllImages/images/图标_212.png";
-                                    break;
-                                case 'ComputerOn':
-                                    imgpc.src = "Images/中控首页按钮/on/pcon.png";
-                                    break;
+                            var sourceof = imgpc.getAttribute('src');
+                            if (sourceof == "Images/AllImages/images/图标_212.png") {
+                                imgpc.src = "Images/中控首页按钮/on/pcon.png";
                             }
-
+                            else {
+                                imgpc.src = "Images/AllImages/images/图标_212.png";
+                            }
                         }
+                        
                         uncheck();
                         switch (arraydata[3]) {
                             case 'Desktop':
@@ -314,14 +312,35 @@ $(function () {
                                 break;
 
                         }
+                        if (arraydata[5] == "CentralLock") {
+
+                            document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1.png";
+                        }
+                        else 
+                            document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1open.png";                            
+                        
+                               
+                        if (arraydata[6] == "PodiumLockoff") {
+
+                            document.getElementById("podiumLock").src = "Images/中控首页按钮/on/lock2open.png";
+                        }
+                        else {
+                            document.getElementById("podiumLock").src = "Images/中控首页按钮/on/lock2.png";
+                        }                        
+                            
+                        if (arraydata[7] == "ClassLockoff") {
+
+                            document.getElementById("classLock").src = "Images/中控首页按钮/on/lock3open.png";
+                        }
+                        else                        
+                           document.getElementById("classLock").src = "Images/中控首页按钮/on/lock3.png";                                                     
                     }
                     else if (arraydata[2] == "SystemSwitchOff") {
+                        
                         var img = document.getElementById("systempower");
                         img.src = "Images/AllImages/images/图标_210.png";
                     }
                 }
-
-
             }
         };
     };
@@ -800,29 +819,32 @@ $(function () {
         $(document).on("click", "", function () { });
 
         $(document).on("click", "#sysLock", function () {
-            var src = document.getElementById('sysLock');
-            if (this.src.indexOf("Images/AllImages/images/SystemLock.png") != -1) {
-                console.log("name in english");
-                console.log(src.src);
-            }
-            else {
-                console.log("false is right " + this.src);
+            var img = $(this).attr("src");            
+            if (img == "Images/中控首页按钮/on/lock1.png")            
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");
+            else
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
-            }
+            //var img = $(this).attr("src");
+            //if (img == "Images/中控首页按钮/on/lock1.png" ) {
+            //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");
+            //}
+            //else {              
+            //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
+            //}
         });
         $(document).on("click", "#podiumLock", function () {
-            var src = document.getElementById('podiumLock');
-            if (src.src.indexOf("Images/AllImages/images/图标_238.png") != -1)
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2e 38");
-            else
+            var img = $(this).attr("src");
+            if (img == "Images/中控首页按钮/on/lock2.png")
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2f 39");
+            else
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2e 38");
         });
         $(document).on("click", "#classLock", function () {
-            var src = document.getElementById('classLock');
-            if (src.src.indexOf("Images/AllImages/images/图标_264.png") != -1)
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 69");
+            var img = $(this).attr("src");
+            if (img== "Images/中控首页按钮/on/lock3.png")
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 60 6A" );
             else
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 60 6A");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 69");
         });
         $(document).on("click", "#dsup", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 6A");

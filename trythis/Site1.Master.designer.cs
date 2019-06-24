@@ -265,6 +265,15 @@ namespace WebCresij {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor logouts;
         
         /// <summary>
+        /// dashboard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor dashboard;
+        
+        /// <summary>
         /// ddlLanguages control.
         /// </summary>
         /// <remarks>

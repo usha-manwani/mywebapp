@@ -462,8 +462,8 @@ function createDivs() {
             var ip = dev[i].split(":");
             var rows = document.getElementById("smallcontrol");
             var DIV = document.createElement("div");
-            DIV.name = "mathaSur";
-            DIV.className = "col-md-6 col-lg-3 col-sm-12";
+            DIV.name = "controldivs";
+            DIV.className = "col-xl-3 col-md-6 col-lg-4 col-sm-6 fixwidth";
             rows.appendChild(DIV);
             var table = document.createElement("table");
             table.className = "table1234 shadows";
@@ -863,7 +863,28 @@ function offdevices() {
     $('#podiumlock').closest("td").find("img").attr('src', "Images/offimages/podiumunlock.png");
     $('#classlock').closest("td").find("img").attr('src', "Images/offimages/classunlock.png");
 }
+$(window).on('load', setWidth);
+$(window).on('resize', setWidth);
+function setWidth() {
+    var width = $(window).width();
 
+    if (width < 1401 && width > 1199) {
+        var div = document.getElementsByClassName('fixwidth');
+        if (div.length > 0) {
+            for (i = 0; i < div.length; i++) {
+                div[i].className = "col-xl-2 col-lg-6 fixwidth";
+            }
+        }
+    }
+    else {
+        var div = document.getElementsByName('controldivs');
+        if (div.length > 0) {
+            for (i = 0; i < div.length; i++) {
+                div[i].className = "col-xl-3 col-md-6 col-lg-4 col-sm-12 fixwidth";
+            }
+        }
+    }
+}
 
 
 

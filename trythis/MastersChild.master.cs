@@ -17,6 +17,7 @@ namespace WebCresij
         //int role = Convert.ToInt32(HttpContext.Current.Session["role"]);
 
         TreeNode root = new TreeNode(Resources.Resource.Institutes);
+        
         static SqlConnection con;
         public static DataTable dtIns = new DataTable("InsDetails");
         public static DataTable dtGrade = new DataTable("GradeDetails");
@@ -31,6 +32,7 @@ namespace WebCresij
             if (!this.IsPostBack)
             {
                 root.SelectAction = TreeNodeSelectAction.Expand;
+               
                 TreeMenuView.Nodes.Add(root);
                 DataTable dt = ExecuteCommand("Select InstituteName, ID, InstituteID from Institute_Details");
                 dtIns = dt;

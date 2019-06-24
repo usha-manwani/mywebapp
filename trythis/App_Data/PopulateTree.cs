@@ -244,7 +244,7 @@ namespace WebCresij
             return result;
         }
 
-        public int InsertClass(string gid, string className)
+        public int InsertClass(string gid, string className, string ip)
         {
              int result = 0;
             using (SqlConnection con = new SqlConnection(constr))
@@ -254,6 +254,9 @@ namespace WebCresij
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Class", className);
                     cmd.Parameters.AddWithValue("@grade", gid);
+                    
+                    cmd.Parameters.AddWithValue("@ip", ip);
+                    
                     cmd.Parameters.Add("@Ids", SqlDbType.Int);
                     cmd.Parameters["@Ids"].Direction = ParameterDirection.Output;
                     try
@@ -1210,12 +1213,15 @@ namespace WebCresij
             //DataTable dt;
             using (SqlConnection connection = new SqlConnection(constr))
             {
-                string query = "SELECT CCIP,cd.ClassName as loc,PortNo,Status,PowerStatus,TimerService,ComputerPower,projectorPower, "+
+                string query = "SELECT gd.GradeName as Grade,  CCIP,cd.ClassName as loc, "+
+                    "PortNo,Status,PowerStatus,TimerService,ComputerPower,projectorPower, " +
                     " ProjectorUsedHour, CurtainStatus, ScreenStatus, light, MediaSignal, LockStatus, " +
                    " PodiumLock, ClassLocked, Temperature, Humidity, PM25, PM10 from CentralControl cc "+
-                    " join Class_Details cd on cc.location = cd.ClassID where cc.location in "+
-                    " (select ClassID from Class_Details where GradeID in"+
-                    "(select GradeID from Grade_Details where InsID = '"+InsID+"'))";
+                    " join Class_Details cd on cc.location = cd.ClassID "+
+                    " join Grade_Details gd on gd.GradeID=cd.GradeID "+
+                    " where cc.location in " +
+                    " (select ClassID from Class_Details where GradeID in "+
+                    "(select GradeID from Grade_Details where InsID = '"+InsID+"')) order by GradeName";
                 try
                 {
                     connection.Open();

@@ -46,6 +46,7 @@ namespace WebCresij.UserActivities
             
             if (tasknumber == 1)
             {
+                
                 return TaskList.Task1;
             }
             else if (tasknumber == 2)
@@ -99,7 +100,7 @@ namespace WebCresij.UserActivities
             }
             else 
             {
-                return TaskList.Task14 + HttpContext.Current.Session["LocToDisplay"].ToString();
+                return TaskList.Task14;
             }
 
         }
@@ -243,10 +244,8 @@ namespace WebCresij.UserActivities
         public static string Task10 { get; } = "Edited IC Card Details";
         public static string Task11 { get; } = "Edited Schedule";
         public static string Task12 { get; } = "Visited Status Page";
-        public static string Task13 { get; } = "Visited Configuration Settings Page";
-        static string classname = "Used Control page for ";
-        public static string Task14 { get; } = classname;
-            
+        public static string Task13 { get; } = "Visited Configuration Settings Page";        
+        public static string Task14 { get; } = "Visited Machine Control Page";            
 
     }
 }

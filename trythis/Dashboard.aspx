@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
     <link rel="stylesheet" href="lib/advanced-datatable/css/DT_bootstrap.css" />
     <link href="css/DropDownStyle.css" rel="stylesheet" />
+    <link href="assets/css/charts.css" rel="stylesheet" />
+    <link href="Content/Chart.min.css" rel="stylesheet" />
+    <script src="Scripts/Chart.min.js"></script>
     <script src="Scripts/tablesorter/jquery.tablesorter.min.js"></script>
     <style>
         .portlet {
@@ -68,21 +71,21 @@
         .carddata {
             margin-top: -15px;
             margin-left: -10px;
+            font-size: 1.5rem!important;
         }
 
-        @media screen and ( max-width: 1600px) {
+        @media screen and ( max-width: 1700px) and (min-width:1251px) {
             .carddata {
-                margin-top: -25px;
-                margin-left: -10px;
-                font-size: 16px;
+               
+                
+                font-size: 1.1rem!important;
             }
         }
 
-        @media screen and ( max-width: 1250px) {
+        @media screen and ( max-width: 1250px) and (min-width:1190px) {
             .carddata {
-                margin-top: -25px;
-                margin-left: -10px;
-                font-size: 14px;
+              
+                font-size: 1rem!important;
             }
         }
 
@@ -127,7 +130,7 @@
             <div class="card" style="background-color: aqua; height: 120px;">
                 <div class="card-body">
                     <div style="width: 70%; float: left;" class="carddata">
-                        <span><i class=" fa fa-users" aria-hidden="true"></i>&nbsp; Active users</span>
+                        <span ><i class=" fa fa-users" aria-hidden="true"></i>&nbsp; Active users</span>
                     </div>
                     <div style="width: 20%; float: right">
                         <asp:Label runat="server" ID="userNo" Font-Size="24px"></asp:Label>
@@ -138,8 +141,8 @@
         <div class="col-xl-2 col-lg-4 col-md-6 col-sm-6">
             <div class="card" style="background-color: aqua; height: 120px;">
                 <div class="card-body">
-                    <div style="width: 70%; float: left;" class="carddata">
-                        <span><i class=" fa fa-users" aria-hidden="true"></i>&nbsp; Registered users</span>
+                    <div style="width: 80%; float: left;" class="carddata">
+                        <span ><i class=" fa fa-users" aria-hidden="true"></i>&nbsp; Registered users</span>
                     </div>
                     <div style="width: 20%; float: right">
                         <asp:Label runat="server" ID="totalUser" Font-Size="24px"></asp:Label>
@@ -151,7 +154,7 @@
             <div class="card" style="background-color: aqua; height: 120px;">
                 <div class="card-body">
                     <div style="width: 70%; float: left;" class="carddata">
-                        <span><i class=" fa fa-cogs" aria-hidden="true"></i>&nbsp; Active Connections</span>
+                        <span ><i class=" fa fa-cogs" aria-hidden="true"></i>&nbsp; Active Connections</span>
                     </div>
                     <div style="width: 20%; float: right">
                         <span id="TotalMachines" style="font-size: 24px"></span>
@@ -161,7 +164,18 @@
         </div>
         <div class="col-xl-1 "></div>
         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-            <div class="divstyle">
+             <div class="divstyle" style=" margin-bottom:30px; ">
+                
+            <canvas id="myChart" height="370" ></canvas></div>
+               
+                 <div class="divstyle" >
+                      <canvas id="pieChart" height="370"></canvas>
+                 </div>
+           
+        </div>
+        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+           
+                 <div class="divstyle" style="min-height:520px">
                 <h5>Activities</h5>
                 <asp:UpdatePanel runat="server">
                     <ContentTemplate>
@@ -179,7 +193,7 @@
                                     Text='<i class="fa fa-sort-alpha-down"></i>'></asp:LinkButton>
                             </div>
                         </div>
-                        <div style="padding-right: 10px">
+                        <div style="padding-right: 10px;  ">
 
                             <asp:GridView runat="server" CellPadding="0" CellSpacing="0" ID="gv1" GridLines="None"
                                 border="0" class="display table gridviewclass" AutoGenerateColumns="false"
@@ -199,10 +213,10 @@
                 </asp:UpdatePanel>
             </div>
         </div>
-        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-        </div>
+      
     </div>
     <script type="text/javascript" src="lib/advanced-datatable/js/jquery.js"></script>
     <script type="text/javascript" src="lib/advanced-datatable/js/jquery.dataTables.js"></script>
     <script type="text/javascript" src="lib/advanced-datatable/js/DT_bootstrap.js"></script>
+    <script src="lib/common-scripts.js?v=4"></script>
 </asp:Content>

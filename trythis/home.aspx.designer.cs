@@ -40,13 +40,40 @@ namespace WebCresij {
         protected global::System.Web.UI.WebControls.DropDownList ddlClass;
         
         /// <summary>
-        /// lblip control.
+        /// ddlTime control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblip;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTime;
+        
+        /// <summary>
+        /// liveLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton liveLink;
+        
+        /// <summary>
+        /// lbllive control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbllive;
+        
+        /// <summary>
+        /// ipgraph control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden ipgraph;
         
         /// <summary>
         /// Timer1 control.

@@ -34,42 +34,42 @@
     <script src="assets/js/Schedule.js?v=3"></script>
   
        <div>
-           <div style="background-color: #4ecdc4; ">
+           <div >
             <asp:UpdatePanel runat="server">
                  <Triggers>
                     <asp:PostBackTrigger ControlID="importExcel" /> 
                 </Triggers>
                 <ContentTemplate>                              
                    
-                    <h4 style="margin-bottom:-10px"><span><%=Resources.Resource.Schedule%></span></h4>
+                    <h4 style="margin-bottom:-10px;margin-top:-10px;color:white"><span><%=Resources.Resource.Schedule%></span></h4>
                   
-                    <div class="row mbcustom" >
+                    <div class="row" style="margin-bottom:-20px" >
                         <div class="col-lg-7 col-md-12 col-sm-12">
-                            <div class="row mbcustom" >
-                        <div class="col-lg-3 col-md-12 col-sm-12">
-                            <h5><span><%=Resources.Resource.CreateSchedule%></span></h5>
+                            <div class="row" style="margin-bottom:-15px;" >
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <span style="color:white"><%=Resources.Resource.CreateSchedule%></span>
                         </div>
-                        <div class=" col-sm-12 col-md-12 col-lg-3">                 
+                        <div class=" col-sm-12 col-md-3 col-lg-3">                 
                         <asp:DropDownList  AutoPostBack="true" Width="100px"
                             OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
-                            CssClass="btn btn-default dropdown border"   
-                            ID="ddlInstitute" data-toggle="dropdown"  runat="server" >
-                            <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
+                            CssClass="btn btn-default border-light" ForeColor="White" BackColor="#1E1E36" 
+                            ID="ddlInstitute" runat="server" >
+                            
                         </asp:DropDownList>
                            </div>                           
-                            <div class="col-sm-12 col-md-12 col-lg-3">
-                    
+                            <div class="col-sm-12 col-md-3 col-lg-3">
                         <asp:DropDownList  ID="ddlGrade" AutoPostBack="true" Width="100px"
-                            CssClass="btn btn-default border dropdown" data-toggle="dropdown" 
+                            CssClass="btn btn-default border-light" 
+                            ForeColor="White" BackColor="#1E1E36"
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server" >
                             <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>
                          </div>                             
-                            <div class=" col-sm-12 col-md-12 col-lg-3">                    
+                            <div class=" col-sm-12 col-md-3 col-lg-3">                    
                         <asp:DropDownList  ID="ddlClass" AutoPostBack="true" 
                             AppendDataBoundItems="true" runat="server"  Width="100px" 
-                            CssClass="btn btn-default border dropdown" 
-                            data-toggle="dropdown" 
+                            CssClass="btn btn-default border-light" 
+                            ForeColor="White" BackColor="#1E1E36" 
                             OnSelectedIndexChanged="ddlClass_SelectedIndexChanged" >
                             <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                         </asp:DropDownList>                    
@@ -77,15 +77,16 @@
                              </div>
                         </div>
                         <div class="col-lg-5 col-md-6 col-sm-12" >
-                            <div class="row mbcustom" >
-                                <div class="col" style="font-size:16px">
-                                    <asp:CheckBox ID="chkTimer" runat="server" Text="<%$Resources:Resource, Timer %>"/>
+                            <div class="row" style="margin-bottom:-20px">
+                                <div class="col-lg-2 col-md-4 col-sm-4" >
+                                    <div style="text-align:center;margin-top:-6%"><asp:CheckBox ID="chkTimer" runat="server" Text="<%$Resources:Resource, Timer %>"
+                                         ForeColor="White"/></div>
                                 </div>
-                                <div class="col">
-                                    <label for="txtmin" style="font-size:16px">
-                                        <span><%=Resources.Resource.EarlyBoot%></span></label>
-                                     <select name="EarlyBoot" id="EarlyBootMins" class="btn btn-default dropdown"
-                                                style="border: 1px solid white;">
+                                <div class="col-lg-5 col-md-4 col-sm-4">
+                                    <label for="txtmin" >
+                                        <span style="color:white"><%=Resources.Resource.EarlyBoot%></span></label>
+                                     <select name="EarlyBoot" id="EarlyBootMins" class="btn btn-default border-light"
+                                                style="color:white; background-color:#1E1E36">
                                                 <option value="01">1 </option>
                                                 <option value="02">2 </option>
                                                 <option value="03">3 </option>
@@ -100,15 +101,15 @@
                                     <%--<asp:TextBox runat="server" ID="txtmin" 
                                         onchange="javascript:text_changed(this);"
                                         Height="25px" Width="60px"></asp:TextBox>--%>
-                                    <label for="txtmin" style="font-size:14px">
-                                        <span><%=Resources.Resource.Mins%></span>
+                                    <label for="txtmin" >
+                                        <span style="color:white"><%=Resources.Resource.Mins%></span>
                                     </label>                                        
                                 </div>
-                                <div class="col">
-                                    <label for="txtmin" style="font-size:16px">
-                                        <span><%=Resources.Resource.DelayBoot%></span></label>
-                                    <select name="DelayBoot" id="DelayBootMins" class="btn btn-default dropdown"
-                                                style="border: 1px solid white;">
+                                <div class="col-lg-5 col-md-4 col-sm-4">
+                                    <label for="txtmin" >
+                                        <span style="color:white"><%=Resources.Resource.DelayBoot%></span></label>
+                                    <select name="DelayBoot" id="DelayBootMins" class="btn btn-default border-light"
+                                                style="color:white; background-color:#1E1E36">
                                                 <option value="01">1 </option>
                                                 <option value="02">2 </option>
                                                 <option value="03">3 </option>
@@ -123,15 +124,15 @@
                                     <%--<asp:TextBox runat="server" ID="txtdelay"
                                         onchange="javascript:text_changed(this);"
                                         Height="25px" Width="60px"></asp:TextBox>--%>
-                                    <label for="txtmin" style="font-size:14px">
-                                        <span><%=Resources.Resource.Mins%></span>
+                                    <label for="txtmin" >
+                                        <span style="color:white"><%=Resources.Resource.Mins%></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         </div>
-                        <div class="row">
-                                <div style="display:none;" id="uploadDiv">
+                        <div class="row" style="margin-bottom:-20px">
+                                <div style="display:none; color:white" id="uploadDiv">
                          <span><%=Resources.Resource.SelectFile%></span>&nbsp;<asp:FileUpload runat="server" ID="fuSample"  />
         <asp:Button ID="importExcel" runat="server" Text="<%$Resources:Resource, Upload %>"
             CssClass="btn btn-info" OnClick="importExcel_Click" /> 
@@ -141,7 +142,7 @@
                 </ContentTemplate>
           </asp:UpdatePanel>
            </div>
-         <div class="row">
+         <div class="row" style="margin-right:10px">
           <asp:UpdatePanel runat="server">
               <Triggers>
                   <asp:AsyncPostBackTrigger ControlID="excelgrd" />
@@ -152,10 +153,10 @@
            EmptyDataRowStyle-BackColor="Black" ShowFooter="true" Width="100%"
            ShowHeaderWhenEmpty="true" RowStyle-HorizontalAlign="Center"
            EmptyDataRowStyle-ForeColor="White" AutoGenerateColumns="false">
-                    <HeaderStyle CssClass="hidden-phone" ForeColor="#7f919f" />
-        <rowstyle CssClass="rowstyle" BackColor="White"  />
+                    <HeaderStyle CssClass="hidden-phone" ForeColor="#7f919f"  Font-Size="Large"/>
+        <rowstyle CssClass="rowstyle" BackColor="White" Font-Size="Large"/>
 
-        <alternatingrowstyle CssClass="rowstylealt" BackColor="WhiteSmoke" />
+        <alternatingrowstyle CssClass="rowstylealt" BackColor="WhiteSmoke" Font-Size="Large"/>
             <Columns>              
                 <asp:TemplateField HeaderText="<%$Resources:Resource, Sno %>">
                     <ItemStyle Width="4%" />

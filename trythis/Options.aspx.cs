@@ -8,7 +8,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Web.Script.Serialization;
 
-
 namespace WebCresij
 {
     public partial class Options : BasePage
@@ -105,6 +104,7 @@ namespace WebCresij
             finally
             {
                 bindTree();
+                EmptyTextBox();
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "HideGrade", "xx();", true);
             }
         }
@@ -114,18 +114,40 @@ namespace WebCresij
             {
                 int result = 0;
                 int v = 0;
+                
                 if (!string.IsNullOrEmpty(Class_Name.Text) && !string.IsNullOrWhiteSpace(Class_Name.Text))
-                    v = fillTree.InsertClass(TextGrade.Text, Class_Name.Text);
-
+                {
+                    if(!string.IsNullOrEmpty(tbip.Text) && !string.IsNullOrWhiteSpace(tbip.Text))
+                    v = fillTree.InsertClass(TextGrade.Text, Class_Name.Text, tbip.Text.Trim());
+                    else
+                    {
+                        v = fillTree.InsertClass(TextGrade.Text, Class_Name.Text, "1");
+                    }
+                }                   
+                
                 string[] textboxValues = Request.Form.GetValues("DynamicTextClass");
+                string[] textboxip = Request.Form.GetValues("DynamicIP");
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
-                this.Values = serializer.Serialize(textboxValues);
+                var c = serializer.Serialize(textboxValues);
+                var i = serializer.Serialize(textboxip);
                 if (textboxValues != null)
                 {
-                    foreach (string textboxValue in textboxValues)
+                    for (int n = 0; n < textboxValues.Length; n++)
                     {
-                        if(!string.IsNullOrEmpty(textboxValue) && !string.IsNullOrWhiteSpace(textboxValue))
-                        result = fillTree.InsertClass(TextGrade.Text, textboxValue);
+                        if(!string.IsNullOrEmpty(textboxValues[n]) && !string.IsNullOrWhiteSpace(textboxValues[n]))
+                        {
+                            if (!string.IsNullOrEmpty(tbip.Text) && !string.IsNullOrWhiteSpace(tbip.Text))
+                            {
+                                if (!string.IsNullOrEmpty(textboxip[n]) && !string.IsNullOrWhiteSpace(textboxip[n]))
+                                    result = fillTree.InsertClass(TextGrade.Text, textboxValues[n], textboxip[n]);
+                                else
+                                {
+                                    result = fillTree.InsertClass(TextGrade.Text, textboxValues[n], "1");
+                                }
+                            }
+                                
+                        }
+                        
                     }
                 }
             }
@@ -136,6 +158,7 @@ namespace WebCresij
             finally
             {
                 bindTree();
+                EmptyTextBox();
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "HideClass", "hideClass();", true);
             }
             
@@ -194,6 +217,7 @@ namespace WebCresij
             finally
             {
                 bindTree();
+                EmptyTextBox();
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "HideCam", "hideCam();", true);
                 
             }
@@ -218,6 +242,7 @@ namespace WebCresij
 
             
             bindTree();
+            EmptyTextBox();
         }
 
         #endregion
@@ -274,6 +299,7 @@ namespace WebCresij
             {
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "error6", "camError();", true);
                 bindTree();
+                EmptyTextBox();
             }
         }
         protected void saveCamEdit_Click(object sender, EventArgs e)
@@ -290,6 +316,7 @@ namespace WebCresij
             finally
             {
                 bindTree();
+                EmptyTextBox();
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "HideEditCam", "hideEdit();", true);
             }
         }
@@ -322,6 +349,7 @@ namespace WebCresij
             finally
             {
                 bindTree();
+                EmptyTextBox();
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "HideRename", "hideRename();", true);
             }
             
@@ -341,6 +369,7 @@ namespace WebCresij
             {
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "error1", "camError();", true);
                 bindTree();
+                EmptyTextBox();
             }           
         }
         protected void Btndel_Click(object sender, EventArgs e)
@@ -399,6 +428,7 @@ namespace WebCresij
             finally
             {
                 bindTree();
+                EmptyTextBox();
             }         
         }
 
@@ -413,5 +443,18 @@ namespace WebCresij
             fillTree.function(TreeViewEdit, null);
             fillTree.function(TreeViewDelete, null);
         }      
+
+        private void EmptyTextBox()
+        {
+            tbip.Text = "";
+            Class_Name.Text = "";
+            Grade_Name.Text = "";
+            instext.Text = "";
+            camEditIP.Text = "";
+            portEdit.Text = "";
+            idEditcam.Text = "";
+            passEditcam.Text = "";
+            
+        }
     }
 }

@@ -78,6 +78,7 @@
                                         <asp:ListItem Text="<%$Resources:Resource, DocUploadDownload %>" Value="4"></asp:ListItem>
                                         <asp:ListItem Text="<%$Resources:Resource, DocDelete %>" Value="5"></asp:ListItem>
                                         <asp:ListItem Text="<%$Resources:Resource, EditUsers %>" Value="6"></asp:ListItem> 
+                                        
                                     </asp:CheckBoxList>
                                     <br />
                                     <asp:Button ID="Button2" runat="server" Text="<%$Resources:Resource, Save %>" OnClick="Button2_Click"

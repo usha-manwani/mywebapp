@@ -5,7 +5,6 @@
     <%--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">--%>
     <link href="Content/normalize.min.css" rel="stylesheet" />
     <%--<link href="css/customstyle-responsive.css" rel="stylesheet" />--%>
-
     <link href="assets/css/charts.css" rel="stylesheet" />
     <link href="Content/Chart.min.css" rel="stylesheet" />
     <%--<link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">--%>
@@ -13,6 +12,41 @@
     <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>--%>
     <script src="Scripts/Chart.min.js"></script>
     <style>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed center; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            margin:auto; /* Location of the box */
+            /*left: 0;
+            top: 0;*/
+            width: 100%; /* Full width */
+            /*height: 100%;*/ /* Full height */
+            overflow-y: no-display;
+            /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+            align-items:center;
+            justify-content:center;
+            /*text-align:center*/
+        }
+
+        .modal-content {
+            /*display:table-cell;*/
+            background-color: #191b28;
+            margin: auto;
+            /*position:center;*/
+            border: 1px solid #888;
+            width: 70%;
+            min-width:300px;
+            /*vertical-align:middle;*/
+            position: relative;
+             top: 25%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+           /*min-height: 90%;*/
+        }
+
         .card-body {
             /*float: left;
             padding: 1em;
@@ -29,6 +63,7 @@
             -webkit-box-shadow: inset 0 0 15px #000000;
             box-shadow: inset 0 0 15px #000000;
             border-width: 2px 10px 10px 2px;
+            min-width:300px;
         }
 
         .chartjs-tooltip {
@@ -49,52 +84,85 @@
             font-size: 12px !important;
         }
         .row{
-    margin-bottom:-40px;
-}
+            margin-bottom:-20px;
+            margin-right:10px;
+        }
+        .custommb{
+            margin-top:-3px;
+            margin-bottom:-5px;            
+        }
     </style>
+    <script>
+        var mySessionVariable;
+        mySessionVariable = '<%= Session["ipforgraph"] %>';
+    </script>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="masterchildBody" ID="MainBody" runat="server">
 
-    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>    
     <script src="Scripts/jquery.signalR-2.4.0.js"></script>
     <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
-    <script src="Scripts/StatusData.js?v=4"></script>
+    <script src="Scripts/StatusData.js?v=7"></script>
 
-    <div class="row " id="ddl" style="background-color: #1e1e36; min-height: 100px">
+    <div class="row " id="ddl" style="background-color: #1e1e36;
+        min-height: 100px; min-width:80%">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <div class="row" style="min-height: 100px;">
-                    <div class="col-lg-6 col-sm-12 col-md-3  mbcustom" style="margin-top: -15px">
-                        <h5><span style="color: white;"><%=Resources.Resource.TempratureChartHead%></span> </h5>
+                    <div class="col-xl-3 col-lg-3 col-sm-12 col-md-3 mbcustom" 
+                        style="margin-top: -15px">
+                        <h5><span style="color: white;">
+                            <%=Resources.Resource.TempratureChartHead%>
+                            </span> </h5>
                     </div>
-                    <div class=" col-lg-2 col-md-3 col-sm-12 float-left  mbcustom">
+                    <div class=" col-xl-2 col-lg-2 col-md-3 col-sm-12 float-left mbcustom">
                         <asp:DropDownList Width="100px" AutoPostBack="true"
                             OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
-                            CssClass="btn btn-default border-light" ID="ddlInstitute"
-                            data-toggle="dropdown" runat="server" ForeColor="White" BackColor="#1E1E36">
-                            <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
+                            CssClass="btn btn-default border-light" ID="ddlInstitute" 
+                            runat="server" ForeColor="White" BackColor="#1E1E36">                            
                         </asp:DropDownList>
                     </div>
-                    <div class="col-lg-2 col-md-3 col-sm-12 float-none  mbcustom" >
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 float-none mbcustom" >
                         <asp:DropDownList Width="100px" ID="ddlGrade" AutoPostBack="true"
-                            CssClass="btn btn-default border dropdown" data-toggle="dropdown"
-                            OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged" runat="server"
+                            CssClass="btn btn-default border dropdown"
+                            OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"
+                            runat="server"
                             ForeColor="White" BackColor="#1E1E36">
-                            <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
+                            <asp:ListItem Text="<%$Resources:Resource, Select %>"
+                                Value="NA"></asp:ListItem>  
                         </asp:DropDownList>
                     </div>
-                    <div class="col-lg-2 col-md-3 col-sm-12 float-right  mbcustom" >
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 float-right mbcustom">
                         <asp:DropDownList ID="ddlClass" Width="100px" AutoPostBack="true"
                             runat="server" CssClass="btn btn-default border dropdown"
-                            data-toggle="dropdown" OnSelectedIndexChanged="ddlClass_SelectedIndexChanged"
+                             OnSelectedIndexChanged="ddlClass_SelectedIndexChanged"
                             ForeColor="White" BackColor="#1E1E36">
-                            <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
+                            <asp:ListItem Text="<%$Resources:Resource, Select %>"
+                                Value="NA"></asp:ListItem>  
                         </asp:DropDownList>
                     </div>
-                    <asp:Label ID="lblip" runat="server" CssClass="displaynone"
-                        Text='<%#Session["ipforgraph"]%>'></asp:Label>
-                    <input id="ipgraph" type="hidden" value='<%=Session["ipforgraph"] %>' />
+                    <div class="col-xl-2 col-lg-2 float-right">
+                        <asp:DropDownList Width="100px" AutoPostBack="true"
+                            OnSelectedIndexChanged="ddlTime_SelectedIndexChanged"
+                            CssClass="btn btn-default border-light" ID="ddlTime"
+                            runat="server" ForeColor="White" BackColor="#1E1E36">
+                            <asp:ListItem Text="<%$Resources:Resource, Select %>" 
+                                Value="0"></asp:ListItem>                            
+                            <asp:ListItem Text="Month" Value="month"></asp:ListItem>
+                            <asp:ListItem Text="Week" Value="week" ></asp:ListItem>
+                            <asp:ListItem Text="WeekDays" Value="days" ></asp:ListItem>
+                            <asp:ListItem Text="Date" Value="date" ></asp:ListItem>
+                        </asp:DropDownList>                       
+                    </div>
+                    <div class="col-xl-1 col-lg-1" style="float:right;">
+                        <h3><asp:LinkButton runat="server" ID="liveLink" 
+                            OnClick="LiveLink_Click" Text="Live">
+                            </asp:LinkButton></h3>
+                    </div>
+                    <asp:Label ID="lbllive" runat="server" CssClass="displaynone"
+                        ForeColor="Blue" Font-Underline="true" ></asp:Label>
+                    <input id="ipgraph" type="hidden" value="" runat="server" />
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
@@ -104,18 +172,24 @@
         <div class="animated fadeIn col-lg-12 col-md-12 col-sm-12">
             <!-- Widgets-->
             <div class="row">
-                <div class="col-sm-6  col-md-4 col-lg-2  mbcustom " title="Brightness">
-                    <div class="card" style="background-color: #5821f0; height: 120px!important; border: 1px solid #8863f0">
+                <div class="col-sm-6 col-md-4 col-lg-2 mbcustom" title="Brightness">
+                    <div class="card" style="background-color: #5821f0; 
+                        height: 120px!important; border: 1px solid #8863f0;
+                        min-width:100px">
                         <div class="card-body">
                             <div class="card-left  float-left" style="width: 50%">
                                 <span><%=Resources.Resource.brightness%></span>
                                 <br />
-                                <span id="brightness" style="font-size:small; font-size-adjust:0.60" class="count float-left ">0</span>
+                                <span id="brightness" style="font-size:small;
+                                    font-size-adjust:0.60" 
+                                    class="count float-left ">0</span>
                                 <span>lx</span>
                             </div>
                             <!-- /.card-left -->
-                            <div class="card-right float-right text-right" style="width: 40%">
-                                <img src="Images/中控首页按钮/环境图标/背景图-（03_27.png" width="70%" />
+                            <div class="card-right float-right text-right" 
+                                style="width: 40%">
+                                <img src="Images/中控首页按钮/环境图标/背景图-（03_27.png" 
+                                    width="70%" />
                                 <%--<i class="wi wi-thermometer" style="font-size:1.5em; color:#967cc5"></i>--%>
                             </div>
                             <!-- /.card-right -->
@@ -124,7 +198,9 @@
                 </div>
                 <!--/.col-->
                 <div class="col-sm-6  col-md-4 col-lg-2  mbcustom" title="CO2">
-                    <div class="card" style="background-color: #002ced; height: 120px!important; border: 1px solid #758bf0">
+                    <div class="card" style="background-color: #002ced;
+                        height: 120px!important; border: 1px solid #758bf0;
+                        min-width:100px">
                         <div class="card-body">
                             <div class="card-left float-left" style="width: 50%">
                                 <span>CO2</span>
@@ -134,25 +210,28 @@
                             </div>
                             <!-- /.card-left -->
                             <div class="card-right float-right text-right" style="width: 50%">
-                                <img src="Images/中控首页按钮/环境图标/背景图-（03_19.png" width="70%" />
+                                <img src="Images/中控首页按钮/环境图标/背景图-（03_19.png"
+                                    width="70%" />
                             </div>
                             <!-- /.card-right -->
                         </div>
                     </div>
                 </div>
                 <!--/.col-->
-                <div class="col-sm-6  col-md-4 col-lg-2  mbcustom" title="Formaldehyde">
-                    <div class="card" style="background-color: #0072e7; height: 120px!important; border: 1px solid #98c3f0">
+                <div class="col-sm-6  col-md-4 col-lg-2 mbcustom" title="Formaldehyde">
+                    <div class="card" style="background-color: #0072e7; 
+                        height: 120px!important; border: 1px solid #98c3f0;
+                        min-width:100px">
                         <div class="card-body">
                             <div class="card-left float-left" style="width: 50%">
                                 <span><%=Resources.Resource.formaldehyde%></span>
                                 <br />
                                 <span id="FormalDehydevalue" class="count float-left">0</span>
-
                             </div>
                             <!-- /.card-left -->
                             <div class="card-right float-right text-right" style="width: 50%">
-                                <img src="Images/中控首页按钮/环境图标/背景图-（03_29.png" width="70%" />
+                                <img src="Images/中控首页按钮/环境图标/背景图-（03_29.png"
+                                    width="70%" />
                             </div>
                             <!-- /.card-right -->
                         </div>
@@ -160,7 +239,9 @@
                 </div>
                 <!--/.col-->
                 <div class="col-sm-6 col-md-6 col-lg-2  mbcustom" title="Voltage">
-                    <div class="card" style="background-color: #00bee0; height: 120px!important; border: 1px solid #9adce7">
+                    <div class="card" style="background-color: #00bee0; 
+                        height: 120px!important; border: 1px solid #9adce7;
+                        min-width:100px">
                         <div class="card-body">
                             <div class="card-left float-left" style="width: 50%">
                                 <span><%=Resources.Resource.Voltage%></span>
@@ -169,15 +250,16 @@
                             </div>
                             <!-- /.card-left -->
                             <div class="card-right float-right text-right" style="width: 50%">
-
-                                <img src="Images/中控首页按钮/环境图标/imgvoltage.png" height="60%" />
+                                <img src="Images/中控首页按钮/环境图标/imgvoltage.png" height="60%"/>
                             </div>
                             <!-- /.card-right -->
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-2  mbcustom" title="Electricity">
-                    <div class="card" style="background-color: #01cc56; height: 120px!important; border: 1px solid #86e9af">
+                    <div class="card" style="background-color: #01cc56; 
+                        height: 120px!important; border: 1px solid #86e9af; 
+                        min-width:100px">
                         <div class="card-body">
                             <div class="card-left float-left" style="width: 50%">
                                 <span><%=Resources.Resource.Electricity%></span>
@@ -197,20 +279,28 @@
 
             <div class="row">
                 <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12  mbcustom fullWidth1">
-                    <div class="card" style="background-color: #191b28; height: 350px;">
-                        <div class="card-body divstyle" id="teamdiv">
-                            <div style="height: 280px">
-                                <h4 class="mb-3" style="text-align: center; font-weight: bold;"><span><%=Resources.Resource.Temperature%></span></h4>
+                    <div class="card" style="background-color: #191b28;
+                        height: 350px;min-width:380px">
+                        <div class="card-body divstyle" >
+                            <div style="height: 280px;" id="teamdiv">
+                                <h4 class="mb-3 custommb" style="text-align: center;
+                                    font-weight: bold;"><span>
+                                    <%=Resources.Resource.Temperature%>
+                                                        </span></h4>
                                 <canvas id="team-chart"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12  mbcustom fullWidth1">
-                    <div class="card" style="background-color: #191b28; height: 350px">
-                        <div class="card-body divstyle" id="humdiv">
-                            <div style="height: 270px">
-                                <h4 class="mb-3" style="text-align: center; font-weight: bold; "><span><%=Resources.Resource.Humidity%></span> </h4>
+                <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 mbcustom fullWidth1">
+                    <div class="card" style="background-color: #191b28;
+                        height: 350px; min-width:380px">
+                        <div class="card-body divstyle" >
+                            <div style="height: 270px" id="humdiv">
+                                <h4 class="mb-3 custommb" style="text-align:center;
+                                    font-weight: bold; "><span>
+                                    <%=Resources.Resource.Humidity%>
+                                                         </span> </h4>
                                 <canvas id="lineChart" ></canvas>
                             </div>
                         </div>
@@ -223,10 +313,10 @@
                 <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 mbcustom fullWidth3">
                     <div class="row">
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 fullWidth2">
-                            <div class="card " style="background-color: #191b28; height: 250px">
+                            <div class="card" style="background-color: #191b28; height: 250px">
                                  
-                                <div class="card-body divstyle" id="systemDiv" align="center" style="margin-top:2px">
-                                    
+                                <div class="card-body divstyle" id="systemDiv"
+                                    align="center" style="margin-top:2px">                                    
                                     <%--<h4 class="mb-3"> <span>System</span> </h4>
                                 <canvas id="systemdonut"></canvas>--%>
                                 </div>
@@ -236,8 +326,11 @@
                             <div class="card" style="background-color: #191b28; height: 250px">
                                 <div class="card-body divstyle" id="BarChart">
                                     <div style="max-height:200px">
-                                    <h4 class="mb-3" style="text-align: center; font-weight: bold;"><span>使用时间</span> </h4>
-                                    <canvas id="UsedBarChart" style="max-height: 150px"></canvas></div>
+                                    <h4 class="mb-3 custommb" style="text-align:center; 
+                                        font-weight: bold;">
+                                        <span>使用时间</span></h4>
+                                    <canvas id="UsedBarChart" style="max-height: 150px">
+                                    </canvas></div>
                                 </div>
                             </div>
                         </div>
@@ -245,46 +338,55 @@
                         <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
                                 <div class="card-body divstyle" id="humdiv1">
-                                    <div >
-                                        <h5 class="mb-3" style="text-align: center; font-weight: bold;">
+                                    <div>
+                                        <h5 class="mb-3 custommb" style="text-align:center;
+                                            font-weight: bold;">
                                             <%=Resources.Resource.EnerygyNVoltage%>
                                         </h5>
-                                        <div style="width: 50%; float:left; height:90%">
-
-                                            <canvas id="Speedometer" width="90%" height="70%"></canvas>
+                                        <div style="width: 45%; float:left; height:80%">
+                                            <canvas id="Speedometer"  
+                                                width="80%" height="65%"></canvas>
                                         </div>
-                                        <div style="width: 50%; float: left; height:90%">
-                                            <canvas id="Speedometer1" width="90%" height="70%"></canvas>
+                                        
+                                        <div style="width: 45%; float: left; height:80%">
+                                            <canvas id="Speedometer1" 
+                                                width="80%" height="65%"></canvas>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                          <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 fullWidth2">
+                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
                                 <div class="card-body divstyle" id="carbonDiv">
                                     <div>
-                                    <h4 class="mb-3" style="text-align: center; font-weight: bold;"><span>CO2 浓度</span> </h4>
-                                    <canvas id="carbondonut" style="max-height:65%"></canvas>
+                                    <h4 class="mb-3 custommb" style="text-align: center;
+                                        font-weight: bold;"><span>CO2 浓度</span> </h4>
+                                    <canvas id="carbondonut" style="max-height:75%"></canvas>
                                         </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
-                                <div class="card-body divstyle" id="brightdiv" style="text-align:center">
-                                    <div >
-                                    <h4 class="mb-3" style="text-align: center;  font-weight: bold;"><span><%=Resources.Resource.brightness%></span> </h4>
-                                    <canvas id="brightdonut" style="max-height:65%"></canvas>
-                                        </div>
+                                <div class="card-body divstyle" id="brightdiv" 
+                                    style="text-align:center">
+                                    <div>
+                                        <h4 class="mb-3 custommb" style="text-align: center; 
+                                            font-weight: bold;"><span>
+                                            <%=Resources.Resource.brightness%>
+                                                </span></h4>
+                                        <canvas id="brightdonut" 
+                                            style="max-height:70%;
+                                            max-width:100%"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
-
-                                <div class="card-body divstyle" id="metanaldiv" align="center">
+                                <div class="card-body divstyle" id="metanaldiv" align="center" >
                                 </div>
                             </div>
                         </div>
@@ -348,7 +450,6 @@
                                         <span >68</span>
                                         <br />
                                         <span style="font-size:small; color: white">中控</span>
-
                                     </div>
                                 </div>
                             </div>
@@ -388,6 +489,42 @@
         </asp:UpdatePanel>
     </div>
 
+    <div class="modal" id="TempModal">
+        <div class="modal-content">            
+            <div style="display:table; text-align:center; color:white">
+                <div>Temperature Current Value: 22</div>
+                <div> Temperature Average value: 23</div>
+                <div> Temperature Normal Range : 18-28</div>                
+            </div>
+            <div class="centered" style="padding-right:20px;padding-left:10px;height:200px">                
+                <canvas id="tempModalChart" width="80%" >
+                </canvas>
+                <%--<span style="text-align:center">Temperature</span>--%>
+           </div>
+        </div>
+    </div>
+        
+    <div class="modal" id="HumidModal">
+        <div class="modal-content">
+            <div>
+                <div style="width:50%; float:left">
+                    <div>Current Humidity Value: </div>
+                     <div>Current PM10 Value: </div>
+                     <div>Current PM2.5 Value:</div>
+                </div>
+                <div style="width:50%; float:right">
+                     <div>Normal Humidity Value:</div>
+                     <div>Normal PM10 Value: </div>
+                     <div>Normal PM2.5 Value:</div>
+                </div>
+            </div>
+            <div >
+                <canvas id="HumidChartModal">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    
     <%--<script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>--%>
     <!--  Chart js -->
     <%--<script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>--%>
@@ -576,7 +713,6 @@
             });
   
     </script>
-
 
     <link href="css/style.css" rel="stylesheet">
     <link href="css/style-responsive.css" rel="stylesheet">

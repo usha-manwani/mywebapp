@@ -1,43 +1,37 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="MastersChild.master.cs" Inherits="WebCresij.MastersChild" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-   
     <asp:ContentPlaceHolder ID="masterchildHead" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-         
-             <aside>
-      <div id="sidebar" class="nav-collapse" tabindex="5000" style="overflow-y:auto;margin-top:-20px; " >  
-        <!-- sidebar menu start-->          
-        <ul class="sidebar-menu" id="nav-accordion" style="margin-left:-20px">  
-             <div style="height:150px; margin-left:-10px; width:250px; background-color:#1e1e36;align-items:center; ">
-                 <h3 class="centered" style="padding-top:50px;color:whitesmoke" ><span><%=Resources.Resource.DeviceManagement%></span></h3>
-             </div>
-          <li class="mt" >
-              <asp:UpdatePanel runat="server" >
-                  <ContentTemplate>
-                      <asp:TreeView runat="server" OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
-                          ID="TreeMenuView" NodeStyle-NodeSpacing="1px" OnTreeNodeExpanded="TreeMenuView_TreeNodeExpanded"
-                           OnTreeNodeCollapsed="TreeMenuView_TreeNodeCollapsed"
-                          RootNodeStyle-CssClass="text-bold" ForeColor="White">
-               </asp:TreeView> 
-                  </ContentTemplate>
-                  
-              </asp:UpdatePanel>
-                       
-                  
-               
-              </li>
-          </ul>             
-        <!-- sidebar menu end-->     
-          </div>
-    </aside>          
-            <section id="main-content" class="MainContent-Color" >
-      <section class="wrapper">
-          <asp:ContentPlaceHolder ID="masterchildBody" runat="server"></asp:ContentPlaceHolder>
-          </section>
-         </section>    
+    <aside>
+        <div id="sidebar" class="nav-collapse" tabindex="5000" style="overflow-y: auto; ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion" style="margin-left: -20px;">
+                <div style="height: 80px; background-color: #1e1e36; text-align: center; padding-top: 15%">
+                    <span style="color: whitesmoke; font-size: 16px!important">
+                        <%=Resources.Resource.DeviceManagement%></span>
+                </div>
+                <li >
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+                            <asp:TreeView runat="server" OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
+                                ID="TreeMenuView" NodeStyle-NodeSpacing="0.5px" OnTreeNodeExpanded="TreeMenuView_TreeNodeExpanded"
+                                OnTreeNodeCollapsed="TreeMenuView_TreeNodeCollapsed" 
+                                RootNodeStyle-CssClass="text-bold" ForeColor="White" >
+                                <RootNodeStyle Font-Size="1.5em" />
+                            </asp:TreeView>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </li>
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <section id="main-content" class="MainContent-Color">
+        <section class="wrapper">
+            <asp:ContentPlaceHolder ID="masterchildBody" runat="server"></asp:ContentPlaceHolder>
+        </section>
+    </section>
     <script>
-
-    </script>
-    
+</script>
 </asp:Content>

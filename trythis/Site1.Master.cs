@@ -48,6 +48,7 @@ namespace WebCresij
         }
         private void displayRole(int[] roleIds, string roleids)
         {
+            ICcard.Visible = false;
             navbarDropdown4.Visible = true;
             navbarDropdown2.Visible = false;
             status.Visible = true;
@@ -55,11 +56,12 @@ namespace WebCresij
             uploadDoc.Visible = false;
             downloadDoc.Visible = false;
             delDoc.Visible = false;
-            addUser.Visible = false;
-            removeUser.Visible = false;
-            approveUser.Visible = false;
+            //addUser.Visible = false;
+            //removeUser.Visible = false;
+            //approveUser.Visible = false;
             navbarDropdown1.Visible = false;
             navbarDropdown.Visible = false;
+            dashboard.Visible = false;
             for (int i = 0; i < roleIds.Length; i++)
             {
                 if (roleIds[i] == 1)
@@ -73,6 +75,8 @@ namespace WebCresij
                     addUser.Visible = true;
                     removeUser.Visible = true;
                     approveUser.Visible = true;
+                    dashboard.Visible = true;
+                    ICcard.Visible = true;
                     break;
                 }
                 else
