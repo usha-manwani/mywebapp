@@ -6,8 +6,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="masterBody" runat="server">
     <link href="css/Card.css" rel="stylesheet" />
-    <script src="Scripts/jquery.signalR-2.4.0.js"></script>
-    <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
 
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
     <script src="Scripts/CardReader.js?v=4"></script>

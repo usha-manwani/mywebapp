@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="Schedule.aspx.cs" Inherits="WebCresij.Schedule" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" EnableEventValidation="false"  
+    AutoEventWireup="true" CodeBehind="Schedule.aspx.cs" Inherits="WebCresij.Schedule" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
     
@@ -31,8 +32,7 @@
 </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">    
-    <script src="assets/js/Schedule.js?v=3"></script>
-  
+    <script src="assets/js/Schedule.js?v=3"></script>  
        <div>
            <div >
             <asp:UpdatePanel runat="server">
@@ -136,7 +136,7 @@
                          <span><%=Resources.Resource.SelectFile%></span>&nbsp;<asp:FileUpload runat="server" ID="fuSample"  />
         <asp:Button ID="importExcel" runat="server" Text="<%$Resources:Resource, Upload %>"
             CssClass="btn btn-info" OnClick="importExcel_Click" /> 
-                                    </div>
+                                    <p style="font-size:11px">please create excel with the same format and without leaving any empty cell in between</p></div>
                             </div>
                        
                 </ContentTemplate>
@@ -154,9 +154,9 @@
            ShowHeaderWhenEmpty="true" RowStyle-HorizontalAlign="Center"
            EmptyDataRowStyle-ForeColor="White" AutoGenerateColumns="false">
                     <HeaderStyle CssClass="hidden-phone" ForeColor="#7f919f"  Font-Size="Large"/>
-        <rowstyle CssClass="rowstyle" BackColor="White" Font-Size="Large"/>
-
-        <alternatingrowstyle CssClass="rowstylealt" BackColor="WhiteSmoke" Font-Size="Large"/>
+        <RowStyle CssClass="rowstyle" BackColor="White" Font-Size="Large"/>
+           
+        <AlternatingRowStyle CssClass="rowstylealt" BackColor="WhiteSmoke" Font-Size="Large"/>
             <Columns>              
                 <asp:TemplateField HeaderText="<%$Resources:Resource, Sno %>">
                     <ItemStyle Width="4%" />
@@ -220,12 +220,21 @@
               </asp:TemplateField>
             </Columns>
         </asp:GridView>
+         <script runat="server">
+                            public override void VerifyRenderingInServerForm(Control control)
+                            {
+                                /* Verifies that the control is rendered */
+                            }
+                       </script>
         <asp:Button ID="svbtn" runat="server" Text="<%$Resources:Resource, Save %>" OnClick="svbtn_Click" Visible="false" CssClass="btn btn-info"/>
         <asp:Button ID="export" runat="server" Text="<%$Resources:Resource, ExportToExcel %>" Visible="false" CssClass="btn btn-info"
              OnClick="export_Click"/>                           
             </div>
             
        </ContentTemplate>
+              <Triggers>
+                  <asp:PostBackTrigger ControlID="export" />
+              </Triggers>
         </asp:UpdatePanel>
              </div>
            <div style="display:none">

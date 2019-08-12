@@ -17,8 +17,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
     
-    <script src="Scripts/jquery.signalR-2.4.0.js"></script>
-        <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
+    <script src="Scripts/jquery.signalR-2.4.1.js"></script>
+        <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
 
     
@@ -66,15 +66,15 @@
                  
                         <div class="card bg-flat-color-1" style="background-color:#cab9e9; height: 120px!important; border: 1px solid #8863f0">
                             <div class="card-body">
-                                <div class="card-left pt-1 float-left">
-                                   <h3> <span><%=Resources.Resource.Temperature%></span></h3>
-                                    <h3 class="mb-0 ">                                        
+                                <div class="card-left pt-1 float-left" >
+                                   <h4> <span><%=Resources.Resource.Temperature%></span></h4>
+                                    <h4 class="mb-0 ">                                        
                                         <span id="tempvalue" class="count float-left ">0</span>
                                         <span >°C</span>
-                                    </h3>                                    
+                                    </h4>                                    
                                 </div><!-- /.card-left -->
                                 <div class="card-right float-right text-right">
-                                    <i class="wi wi-thermometer" style="font-size:2.5em; color:#967cc5"></i>
+                                    <i class="wi wi-thermometer" style="font-size:2em; color:#967cc5"></i>
                                 </div><!-- /.card-right -->
                             </div>
                         </div>
@@ -84,14 +84,14 @@
                         <div class="card  bg-flat-color-6" style=" background-color:#99e9d7; height: 120px!important; border: 1px solid #8863f0">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left" >
-                                    <h3><span><%=Resources.Resource.Humidity%></span></h3>
-                                    <h3 class="mb-0 fw-r">                                        
+                                    <h4><span><%=Resources.Resource.Humidity%></span></h4>
+                                    <h4 class="mb-0 fw-r">                                        
                                         <span id="humidvalue" class="count float-left">0</span>
                                         <span>%</span>
-                                    </h3>                                    
+                                    </h4>                                    
                                 </div><!-- /.card-left -->
                                 <div class="card-right float-right text-right">
-                                    <i class="wi wi-humidity" style="font-size:2.5em; color:#53af9a"></i>
+                                    <i class="wi wi-humidity" style="font-size:2em; color:#53af9a"></i>
                                 </div><!-- /.card-right -->
                             </div>
                         </div>
@@ -101,13 +101,13 @@
                         <div class="card  bg-flat-color-3" style=" background-color:#f1c9c8;  height: 120px!important; border: 1px solid #8863f0">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
-                                    <h3> PM2.5(µg/m3)</h3>
-                                    <h3 class="mb-0 ">                                       
+                                    <h4> PM2.5(µg/m3)</h4>
+                                    <h4 class="mb-0 ">                                       
                                         <span id="hum25value" class="count float-left">0</span>                                        
-                                    </h3>                                  
+                                    </h4>                                  
                                 </div><!-- /.card-left -->
                                 <div class="card-right float-right text-right">
-                                    <i class="wi wi-humidity" style="font-size:2.5em; color:#ca7f7d"></i>
+                                    <i class="wi wi-humidity" style="font-size:2em; color:#ca7f7d"></i>
                                 </div><!-- /.card-right -->
                             </div>
                         </div>
@@ -117,13 +117,13 @@
                         <div class="card  bg-flat-color-2" style=" background-color:#c2e9c4;  height: 120px!important; border: 1px solid #8863f0">
                             <div class="card-body">
                                 <div class="card-left pt-1 float-left">
-                                    <h3>PM10(µg/m3)</h3>
-                                    <h3 class="mb-0 ">                                        
+                                    <h4>PM10(µg/m3)</h4>
+                                    <h4 class="mb-0 ">                                        
                                         <span id="hum10value" class="count float-left">0</span>
-                                    </h3>                                    
+                                    </h4>                                    
                                 </div><!-- /.card-left -->
                                 <div class="card-right float-right text-right">
-                                    <i class="wi wi-humidity" style="font-size:2.5em; color:#61bd66"></i>
+                                    <i class="wi wi-humidity" style="font-size:2em; color:#61bd66"></i>
                                 </div><!-- /.card-right -->
                             </div>
                         </div>

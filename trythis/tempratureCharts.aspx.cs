@@ -39,7 +39,7 @@ namespace WebCresij
             dr["Desc"] = string.Empty;
             dt.Rows.Add(dr);
             //Store the DataTable in ViewState
-            ViewState["CurrentTable"] = dt;
+            ViewState["CurrentTempTable"] = dt;
            
         }
         protected void ddlInstitute_SelectedIndexChanged(object sender, EventArgs e)

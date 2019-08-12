@@ -13,20 +13,22 @@
         }        
     </script>
 
-    <h2><span><%=Resources.Resource.Register%></span></h2>
+   
     <%--<p class="text-danger">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>--%>
 
-    <div class="form-horizontal"  >
-        <h4><span><%=Resources.Resource.NewAccount%></span></h4>
-        <hr />
+    <div class="form-horizontal positionCenter"  >
+         <h2 style="text-align:center"><span><%=Resources.Resource.Register%></span></h2>
+        <h4 style="text-align:center"><span><%=Resources.Resource.NewAccount%></span></h4>
+        <hr style="background-color:white; height:1.5px;"/>
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
+        
         <div class="form-group row">
-            <asp:Label runat="server" AssociatedControlID="User_Name" CssClass="col-md-2 control-label">
+            <asp:Label runat="server" AssociatedControlID="User_Name" CssClass="col-md-5 control-label">
                 <span><%=Resources.Resource.User%></span>
             </asp:Label>
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <asp:TextBox runat="server" ID="User_Name" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="User_Name"
                     CssClass="text-danger" ErrorMessage="The user name field is required." />
@@ -34,10 +36,10 @@
         </div>
         <div class="form-group row">
             <asp:Label runat="server" AssociatedControlID="UserID"
-               CssClass="col-md-2 control-label">
+               CssClass="col-md-5 control-label">
                 <span><%=Resources.Resource.UserID%></span>
             </asp:Label>
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <asp:TextBox runat="server" ID="UserID" CssClass="form-control" ToolTip=" UpperCase, Lowercase and numbers are allowed" />
                  <cc1:FilteredTextBoxExtender runat="server" ID="filterId" FilterType="UppercaseLetters,LowercaseLetters,Numbers" TargetControlID="UserID" />
                            
@@ -46,10 +48,10 @@
             </div>
         </div>        
         <div class="form-group row">
-            <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">
+            <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-5 control-label">
                 <span><%=Resources.Resource.Password%></span>
             </asp:Label>
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" ToolTip="Uppercase, Lowercase, Numbers and Symbols '@!_$#%' are allowed" />
                 <cc1:FilteredTextBoxExtender runat="server" ID="filterPass" 
                     FilterType="UppercaseLetters,LowercaseLetters,Numbers, Custom" 
@@ -59,10 +61,10 @@
             </div>
         </div>
         <div class="form-group row">
-            <asp:Label runat="server" AssociatedControlID="ConfirmPassword" CssClass="col-md-2 control-label">
+            <asp:Label runat="server" AssociatedControlID="ConfirmPassword" CssClass="col-md-5 control-label">
                 <span><%=Resources.Resource.ConfirmPassword%></span>
             </asp:Label>
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPassword"
                     CssClass="text-danger" Display="Dynamic" ErrorMessage="The confirm password field is required." />
@@ -72,10 +74,10 @@
         </div>
         <br />
         <div class="form-group row">
-            <asp:Label runat="server" AssociatedControlID="PhoneNo" CssClass="col-md-2 control-label">
+            <asp:Label runat="server" AssociatedControlID="PhoneNo" CssClass="col-md-5 control-label">
                <span><%=Resources.Resource.Phone%></span>
             </asp:Label>
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <asp:TextBox runat="server" ID="PhoneNo" placeHolder="+86-123-12345678" CssClass="form-control" ClientIDMode="Static"   />
 
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="PhoneNo"
@@ -83,15 +85,18 @@
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="PhoneNo" ValidationExpression = "\+(\(|)[\d]{2}(\)|)\-(\(|)[\d]{3}(\)|)\-(\(|)[\d]{8}(\)|)"
                     CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number "></asp:RegularExpressionValidator>
                 <br />                
-                <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true" OnClientClick="RequirePhone(); return false"  ClientIDMode="Static"
-                    CausesValidation="True" > <span><%=Resources.Resource.PhoneVerify%></span></asp:LinkButton>                                    
+                <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true" 
+                    OnClientClick="RequirePhone(); return false"  ClientIDMode="Static"
+                    CausesValidation="True" ForeColor="DeepSkyBlue"  > 
+                    <span ><%=Resources.Resource.PhoneVerify%></span></asp:LinkButton>                                    
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-md-offset-2 col-md-10" >
+            <div class="col-md-12" style="text-align:center">
                 <asp:Button runat="server" OnClick="CreateUser_Click" 
-                    Text="<%$Resources:Resource, Register %>" CssClass="btn btn-default" ForeColor="White" Font-Size="Medium" BorderColor="Gray" />
+                    Text="<%$Resources:Resource, Register %>" CssClass="btn btn-outline-light"/>
             </div>
         </div>
+            
     </div>
 </asp:Content>

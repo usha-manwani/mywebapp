@@ -1,13 +1,12 @@
 ﻿$(function () {
     // Declare a proxy to reference the hub.
-   
     var chat = $.connection.myHub;
-
     // Create a function that the hub can call to broadcast messages.
     chat.client.broadcastMessage = function (name, message) {
         // Html encode display name and message. 
         var tab = document.getElementById("MainContent_masterchildBody_GridView1");
-        for (i = 0; i < tab.rows.length; i++) {
+
+        for (i = 0; i < tab.rows.length-1; i++) {
             var cellIp = tab.rows[i].cells[2];
             var arraydata = message.split(',');
             if (cellIp.innerHTML == name)
@@ -135,7 +134,7 @@
                 else if (arraydata[2] == 'Offline') {
                     tab.rows[i].cells[3].innerHTML = 'Offline';
                     for (j = 4; j < arraydata.length - 1; j++) {
-                        tab.rows[i].cells[j].innerHTML = arraydata[j];
+                        tab.rows[i].cells[j].innerHTML = '--';
                     }
                 }
                 else if (arraydata[1] == 'Unsuccessful') {
@@ -162,19 +161,24 @@
     chat.client.updatelog = function () {
         //alert("inside grid");
         _doPostBack("<%=up1.UniqueID %>", "");
-
     };
-    $.connection.hub.start().done(function () {
-       
+    $.connection.hub.start().done(function () {       
         chat.server.sendData();
         $(document).on("click", "#refresh", function () {
-           
             //Call the Send method on the hub.
             chat.server.sendData();            
         });
         $(document).on("change", "#MainContent_masterchildBody_ddlins", function () {
             chat.server.sendData();
         });
-    });
+    });    
 });
+
+function triggerclick() {
+    $('#refresh').trigger('click');
+    console.log("after click");
+}
+
+
+
 

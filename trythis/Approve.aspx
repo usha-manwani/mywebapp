@@ -60,7 +60,6 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-
                 <div id="Permissions" class=" displayplease" style="display: none">
                     <div class="modal-content" style="width: 400px">
                         <header>
@@ -76,9 +75,8 @@
                                         <asp:ListItem Text="<%$Resources:Resource, LiveFeed %>" Value="2"></asp:ListItem>
                                         <asp:ListItem Text="<%$Resources:Resource, manageDevice %>" Value="3"></asp:ListItem>
                                         <asp:ListItem Text="<%$Resources:Resource, DocUploadDownload %>" Value="4"></asp:ListItem>
-                                        <asp:ListItem Text="<%$Resources:Resource, DocDelete %>" Value="5"></asp:ListItem>
+                                        <asp:ListItem Text="Maintainance" Value="5"></asp:ListItem>
                                         <asp:ListItem Text="<%$Resources:Resource, EditUsers %>" Value="6"></asp:ListItem> 
-                                        
                                     </asp:CheckBoxList>
                                     <br />
                                     <asp:Button ID="Button2" runat="server" Text="<%$Resources:Resource, Save %>" OnClick="Button2_Click"
@@ -92,11 +90,9 @@
         </asp:UpdatePanel>
     </div>
     <asp:HiddenField ID="userIdhid" runat="server" Value="" />
-
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <asp:Button runat="server" CssClass="linkCursor" Text="click me!" ID="btn1" />
         </ContentTemplate>
     </asp:UpdatePanel>
-
 </asp:Content>

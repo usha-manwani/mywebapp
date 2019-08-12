@@ -72,13 +72,17 @@
     min-width:240px;
     min-height: 280px;
     max-height:300px;
-    background-color:#23233f;
-    
+    background-color:#23233f;    
 }
 
 .fixwidth{
-    width:100%;
+    width:80%;
     text-align:center;
+}
+.chk{
+    width:20%;
+    float:left;
+    text-align:center
 }
 </style>                                                                                
     <link href="Content/ControlStyle.css?v=1" rel="stylesheet" />   
@@ -86,24 +90,47 @@
     <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
     <!--Reference the SignalR library. -->  
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">    
-        <script src="Scripts/jquery.signalR-2.4.0.js"></script>
-        <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
-        <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
-        <script src="Scripts/ControlKeys.js?v=19"></script>
-    <div class="container-fluid"  >
-    <div class="row clearfix" id="smallcontrol" style="width:90%; min-width:800px; max-width:100%" >
-        <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
-    </div>
-    </div>  
+<asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
+    <script src="Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
+    <script src="Scripts/ControlKeys.js?v=19"></script>
+    <h4 style="color:white;margin-top:-1rem">
+        <asp:Label runat="server" ID="insName"></asp:Label>            
+        <asp:Label runat="server" ID="GradeName"></asp:Label> 
+                    </h4>
+        <hr style="background-color:black"/>
 
-    <input id="sessionInput" type="hidden" value='<%= Session["DeviceIP"] %>' />
-        <input id="sessionInput1" type="hidden" value='<%= Session["loc"] %>' />
-        <input id="dev1" type="hidden" value='<%= Session["devices"] %>' />
-    <input id="InputIP" type="hidden" value='<%= Session["DeviceIP"] %>' />
-        <asp:TextBox style="display:none" ID="ipAddressToSend" runat="server"></asp:TextBox>
-        <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server" ></asp:ScriptManagerProxy>
-    <div id="control" class="modal">
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <div class="row" style="margin-bottom:-1.5rem; margin-top:-1rem">
+        <span class="col-lg-3 col-md-6 col-sm-9" style="font-size:1rem; color:white">
+            Select classes to on/off the Multiple devices</span>
+                <div class="col-lg-1 col-md-1 col-sm-3">
+        <button class="btn btn-outline-light " value="ON/OFF" id="btnOn"> On</button></div>
+                <div class="col-lg-1 col-md-1 col-sm-3">
+        <button class="btn btn-outline-light " value="ON/OFF" id="btnOff"> Off</button></div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-1 col-md-1 col-sm-3" style="float:right">
+        <button class=" btn btn-link" value="ON/OFF" id="SelectAll"> Select All</button></div>
+                <div class="col-lg-2 col-md-1 col-sm-3" style="float:right">
+        <button class=" btn btn-link" value="ON/OFF" id="UnselectAll"> Unselect All</button></div>
+        </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    
+    <div class="container-fluid">
+        <div class="row clearfix" id="smallcontrol" style="width: 90%; min-width: 800px; max-width: 100%">
+            <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
+        </div>
+    </div>
+    <input id="sessionInput" type="hidden" value='<%= Session["DeviceIP"] %>'/>
+    <input id="sessionInput1" type="hidden" value='<%= Session["loc"] %>'/>
+    <input id="dev1" type="hidden" value='<%= Session["devices"] %>'/>
+    <input id="InputIP" type="hidden" value='<%= Session["DeviceIP"] %>'/>
+    <asp:TextBox Style="display:none" ID="ipAddressToSend" runat="server"></asp:TextBox>
+    <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server"></asp:ScriptManagerProxy>
+    <%--  <div id="control" class="modal">
     <div class=" modal-content" style="font-family: 'Ruda', sans-serif" >        
         <div style="width:100%; color:#3c763d; border:solid;border-color:#3c763d; background-color:#dff0d8; 
              border-radius:5px" class="row " onmouseover="this.style.background='white';"
@@ -758,8 +785,7 @@
             </tr>
         </table>           
     </div>
-     </div>       
-       
+     </div>       --%>       
     <%--<div id="control" class="modal">
         <div class="modal-content">
             <header class="row" style="position: center;">
@@ -771,6 +797,5 @@
                 <iframe id="Iframe1" style="background-color: #1e1e36" src="~/controlRemote.aspx" height="700" width="100%" runat="server" frameborder="0"></iframe>
             </div>
         </div>
-    </div>--%>
-    
+    </div>--%>    
 </asp:Content>

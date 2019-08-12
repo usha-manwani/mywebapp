@@ -30,7 +30,7 @@
                                         Width="70%" placeHolder="<%$Resources:Resource, Search %>"
                                         CssClass="form-control"
                                         OnTextChanged="txtloc_TextChanged" /></td>
-                                <%-- <span style="color:darkslategray"><i class="fa fa-search" 
+                                <%--<span style="color:darkslategray"><i class="fa fa-search" 
                                         aria-hidden="true"></i></span>--%>
                             </tr>
                         </table>
@@ -48,16 +48,16 @@
                             OnRowCancelingEdit="gvCard_RowCancelingEdit"
                             OnRowEditing="gvCard_RowEditing"
                             OnRowUpdating="gvCard_RowUpdating" 
-                            AllowSorting="true"
+                            AllowSorting="true" CellPadding="20" CellSpacing="20"
                             OnSorting="gvCard_Sorting" 
                             DataKeyNames="CardID"
                             BorderStyle="None" Width="100%" 
                             PagerSettings-Mode="Numeric">
-                            <HeaderStyle CssClass="hidden-phone" 
-                                ForeColor="WhiteSmoke" />
-                            <RowStyle CssClass=" center" BackColor="White" />
-                            <AlternatingRowStyle CssClass=" center" 
-                                BackColor="WhiteSmoke" />
+                            <HeaderStyle CssClass="hidden-phone" HorizontalAlign="Center" 
+                               BackColor="Transparent" ForeColor="white" />
+                            <RowStyle HorizontalAlign="Center"  ForeColor="White" />
+                            <%--<AlternatingRowStyle CssClass=" center" 
+                                BackColor="WhiteSmoke" />--%>
                             <Columns>
                                 <asp:BoundField SortExpression="memberID" 
                                     HeaderText="<%$Resources:Resource, MemberID %>"
@@ -99,7 +99,7 @@
                                 <asp:TemplateField>
                                     <ItemTemplate>
                                         <controlstyle width="100%" />
-                                        <asp:LinkButton runat="server"
+                                        <asp:LinkButton runat="server" ForeColor="DeepSkyBlue"
                                             Text="<%$Resources:Resource, Resend %>"
                                             ToolTip="<%$Resources:Resource, toolTipResend%>"
                                             OnClick="Unnamed_Click" />
@@ -110,7 +110,7 @@
                                     <ItemStyle Width="10%" />
                                     <ControlStyle Width="100%" />
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="selectAccessTree"
+                                        <asp:LinkButton ID="selectAccessTree" ForeColor="DeepSkyBlue"
                                             ToolTip="<%$Resources:Resource, ToolTipLocation %>"
                                             runat="server" OnClick="openaccess_Click"
                                             Text="<%$Resources:Resource, Select %>"

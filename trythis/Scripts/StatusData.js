@@ -1,6 +1,6 @@
 ﻿
 var myChart;
-var myChart2, myChart3, myChart4, myChart5;
+var myChart2, myChart3, myChart4, myChart5, chart9;
 var temp = new Array();
 var humidity = new Array();
 var hum2 = new Array();
@@ -9,29 +9,59 @@ var timenow = new Array();
 var defaultip = "";
 (function ($) {
     var chat = $.connection.myHub;
-    console.log("connection started 1");
-    
-   
-    //for (i = 0; i < 20; i++) {
-    //    temp[i] = 0;
-    //    humidity[i] = 0;
-    //    hum2[i] = 0;
-    //    hum10[i] = 0;
-    //    timenow[i] = "";
-    //};  
+   // console.log("connection started 1");
+
+    for (i = 0; i < 20; i++) {
+        temp[i] = 0;
+        humidity[i] = 0;
+        hum2[i] = 0;
+        hum10[i] = 0;
+        timenow[i] = "";
+    };  
     chat.client.broadcastMessage = function (name, message) {
         //document.getElementById("tempdata").style.display = "block";
         console.log(name);
         //var ipName ="192.168.1.38";  
+        var arrayData = message.split(",");
+        if (arrayData[1] == "Heartbeat") {
+
+        }
         var tt = document.getElementById("MainContent_masterchildBody_lbllive").innerHTML;
         if (tt == "Live") {
             updatelivechart(name, message);
         }
     }; 
+
+    //chat.client.totalCount = function (count) {
+    //    var e = document.getElementById("MainContent_masterchildBody_ddlInstitute");
+    //    var v = e.options[e.selectedIndex].value;
+    //    CreateAllChart(v);
+        
+    //};
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-        console.log("connection started");
-        $(document).on("click", "#team-chart", function () {
-            
+       // console.log("connection started");
+        $(document).on("click", "#team-chart", function () {            
+            var classvalue = $('#MainContent_masterchildBody_ddlClass').val();
+            if (classvalue.includes("Cla")) {
+                $.ajax({
+                    type: "POST",
+                    url: "Services/ChartData.asmx/GetTempChartDataAll",
+                    data: jsonData,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: OnSuccess,
+                    error: OnErrorCall
+                });
+            }
+            else {
+                var gradevalue = $('#MainContent_masterchildBody_ddlGrade').val();
+                if (gradevalue.includes("Gra")) {
+
+                }
+                else {
+                    var insvalue = $('#MainContent_masterchildBody_ddlInstitute').val();
+                }
+            }
             var data = {
                 labels: [
                     "Temperature", "Temperature", "Temperature", "Temperature",
@@ -63,9 +93,17 @@ var defaultip = "";
                     }],
                
             };
-            var ctx = $("#tempModalChart").get(0).getContext('2d');
-           
+            var ctx = $("#tempModalChartMonth").get(0).getContext('2d');
+            
             new Chart(ctx, TempModalShow);
+            var ctx = $("#tempModalChartDate").get(0).getContext('2d');
+           
+
+            new Chart(ctx, TempModalShow1);
+            var ctx = $("#tempModalChartLive").get(0).getContext('2d');
+            
+            new Chart(ctx, TempModalShow2);
+           
             //var myDoughnutChart = new Chart(ctx, {
             //    type: 'doughnut',
             //    data: data,
@@ -74,12 +112,11 @@ var defaultip = "";
             //        circumference: 1 * Math.PI,
             //        legend: {
             //            display: false,
-            //        },
-                   
+            //        },                   
             //    }
             //});
             document.getElementById("TempModal").style.display = "flex";
-            console.log("modal error");
+           
         });
         $(document).on("click", "#lineChart", function () {
             document.getElementById("HumidModal").style.display = "flex";
@@ -87,15 +124,11 @@ var defaultip = "";
         "use strict";
         //Team chart
         Chart.defaults.global.defaultFontColor = "#fff";
-        Chart.defaults.scale.gridLines.color = "#f2faf8"
-
-       // CreateAllChart();
-
+        Chart.defaults.scale.gridLines.color = "#f2faf8"        
         //var now = new Date();
         //var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
         var ctx = document.getElementById("UsedBarChart");
-        //ctx.height = 130;
         myChart4 = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -158,8 +191,6 @@ var defaultip = "";
         });
 
         var ctx = document.getElementById('c1');
-       // ctx.height = 130;
-        
         chart5 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
@@ -167,8 +198,7 @@ var defaultip = "";
             // The data for our dataset
             data: {
                 labels: ["No of projectors", ""],
-                datasets: [{
-                    
+                datasets: [{                    
                     backgroundColor: ['#2c76b2', 'white'],
                     borderColor: '#fff',
                     data: [20, 5],
@@ -196,8 +226,6 @@ var defaultip = "";
         });
 
         var ctx = document.getElementById('c2');
-       // ctx.height = 130;
-        
         chart6 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
@@ -233,9 +261,7 @@ var defaultip = "";
             }
         });
 
-        var ctx = document.getElementById('c3');
-       // ctx.height = 130;
-       
+        var ctx = document.getElementById('c3');        
         chart7 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
@@ -270,9 +296,8 @@ var defaultip = "";
 
             }
         });
-        var ctx = document.getElementById('c4');
-        //ctx.height = 130;
-        
+
+        var ctx = document.getElementById('c4');                
         chart8 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
@@ -309,8 +334,6 @@ var defaultip = "";
         });
 
         var ctx = document.getElementById('c5');
-       // ctx.height = 130;
-        
         chart9 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
@@ -333,8 +356,8 @@ var defaultip = "";
                 cutoutPercentage: 80,
                 title: {
                     display: false,
-                    text: 'No. of Centrol Control Machine',
-                    
+                    text: 'No. of Central Control Machine',
+
                 },
                 animation: {
                     animateRotete: true,
@@ -342,12 +365,10 @@ var defaultip = "";
                 legend: {
                     display: false
                 },
-
             }
         });
-        var ctx = document.getElementById('c6');
-        //ctx.height = 130;
-        
+
+        var ctx = document.getElementById('c6');        
         chart10 = new Chart(ctx, {
             // The type of chart we want to create
             type: 'doughnut',
@@ -383,10 +404,9 @@ var defaultip = "";
                     display: true,
                 }
             }
-        });
-      
+        }); 
+        
         var ctx = document.getElementById("brightdonut");
-        //ctx.height = 120;
         myChart12 = new Chart(ctx, {
             type: 'doughnut',
             data: {
@@ -547,6 +567,14 @@ var defaultip = "";
         //    responsive: true
         //});
 
+        //var machineonline = document.getElementById("MainContent_masterchildBody_machineStatus").innerText;
+        //var machineoffline = document.getElementById("MainContent_masterchildBody_total").innerText;
+        //var type = Number(machineonline);
+        //if (typeof type == 'number') {            
+        //    chart9.data.datasets[0].data = [parseInt(machineonline, 10), parseInt(machineoffline, 10)];
+        //    chart9.update(0);
+        //    document.getElementById("systemspan").innerText = parseInt(machineonline, 10) + parseInt(machineoffline, 10);
+        //}
  
     });
 })(jQuery);
@@ -765,24 +793,26 @@ window.onload = function () {
     
 };
 
-function func() {
-    console.log("function worked");
-    var machineonline = document.getElementById("MainContent_masterchildBody_machineStatus").innerText; 
-    var machineoffline = document.getElementById("MainContent_masterchildBody_machineStatus1").innerText;
-    var work = document.getElementById("MainContent_masterchildBody_work").innerText;
-    var work1 = document.getElementById("MainContent_masterchildBody_work1").innerText;
-    if (machineonline != "" && parseInt(machineonline, 10) != NaN) {
-        cccc.series[0].setData([[parseInt(machineonline, 10)], [parseInt(machineoffline, 10)]]);
-        cccc.series[1].setData([[parseInt(work1, 10)], [parseInt(work, 10)]]);
-        ccc.series[0].setData([[Math.random()], [Math.random()]]);
-    }
-    else {
-        console.log("no values");
-    }
+//function func() {   
+//        var machineonline = document.getElementById("MainContent_masterchildBody_machineStatus").innerText;
+//        var machineoffline = document.getElementById("MainContent_masterchildBody_total").innerText;
+//        var work = document.getElementById("MainContent_masterchildBody_work").innerText;
+//        var work1 = document.getElementById("MainContent_masterchildBody_work1").innerText;
+//        var type = Number(machineonline);
+//        if (typeof type == 'number') {
+//            cccc.series[0].setData([[parseInt(machineonline, 10)], [parseInt(machineoffline, 10)]]);
+//            cccc.series[1].setData([[parseInt(work1, 10)], [parseInt(work, 10)]]);
+//            ccc.series[0].setData([[Math.random()], [Math.random()]]);
+//            chart9.data.datasets[0].data = [parseInt(machineonline, 10), parseInt(machineoffline, 10)];
+//            chart9.update(0);
+//            document.getElementById("systemspan").innerText = parseInt(machineonline, 10) + parseInt(machineoffline, 10);
+//        }
+//        else {
+//            console.log("no values");
+//        }   
+//};
 
-    
-};
-setInterval(func, 30 * 1000);
+//setInterval(func, 30 * 1000);
 $(window).on('load', setWidth);
 $(window).on('resize', setWidth);
 
@@ -847,13 +877,15 @@ function ShowTempModal() {
                 ]
             }]
     };
-    var ctx = document.getElementById("tempModalChart");
+    var ctx = document.getElementById("tempModalChartMonth");
     var myDoughnutChart = new Chart(ctx, {
         type: 'doughnut',
         data: data,
         options: {
+            maintainAspectRatio: false,
             rotation: 1 * Math.PI,
-            circumference: 1 * Math.PI
+            circumference: 1 * Math.PI,
+            postion: center,
         }
     });
 }
@@ -1132,7 +1164,6 @@ function CreateAllChart(value) {
         error: OnErrorCall_
     });
     function OnSuccess_(response) {
-
         aData = response.d;
         var alabel = aData[0];
         var temperature = aData[1];
@@ -1220,7 +1251,6 @@ function CreateAllChart(value) {
                 },
             }
         });
-
         //line chart
         var ctx = document.getElementById("lineChart");
         ctx.height = 130;
@@ -1310,11 +1340,37 @@ function CreateAllChart(value) {
             }
         });   
 
+        var val = String(value);
+        if (val.includes("Ins") || val.includes("All")) {
+            var machineonline = aData[5];
+            var machineoffline = aData[6];
+            var workopen = aData[7];
+            var workclose = aData[8];
+            if (workopen == workclose && parseInt(workopen, 10) == 0) {
+                if (parseInt(machineonline, 10) == 0)
+                    workclose = machineoffline ;
+                else {
+                    workclose = machineonline 
+                }
+            }
+            var type = Number(machineonline);
+            if (typeof type == 'number') {
+                document.getElementById("systemspan").innerText = parseInt(machineonline, 10) + parseInt(machineoffline, 10);
+                cccc.series[0].setData([[parseInt(machineonline, 10)], [parseInt(machineoffline, 10)]]);
+                cccc.series[1].setData([[parseInt(workclose, 10)], [parseInt(workopen, 10)]]);
+                //ccc.series[0].setData([[Math.random()], [Math.random()]]);
+                chart9.data.datasets[0].data = [parseInt(machineonline, 10), parseInt(machineoffline, 10)];
+                chart9.update(0);
+                
+            }
+            else {
+                console.log("no values");
+            }   
+        }        
     }
     function OnErrorCall_(respo) {
         console.log(respo);
-    }
-    
+    }    
 }
 
 function clearCharts() {
@@ -1334,7 +1390,7 @@ function ddlIndexChange(value) {
     });
     $.ajax({
         type: "POST",
-        url: "Services/ChartData.asmx/GetCustomData",
+        url: "Services/ChartData.asmx/getDataforClass",
         data: jsonData,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -1342,184 +1398,31 @@ function ddlIndexChange(value) {
         error: OnErrorCall_
     });
     function OnSuccess_(response) {
+        designChart(response);
+        
+    }
+    function OnErrorCall_(respo) {
+        console.log(respo);
+    }
+}
 
-        aData = response.d;
-        aData = response.d;
-        var alabel = aData[0];
-        var temperature = aData[1];
-        var humid = aData[2];
-        var pm25 = aData[3];
-        var pm10 = aData[4];
-        var temptick = Math.ceil(Math.min.apply(null, temperature));
-        var ctx = document.getElementById("team-chart");
-        ctx.height = 130;
-        myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: alabel,
-                type: 'line',
-                defaultFontFamily: 'Montserrat',
-                datasets: [{
-                    data: temperature,
-                    label: "Temprature",
-                    backgroundColor: 'rgba(0,44,237,0.3)',
-                    borderColor: 'rgba(213,154,168,0.70)',
-                    borderWidth: 2,
-                    pointStyle: 'circle',
-                    pointRadius: 1,
-                    pointBorderColor: "rgba(255,255,255,1)",
-                    pointBackgroundColor: 'rgba(255,255,255,1)',
-                    pointHighlightStroke: "rgba(255,255,255,1)",
-                },
-                ]
-            },
-            options: {
-                maintainAspectRatio: false,
-                responsive: true,
-                tooltips: {
-                    mode: 'index',
-                    titleFontSize: 12,
-                    titleFontColor: '#000',
-                    bodyFontColor: '#000',
-                    backgroundColor: '#fff',
-                    titleFontFamily: 'Montserrat',
-                    bodyFontFamily: 'Montserrat',
-                    cornerRadius: 3,
-                    intersect: false,
-                },
-                legend: {
-                    display: false,
-                    position: 'top',
-                    labels: {
-                        usePointStyle: true,
-                        fontFamily: 'Montserrat',
-                    },
-                },
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        gridLines: {
-                            display: false,
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: '时间',
-                            fontSize: 16,
+function ddltimeclass(time, loc) {
+    var obj = {};
+    obj.name = time;
+    obj.location = loc;
+    
+    $.ajax({
+        type: "POST",
+        url: "Services/ChartData.asmx/GetCustomData",
+        data: JSON.stringify(obj),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess_,
+        error: OnErrorCall_
+    });
+    function OnSuccess_(response) {
+        designChart(response);
 
-                        },
-                        ticks: {
-                            fontSize: 9,
-
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        gridLines: {
-                            display: false,
-                            zeroLineColor: '#fff',
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: '温度 (°C)',
-                        },
-                        ticks: {
-                            min: temptick - 5,
-                            stepSize: 2,
-                            fontSize: 9,
-                        }
-                    }]
-                },
-            }
-        });
-
-        //line chart
-        var ctx = document.getElementById("lineChart");
-        ctx.height = 130;
-        myChart2 = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: alabel,
-                datasets: [
-                    {
-                        label: "湿度",
-                        borderColor: "rgba(115,99,148,.9)",
-                        borderWidth: "2",
-                        backgroundColor: "rgba(233,221,255,.4)",
-                        pointStyle: 'circle',
-                        pointRadius: 0,
-                        data: humid,
-                    },
-                    {
-                        label: "PM2.5(µg/m3)",
-                        borderColor: "rgba(0,200,155, 0.9)",
-                        borderWidth: "2",
-                        backgroundColor: "rgba(212,248,240, .4)",
-                        pointHighlightStroke: "rgba(0,200,155,1)",
-                        pointStyle: 'circle',
-                        pointRadius: 0,
-                        data: pm25,
-                    },
-                    {
-                        label: "PM10(µg/m3)",
-                        borderColor: "rgba(219,120,118, 0.9)",
-                        borderWidth: "2",
-                        backgroundColor: "rgba(241,196,195, .4)",
-                        pointHighlightStroke: "rgba(219,120,118,1)",
-                        pointStyle: 'circle',
-                        pointRadius: 0,
-                        data: pm10,
-                    }
-                ]
-            },
-            options: {
-                maintainAspectRatio: false,
-                responsive: true,
-                tooltips: {
-                    mode: 'index',
-                    intersect: false
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
-                },
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: '时间',
-                            fontSize: 16,
-
-                        },
-                        ticks: {
-                            fontSize: 9,
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        gridLines: {
-                            display: false,
-                            drawBorder: true
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: '数值'
-                        },
-                        ticks: {
-                            min: 0,
-                            stepSize: 10,
-                            fontSize: 9,
-
-                        }
-                    }]
-                },
-
-            }
-        }); 
     }
     function OnErrorCall_(respo) {
         console.log(respo);
@@ -1529,42 +1432,43 @@ function ddlIndexChange(value) {
 function updatelivechart(name, message) {
 
     var ipName = document.getElementById("MainContent_masterchildBody_ipgraph").value;
-    if (defaultip == "") {
-        defaultip = ipName;
-        timenow.length = 20;
-        temp.length = 20;
-        humidity.length = 20;
-        hum10.length = 20;
-        hum2.length = 20;
+    
+    //if (defaultip == "") {
+    //    defaultip = ipName;
+    //    timenow.length = 20;
+    //    temp.length = 20;
+    //    humidity.length = 20;
+    //    hum10.length = 20;
+    //    hum2.length = 20;
         
-        for (i = 0; i < 20; i++) {
-            temp[i] = 0;
-            humidity[i] = 0;
-            hum2[i] = 0;
-            hum10[i] = 0;
-            timenow[i] = "";
-        }
-    }
-    else {
-        if (defaultip != ipName) {
-            defaultip = ipName;
-            timenow.length = 20;
-            temp.length = 20;
-            humidity.length = 20;
-            hum10.length = 20;
-            hum2.length = 20;
-            pm10 = 0;
-            pm25 = 0;
-            for (i = 0; i < 20; i++) {
-                temp[i] = 0;
-                humidity[i] = 0;
-                hum2[i] = 0;
-                hum10[i] = 0;
-                timenow[i] = "";
-            }                
-        }
-    }
-    if (name == defaultip) {
+    //    for (i = 0; i < 20; i++) {
+    //        temp[i] = 0;
+    //        humidity[i] = 0;
+    //        hum2[i] = 0;
+    //        hum10[i] = 0;
+    //        timenow[i] = "";
+    //    }
+    //}
+    //else {
+    //    if (defaultip != ipName) {
+    //        defaultip = ipName;
+    //        timenow.length = 20;
+    //        temp.length = 20;
+    //        humidity.length = 20;
+    //        hum10.length = 20;
+    //        hum2.length = 20;
+    //        pm10 = 0;
+    //        pm25 = 0;
+    //        for (i = 0; i < 20; i++) {
+    //            temp[i] = 0;
+    //            humidity[i] = 0;
+    //            hum2[i] = 0;
+    //            hum10[i] = 0;
+    //            timenow[i] = "";
+    //        }
+    //    }
+    //}
+    if (name == ipName) {
         var arraydata = message.split(',');
         if (arraydata[0] == "Temp") {
             var today = new Date();
@@ -1671,4 +1575,606 @@ function updatelivechart(name, message) {
             myChart2.update(0);
         };
     };
+}
+
+var TempModalShow1 = {
+
+    "type": "gauge",
+    "data": {
+        "datasets": [
+            {
+                "data": [-10, 0, 10, 20, 30, 40, 50],
+                "backgroundColor": [],
+                "borderWidth": 0,
+                "hoverBackgroundColor": [],
+                "hoverBorderWidth": 0
+            }
+        ],
+        "current": 25,
+    },
+    "options": {
+        "panel": {
+            "min": -10,
+            "max": 50,
+            "tickInterval": 10,
+            "tickColor": "rgb(255, 255, 255)",
+            "tickOuterRadius": 99,
+            "tickInnerRadius": 95,
+            "scales": [-10, 0, 10, 20, 30, 40, 50],
+            "scaleColor": "rgb(255, 255, 255)",
+            "scaleBackgroundColor": "rgb(252,114,131)",
+            "scaleTextRadius": 70,
+            "scaleTextSize": 12,
+            "scaleTextColor": "rgba(255, 255, 255, 1)",
+            "scaleOuterRadius": 99,
+            "scaleInnerRadius": 93,
+        },
+        "needle": {
+            "lengthRadius": 90,
+            "circleColor": "rgba(0,114,231, 1)",
+            "color": "rgba(0,114,231, 0.8)",
+            "circleRadius": 4,
+            "width": 3,
+        },
+        "cutoutPercentage": 85,
+        "rotation": 1 * Math.PI,
+        "circumference": 1 * Math.PI,
+        "legend": {
+            "display": false,
+            "text": "legend"
+        },
+        "tooltips": {
+            "enabled": false
+        },
+        "title": {
+            "display": true,
+            "text": "Temperature",
+            "position": "bottom",
+            "fontColor": "white",
+            "fontWeight": "normal",
+        },
+        "animation": {
+            "animateRotate": true,
+            "animateScale": false
+        },
+        "hover": {
+            "mode": null
+        },
+
+    }
+};
+function ShowTempModal1() {
+    var data = {
+        labels: [
+            "Red",
+            "Blue",
+            "Yellow"
+        ],
+        datasets: [
+            {
+                data: [300, 50, 100],
+                backgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56"
+                ],
+                hoverBackgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56"
+                ]
+            }]
+    };
+    var ctx = document.getElementById("tempModalChartDate");
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: {
+            maintainAspectRatio: false,
+            rotation: 1 * Math.PI,
+            circumference: 1 * Math.PI
+        }
+    });
+}
+
+var TempModalShow2 = {
+
+    "type": "gauge",
+    "data": {
+        "datasets": [
+            {
+                "data": [-10, 0, 10, 20, 30, 40, 50],
+                "backgroundColor": [],
+                "borderWidth": 0,
+                "hoverBackgroundColor": [],
+                "hoverBorderWidth": 0
+            }
+        ],
+        "current": 25,
+    },
+    "options": {
+        "panel": {
+            "min": -10,
+            "max": 50,
+            "tickInterval": 10,
+            "tickColor": "rgb(255, 255, 255)",
+            "tickOuterRadius": 99,
+            "tickInnerRadius": 95,
+            "scales": [-10, 0, 10, 20, 30, 40, 50],
+            "scaleColor": "rgb(255, 255, 255)",
+            "scaleBackgroundColor": "rgb(252,114,131)",
+            "scaleTextRadius": 70,
+            "scaleTextSize": 12,
+            "scaleTextColor": "rgba(255, 255, 255, 1)",
+            "scaleOuterRadius": 99,
+            "scaleInnerRadius": 93,
+        },
+        "needle": {
+            "lengthRadius": 90,
+            "circleColor": "rgba(0,114,231, 1)",
+            "color": "rgba(0,114,231, 0.8)",
+            "circleRadius": 4,
+            "width": 3,
+        },
+        "cutoutPercentage": 85,
+        "rotation": 1 * Math.PI,
+        "circumference": 1 * Math.PI,
+        "legend": {
+            "display": false,
+            "text": "legend"
+        },
+        "tooltips": {
+            "enabled": false
+        },
+        "title": {
+            "display": true,
+            "text": "Temperature",
+            "position": "bottom",
+            "fontColor": "white",
+            "fontWeight": "normal",
+        },
+        "animation": {
+            "animateRotate": true,
+            "animateScale": false
+        },
+        "hover": {
+            "mode": null
+        },
+
+    }
+};
+function ShowTempModal2() {
+    var data = {
+        labels: [
+            "Red",
+            "Blue",
+            "Yellow"
+        ],
+        datasets: [
+            {
+                data: [300, 50, 100],
+                backgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56"
+                ],
+                hoverBackgroundColor: [
+                    "#FF6384",
+                    "#36A2EB",
+                    "#FFCE56"
+                ]
+            }]
+    };
+    var ctx = document.getElementById("tempModalChartLive");
+    var myDoughnutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: {
+            maintainAspectRatio: false,
+            rotation: 1 * Math.PI,
+            circumference: 1 * Math.PI
+        }
+    });
+}
+
+
+$(document).ready(function () {
+
+    CreateAllChart("All");
+    //var aData;
+    //var jsonData = JSON.stringify({
+
+    //    name: "All"
+    //});
+    //$.ajax({
+    //    type: "POST",
+    //    url: "Services/ChartData.asmx/GetTempChartDataAll",
+    //    data: jsonData,
+    //    contentType: "application/json; charset=utf-8",
+    //    dataType: "json",
+    //    success: OnSuccess_,
+    //    error: OnErrorCall_
+    //});
+    //function OnSuccess_(response) {
+
+    //    aData = response.d;
+    //    var alabel = aData[0];
+    //    var temperature = aData[1];
+    //    var humid = aData[2];
+    //    var pm25 = aData[3];
+    //    var pm10 = aData[4];
+    //    var temptick = Math.ceil(Math.min.apply(null, temperature));
+    //    var ctx = document.getElementById("team-chart");
+    //    ctx.height = 130;
+    //    myChart = new Chart(ctx, {
+    //        type: 'line',
+    //        data: {
+    //            labels: alabel,
+    //            type: 'line',
+    //            defaultFontFamily: 'Montserrat',
+    //            datasets: [{
+    //                data: temperature,
+    //                label: "Temprature",
+    //                backgroundColor: 'rgba(0,44,237,0.3)',
+    //                borderColor: 'rgba(213,154,168,0.70)',
+    //                borderWidth: 2,
+    //                pointStyle: 'circle',
+    //                pointRadius: 1,
+    //                pointBorderColor: "rgba(255,255,255,1)",
+    //                pointBackgroundColor: 'rgba(255,255,255,1)',
+    //                pointHighlightStroke: "rgba(255,255,255,1)",
+    //            },
+    //            ]
+    //        },
+    //        options: {
+    //            maintainAspectRatio: false,
+    //            responsive: true,
+    //            tooltips: {
+    //                mode: 'index',
+    //                titleFontSize: 12,
+    //                titleFontColor: '#000',
+    //                bodyFontColor: '#000',
+    //                backgroundColor: '#fff',
+    //                titleFontFamily: 'Montserrat',
+    //                bodyFontFamily: 'Montserrat',
+    //                cornerRadius: 3,
+    //                intersect: false,
+    //            },
+    //            legend: {
+    //                display: false,
+    //                position: 'top',
+    //                labels: {
+    //                    usePointStyle: true,
+    //                    fontFamily: 'Montserrat',
+    //                },
+    //            },
+    //            scales: {
+    //                xAxes: [{
+    //                    display: true,
+    //                    gridLines: {
+    //                        display: false,
+    //                    },
+    //                    scaleLabel: {
+    //                        display: true,
+    //                        labelString: '时间',
+    //                        fontSize: 16,
+
+    //                    },
+    //                    ticks: {
+    //                        fontSize: 9,
+
+    //                    }
+    //                }],
+    //                yAxes: [{
+    //                    display: true,
+    //                    gridLines: {
+    //                        display: false,
+    //                        zeroLineColor: '#fff',
+    //                    },
+    //                    scaleLabel: {
+    //                        display: true,
+    //                        labelString: '温度 (°C)',
+    //                    },
+    //                    ticks: {
+    //                        min: temptick - 5,
+    //                        stepSize: 2,
+    //                        fontSize: 9,
+    //                    }
+    //                }]
+    //            },
+    //        }
+    //    });
+
+    //    //line chart
+    //    var ctx = document.getElementById("lineChart");
+    //    ctx.height = 130;
+    //    myChart2 = new Chart(ctx, {
+    //        type: 'line',
+    //        data: {
+    //            labels: alabel,
+    //            datasets: [
+    //                {
+    //                    label: "湿度",
+    //                    borderColor: "rgba(115,99,148,.9)",
+    //                    borderWidth: "2",
+    //                    backgroundColor: "rgba(233,221,255,.4)",
+    //                    pointStyle: 'circle',
+    //                    pointRadius: 0,
+    //                    data: humid,
+    //                },
+    //                {
+    //                    label: "PM2.5(µg/m3)",
+    //                    borderColor: "rgba(0,200,155, 0.9)",
+    //                    borderWidth: "2",
+    //                    backgroundColor: "rgba(212,248,240, .4)",
+    //                    pointHighlightStroke: "rgba(0,200,155,1)",
+    //                    pointStyle: 'circle',
+    //                    pointRadius: 0,
+    //                    data: pm25,
+    //                },
+    //                {
+    //                    label: "PM10(µg/m3)",
+    //                    borderColor: "rgba(219,120,118, 0.9)",
+    //                    borderWidth: "2",
+    //                    backgroundColor: "rgba(241,196,195, .4)",
+    //                    pointHighlightStroke: "rgba(219,120,118,1)",
+    //                    pointStyle: 'circle',
+    //                    pointRadius: 0,
+    //                    data: pm10,
+    //                }
+    //            ]
+    //        },
+    //        options: {
+    //            maintainAspectRatio: false,
+    //            responsive: true,
+    //            tooltips: {
+    //                mode: 'index',
+    //                intersect: false
+    //            },
+    //            hover: {
+    //                mode: 'nearest',
+    //                intersect: true
+    //            },
+    //            scales: {
+    //                xAxes: [{
+    //                    display: true,
+    //                    gridLines: {
+    //                        display: false,
+    //                        drawBorder: true
+    //                    },
+    //                    scaleLabel: {
+    //                        display: true,
+    //                        labelString: '时间',
+    //                        fontSize: 16,
+
+    //                    },
+    //                    ticks: {
+    //                        fontSize: 9,
+    //                    }
+    //                }],
+    //                yAxes: [{
+    //                    display: true,
+    //                    gridLines: {
+    //                        display: false,
+    //                        drawBorder: true
+    //                    },
+    //                    scaleLabel: {
+    //                        display: true,
+    //                        labelString: '数值'
+    //                    },
+    //                    ticks: {
+    //                        min: 0,
+    //                        stepSize: 10,
+    //                        fontSize: 9,
+
+    //                    }
+    //                }]
+    //            },
+
+    //        }
+    //    });
+
+    //    var machineonline = aData[5];
+    //    var machineoffline = aData[6];
+    //    var work = aData[7];
+    //    var work1 = aData[8];
+    //    var type = Number(machineonline);
+    //    if (typeof type == 'number') {
+    //        cccc.series[0].setData([[parseInt(machineonline, 10)], [parseInt(machineoffline, 10)]]);
+    //        cccc.series[1].setData([[parseInt(work1, 10)], [parseInt(work, 10)]]);
+    //        ccc.series[0].setData([[Math.random()], [Math.random()]]);
+    //        chart9.data.datasets[0].data = [parseInt(machineonline, 10), parseInt(machineoffline, 10)];
+    //        chart9.update(0);
+    //        document.getElementById("systemspan").innerText = parseInt(machineonline, 10) + parseInt(machineoffline, 10);
+    //    }
+    //    else {
+    //        console.log("no values");
+    //    }   
+
+    //}
+    //function OnErrorCall_(respo) {
+    //    console.log(respo);
+    //}
+    
+    
+});
+
+function designChart(response) {
+    aData = response.d;
+    aData = response.d;
+    var alabel = aData[0];
+    var temperature = aData[1];
+    var humid = aData[2];
+    var pm25 = aData[3];
+    var pm10 = aData[4];
+    var temptick = Math.ceil(Math.min.apply(null, temperature));
+    var ctx = document.getElementById("team-chart");
+    ctx.height = 130;
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: alabel,
+            type: 'line',
+            defaultFontFamily: 'Montserrat',
+            datasets: [{
+                data: temperature,
+                label: "Temprature",
+                backgroundColor: 'rgba(0,44,237,0.3)',
+                borderColor: 'rgba(213,154,168,0.70)',
+                borderWidth: 2,
+                pointStyle: 'circle',
+                pointRadius: 1,
+                pointBorderColor: "rgba(255,255,255,1)",
+                pointBackgroundColor: 'rgba(255,255,255,1)',
+                pointHighlightStroke: "rgba(255,255,255,1)",
+            },
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                titleFontSize: 12,
+                titleFontColor: '#000',
+                bodyFontColor: '#000',
+                backgroundColor: '#fff',
+                titleFontFamily: 'Montserrat',
+                bodyFontFamily: 'Montserrat',
+                cornerRadius: 3,
+                intersect: false,
+            },
+            legend: {
+                display: false,
+                position: 'top',
+                labels: {
+                    usePointStyle: true,
+                    fontFamily: 'Montserrat',
+                },
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    gridLines: {
+                        display: false,
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: '时间',
+                        fontSize: 16,
+
+                    },
+                    ticks: {
+                        fontSize: 9,
+
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    gridLines: {
+                        display: false,
+                        zeroLineColor: '#fff',
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: '温度 (°C)',
+                    },
+                    ticks: {
+                        min: temptick - 5,
+                        stepSize: 2,
+                        fontSize: 9,
+                    }
+                }]
+            },
+        }
+    });
+
+    //line chart
+    var ctx = document.getElementById("lineChart");
+    ctx.height = 130;
+    myChart2 = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: alabel,
+            datasets: [
+                {
+                    label: "湿度",
+                    borderColor: "rgba(115,99,148,.9)",
+                    borderWidth: "2",
+                    backgroundColor: "rgba(233,221,255,.4)",
+                    pointStyle: 'circle',
+                    pointRadius: 0,
+                    data: humid,
+                },
+                {
+                    label: "PM2.5(µg/m3)",
+                    borderColor: "rgba(0,200,155, 0.9)",
+                    borderWidth: "2",
+                    backgroundColor: "rgba(212,248,240, .4)",
+                    pointHighlightStroke: "rgba(0,200,155,1)",
+                    pointStyle: 'circle',
+                    pointRadius: 0,
+                    data: pm25,
+                },
+                {
+                    label: "PM10(µg/m3)",
+                    borderColor: "rgba(219,120,118, 0.9)",
+                    borderWidth: "2",
+                    backgroundColor: "rgba(241,196,195, .4)",
+                    pointHighlightStroke: "rgba(219,120,118,1)",
+                    pointStyle: 'circle',
+                    pointRadius: 0,
+                    data: pm10,
+                }
+            ]
+        },
+        options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: false
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    gridLines: {
+                        display: false,
+                        drawBorder: true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: '时间',
+                        fontSize: 16,
+
+                    },
+                    ticks: {
+                        fontSize: 9,
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    gridLines: {
+                        display: false,
+                        drawBorder: true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: '数值'
+                    },
+                    ticks: {
+                        min: 0,
+                        stepSize: 10,
+                        fontSize: 9,
+
+                    }
+                }]
+            },
+
+        }
+    }); 
 }

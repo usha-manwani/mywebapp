@@ -298,7 +298,7 @@
     <value>Class</value>
   </data>
   <data name="ClassLock" xml:space="preserve">
-    <value>Class Lock Status</value>
+    <value>Class Lock</value>
   </data>
   <data name="ClassName" xml:space="preserve">
     <value>Class Name</value>
@@ -445,7 +445,7 @@
     <value>Ok</value>
   </data>
   <data name="PCPower" xml:space="preserve">
-    <value>PC Power Satus</value>
+    <value>PC Power</value>
   </data>
   <data name="PCUses" xml:space="preserve">
     <value>PC Uses</value>
@@ -457,7 +457,7 @@
     <value>Name of Person</value>
   </data>
   <data name="PodiumLock" xml:space="preserve">
-    <value>Podium Lock Status</value>
+    <value>Podium Lock</value>
   </data>
   <data name="ProjAutoBoot" xml:space="preserve">
     <value>投影机自动开机</value>
@@ -469,10 +469,10 @@
     <value>投影机自动切换</value>
   </data>
   <data name="ProjectorHours" xml:space="preserve">
-    <value>Projector Used Hours</value>
+    <value>Projector Hours</value>
   </data>
   <data name="ProjectorPower" xml:space="preserve">
-    <value>Projector Power Status</value>
+    <value>Projector Power</value>
   </data>
   <data name="ProjectorUses" xml:space="preserve">
     <value>Projector Uses</value>
@@ -526,7 +526,7 @@
     <value>使用投影仪打开数字屏幕</value>
   </data>
   <data name="SCStatus" xml:space="preserve">
-    <value>digital Screen Status</value>
+    <value>digital Screen</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
@@ -559,7 +559,7 @@
     <value>Sunday</value>
   </data>
   <data name="SystemLock" xml:space="preserve">
-    <value>System lock Status</value>
+    <value>System lock</value>
   </data>
   <data name="Temperature" xml:space="preserve">
     <value>Temperature</value>

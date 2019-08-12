@@ -26,7 +26,7 @@ namespace WebCresij
             {
                 BindData();
             }
-            LblText();
+           
         }
         protected void PageSize_Changed(object sender, EventArgs e)
         {
@@ -43,10 +43,19 @@ namespace WebCresij
                 "join ReaderData rd on rd.data = cc.CardID join CentralControl ccc on " +
                 "rd.Reader = ccc.CCIP join Class_Details cd on ccc.location= cd.ClassID order by cc.Name asc ";
             dt = PopulateTree.ExecuteCommand(query);
-            gv1.DataSource = dt;
-            dt.TableName = "cardLogs";
-            gv1.DataBind();
-            LblText();
+            if (dt.Rows.Count > 0)
+            {
+                gv1.DataSource = dt;
+                dt.TableName = "cardLogs";
+                gv1.DataBind();
+                LblText();
+            }
+            else
+            {
+                lblTitle.Text = "No Logs Yet!!";
+                lblTitle.Font.Size = 30;
+                exportexcel.Visible = false;
+            }
         }
 
         protected void Gv1_Sorting(object sender, GridViewSortEventArgs e)

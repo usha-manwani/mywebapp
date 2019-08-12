@@ -1,9 +1,7 @@
 ﻿﻿$(function () {
-
-   
-     var ipAddress = "";
+    var ipAddress = "";
     var chat = $.connection.myHub;
-     chat.client.broadcastMessage = function (name, message) {
+    chat.client.broadcastMessage = function (name, message) {
          
          tbleupdate(name, message);
         if (name == ipAddress) {
@@ -221,25 +219,23 @@
 
     $.connection.hub.reconnecting(function () {
         tryingToReconnect = true;
-        alert("trying to reconnect");
+        console.log("trying to reconnect");
     });
 
     $.connection.hub.reconnected(function () {
         tryingToReconnect = false;
-        alert("reconnected");
+        console.log("reconnected");
     });
 
     $.connection.hub.disconnected(function () {
         if (tryingToReconnect) {
-            alert("hub disconnected");
+            console.log("hub disconnected");
         }
     });
 
-    $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-        
+    $.connection.hub.start({ waitForPageLoad: false }).done(function () {        
         createDivs();
-        var chkbox = document.getElementsByName("toggle");
-        
+        var chkbox = document.getElementsByName("toggle");        
         for (k = 0; k < chkbox.length; k++) {            
             chat.server.sendControlKeys(chkbox[k].value, "8B B9 00 03 05 01 09");
         }
@@ -265,7 +261,7 @@
                 
             }            
         });
-        $(document).on('click', "*[name='lockIcon']", function () {          
+        $(document).on('click', "*[name='lockIcon']",function () {          
             var lock = $(this).closest('table').find('input').val();
             chat.server.sendControlKeys(lock, "8B B9 00 04 02 04 2d 37");           
         });
@@ -441,30 +437,66 @@
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");
         });
         $(document).on("change", "*[name ='test']", function () {
-            
-                   
-                   
-            
+    
+        });
+        $(document).on("change", "*[name ='classnames']", function () {
+            console.log("clicked Class Name");
+            var val = $(this).closest('.tdcenter').find('input:checkbox').attr('value');
+            console.log(val);
+        });
+        $(document).on("click", "#btnOff", function () {
+            var checkedids = document.getElementsByName('selectclass');
+            for (i = 0; i < checkedids.length; i++) {
+                if (checkedids[i].checked) {
+                    var ipadd = checkedids[i].value;
+                    chat.server.sendControlKeys(ipadd, "8B B9 00 04 02 04 C1 CB");
+                }
+            }
+        });
+        $(document).on("click", "#btnOn", function () {
+            var checkedids = document.getElementsByName('selectclass');
+            for (i = 0; i < checkedids.length; i++) {
+                if (checkedids[i].checked) {
+                    var ipadd = checkedids[i].value;
+                    chat.server.sendControlKeys(ipadd, "8B B9 00 04 02 04 C0 CA");
+                }
+            }
+        });
+        $(document).on("click", "#SelectAll", function () {
+            var checkedids = document.getElementsByName('selectclass');
+            for (i = 0; i < checkedids.length; i++) {
+                checkedids[i].checked = true;
+            }
+        });
+        $(document).on("click", "#UnselectAll", function () {
+            var checkedids = document.getElementsByName('selectclass');
+            for (i = 0; i < checkedids.length; i++) {
+                checkedids[i].checked = false;
+            }
         });
     });
 });
 function createDivs() {
     var chkds = $("input[name='toggle']:checkbox");
-    chkds.checked = true;
-    
+    chkds.checked = true;    
     var deviceidsloc = $('#dev1').val();
     console.log(deviceidsloc);
     if (deviceidsloc != "" && deviceidsloc != undefined) {
         var dev = deviceidsloc.split(",");
         var counter = 0;
-        for (i = 0; i < dev.length; i++) {            
-            
+        for (i = 0; i < dev.length; i++) {           
             var ip = dev[i].split(":");
             var rows = document.getElementById("smallcontrol");
             var DIV = document.createElement("div");
             DIV.name = "controldivs";
             DIV.className = "col-xl-3 col-md-6 col-lg-4 col-sm-6 fixwidth";
             rows.appendChild(DIV);
+            var checkselect = document.createElement("input");
+            checkselect.type = "checkbox";
+            checkselect.name = "selectclass";
+            checkselect.value = ip[0];
+            checkselect.className = "chk";
+            DIV.appendChild(checkselect);
             var table = document.createElement("table");
             table.className = "table1234 shadows";
             //row1
@@ -490,6 +522,7 @@ function createDivs() {
             chk.name = "toggle";
             chk.className = "tdcenter";
             chk.value = ip[0];
+            
            // chk.onchange = function () { isRemote(this.value, this.checked) };
             div1.appendChild(chk);
             var label1 = document.createElement("label");
@@ -592,13 +625,13 @@ function openRemote(ipofremote) {
    document.getElementById("control").style.display = "block";
    document.getElementById("smallcontrol").style.display = "none";    
 }
-window.onclick = function (event) {
-    if (event.target == modal) {
+//window.onclick = function (event) {
+//    if (event.target == modal) {
         
-       document.getElementById("control").style.display = "none";
+//       document.getElementById("control").style.display = "none";
        
-    }
-}
+//    }
+//}
 
 function closexx() {
     

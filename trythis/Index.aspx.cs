@@ -18,7 +18,15 @@ namespace WebCresij
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!IsPostBack)
-            Session.Clear();
+            {
+                Session.Clear();
+                if (Request.Cookies["cresijuserid"] != null && Request.Cookies["cresijpwd"] != null)
+                {
+                    UserName.Text = Request.Cookies["cresijuserid"].Value;
+                    Password.Text = Request.Cookies["cresijpwd"].Value;
+                    RememberMe.Checked = true;
+                }
+            }
         }
         protected void LogIn(object sender, EventArgs e)
         {
@@ -26,7 +34,7 @@ namespace WebCresij
             int k = 0;
             string n = "";
             string u = "";
-            string id = UserName.Text;
+            string id = UserName.Text.Trim();
             var charsToRemove = new string[] { "+", "-", " " };
             foreach (var c in charsToRemove)
             {
@@ -50,7 +58,7 @@ namespace WebCresij
                 SqlCommand cmd = new SqlCommand("Sp_Login", con) { CommandType = CommandType.StoredProcedure };
                 cmd.Parameters.AddWithValue("User_ID", id);
                 cmd.Parameters.AddWithValue("Phone_No", phone);
-                cmd.Parameters.AddWithValue("User_Password", Password.Text);
+                cmd.Parameters.AddWithValue("User_Password", Password.Text.Trim());
                 cmd.Parameters.Add("@roleName", SqlDbType.Int);
                 cmd.Parameters["@roleName"].Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("@Username", SqlDbType.NVarChar, 50);
@@ -75,6 +83,18 @@ namespace WebCresij
                 HttpContext.Current.Session["role"] = k;
                 HttpContext.Current.Session["UserId"] = u;
                 HttpContext.Current.Session["LocToDisplay"] = "";
+                if (RememberMe.Checked == true)
+                {
+                    Response.Cookies["cresijuserid"].Value = UserName.Text;
+                    Response.Cookies["cresijpwd"].Value = Password.Text.Trim();
+                    Response.Cookies["cresijuserid"].Expires = DateTime.Now.AddDays(30);
+                    Response.Cookies["cresijpwd"].Expires = DateTime.Now.AddDays(30);
+                }
+                else
+                {                  
+                    Response.Cookies["cresijuserid"].Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies["cresijpwd"].Expires = DateTime.Now.AddDays(-1);
+                }
                 UserActivities.UserLogs.Task1(u,n,1); /// Saving login Task
                 //bool sessionAdd =  AddSession(u);
                 Response.Redirect("~/home.aspx");

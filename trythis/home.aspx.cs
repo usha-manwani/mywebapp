@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -26,8 +27,10 @@ namespace WebCresij
                 ddlInstitute.DataValueField = "InstituteID";
                 ddlInstitute.DataBind();
                 string select = Resources.Resource.Select;
-                ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));
+                ddlInstitute.Items.Insert(0, new ListItem("All", "All"));
+                ddlTime.Enabled = false;
                 HttpContext.Current.Session["ipforgraph"] = "";
+               
                 //if (ddlClass.SelectedValue == "NA")
                 //{
                 //    ipgraph.Value = "NA";
@@ -36,22 +39,22 @@ namespace WebCresij
                 //}
             }
         }
-        private void bindgrd()
-        {
-            DataTable dt = new DataTable();
-            DataRow dr = null;
-            dt.Columns.Add(new DataColumn("Slno", typeof(string)));
-            dt.Columns.Add(new DataColumn("Name", typeof(string)));
-            dt.Columns.Add(new DataColumn("Desc", typeof(string)));
-            dr = dt.NewRow();
-            dr["Slno"] = 1;
-            dr["Name"] = string.Empty;
-            dr["Desc"] = string.Empty;
-            dt.Rows.Add(dr);
-            //Store the DataTable in ViewState
-            ViewState["CurrentTable"] = dt;
+        //private void bindgrd()
+        //{
+        //    DataTable dt = new DataTable();
+        //    DataRow dr = null;
+        //    dt.Columns.Add(new DataColumn("Slno", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("Name", typeof(string)));
+        //    dt.Columns.Add(new DataColumn("Desc", typeof(string)));
+        //    dr = dt.NewRow();
+        //    dr["Slno"] = 1;
+        //    dr["Name"] = string.Empty;
+        //    dr["Desc"] = string.Empty;
+        //    dt.Rows.Add(dr);
+        //    //Store the DataTable in ViewState
+        //    ViewState["CurrentTable"] = dt;
 
-        }
+        //}
         protected void ddlInstitute_SelectedIndexChanged(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartclear2", "clearCharts();", true);
@@ -60,6 +63,14 @@ namespace WebCresij
             string select = Resources.Resource.Select;
             ddlClass.Items.Insert(0, new ListItem(select, "NA"));
             string insID = ddlInstitute.SelectedValue;
+            if (insID == "All")
+            {
+                ddlTime.Enabled = false;
+            }
+            else
+            {
+                ddlTime.Enabled = true;
+            }
             string query = "select GradeID, GradeName from Grade_Details where InsID='" + insID + "'";
             DataTable dt = PopulateTree.ExecuteCommand(query);
             ddlGrade.DataSource = dt;
@@ -122,22 +133,29 @@ namespace WebCresij
             ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey4", "ddlIndexChange('" + classID + "');", true);
         }
 
-        protected void Timer1_Tick(object sender, EventArgs e)
-        {
-            DataTable dt = pt.GetStatus();
-            machineStatus.InnerText = dt.Select("MachineStatus='Online'").Count().ToString();
-            machineStatus1.InnerText = dt.Select("MachineStatus='Offline'").Count().ToString();
-            work.InnerText = dt.Select("WorkStatus='OPEN'").Count().ToString();
-            work1.InnerText = dt.Select("WorkStatus='CLOSED'").Count().ToString();
-            total.InnerText = dt.Rows.Count.ToString();
-        }
+        //protected void Timer1_Tick(object sender, EventArgs e)
+        //{
+        //    CountMachines();
+        //}
 
         protected void ddlTime_SelectedIndexChanged(object sender, EventArgs e)
         {
             lbllive.Text = "";
             lbllive.ForeColor = System.Drawing.Color.Blue;
             ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartclear5", "clearCharts();", true);
-            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey5", "ddlIndexChange('" + ddlTime.SelectedValue + "');", true);            
+            if (ddlClass.SelectedValue != "NA")
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey5", "ddltimeclass('" + ddlTime.SelectedValue + "','"+ ddlClass.SelectedValue + "');", true);
+            }
+            else if (ddlGrade.SelectedValue != "NA")
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey6", "ddltimeclass('" + ddlTime.SelectedValue + "','" + ddlGrade.SelectedValue + "');", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey7", "ddltimeclass('" + ddlTime.SelectedValue + "','" + ddlInstitute.SelectedValue + "');", true);
+            }
+
         }
 
         protected void LiveLink_Click(object sender, EventArgs e)
@@ -146,6 +164,23 @@ namespace WebCresij
             lbllive.ForeColor = System.Drawing.Color.White;
             ddlTime.SelectedItem.Selected=false;            
             ddlTime.Items.FindByValue("0").Selected = true;            
-        }
+        }      
+        //public void CountMachines()
+        //{
+        //    DataTable dt = pt.GetStatus();
+        //    machineStatus.InnerText = dt.Select("MachineStatus='Online'").Count().ToString();
+        //    machineStatus1.InnerText = dt.Select("MachineStatus='Offline'").Count().ToString();
+        //    work.InnerText = dt.Select("WorkStatus='OPEN'").Count().ToString();
+        //    work1.InnerText = dt.Select("WorkStatus='CLOSED'").Count().ToString();
+        //    dt = pt.totalMachines();
+        //    total.InnerText = (Convert.ToInt32(dt.Rows[0][0]) - Convert.ToInt32(machineStatus.InnerText)).ToString();
+        //    //ScriptManager.RegisterStartupScript(this, typeof(Page), "updatefunc", "func();", true);
+            
+        //}
+
+        //protected void btngetData_Click(object sender, EventArgs e)
+        //{
+        //    CountMachines();
+        //}
     }
 }

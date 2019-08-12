@@ -34,13 +34,13 @@
             /*display:table-cell;*/
             background-color: #191b28;
             margin: auto;
-            /*position:center;*/
+            position:center;
             border: 1px solid #888;
-            width: 70%;
+            width: 50%;
             min-width:300px;
-            /*vertical-align:middle;*/
-            position: relative;
-             top: 25%;
+            /*vertical-align:middle;
+            position: relative;*/
+             top: 35%;
             -webkit-transform: translateY(-50%);
             -ms-transform: translateY(-50%);
             transform: translateY(-50%);
@@ -85,12 +85,18 @@
         }
         .row{
             margin-bottom:-20px;
-            margin-right:10px;
+           
         }
         .custommb{
             margin-top:-3px;
             margin-bottom:-5px;            
         }
+        .customchartsize{
+            max-width:200px!important;
+            min-height:100px!important;
+            text-align:center
+        }
+        
     </style>
     <script>
         var mySessionVariable;
@@ -99,31 +105,34 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="masterchildBody" ID="MainBody" runat="server">
 
-    <script src="Scripts/jquery-3.3.1.min.js"></script>    
-    <script src="Scripts/jquery.signalR-2.4.0.js"></script>
-    <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <script src="Scripts/jquery-3.4.1.min.js"></script>    
+   
+    <script src="Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
-    <script src="Scripts/StatusData.js?v=7"></script>
-
-    <div class="row " id="ddl" style="background-color: #1e1e36;
+    <script src="Scripts/StatusData.js?v=8"></script>
+   
+    <div class="row" id="ddl" style="background-color: #1e1e36;
         min-height: 100px; min-width:80%">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <div class="row" style="min-height: 100px;">
                     <div class="col-xl-3 col-lg-3 col-sm-12 col-md-3 mbcustom" 
-                        style="margin-top: -15px">
+                        style="margin-top: -15px; min-width:100px"">
                         <h5><span style="color: white;">
                             <%=Resources.Resource.TempratureChartHead%>
                             </span> </h5>
                     </div>
-                    <div class=" col-xl-2 col-lg-2 col-md-3 col-sm-12 float-left mbcustom">
+                    <div class=" col-xl-2 col-lg-2 col-md-3 col-sm-12 float-left mbcustom" 
+                        style="min-width:100px">
                         <asp:DropDownList Width="100px" AutoPostBack="true"
                             OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                             CssClass="btn btn-default border-light" ID="ddlInstitute" 
                             runat="server" ForeColor="White" BackColor="#1E1E36">                            
                         </asp:DropDownList>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 float-none mbcustom" >
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 float-none mbcustom"
+                        style="min-width:100px">
                         <asp:DropDownList Width="100px" ID="ddlGrade" AutoPostBack="true"
                             CssClass="btn btn-default border dropdown"
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"
@@ -133,7 +142,8 @@
                                 Value="NA"></asp:ListItem>  
                         </asp:DropDownList>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 float-right mbcustom">
+                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 float-right mbcustom "
+                        style="min-width:100px">
                         <asp:DropDownList ID="ddlClass" Width="100px" AutoPostBack="true"
                             runat="server" CssClass="btn btn-default border dropdown"
                              OnSelectedIndexChanged="ddlClass_SelectedIndexChanged"
@@ -142,7 +152,7 @@
                                 Value="NA"></asp:ListItem>  
                         </asp:DropDownList>
                     </div>
-                    <div class="col-xl-2 col-lg-2 float-right">
+                    <div class="col-xl-2 col-lg-2 float-right" style="min-width:100px">
                         <asp:DropDownList Width="100px" AutoPostBack="true"
                             OnSelectedIndexChanged="ddlTime_SelectedIndexChanged"
                             CssClass="btn btn-default border-light" ID="ddlTime"
@@ -172,7 +182,7 @@
         <div class="animated fadeIn col-lg-12 col-md-12 col-sm-12">
             <!-- Widgets-->
             <div class="row">
-                <div class="col-sm-6 col-md-4 col-lg-2 mbcustom" title="Brightness">
+                <div class="col-sm-6 col-md-4 col-lg-2 col-xl-2 mbcustom" title="Brightness">
                     <div class="card" style="background-color: #5821f0; 
                         height: 120px!important; border: 1px solid #8863f0;
                         min-width:100px">
@@ -197,7 +207,7 @@
                     </div>
                 </div>
                 <!--/.col-->
-                <div class="col-sm-6  col-md-4 col-lg-2  mbcustom" title="CO2">
+                <div class="col-sm-6  col-md-4 col-lg-2 col-xl-2 mbcustom" title="CO2">
                     <div class="card" style="background-color: #002ced;
                         height: 120px!important; border: 1px solid #758bf0;
                         min-width:100px">
@@ -218,7 +228,7 @@
                     </div>
                 </div>
                 <!--/.col-->
-                <div class="col-sm-6  col-md-4 col-lg-2 mbcustom" title="Formaldehyde">
+                <div class="col-sm-6  col-md-4 col-lg-2 col-xl-2 mbcustom" title="Formaldehyde">
                     <div class="card" style="background-color: #0072e7; 
                         height: 120px!important; border: 1px solid #98c3f0;
                         min-width:100px">
@@ -238,7 +248,7 @@
                     </div>
                 </div>
                 <!--/.col-->
-                <div class="col-sm-6 col-md-6 col-lg-2  mbcustom" title="Voltage">
+                <div class="col-sm-6 col-md-6 col-lg-2 col-xl-2 mbcustom" title="Voltage">
                     <div class="card" style="background-color: #00bee0; 
                         height: 120px!important; border: 1px solid #9adce7;
                         min-width:100px">
@@ -256,7 +266,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-6 col-lg-2  mbcustom" title="Electricity">
+                <div class="col-sm-6 col-md-6 col-lg-2 col-xl-2 mbcustom" title="Electricity">
                     <div class="card" style="background-color: #01cc56; 
                         height: 120px!important; border: 1px solid #86e9af; 
                         min-width:100px">
@@ -277,7 +287,7 @@
             </div>
             <div style="clear: both"></div>
 
-            <div class="row">
+            <div class="row" style="margin-bottom:-50px">
                 <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12  mbcustom fullWidth1">
                     <div class="card" style="background-color: #191b28;
                         height: 350px;min-width:380px">
@@ -312,17 +322,16 @@
             <div class="row">
                 <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 mbcustom fullWidth3">
                     <div class="row">
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 fullWidth2">
+                        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
                                  
                                 <div class="card-body divstyle" id="systemDiv"
-                                    align="center" style="margin-top:2px">                                    
-                                    <%--<h4 class="mb-3"> <span>System</span> </h4>
-                                <canvas id="systemdonut"></canvas>--%>
+                                    align="center" style="margin-top:2px ">                                    
+                                   
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 fullWidth2">
+                        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
                                 <div class="card-body divstyle" id="BarChart">
                                     <div style="max-height:200px">
@@ -357,7 +366,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 fullWidth2">
+                        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
                                 <div class="card-body divstyle" id="carbonDiv">
                                     <div>
@@ -368,7 +377,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 fullWidth2">
+                        <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
                                 <div class="card-body divstyle" id="brightdiv" 
                                     style="text-align:center">
@@ -398,9 +407,9 @@
             <div class="row">
                 <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 mbcustom">
                     <div class="row" style="margin-left: -20px;">
-                        <div class="col-lg-2 col-md-4 col-sm-6 ">
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div>
-                                <canvas id="c1" height="100%"></canvas>
+                                <canvas id="c1" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip" class="chartjs-tooltip">
                                     <div class="centered">
                                         <span >20</span><br />
@@ -409,9 +418,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div>
-                                <canvas id="c2" height="100%"></canvas>
+                                <canvas id="c2" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip1" class="chartjs-tooltip">
                                     <div class="centered">
                                         <span >200</span><br />
@@ -420,9 +429,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6 ">
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div>
-                                <canvas id="c3" height="100%"></canvas>
+                                <canvas id="c3" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip2" class="chartjs-tooltip">
                                     <div class="centered">
                                         <span >30</span><br />
@@ -431,9 +440,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6">
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div>
-                                <canvas id="c4" height="100%"></canvas>
+                                <canvas id="c4" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip5" class="chartjs-tooltip">
                                     <div class="centered">
                                         <span >25</span><br />
@@ -442,21 +451,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6 ">
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div>
-                                <canvas id="c5" height="100%"></canvas>
+                                <canvas id="c5" height="100%" style="width:100px!important; min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip3" class="chartjs-tooltip">
                                     <div class="centered">
-                                        <span >68</span>
+                                        <span id="systemspan">68</span>
                                         <br />
                                         <span style="font-size:small; color: white">中控</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6 ">
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div >
-                                <canvas id="c6" height="100%"></canvas>
+                                <canvas id="c6" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip4" class="chartjs-tooltip">
                                     <div class="centered">
                                         <span >34</span>
@@ -473,7 +482,7 @@
         </div>
     </div>
 
-    <asp:Timer ID="Timer1" OnTick="Timer1_Tick" runat="server" Interval="25000" />
+    <%--<asp:Timer ID="Timer1" OnTick="Timer1_Tick" runat="server" Interval="25000" />
     <div style="display: none">
         <asp:UpdatePanel runat="server">
             <Triggers>
@@ -487,18 +496,26 @@
                 <span id="total" runat="server"></span>
             </ContentTemplate>
         </asp:UpdatePanel>
-    </div>
+    </div>--%>
 
     <div class="modal" id="TempModal">
-        <div class="modal-content">            
+        <div class="modal-content" >            
             <div style="display:table; text-align:center; color:white">
                 <div>Temperature Current Value: 22</div>
-                <div> Temperature Average value: 23</div>
-                <div> Temperature Normal Range : 18-28</div>                
+                <div> Temperature Average value for the current week: 23</div>
+                <div> Temperature Average value for the current month : 28</div>                
             </div>
-            <div class="centered" style="padding-right:20px;padding-left:10px;height:200px">                
-                <canvas id="tempModalChart" width="80%" >
+            <div class="centered row" style="padding-right:20px;padding-left:10px; min-height:250px;"> 
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" >
+                    <canvas id="tempModalChartMonth" class="customchartsize" >
+                </canvas></div>
+                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" >
+                     <canvas id="tempModalChartDate" class="customchartsize">
                 </canvas>
+                 </div>
+                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" >
+                     <canvas id="tempModalChartLive" class="customchartsize">
+                </canvas></div>
                 <%--<span style="text-align:center">Temperature</span>--%>
            </div>
         </div>
@@ -567,8 +584,7 @@
                     //}
                 },
 
-                title: {
-                    
+                title: {                    
                     text: '系统状态',
                     style: {
 
@@ -580,7 +596,7 @@
                     }
                 },
                 tooltip: {
-                    pointFormat: '<b>{point.percentage:.1f}%</b>'
+                    pointFormat: '<b>{point.y}</b>'
                 },
                 plotOptions: {
                     pie: {
@@ -670,7 +686,7 @@
                     }
                 },
                 tooltip: {
-                    pointFormat: ' <b>{point.percentage:.1f}%</b>'
+                    pointFormat: ' <b>{point.percentage:.f}%</b>'
                 },
                 plotOptions: {
                     pie: {

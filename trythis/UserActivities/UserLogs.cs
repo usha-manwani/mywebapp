@@ -106,7 +106,8 @@ namespace WebCresij.UserActivities
         }
         public static void LoggedinUser(string userID)
         {
-            string query = "Insert into LoggedinUser values('" + userID + "')";
+            string query = "if not exists(select UserID from LoggedinUser where USERID='"+userID+"')begin "
+                + "Insert into LoggedinUser values('" + userID + "') end";
             using (SqlConnection con = new SqlConnection(constr))
             {
                 using (SqlCommand cmd = new SqlCommand(query, con))
@@ -228,7 +229,6 @@ namespace WebCresij.UserActivities
             return count;
 
         }
-
     }
     public class TaskList
     {

@@ -25,11 +25,11 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
     <script src="Scripts/esm/popper.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
-    <script src="Scripts/jquery.signalR-2.4.0.js"></script>
-        <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
+    <script src="Scripts/jquery.signalR-2.4.1.js"></script>
+        <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
     
 </head>

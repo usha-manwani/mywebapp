@@ -5,27 +5,33 @@
     <title></title>
     <style>
         .message{
-            margin:auto;
-            max-width:400px;
-            min-height:200px;
-            border:2px solid red;
-            margin-top:100px;
-            padding: 10px 10px 10px 10px;
-            border-radius:5px;
+           position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+          
+          color:red;
+            
+            /*border:2px solid red;*/
+          
         }
+        
     </style>
     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     
-        <div>
-            <div class="row message" >
+        <div class="message">
+            <div class="row">
                 <span>OOPS! The page you are trying to request is not found! Please login again to continue</span>
-                <div style=" padding-left:40%">
-                    <asp:Button runat="server" ID="btnLogin" CommandName="Login" OnClick="BtnLogin_Click" 
+           &nbsp; &nbsp; &nbsp;
+                    <asp:LinkButton runat="server" CommandName="Login"
+                        OnClick="BtnLogin_Click" 
                                 Text="<%$Resources:Resource, Login %>" 
-                                Font-Size="Medium" BorderColor="white" ForeColor="White" CssClass="btn btn-default" />
+                                Font-Size="Medium" BorderColor="white" ForeColor="White" Font-Underline="true"></asp:LinkButton>
                 </div>
             </div>
-        </div>
+        
 </asp:Content>

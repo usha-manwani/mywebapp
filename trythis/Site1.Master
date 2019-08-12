@@ -1,5 +1,5 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="WebCresij.Site1" %>
-
+﻿<%@ Master Language="C#" AutoEventWireup="true" 
+    CodeBehind="Site1.master.cs" Inherits="WebCresij.Site1" %>
 <!DOCTYPE html >
 <html lang="en">
 <head runat="server">
@@ -25,56 +25,25 @@
         <link href="Content/fontawesome-all.min.css" rel="stylesheet" />
         <link href="Content/font-awesome.min.css" rel="stylesheet" />
         <link href="Content/solid.min.css" rel="stylesheet" />                
-        <script src="Scripts/jquery-3.3.1.min.js"></script>  
+        <script src="Scripts/jquery-3.4.1.min.js"></script>  
         <script src="Scripts/umd/popper.min.js"></script>
         <script src="Scripts/bootstrap.min.js"></script>
         <script src="Scripts/fontawesome/brands.min.js"></script>
         <script src="Scripts/fontawesome/all.min.js"></script>
         <script src="Scripts/fontawesome/solid.min.js"></script>
-        <script src="Scripts/fontawesome/fontawesome.min.js"></script>
-        
-        
-        
+        <script src="Scripts/fontawesome/fontawesome.min.js"></script>   
     </asp:PlaceHolder>
     <style type="text/css">
-        .text-bold {
-            font-weight: bold;
-        }
-
-        #bgwidth {
-            width: 100%;
-            /*opacity:0.8;*/
-        }      
-        
-
-        h2 {
-            padding-top: 2em;
-        }
         body{
-            background-color:#1e1e36
+            background-color:#1e1e36!important
         }
-        #navbarSupportedContent{
-            padding:0;
-            margin:0;
-        }
-        .caret-off::before {
-            display: none;
-        }
-        .caret-off::after {
-            display: none;
-        }
-        ul.dropdown-menu {
-            margin-top: -20px;
-        }
-        
-        /*Entirely optional – just wanted to remove the scrollbar on WebKit browsers as I find them ugly*/
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-          <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePageMethods="true">
+        <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePartialRendering="true">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -93,71 +62,74 @@
                 <asp:ScriptReference Name="WebFormsBundle" />
                 <%--Site Scripts--%>
             </Scripts>
-        </asp:ScriptManager>
-       
-
-        <nav class="navbar navbar-expand-lg navbar-dark  fixed-top customNav"
-            style="background-color: #23233f; text-decoration-color: white;  ">
-            <div  class="container-fluid fontsizes" style="font-family: 'Ruda', sans-serif; ">
-               
-                    <div class=" sidebar-toggle-box" data-placement="right" data-original-title="Toggle Navigation">
-                        <i class="fa fa-bars" aria-hidden="true"></i></div>
-               
-                <button class="navbar-toggler navbar-toggler-right " type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent"  >
-                    <ul class="navbar-nav  float-left "  >
-                        <li class="nav-item active">
-                            <a class="nav-link" href="home.aspx">
-                                <i class="fa fa-th" aria-hidden="true"></i>
-                                &nbsp;<span><%=Resources.Resource.Home%></span>
-            <span class="sr-only">(current)</span></a>
-                        </li>&nbsp;
+        </asp:ScriptManager>     
+        <div>
+            <div>
+                <nav class="navbar navbar-expand-lg navbar-dark fixed-top row no-margin"
+                    style="background-color: #23233f; text-decoration-color: white;">
+                    <div class="container-fluid fontsizes" style="font-family: 'Ruda', sans-serif;">
+                        <div class=" sidebar-toggle-box" data-placement="right" data-original-title="Toggle Navigation">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </div>
+                        <button class="navbar-toggler navbar-toggler-right " type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+                            <ul class="navbar-nav  float-left ">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="home.aspx">
+                                        <i class="fa fa-th" aria-hidden="true"></i>
+                                        &nbsp;<span><%=Resources.Resource.Home%></span>
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+                                &nbsp;
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle caret-off" runat="server" href="#" id="navbarDropdown"
                                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-users"></i><span><%=Resources.Resource.UsersMenu%></span>
                             </a>
-                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown" >
-                              <li >  <a class="dropdown-item" runat="server" id="approveUser" href="authorize.aspx">
+                            <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" runat="server" id="approveUser" href="authorize.aspx">
                                     <i class="fas fa-user-check" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.AuthenticateUsers%></span></a></li>
-                                <li ><a class="dropdown-item" id="addUser" runat="server" href="AddUser.aspx">
+                                <li><a class="dropdown-item" id="addUser" runat="server" href="AddUser.aspx">
                                     <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.AddNewUser%></span></a></li>
-                                <li ><a class="dropdown-item" id="removeUser" runat="server" href="RemoveUsers.aspx">
+                                <li><a class="dropdown-item" id="removeUser" runat="server" href="RemoveUsers.aspx">
                                     <i class="fas fa-user-minus" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.RemoveUser%></span></a></li>
                             </ul>
-                        </li>&nbsp;
+                        </li>
+                                &nbsp;
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle caret-off" runat="server" href="#" id="navbarDropdown1"
                                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-file" aria-hidden="true"></i>&nbsp; 
                                 <span><%=Resources.Resource.DocumentMenu%></span></a>
-                            <ul class="dropdown-menu " id="doc" aria-labelledby="navbarDropdown1" >
-                               <li> <a class="dropdown-item" id="uploadDoc" runat="server" href="UploadFile.aspx">
+                            <ul class="dropdown-menu " id="doc" aria-labelledby="navbarDropdown1">
+                                <li><a class="dropdown-item" id="uploadDoc" runat="server" href="UploadFile.aspx">
                                     <i class="fa fa-upload" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.UploadDocument%></span></a></li>
-                               <li> <a class="dropdown-item" id="downloadDoc" runat="server" href="UploadFile.aspx">
+                                <li><a class="dropdown-item" id="downloadDoc" runat="server" href="UploadFile.aspx">
                                     <i class="fa fa-download" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.DownloadDocument%></span></a></li>
                                 <li><a class="dropdown-item" id="delDoc" runat="server" href="UploadFile.aspx">
                                     <i class="fa fa-minus-square" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.DeleteDocument%></span></a></li>
                             </ul>
-                        </li>&nbsp;
-                        <li class="nav-item dropdown" >
+                        </li>
+                                &nbsp;
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle caret-off" runat="server" href="#" id="navbarDropdown2" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-tasks" aria-hidden="true"></i>&nbsp;
-                                <span><%=Resources.Resource.SettingsMenu%></span>                 
+                                <span><%=Resources.Resource.SettingsMenu%></span>
                             </a>
                             <ul class="dropdown-menu" id="dev" aria-labelledby="navbarDropdown2">
-                               <li> <a class="dropdown-item" id="addDevice" runat="server" href="Options.aspx">
+                                <li><a class="dropdown-item" id="addDevice" runat="server" href="Options.aspx">
                                     <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.AddDevice%></span></a></li>
                                 <li><a class="dropdown-item" id="editdevice" runat="server" href="Options.aspx">
@@ -167,7 +139,8 @@
                                     <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.DeleteDevice%></span></a></li>
                             </ul>
-                        </li>&nbsp;
+                        </li>
+                                &nbsp;
                         <li class="nav-item dropdown" style="cursor: pointer;">
                             <a class="nav-link dropdown-toggle caret-off" runat="server" id="ICcard" role="button"
                                 data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" style="overflow: hidden;">
@@ -190,27 +163,29 @@
                                     <span><%=Resources.Resource.CardLogs%></span>
                                 </a></li>
                             </ul>
-                        </li>&nbsp;
+                        </li>
+                                &nbsp;
                         <li class="nav-item">
-                            <a class="nav-link" href="Maintainance.aspx">
+                            <a class="nav-link" href="Maintainance.aspx" runat="server" id="maintainanceLink">
                                 <i class="fa fa-cog" aria-hidden="true"></i>
                                 &nbsp;<span><%=Resources.Resource.Maintainance%></span></a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle caret-off" runat="server" href="#" id="navbarDropdown4" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-life-ring" aria-hidden="true"></i>&nbsp;
-                                <span><%=Resources.Resource.Support%></span>                
-                            </a>
-                            <ul class="dropdown-menu" id="queryMenu" aria-labelledby="navbarDropdown4">
-                                <li><a class="dropdown-item" id="a2" runat="server" href="Contact.aspx">
-                                    <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle caret-off" runat="server" href="#" id="navbarDropdown4" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-life-ring" aria-hidden="true"></i>&nbsp;
+                                <span><%=Resources.Resource.Support%></span>
+                                    </a>
+                                    <ul class="dropdown-menu" id="queryMenu" aria-labelledby="navbarDropdown4">
+                                        <li><a class="dropdown-item" id="a2" runat="server" href="Contact.aspx">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.Query%></span></a></li>
-                                <li><a class="dropdown-item" id="A3" runat="server" href="About.aspx">
-                                    <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;
+                                        <li><a class="dropdown-item" id="A3" runat="server" href="About.aspx">
+                                            <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.About%></span></a></li>
-                            </ul>
-                        </li>&nbsp;
+                                    </ul>
+                                </li>
+                                &nbsp;
                         <li class="nav-item dropdown" style="cursor: pointer">
                             <a class="nav-link dropdown-toggle caret-off" runat="server" id="moreMenu" role="button"
                                 data-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
@@ -234,38 +209,34 @@
                                     <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.SignOut%></span></a></li>
                             </ul>
-                            <div>
-                            </div>
-                        </li>&nbsp;
-                    </ul>
-                </div>
-                <ul class="navbar-nav float-right">
-                    <li class="nav-item" >
-                        <a class="nav-link" href="Dashboard.aspx" id="dashboard" runat="server">DashBoard</a>
-                    </li>
-                    <li>
-                       <asp:DropDownList runat="server" ID="ddlLanguages" AutoPostBack="true" >
-                                <asp:ListItem Text="English" Value="en-US" ></asp:ListItem>
-                                <asp:ListItem Text="中文" Value="zh-CN" ></asp:ListItem>
-                       </asp:DropDownList>
-                        &nbsp;
-                    </li>
-                    <li>
-                        <a class="navbar-brand" href="#"><span><%=Resources.Resource.Hello%></span>
-                            <asp:Label ID="username" runat="server" Font-Size="Smaller"></asp:Label></a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    
-        
-        
-        <div style="background-color:#1e1e36">
-            <section id="container" class="sidebar-close">
-                <%-- <div style="float:right; flex:1; overflow-x:auto; " class=" col-sm-12 col-md-12 col-lg-12 ">--%>
-                <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                </asp:ContentPlaceHolder>
-               <%-- <footer class="site-footer position-sticky">
+                        </li>
+                                &nbsp;
+                            </ul>
+                        </div>
+                        <ul class="navbar-nav float-right">
+                            <li class="nav-item">
+                                <a class="nav-link" href="Dashboard.aspx" id="dashboard" runat="server">DashBoard</a>
+                            </li>
+                            <li>
+                                <asp:DropDownList runat="server" ID="ddlLanguages" AutoPostBack="true">
+                                    <asp:ListItem Text="English" Value="en-US"></asp:ListItem>
+                                    <asp:ListItem Text="中文" Value="zh-CN"></asp:ListItem>
+                                </asp:DropDownList>
+                                &nbsp;
+                            </li>
+                            <li>
+                                <a class="navbar-brand" href="#"><span><%=Resources.Resource.Hello%></span>
+                                    <asp:Label ID="username" runat="server" Font-Size="Smaller"></asp:Label></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <div style="background-color: #1e1e36; width:100%">
+                <section id="container" class="sidebar-close">
+                    <%-- <div style="float:right; flex:1; overflow-x:auto; " class=" col-sm-12 col-md-12 col-lg-12 ">--%>
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <%-- <footer class="site-footer position-sticky">
                     <div class="text-center" style="font-size: small">
                         <p>
                             &copy; Copyrights <strong>Cresij</strong>. All Rights Reserved
@@ -275,48 +246,20 @@
                         </div>
                     </div>
                 </footer>--%>
-            </section>
+                </section>
+            </div>
+            </div>
+            
         </div>
-    </form>
-    
+    </form>    
     <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
     <script src="lib/jquery.scrollTo.min.js"></script>
     <script src="lib/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="lib/jquery.sparkline.js"></script>
-    <!--common script for all pages-->
-    
+    <!--common script for all pages-->    
     <script type="text/javascript" src="lib/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="lib/gritter-conf.js"></script>
     <!--script for this page-->
     <script src="lib/common-scripts.js?v=4"></script>
-    
-    <script type="application/javascript">
-        //$(document).ready(function () {
-           
-        //    $("#my-calendar").zabuto_calendar({
-        //        action: function () {
-        //            return myDateFunction(this.id, false);
-        //        },
-        //        action_nav: function () {
-        //            return myNavFunction(this.id);
-        //        },
-        //        ajax: {
-        //            url: "show_data.php?action=1",
-        //            modal: true
-        //        },
-        //        legend: [{
-        //            type: "text",
-        //            label: "Special event",
-        //            badge: "00"
-        //        },
-        //        {
-        //            type: "block",
-        //            label: "Regular event",
-        //        }
-        //        ]
-        //    });
-        //});
-        
-    </script>
 </body>
 </html>

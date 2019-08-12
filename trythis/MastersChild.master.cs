@@ -112,7 +112,9 @@ namespace WebCresij
             string devicelocations = string.Empty;
             if (TreeMenuView.SelectedNode.Depth == 2)
             {
-                DataTable dt = ExecuteCommand("select cd.ClassName as loc ,cc.CCIP as ip from CentralControl cc join Class_Details cd on cd.ClassID=cc.location where cd.GradeID='" + TreeMenuView.SelectedNode.ToolTip + "'");
+                HttpContext.Current.Session["GradeName"] = TreeMenuView.SelectedNode.Text;
+                HttpContext.Current.Session["InstituteID"] = TreeMenuView.SelectedNode.Parent.Text;
+                DataTable dt = ExecuteCommand("select cd.ClassName as loc ,cc.CCIP as ip from CentralControl cc join Class_Details cd on cd.ClassID=cc.location where cd.GradeID='" + TreeMenuView.SelectedNode.ToolTip + "' order by cd.ClassName");
                 if (dt.Rows.Count > 0)
                 {
                     string[] deviceloc = new string[dt.Rows.Count];

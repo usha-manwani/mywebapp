@@ -34,6 +34,7 @@ namespace WebCresij
                 }
                 else
                 {
+                   
                     Response.Redirect("~/Index.aspx");
                 }
             }
@@ -46,6 +47,7 @@ namespace WebCresij
             Response.AddHeader("Pragma", "no-cache");
            
         }
+        
         private void displayRole(int[] roleIds, string roleids)
         {
             ICcard.Visible = false;
@@ -56,6 +58,7 @@ namespace WebCresij
             uploadDoc.Visible = false;
             downloadDoc.Visible = false;
             delDoc.Visible = false;
+            maintainanceLink.Visible = false;
             //addUser.Visible = false;
             //removeUser.Visible = false;
             //approveUser.Visible = false;
@@ -77,6 +80,7 @@ namespace WebCresij
                     approveUser.Visible = true;
                     dashboard.Visible = true;
                     ICcard.Visible = true;
+                    maintainanceLink.Visible = true;
                     break;
                 }
                 else
@@ -89,17 +93,18 @@ namespace WebCresij
                     {
                         navbarDropdown2.Visible = true;
                     }
-                    else if (roleIds[i] == 4)
+                    else if (roleIds[i] == 4 )
                     {
                         navbarDropdown1.Visible = true;
                         uploadDoc.Visible = true;
-                        downloadDoc.Visible = true;                       
+                        downloadDoc.Visible = true;
+                        delDoc.Visible = true;
 
                     }
                     else if (roleIds[i] == 5)
                     {
-                        navbarDropdown1.Visible = true;                        
-                        delDoc.Visible = true;
+                        navbarDropdown1.Visible = true;
+                        maintainanceLink.Visible = true;
                     }
                     else if (roleIds[i] == 6)
                     {

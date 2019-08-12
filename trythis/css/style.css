@@ -20,7 +20,7 @@ body {
     background-color: #1e1e36 font-family: 'Ruda', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
-    font-size: 13px;
+    font-size: 1rem;   
 }
 gridviewclass:last-child > table {
     border: none !important
@@ -40,7 +40,6 @@ a, a:hover, a:focus {
     outline: none;
 }
 ::selection {
-
     background: #4ECDC4;
     color: #fff;
 }
@@ -80,9 +79,94 @@ a, a:hover, a:focus {
 	outline: none !important;
 	text-decoration: none;
 }
+/*custom css by usha*/
+.text-bold {
+    font-weight: bold;
+}
+h2 {
+    padding-top: 2em;
+}
+.caret-off::before {
+    display: none;
+}
 
+.caret-off::after {
+    display: none;
+}
 
+ul.dropdown-menu {
+    margin-top: -20px;
+}
 
+.positionCenter {
+    padding: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    max-width: 550px;
+}
+#bgwidth {
+    width: 100%;
+    /*opacity:0.8;*/
+}
+#navbarSupportedContent {
+    padding: 0;
+    margin: 0;
+}
+/*scrollbar*/
+body::-webkit-scrollbar {
+    width: 10px;
+    background-color: #404040;
+    visibility: hidden;
+}
+
+    body::-webkit-scrollbar:hover {
+        visibility: visible;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background: linear-gradient(left, #fff, #4ECDC4);
+        max-height: 200px !important;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+        background: #4ECDC4;
+    }
+
+    body::-webkit-scrollbar-thumb:active {
+        background: linear-gradient(left, #22ADD4, #4ECDC4);
+    }
+
+.scroll {
+    overflow-y: auto;
+}
+
+    .scroll::-webkit-scrollbar {
+        width: 10px;
+        background-color: #404040;
+        visibility: hidden;
+    }
+
+        .scroll::-webkit-scrollbar:hover {
+            visibility: visible;
+        }
+
+    .scroll::-webkit-scrollbar-thumb {
+        background: linear-gradient(left, #fff, #4ECDC4);
+        max-height: 200px !important;
+    }
+
+        .scroll::-webkit-scrollbar-thumb:hover {
+            background: #4ECDC4;
+        }
+
+        .scroll::-webkit-scrollbar-thumb:active {
+            background: linear-gradient(left, #22ADD4, #4ECDC4);
+        }
+/*custom css ends here*/
 /*Theme Backgrounds*/
 
 .bg-theme {
@@ -243,8 +327,12 @@ ul.top-menu > li > .logout {
     position: fixed;
     background: #23233f;
     z-index: 1001;
+    border:none!important;
+    margin-left:-20px;
 }
-
+    #sidebar:active {
+        border: none !important;
+    }
 #sidebar h5 {
 	color: #f2f2f2;
 	font-weight: 700;
@@ -282,7 +370,9 @@ ul.top-menu > li > .logout {
     -webkit-border-radius:3px;
 }
 /*---*/
-
+td a img{
+    width:30px;
+}
 .nav-collapse.collapse {
     display: inline;
 }
@@ -293,7 +383,7 @@ ul.sidebar-menu , ul.sidebar-menu li ul.sub{
 }
 
 ul.sidebar-menu {
-    margin-top: 40px;
+    /*margin-top: 40px;*/
 }
 
 #sidebar > ul > li > ul.sub {

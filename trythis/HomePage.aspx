@@ -81,8 +81,8 @@
         .modal {
             display: none; /* Hidden by default */
             position: fixed center; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 80px; /* Location of the box */
+            z-index: 10000; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
             left: 0;
             top: 0;
             width: 100%; /* Full width */
@@ -294,9 +294,9 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
-    <script src="Scripts/jquery-3.3.1.min.js"></script>
-    <script src="Scripts/jquery.signalR-2.4.0.js"></script>
-    <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
     <script src="Scripts/HomePageJS.js?v=16"></script>
 
@@ -720,16 +720,16 @@ border-top:none;min-width:200px">
 
     </div>
 
-    <div id="RemoteControl" class="modal">
-        <div class="modal-content">
-            <header class="row" style="position: center;">
+    <div id="RemoteControl" class="modal scroll">
+        <div class="modal-content ">
+            <header class="row" >
                 <span 
                 onclick="document.getElementById('RemoteControl').style.display='none'"
                     class="w3-button w3-display-topright">&times;</span>
             </header>
            
                 <iframe id="Iframe1" style="background-color: #1e1e36; 
-                min-height:700px" src="~/controlRemote.aspx" 
+                min-height:700px" src="~/controlRemote.aspx" class="scroll"
                 width="100%" runat="server" frameborder="0"></iframe>            
         </div>
     </div>

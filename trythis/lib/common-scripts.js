@@ -15,8 +15,6 @@ $(function () {
 });
 
 var Script = function () {
-
-
     //    sidebar dropdown menu auto scrolling
 
     jQuery('#sidebar .sub-menu > a').click(function () {
@@ -28,52 +26,42 @@ var Script = function () {
             $("#sidebar").scrollTo("+=" + Math.abs(diff), 500);
     });
 
-
-
-    //    sidebar toggle
-
-    $(function () {
-        function responsiveView()
+    function responsiveView()
         {
             console.log("Window width " +$(window).width());
             console.log("Document width " + $(document).width());
             console.log("Document Hieght " + $(document).height()); 
-            var wSize = $(window).width();
-            
+            var wSize = $(window).width();            
             if (wSize <= 768) {
-                $('#container').addClass('sidebar-close');
-                
+                $('#container').addClass('sidebar-close');                
                 $('#sidebar > ul').hide();
-                
+                $('#sidebar').width = '100%';
             }
 
             if (wSize > 768) {
-                $('#container').removeClass('sidebar-close');
-              
+                $('#container').removeClass('sidebar-close');              
                 $('#sidebar > ul').show();
             }
-            if (wSize > 1050 && wSize < 1150)
+            if (wSize > 1100 && wSize < 1300)
             {
-
                 $('div').css('font-size', "14px");
                 console.log("font decresed");
             }
-            if (wSize > 1150)
-            {
+            
+            else if (wSize > 1300) {
                 $('div').css('font-size', "16px");
                 console.log("font incresed");
             }
-            if (wSize<1050)
+            else if (wSize<1100)
             {
                 $('div').css('font-size', "12px");
                 console.log("font smallest");
             }
         }
-        $(window).on('load', responsiveView);
-        $(window).on('resize', responsiveView);
-    });
 
-
+    $(window).on('load', responsiveView);
+    $(window).on('resize', responsiveView);
+    //    sidebar toggle
     $(document).on('click', '.fa-bars', function () {
         if ($('#sidebar > ul').is(":visible") === true) {
             $('#main-content').css({
@@ -99,19 +87,20 @@ var Script = function () {
         
     });
 
-
-  // custom scrollbar
-  $("#sidebar").niceScroll({
-    styler: "fb",
-    cursorcolor: "#4ECDC4",
-    cursorwidth: '1',
-    cursorborderradius: '1px',
-    background: '#404040',
-    spacebarenabled: false,
-    cursorborder: ''
-  });
-
-   //$("html").niceScroll({styler:"fb",cursorcolor:"#4ECDC4", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
+    //$(document).ready(function () {
+    //    $("#sidebar").niceScroll({
+    //        styler: "fb",
+    //        cursorcolor: "#4ECDC4",
+    //        cursorwidth: '1',
+    //        cursorborderradius: '1px',
+    //        background: '#404040',
+    //        spacebarenabled: false,
+    //        cursorborder: ''
+    //    });
+    //    });
+   //custom scrollbar
+  
+  // $("html").niceScroll({styler:"fb",cursorcolor:"#4ECDC4", cursorwidth: '6', cursorborderradius: '10px', background: '#404040', spacebarenabled:false,  cursorborder: '', zindex: '1000'});
 
   // widget tools
 
@@ -143,26 +132,26 @@ var Script = function () {
 
   // custom bar chart
 
-  if ($(".custom-bar-chart")) {
-    $(".bar").each(function() {
-      var i = $(this).find(".value").html();
-      $(this).find(".value").html("");
-      $(this).find(".value").animate({
-        height: i
-      }, 2000)
-    })
-  }
+  //if ($(".custom-bar-chart")) {
+  //  $(".bar").each(function() {
+  //    var i = $(this).find(".value").html();
+  //    $(this).find(".value").html("");
+  //    $(this).find(".value").animate({
+  //      height: i
+  //    }, 2000)
+  //  })
+  //}
 
 }();
 
-jQuery(document).ready(function( $ ) {
+//jQuery(document).ready(function( $ ) {
 
-  // Go to top
-  $('.go-top').on('click', function(e) {
-    e.preventDefault();
-    $('html, body').animate({scrollTop : 0},500);
-    });
+//  // Go to top
+//  $('.go-top').on('click', function(e) {
+//    e.preventDefault();
+//    $('html, body').animate({scrollTop : 0},500);
+//    });
    
-});
+//});
 
 

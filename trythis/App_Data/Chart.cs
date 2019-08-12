@@ -125,14 +125,14 @@ namespace WebCresij
             return dt.Tables[0];
         }
 
-        public string query (string value)
+        public string query (string value, string loc)
         {
             string query = "";
             switch (value){
                 case "month":
                     query = "select convert(char(3), Date, 0) as Result, cast(AVG(Temp) as numeric(10, 2)) as temp," +
                     " cast(AVG(Humidity) as numeric(10, 2)) as humid, cast(AVG(pm25) as numeric(10, 2))" +
-                    " as pm25,cast(AVG(pm10) as numeric(10, 2)) as pm10 from TempData where" +
+                    " as pm25,cast(AVG(pm10) as numeric(10, 2)) as pm10 from TempData where " +
                     " DATENAME(year, date) = DATENAME(year, getdate()) group by convert(char(3), Date, 0)";
                     break;
                 case "week":
@@ -148,26 +148,167 @@ namespace WebCresij
                     " ,FORMAT(Date, 'd')";
                     break;
                 case "date":
-                    query = "select FORMAT(Date, 'd') AS Result, cast(AVG(Temp) as numeric(10, 2)) as temp, " +
+                    query = "select CONVERT(varchar(10), date, 101) AS Result, cast(AVG(Temp) as numeric(10, 2)) as temp, " +
                     " cast(AVG(Humidity) as numeric(10, 2)) as humid, " +
                     "cast(AVG(pm25) as numeric(10, 2)) as pm25, " +
                     "cast(AVG(pm10) as numeric(10, 2)) as pm10 from TempData " +
-                    "where datepart(MONTH, Date) = datepart(MONTH, GETDATE()) group by FORMAT(Date, 'd')";
+                    "where datepart(MONTH, Date) = datepart(MONTH, GETDATE()) group "+
+                    " by CONVERT(varchar(10), date, 101), convert(date , date)   order by convert(date , date)  desc";
                     break;
                 default:
                     query = "select cast(date as time(0)) Result, temp, Humidity as humid, pm25, pm10 from TempData " +
-                           "WHERE date >= DATEADD(HOUR, -6, GETDATE()) and location = '" + value + "'";
+                           "WHERE date >= DATEADD(HOUR, -6, GETDATE()) and location = '" + value + "' order by Result desc";
+                    break;
+            }
+            return query;
+        }
+        public string QueryForIns (string value, string loc)
+        {
+            string query = "";
+            switch (value)
+            {
+                case "month":
+                    query = "select convert(char(3), Date, 0) as Result, cast(AVG(Temp) as numeric(10, 2)) as temp," +
+                    " cast(AVG(Humidity) as numeric(10, 2)) as humid, cast(AVG(pm25) as numeric(10, 2)) " +
+                    " as pm25,cast(AVG(pm10) as numeric(10, 2)) as pm10 from TempData td join Class_Details cd "+
+                     " on td.Location = cd.ClassID join Grade_Details gd on "+
+                     " gd.GradeID = cd.GradeID join Institute_Details id on "+
+                     " id.InstituteID = gd.InsID where id.InstituteID = '"+loc+"' and " +
+                    " DATENAME(year, date) = DATENAME(year, getdate()) group by convert(char(3), Date, 0)";
+                    break;
+                case "week":
+                    query = "select * from [dbo].[WeekTempDatabyIns] ( '"+loc+"' )"; // weekname
+                    break;
+                case "days":
+                    query = "select FORMAT(Date, 'ddd') AS Result, cast(AVG(Temp) as numeric(10, 2)) as temp, " +
+                    " cast(AVG(Humidity) as numeric(10, 2)) as humid, " +
+                    "cast(AVG(pm25) as numeric(10, 2)) as pm25, " +
+                    "cast(AVG(pm10) as numeric(10, 2)) as pm10, " +
+                    "FORMAT(Date, 'd') as Date from TempData td join Class_Details cd"+
+                    " on td.Location = cd.ClassID join Grade_Details gd on "+
+                    " gd.GradeID = cd.GradeID join Institute_Details id on "+
+                     " id.InstituteID = gd.InsID where id.InstituteID = '"+loc+"'and" +
+                    " datepart(wk, Date) = datepart(wk, GETDATE()) group by FORMAT(Date, 'ddd') " +
+                    " ,FORMAT(Date, 'd')";
+                    break;
+                case "date":
+                    query = "select CONVERT(varchar(10), date, 101) AS Result, cast(AVG(Temp) as numeric(10, 2)) as temp, " +
+                    " cast(AVG(Humidity) as numeric(10, 2)) as humid, " +
+                    "cast(AVG(pm25) as numeric(10, 2)) as pm25, " +
+                    "cast(AVG(pm10) as numeric(10, 2)) as pm10 from TempData "+ 
+                    " td join Class_Details cd on td.Location = cd.ClassID "+
+                    " join Grade_Details gd on gd.GradeID = cd.GradeID "+
+                    " join Institute_Details id on id.InstituteID = gd.InsID "+
+                    " where id.InstituteID = '"+loc+"' and Date>= DATEADD(day, -10, GETDATE()) group " +
+                    " by CONVERT(varchar(10), date, 101), convert(date , date) "+
+                    " order by convert(date , date)  desc";
+                    break;
+                default:
+                    query = "select cast(date as time(0)) Result, temp, Humidity as humid, pm25, pm10 from TempData " +
+                           "WHERE date >= DATEADD(HOUR, -6, GETDATE()) and location = '" + value + "' order by Result desc";
                     break;
             }
             return query;
         }
 
-        public DataTable getDatacustom(string value)
+        public string QueryForgrade(string value, string loc)
+        {
+            string query = "";
+            switch (value)
+            {
+                case "month":
+                    query = "select convert(char(3), Date, 0) as Result, cast(AVG(Temp) as numeric(10, 2)) as temp," +
+                    " cast(AVG(Humidity) as numeric(10, 2)) as humid, cast(AVG(pm25) as numeric(10, 2)) " +
+                    " as pm25,cast(AVG(pm10) as numeric(10, 2)) as pm10 from TempData td join Class_Details cd " +
+                     " on td.Location = cd.ClassID join Grade_Details gd on " +
+                     " gd.GradeID = cd.GradeID " +
+                     " where gd.GradeID = '" + loc + "' and " +
+                    " DATENAME(year, date) = DATENAME(year, getdate()) group by convert(char(3), Date, 0)";
+                    break;
+                case "week":
+                    query = "select * from [dbo].[WeekTempDatabyGrade] ( '" + loc + "' )"; // weekname
+                    break;
+                case "days":
+                    query = "select FORMAT(Date, 'ddd') AS Result, cast(AVG(Temp) as numeric(10, 2)) as temp, " +
+                    " cast(AVG(Humidity) as numeric(10, 2)) as humid, " +
+                    "cast(AVG(pm25) as numeric(10, 2)) as pm25, " +
+                    "cast(AVG(pm10) as numeric(10, 2)) as pm10, " +
+                    "FORMAT(Date, 'd') as Date from TempData td join Class_Details cd" +
+                    " on td.Location = cd.ClassID join Grade_Details gd on " +
+                     " gd.GradeID = cd.GradeID " +
+                     " where gd.GradeID = '" + loc + "' and " +
+                    " datepart(wk, Date) = datepart(wk, GETDATE()) group by FORMAT(Date, 'ddd') " +
+                    " ,FORMAT(Date, 'd')";
+                    break;
+                case "date":
+                    query = "select CONVERT(varchar(10), date, 101) AS Result, cast(AVG(Temp) as numeric(10, 2)) as temp, " +
+                    " cast(AVG(Humidity) as numeric(10, 2)) as humid, " +
+                    "cast(AVG(pm25) as numeric(10, 2)) as pm25, " +
+                    "cast(AVG(pm10) as numeric(10, 2)) as pm10 from TempData " +
+                    " td join Class_Details cd on td.Location = cd.ClassID " +
+                    " join Grade_Details gd on gd.GradeID = cd.GradeID " +
+                     " where gd.GradeID = '" + loc + "' and Date>= DATEADD(day, -10, GETDATE()) group " +
+                    " by CONVERT(varchar(10), date, 101), convert(date , date) " +
+                    " order by convert(date , date)  desc";
+                    break;
+                default:
+                    query = "select cast(date as time(0)) Result, temp, Humidity as humid, pm25, pm10 from TempData " +
+                           "WHERE date >= DATEADD(HOUR, -6, GETDATE()) and location = '" + value + "' order by Result desc";
+                    break;
+            }
+            return query;
+        }
+
+        public string QueryForClass(string value, string loc)
+        {
+            string query = "";
+            switch (value)
+            {
+                case "month":
+                    query = "select convert(char(3), Date, 0) as Result, cast(AVG(Temp) as numeric(10, 2)) as temp," +
+                    " cast(AVG(Humidity) as numeric(10, 2)) as humid, cast(AVG(pm25) as numeric(10, 2)) " +
+                    " as pm25,cast(AVG(pm10) as numeric(10, 2)) as pm10 from TempData td join Class_Details cd " +
+                     " on td.Location = cd.ClassID  "+
+                     " where cd.ClassID = '" + loc + "' and " +
+                    " DATENAME(year, date) = DATENAME(year, getdate()) group by convert(char(3), Date, 0)";
+                    break;
+                case "week":
+                    query = "select * from [dbo].[WeekTempDatabyClass] ( '" + loc + "' )"; // weekname
+                    break;
+                case "days":
+                    query = "select FORMAT(Date, 'ddd') AS Result, cast(AVG(Temp) as numeric(10, 2)) as temp, " +
+                    " cast(AVG(Humidity) as numeric(10, 2)) as humid, " +
+                    "cast(AVG(pm25) as numeric(10, 2)) as pm25, " +
+                    "cast(AVG(pm10) as numeric(10, 2)) as pm10, " +
+                    "FORMAT(Date, 'd') as Date from TempData td join Class_Details cd" +
+                    " on td.Location = cd.ClassID " +
+                     " where cd.ClassID = '" + loc + "' and " +
+                    " datepart(wk, Date) = datepart(wk, GETDATE()) group by FORMAT(Date, 'ddd') " +
+                    " ,FORMAT(Date, 'd')";
+                    break;
+                case "date":
+                    query = "select CONVERT(varchar(10), date, 101) AS Result, cast(AVG(Temp) as numeric(10, 2)) as temp, " +
+                    " cast(AVG(Humidity) as numeric(10, 2)) as humid, " +
+                    "cast(AVG(pm25) as numeric(10, 2)) as pm25, " +
+                    "cast(AVG(pm10) as numeric(10, 2)) as pm10 from TempData " +
+                    " td join Class_Details cd on td.Location = cd.ClassID " +
+                     " where cd.ClassID = '" + loc + "' and Date>= DATEADD(day, -10, GETDATE()) group " +
+                    " by CONVERT(varchar(10), date, 101), convert(date , date) " +
+                    " order by convert(date , date)  desc";
+                    break;
+                default:
+                    query = "select cast(date as time(0)) Result, temp, Humidity as humid, pm25, pm10 from TempData " +
+                           "WHERE date >= DATEADD(HOUR, -6, GETDATE()) and location = '" + value + "' order by Result desc";
+                    break;
+            }
+            return query;
+        }
+        public DataTable getDatacustom(string query)
         {
             DataTable dt = new DataTable();
-            string q = query(value);
+           
             using(SqlConnection con = new SqlConnection(connString)){
-                using(SqlCommand cmd = new SqlCommand(q, con))
+                using(SqlCommand cmd = new SqlCommand(query, con))
                 {
                     using(SqlDataAdapter sqlData = new SqlDataAdapter(cmd))
                     {
@@ -179,6 +320,10 @@ namespace WebCresij
 
                             }
                             sqlData.Fill(dt);
+                        }
+                        catch(Exception ex)
+                        {
+
                         }
                         finally
                         {
@@ -193,8 +338,8 @@ namespace WebCresij
         public DataTable getDataforClass(string value)
         {
             DataTable dt = new DataTable();
-            string q = "select cast(date as time(0)) time as Result, temp, Humidity as humid, pm25, pm10 from TempData " +
-                            "WHERE date >= DATEADD(HOUR, -6, GETDATE()) and location = '"+value+"'";
+            string q = "select cast(date as time(0)) time , temp, Humidity as humid, pm25, pm10 from TempData " +
+                            "WHERE date >= DATEADD(HOUR, -6, GETDATE()) and location = '"+value+"' order by date desc";
             using (SqlConnection con = new SqlConnection(connString))
             {
                 using (SqlCommand cmd = new SqlCommand(q, con))
@@ -234,6 +379,15 @@ namespace WebCresij
                 //    "WHERE cast(date as Date) = cast( GETDATE() as date) and "+
                 //    "convert(date, GetDate()) = CONVERT(date, GETDATE()) group by Location ");                    
                 //    break;
+                case "All":
+                    query.Append("select InsID, cast(AVG(CAST(Temp as numeric)) as decimal(10, 2)) as temp, "+
+                        "cast(AVG(CAST(Humidity as numeric)) as decimal(10, 2)) as humid, "+
+                        "cast(AVG(CAST(pm25 as numeric)) as decimal(10, 2)) as pm25, " +
+                         "cast(AVG(CAST(pm10 as numeric)) as decimal(10, 2)) as pm10 " +
+                        "from TempData t join Class_Details c on t.Location = c.ClassID " +
+                        "join Grade_Details g on g.GradeID = c.GradeID join Institute_Details i " +
+                         "on i.InstituteID = g.InsID  group by InsID");
+                    break;
                 case "Ins":
                     query.Append("select distinct(g.GradeName), " +
                         "cast(AVG(CAST(Temp as numeric)) as decimal(10, 2)) as temp,"+
@@ -242,7 +396,7 @@ namespace WebCresij
                         " cast(AVG(CAST(pm10 as numeric)) as decimal(10, 2)) as pm10 "+
                         "from TempData t join Class_Details c on t.Location = c.ClassID "+
                         "join Grade_Details g on g.GradeID = c.GradeID join Institute_Details i"+
-                        " on i.InstituteID = g.InsID WHERE "+                        
+                        " on i.InstituteID = g.InsID WHERE "+     
                         " i.InstituteID='"+value+"' group by g.GradeName");
                     break;
                 case "Gra":
@@ -259,5 +413,61 @@ namespace WebCresij
             }
             return query.ToString();
         }
+
+        public DataTable MachineCount()
+        {
+            DataTable dtStatus = new DataTable();
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                string query = "select Count(CCIP) from CentralControl";
+                try
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        da.Fill(dtStatus);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dtStatus;
+        }
+
+        public DataTable MachineCountByIns(string id)
+        {
+            DataTable dtStatus = new DataTable();
+            using (SqlConnection con = new SqlConnection(connString))
+            {
+                string query = "select Count(CCIP) from CentralControl";
+                try
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        da.Fill(dtStatus);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dtStatus;
+        }
+
+       
     }
 }

@@ -1,4 +1,5 @@
-﻿
+﻿  
+
 .leftspace {
     margin-right: 20px;
     height: inherit;
@@ -76,11 +77,10 @@
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    overflow-y: auto; /*Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     max-height: 70%;
-   
     align-items: center;
 }
 
@@ -93,6 +93,9 @@
     overflow-y: auto;
     margin:auto;
 }
+    
+  
+      
 .vertical-align-center {
     /* To center vertically */
     display: table-cell;
@@ -102,7 +105,13 @@
 .space{
     margin-top:-30px;
 }
+.margintop {
+    margin-top: -30px;
+}
 
+.labelpadding {
+    padding-top: 10px;
+}
 @media (max-width: 768px) {
 
     .modal-content {

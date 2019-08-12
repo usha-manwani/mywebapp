@@ -1,18 +1,24 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="MastersChild.master.cs" Inherits="WebCresij.MastersChild" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <asp:ContentPlaceHolder ID="masterchildHead" runat="server"></asp:ContentPlaceHolder>
+    <asp:ContentPlaceHolder ID="masterchildHead" runat="server">
+        <style>
+           .scroll::-webkit-scrollbar {        
+                display:none!important;
+           }
+        </style>
+    </asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <aside>
-        <div id="sidebar" class="nav-collapse" tabindex="5000" style="overflow-y: auto; ">
-            <!-- sidebar menu start-->
-            <ul class="sidebar-menu" id="nav-accordion" style="margin-left: -20px;">
-                <div style="height: 80px; background-color: #1e1e36; text-align: center; padding-top: 15%">
+    <div>        
+        <div id="sidebar" class="nav-collapse scroll">
+            <!-- sidebar menu start-->             
+            <ul class="sidebar-menu" id="nav-accordion" >
+               <div style="height: 50px; background-color: #1e1e36; text-align: center;">
                     <span style="color: whitesmoke; font-size: 16px!important">
                         <%=Resources.Resource.DeviceManagement%></span>
                 </div>
-                <li >
-                    <asp:UpdatePanel runat="server">
+                <li>
+                    <asp:UpdatePanel runat="server">                        
                         <ContentTemplate>
                             <asp:TreeView runat="server" OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
                                 ID="TreeMenuView" NodeStyle-NodeSpacing="0.5px" OnTreeNodeExpanded="TreeMenuView_TreeNodeExpanded"
@@ -25,13 +31,11 @@
                 </li>
             </ul>
             <!-- sidebar menu end-->
-        </div>
-    </aside>
-    <section id="main-content" class="MainContent-Color">
-        <section class="wrapper">
-            <asp:ContentPlaceHolder ID="masterchildBody" runat="server"></asp:ContentPlaceHolder>
-        </section>
-    </section>
-    <script>
-</script>
+        </div>    
+        <section id="main-content" class="MainContent-Color">
+            <section class="wrapper">
+                <asp:ContentPlaceHolder ID="masterchildBody" runat="server"></asp:ContentPlaceHolder>
+            </section>
+        </section> 
+    </div>           
 </asp:Content>

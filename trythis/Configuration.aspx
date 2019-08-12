@@ -1,12 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.master" AutoEventWireup="true" CodeBehind="Configuration.aspx.cs" Inherits="WebCresij.Configuration" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterHead" runat="server">
     <link href="css/Configcss.css" rel="stylesheet" />
     <link href="ajaxfiles/Background.css" rel="stylesheet" />
     <link href="ajaxfiles/Tabs.css" rel="stylesheet" />
-   <style>
-      
-   </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterBody" runat="server">
     <script src="ajaxfiles/Localization.Resources.debug.js"></script>
@@ -15,12 +13,12 @@
     <script src="ajaxfiles/BaseScripts.debug.js"></script>
     <script src="ajaxfiles/Tabs.debug.js"></script>    
     <script src="ajaxfiles/DynamicPopulate.debug.js"></script>
-    <script src="Scripts/jquery.signalR-2.4.0.js"></script>
-    <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
-    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
+    <script src="Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
     <script src="Scripts/Config.js"></script>
     <div>
-        <div style="background-color: #4ecdc4; margin-left:-25px; margin-top:-30px">
+        <div style="background-color: #4ecdc4; margin-left: -25px; margin-top: -30px">
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <div class="row">
@@ -31,30 +29,32 @@
                             <asp:DropDownList Width="100px" AutoPostBack="true"
                                 OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                                 CssClass="btn btn-default border dropdown" ID="ddlInstitute"
-                                 runat="server">
+                                runat="server">
                                 <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
                             </asp:DropDownList>
                         </div>
                         &nbsp;&nbsp;  &nbsp;&nbsp; &nbsp;
-         <div class="col-lg-2 col-sm-6 col-md-6 float-none">
-             <asp:DropDownList Width="100px" ID="ddlGrade"
-                 OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"
-                 CssClass="btn btn-default border dropdown" 
-                 AutoPostBack="true" runat="server">
-                 <asp:ListItem Text="<%$Resources:Resource, Select %>" Value=""></asp:ListItem>
-             </asp:DropDownList>
-         </div>
+                        <div class="col-lg-2 col-sm-6 col-md-6 float-none">
+                            <asp:DropDownList Width="100px" ID="ddlGrade"
+                                OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"
+                                CssClass="btn btn-default border dropdown"
+                                AutoPostBack="true" runat="server">
+                            <asp:ListItem Text="<%$Resources:Resource, Select %>" 
+                                Value=""></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
-        <div class="row" >
+        <div class="row">
             <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12">
+                
             <cc1:TabContainer ID="tb1" runat="server" CssClass="fancy fancy-green">
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
                         <img src="Images/icons/deskblack.png" height="15" width="15" />&nbsp;
-                    <span><%=Resources.Resource.SystemSetup%></span>
+                        <span><%=Resources.Resource.SystemSetup%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
                         <fieldset class="group" style="width: 80%;font-size:small">
@@ -311,7 +311,7 @@
                 </cc1:TabPanel>
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
-                        <img src="Images/icons/project4.png" height="15px" width="15px" />&nbsp;
+                        <img src="Images/icons/project4.png" height="15" width="15" />&nbsp;
                     <span><%=Resources.Resource.Projector%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
@@ -431,7 +431,7 @@
                 </cc1:TabPanel>
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
-                        <img src="Images/icons/lightblack.png" height="15px" width="15px" />&nbsp;
+                        <img src="Images/icons/lightblack.png" height="15" width="15" />&nbsp;
                     <span><%=Resources.Resource.Power%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
@@ -642,7 +642,7 @@
                 </cc1:TabPanel>
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
-                        <img src="Images/icons/vidblack.png" height="15px" width="15px" />&nbsp;
+                        <img src="Images/icons/vidblack.png" height="15" width="15" />&nbsp;
                     <span><%=Resources.Resource.Recording%></span>
                     </HeaderTemplate>
                     <ContentTemplate>
@@ -723,7 +723,7 @@
                 </cc1:TabPanel>
                 <cc1:TabPanel runat="server">
                     <HeaderTemplate>
-                        <img src="Images/icons/camblack.png" height="15px" width="15px" />&nbsp;
+                        <img src="Images/icons/camblack.png" height="15" width="15" />&nbsp;
                     <span><%=Resources.Resource.Camera%></span>
                     </HeaderTemplate>
                     <ContentTemplate>

@@ -359,7 +359,7 @@ namespace WebCresij
         }
         #endregion
 
-            #region Delete details
+        #region Delete details
 
         public int DelCC(string ccip, string loc)
         {
@@ -1032,7 +1032,7 @@ namespace WebCresij
         public DataTable GetCardLogs()
         {
             DataTable dt = null;
-            string query = "select cc.MemberID cc.Name ";
+            //string query = "select cc.MemberID cc.Name ";
             using(SqlConnection con= new SqlConnection(constr))
             {
                 using(SqlCommand cmd = new SqlCommand("GetCardLogs", con))
@@ -1096,7 +1096,7 @@ namespace WebCresij
         #endregion
 
         #region Schedule
-        public int setSchedule(string ip,string classID,string starttime, 
+        public int setSchedule(string ID,string starttime, 
             string stoptime, string timer,
             string mon,string tue,string wed,string thu,
             string fri, string sat,string sun)
@@ -1110,8 +1110,8 @@ namespace WebCresij
                     using(SqlCommand cmd = new SqlCommand("updateSchedule", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@ip", ip);
-                        cmd.Parameters.AddWithValue("@ClassID", classID);
+                        
+                        cmd.Parameters.AddWithValue("@ID", ID);
                         cmd.Parameters.AddWithValue("@time", starttime);
                         cmd.Parameters.AddWithValue("@stoptime", stoptime);
                         cmd.Parameters.AddWithValue("@timer", timer);
@@ -1129,7 +1129,7 @@ namespace WebCresij
                         success = cmd.ExecuteNonQuery();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     success = -1;
                 }
@@ -1169,19 +1169,174 @@ namespace WebCresij
                 }
             }
         }
+
+        public static DataTable GetSchedule(string id)
+        {
+            DataTable dt = new DataTable();
+            
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_GetSchedule", con))
+                {
+                    try
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@id", id);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                            using(SqlDataAdapter da = new SqlDataAdapter(cmd))
+                            {
+                                da.Fill(dt);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return dt;
+        }
         #endregion
 
         #region status
         public DataTable GetStatus()
         {
+            
             DataTable dtStatus = new DataTable();
             using (SqlConnection con = new SqlConnection(constr))
             {
-                string query = "select MachineStatus, WorkStatus, PCStatus from Status ";
+                string query = "select MachineStatus, WorkStatus, PCStatus from Status";
                 try
                 {
-
                     using (SqlDataAdapter da = new SqlDataAdapter(query,con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        da.Fill(dtStatus);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dtStatus;
+        }
+
+        public DataTable GetStatus(string id)
+        {
+            
+            DataTable dtStatus = new DataTable();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "select count(WorkStatus) total, WorkStatus, InsID "+
+                    "from Status s join Class_Details c on c.ClassID = s.Class "+ 
+                    "join Grade_Details g on g.GradeID = c.GradeID "+
+                    "join Institute_Details id on id.InstituteID = g.InsID "+
+                    " and InsID = '"+id+ "' group by  InsID, WorkStatus order by WorkStatus";
+                try
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        da.Fill(dtStatus);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dtStatus;
+        }
+
+        public DataTable totalMachines()
+        {
+            DataTable dtStatus = new DataTable();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "select Count(CCIP) from CentralControl";
+                try
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        da.Fill(dtStatus);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dtStatus;
+        }
+
+        public DataTable totalMachines(string id)
+        {
+            DataTable dtStatus = new DataTable();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "select count( CCIP), InsID from CentralControl cc " +
+                    " join Class_Details c on c.ClassID = cc.location " +
+                    "join Grade_Details g on g.GradeID = c.GradeID "+
+                    "join Institute_Details id on id.InstituteID = g.InsID where "+
+                    " InsID='"+id+"' group by InsID";
+                try
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        da.Fill(dtStatus);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dtStatus;
+        }
+
+        public DataTable totalMachinesOnline(string id)
+        {
+            DataTable dtStatus = new DataTable();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query = "select count( MachineStatus), MachineStatus, InsID " +
+                    " from Status s join Class_Details c on c.ClassID = s.Class " +
+                    "join Grade_Details g on g.GradeID = c.GradeID " +
+                    "join Institute_Details id on id.InstituteID = g.InsID where " +
+                    "MachineStatus='Online' and InsID='" + id + "' group by InsID, MachineStatus";
+                try
+                {
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
                     {
                         if (con.State != ConnectionState.Open)
                             con.Open();
@@ -1204,8 +1359,38 @@ namespace WebCresij
     }
     public class CentralControl
     {
-        string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        string constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings["CresijCamConnectionString"].ConnectionString;
 
+        public void SaveDatainDatabase(string sender, string data)
+        {
+            string[] data1 = data.Split(',');
+
+            string query = "update Status set WorkStatus='" + data1[3] + 
+                "', PCStatus='" + data1[5] + "'"
+              + " where MachineIP = '" + sender + "'";
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                try
+                {
+                    using (SqlCommand da = new SqlCommand(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        da.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+        }
+    
         public DataSet ControlDetails(string InsID)
         {
 
@@ -1213,15 +1398,18 @@ namespace WebCresij
             //DataTable dt;
             using (SqlConnection connection = new SqlConnection(constr))
             {
-                string query = "SELECT gd.GradeName as Grade,  CCIP,cd.ClassName as loc, "+
-                    "PortNo,Status,PowerStatus,TimerService,ComputerPower,projectorPower, " +
-                    " ProjectorUsedHour, CurtainStatus, ScreenStatus, light, MediaSignal, LockStatus, " +
-                   " PodiumLock, ClassLocked, Temperature, Humidity, PM25, PM10 from CentralControl cc "+
+                string query = "SELECT gd.GradeName as Grade, CCIP,cd.ClassName as loc, "+
+                    " PortNo,Status,PowerStatus,TimerService,ComputerPower,projectorPower, " +
+                    " ProjectorUsedHour, CurtainStatus, ScreenStatus,"+
+                    " light, MediaSignal, LockStatus, " +
+                    " PodiumLock, ClassLocked, Temperature, Humidity, PM25,"+
+                    " PM10 from CentralControl cc "+
                     " join Class_Details cd on cc.location = cd.ClassID "+
                     " join Grade_Details gd on gd.GradeID=cd.GradeID "+
                     " where cc.location in " +
                     " (select ClassID from Class_Details where GradeID in "+
-                    "(select GradeID from Grade_Details where InsID = '"+InsID+"')) order by GradeName";
+                    "(select GradeID from Grade_Details where InsID = '"+InsID+"')) "+
+                    " order by GradeName, cd.ClassName";
                 try
                 {
                     connection.Open();
@@ -1244,6 +1432,7 @@ namespace WebCresij
             }
             return ds;
         }
+
         #region cam
         public DataTable CamDetails (string loc)
         {
@@ -1277,6 +1466,38 @@ namespace WebCresij
         }
         #endregion
 
+        public DataTable Getlocation(string ip)
+        {
+            DataTable dt = new DataTable();
+            using(SqlConnection con= new SqlConnection(constr))
+            {
+                try
+                {
+                    string query = "select id.InstituteName as InsName, gd.GradeName as GradeName, " +
+                    "cd.ClassName as ClassName from Institute_Details id join Grade_Details gd on " +
+                    "gd.InsID = id.InstituteID join Class_Details cd on cd.GradeID = gd.GradeID " +
+                    "join CentralControl cc on cc.location = cd.ClassID where cc.CCIP = '" + ip + "'";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            da.Fill(dt);
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+                return dt;
+            }
+        }
     }
     public class ScanReader
     {
@@ -1311,8 +1532,141 @@ namespace WebCresij
         }
     }
 
-   
+    public class UploadFiles
+    {
+        public static string constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        public void AddFileDetail(string userid, string name, string type)
+        {
+            string query = "Insert into docInfo values(@userid, @fileName, @date, @type)"; 
+                
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using(SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    try
+                    {
+                        cmd.Parameters.AddWithValue("@userid",userid);
+                        cmd.Parameters.AddWithValue("@fileName", name);
+                        cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@type", type);
 
+                        if (con.State!= ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
 
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            
+        }
+
+        public DataTable GetFiles( string type, string userID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                string query;
+                if (string.IsNullOrEmpty(userID) && type=="Public")
+                {
+                    query = "Select docinfo, User_Name as UserName from Docinfo dc join " +
+                    "UserDetails ud on ud.User_id COLLATE Chinese_PRC_CI_AS = " +
+                    "dc.userId COLLATE Chinese_PRC_CI_AS " +
+                    " where type='" + type + "' order by time desc";
+                }
+                else
+                {
+                    query = "Select docinfo, User_Name as UserName from Docinfo dc join " +
+                    "UserDetails ud on ud.User_id COLLATE Chinese_PRC_CI_AS = " +
+                    "dc.userId COLLATE Chinese_PRC_CI_AS " +
+                    " where type='" + type + "' and userId='"+userID+"' order by time desc";
+                }
+                using(SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    if(con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    da.Fill(dt);
+                }
+            }
+            return dt;
+        }
+
+        public int DeleteFileInfo(string userid, string name)
+        {
+            
+            int r = 0;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_DeleteDocInfo", con))
+                {
+                    try
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@userID", userid);
+                        cmd.Parameters.AddWithValue("@doc", name);
+                        cmd.Parameters.Add("@result", SqlDbType.Int);
+                        cmd.Parameters["@result"].Direction = ParameterDirection.Output;
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        cmd.ExecuteNonQuery();
+                        r = Convert.ToInt32( cmd.Parameters["@result"].Value);
+                    }
+                    catch (Exception ex)
+                    {
+                        r = 0;
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return r;
+        }
+
+        public void UpdateType(string userid, string name)
+        {
+            string query = "Update docInfo set type='Public' where userID=@userid and docinfo=@fileName";
+
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                {
+                    try
+                    {
+                        cmd.Parameters.AddWithValue("@userid", userid);
+                        cmd.Parameters.AddWithValue("@fileName", name);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+        }
+    }
 
 }

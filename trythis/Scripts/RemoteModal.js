@@ -65,99 +65,100 @@ $(function () {
             
             var arraydata = message.split(',');
             if (arraydata[1] == "Heartbeat") {
-                if (arraydata[3] == 'OPEN') {
-                    var img = document.getElementById("systempower");
-                    img.src = "Images/中控首页按钮/on/systemon.png";
-                }
-                else {
+                if (arraydata[3] == 'CLOSED') {
                     var img = document.getElementById("systempower");
                     img.src = "Images/AllImages/images/图标_210.png";
-                }
-                if (arraydata[5] == 'On') {
-                    var imgpc = document.getElementById("pcpower");
-                    imgpc.src = "Images/中控首页按钮/on/pcon.png";
+                    NoNotification(arraydata);
                 }
                 else {
-                    var imgpc = document.getElementById("pcpower");
-                    imgpc.src = "Images/AllImages/images/图标_212.png";
-                }
-                if (arraydata[12] == 'Locked') {
-                    var src = document.getElementById('sysLock');
-                    src.src = "Images/中控首页按钮/on/lock1.png";
-                }
-                else {
-                    var src = document.getElementById('sysLock');
-                    src.src = "Images/中控首页按钮/on/lock1open.png";
-                }
-                if (arraydata[13] == 'Locked') {
-                    var src = document.getElementById('podiumLock');
-                    src.src = "Images/中控首页按钮/on/lock2.png";
-                }
-                else {
-                    var src = document.getElementById('podiumLock');
-                    src.src = "Images/中控首页按钮/on/lock2open.png";
-                }
-                if (arraydata[14] == 'Locked') {
-                    var src = document.getElementById('classLock');
-                    src.src = "Images/中控首页按钮/on/lock3.png";
-                }
-                else {
-                    var src = document.getElementById('classLock');
-                    src.src = "Images/中控首页按钮/on/lock3open.png";
-                }
-                uncheck();
-                switch (arraydata[11]) {
-                    case 'Desktop':
-                        var desk = document.getElementById('desktop');
-                        document.getElementById('desktop').checked = true;
-                        $(desk).closest("td").find("img").attr('src', "Images/中控首页按钮/on/desk1.png");
+                    var img = document.getElementById("systempower");
+                    img.src = "Images/中控首页按钮/on/systemon.png"; 
 
-                        break;
-                    case 'Laptop':
-                        document.getElementById('laptop').checked = true;
-                        var laptop = document.getElementById('laptop');
-                        $(laptop).closest("td").find("img").attr('src', "Images/中控首页按钮/on/lap1.png");
+                    if (arraydata[5] == 'On') {
+                        var imgpc = document.getElementById("pcpower");
+                        imgpc.src = "Images/中控首页按钮/on/pcon.png";
+                    }
+                    else {
+                        var imgpc = document.getElementById("pcpower");
+                        imgpc.src = "Images/AllImages/images/图标_212.png";
+                    }
+                    if (arraydata[12] == 'Locked') {
+                        var src = document.getElementById('sysLock');
+                        src.src = "Images/中控首页按钮/on/lock1.png";
+                    }
+                    else {
+                        var src = document.getElementById('sysLock');
+                        src.src = "Images/中控首页按钮/on/lock1open.png";
+                    }
+                    if (arraydata[13] == 'Locked') {
+                        var src = document.getElementById('podiumLock');
+                        src.src = "Images/中控首页按钮/on/lock2.png";
+                    }
+                    else {
+                        var src = document.getElementById('podiumLock');
+                        src.src = "Images/中控首页按钮/on/lock2open.png";
+                    }
+                    if (arraydata[14] == 'Locked') {
+                        var src = document.getElementById('classLock');
+                        src.src = "Images/中控首页按钮/on/lock3.png";
+                    }
+                    else {
+                        var src = document.getElementById('classLock');
+                        src.src = "Images/中控首页按钮/on/lock3open.png";
+                    }
+                    uncheck();
+                    switch (arraydata[11]) {
+                        case 'Desktop':
+                            var desk = document.getElementById('desktop');
+                            document.getElementById('desktop').checked = true;
+                            $(desk).closest("td").find("img").attr('src', "Images/中控首页按钮/on/desk1.png");
 
-                        break;
-                    case 'Digital Curtain':
-                        document.getElementById('platform').checked = true;
-                        $('#platform').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
-                        break;
-                    case 'Digital Screen':
-                        document.getElementById('digitalEquipment').checked = true;
-                        $('#digitalEquipment').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
-                        break;
-                    case 'DVD':
-                        document.getElementById('dvd').checked = true;
-                        $('#dvd').closest("td").find("img").attr('src', "Images/中控首页按钮/on/dvd.png");
-                        break;
-                    case 'TV':
-                        document.getElementById('tv').checked = true;
-                        $('#tv').closest("td").find("img").attr('src', "Images/中控首页按钮/on/tv.png");
-                        break;
-                    case 'Video Camera':
-                        document.getElementById('camera').checked = true;
-                        $('#camera').closest("td").find("img").attr('src', "Images/中控首页按钮/on/cam.png");
-                        break;
-                    case 'Blu-Ray DVD':
-                        document.getElementById('bluray').checked = true;
-                        $('#bluray').closest("td").find("img").attr('src', "Images/中控首页按钮/on/blu.png");
-                        break;
-                    case 'Recording System':
-                        document.getElementById('recorder').checked = true;
-                        $('#recorder').closest("td").find("img").attr('src', "Images/中控首页按钮/on/recorder.png");
-                        break;
-                }
-              
-                if (arraydata[6] == 'Closed') {
-                    
-                    var src = document.getElementById("projectorOff");
-                    src.src = "Images/中控首页按钮/on/projred.png";
-                } else {
-                    var src = document.getElementById("projectorOn");
-                    src.src = "Images/中控首页按钮/on/projgreen.png";
-                }
+                            break;
+                        case 'Laptop':
+                            document.getElementById('laptop').checked = true;
+                            var laptop = document.getElementById('laptop');
+                            $(laptop).closest("td").find("img").attr('src', "Images/中控首页按钮/on/lap1.png");
 
+                            break;
+                        case 'Digital Curtain':
+                            document.getElementById('platform').checked = true;
+                            $('#platform').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
+                            break;
+                        case 'Digital Screen':
+                            document.getElementById('digitalEquipment').checked = true;
+                            $('#digitalEquipment').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
+                            break;
+                        case 'DVD':
+                            document.getElementById('dvd').checked = true;
+                            $('#dvd').closest("td").find("img").attr('src', "Images/中控首页按钮/on/dvd.png");
+                            break;
+                        case 'TV':
+                            document.getElementById('tv').checked = true;
+                            $('#tv').closest("td").find("img").attr('src', "Images/中控首页按钮/on/tv.png");
+                            break;
+                        case 'Video Camera':
+                            document.getElementById('camera').checked = true;
+                            $('#camera').closest("td").find("img").attr('src', "Images/中控首页按钮/on/cam.png");
+                            break;
+                        case 'Blu-Ray DVD':
+                            document.getElementById('bluray').checked = true;
+                            $('#bluray').closest("td").find("img").attr('src', "Images/中控首页按钮/on/blu.png");
+                            break;
+                        case 'Recording System':
+                            document.getElementById('recorder').checked = true;
+                            $('#recorder').closest("td").find("img").attr('src', "Images/中控首页按钮/on/recorder.png");
+                            break;
+                    }
+
+                    if (arraydata[6] == 'Closed') {
+
+                        var src = document.getElementById("projectorOff");
+                        src.src = "Images/中控首页按钮/on/projred.png";
+                    } else {
+                        var src = document.getElementById("projectorOn");
+                        src.src = "Images/中控首页按钮/on/projgreen.png";
+                    }
+                }
             }
             else {
 
@@ -609,7 +610,7 @@ $(function () {
                 $(td).css("background-color", "transparent");
             });
             $(this).closest("td").css("background-color", "#4ecdc4");
-            console.log("click worked");
+            
         });
 
         $(document).on("click", "#light8", function () {
@@ -626,7 +627,7 @@ $(function () {
                 $(td).css("background-color", "transparent");
             });
             $(this).closest("td").css("background-color", "#4ecdc4");
-            console.log("click worked");
+            
         });
 
         $(document).on("click", "#ac1", function () {
@@ -981,6 +982,45 @@ $(function () {
     });
 
 });
+function NoNotification(arraydata) {
+    var imgpc = document.getElementById("pcpower");
+    imgpc.src = "Images/AllImages/images/图标_212.png";
+    if (arraydata[12] == 'Locked') {
+        var src = document.getElementById('sysLock');
+        src.src = "Images/AllImages/images/图标_262.png";
+    } 
+    else {
+        var src = document.getElementById('sysLock');
+        src.src = "Images/AllImages/images/图标_264.png";
+    }
+    if (arraydata[13] == 'Locked') {
+        var src = document.getElementById('podiumLock');
+        src.src = "Images/AllImages/images/PodiumLock.png";
+    }
+    else {
+        var src = document.getElementById('podiumLock');
+        src.src = "Images/AllImages/images/图标_216.png";
+    }
+    if (arraydata[14] == 'Locked') {
+        var src = document.getElementById('classLock');
+        src.src = "Images/AllImages/images/图标_236.png";
+    }
+    else {
+        var src = document.getElementById('classLock');
+        src.src = "Images/AllImages/images/图标_238.png";
+    }
+    uncheck();
+    
+
+    if (arraydata[6] == 'Closed') {
+
+        var src = document.getElementById("projectorOff");
+        src.src = "Images/AllImages/images/图标_186.png";
+    } else {
+        var src = document.getElementById("projectorOn");
+        src.src = "Images/AllImages/images/图标_184.png";
+    }
+}
 window.SetVolume = function (val) {
     console.log('After: ' + val / 100);
 }
@@ -997,4 +1037,6 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+
 

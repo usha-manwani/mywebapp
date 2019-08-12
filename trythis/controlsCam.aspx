@@ -5,10 +5,10 @@
     <link href="Content/bootstrap-grid.min.css" rel="stylesheet" />
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/fontawesome/fontawesome.min.js"></script>
-     <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>    
+     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>    
         <script src='<%: ResolveClientUrl("~/signalr/hubs") %>' > </script>
     <script src="Scripts/remotekeys.js"></script>
     <title></title>

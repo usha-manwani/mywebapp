@@ -278,8 +278,17 @@
     };
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         $(document).on('click', '#readConfig', function () {
-           // uncheckall();
-            chat.server.sendControlKeys("192.168.1.38","8B B9 00 03 03 02 08");
+            // uncheckall();
+            var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+            for (i = 0; i < checkbox.length; i++) {
+                if (checkbox.checked) {
+                    var ip= checkbox.value;
+                    chat.server.sendControlKeys(ip, "8B B9 00 03 03 02 08");
+                    break;
+                }
+            }
+            
+           // chat.server.sendControlKeys("192.168.1.38","8B B9 00 03 03 02 08");
         });
         $(document).on('click', "#writeConfig", function () {
             var data1 = "8b b9 ";
@@ -629,120 +638,355 @@
             chksum = chksum & 255;
             var checksum = chksum.toString(16);
             data = data1 + data + checksum;
-            chat.server.sendControlKeys("192.168.1.38", data);            
+            var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+            for (i = 0; i < checkbox.length; i++) {
+                if (checkbox.checked) {
+                    var ip = checkbox.value;
+                    chat.server.sendControlKeys(ip, data);
+                    
+                }
+            }
+           // chat.server.sendControlKeys("192.168.1.38", data);            
         });
         $(document).on('click', "#projok", function () {
            
         });
         $(document).on('click', "powerok", function () {
             if (document.getElementById("bc1").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 78 82");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 78 82");
+                    }
+                    //chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 78 82");
+
+                }
             }
-            if (document.getElementById("bc2").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 68 72");
-            }
+                if (document.getElementById("bc2").checked == true) {
+                    var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                    for (i = 0; i < checkbox.length; i++) {
+                        if (checkbox.checked) {
+                            var ip = checkbox.value;
+                            chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                        }
+                        // chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 68 72");
+                    }
+                }
             if (document.getElementById("bc3").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 58 62");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 58 62");
+                    }
+                }
+                //chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 58 62");
             }
+                
+            
             if (document.getElementById("bc4").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 53 5d");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 53 5d");
+                    }
+                }
+               // chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 53 5d");
             }
             if (document.getElementById("bc5").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 54 5e");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 54 5e");
+                    }
+                }
+                //chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 54 5e");
             }
             if (document.getElementById("bc6").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 55 5F");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 55 5F");
+                    }
+                }
+                //chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 55 5F");
             }
             if (document.getElementById("bc7").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 78 82");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 78 82");
+                    }
+                }
+                //chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 78 82");
             }
             if (document.getElementById("bc8").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 68 72");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
+                //chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 68 72");
             }
             if (document.getElementById("bc9").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 58 62");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc10").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 53 5d");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc11").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 54 5e");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc12").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 55 5F");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
 
             }
             if (document.getElementById("bc13").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4c 56");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc14").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4d 53");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc15").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4e 58");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc16").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4f 59");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc17").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 56 60");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc18").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 5e 68");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc19").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4c 56");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc20").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4d 53");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc21").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4e 58");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc22").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4f 59");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc23").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 56 60");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("bc24").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 5e 68");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("w1").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 77 81");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("w11").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 57 61");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("w2").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 63 6d");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("w22").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 64 6e");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("w3").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 46 50");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("w33").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 47 51");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("w4").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 49 53");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("w44").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 4a 54");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("air1").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 39 43");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("air11").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 3a 44");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("air2").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 59 63");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
             if (document.getElementById("air22").checked == true) {
-                chat.server.sendControlKeys("192.168.1.38", "8b b9 00 04 02 04 5a 64");
+                var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+                for (i = 0; i < checkbox.length; i++) {
+                    if (checkbox.checked) {
+                        var ip = checkbox.value;
+                        chat.server.sendControlKeys(ip, "8b b9 00 04 02 04 68 72");
+                    }
+                }
             }
         });
         $(document).on('click', "camok", function () {

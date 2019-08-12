@@ -5,29 +5,71 @@
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
     <meta http-equiv="Expires" content="0" />
-  
+
     <script src="Scripts/umd/popper.js"></script>
-    <script src="Scripts/jquery-3.3.1.min.js"></script>
-    
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <script src="Scripts/bootstrap.min.js"></script>
-    
+
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
-     <asp:PlaceHolder runat="server">
+    <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <style>
+        .positionCenter {
+            padding: 15px;
+            padding-left: 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            max-width: 550px;
+            min-width: 250px;
+            width:50%;
+            height:50%;
+        }
+
+        .width100 {
+            width: 100%;
+        }
+        body::-webkit-scrollbar {
+            width: 8px;
+            background-color: #404040;
+            visibility: hidden;
+        }
+
+            body::-webkit-scrollbar:hover {
+                visibility: visible;
+            }
+
+        body::-webkit-scrollbar-thumb {
+            background: linear-gradient(left, #fff, #4ECDC4);
+            max-height: 200px !important;
+        }
+
+            body::-webkit-scrollbar-thumb:hover {
+                background: #4ECDC4;
+            }
+
+            body::-webkit-scrollbar-thumb:active {
+                background: linear-gradient(left, #22ADD4, #4ECDC4);
+            }
+    </style>
 </head>
-<body style="background-color:#232140">
-    
-    <form id="form1" runat="server" >
+<body style="background-color: #232140">
+
+    <form id="form1" runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
@@ -48,32 +90,34 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-        <div class="navbar-form" style="font-size:large">
-            <nav class="navbar navbar-fixed-top navbar-light" style="background-color:#1e1e36;">
-                <div class="container-fluid">
-                    <div class="navbar-header navbar-brand" style="font-size:large; float:left; color:white">
-                        Welcome to Cresij Cam 
-                    </div>
-                    <div>
-                    <ul class="nav navbar-nav float-right  " >
-                                <li><a runat="server" href="~/Registration"  style="color:white">
+        <div class="width100" style="font-size: large">
+            <div class="width100">
+                <nav class="navbar navbar-fixed-top navbar-light" style="background-color: #1e1e36;">
+                    <div class="container-fluid">
+                        <div class="navbar-header navbar-brand" style="font-size: large; float: left; color: white">
+                            Welcome to Cresij Cam 
+                        </div>
+                        <div>
+                            <ul class="nav navbar-nav float-right">
+                                <li><a runat="server" href="~/Registration" style="color: white">
                                     <span><%=Resources.Resource.Register%></span></a></li>
-                                <li><a runat="server" href="~/Index.aspx" style="color:white" >
+                                <li><a runat="server" href="~/Index.aspx" style="color: white">
                                     <span><%=Resources.Resource.Login%></span></a></li>
-                        <li>
-                            <asp:DropDownList runat="server" ID="ddlLanguages" AutoPostBack="true" >
-                                <asp:ListItem Text="English" Value="en-US" ></asp:ListItem>
-                                <asp:ListItem Text="中文" Value="zh-CN" ></asp:ListItem>
-                            </asp:DropDownList>
-                        </li>
+                                <li>
+                                    <asp:DropDownList runat="server" ID="ddlLanguages" AutoPostBack="true">
+                                        <asp:ListItem Text="English" Value="en-US"></asp:ListItem>
+                                        <asp:ListItem Text="中文" Value="zh-CN"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </li>
                             </ul>
                         </div>
-                </div>
-           </nav>
-        </div>  
-        <div class="container body-content" style="font-size:medium;background-color:#232140; color:white!important; ">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server">
-            </asp:ContentPlaceHolder>
+                    </div>
+                </nav>
+            </div>
+            <div class="container body-content width100" style="font-size: medium; background-color: #232140; color: white!important;">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
         </div>
     </form>
 </body>

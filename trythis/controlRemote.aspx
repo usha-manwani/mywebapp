@@ -3,14 +3,40 @@
 <html>
 <head>
     <title></title>
-    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="Scripts/jquery.signalR-2.4.0.js"></script>
-    <script src="Scripts/jquery.signalR-2.4.0.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
     <script src="Scripts/RemoteModal.js?v=5"></script>
     <style>
+        .scroll {
+            overflow-y: auto;
+        }
+            .scroll::-webkit-scrollbar {
+                width: 10px;
+                background-color: #404040;
+                visibility: hidden;
+            }
+
+                .scroll::-webkit-scrollbar:hover {
+                    visibility: visible;
+                }
+
+            .scroll::-webkit-scrollbar-thumb {
+                background: linear-gradient(left, #fff, #4ECDC4);
+                max-height: 200px !important;
+            }
+
+                .scroll::-webkit-scrollbar-thumb:hover {
+                    background: #4ECDC4;
+                }
+
+                .scroll::-webkit-scrollbar-thumb:active {
+                    background: linear-gradient(left, #22ADD4, #4ECDC4);
+                }
+
         input, select, textarea {
             max-width: 280px;
         }
@@ -26,15 +52,17 @@
             width: 55%;
         }*/
         .imgsize {
-            width: 55%;
+            width: 50%;
         }
 
         .imgsize1 {
+            width: 55%;
+        }
+
+        .imgsize2 {
             width: 60%;
         }
-        .imgsize2 {
-            width: 80%;
-        }
+
         .imgclick:hover {
             -webkit-border-radius: 5%;
             -moz-border-radius: 5%;
@@ -85,7 +113,7 @@
 
         #control {
             background-color: #1e1e36;
-            height: 500px;
+            height: 600px;
             padding-bottom: 50px;
             padding-left: 50px;
         }
@@ -204,8 +232,10 @@
 
         .tableStyle {
             border: 1px solid #4ecdc4;
-            height: 200px;
-            width: 330px;
+            height: 180px;
+            width: 300px;
+            min-width: 250px !important;
+            max-width: 330px !important;
         }
 
         .controlHeaderRow {
@@ -219,6 +249,10 @@
             margin-left: -50px;
         }
 
+        .MediaSignalTable {
+            border: 1px solid #4ecdc4;
+            width: 220px !important;
+        }
         /*.tab {
             float: left;
             border: 1px solid #4ecdc4;
@@ -308,13 +342,20 @@
                 -moz-box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
                 box-shadow: 0px 0px 4px 4px rgba(119,204,238, 0.67);
             }
-           
     </style>
 </head>
 <body style="overflow-x: hidden !important">
     <form runat="server">
-
+        
         <div id="control">
+            <div style="color:white; font-size:1.5em">
+            <asp:Label runat="server" ID="insName"></asp:Label>
+            <span>>></span>
+            <asp:Label runat="server" ID="GradeName"></asp:Label>
+            <span>>></span>
+            <asp:Label runat="server" ID="ClassName"></asp:Label>
+           <hr/>
+        </div>
             <input id="sessionInputIP" type="hidden" value='<%= Session["DeviceIP"] %>' />
             <input id="sessionInput1" type="hidden" value='<%= Session["loc"] %>' />
             <input id="dev" type="hidden" value='<%=Session["devices"] %>' />
@@ -333,18 +374,19 @@
                                         <td colspan="3" style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_212.png" id="systempower"
-                                                    class="imgclick" style="width:50%" /></span>
+                                                    class="imgclick" style="width:45%" /></span>
                                         </td>
                                         <td colspan="3" style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_212.png" id="pcpower"
-                                                    class="imgclick" style="width:50%" /></span></td>
+                                                    class="imgclick" style="width:45%" /></span></td>
 
                                     </tr>
                                     <tr style="align-items: center; align-content: center;">
 
                                         <td colspan="2" style="text-align: center">
                                             <span>
+                                                
 
                                                 <img src="Images/中控首页按钮/on/lock1open.png" id="sysLock"
                                                     class="imgclick imgsize" /></span>
@@ -421,7 +463,7 @@
                                     <tr>
                                         <td>
                                             <div style="width: 25%; height: 100%; border-right: 1px solid #4ecdc4; float: left">
-                                                <table style="width: 100%; height: 100%; font-size: 14px; margin-top: -2px" id="myTable">
+                                                <table style="width: 100%; height: 100%; font-size: 12px; margin-top: -2px" id="myTable">
 
                                                     <tr class="buttonEffect">
                                                         <td id="light1">Light 1
@@ -617,7 +659,7 @@
                                     <tr>
                                         <td>
                                             <div style="width: 25%; height: 100%; border-right: 1px solid #4ecdc4; float: left">
-                                                <table style="width: 100%; height: 100%; font-size: 14px; margin-top: -2px;"
+                                                <table style="width: 100%; height: 100%; font-size: 12px; margin-top: -2px;"
                                                     id="curtainTable">
                                                     <tr class="buttonEffect">
                                                         <td id="screen1">Screen 1</td>
@@ -832,12 +874,14 @@
                 <div class="col-xl-5 col-lg-8 col-md-12 col-sm-12">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div id="media" class="divcontrols" style="border: 1px solid #4ecdc4; ">
-                                <table style="height: 100%; width: 100%;">
+                            <div id="media" class="divcontrols MediaSignalTable">
+                                <table style="height: 100%; width: 100%">
                                     <tr class="controlHeaderRow">
                                         <td colspan="2" style="text-align: center">Media Signals
+                                           
                                         </td>
                                     </tr>
+                                    
                                     <tr>
                                         <td style="text-align: center">
                                             <label>
@@ -925,7 +969,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div >
                                 <div id="dvdcontrols" class="displaynone">
-                                    <div id="dvdsubmenu" class="divcontrols" style="border: 1px solid #4ecdc4; width: 100%;">
+                                    <div id="dvdsubmenu" class="divcontrols  MediaSignalTable">
                                         <table style="width: 100%; height: 100%">
                                             <tr class="controlHeaderRow">
                                                 <td colspan="2" style="text-align: center">DVD Controls
@@ -981,7 +1025,7 @@
                                     </div>
                                 </div>
                                 <div id="bluraydvd" class="displaynone">
-                                    <div id="bludvdsubmenu" class="divcontrols" style="border: 1px solid #4ecdc4; width: 100%;">
+                                    <div id="bludvdsubmenu" class="divcontrols MediaSignalTable" >
                                         <table style="width: 100%; height: 100%">
                                             <tr class="controlHeaderRow">
                                                 <td colspan="2" style="text-align: center">Blu-ray DVD Controls
@@ -1037,7 +1081,7 @@
                                     </div>
                                 </div>
                                 <div id="Camera" class="displaynone">
-                                    <div id="camerasubmenu" class="divcontrols" style="border: 1px solid #4ecdc4; width: 100%;">
+                                    <div id="camerasubmenu" class="divcontrols MediaSignalTable">
                                         <table style="width: 100%; height: 100%">
                                             <tr class="controlHeaderRow">
                                                 <td colspan="2" style="text-align: center">Camera Controls
@@ -1105,7 +1149,7 @@
                                     </div>
                                 </div>
                                 <div id="tvcontrols" class="displaynone">
-                                    <div id="tvsubmenu" class="divcontrols" style="border: 1px solid #4ecdc4; width: 100%;">
+                                    <div id="tvsubmenu" class="divcontrols MediaSignalTable">
                                         <table style="width: 100%; height: 80%">
                                             <tr class="controlHeaderRow">
                                                 <td colspan="2" style="text-align: center">TV Controls
@@ -1152,7 +1196,7 @@
                                     </div>
                                 </div>
                                 <div id="recordercontrol" class="displaynone">
-                                    <div id="recordermenu" class="divcontrols" style="border: 1px solid #4ecdc4; width: 100%">
+                                    <div id="recordermenu" class="divcontrols MediaSignalTable">
                                         <table style="width: 100%; height: 100%">
                                             <tr class="controlHeaderRow">
                                                 <td colspan="2" style="text-align: center">Recorder Controls
@@ -1209,7 +1253,7 @@
                                 <td>
                                     <div  style="height:100%">
                                         <div style="width: 20%; height: 100%; border-right: 1px solid #4ecdc4; float: left">
-                                            <table style="width: 100%; height: 100%; font-size: 14px; margin-top: -2px;" id="actable">
+                                            <table style="width: 100%; height: 100%; font-size: 12px; margin-top: -2px;" id="actable">
                                                 <tr class="buttonEffect">
                                                     <td id="ac1">AC 1</td>
                                                 </tr>

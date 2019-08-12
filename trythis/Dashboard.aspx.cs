@@ -56,20 +56,20 @@ namespace WebCresij
                         SortDir = "Asc";
                         btnAsc.Text = "<i class=\"fa fa-sort-alpha-down\"></i>";
                     }
-                    if (e.SortExpression == "Time")
-                    {
+                    //if (e.SortExpression == "Time")
+                    //{
 
-                        dt = UserActivities.UserLogs.LogsRecord();
-                        gv1.DataSource = dt;
-                        gv1.DataBind();
-                    }
-                    else
-                    {
+                    //    dt = UserActivities.UserLogs.LogsRecord();
+                    //    gv1.DataSource = dt;
+                    //    gv1.DataBind();
+                    //}
+                    //else
+                    //{
                         sortedView.Sort = e.SortExpression + " " + SortDir;
                         dt = sortedView.ToTable();
                         gv1.DataSource = dt;
                         gv1.DataBind();
-                    }
+                    //}
 
                 }
             }

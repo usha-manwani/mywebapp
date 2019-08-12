@@ -12,7 +12,7 @@ namespace WebCresij
     public partial class Status : BasePage
     {
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-        IHubContext hubContext;
+        
         protected void Page_Load(object sender, EventArgs e)
         {                  
             if (!IsPostBack)
@@ -36,18 +36,26 @@ namespace WebCresij
                     Response.Redirect("Logout.aspx");
                 }                
             }
-            
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg2", "triggerclick();", true);
         }
 
         private void loadGrid( string insID)
         {
             CentralControl cc = new CentralControl();
             DataSet ds = cc.ControlDetails( insID);
+            DataTable dt = ds.Tables[0];
             try
             {
                 GridView1.DataSource = ds;
                 GridView1.DataBind();
-                
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg1", "triggerclick();", true);
+                //hubContext = GlobalHost.ConnectionManager.GetHubContext<Hubsfile.MyHub>();
+                //foreach (GridViewRow row in GridView1.Rows)
+                //{
+                //    string ip = row.Cells[1].Text;
+                //    string data = "8B B9 00 03 05 01 09";
+                //    hubContext.Clients.All.SendControl(ip, data);
+                //}
             }
             catch
             {
@@ -63,13 +71,13 @@ namespace WebCresij
         protected void ddlins_SelectedIndexChanged(object sender, EventArgs e)
         {
             loadGrid(ddlins.SelectedValue);
-            hubContext = GlobalHost.ConnectionManager.GetHubContext<Hubsfile.MyHub>();
-            foreach(GridViewRow row in GridView1.Rows)
-            {
-                string ip = row.Cells[1].Text;
-                string data = "8B B9 00 03 05 01 09";
-                hubContext.Clients.All.SendControl(ip, data);
-            }
+            
+        }
+
+        protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridView1.PageIndex = e.NewPageIndex;
+            loadGrid(ddlins.SelectedValue);
         }
 
 

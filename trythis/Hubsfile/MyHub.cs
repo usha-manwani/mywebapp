@@ -91,8 +91,7 @@ namespace WebCresij.Hubsfile
                 {
                     keyValues.Add(sender, data);
                 }
-            }
-            
+            }            
             if (data.Contains("Toregister"))
             {
                 Clients.All.registerCard(sender, data);
@@ -118,8 +117,19 @@ namespace WebCresij.Hubsfile
                         break;
                 }
             }
+            else if (data.Contains("Heartbeat"))
+            {
+                saveStatusinDatebase(sender, data);
+            }
             Clients.All.broadcastMessage(sender, data);
         }
+
+        private void saveStatusinDatebase(string sender, string data)
+        {
+            CentralControl cc = new CentralControl();
+            cc.SaveDatainDatabase(sender, data);
+        }
+
         ///send to server to get status of all machines
         public void SendData()
         {            

@@ -9,28 +9,24 @@
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <asp:GridView ID="gv2" runat="server" BorderStyle="None" GridLines="Horizontal"
-                    AutoGenerateColumns="false" Width="100%" EmptyDataText="<%$Resources:Resource, NoPending %>">
-                    <HeaderStyle BackColor="PaleTurquoise" Font-Bold="false" HorizontalAlign="Center" CssClass="table table-striped table-bordered table-hover" />
-                    <RowStyle BackColor="LightCyan"
-                        ForeColor="black"
-                        Font-Italic="false" />
-
-                    <AlternatingRowStyle BackColor="White"
-                        ForeColor="black"
-                        Font-Italic="false" />
+                    AutoGenerateColumns="false" Width="100%" CellPadding="20" CellSpacing="20" 
+                    EmptyDataText="<%$Resources:Resource, NoPending %>">
+                    <HeaderStyle BackColor="white" Font-Bold="false" HorizontalAlign="Center" 
+                        CssClass="table table-striped table-bordered table-hover" ForeColor="#1e1e36"/>
+                    <RowStyle ForeColor="white" HorizontalAlign="Center"/>
+                    
                     <Columns>
                         <asp:BoundField DataField="User_ID" HeaderText="<%$Resources:Resource, UserID %>" HeaderStyle-HorizontalAlign="Left" />
                         <asp:BoundField DataField="User_Name" HeaderText="<%$Resources:Resource, User %>" HeaderStyle-HorizontalAlign="Left" />
                         <asp:TemplateField HeaderText="<%$Resources:Resource, Role %>">
                             <ItemTemplate>
-                                <asp:LinkButton runat="server" ID="link1" Text="<%$Resources:Resource, Select %>"
+                                <asp:LinkButton ForeColor="DeepSkyBlue" runat="server" ID="link1" Text="<%$Resources:Resource, Select %>"
                                     OnClick="btnEdit_Click" CssClass="text123"></asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
-                <div id="idiot" class="modal" style="display: none; max-width: 500px; min-height: 800px; position: absolute;">
-
+                <div id="roleModal" class="modal" style="display: none; max-width: 500px; min-height: 800px; position: absolute;">
                     <div class="modal-content">
                         <p><span><%=Resources.Resource.Role%></span></p>
                         <span onclick="close3();"
@@ -40,7 +36,7 @@
                             <asp:ListItem Text="<%$Resources:Resource, LiveFeed %>" Value="2"></asp:ListItem>
                             <asp:ListItem Text="<%$Resources:Resource, manageDevice %>" Value="3"></asp:ListItem>
                             <asp:ListItem Text="<%$Resources:Resource, DocUploadDownload %>" Value="4"></asp:ListItem>
-                            <asp:ListItem Text="<%$Resources:Resource, DocDelete %>" Value="5"></asp:ListItem>
+                            <asp:ListItem Text="Maintainance" Value="5"></asp:ListItem>
                             <asp:ListItem Text="<%$Resources:Resource, EditUsers %>" Value="6"></asp:ListItem>
                         </asp:CheckBoxList>
 

@@ -6,7 +6,9 @@
      <link href="ajaxfiles/Background.css" rel="stylesheet" />
     <link href="ajaxfiles/Tabs.css" rel="stylesheet" />
     <link href="Content/options.css?v=1" rel="stylesheet" />
-
+  <style>
+      
+  </style> 
 </asp:Content>
 <asp:Content ID="Main" ContentPlaceHolderID="masterBody" runat="server">
     <script src="ajaxfiles/Localization.Resources.debug.js"></script>
@@ -64,7 +66,7 @@
                 <ContentTemplate>
         <div style="position: center;">
             
-            <div id="id01" class="modal">
+            <div id="id01" class="modal scroll">
                 <div class="modal-content">
                     
                         <div class=" row " style="padding-right: 20px;">
@@ -108,45 +110,37 @@
                     <div style="clear:both"></div>
                 </div>
             </div>
-            
-            
-            
-            <div id="idGrade" class="modal ">
-                <!-- Modal content -->
-                
+          
+            <div id="idGrade" class="modal scroll">
+                <!-- Modal content -->                
                 <div class="modal-content">
                     <div class=" row " style="padding-right: 20px;">
                         <div class="panel-heading col ">
                             <h4><span><%=Resources.Resource.AddGrades%></span></h4>
                         </div>
                         <span onclick="xx();" style="cursor: pointer">&times;</span>
-                    </div>
-                    
+                    </div>                    
                     <div>
                     <div class="row ">
                         <asp:TextBox ID="instext" runat="server" Visible="false"></asp:TextBox>
                                 <div id="TextBoxContainer" class="form-horizontal">
-                                    <div class="form-group">
+                                    <div class="form-group row margintop">
                                         <asp:Label runat="server" Font-Bold="true" AssociatedControlID="Grade_Name"
-                                            CssClass=" control-label" Text="<%$Resources:Resource, Grade %>"></asp:Label>
-                                        <div>
-                                            <asp:TextBox runat="server" ID="Grade_Name" CssClass="form-control" />
+                                            CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Grade %>"></asp:Label>
+                                        <div class="col-md-7">
+                                            <asp:TextBox runat="server" ID="Grade_Name" CssClass="form-control " />
                                         </div>
                                     </div>
                                 </div>
                         </div>
-                        <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
+                        <div class="row" style="width:50%;  float:left;margin-right:30px;">
                             <div class="col"><asp:Button ID="btnaddgrade" Text="<%$Resources:Resource, Add %>" runat="server" OnClientClick="AddTextGrade(); return false;" /></div>
                             <div class="col"><asp:Button ID="save" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideGrade();" OnClick="btnGradesave_Click" /></div>
                         </div>
-                    </div>
-                   
-                   </div>
-                   
+                    </div>                   
+                   </div>                   
             </div>
-            
-            
-            <div id="idClass" class="modal">
+            <div id="idClass" class="modal scroll">
                 <div class="modal-content">
                     <div class=" row " style="padding-right: 20px;">
                         <div class="panel-heading col ">
@@ -154,37 +148,39 @@
                         </div>
                         <span onclick="hideClass();" style="cursor: pointer">&times;</span>
                     </div>
-                    <div class="row ">
-                        
+                    <div class="row ">                        
                                 <asp:TextBox runat="server" ID="TextGrade" Visible="false" />
                                 <div id="TextContainer" class="form-horizontal">
-                                    <div class="form-group">
-                                        <asp:Label runat="server" Text="<%$Resources:Resource, Class %>" AssociatedControlID="TextGrade"
-                                            CssClass=" control-label" Font-Bold="True"></asp:Label>
-                                        <div>
+                                    <div class="form-group row margintop" >
+                                        <asp:Label runat="server" Text="<%$Resources:Resource, Class %>"
+                                            AssociatedControlID="TextGrade"
+                                            CssClass="col-md-5 col-lg-5 control-label labelpadding" Font-Bold="True"></asp:Label>
+                                         <div class="col-md-7 ">
                                             <asp:TextBox runat="server" ID="Class_Name" CssClass="form-control"></asp:TextBox>
-                                        </div>
+                                             </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    <div class=" form-group row  margintop">
                                         <asp:Label runat="server" 
                                             Text="<%$Resources:Resource, CCIPAddress %>" 
                                             AssociatedControlID="tbip"
-                                            CssClass=" control-label" Font-Bold="True"></asp:Label>
-                                        <div>
+                                            CssClass="col-md-5 col-lg-5 control-label labelpadding" Font-Bold="True"></asp:Label>
+                                       
+                                            <div class="col-md-7">
                                             <asp:TextBox runat="server" ID="tbip" CssClass="form-control"></asp:TextBox>
-                                        </div>
+                                                </div>
+                                        
                                     </div>
 
                                 </div>
                         </div>
-                        <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
+                        <div class="row margintop" style="width:50%;  float:left;margin-right:30px;">
                             <div class="col"><asp:Button ID="BtnClass" Text="<%$Resources:Resource, Add %>" runat="server" OnClientClick="AddTextClass(); return false;" /></div>
                             <div class="col"><asp:Button ID="BtnClassSave" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideClass();" OnClick="BtnClassSave_Click" /></div>
                         </div>
                   </div>
             </div>       
-            <div id="idCamera" class="modal">
+            <div id="idCamera" class="modal scroll">
                 <div class="modal-content">
                     <div class=" row " style="padding-right: 20px; padding-top:50px">
                         <div class="panel-heading col ">
@@ -195,15 +191,15 @@
                     </div>
                     <div class="row" style="float:left">
                          <asp:TextBox Visible="false" runat="server" ID="tbSelectedClass"></asp:TextBox>
-                                <div class="form-group row">
-                                    <asp:Label Text="<%$Resources:Resource, CCIPAddress %>" AssociatedControlID="ccSystem" runat="server" CssClass=" control-label" Font-Bold="True"></asp:Label>
-                                    <asp:TextBox runat="server" CssClass="form-control" ID="ccSystem"></asp:TextBox>
+                                <div class="form-group row margintop">
+                                    <asp:Label Text="<%$Resources:Resource, CCIPAddress %>" AssociatedControlID="ccSystem" runat="server" CssClass="col-md-5 control-label" Font-Bold="True"></asp:Label>
+                                  <div class="col-md-7">  
+                                      <asp:TextBox runat="server" CssClass="form-control" ID="ccSystem"></asp:TextBox></div>
                                 </div>
-                                <div id="camdiv" class="row">
+                                <div id="camdiv" class="row margintop">
                                 </div>
-                                <br />
                      </div>
-                     <div class="row" style="width:50%; margin-top:50px; float:left;margin-right:30px;">
+                     <div class="row" style="width:50%;  float:left;margin-right:30px;">
                             <div class="col">   <asp:Button ID="btncam" Text="<%$Resources:Resource, AddCam %>" runat="server" OnClientClick="AddTextCam(); return false;" />
                                </div>  
                              <div class="col">
@@ -272,8 +268,8 @@
 
                 // Get the modal
                 function GetDynamicTextBox(value) {
-                    return '<div class="form-group">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Grade %>" CssClass=" control-label" Font-Bold="True"/>' +
-                        '<div ><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
+                    return '<div class="form-group row  margintop">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Grade %>" CssClass="col-md-5 control-label labelpadding" Font-Bold="True"/>' +
+                        '<div class="col-md-7"><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
                 }
 
                 function AddTextGrade() {
@@ -284,12 +280,10 @@
                 }
 
                 function GetDynamicTextClass(value) {
-                    return '<div class="form-group">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Class %>" CssClass=" control-label" Font-Bold="True"/>' +
-                        '<input name = "DynamicTextClass" class="form-control" type="text" value = "' + value + '" /></div>' +
-                        '<div class="form-group">' +
-                        '<div class="form-group">' + '<asp:Label runat="server" Text="<%$Resources:Resource, CCIPAddress %>" CssClass=" control-label" Font-Bold="True"/>' +
-                        '<input name = "DynamicIP" class="form-control" type="text" value = "' + value + '" /></div>' +
-                        '<div class="form-group">';
+                    return '<div class="form-group row  margintop">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Class %>" CssClass="col-md-5 control-label labelpadding" Font-Bold="True"/>' +
+                        '<div class="col-md-7"><input name = "DynamicTextClass" class="form-control" type="text" value = "' + value + '" /></div></div>' +
+                        '<div class="form-group row  margintop">' + '<asp:Label runat="server" Text="<%$Resources:Resource, CCIPAddress %>" CssClass="col-md-5 control-label labelpadding" Font-Bold="True"/>' +
+                        '<div class="col-md-7"><input name = "DynamicIP" class="form-control" type="text" value = "' + value + '" /></div></div>';
                 }
 
                 function AddTextClass() {
@@ -298,15 +292,15 @@
                     document.getElementById("TextContainer").appendChild(div);
                 }
                 function GetDynamicCamDetails(value) {
-                    return '<p style="color: #C0C0C0"><span><%=Resources.Resource.AddCam%></span></p><section><div class="form-horizontal">'
-            + '<table style="width:100%;"><tr><td style="text-align:center"> <div class = "form-group">' +
+                    return '<span style="color: #C0C0C0"><%=Resources.Resource.AddCam%></span><section><div class="form-horizontal">'
+            + '<table style="width:100%;"><tr class="margintop"><td style="text-align:center"> <div class = "form-group">' +
             '<asp:label runat="server" Text="<%$Resources:Resource, CamIP %>" CssClass=" control-label" Fond-Bold="True"/>' +
             '<div ><input name="IP" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
             '<td style="text-align:center"><div class = "form-group">' +
             '<asp:label runat="server" Text="<%$Resources:Resource, PortNo %>" CssClass=" control-label" Fond-Bold="True"/>' +
             '<div ><input name="Port" class="form-control" type="text" value="' + value + '"' +
             '</div></div></td></tr>' +
-            '<tr><td style="text-align:center"><div class = "form-group">' +
+            '<tr class="margintop"><td style="text-align:center"><div class = "form-group">' +
             '<asp:label runat="server" Text="<%$Resources:Resource, UserID %>" CssClass=" control-label" Fond-Bold="True"/>' +
             '<div ><input name="User" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
             '<td style="text-align:center"><div class = "form-group">' +
@@ -318,6 +312,7 @@
                     var div = document.createElement('DIV');
                     div.innerHTML = GetDynamicCamDetails("");
                     document.getElementById("camdiv").appendChild(div);
+                    
                 }
             </script>
             <%--add all details finished--%>

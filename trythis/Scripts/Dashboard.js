@@ -45,7 +45,7 @@ $(document).ready(function () {
         var data1 = {
             labels: aLabels,
             datasets: [{
-                label: "User Activities",
+                label: "# Activities",
                 backgroundColor: gradientFill,
                 borderColor: 'rgba(213,154,168,0.70)',
                 borderWidth: 2,
@@ -123,8 +123,8 @@ $(document).ready(function () {
                         },
                         ticks: {
                             min: 0,
-                            stepSize: 50,
-                            fontSize: 12,
+                            stepSize: 100,
+                            fontSize: 10,
                             fontColor:'white',
                         }
                     }]

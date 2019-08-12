@@ -1,15 +1,41 @@
-@media screen and (min-width: 980px) and (max-width:1160) {
-  
-   
+@media screen and (min-width: 980px) and (max-width:1160px) {
+    /*sidebar*/
+    .col-lg-2 {
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%
+    }
+    .row{
+        width:100%!important;
+    }
+   body{
+       font-size:10px!important;
+   }
     .custom-bar-chart {
         margin-bottom: 40px;
     }
 }
 
-
-
-
+@media (min-width: 992px) and (max-width: 1500px) {
+    .col-lg-2 {
+        -ms-flex: 0 0 20%;
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+    .row {
+        width: 100% !important;
+    }
+}
 @media only screen and (min-width: 768px) and (max-width: 979px) {
+    .row {
+        width: 100% !important;
+    }
+    body {
+        font-size: 10px !important;
+    }
+    #sidebar{
+        padding-top:40px;
+    }
     .fullWidth {
         width: 100%;
     }
@@ -86,6 +112,9 @@
 }
 
 @media only screen and  (max-width: 768px) {
+    .row {
+        width: 100% !important;
+    }
     .fullWidth {
         width: 100%;
     }
@@ -128,9 +157,9 @@
         padding: 0 10px;
         text-align: left;
     }
-    #sidebar > ul > li > a i{
-        /*display: none !important;*/
-    }
+    /*#sidebar > ul > li > a i{
+        /*display: none !important;
+    }*/
 
     .mail-info, .mail-info:hover {
         display: none !important;
@@ -151,9 +180,9 @@
     #sidebar > ul > li > ul.sub > li > a {
         background: transparent !important ;
     }
-    #sidebar > ul > li > ul.sub > li > a:hover {
+    /*#sidebar > ul > li > ul.sub > li > a:hover {
         
-    }
+    }*/
 
 
     /* sidebar */
@@ -187,10 +216,6 @@
     .btn {
         margin-bottom: 5px;
     }
-
-
-
-
     .mail-box aside {
         display: block;
     }
@@ -326,6 +351,15 @@
 
 
 @media (max-width: 480px) {
+    .row {
+        width: 100% !important;
+    }
+    div {
+        font-size: 10px;
+    }
+    body {
+        font-size: 10px !important;
+    }
     .fullWidth {
         width: 100%;
     }
@@ -433,6 +467,15 @@
 }
 
 @media (max-width:320px) {
+    .row {
+        width: 100% !important;
+    }
+    div {
+        font-size: 10px;
+    }
+    body {
+        font-size: 10px !important;
+    }
     .fullWidth {
         width: 100%;
     }

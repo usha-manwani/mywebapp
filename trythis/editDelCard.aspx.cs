@@ -11,8 +11,7 @@ namespace WebCresij
 {
     public partial class editDelCard : BasePage
     {
-        static List<KeyValuePair<string, string>> idsloc = new List<KeyValuePair<string, string>>();
-        
+        static List<KeyValuePair<string, string>> idsloc = new List<KeyValuePair<string, string>>();        
         IHubContext hubContext;
         string nodesval = "";
         DataSet ds = new DataSet();
@@ -61,6 +60,7 @@ namespace WebCresij
                 gvCard.DataBind();
             }
         }
+
         public SortDirection dir
         {
             get
@@ -211,8 +211,7 @@ namespace WebCresij
 
         protected void gvCard_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            GridViewRow row = gvCard.Rows[e.RowIndex];
-           
+            GridViewRow row = gvCard.Rows[e.RowIndex];           
             if (e.RowIndex > -1)
             {
                 PopulateTree tree = new PopulateTree();
@@ -238,9 +237,9 @@ namespace WebCresij
             if (row != null)
             {
                 selectindex = row.RowIndex; //gets the row index selected
-            }
-           
+            }           
         }
+
         protected void addAccess_Click(object sender, EventArgs e)
         {
             string nodes = "";
@@ -257,16 +256,14 @@ namespace WebCresij
                     }
                     i++;
                 }
-                nodesval = nodesval.Substring(0, nodesval.Length - 1);
-                
+                nodesval = nodesval.Substring(0, nodesval.Length - 1);                
                 gvCard.Rows[selectindex].Cells[6].Text = nodes;
                 (gvCard.Rows[selectindex].FindControl("hidlocID") as Label).Text = nodesval;
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "MyKey2", "HideTree();", true);
-                updatecards();
-               
-            }
-            
+                updatecards();               
+            }            
         }
+
         protected void updatecards()
         {
             GridViewRow row = gvCard.Rows[selectindex];
@@ -277,18 +274,14 @@ namespace WebCresij
             string loc = "";
             string pending = row.Cells[6].Text;
             string comment = row.Cells[7].Text;
-            string locid = (row.FindControl("hidlocID") as Label).Text;
-            
+            string locid = (row.FindControl("hidlocID") as Label).Text;            
             int result = tree.UpdateRegCard(cardID, name, memid, loc, comment, pending,locid);
             if (result == 1)
             {
                 string Name = (row.FindControl("hidlocID") as Label).Text;
                 if (Name != null)
-                {
-
-                   
+                {                   
                     string[] ipsloc = Name.Split(',');
-
                     if (ipsloc.Length > 0)
                     {
                         string c = "";

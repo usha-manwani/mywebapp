@@ -6,15 +6,15 @@ using System.Web;
 using System.Data.Sql;
 using System.Data;
 
-
 namespace WebCresij.Hubsfile
 {
     public class UpdateDevice
     {
-        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        public static string constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         SqlConnection connection;
         DataTable dt;
-         public DataTable update()
+        public DataTable update()
         {
             try
             {
@@ -46,7 +46,7 @@ namespace WebCresij.Hubsfile
             {
                 connection.Close();
             } 
-            //if (dt != null)
+            //if (dt != null)z
             //{
             //    updateStatus(dt);
             //}
