@@ -5,29 +5,29 @@ using System.Linq;
 using System.Web;
 using System.Data.Sql;
 using System.Data;
-
+using MySql.Data.MySqlClient;
 namespace WebCresij.Hubsfile
 {
     public class UpdateDevice
     {
         public static string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-        SqlConnection connection;
+        MySqlConnection connection;
         DataTable dt;
         public DataTable update()
         {
             try
             {
-                connection = new SqlConnection(constr);
+                connection = new MySqlConnection(constr);
                 dt = new DataTable();
                 string query = "select * from dbo.[CentralControl]";
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, connection);
                 connection.OpenAsync();
                 dataAdapter.Fill(dt);
                 if (dt != null)
                 {
                     string ip = dt.Rows[0]["ip"].ToString();
-                    SqlCommand command = new SqlCommand("DeleteDatafromRemote", connection);
+                    MySqlCommand command = new MySqlCommand("DeleteDatafromRemote", connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@ip", ip);
                 }

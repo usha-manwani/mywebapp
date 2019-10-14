@@ -16,8 +16,8 @@
                     <RowStyle ForeColor="white" HorizontalAlign="Center"/>
                     
                     <Columns>
-                        <asp:BoundField DataField="User_ID" HeaderText="<%$Resources:Resource, UserID %>" HeaderStyle-HorizontalAlign="Left" />
-                        <asp:BoundField DataField="User_Name" HeaderText="<%$Resources:Resource, User %>" HeaderStyle-HorizontalAlign="Left" />
+                        <asp:BoundField DataField="userid" HeaderText="<%$Resources:Resource, UserID %>" HeaderStyle-HorizontalAlign="Left" />
+                        <asp:BoundField DataField="username" HeaderText="<%$Resources:Resource, User %>" HeaderStyle-HorizontalAlign="Left" />
                         <asp:TemplateField HeaderText="<%$Resources:Resource, Role %>">
                             <ItemTemplate>
                                 <asp:LinkButton ForeColor="DeepSkyBlue" runat="server" ID="link1" Text="<%$Resources:Resource, Select %>"

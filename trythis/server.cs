@@ -8,6 +8,7 @@ using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading;
+using MySql.Data.MySqlClient;
 
 namespace WebCresij
 {
@@ -28,15 +29,15 @@ namespace WebCresij
         {
 
             byte[] dataToSend = new byte[] { 0x8B, 0xB9, 0x00, 0x03, 0x05, 0x01, 0x09 };
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
                 string query = "select * from dbo.CentralControl";
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     try
                     {
                         con.Open();
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         da.Fill(dt);
                     }
                     catch (Exception ex)

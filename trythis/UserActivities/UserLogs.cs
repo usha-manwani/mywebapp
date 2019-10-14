@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 
@@ -12,11 +13,10 @@ namespace WebCresij.UserActivities
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         public static void Task1(string UserID, string Name, int tasknumber)
         {
-
             string task = TaskName(tasknumber);
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("sp_userLogs", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_userLogs", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@userid", UserID);
@@ -105,13 +105,13 @@ namespace WebCresij.UserActivities
 
         }
         public static void LoggedinUser(string userID)
-        {
-            string query = "if not exists(select UserID from LoggedinUser where USERID='"+userID+"')begin "
-                + "Insert into LoggedinUser values('" + userID + "') end";
-            using (SqlConnection con = new SqlConnection(constr))
+        {           
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_insertCurrentUser", con))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("userid", userID);
                     if(con.State != ConnectionState.Open)
                     {
                         con.Open();
@@ -124,9 +124,9 @@ namespace WebCresij.UserActivities
         public static void LoggedOutUser(string userID)
         {
             string query = "Delete from LoggedinUser where userID ='" + userID + "'";
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     if (con.State != ConnectionState.Open)
                     {
@@ -140,12 +140,12 @@ namespace WebCresij.UserActivities
         public static DataTable LogsRecord()
         {
             DataTable dt = new DataTable();
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
                 string query = "select * from UserLogs order by Time desc";
                 try
                 {
-                    ; using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
                     {
                         if (con.State != ConnectionState.Open)
                         {
@@ -169,11 +169,10 @@ namespace WebCresij.UserActivities
         public static int CurrentUser()
         {
             int count = 0;
-            string query = "SELECT count(distinct [UserID]) "
-                            +"FROM[CresijCam].[dbo].[LoggedinUser]";
-            using (SqlConnection con = new SqlConnection(constr))
+            string query = "SELECT count(distinct user_id) FROM current_loggeduser";
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     if (con.State != ConnectionState.Open)
                     {
@@ -201,11 +200,10 @@ namespace WebCresij.UserActivities
         public static int TotalUser()
         {
             int count = 0;
-            string query = "SELECT count( User_Id) "
-                            + "FROM[CresijCam].[dbo].[UserDetails]";
-            using (SqlConnection con = new SqlConnection(constr))
+            string query = "SELECT count(*) FROM user_details";
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     if (con.State != ConnectionState.Open)
                     {

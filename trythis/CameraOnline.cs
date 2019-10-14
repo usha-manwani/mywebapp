@@ -6,6 +6,7 @@ using System.Net.NetworkInformation;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections;
+using MySql.Data.MySqlClient;
 
 namespace WebCresij
 {
@@ -38,9 +39,9 @@ namespace WebCresij
         public DataTable Camcheck()
         {
             
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlDataAdapter da = new SqlDataAdapter("select CameraIP from Camera_Details", con))
+                using (MySqlDataAdapter da = new MySqlDataAdapter("select CameraIP from Camera_Details", con))
                 {
                     try
                     {

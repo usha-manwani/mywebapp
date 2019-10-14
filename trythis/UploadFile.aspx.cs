@@ -265,7 +265,7 @@ namespace WebCresij
         protected void VideoGrid_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             VideoGrid.PageIndex = e.NewPageIndex;
-            FillGrid();
+            FillVideoGrid(Server.MapPath("~/Uploads/"));
         }
         protected void FillVideoGrid(string path)
         {
@@ -287,7 +287,6 @@ namespace WebCresij
                 {
                     files.Add(new ListItem(fi.Name, fi.FullName));
                 }
-
             }
             VideoGrid.DataSource = files;
             VideoGrid.DataBind();

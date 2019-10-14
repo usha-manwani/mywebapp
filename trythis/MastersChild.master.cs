@@ -6,19 +6,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MySql.Data.MySqlClient;
 
 namespace WebCresij
 {
-    public partial class MastersChild : System.Web.UI.MasterPage
+    public partial class MastersChild : MasterPage
     {
         string[] nodenames;
         //int i = 0;
         // public event EventHandler selected;
         //int role = Convert.ToInt32(HttpContext.Current.Session["role"]);
-
-        TreeNode root = new TreeNode(Resources.Resource.Institutes);
-        
-        static SqlConnection con;
+        TreeNode root = new TreeNode(Resources.Resource.Institutes);        
+        static MySqlConnection con;
         public static DataTable dtIns = new DataTable("InsDetails");
         public static DataTable dtGrade = new DataTable("GradeDetails");
         public static DataTable dtClass = new DataTable("ClassDetails");
@@ -34,7 +33,7 @@ namespace WebCresij
                 root.SelectAction = TreeNodeSelectAction.Expand;
                
                 TreeMenuView.Nodes.Add(root);
-                DataTable dt = ExecuteCommand("Select InstituteName, ID, InstituteID from Institute_Details");
+                DataTable dt = ExecuteCommand("Select ins_name, ID, ins_id from Institute_Details order by ins_name");
                 dtIns = dt;
                 this.PopulateTreeView(dt, 0, null);
                 nodenames = new string[TreeMenuView.Nodes.Count];
@@ -58,18 +57,19 @@ namespace WebCresij
                 {
                     child.SelectAction = TreeNodeSelectAction.Expand;
                     root.ChildNodes.Add(child);
-                    DataTable dtChild = ExecuteCommand("Select GradeName, Id, GradeID from Grade_Details where InsID ='" + val + "'");
+                    DataTable dtChild = ExecuteCommand("Select Grade_Name, Id,grade_id from Grade_Details where InsID  in" +
+                        "(select id from `cresijdatabase`.institute_details where ins_id='" + val + "') order by Grade_Name");
                     dtGrade.Merge(dtChild);
                     PopulateTreeView(dtChild, int.Parse(child.Value), child);
                 }
                 else
                 {
-                    if (ParentId != 0)
+                    if (ParentId !=0)
                     {
                         treeNode.ChildNodes.Add(child);
-                        DataTable dtclass = ExecuteCommand("Select ClassName, Id,ClassID from Class_Details where GradeID='" + val + "'");
-                        dtClass.Merge(dtclass);
-
+                        DataTable dtclass = ExecuteCommand("Select ClassName, Id, classId from Class_Details where GradeID in"+
+                            "(select id from grade_details where grade_id='" + val + "') order by ClassName");
+                        dtClass.Merge(dtclass);                        
                         PopulateTreeView(dtclass, int.Parse(child.Value), child);
                     }
                     else
@@ -83,8 +83,8 @@ namespace WebCresij
         {
             try
             {
-                con = new SqlConnection(constr);
-                SqlDataAdapter da = new SqlDataAdapter(Text, con);
+                con = new MySqlConnection(constr);
+                MySqlDataAdapter da = new MySqlDataAdapter(Text, con);
 
                 //Opening Connection  
                 if (con.State != ConnectionState.Open)
@@ -114,7 +114,7 @@ namespace WebCresij
             {
                 HttpContext.Current.Session["GradeName"] = TreeMenuView.SelectedNode.Text;
                 HttpContext.Current.Session["InstituteID"] = TreeMenuView.SelectedNode.Parent.Text;
-                DataTable dt = ExecuteCommand("select cd.ClassName as loc ,cc.CCIP as ip from CentralControl cc join Class_Details cd on cd.ClassID=cc.location where cd.GradeID='" + TreeMenuView.SelectedNode.ToolTip + "' order by cd.ClassName");
+                DataTable dt = ExecuteCommand("select cd.ClassName as loc ,cc.ccip as ip from CentralControl cc join Class_Details cd on cd.ID=cc.location where cd.GradeID='" + TreeMenuView.SelectedNode.Value + "' order by cd.ClassName");
                 if (dt.Rows.Count > 0)
                 {
                     string[] deviceloc = new string[dt.Rows.Count];
@@ -153,9 +153,9 @@ namespace WebCresij
                 string ip = "";
                 try
                 {
-                    string query = "select CCIP from CentralControl where location in (select classID from Class_Details where ID = '" + TreeMenuView.SelectedValue + "')";
-                    con = new SqlConnection(constr);
-                    SqlCommand cmd = new SqlCommand(query, con);
+                    string query = "select CCIP from CentralControl where location  = " + TreeMenuView.SelectedValue ;
+                    con = new MySqlConnection(constr);
+                    MySqlCommand cmd = new MySqlCommand(query, con);
                     //Opening Connection  
                     if (con.State != ConnectionState.Open)
                         con.Open();
@@ -166,7 +166,7 @@ namespace WebCresij
                     }
                     HttpContext.Current.Session["DeviceIP"] = ip;
                 }
-                catch(Exception)
+                catch(Exception ex)
                 {
                    // HttpContext.Current.Session["DeviceIP"] = ip;
                 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 namespace WebCresij
 {
     public class Userdetails
@@ -13,15 +14,16 @@ namespace WebCresij
         public DataTable getUserDetails(string s)
         {
             DataTable dtuser = new DataTable();
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("select * from dbo.fn_GetUserDetails(@Userid)", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_getUserDetails", con))
                 {
-                    cmd.Parameters.AddWithValue("@Userid", s);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@user", s);
                     try
                     {
                         con.Open();
-                        SqlDataAdapter sa = new SqlDataAdapter(cmd);
+                        MySqlDataAdapter sa = new MySqlDataAdapter(cmd);
                         sa.Fill(dtuser);
                     }
                     catch (Exception ex)
@@ -41,15 +43,15 @@ namespace WebCresij
         public DataTable getUserDetailsPending()
         {
             DataTable dtuser = new DataTable();
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("select * from GetuserDetailsPending()", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_getuserDetailsPending", con))
                 {
-                   
+                    cmd.CommandType = CommandType.StoredProcedure;
                     try
                     {
                         con.Open();
-                        SqlDataAdapter sa = new SqlDataAdapter(cmd);
+                        MySqlDataAdapter sa = new MySqlDataAdapter(cmd);
                         sa.Fill(dtuser);
                     }
                     catch (Exception ex)
@@ -68,20 +70,20 @@ namespace WebCresij
 
         public void DeleteUser(string userid)
         {
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("sp_DelUser", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_deleteuser", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@userid", userid);
+                    
                     try
                     {
                         con.Open();
                         cmd.ExecuteNonQuery();
-                        
 
                     }
-                    catch { }
+                    catch (Exception ex) { }
                     
                     finally
                     {
@@ -95,13 +97,13 @@ namespace WebCresij
         public void SaveUser(string userid, string i)
         {
             int role = Convert.ToInt32(i);
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (SqlCommand cmd = new SqlCommand("sp_UserRoleSave", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_UserRoleSave", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@userid", userid);
-                    cmd.Parameters.AddWithValue("@role", role);
+                    cmd.Parameters.AddWithValue("@tuserid", userid);
+                    cmd.Parameters.AddWithValue("@trole", role);
                     try
                     {
                         con.Open();
@@ -109,7 +111,7 @@ namespace WebCresij
 
 
                     }
-                    catch  { }
+                    catch(Exception ex){ }
 
                     finally
                     {

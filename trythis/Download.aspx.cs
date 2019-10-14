@@ -15,12 +15,37 @@ namespace WebCresij
             string filePath = HttpContext.Current.Session["fileName"].ToString();
             if (!string.IsNullOrEmpty(filePath))
             {
-                Response.ContentType = ContentType;
-                Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
-                Response.WriteFile(filePath);
-                Response.Flush();
+                if (File.Exists(filePath))
+                {
+                    Response.ContentType = ContentType;
+                    Response.AppendHeader("Content-Disposition", "attachment; filename=" + Path.GetFileName(filePath));
+                    Response.WriteFile(filePath);
+                    Response.Flush();
+                }
+                else
+                {
+                    try
+                    {
+                        FileInfo fn = new FileInfo(filePath);
+                        int result;
+                        string name = fn.Name;
+                        UploadFiles up = new UploadFiles();
+                        File.Delete(filePath);
+                        result = up.DeleteFileInfo(HttpContext.Current.Session["UserId"].ToString(), name);
+
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alertdelete",
+                            "alert('File with this name doesnt exists anymore')", true);
+                        
+                    }
+                    catch(Exception ex)
+                    {
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alertdelete",
+                            "alert('Some error occured. Please try again !!')", true);
+                    }
+                    
+                }
                 HttpContext.Current.Session["fileName"] = "";
-                
+                Response.Redirect("UploadFile.aspx");
             }
         }
     }

@@ -6,22 +6,22 @@ $(function () {
     }
     var chat = $.connection.myHub;
     ipAddress = document.getElementById("InputIP").value;
-    document.getElementById("MainContent_masterchildBody_iptocam").value = ipAddress;    
+    document.getElementById("MainContent_masterchildBody_iptocam").value = ipAddress;
     console.log("IP address from InputIP is " + document.getElementById("MainContent_masterchildBody_iptocam").value);
     //sessionStorage.setItem('ipofremote', ipAddress);
     chat.client.broadcastMessage = function (name, message) {
-        var status = document.getElementById("deviceStatusHidden");       
+        var status = document.getElementById("deviceStatusHidden");
         if (name == ipAddress) {
             var lastStatus = status.value;
             console.log("data received from " + ipAddress + "  " + message);
             if (lastStatus == "Offline") {
-               
+
                 var statusshow = document.getElementById("devicestatus");
                 statusshow.innerHTML = "Online";
                 document.getElementById("deviceStatusHidden").value = "Online";
                 statusshow.style.color = "lightgreen";
                 statusshow.style.fontWeight = "bolder";
-            }                                            
+            }
             //setInterval(function () {
             //    f.style.visibility = (f.style.visibility == 'hidden' ? '' : 'hidden');
             //}, 2000);
@@ -41,8 +41,7 @@ $(function () {
                     }
 
                 }
-                else if (arraydata[1] == "Heartbeat")
-                {
+                else if (arraydata[1] == "Heartbeat") {
                     if (arraydata[3] == 'CLOSED') {
                         var img = document.getElementById("syspower");
                         img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
@@ -72,12 +71,12 @@ $(function () {
                         }
                         if (arraydata[12] == 'Locked') {
                             var src = document.getElementById('lock');
-                            src.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_214.png";
+                            src.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png";
                             $(src).addClass('oncolor');
                         }
                         else {
                             var src = document.getElementById('lock');
-                            src.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_216.png";
+                            src.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
                             $(src).addClass('oncolor');
                         }
                         if (arraydata[9] == 'Stop') {
@@ -136,7 +135,7 @@ $(function () {
                             $(curtain).removeClass('oncolor');
 
                         }
-                        else (arraydata[8] == 'Stop')
+                        else if (arraydata[8] == 'Stop')
                         {
                             var curtain = document.getElementById('CurtainClose');
                             curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png";
@@ -216,8 +215,7 @@ $(function () {
                     }
                 }
             }
-            else
-            {
+            else {
                 if (arraydata[1] == "KeyValue") {
                     switch (arraydata[2]) {
                         case 'SystemON':
@@ -304,10 +302,8 @@ $(function () {
                             break;
                     }
                 }
-                else if (arraydata[1] == "LEDIndicator")
-                {                    
-                    if (arraydata[2] == "SystemSwitchOn")
-                    {
+                else if (arraydata[1] == "LEDIndicator") {
+                    if (arraydata[2] == "SystemSwitchOn") {
                         var img = document.getElementById("syspower");
                         img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
                         $(img).addClass('oncolor');
@@ -316,14 +312,14 @@ $(function () {
                             var source = imgpc.getAttribute('class');
                             imgpc.setAttribute('src', "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png");
                             if (source.includes('oncolor')) {
-                                                            
+
                                 $(imgpc).removeClass('oncolor');
                             }
                             else {
-                               // imgpc.setAttribute('src', "Images/greyed/pcgrey.png");
+                                // imgpc.setAttribute('src', "Images/greyed/pcgrey.png");
                                 $(imgpc).addClass('oncolor');
                             }
-                        }                        
+                        }
                         switch (arraydata[3]) {
                             case 'Desktop':
                                 var img = document.getElementById('desktop1');
@@ -354,27 +350,26 @@ $(function () {
                                 break;
                         }
                         if (arraydata[5] == "CentralLock") {
-                            var imglock = document.getElementById('lock');                            
-                            document.getElementById('lock').src= "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_214.png";
-                            $(imglock).addClass('oncolor');
-                        }
-                        else
-                        {
                             var imglock = document.getElementById('lock');
-                            document.getElementById('lock').src= "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_216.png";                                
+                            document.getElementById('lock').src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png";
                             $(imglock).addClass('oncolor');
                         }
-                    }                    
-                    else if (arraydata[2] == "SystemSwitchOff"){
+                        else {
+                            var imglock = document.getElementById('lock');
+                            document.getElementById('lock').src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
+                            $(imglock).addClass('oncolor');
+                        }
+                    }
+                    else if (arraydata[2] == "SystemSwitchOff") {
                         var img = document.getElementById("syspower");
                         img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
                         $(img).removeClass('oncolor');
-                        
+
                     }
-                }               
-            }        
+                }
+            }
             if (arraydata[0] == "Temp") {
-                document.getElementById("tempvalue").innerHTML = arraydata[1] +" °C";
+                document.getElementById("tempvalue").innerHTML = arraydata[1] + " °C";
                 document.getElementById("humidvalue").innerHTML = arraydata[2] + "%";
                 document.getElementById("pmvalue").innerHTML = arraydata[3] + " µg/m3";
                 if (arraydata[5] != "--") {
@@ -382,19 +377,20 @@ $(function () {
                     document.getElementById("intensityvalue").innerHTML = arraydata[13] + "nits";
                     document.getElementById("methanalvalue").innerHTML = arraydata[11] + "mg/m3";
                     document.getElementById("voltvalue").innerHTML = arraydata[5] + "V";
-                    document.getElementById("I1").innerHTML = (((arraydata[6] / 1000) * arraydata[5]) / 1000).toFixed(2) + "KW";                   
-                    document.getElementById("I2").innerHTML = (((arraydata[7] / 1000) * arraydata[5]) / 1000).toFixed(2) + "KW";                    
-                    document.getElementById("I3").innerHTML = (((arraydata[8] / 1000) * arraydata[5]) / 1000).toFixed(2) + "KW";                    
-                    document.getElementById("I4").innerHTML = (((arraydata[9] / 1000) * arraydata[5]) / 1000).toFixed(2) + "KW";                    
+                    document.getElementById("I1").innerHTML = (((arraydata[6] / 1000.00) * arraydata[5]) / 1000.00).toFixed(2) + "KW";
+                    document.getElementById("I2").innerHTML = (((arraydata[7] / 1000.00) * arraydata[5]) / 1000.00).toFixed(2) + "KW";
+                    document.getElementById("I3").innerHTML = (((arraydata[8] / 1000.00) * arraydata[5]) / 1000.00).toFixed(2) + "KW";
+                    document.getElementById("I4").innerHTML = (((arraydata[9] / 1000.00) * arraydata[5]) / 1000.00).toFixed(2) + "KW";
+
                 }
             }
-            if (arraydata[2] == 'Offline' || arraydata[1] =='Unsuccessful') {
+            if (arraydata[2] == 'Offline' || arraydata[1] == 'Unsuccessful') {
                 allGrey();
                 document.getElementById("devicestatus").innerHTML = "Offline";
                 document.getElementById("deviceStatusHidden").value = "Offline";
                 document.getElementById("devicestatus").style.color = "white";
             }
-        }        
+        }
     };
 
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
@@ -403,24 +399,32 @@ $(function () {
         console.log("control to machine");
         SetVolume = function (val) {
             var lastVal = this.document.getElementById("volchange").innerText;
-            if (lastVal > val) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 25");
+            var img = document.getElementById("volsymbol");
+            img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
+            if (lastVal > val && val > 0) {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2B");
+
             }
             else if (val == 0) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 26");
+                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量静音.png";
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 2C");
             }
             else if (lastVal < val) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 24");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2A");
+
             }
             this.document.getElementById("volchange").innerText = val;
             console.log('After: ' + val);
         };
         MicControl = function (val) {
             var lastVal = this.document.getElementById("micchange").innerText;
-            if (lastVal > val) {
+            var img = document.getElementById("micIcon");
+            img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
+            if (lastVal > val && val > 0) {
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");
             }
             else if (val == 0) {
+                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦静音.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
             }
             else if (lastVal < val) {
@@ -429,13 +433,14 @@ $(function () {
             this.document.getElementById("micchange").innerText = val;
             console.log('After: ' + val);
         };
+
         $(document).on("click", "#lock", function () {
             var imgpc = document.getElementById('lock');
             var source = imgpc.getAttribute('src');
-            if (source == "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_214.png")
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37" );
+            if (source == "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png")
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");
             else
-                chat.server.sendControlKeys(ipAddress,  "8B B9 00 04 02 04 2c 36");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
         });
         $(document).on("click", "#Scup", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 76 80");
@@ -468,9 +473,15 @@ $(function () {
         $(document).on("click", "#laptop1", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 11 1b");
         });
+        $(document).on("click", "#projgreen", function () {
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 33 3D");
+        });
+        $(document).on("click", "#projred", function () {
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 43 4D");
+        });
     });
-  
-})
+
+});
 
 function allGrey(){
   

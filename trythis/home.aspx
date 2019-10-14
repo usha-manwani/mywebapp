@@ -121,7 +121,7 @@
                         style="margin-top: -15px; min-width:100px"">
                         <h5><span style="color: white;">
                             <%=Resources.Resource.TempratureChartHead%>
-                            </span> </h5>
+                            </span></h5>
                     </div>
                     <div class=" col-xl-2 col-lg-2 col-md-3 col-sm-12 float-left mbcustom" 
                         style="min-width:100px">
@@ -215,7 +215,8 @@
                             <div class="card-left float-left" style="width: 50%">
                                 <span>CO2</span>
                                 <br />
-                                <span id="humidvalue" class="count float-left">0</span>
+                                <span id="co2value" style="font-size:small;
+                                    font-size-adjust:0.60" class="count float-left">0</span>
                                 <span>PPM</span>
                             </div>
                             <!-- /.card-left -->

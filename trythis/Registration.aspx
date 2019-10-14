@@ -78,7 +78,7 @@
                <span><%=Resources.Resource.Phone%></span>
             </asp:Label>
             <div class="col-md-7">
-                <asp:TextBox runat="server" ID="PhoneNo" placeHolder="+86-123-12345678" CssClass="form-control" ClientIDMode="Static"   />
+                <asp:TextBox runat="server" ID="PhoneNo" placeHolder="12312345678" CssClass="form-control" ClientIDMode="Static"   />
 
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="PhoneNo"
                     CssClass="text-danger" ErrorMessage="The Phone Number is required." />

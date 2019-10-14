@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Threading;
+using MySql.Data.MySqlClient;
 
 namespace WebCresij
 {
@@ -30,15 +31,15 @@ namespace WebCresij
                  long phone = Convert.ToInt64(no);
                 string connString = null;
                 connString = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-                SqlConnection con = new SqlConnection(connString);
+                MySqlConnection con = new MySqlConnection(connString);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("sp_Registration", con) { CommandType = CommandType.StoredProcedure };
+                MySqlCommand cmd = new MySqlCommand("sp_Registration", con) { CommandType = CommandType.StoredProcedure };
                 cmd.Parameters.AddWithValue("User_ID", UserID.Text);
                 cmd.Parameters.AddWithValue("User_Name", User_Name.Text);
                 cmd.Parameters.AddWithValue("Password", Password.Text);
                 cmd.Parameters.AddWithValue("Phone_Number", phone);
                 cmd.Parameters.AddWithValue("Request_Status", "Pending");
-                cmd.Parameters.Add("@k", SqlDbType.Int);
+                cmd.Parameters.Add("@k", MySqlDbType.Int32);
                 cmd.Parameters["@k"].Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
                 int k = Convert.ToInt32( cmd.Parameters["@k"].Value);

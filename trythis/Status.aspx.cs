@@ -21,15 +21,15 @@ namespace WebCresij
                 {
                     UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
                                     HttpContext.Current.Session["UserName"].ToString(), 12);
-                    string query = "select * from Institute_Details";
+                    string query = "select ins_name, id from Institute_Details";
                     DataTable dt = PopulateTree.ExecuteCommand(query);
                     ddlins.DataSource = dt;
-                    ddlins.DataTextField = "InstituteName";
-                    ddlins.DataValueField = "InstituteID";
+                    ddlins.DataTextField = "ins_name";
+                    ddlins.DataValueField = "id";
                     ddlins.DataBind();
                     string select = Resources.Resource.Select;
                     //ddlins.Items.Insert(0, new ListItem(select, "NA"));
-                    loadGrid(dt.Rows[0]["InstituteID"].ToString());
+                    loadGrid(dt.Rows[0]["id"].ToString());
                 }
                 else
                 {
@@ -44,6 +44,7 @@ namespace WebCresij
             CentralControl cc = new CentralControl();
             DataSet ds = cc.ControlDetails( insID);
             DataTable dt = ds.Tables[0];
+            
             try
             {
                 GridView1.DataSource = ds;
@@ -70,6 +71,7 @@ namespace WebCresij
 
         protected void ddlins_SelectedIndexChanged(object sender, EventArgs e)
         {
+            GridView1.PageIndex = 0;
             loadGrid(ddlins.SelectedValue);
             
         }

@@ -148,7 +148,7 @@ namespace WebCresij
             string loc = location.Substring(0, 3);
             string query = "";
             List<object> idata = new List<object>();
-              List<object> ilabels = new List<object>();
+            List<object> ilabels = new List<object>();
             switch (loc)
             {
                 case "Ins":
@@ -160,27 +160,30 @@ namespace WebCresij
                 case "Cla":
                     query = chart.QueryForClass(name, location);
                     break;
+                default:
+                    query = chart.query(name);
+                    break;
             }
-                DataTable temp = chart.getDatacustom(query);
-                List<string> className = new List<string>();
-                List<double> temperature = new List<double>();
-                List<double> humid = new List<double>();
-                List<double> pm25 = new List<double>();
-                List<double> pm10 = new List<double>();
-                foreach (DataRow dr in temp.Rows)
-                {
-                    className.Add(dr[0].ToString());
-                    temperature.Add(Convert.ToDouble(dr["temp"].ToString()));
-                    humid.Add(Convert.ToDouble(dr["humid"].ToString()));
-                    pm25.Add(Convert.ToDouble(dr["pm25"].ToString()));
-                    pm10.Add(Convert.ToDouble(dr["pm10"].ToString()));
-                }
-                idata.Add(className);
-                idata.Add(temperature);
-                idata.Add(humid);
-                idata.Add(pm25);
-                idata.Add(pm10);
-           return idata;
+            DataTable temp = chart.getDatacustom(query);
+            List<string> className = new List<string>();
+            List<double> temperature = new List<double>();
+            List<double> humid = new List<double>();
+            List<double> pm25 = new List<double>();
+            List<double> pm10 = new List<double>();
+            foreach (DataRow dr in temp.Rows)
+            {
+                className.Add(dr[0].ToString());
+                temperature.Add(Convert.ToDouble(dr["temp"].ToString()));
+                humid.Add(Convert.ToDouble(dr["humid"].ToString()));
+                pm25.Add(Convert.ToDouble(dr["pm25"].ToString()));
+                pm10.Add(Convert.ToDouble(dr["pm10"].ToString()));
+            }
+            idata.Add(className);
+            idata.Add(temperature);
+            idata.Add(humid);
+            idata.Add(pm25);
+            idata.Add(pm10);
+            return idata;
         }
 
         [WebMethod]
@@ -206,8 +209,7 @@ namespace WebCresij
             idata.Add(temperature);
             idata.Add(humid);
             idata.Add(pm25);
-            idata.Add(pm10);
-            
+            idata.Add(pm10);            
             return idata;
         }
 
@@ -219,5 +221,67 @@ namespace WebCresij
             return num;
         }
 
+        [WebMethod]
+        public List<object> GetIpClass(string gradeid)
+        {
+            DataTable dt = chart.MachineIPLoc(gradeid);
+            List<string> names = new List<string>();
+            List<string> ip = new List<string>();
+            List<object> idata = new List<object>();
+            foreach(DataRow dr in dt.Rows)
+            {
+                names.Add(dr[0].ToString());
+                ip.Add(dr[1].ToString());
+            }
+            idata.Add(names);
+            idata.Add(ip);
+            dt = chart.getGradeName(gradeid);
+            string gradename = dt.Rows[0][1].ToString();
+            string insname = dt.Rows[0][0].ToString();
+            idata.Add(insname);
+            idata.Add(gradename);           
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetInsIds(string name)
+        {
+            DataTable dt = chart.InsIDs();
+            List<object> idata = new List<object>();
+            List<string> insids = new List<string>();
+            List<string> insName = new List<string>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach(DataRow dr in dt.Rows)
+                {
+                    insids.Add(dr[0].ToString());
+                    insName.Add(dr[1].ToString());
+                }
+            }
+            idata.Add(insids);
+            idata.Add(insName);
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetGradeIds(string insid)
+        {
+            DataTable dt = chart.GradeIDs(insid);
+            List<object> idata = new List<object>();
+            List<string> gradeids = new List<string>();
+            List<string> gname = new List<string>();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    gradeids.Add(dr[0].ToString());
+                    gname.Add(dr[1].ToString());
+                }
+            }
+            idata.Add(gradeids);
+            idata.Add(gname);
+            
+            return idata;
+        }
     }
 }

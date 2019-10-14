@@ -82,6 +82,25 @@ $(function () {
                         var imgpc = document.getElementById("pcpower");
                         imgpc.src = "Images/AllImages/images/图标_212.png";
                     }
+
+                    if (arraydata[9] == 'Stop') {
+                        $('#screendown1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_134.png");
+                        $('#screenstop1').closest("td").find("img").attr('src', "Images/中控首页按钮/on/screenstop.png");
+                        $('#screenup1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_132.png");
+
+                    }
+                    else if (arraydata[9] == 'Down') {
+                        $('#screendown1').attr('src', "Images/中控首页按钮/on/screendown.png");
+                        $('#screenstop1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png");
+                        $('#screenup1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_132.png");
+
+                    }
+                    else if (arraydata[9] == 'Up') {
+                        $('#screendown1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_134.png");
+                        $('#screenstop1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png");
+                        $('#screenup1').attr('src', "Images/中控首页按钮/on/screenup.png");
+
+                    }
                     if (arraydata[12] == 'Locked') {
                         var src = document.getElementById('sysLock');
                         src.src = "Images/中控首页按钮/on/lock1.png";
@@ -154,9 +173,11 @@ $(function () {
 
                         var src = document.getElementById("projectorOff");
                         src.src = "Images/中控首页按钮/on/projred.png";
+                        document.getElementById("projectorOn").src = "Images/AllImages/images/图标_184.png";
                     } else {
                         var src = document.getElementById("projectorOn");
                         src.src = "Images/中控首页按钮/on/projgreen.png";
+                        document.getElementById("projectorOff").src = "Images/AllImages/images/图标_186.png";
                     }
                 }
             }
@@ -173,14 +194,14 @@ $(function () {
                             img.src = "Images/AllImages/images/图标_210.png";
                             break;
                         case 'DSDown':
-                            $('#screendown1').closest("td").find("img").attr('src', "Images/中控首页按钮/on/screendown.png");
-                            $('#screenstop1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png" );
-                            $('#screenup1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_132.png");
+                            $('#screendown1').attr('src', "Images/中控首页按钮/on/screendown.png");
+                            $('#screenstop1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png" );
+                            $('#screenup1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_132.png");
                             break;
                         case 'DSUp':
-                            $('#screendown1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_134.png");
-                            $('#screenstop1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png");
-                            $('#screenup1').closest("td").find("img").attr('src', "Images/中控首页按钮/on/screenup.png");
+                            $('#screendown1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_134.png");
+                            $('#screenstop1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png");
+                            $('#screenup1').attr('src', "Images/中控首页按钮/on/screenup.png");
                             break;
                         case 'DSStop':
                             $('#screendown1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_134.png");
@@ -769,7 +790,7 @@ $(function () {
 
         });
 
-        $(document).on("click", "", function () { });
+        
 
         $(document).on("click", "", function () { });
 
@@ -847,23 +868,23 @@ $(function () {
             else
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 69");
         });
-        $(document).on("click", "#dsup", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 6A");
+        $(document).on("click", "#screenup1", function () {
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 76 80");
         });
         $(document).on("click", "#dcopen", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
-        });
-        $(document).on("click", "#dsstop", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 77 81");
         });
-        $(document).on("click", "#dcstop", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
+        $(document).on("click", "#screenstop1", function () {
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 66 70");
         });
-        $(document).on("click", "#dsdown", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
+        $(document).on("click", "#dcstop", function () {
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 67 71");
+        });
+        $(document).on("click", "#screendown1", function () {
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 56 60");
         });
         $(document).on("click", "#dcclose", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 57 61");
         });
         $(document).on("click", "#desktop", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 10 1A");
@@ -914,10 +935,14 @@ $(function () {
             $(target).show();
         });
         $(document).on("click", "#projectorOn", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 33 3d");
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 33 3D");
         });
         $(document).on("click", "#projectorOff", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 43 4d");
+            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 43 4D");
+        });
+
+        $(document).on("click", "#projSleep", function () {            
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 45 4F");           
         });
         $(document).on("click", "#hdmi", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 34 3E");
@@ -939,27 +964,62 @@ $(function () {
         });
         RemoteVol = function (val) {
             var lastVal = this.document.getElementById("volValue").innerText;
-            if (lastVal > val) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 25");
+            if (lastVal > val && val > 0) {
+                var img = document.getElementById("volicons");
+                //if (val > 50) {
+                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
+                //}
+                //else {
+                    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
+                //}
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2B");
             }
             else if (val == 0) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 26");
+                
+                var img = document.getElementById("volicons");
+                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量静音.png";
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 2C");
             }
             else if (lastVal < val) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 24");
+                var img = document.getElementById("volicons");
+                //if (val > 50) {
+                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
+                //}
+                //else {
+                    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
+               // }
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2A");
             }
             this.document.getElementById("volValue").innerText = val;
+            
             console.log('After: ' + val);
         };
         WirelessRemoteMic = function (val) {
             var lastVal = this.document.getElementById("wirelessValue").innerText;
-            if (lastVal > val) {
+            if (lastVal > val && val > 0) {
+                var img = document.getElementById("wirelessicons");
+                //if (val < 50) {
+                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
+                //}
+                //else {
+                    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
+                //}
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");
             }
             else if (val == 0) {
+                
+                var img = document.getElementById("wirelessicons");
+                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦静音.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
             }
             else if (lastVal < val) {
+                var img = document.getElementById("wirelessicons");
+                //if (val < 50) {
+                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
+                //}
+                //else {
+                    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
+                //}
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 73 7d");
             }
             this.document.getElementById("wirelessValue").innerText = val;
@@ -967,13 +1027,31 @@ $(function () {
         };
         WiredRemoteMic = function (val) {
             var lastVal = this.document.getElementById("wiredValue").innerText;
-            if (lastVal > val) {
+            if (lastVal > val && val > 0) {
+                var img = document.getElementById("wiredicons");
+                //if (val > 50) {
+                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
+                //}
+                //else {
+                    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
+                //}
+                
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 24 2e");
             }
             else if (val == 0) {
+                var img = document.getElementById("wiredicons");
+                img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦静音.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 25 2f");
             }
             else if (lastVal < val) {
+
+                var img = document.getElementById("wiredicons");
+                //if (val > 50) {
+                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
+                //}
+                //else {
+                    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
+                //}
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 23 2d");
             }
             this.document.getElementById("wiredValue").innerText = val;
@@ -1016,7 +1094,9 @@ function NoNotification(arraydata) {
 
         var src = document.getElementById("projectorOff");
         src.src = "Images/AllImages/images/图标_186.png";
+        //document.getElementById("projectorOn").src = "Images/AllImages/images/图标_184.png";
     } else {
+        //document.getElementById("projectorOff").src = "Images/AllImages/images/图标_186.png";
         var src = document.getElementById("projectorOn");
         src.src = "Images/AllImages/images/图标_184.png";
     }

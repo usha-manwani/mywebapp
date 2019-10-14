@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -11,12 +12,12 @@ namespace WebCresij
     public class Chart
     {
         private readonly string connString= System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-        private readonly SqlConnection con;
+        
         public DataTable GetDashboardData()
         {
             string query = "select distinct(task) as Task, count(task) as count from userlogs group by Task";
             DataSet ds = new DataSet();
-            using (SqlConnection con = new SqlConnection(connString))
+            using (MySqlConnection con = new MySqlConnection(connString))
             {
                 try
                 { 
@@ -24,7 +25,7 @@ namespace WebCresij
                     {
                         con.Open();
                     }
-                SqlDataAdapter dap = new SqlDataAdapter(query, con);               
+                MySqlDataAdapter dap = new MySqlDataAdapter(query, con);               
                 dap.Fill(ds);                
                 }               
                 finally
@@ -36,10 +37,10 @@ namespace WebCresij
         }
         public int SaveTempData(string ip, List<string> vs)
         {           
-            using(SqlConnection con= new SqlConnection(connString))
+            using(MySqlConnection con= new MySqlConnection(connString))
             {
                 try {
-                    using (SqlCommand cmd = new SqlCommand("sp_SaveTempData", con))
+                    using (MySqlCommand cmd = new MySqlCommand("sp_SaveTempData", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ip", ip);
@@ -64,14 +65,14 @@ namespace WebCresij
         public DataTable GetTempData()
         {
             DataSet dt = new DataSet();
-            using(SqlConnection con = new SqlConnection(connString))
+            using(MySqlConnection con = new MySqlConnection(connString))
             {
                 StringBuilder query = new StringBuilder();
                 query.Append("select Location, Temp , Humidity, pm25, pm10, " +
                     "cast(Date as time(0)) as Time from TempData ");
                 query.Append("WHERE date >= DATEADD(HOUR, -4, GETDATE()) ");                
                 string q = query.ToString();
-                using(SqlCommand cmd = new SqlCommand(q, con))
+                using(MySqlCommand cmd = new MySqlCommand(q, con))
                 {
                     try
                     {
@@ -79,7 +80,7 @@ namespace WebCresij
                         {
                             con.Open();
                         }
-                        SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
                     }
                     catch(Exception ex)
@@ -97,11 +98,11 @@ namespace WebCresij
         public DataTable GetTempDataAll(string val)
         {
             DataSet dt = new DataSet();
-            using (SqlConnection con = new SqlConnection(connString))
+            using (MySqlConnection con = new MySqlConnection(connString))
             {
 
                 string q = Query1(val);
-                using (SqlCommand cmd = new SqlCommand(q, con))
+                using (MySqlCommand cmd = new MySqlCommand(q, con))
                 {
                     try
                     {
@@ -109,7 +110,7 @@ namespace WebCresij
                         {
                             con.Open();
                         }
-                        SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
                     }
                     catch (Exception ex)
@@ -125,7 +126,7 @@ namespace WebCresij
             return dt.Tables[0];
         }
 
-        public string query (string value, string loc)
+        public string query (string value)
         {
             string query = "";
             switch (value){
@@ -307,10 +308,10 @@ namespace WebCresij
         {
             DataTable dt = new DataTable();
            
-            using(SqlConnection con = new SqlConnection(connString)){
-                using(SqlCommand cmd = new SqlCommand(query, con))
+            using(MySqlConnection con = new MySqlConnection(connString)){
+                using(MySqlCommand cmd = new MySqlCommand(query, con))
                 {
-                    using(SqlDataAdapter sqlData = new SqlDataAdapter(cmd))
+                    using(MySqlDataAdapter sqlData = new MySqlDataAdapter(cmd))
                     {
                         try
                         {
@@ -340,11 +341,11 @@ namespace WebCresij
             DataTable dt = new DataTable();
             string q = "select cast(date as time(0)) time , temp, Humidity as humid, pm25, pm10 from TempData " +
                             "WHERE date >= DATEADD(HOUR, -6, GETDATE()) and location = '"+value+"' order by date desc";
-            using (SqlConnection con = new SqlConnection(connString))
+            using (MySqlConnection con = new MySqlConnection(connString))
             {
-                using (SqlCommand cmd = new SqlCommand(q, con))
+                using (MySqlCommand cmd = new MySqlCommand(q, con))
                 {
-                    using (SqlDataAdapter sqlData = new SqlDataAdapter(cmd))
+                    using (MySqlDataAdapter sqlData = new MySqlDataAdapter(cmd))
                     {
                         try
                         {
@@ -417,12 +418,12 @@ namespace WebCresij
         public DataTable MachineCount()
         {
             DataTable dtStatus = new DataTable();
-            using (SqlConnection con = new SqlConnection(connString))
+            using (MySqlConnection con = new MySqlConnection(connString))
             {
                 string query = "select Count(CCIP) from CentralControl";
                 try
                 {
-                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
                     {
                         if (con.State != ConnectionState.Open)
                             con.Open();
@@ -444,12 +445,12 @@ namespace WebCresij
         public DataTable MachineCountByIns(string id)
         {
             DataTable dtStatus = new DataTable();
-            using (SqlConnection con = new SqlConnection(connString))
+            using (MySqlConnection con = new MySqlConnection(connString))
             {
                 string query = "select Count(CCIP) from CentralControl";
                 try
                 {
-                    using (SqlDataAdapter da = new SqlDataAdapter(query, con))
+                    using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
                     {
                         if (con.State != ConnectionState.Open)
                             con.Open();
@@ -468,6 +469,136 @@ namespace WebCresij
             return dtStatus;
         }
 
-       
+        #region Configuration
+        public DataTable MachineIPLoc(string gradeid)
+        {
+            DataTable dt = new DataTable();
+
+            using (MySqlConnection con = new MySqlConnection(connString))
+            {
+                try
+                {
+                    string query = "select ClassName, CCIP from Class_Details" +
+                        " cd join CentralControl cc on cc.location=cd.ClassID" +
+                        " where gradeID='" +gradeid+"' order by ClassName";
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        adapter.Fill(dt);
+                    }
+                }
+                catch(Exception)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dt;
+        }
+        public DataTable InsIDs()
+        {
+            DataTable dt = new DataTable();
+
+            using (MySqlConnection con = new MySqlConnection(connString))
+            {
+                try
+                {
+                    string query = "select InstituteID, InstituteName from Institute_Details order by InstituteName";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        adapter.Fill(dt);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dt;
+        }
+        public DataTable GradeIDs(string insid)
+        {
+            DataTable dt = new DataTable();
+
+            using (MySqlConnection con = new MySqlConnection(connString))
+            {
+                try
+                {
+                    string query = " select GradeID, GradeName from Grade_Details " +
+                        "where InsID ='" + insid+"' order by GradeName";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        adapter.Fill(dt);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dt;
+        }
+
+        public DataTable getGradeName(string gradeid)
+        {
+            DataTable dt = new DataTable();
+
+            using (MySqlConnection con = new MySqlConnection(connString))
+            {
+                try
+                {
+                    string query = " select  InstituteName , GradeName from Grade_Details gd " +
+                        "join Institute_details id on gd.InsID = id.InstituteID " +
+                        "where gradeID = '" + gradeid + "' order by InstituteName asc";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        adapter.Fill(dt);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dt;
+        }
+
+        #endregion
+
     }
 }

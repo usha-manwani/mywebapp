@@ -12,20 +12,27 @@ namespace WebCresij
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            string userid = HttpContext.Current.Session["UserId"].ToString();
+            if (string.IsNullOrEmpty(userid))
             {
-                UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
-                HttpContext.Current.Session["UserName"].ToString(), 13);
-                string query = "select * from Institute_Details";
-                DataTable dt = PopulateTree.ExecuteCommand(query);
-                ddlInstitute.DataSource = dt;
-                ddlInstitute.DataTextField = "InstituteName";
-                ddlInstitute.DataValueField = "InstituteID";
-                ddlInstitute.DataBind();
-                string select = Resources.Resource.Select;
-                ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));                
+                Response.Redirect("Index.aspx");
             }
-            
+            else
+            {
+                if (!IsPostBack)
+                {               
+                    UserActivities.UserLogs.Task1(userid,
+                    HttpContext.Current.Session["UserName"].ToString(), 13);
+                    string query = "select * from Institute_Details";
+                    DataTable dt = PopulateTree.ExecuteCommand(query);
+                    ddlInstitute.DataSource = dt;
+                    ddlInstitute.DataTextField = "InstituteName";
+                    ddlInstitute.DataValueField = "InstituteID";
+                    ddlInstitute.DataBind();
+                    string select = Resources.Resource.Select;
+                    ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));
+                }                              
+            }            
         }
         protected void ddlInstitute_SelectedIndexChanged(object sender, EventArgs e)
         {

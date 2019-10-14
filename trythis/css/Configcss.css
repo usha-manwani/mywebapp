@@ -1,6 +1,9 @@
 ﻿.noshow{
 display:none;
 }
+.minwidth{
+    min-width:660px;
+}
 .TabHeaderCSS {
     font-family: 'Ruda', sans-serif;
     cursor: pointer;

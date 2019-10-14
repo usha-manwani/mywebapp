@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace WebCresij.Hubsfile
 {  
@@ -18,19 +19,20 @@ namespace WebCresij.Hubsfile
         public void GetUsers()
         {
             DataTable dt;
-            using (var connection = new SqlConnection(constr))
+            using (var connection = new MySqlConnection(constr))
             {
                 string query = "SELECT * from dbo.[CentralControl]";
                 try
                 {
                     connection.OpenAsync();
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Notification = null;
+                        //command.Notification = null;
                         dt = new DataTable();
                         DataSet ds = new DataSet();
-                        SqlDependency dependency = new SqlDependency(command);
-                        dependency.OnChange += dependency_OnChange;
+                        
+                        //SqlDependency dependency = new SqlDependency(command);
+                        //dependency.OnChange += dependency_OnChange;
                         if (connection.State == ConnectionState.Closed)
                             connection.OpenAsync();
                         SqlDependency.Start(connection.ConnectionString);
@@ -81,6 +83,7 @@ namespace WebCresij.Hubsfile
         ///show status of all machines
         public void SendMessage(string sender, string data)  
         {
+            Console.WriteLine("received data from " + sender);
             if (data.Contains("Temp"))
             {
                 if (keyValues.ContainsKey(sender))
@@ -108,12 +111,12 @@ namespace WebCresij.Hubsfile
             }
             else if (data.Contains("KeyValue"))
             {
-                string query = "";
+               // string query = "";
                 string[] values = data.Split(',');
                 switch (values[2])
                 {
                     case "SystemON":
-                        query = "Insert into ";
+                        //query = "Insert into ";
                         break;
                 }
             }

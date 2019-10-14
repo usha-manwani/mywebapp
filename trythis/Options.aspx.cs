@@ -285,7 +285,8 @@ namespace WebCresij
                 }
                 else if (level == 3)
                 {
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "donothing", "donothing();", true);
+                    TreeViewEdit.SelectedNode.Expand();
+                   // ScriptManager.RegisterStartupScript(this, typeof(Page), "donothing", "donothing();", true);
                 }
                 else
                 {
@@ -360,8 +361,7 @@ namespace WebCresij
         protected void TreeViewDelete_SelectedNodeChanged(object sender, EventArgs e)
         {
             try
-            {
-               
+            {               
                 delvalue.Text = TreeViewDelete.SelectedValue;
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "ConfirmDel", "ConfirmDel();", true);
             }
@@ -416,10 +416,8 @@ namespace WebCresij
                 }
                 if (result != 1 && result != 0)
                 {
-
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('The requested Item can not be deleted at this moment. Please try later'); ", true);
-                }
-                
+                }                
             }
             catch
             {

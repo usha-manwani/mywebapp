@@ -82,7 +82,6 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
 
-            
             <div class="row" style="padding-top: 10px;">
                 <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12">
                     <fieldset>
@@ -113,15 +112,13 @@
                                     <HeaderStyle BorderColor="Transparent" />
                                     <Columns>
                                         <asp:BoundField DataField="Text" />
-                                        <%--<asp:BoundField DataField="UserName" HeaderText="Uploaded By" />--%>
-                                         
+                                        <%--<asp:BoundField DataField="UserName" HeaderText="Uploaded By" />--%>                                        
                                         <asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkdelete" runat="server" 
                                                     Text="<%$Resources:Resource, Delete %>"
                                                     CommandArgument='<%# Eval("Value") %>' 
                                                     OnClick="lnkdelete_Click" ForeColor="DeepSkyBlue">
-
                                                 </asp:LinkButton>
                                             </ItemTemplate>
                                         </asp:TemplateField>

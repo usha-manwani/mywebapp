@@ -67,4 +67,16 @@
         </div>--%>
     </div>
         </div>
+    <script type="text/javascript">
+        var wsUri = "ws://127.0.0.1:1200/",
+            websocket = new WebSocket(wsUri); 
+        websocket.onopen = function (e) {
+        writeToScreen("CONNECTED");
+        doSend("WebSocket connected now as tcp client");
+    };
+
+    websocket.onclose = function (e) {
+        writeToScreen("DISCONNECTED");
+    };
+    </script>
 </asp:Content>

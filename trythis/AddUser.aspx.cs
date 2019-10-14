@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MySql.Data.MySqlClient;
 
 namespace WebCresij
 {
@@ -17,10 +18,10 @@ namespace WebCresij
         }
         protected void CreateUser_Click(object sender, EventArgs e)  
         {
-            SqlConnection con;
+            MySqlConnection con;
             string connString = null;
             connString = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-            con = new SqlConnection(connString);
+            con = new MySqlConnection(connString);
             string i = "";
             if (UserID.Text != null)
             {                
@@ -44,15 +45,15 @@ namespace WebCresij
                 }
                 long phone = Convert.ToInt64(no);
                 connString = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-                con = new SqlConnection(connString);
+                con = new MySqlConnection(connString);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("sp_AddNewUser", con) { CommandType = CommandType.StoredProcedure };
-                cmd.Parameters.AddWithValue("@User_ID", UserID.Text);
-                cmd.Parameters.AddWithValue("@User_Name", User_Name.Text);
-                cmd.Parameters.AddWithValue("@Password", Password.Text);
-                cmd.Parameters.AddWithValue("@Role_Ids", i);
-                cmd.Parameters.AddWithValue("@Phone_Number", phone);
-                cmd.Parameters.Add("@result", SqlDbType.Int);
+                MySqlCommand cmd = new MySqlCommand("sp_addNewUser", con) { CommandType = CommandType.StoredProcedure };
+                cmd.Parameters.AddWithValue("@userid", UserID.Text);
+                cmd.Parameters.AddWithValue("@username", User_Name.Text);
+                cmd.Parameters.AddWithValue("@Pass", Password.Text);
+                cmd.Parameters.AddWithValue("@roleid", i);
+                cmd.Parameters.AddWithValue("@ph", phone);
+                cmd.Parameters.Add("@result", MySqlDbType.Int32);
                 cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
                 int k = Convert.ToInt16(cmd.Parameters["@result"].Value);

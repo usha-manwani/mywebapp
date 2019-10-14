@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Windows;
 
 namespace WebCresij
@@ -17,7 +18,7 @@ namespace WebCresij
         public event EventHandler selected;
         //int role = Convert.ToInt32(HttpContext.Current.Session["role"]);
         TreeNode root = new TreeNode("Institutes");
-        static SqlConnection con;
+        static MySqlConnection con;
         public static DataTable dtIns = new DataTable("InsDetails");
         public static DataTable dtGrade = new DataTable("GradeDetails");
         public static DataTable dtClass = new DataTable("ClassDetails");
@@ -172,8 +173,8 @@ namespace WebCresij
         {
             try
             {
-                con = new SqlConnection(constr);
-                SqlDataAdapter da = new SqlDataAdapter(Text, con);
+                con = new MySqlConnection(constr);
+                MySqlDataAdapter da = new MySqlDataAdapter(Text, con);
 
                 //Opening Connection  
                 if (con.State != ConnectionState.Open)
@@ -213,12 +214,13 @@ namespace WebCresij
                     HttpContext.Current.Session["DeviceIP"] = c;
                     Response.Redirect("~/Control.aspx");
                 }
-
                 if (selected != null)
                 {
                     selected(this, EventArgs.Empty);
                 }
+
             }
+            
             else
             {
                 TreeMenuView.SelectedNode.Expand();

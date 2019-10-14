@@ -20,7 +20,7 @@ namespace WebCresij
         {
             if (!IsPostBack)
             {
-                string query = "select * from Institute_Details";
+                string query = "select * from institute_details";
                 DataTable dt = PopulateTree.ExecuteCommand(query);
                 ddlInstitute.DataSource = dt;
                 ddlInstitute.DataTextField = "InstituteName";
@@ -28,7 +28,7 @@ namespace WebCresij
                 ddlInstitute.DataBind();
                 string select = Resources.Resource.Select;
                 ddlInstitute.Items.Insert(0, new ListItem("All", "All"));
-                ddlTime.Enabled = false;
+                //ddlTime.Enabled = false;
                 HttpContext.Current.Session["ipforgraph"] = "";
                
                 //if (ddlClass.SelectedValue == "NA")
@@ -63,14 +63,14 @@ namespace WebCresij
             string select = Resources.Resource.Select;
             ddlClass.Items.Insert(0, new ListItem(select, "NA"));
             string insID = ddlInstitute.SelectedValue;
-            if (insID == "All")
-            {
-                ddlTime.Enabled = false;
-            }
-            else
-            {
-                ddlTime.Enabled = true;
-            }
+            //if (insID == "All")
+            //{
+            //    ddlTime.Enabled = false;
+            //}
+            //else
+            //{
+            //    ddlTime.Enabled = true;
+            //}
             string query = "select GradeID, GradeName from Grade_Details where InsID='" + insID + "'";
             DataTable dt = PopulateTree.ExecuteCommand(query);
             ddlGrade.DataSource = dt;

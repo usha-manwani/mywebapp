@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Web;
 
@@ -16,11 +17,11 @@ namespace WebCresij
             string memName, string desc, string phone, string stat)
         {
             int result=0;
-            using(SqlConnection con = new SqlConnection(constr))
+            using(MySqlConnection con = new MySqlConnection(constr))
             {
                 try
                 {
-                    using(SqlCommand cmd = new SqlCommand("sp_InsertFaultInfo", con))
+                    using(MySqlCommand cmd = new MySqlCommand("sp_InsertFaultInfo", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ip", ip);
@@ -31,7 +32,7 @@ namespace WebCresij
                         cmd.Parameters.AddWithValue("@desc", desc);
                         cmd.Parameters.AddWithValue("@phone", phone);
                         cmd.Parameters.AddWithValue("@stat", stat);
-                        cmd.Parameters.Add("@result", SqlDbType.Int);
+                        cmd.Parameters.Add("@result", MySqlDbType.Int32);
                         cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                         con.Open();
                         cmd.ExecuteNonQuery();
@@ -52,11 +53,11 @@ namespace WebCresij
 
         public void UpdateStatus(string ip, string[] data)
         {
-            using (SqlConnection con = new SqlConnection(constr))
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("sp_updateStatus", con))
+                    using (MySqlCommand cmd = new MySqlCommand("sp_updateStatus", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ip", ip);

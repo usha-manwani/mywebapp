@@ -253,7 +253,7 @@
     <value>添加相机详情</value>
   </data>
   <data name="AddClass" xml:space="preserve">
-    <value>添加课程</value>
+    <value>添加班级</value>
   </data>
   <data name="AddDeviceDetails" xml:space="preserve">
     <value>添加设备细节</value>
@@ -289,7 +289,7 @@
     <value>卡注册</value>
   </data>
   <data name="CCIPAddress" xml:space="preserve">
-    <value>中央控制系统IP地址</value>
+    <value>中控系统IP地址</value>
   </data>
   <data name="ChangeLocation" xml:space="preserve">
     <value>修改班级</value>

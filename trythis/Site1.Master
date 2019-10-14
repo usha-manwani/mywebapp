@@ -24,6 +24,7 @@
         <link href="css/style-responsive.css" rel="stylesheet" />
         <link href="Content/fontawesome-all.min.css" rel="stylesheet" />
         <link href="Content/font-awesome.min.css" rel="stylesheet" />
+        <link href="Content/fontawesome.min.css" rel="stylesheet" />
         <link href="Content/solid.min.css" rel="stylesheet" />                
         <script src="Scripts/jquery-3.4.1.min.js"></script>  
         <script src="Scripts/umd/popper.min.js"></script>

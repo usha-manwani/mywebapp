@@ -112,12 +112,12 @@
                 CssClass="col-lg-2 control-label"> 
                 <span><%=Resources.Resource.Phone%></span></asp:Label>
 
-            <asp:TextBox runat="server" ID="PhoneNo" placeHolder="+86-123-12345678"
+            <asp:TextBox runat="server" ID="PhoneNo" placeHolder="12312345678"
                 CssClass="form-control col-lg-3" ClientIDMode="Static" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="PhoneNo"
                 CssClass="text-danger" ErrorMessage="The Phone Number is required." />
             <asp:RegularExpressionValidator runat="server" ControlToValidate="PhoneNo"
-                ValidationExpression="\+(\(|)[\d]{2}(\)|)\-(\(|)[\d]{3}(\)|)\-(\(|)[\d]{8}(\)|)"
+                ValidationExpression="[\d]{11}"
                 CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number ">
             </asp:RegularExpressionValidator>
 

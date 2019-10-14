@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using MySql.Data.MySqlClient;
 namespace WebCresij.Scan
 {
     public partial class MobileLogin : Page
@@ -30,7 +30,7 @@ namespace WebCresij.Scan
                 string n = "";
                 string u = "";
                 string id = UserName.Text;
-                SqlConnection con;
+                MySqlConnection con;
                 string connString = null;
                 connString = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
                 var charsToRemove = new string[] { "+", "-", " " };
@@ -46,20 +46,22 @@ namespace WebCresij.Scan
 
                     id = "phone";
                 }
-                using (con = new SqlConnection(connString))
+                using (con = new MySqlConnection(connString))
                 {
                     try
                     {
                         con.Open();
-                        SqlCommand cmd = new SqlCommand("Sp_Login", con) { CommandType = CommandType.StoredProcedure };
+                        MySqlCommand cmd = new MySqlCommand("Sp_Login", con) {
+                            CommandType = CommandType.StoredProcedure
+                        };
                         cmd.Parameters.AddWithValue("User_ID", id);
                         cmd.Parameters.AddWithValue("Phone_No", phone);
                         cmd.Parameters.AddWithValue("User_Password", Password.Text);
-                        cmd.Parameters.Add("@roleName", SqlDbType.Int);
+                        cmd.Parameters.Add("@roleName", MySqlDbType.Int32);
                         cmd.Parameters["@roleName"].Direction = ParameterDirection.Output;
-                        cmd.Parameters.Add("@Username", SqlDbType.NVarChar, 50);
+                        cmd.Parameters.Add("@Username", MySqlDbType.VarChar, 50);
                         cmd.Parameters["@Username"].Direction = ParameterDirection.Output;
-                        cmd.Parameters.Add("@id", SqlDbType.NVarChar, 50);
+                        cmd.Parameters.Add("@id", MySqlDbType.VarChar, 50);
                         cmd.Parameters["@id"].Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
                         k = Convert.ToInt32(cmd.Parameters["@rolename"].Value);

@@ -48,9 +48,9 @@
                     <RowStyle ForeColor="White" />
                     <HeaderStyle ForeColor="#1e1e36" BackColor="White" />
                     <Columns>
-                        <asp:BoundField DataField="User_Id" HeaderText="<%$Resources:Resource, userID %>"
+                        <asp:BoundField DataField="userid" HeaderText="<%$Resources:Resource, userID %>"
                             HeaderStyle-HorizontalAlign="Left" />
-                        <asp:BoundField DataField="User_Name" HeaderText="<%$Resources:Resource, Name %>"
+                        <asp:BoundField DataField="username" HeaderText="<%$Resources:Resource, Name %>"
                             HeaderStyle-HorizontalAlign="Left" />
                         <asp:TemplateField HeaderText="Option">
                             <ItemTemplate>

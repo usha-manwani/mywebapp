@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Web.Security;
 using System.Security.Cryptography;
 using System.Threading;
@@ -46,29 +47,31 @@ namespace WebCresij
             if (long.TryParse(id, out phone))
             {
                 phone = Convert.ToInt64(id);
-
                 id = "phone";
             }
             try
             {
                 string connString = null;
                 connString = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-                SqlConnection con = new SqlConnection(connString);
+                
+                MySqlConnection con = new MySqlConnection(connString);
                 con.Open();
-                SqlCommand cmd = new SqlCommand("Sp_Login", con) { CommandType = CommandType.StoredProcedure };
-                cmd.Parameters.AddWithValue("User_ID", id);
-                cmd.Parameters.AddWithValue("Phone_No", phone);
-                cmd.Parameters.AddWithValue("User_Password", Password.Text.Trim());
-                cmd.Parameters.Add("@roleName", SqlDbType.Int);
-                cmd.Parameters["@roleName"].Direction = ParameterDirection.Output;
-                cmd.Parameters.Add("@Username", SqlDbType.NVarChar, 50);
-                cmd.Parameters["@Username"].Direction = ParameterDirection.Output;
-                cmd.Parameters.Add("@id", SqlDbType.NVarChar, 50);
-                cmd.Parameters["@id"].Direction = ParameterDirection.Output;
+                MySqlCommand cmd = new MySqlCommand("sp_login", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                cmd.Parameters.AddWithValue("userid", id);
+                cmd.Parameters.AddWithValue("phone_no", phone);
+                cmd.Parameters.AddWithValue("user_password", Password.Text.Trim());
+                cmd.Parameters.Add("@rolename", MySqlDbType.Int32);
+                cmd.Parameters["@rolename"].Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@usernametemp", MySqlDbType.VarChar, 50);
+                cmd.Parameters["@usernametemp"].Direction = ParameterDirection.Output;
+                cmd.Parameters.Add("@userids", MySqlDbType.VarChar, 50);
+                cmd.Parameters["@userids"].Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
                 k = Convert.ToInt32(cmd.Parameters["@rolename"].Value);
-                n = cmd.Parameters["@username"].Value.ToString();
-                u = cmd.Parameters["@id"].Value.ToString();
+                n = cmd.Parameters["@usernametemp"].Value.ToString();
+                u = cmd.Parameters["@userids"].Value.ToString();
                 con.Close();
             }
             catch (Exception ex)
@@ -97,7 +100,7 @@ namespace WebCresij
                 }
                 UserActivities.UserLogs.Task1(u,n,1); /// Saving login Task
                 //bool sessionAdd =  AddSession(u);
-                Response.Redirect("~/home.aspx");
+                Response.Redirect("~/status.aspx");
             }
             else if (k == -9)
             {
