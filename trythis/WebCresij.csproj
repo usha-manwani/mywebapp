@@ -414,7 +414,6 @@
     <Content Include="css\style.css" />
     <Content Include="css\table-responsive.css" />
     <Content Include="Dashboard.aspx" />
-    <Content Include="demohtml.html" />
     <Content Include="Images\done.png" />
     <Content Include="Images\notdone.png" />
     <Content Include="Images\tab_active.gif" />
