@@ -114,6 +114,7 @@ namespace WebCresij
 
         public static DataTable ExecuteCommand(string Text)
         {
+            DataTable dt = new DataTable();
             MySqlConnection con = new MySqlConnection(constr);
             try
             {
@@ -121,20 +122,21 @@ namespace WebCresij
                 //Opening Connection  
                 if (con.State != ConnectionState.Open)
                     con.Open();
-                DataTable dt = new DataTable();
+                
                 //Loading all data in a datatable from datareader  
                 da.Fill(dt);
                 //Closing the connection  
-                return dt;
+               
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                
             }
             finally
             {
                 con.Close();
             }
+            return dt;
         }
         public static DataSet GetDataSet(string Text)
         {
@@ -208,7 +210,7 @@ namespace WebCresij
                     }
 
                 }
-                catch { }
+                catch(Exception ex) { }
                 finally
                 {
                     con.Close();
@@ -222,20 +224,20 @@ namespace WebCresij
             int result = 0;            
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlCommand cmd = new MySqlCommand("sp_insertGrade", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_InsertOnlyGrade", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Grade", Grade);
-                    cmd.Parameters.AddWithValue("@InsID", insID);
-                    cmd.Parameters.Add("@Ids", MySqlDbType.Int32);
-                    cmd.Parameters["@Ids"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.AddWithValue("@gradename", Grade);
+                    cmd.Parameters.AddWithValue("@insid", insID);
+                    //cmd.Parameters.Add("@Ids", MySqlDbType.Int32);
+                    //cmd.Parameters["@Ids"].Direction = ParameterDirection.Output;
                     try
                     {
                         con.Open();
                         cmd.ExecuteNonQuery();
-                        result = Convert.ToInt32(cmd.Parameters["@Ids"].Value);
+                        //result = Convert.ToInt32(cmd.Parameters["@Ids"].Value);
                     }
-                    catch
+                    catch (Exception ex)
                     {
 
                     }
@@ -246,6 +248,31 @@ namespace WebCresij
                 }
             }
             return result;
+        }
+
+        public void InsertGrade(int insID, string Grade)
+        {            
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("sp_insertGrade", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@gradename", Grade);
+                    cmd.Parameters.AddWithValue("@insid", insID);
+                    //cmd.Parameters.Add("@Ids", MySqlDbType.Int32);
+                    //cmd.Parameters["@Ids"].Direction = ParameterDirection.Output;
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();                       
+                    }
+                    catch (Exception ex){}
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
         }
 
         public int InsertClass(string gid, string className, string ip)
@@ -269,7 +296,7 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@Ids"].Value);
                     }
-                    catch
+                    catch (Exception ex)
                     {
 
                     }
@@ -292,16 +319,16 @@ namespace WebCresij
                 {
                     try
                     {
-                        using (MySqlCommand cmd = new MySqlCommand("sp_InsertCam", con))
+                        using (MySqlCommand cmd = new MySqlCommand("sp_insertCamDetails", con))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@CameraIP", camIP);                           
-                            cmd.Parameters.AddWithValue("@password", camPass);
+                            cmd.Parameters.AddWithValue("@ip", camIP);                           
+                            cmd.Parameters.AddWithValue("@pass", camPass);
                             cmd.Parameters.AddWithValue("@loc", loc);
-                            cmd.Parameters.AddWithValue("@id", userId);
-                            cmd.Parameters.AddWithValue("@portNo", port);
-                            cmd.Parameters.AddWithValue("@CamProvider", "HikVision");
-                            cmd.Parameters.AddWithValue("@insId", insID);
+                            cmd.Parameters.AddWithValue("@userid", userId);
+                            cmd.Parameters.AddWithValue("@portno", port);
+                            cmd.Parameters.AddWithValue("@camprovider", "HikVision");
+                            cmd.Parameters.AddWithValue("@ins", insID);
                             cmd.Parameters.Add("@result", MySqlDbType.VarChar, -1);
                             cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                             con.Open();
@@ -309,15 +336,11 @@ namespace WebCresij
                            result= Convert.ToInt32(cmd.Parameters["@result"].Value);
                         }
                     }
-                    catch
-                    {
-
-                    }
+                    catch (Exception ex){}
                     finally
                     {
                         con.Close();
                     }
-
                 }
             }
             return result;
@@ -332,11 +355,11 @@ namespace WebCresij
                 try
                 {
                     
-                    using (MySqlCommand cmd = new MySqlCommand("InsCentralControl", con))
+                    using (MySqlCommand cmd = new MySqlCommand("sp_insertCentralControl", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@ccip", ccIP);
-                        cmd.Parameters.AddWithValue("@loc", loc);
+                        cmd.Parameters.AddWithValue("@ip", ccIP);
+                        cmd.Parameters.AddWithValue("@location", loc);
                         cmd.Parameters.AddWithValue("@insId", insId);
                         cmd.Parameters.Add("@result", MySqlDbType.Int32);
                         cmd.Parameters["@result"].Direction = ParameterDirection.Output;
@@ -386,7 +409,7 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result= Convert.ToInt32(cmd.Parameters["@result"].Value);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         result = -1;
                     }
@@ -407,19 +430,19 @@ namespace WebCresij
                 {
                     try
                     {
-                        using (MySqlCommand cmd = new MySqlCommand("sp_delCam", con))
+                        using (MySqlCommand cmd = new MySqlCommand("sp_deleteCameraonLocation", con))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
                             cmd.Parameters.Add("@r", MySqlDbType.Int32);
                             cmd.Parameters["@r"].Direction = ParameterDirection.Output;
-                            cmd.Parameters.AddWithValue("@Cam", camIP);
-                            cmd.Parameters.AddWithValue("@classID", loc);
+                            cmd.Parameters.AddWithValue("@camip", camIP);
+                            cmd.Parameters.AddWithValue("@loc", loc);
                             con.Open();
                             cmd.ExecuteNonQuery();
                             cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
 
                     }
@@ -437,7 +460,7 @@ namespace WebCresij
             int result = -1;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlCommand cmd = new MySqlCommand("sp_DelClass", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_deleteClass", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@r", MySqlDbType.Int32);
@@ -468,7 +491,7 @@ namespace WebCresij
             int result = -1;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlCommand cmd = new MySqlCommand("sp_DelGrade", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_deletegrade", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
@@ -481,7 +504,7 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                     }
-                    catch
+                    catch (Exception ex)
                     {
 
                     }
@@ -499,11 +522,11 @@ namespace WebCresij
             int result = -1;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlCommand cmd = new MySqlCommand("sp_delInstitute", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_deleteInstitute", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@insID", insId);
+                    cmd.Parameters.AddWithValue("@ins", insId);
                     cmd.Parameters.Add("@r", MySqlDbType.Int32);
                     cmd.Parameters["@r"].Direction = ParameterDirection.Output;
                     try
@@ -512,7 +535,7 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                     }
-                    catch
+                    catch(Exception ex)
                     {
 
                     }
@@ -529,7 +552,7 @@ namespace WebCresij
             int result = -1;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlCommand cmd = new MySqlCommand("sp_DelAllCam", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_deleteCamera", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@r", MySqlDbType.Int32);
@@ -541,7 +564,7 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                     }
-                    catch
+                    catch (Exception ex)
                     {
 
                     }
@@ -558,7 +581,7 @@ namespace WebCresij
             int result = -1;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlCommand cmd = new MySqlCommand("sp_DelAllCC", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_deleteCentralControl", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.Add("@r", MySqlDbType.Int32);
@@ -571,7 +594,7 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                     }
-                    catch
+                    catch (Exception ex)
                     {
 
                     }
@@ -611,159 +634,23 @@ namespace WebCresij
         #region Edit details
 
         public DataTable camDetails(string camName, string loc)
-            {
-                DataTable dt = new DataTable();
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    using (MySqlCommand cmd = new MySqlCommand("select * from fn_camDetails(@camIP,@loc)", con))
-                    {
-                        cmd.Parameters.Clear();
-                    
-                        cmd.Parameters.AddWithValue("@camIP", camName);
-                        cmd.Parameters.AddWithValue("@loc", loc);
-                        try
-                        {
-                            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-                            da.Fill(dt);
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
-                        finally
-                        {
-                            con.Close();
-                        }
-                    }
-                }
-                return dt;
-            }
-
-            public void updateCam(string ip, string pass, string id, string port,string camName)
-            {
-                int portNo = Convert.ToInt32(port);
-                DataTable dt = new DataTable();
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateCam", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@id", id);
-                        cmd.Parameters.AddWithValue("@ip", ip);
-                        cmd.Parameters.AddWithValue("@pass", pass);
-                        cmd.Parameters.AddWithValue("@port", portNo);
-                        cmd.Parameters.AddWithValue("@camName", camName);
-                        try
-                        {
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-
-                        }
-                        catch
-                        {
-
-                        }
-                        finally
-                        {
-                            con.Close();
-                        }
-                    }
-                }
-            }
-            public void updateIns(string id, string insName)
-            {
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateIns", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Id", id);
-                        cmd.Parameters.AddWithValue("@InsName", insName);
-                        try
-                        {
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                        }
-                        catch
-                        {
-
-                        }
-                        finally
-                        {
-                            con.Close();
-                        }
-                    }
-                }
-            }
-
-            public void updateGrade(string id, string gradeName)
-            {
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateGrade", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Id", id);
-                        cmd.Parameters.AddWithValue("@gradeName", gradeName);
-                        try
-                        {
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                        }
-                        catch
-                        {
-
-                        }
-                        finally
-                        {
-                            con.Close();
-                        }
-                    }
-
-                }
-            }
-            public void updateClass(string id, string className)
-            {
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateClass", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Id", id);
-                        cmd.Parameters.AddWithValue("@className", className);
-                        try
-                        {
-                            con.Open();
-                            cmd.ExecuteNonQuery();
-                        }
-                        catch
-                        {
-
-                        }
-                        finally
-                        {
-                            con.Close();
-                        }
-                    }
-
-                }
-            }
-
-        public void UpdateCentralControl(string ip, string loc)
         {
+            DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlCommand cmd = new MySqlCommand("sp_UpdateCentralControl", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_camdetails", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Ip", ip);
-                    cmd.Parameters.AddWithValue("@className", loc);
+                    cmd.Parameters.Clear();
+
+                    cmd.Parameters.AddWithValue("@cname", camName);
+                    cmd.Parameters.AddWithValue("@loc", loc);
                     try
                     {
-                        con.Open();
-                        cmd.ExecuteNonQuery();
+                        MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+                        da.Fill(dt);
                     }
-                    catch
+                    catch (Exception ex)
                     {
 
                     }
@@ -771,7 +658,140 @@ namespace WebCresij
                     {
                         con.Close();
                     }
+                }
+            }
+            return dt;
+        }
 
+        public void updateCam(string ip, string pass, string id, string port, string camName)
+        {
+            int portNo = Convert.ToInt32(port);
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("sp_updateCamera", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@userid", id);
+                    cmd.Parameters.AddWithValue("@ip", ip);
+                    cmd.Parameters.AddWithValue("@pass", pass);
+                    cmd.Parameters.AddWithValue("@portno", portNo);
+                    cmd.Parameters.AddWithValue("@cameraName", camName);
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+        }
+        public void updateIns(string id, string insName)
+        {
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("sp_updateInstitute", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@InsName", insName);
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+        }
+
+        public void updateGrade(string id, string gradeName)
+        {
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("sp_updateGrade", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@gradeName", gradeName);
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+        }
+        public void updateClass(string id, string className)
+        {
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("sp_updateClass", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    cmd.Parameters.AddWithValue("@className", className);
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    { }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+        }
+
+        public void UpdateCentralControl(string ip, string loc)
+        {
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("sp_updateCentralControl", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@Ip", ip);
+                    cmd.Parameters.AddWithValue("@className", loc);
+                    try
+                    {
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
                 }
             }
         }
@@ -785,7 +805,7 @@ namespace WebCresij
                 t.Nodes.Clear();
             }
 
-            DataTable dt = ExecuteCommand("Select InstituteName, ID, InstituteID from Institute_Details");
+            DataTable dt = ExecuteCommand("Select Ins_Name, ID, Ins_ID from Institute_Details");
             this.populateTreeCard(dt, 0, null, t);
         }
         private void populateTreeCard(DataTable dtParent, int ParentId, TreeNode treeNode, TreeView t)
@@ -803,7 +823,8 @@ namespace WebCresij
                 if (ParentId == 0)
                 {
                     t.Nodes.Add(child);
-                    DataTable dtChild = ExecuteCommand("Select GradeName, ID, GradeID from Grade_Details where InsID ='" + val + "'");
+                    DataTable dtChild = ExecuteCommand("Select Grade_Name, Id,grade_id from Grade_Details where InsID  in" +
+                        "(select id from `cresijdatabase`.institute_details where ins_id='" + val + "') order by Grade_Name");
                     populateTreeCard(dtChild, int.Parse(child.Value), child, t);
                 }
                 else
@@ -811,7 +832,8 @@ namespace WebCresij
                     if (ParentId != 0)
                     {
                         treeNode.ChildNodes.Add(child);
-                        DataTable dtclass = ExecuteCommand("Select ClassName,ID, ClassID from Class_Details where GradeID='" + val + "'");
+                        DataTable dtclass = ExecuteCommand("Select ClassName, Id, classId from Class_Details where GradeID in" +
+                            "(select id from grade_details where grade_id='" + val + "') order by ClassName");
                         populateTreeCard(dtclass, int.Parse(child.Value), child, t);
                     }
                     else
@@ -946,7 +968,8 @@ namespace WebCresij
             {
                 try
                 {
-                    string query = "Select CCIP from CentralControl where location ='"+loc+"'"; 
+                    string query = "Select CCIP from CentralControl where location in " +
+                        "(select id from class_Details where classid ='" + loc +"' COLLATE utf8mb4_unicode_ci)"; 
                     using(MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         if(con.State!= ConnectionState.Open)
@@ -971,6 +994,41 @@ namespace WebCresij
             }
             return result;
         }
+
+        public static string getIP(int loc)
+        {
+            string result = "";
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                try
+                {
+                    string query = "Select CCIP from CentralControl where location =" + loc ;
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        var i = cmd.ExecuteScalar();
+                        if (result != null)
+                        {
+                            result = i.ToString();
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result = "";
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return result;
+        }
+
         public int updateStatus(string ip,string card)
         {
             int result = 0;
@@ -1059,16 +1117,17 @@ namespace WebCresij
             return dt;
         }
 
-        public int UpdateRegCard( string cardID, string name, string memberid, string loc, string comment, string pending,string locids)
+        public int UpdateRegCard( string cardID, string name, string memberid, 
+            string loc, string comment, string pending,string locids)
         {
             int result = -1;
 
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using(MySqlCommand cmd= new MySqlCommand("UpdateRegCard", con))
+                using(MySqlCommand cmd= new MySqlCommand("sp_updateCard", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@cardId", cardID);
+                    cmd.Parameters.AddWithValue("@cid", cardID);
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@memid", memberid);
                     cmd.Parameters.AddWithValue("@loc", loc);
@@ -1111,7 +1170,7 @@ namespace WebCresij
                 try
                 {
                     
-                    using(MySqlCommand cmd = new MySqlCommand("updateSchedule", con))
+                    using(MySqlCommand cmd = new MySqlCommand("sp_UpdateSchedule", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         
@@ -1152,7 +1211,7 @@ namespace WebCresij
             {
                 try
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("DelSchedule", con))
+                    using (MySqlCommand cmd = new MySqlCommand("sp_deleteSchedule", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ClassID", ClassID);
@@ -1163,7 +1222,7 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
                 }
@@ -1185,7 +1244,7 @@ namespace WebCresij
                     try
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@id", id);
+                        cmd.Parameters.AddWithValue("@loc", id);
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();

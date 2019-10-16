@@ -504,12 +504,12 @@ function createDivs() {
             row1.style.textAlign = "center";
             //classname
             var cell1 = row1.insertCell(0);
-            var a1 = document.createElement("a");           
-            a1.name = "classnames";            
+            var a1 = document.createElement("a");
+            a1.name = "classnames";
             a1.innerHTML = ip[1];
             cell1.appendChild(a1);
             a1.className = "aclass";
-            a1.style.color = "white";        
+            a1.style.color = "white";
             cell1.className = 'tdcenter';
             cell1.title = "click to open Remote Control";
            //on/off
@@ -531,7 +531,7 @@ function createDivs() {
             label1.appendChild(i1);
             var span1 = document.createElement("span");
             div1.appendChild(label1);
-            div1.appendChild(span1);           
+            div1.appendChild(span1);
             cell12.appendChild(div1);
             cell12.title = "System On/Off";
             //row 2
@@ -556,15 +556,15 @@ function createDivs() {
             cell23.title = "Media Signal";
             cell23.className = "tdcenter";
             cell23.style.color = "white";
-            cell23.innerHTML = '<i style="font-size:1.5em" class="fa fa-window-restore"  aria-hidden=true name="mediaIcon"></i>';
+            cell23.innerHTML = '<i style="font-size:1.5em" class="fa fa-window-restore" aria-hidden=true name="mediaIcon"></i>';
            
             //row3
             var row3 = table.insertRow(2);
             row3.className = "trstyle";
             //vol
             var cell31 = row3.insertCell(0);
-          //  cell31.setAttribute("colspan", "2");
-            cell31.className = 'tdcenter ';           
+          //cell31.setAttribute("colspan", "2");
+            cell31.className = 'tdcenter ';
             cell31.innerHTML = '<i style="font-size:1.5em" class="fa fa-volume-up" aria-hidden=true name="volIcon"></i>';
             cell31.title = "volume";
             cell31.style.color = "white";
@@ -591,7 +591,7 @@ function createDivs() {
         var DIV = document.createElement("div");
         DIV.className = "col-md-3";
         rows.appendChild(DIV);
-        DIV.innerHTML='<h3 style="color: Black;">No Devices to show!!</h3>'
+        DIV.innerHTML = '<h3 style="color: White;">No Devices to show!!</h3>';
     }
 }
 
@@ -620,33 +620,26 @@ function openRemote(ipofremote) {
     offdevices();
     var iplabel = document.getElementById("MainContent_masterchildBody_masterBody_deviceips");
     iplabel.innerText = ipofremote;
-    
-   
-   document.getElementById("control").style.display = "block";
-   document.getElementById("smallcontrol").style.display = "none";    
+    document.getElementById("control").style.display = "block";
+    document.getElementById("smallcontrol").style.display = "none";    
 }
 //window.onclick = function (event) {
-//    if (event.target == modal) {
-        
-//       document.getElementById("control").style.display = "none";
-       
+//    if (event.target == modal) {        
+//       document.getElementById("control").style.display = "none";       
 //    }
 //}
 
-function closexx() {
-    
+function closexx() {    
     document.getElementById("control").style.display = "none";
      document.getElementById("smallcontrol").style.display ="flex";
-    document.getElementById("smallcontrol").addClass = "clearfix";
-    
+    document.getElementById("smallcontrol").addClass = "clearfix";    
 }
 
 function tbleupdate(name, message) {
     var chkbox = document.getElementsByName("toggle");
     var arraydata = message.split(',');
     for (k = 0; k < chkbox.length; k++) {
-        if (chkbox[k].value == name) {
-            
+        if (chkbox[k].value == name) {            
             if (arraydata[1] == "Heartbeat") {
                 if (arraydata[3] == 'OPEN') {
                     chkbox[k].checked = true;
@@ -654,12 +647,10 @@ function tbleupdate(name, message) {
                 else {
                     chkbox[k].checked = false;
                 }
-
                 if (arraydata[5] == 'On') {
                     var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
                     desktop.addClass("iconColor");
-                    desktop.removeClass("red");
-                   
+                    desktop.removeClass("red");                   
                 }
                 else {
                     var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
@@ -689,8 +680,7 @@ function tbleupdate(name, message) {
                     var proj = $(chkbox[k]).closest('table').find("*[name='projIcon']");
                     proj.addClass("iconColor");
                     proj.removeClass("red");
-                }
-               
+                }               
                 switch (arraydata[11]) {
                     case "Desktop":
                         var media = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
@@ -712,12 +702,10 @@ function tbleupdate(name, message) {
                         curtain.addClass("iconColor");  
                         var cur = $(chkbox[k]).closest('table').find("#curtainMain");
                         if (arraydata[8] == 'Stop') {
-
                             $(cur).attr('src', 'Images/imgs/curtainclose32.png');
                         }
                         else {
                             if (arraydata[8] == 'close') {
-
                                 cur.src = 'Images/imgs/curtain32.png';
                             }
                             else {
@@ -729,15 +717,13 @@ function tbleupdate(name, message) {
                         var camera = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         camera.removeClass("^='fa-'");
                         camera.addClass("fa-camera");
-                        camera.addClass("iconColor");
-                        
+                        camera.addClass("iconColor");                        
                         break;
                     case "Digital Screen":
                         var sc = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         sc.removeClass("^='fa-'");
                         sc.addClass("iconColor");
-                        sc.addClass("fa-mobile");
-                       
+                        sc.addClass("fa-mobile");                       
                         break;
                     case "TV":
                         var tv = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
@@ -762,8 +748,7 @@ function tbleupdate(name, message) {
                         rec.removeClass("^='fa-'");
                         rec.addClass("iconColor");
                         rec.addClass("fa-camera");
-                        break;
-                        
+                        break;                        
                 }
             }
             else if (arraydata[1] == "LEDIndicator") {
@@ -793,13 +778,13 @@ function tbleupdate(name, message) {
                             var laptop = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                             laptop.removeClass("^='fa-'");
                             laptop.addClass("iconColor");
-                            laptop.addClass("fa-laptop"); 
+                            laptop.addClass("fa-laptop");
                             break;
                         case 'DigitalCurtain':
                             var curtain = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                             curtain.removeClass("^='fa-'");
                             curtain.addClass("fa-window-maximize");
-                            curtain.addClass("iconColor"); 
+                            curtain.addClass("iconColor");
                             var cur = $(chkbox[k]).closest('table').find("#curtainMain");
                             if (arraydata[8] == 'Stop') {
                                 $(cur).attr('src', 'Images/imgs/curtainclose32.png');
@@ -840,8 +825,7 @@ function tbleupdate(name, message) {
                             blu.removeClass("^='fa-'");
                             blu.addClass("iconColor");
                             blu.addClass("fa-compact-disc");
-                            break;
-                            break;
+                            break;                            
                         case 'RecordingSystem':
                             var rec = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                             rec.removeClass("^='fa-'");

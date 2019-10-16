@@ -29,7 +29,7 @@ namespace WebCresij
 
         private void bindData()
         {
-            string query = "select * from CardRegister";
+            string query = "select * from Card_register";
             ds = PopulateTree.GetDataSet(query);
             dtSearch = ds.Tables[0];
             gvCard.DataSource = ds;

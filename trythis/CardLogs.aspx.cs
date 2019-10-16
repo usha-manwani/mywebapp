@@ -38,10 +38,13 @@ namespace WebCresij
         }
         protected void BindData()
         {
-            string query = "Select cc.Name as name, cc.MemberID as memberID, rd.data as cardID, " +
-                "cd.ClassName as Location,  rd.date as Time from CardRegister cc " +
-                "join ReaderData rd on rd.data = cc.CardID join CentralControl ccc on " +
-                "rd.Reader = ccc.CCIP join Class_Details cd on ccc.location= cd.ClassID order by cc.Name asc ";
+            string query = "Select cc.memberName as name, cc.MemberID as memberID, "+
+                "rd.cardid as cardID, cd.ClassName as Location,"+
+                "rd.date as Time from Card_Register cc "+
+                "join Reader_logs rd on rd.cardid = cc.CardID "+
+                "COLLATE utf8mb4_unicode_ci join CentralControl ccc on "+
+                "rd.Readerid = ccc.CCIP COLLATE utf8mb4_unicode_ci join "+
+                "Class_Details cd on ccc.location = cd.id order by cc.memberName asc ";
             dt = PopulateTree.ExecuteCommand(query);
             if (dt.Rows.Count > 0)
             {

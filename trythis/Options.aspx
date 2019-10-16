@@ -31,7 +31,10 @@
                                 <asp:LinkButton runat="server" Text="<%$Resources:Resource, AddInstitutes %>" ID="AddInstitutes" OnClientClick="displayPopup(); return false;" Font-Underline="True"
                                     Font-Bold="True" Font-Size="20px" ForeColor="#2f323a"></asp:LinkButton>
                                 <asp:TreeView ID="TreeMenuView1" EnableClientScript="true" runat="server"
-                                    OnSelectedNodeChanged="TreeMenuView1_SelectedNodeChanged" NodeStyle-NodeSpacing="5px" CssClass="leftspace" ToolTip="Add new Details" PopulateNodesFromClient="true" ForeColor="#2F323A" ShowCheckBoxes="None">
+                                    OnSelectedNodeChanged="TreeMenuView1_SelectedNodeChanged" 
+                                    NodeStyle-NodeSpacing="5px" CssClass="leftspace" 
+                                    ToolTip="Add new Details" PopulateNodesFromClient="true" 
+                                    ForeColor="#2F323A" ShowCheckBoxes="None">
                                 </asp:TreeView>
                             </ContentTemplate>
                         </cc1:TabPanel>

@@ -16,11 +16,11 @@ namespace WebCresij.UserActivities
             string task = TaskName(tasknumber);
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlCommand cmd = new MySqlCommand("sp_userLogs", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_insertUserLogs", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@userid", UserID);
-                    cmd.Parameters.AddWithValue("@userName", Name);
+                    //cmd.Parameters.AddWithValue("@userName", Name);
                     cmd.Parameters.AddWithValue("@task", task);
                     if(con.State!= ConnectionState.Open)
                     {
@@ -123,7 +123,7 @@ namespace WebCresij.UserActivities
 
         public static void LoggedOutUser(string userID)
         {
-            string query = "Delete from LoggedinUser where userID ='" + userID + "'";
+            string query = "Delete from LoggedinUser where userid ='" + userID + "'";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -142,7 +142,7 @@ namespace WebCresij.UserActivities
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "select * from UserLogs order by Time desc";
+                string query = "select * from user_logs order by Time desc";
                 try
                 {
                     using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
@@ -169,7 +169,7 @@ namespace WebCresij.UserActivities
         public static int CurrentUser()
         {
             int count = 0;
-            string query = "SELECT count(distinct user_id) FROM current_loggeduser";
+            string query = "SELECT count(distinct userid) FROM current_loggeduser";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))

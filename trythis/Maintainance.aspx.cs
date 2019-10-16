@@ -21,8 +21,8 @@ namespace WebCresij
                 string query = "select * from Institute_Details";
                 DataTable dt = PopulateTree.ExecuteCommand(query);
                 ddlInstitute.DataSource = dt;
-                ddlInstitute.DataTextField = "InstituteName";
-                ddlInstitute.DataValueField = "InstituteID";
+                ddlInstitute.DataTextField = "Ins_Name";
+                ddlInstitute.DataValueField = "Ins_ID";
                 ddlInstitute.DataBind();
                // GradeDetails();
                 TaskDetails();
@@ -32,7 +32,7 @@ namespace WebCresij
 
         private void TaskDetails()
         {
-            string query = "select Id, Task, TimeToReport from FaultTask";
+            string query = "select Id, Task, TimeToReport from Fault_Task";
             DataTable dt = PopulateTree.ExecuteCommand(query);
             gvInputTask.DataSource = dt;
             gvInputTask.DataBind();
@@ -48,11 +48,16 @@ namespace WebCresij
 
         protected void FillData()
         {
+            string query = "SELECT sno, IP, fault_knowledge as faultknow, cd.ClassName , priority, " +
+                " Grade_Name as GradeName, distName as distName, " 
+                +"member_Name as memName , phone, description, time, LastUpdated, status as stat "+
+                "FROM Fault_Info f   join Class_Details cd on cd.id = f.classID "+
+                "join Grade_Details gd on gd.ID = cd.gradeId order by sno";
             DataTable dt = new DataTable();
-            string query = "SELECT [sno],IP,faultknow,cd.ClassName ,[priority],[GradeName],[distName], " +
-                "[memName] ,[phone],[description],[time],LastUpdated,[stat] " +
-                "FROM[dbo].[FaultInfo] f join Grade_Details gd on gd.GradeID = f.gradeId " +
-                "join Class_Details cd on cd.ClassID = f.classID order by sno";
+            //string query = "SELECT [sno],IP,faultknow,cd.ClassName ,[priority],[GradeName],[distName], " +
+            //    "[memName] ,[phone],[description],[time],LastUpdated,[stat] " +
+            //    "FROM[dbo].[FaultInfo] f join Grade_Details gd on gd.GradeID = f.gradeId " +
+            //    "join Class_Details cd on cd.ClassID = f.classID order by sno";
             dt = PopulateTree.ExecuteCommand(query);
             if (dt.Rows.Count == 0)
             {
@@ -89,7 +94,7 @@ namespace WebCresij
                 if ((gr.FindControl("chkSelect") as CheckBox).Checked)
                 {
                     int sno = Convert.ToInt32(dt.Rows[i][0].ToString());
-                    PopulateTree.AnyTask("Delete from FaultInfo where sno = " + sno);
+                    PopulateTree.AnyTask("Delete from Fault_Info where sno = " + sno);
                 }
             }                        
             FillData();
@@ -102,7 +107,7 @@ namespace WebCresij
             GridViewRow gvrow = lnkbtn.NamingContainer as GridViewRow;
             //getting sno of particular row
             int sno = Convert.ToInt32(gv1Fault.DataKeys[gvrow.RowIndex].Value.ToString());
-            PopulateTree.AnyTask("Delete from FaultInfo where sno = " + sno);
+            PopulateTree.AnyTask("Delete from Fault_Info where sno = " + sno);
             FillData();
         }
 
@@ -143,8 +148,9 @@ namespace WebCresij
         protected void FillChartGrid()
         {
             DataTable dt = new DataTable();
-            string query = "SELECT COUNT(CASE Stat WHEN 'Resolved' THEN 1 END) AS Resolved, COUNT(CASE " +
-                 "Stat WHEN 'Pending' THEN 1 END) AS Pending," + " distName FROM FaultInfo group by distName";
+            string query = "SELECT COUNT(CASE Status WHEN 'Resolved' THEN 1 END) AS Resolved, COUNT(CASE "+ 
+                 "Status WHEN 'Pending' THEN 1 END) AS Pending, distName "+
+                 "FROM cresijdatabase.Fault_Info group by distName";
             dt = PopulateTree.ExecuteCommand(query);
             gvChart.DataSource = dt;
             gvChart.DataBind();
@@ -175,7 +181,7 @@ namespace WebCresij
         protected void FillInspectGrid()
         {
             DataTable dt = new DataTable();
-            dt = PopulateTree.ExecuteCommand("select * from InspectionLogs order by sno");
+            dt = PopulateTree.ExecuteCommand("select * from Inspection_Logs order by sno");
             gvinspect.DataSource = dt;
             gvinspect.DataBind();
         }
@@ -187,7 +193,7 @@ namespace WebCresij
             GridViewRow gvrow = lnkbtn.NamingContainer as GridViewRow;
             //getting sno of particular row
             int sno = Convert.ToInt32(gvinspect.DataKeys[gvrow.RowIndex].Value.ToString());
-            PopulateTree.AnyTask("Delete from InspectionLogs where sno = " + sno);
+            PopulateTree.AnyTask("Delete from Inspection_Logs where sno = " + sno);
             FillInspectGrid();
         }
 
@@ -371,9 +377,9 @@ namespace WebCresij
             TextBox desc = (TextBox)row.FindControl("txtdescription");
             //TextBox stat = (TextBox)row.FindControl("txtstat");
             DropDownList ddlstats = (DropDownList)row.FindControl("ddlStat");
-            string query = "Update FaultInfo set priority ='" + ddlprio.SelectedValue + "', memName='" + memName.Text + "',phone='" +
-                phone.Text + "', description ='" + desc.Text + "', stat='" + ddlstats.SelectedValue + 
-                "', LastUpdated='"+DateTime.Now+"' where sno = " + Convert.ToInt32(ID);
+            string query = "Update Fault_Info set priority ='" + ddlprio.SelectedValue + "', member_Name='" + memName.Text + "',phone='" +
+                phone.Text + "', description ='" + desc.Text + "', status='" + ddlstats.SelectedValue + 
+                "', LastUpdated=Now() where sno = " + Convert.ToInt32(ID);
             PopulateTree.AnyTask(query);
             gv1Fault.EditIndex = -1;
             FillData();

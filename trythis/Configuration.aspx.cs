@@ -26,8 +26,8 @@ namespace WebCresij
                     string query = "select * from Institute_Details";
                     DataTable dt = PopulateTree.ExecuteCommand(query);
                     ddlInstitute.DataSource = dt;
-                    ddlInstitute.DataTextField = "InstituteName";
-                    ddlInstitute.DataValueField = "InstituteID";
+                    ddlInstitute.DataTextField = "Ins_Name";
+                    ddlInstitute.DataValueField = "Ins_ID";
                     ddlInstitute.DataBind();
                     string select = Resources.Resource.Select;
                     ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));
@@ -41,11 +41,12 @@ namespace WebCresij
             ddlClass.DataBind();
             ddlGrade.Items.Clear();            
             string insID = ddlInstitute.SelectedValue;
-            string query = "select GradeID, GradeName from Grade_Details where InsID='" + insID + "'";
+            string query = "select grade_ID, Grade_Name from Grade_Details where InsID " +
+                " in (select id from Institute_details where ins_id='" + insID + "')";
             DataTable dt = PopulateTree.ExecuteCommand(query);
             ddlGrade.DataSource = dt;
-            ddlGrade.DataTextField = "GradeName";
-            ddlGrade.DataValueField = "GradeID";
+            ddlGrade.DataTextField = "Grade_Name";
+            ddlGrade.DataValueField = "Grade_ID";
             ddlGrade.DataBind();
             string select = Resources.Resource.Select;
             ddlGrade.Items.Insert(0, new ListItem(select, "NA"));           
@@ -58,7 +59,8 @@ namespace WebCresij
                 ddlClass.DataSource = null;
                 ddlClass.DataBind();
                 string gradeID = ddlGrade.SelectedValue;
-                string query = "select ClassID, ClassName from Class_Details where GradeID='" + gradeID + "'";
+                string query = "select ClassID, ClassName from Class_Details  " +
+                " where GradeID in(select id from Grade_details where grade_id ='" + gradeID + "')";
                 DataTable dt = PopulateTree.ExecuteCommand(query);
                 ddlClass.DataSource = dt;
                 ddlClass.DataTextField = "ClassName";

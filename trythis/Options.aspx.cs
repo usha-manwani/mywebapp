@@ -12,8 +12,7 @@ namespace WebCresij
 {
     public partial class Options : BasePage
     {
-        protected string Values;
-       
+        protected string Values;       
         PopulateTree fillTree = new PopulateTree();
         static DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
@@ -51,7 +50,8 @@ namespace WebCresij
                 {
                     tbSelectedClass.Text = TreeMenuView1.SelectedNode.ToolTip;
                     instext.Text = TreeMenuView1.SelectedNode.Parent.Parent.ToolTip;
-                    string classid = TreeMenuView1.SelectedNode.ToolTip;
+                    //string classid = TreeMenuView1.SelectedNode.ToolTip;
+                    int classid = Convert.ToInt32(TreeMenuView1.SelectedNode.Value);
                     string ip = PopulateTree.getIP(classid);
                     if (!string.IsNullOrEmpty(ip))
                     {
@@ -227,7 +227,7 @@ namespace WebCresij
         protected void save_Click(object sender, EventArgs e)
         {
             int r = fillTree.InsertInstitute(txtIns.Text);
-            int v = 0;
+            //int v = 0;
             string[] textboxValues = Request.Form.GetValues("DynamicTextBox");
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             this.Values = serializer.Serialize(textboxValues);
@@ -235,12 +235,10 @@ namespace WebCresij
             {
                 foreach (string textboxValue in textboxValues)
                 {
-                    v = fillTree.InsertGrade(r.ToString(), textboxValue);
-
+                    // v = fillTree.InsertGrade(r.ToString(), textboxValue);
+                   fillTree.InsertGrade(r, textboxValue);
                 }
-            }
-
-            
+            }            
             bindTree();
             EmptyTextBox();
         }
@@ -356,6 +354,7 @@ namespace WebCresij
             
         }
         #endregion
+
         #region delete
         //del
         protected void TreeViewDelete_SelectedNodeChanged(object sender, EventArgs e)
@@ -419,7 +418,7 @@ namespace WebCresij
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('The requested Item can not be deleted at this moment. Please try later'); ", true);
                 }                
             }
-            catch
+            catch(Exception ex)
             {
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "error5", "camError();", true);
             }
@@ -432,9 +431,7 @@ namespace WebCresij
 
         #endregion
 
-        //close all popups
-        
-
+        //close all popups        
         protected void bindTree()
         {
             fillTree.function(TreeMenuView1, null);

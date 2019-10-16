@@ -29,7 +29,7 @@ namespace WebCresij
                         cmd.Parameters.AddWithValue("@priority", priority);
                         cmd.Parameters.AddWithValue("@distName", distName);
                         cmd.Parameters.AddWithValue("@memName", memName);
-                        cmd.Parameters.AddWithValue("@desc", desc);
+                        cmd.Parameters.AddWithValue("@desce", desc);
                         cmd.Parameters.AddWithValue("@phone", phone);
                         cmd.Parameters.AddWithValue("@stat", stat);
                         cmd.Parameters.Add("@result", MySqlDbType.Int32);

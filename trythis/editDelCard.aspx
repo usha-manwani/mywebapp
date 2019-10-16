@@ -7,7 +7,6 @@
         .textdec {
             text-decoration: underline;
         }
-
         .displaynone {
             display: none;
         }
@@ -66,7 +65,7 @@
                                 <asp:BoundField ItemStyle-Width="15%"
                                     HeaderText="<%$Resources:Resource, Name %>"
                                      SortExpression="Name"
-                                    ControlStyle-Width="100%" DataField="Name" />
+                                    ControlStyle-Width="100%" DataField="memberName" />
                                 <asp:BoundField SortExpression="CardID"
                                     HeaderText="<%$Resources:Resource, CardID %>"                                    
                                     ItemStyle-Width="10%" DataField="CardID"
@@ -78,12 +77,12 @@
                                 <asp:BoundField ReadOnly="true"
                                     HeaderText="<%$Resources:Resource, Accesspermitted %>"
                                     SortExpression="locnames" ItemStyle-Width="20%"
-                                    DataField="locnames" ControlStyle-Width="100%"/>
+                                    DataField="location" ControlStyle-Width="100%"/>
                                 <%--<asp:BoundField Visible="false" DataField="locids" />--%>
                                 <asp:BoundField SortExpression="pending"
                                     HeaderText="<%$Resources:Resource, PendingAccess %>"
                                     ItemStyle-Width="15%" ReadOnly="true"
-                                    ControlStyle-Width="100%" DataField="pending" />
+                                    ControlStyle-Width="100%" DataField="pending_loc" />
                                 <asp:BoundField ItemStyle-Width="5%" 
                                     ControlStyle-Width="100%"
                                     HeaderText="<%$Resources:Resource, Comments %>"
@@ -91,7 +90,7 @@
                                 <asp:TemplateField Visible="false">
                                     <ControlStyle Width="100%" />
                                     <ItemTemplate>
-                                        <asp:Label Text='<%#Eval("locids") %>' 
+                                        <asp:Label Text='<%#Eval("locationid") %>' 
                                             runat="server" ID="hidlocID">
                                         </asp:Label>
                                     </ItemTemplate>

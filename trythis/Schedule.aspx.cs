@@ -24,8 +24,8 @@ namespace WebCresij
                 string query = "select * from Institute_Details";
                 DataTable dt = PopulateTree.ExecuteCommand(query);
                 ddlInstitute.DataSource = dt;
-                ddlInstitute.DataTextField = "InstituteName";
-                ddlInstitute.DataValueField = "InstituteID";
+                ddlInstitute.DataTextField = "Ins_Name";
+                ddlInstitute.DataValueField = "Ins_ID";
                 ddlInstitute.DataBind();
                 // string select = Resources.Resource.Select;
                 // ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));
@@ -51,20 +51,22 @@ namespace WebCresij
         {
             string select = Resources.Resource.Select;
             string insID = ddlInstitute.SelectedValue;
-            string query = "select GradeID, GradeName from Grade_Details where InsID='" + insID + "'";
+            string query = "select grade_ID, Grade_Name from Grade_Details where InsID "+
+                " in (select id from Institute_details where ins_id='" + insID + "')";
             DataTable dt = PopulateTree.ExecuteCommand(query);
             ddlGrade.DataSource = dt;
-            ddlGrade.DataTextField = "GradeName";
-            ddlGrade.DataValueField = "GradeID";
+            ddlGrade.DataTextField = "Grade_Name";
+            ddlGrade.DataValueField = "Grade_ID";
             ddlGrade.DataBind();
 
             ddlGrade.Items.Insert(0, new ListItem(select, "NA"));
-            query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
-              " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
-              "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
-              + " where ID = '" + ddlInstitute.SelectedValue + "' order by StartTime asc";
+            query = "SELECT StartTime as starttime, StopTime as stoptime,Monday "+
+               "as Monday, Tuesday as Tuesday,Wednesday as Wednesday ,Thursday as Thursday ,"+
+              "Friday as Friday ,Saturday as Saturday,Sunday as Sunday, timer FROM Schedule "+
+               "where location = '"+insID+"' order by StartTime asc";
 
-            dt = PopulateTree.ExecuteCommand(query);
+            //dt = PopulateTree.ExecuteCommand(query);
+            dt= PopulateTree.GetSchedule(insID);
             if (dt.Rows.Count > 0)
             {
                 GetData(dt);
@@ -82,7 +84,7 @@ namespace WebCresij
             ddlClass.DataBind();
             string gradeID = ddlGrade.SelectedValue;
             string query = "select ClassID, ClassName from Class_Details  " +
-                " where GradeID='" + gradeID + "'";
+                " where GradeID in(select id from Grade_details where grade_id ='" + gradeID + "')";
             DataTable dt = PopulateTree.ExecuteCommand(query);
             ddlClass.DataSource = dt;
             ddlClass.DataTextField = "ClassName";
@@ -193,10 +195,10 @@ namespace WebCresij
             //string ClassID = ddlClass.SelectedValue;
             if (ID != "NA" && !string.IsNullOrEmpty(ID))
             {
-                query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
-                " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
-                "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
-                + " where ID = '" + ID + "' order by StartTime asc";
+                query = "SELECT StartTime as starttime, StopTime as stoptime," +
+                " Monday, Tuesday,Wednesday , Thursday ," +
+                "Friday ,Saturday, Sunday, timer FROM Schedule "
+                + " where Location = '" + ID + "' COLLATE utf8mb4_unicode_ci order by StartTime asc";
                                 
             }
             

@@ -30,8 +30,7 @@ namespace WebCresij
         {
             if (!this.IsPostBack)
             {
-                root.SelectAction = TreeNodeSelectAction.Expand;
-               
+                root.SelectAction = TreeNodeSelectAction.Expand;               
                 TreeMenuView.Nodes.Add(root);
                 DataTable dt = ExecuteCommand("Select ins_name, ID, ins_id from Institute_Details order by ins_name");
                 dtIns = dt;
