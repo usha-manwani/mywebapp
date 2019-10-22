@@ -14,7 +14,8 @@
               z-index:3;display:none;
               padding-top:100px;
               position:fixed;
-              left:0;top:0;
+              left:0;
+              top:0;
               width:100%;
               height:100%;
               overflow:auto;
@@ -120,8 +121,6 @@
                 ValidationExpression="[\d]{11}"
                 CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number ">
             </asp:RegularExpressionValidator>
-
-
         </div>
 
         <asp:LinkButton runat="server" ID="PhoneNoLink" Enabled="true"

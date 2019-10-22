@@ -47,9 +47,7 @@
     padding: 20px;
     border: 1px solid #888;
     width: 60%;
-}
-
- 
+} 
 .pp{
     background-color: #565656;
     color: transparent;
@@ -72,9 +70,8 @@
     min-width:240px;
     min-height: 280px;
     max-height:300px;
-    background-color:#23233f;    
+    background-color:#23233f;
 }
-
 .fixwidth{
     width:80%;
     text-align:center;
@@ -82,10 +79,10 @@
 .chk{
     width:20%;
     float:left;
-    text-align:center
+    text-align:center;
 }
-</style>                                                                                
-    <link href="Content/ControlStyle.css?v=1" rel="stylesheet" />   
+</style>
+    <link href="Content/ControlStyle.css?v=1" rel="stylesheet" />
     <link href="css/toggleswitch.css" rel="stylesheet" />
     <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
     <!--Reference the SignalR library. -->  
@@ -93,14 +90,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
     <script src="Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
-    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
+    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
     <script src="Scripts/ControlKeys.js?v=19"></script>
     <h4 style="color:white;margin-top:-1rem">
-        <asp:Label runat="server" ID="insName"></asp:Label>            
-        <asp:Label runat="server" ID="GradeName"></asp:Label> 
-                    </h4>
+        <asp:Label runat="server" ID="insName"></asp:Label>
+        <asp:Label runat="server" ID="GradeName"></asp:Label>
+    </h4>
         <hr style="background-color:black"/>
-
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="row" style="margin-bottom:-1.5rem; margin-top:-1rem">
@@ -118,10 +114,9 @@
         </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    
     <div class="container-fluid">
         <div class="row clearfix" id="smallcontrol" style="width: 90%; min-width: 800px; max-width: 100%">
-            <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>" />
+            <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>"/>
         </div>
     </div>
     <input id="sessionInput" type="hidden" value='<%= Session["DeviceIP"] %>'/>
@@ -785,7 +780,7 @@
             </tr>
         </table>           
     </div>
-     </div>       --%>       
+     </div>       --%>
     <%--<div id="control" class="modal">
         <div class="modal-content">
             <header class="row" style="position: center;">
@@ -797,5 +792,5 @@
                 <iframe id="Iframe1" style="background-color: #1e1e36" src="~/controlRemote.aspx" height="700" width="100%" runat="server" frameborder="0"></iframe>
             </div>
         </div>
-    </div>--%>    
+    </div>--%>
 </asp:Content>

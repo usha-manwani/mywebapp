@@ -100,18 +100,18 @@
                     var arraydata = message.split(",");
                     if (arraydata[3] == 'CLOSED' || arraydata[2] == 'SystemSwitchOff' || arraydata[2] == 'SystemOff') {
                         var img = document.getElementById("syspower");
-                        img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
+                        img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
                         $(img).removeClass('oncolor');
                     }
                     else if (arraydata[3] == 'OPEN' || arraydata[2] == 'SystemSwitchOn' || arraydata[2] == 'SystemON') {
                         var img = document.getElementById("syspower");
-                       img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
+                       img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
                         $(img).addClass('oncolor');
                         
                     }
                     else if (arraydata[2] == 'Offline' || arraydata[1] == 'Unsuccessful') {
                         var img = document.getElementById("syspower");
-                        img.src = "Images/greyed/sysgrey.png";
+                        img.src = "../Images/greyed/sysgrey.png";
                         $(img).removeClass('oncolor');
                     }
                 }

@@ -312,7 +312,6 @@ $(function () {
                             var source = imgpc.getAttribute('class');
                             imgpc.setAttribute('src', "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png");
                             if (source.includes('oncolor')) {
-
                                 $(imgpc).removeClass('oncolor');
                             }
                             else {

@@ -123,7 +123,7 @@ namespace WebCresij.UserActivities
 
         public static void LoggedOutUser(string userID)
         {
-            string query = "Delete from LoggedinUser where userid ='" + userID + "'";
+            string query = "Delete from Current_LoggedUser where userid ='" + userID + "'";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 using (MySqlCommand cmd = new MySqlCommand(query, con))

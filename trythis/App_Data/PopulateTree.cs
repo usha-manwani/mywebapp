@@ -472,7 +472,7 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                     }
-                    catch
+                    catch(Exception ex)
                     {
 
                     }
@@ -495,7 +495,7 @@ namespace WebCresij
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@GradeID", GradeId);
+                    cmd.Parameters.AddWithValue("@gradeids", GradeId);
                     cmd.Parameters.Add("@r", MySqlDbType.Int32);
                     cmd.Parameters["@r"].Direction = ParameterDirection.Output;
                     try
@@ -1303,11 +1303,12 @@ namespace WebCresij
             DataTable dtStatus = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "select count(WorkStatus) total, WorkStatus, InsID "+
-                    "from Status s join Class_Details c on c.ClassID = s.Class "+ 
-                    "join Grade_Details g on g.GradeID = c.GradeID "+
-                    "join Institute_Details id on id.InstituteID = g.InsID "+
-                    " and InsID = '"+id+ "' group by  InsID, WorkStatus order by WorkStatus";
+                string query = "select count(WorkStatus) total, WorkStatus, id.Ins_ID "+
+                    "from Status s join Class_Details c on c.ID = s.Class "+ 
+                    "join Grade_Details g on g.ID = c.GradeID "+
+                    "join Institute_Details id on id.ID = g.InsID "+
+                     "where g.InsID in (select id from institute_details where ins_id = '"+id+
+                     "') group by  g.InsID, WorkStatus order by WorkStatus";
                 try
                 {
                     using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
@@ -1361,11 +1362,12 @@ namespace WebCresij
             DataTable dtStatus = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "select count( CCIP), InsID from CentralControl cc " +
-                    " join Class_Details c on c.ClassID = cc.location " +
-                    "join Grade_Details g on g.GradeID = c.GradeID "+
-                    "join Institute_Details id on id.InstituteID = g.InsID where "+
-                    " InsID='"+id+"' group by InsID";
+                string query = "select count( CCIP), id.Ins_ID from CentralControl cc " +
+                    " join Class_Details c on c.ID = cc.location " +
+                    "join Grade_Details g on g.ID = c.GradeID "+
+                    "join Institute_Details id on id.ID = g.InsID where "+
+                    " gd.InsID in (select id from institute_details where ins_id = '" + id +
+                     "') group by gd.InsID";
                 try
                 {
                     using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
@@ -1392,11 +1394,12 @@ namespace WebCresij
             DataTable dtStatus = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "select count( MachineStatus), MachineStatus, InsID " +
-                    " from Status s join Class_Details c on c.ClassID = s.Class " +
-                    "join Grade_Details g on g.GradeID = c.GradeID " +
-                    "join Institute_Details id on id.InstituteID = g.InsID where " +
-                    "MachineStatus='Online' and InsID='" + id + "' group by InsID, MachineStatus";
+                string query = "select count( MachineStatus), MachineStatus, id.Ins_ID " +
+                    " from Status s join Class_Details c on c.ID = s.Class " +
+                    "join Grade_Details g on g.ID = c.GradeID " +
+                    "join Institute_Details id on id.ID = g.InsID where " +
+                    "MachineStatus='Online' and gd.InsID in (select id from institute_details where ins_id = '" + id +
+                     "') group by gd.InsID, MachineStatus";
                 try
                 {
                     using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
@@ -1538,10 +1541,10 @@ namespace WebCresij
             {
                 try
                 {
-                    string query = "select id.InstituteName as InsName, gd.GradeName as GradeName, " +
+                    string query = "select id.Ins_Name as InsName, gd.Grade_Name as GradeName, " +
                     "cd.ClassName as ClassName from Institute_Details id join Grade_Details gd on " +
-                    "gd.InsID = id.InstituteID join Class_Details cd on cd.GradeID = gd.GradeID " +
-                    "join CentralControl cc on cc.location = cd.ClassID where cc.CCIP = '" + ip + "'";
+                    "gd.InsID = id.ID join Class_Details cd on cd.GradeID = gd.ID " +
+                    "join CentralControl cc on cc.location = cd.ID where cc.CCIP = '" + ip + "'";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         if (con.State != ConnectionState.Open)

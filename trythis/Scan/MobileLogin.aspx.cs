@@ -54,19 +54,19 @@ namespace WebCresij.Scan
                         MySqlCommand cmd = new MySqlCommand("Sp_Login", con) {
                             CommandType = CommandType.StoredProcedure
                         };
-                        cmd.Parameters.AddWithValue("User_ID", id);
+                        cmd.Parameters.AddWithValue("Userid", id);
                         cmd.Parameters.AddWithValue("Phone_No", phone);
                         cmd.Parameters.AddWithValue("User_Password", Password.Text);
                         cmd.Parameters.Add("@roleName", MySqlDbType.Int32);
                         cmd.Parameters["@roleName"].Direction = ParameterDirection.Output;
-                        cmd.Parameters.Add("@Username", MySqlDbType.VarChar, 50);
-                        cmd.Parameters["@Username"].Direction = ParameterDirection.Output;
-                        cmd.Parameters.Add("@id", MySqlDbType.VarChar, 50);
-                        cmd.Parameters["@id"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add("@Usernametemp", MySqlDbType.VarChar, 50);
+                        cmd.Parameters["@Usernametemp"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add("@userids", MySqlDbType.VarChar, 50);
+                        cmd.Parameters["@userids"].Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
                         k = Convert.ToInt32(cmd.Parameters["@rolename"].Value);
-                        n = cmd.Parameters["@username"].Value.ToString();
-                        u = cmd.Parameters["@id"].Value.ToString();
+                        n = cmd.Parameters["@usernametemp"].Value.ToString();
+                        u = cmd.Parameters["@userids"].Value.ToString();
 
                         if (k.ToString().Contains("1"))
                         {

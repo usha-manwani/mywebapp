@@ -9,6 +9,7 @@ var timenow = new Array();
 var co2array = new Array();
 var defaultip = "";
 (function ($) {
+    
     var chat = $.connection.myHub;
    // console.log("connection started 1");
 
@@ -333,7 +334,6 @@ var defaultip = "";
             data: {
                 labels: ["Centrol Control Machine", ""],
                 datasets: [{
-
                     backgroundColor: ['#da4265', 'white'],
                     borderColor: '#fff',
                     data: [100, 25],
@@ -1155,6 +1155,7 @@ function CreateAllChart(value) {
         error: OnErrorCall_
     });
     function OnSuccess_(response) {
+       // chart9.destroy();
         aData = response.d;
         var alabel = aData[0];
         var temperature = aData[1];
@@ -1338,25 +1339,44 @@ function CreateAllChart(value) {
             var workopen = aData[7];
             var workclose = aData[8];
             if (workopen == workclose && parseInt(workopen, 10) == 0) {
-                if (parseInt(machineonline, 10) == 0)
-                    workclose = machineoffline ;
-                else {
+                if (parseInt(machineonline, 10) == 0) {
+                    workclose = machineoffline;
+                }                    
+                else
+                {
                     workclose = machineonline 
                 }
+            }           
+            //var type = Number(machineonline);            
+            var n = parseInt(machineonline) + parseInt(machineoffline);
+            if (n == 0) {
+                document.getElementById("systemspan").innerHTML = 0;
+                cccc.series[0].setData(0, 1);
+                cccc.series[1].setData(0, 1);
+                donutchartsystem(machineonline, machineoffline);
+               //chart9.data.datasets[0].data = [0, 1];
+               //chart9.update(0);
             }
-            var type = Number(machineonline);
-            if (typeof type == 'number') {
-                document.getElementById("systemspan").innerText = parseInt(machineonline, 10) + parseInt(machineoffline, 10);
-                cccc.series[0].setData([[parseInt(machineonline, 10)], [parseInt(machineoffline, 10)]]);
-                cccc.series[1].setData([[parseInt(workclose, 10)], [parseInt(workopen, 10)]]);
+            else if (typeof Number(machineonline) == 'number')
+            {
                 //ccc.series[0].setData([[Math.random()], [Math.random()]]);
-                chart9.data.datasets[0].data = [parseInt(machineonline, 10), parseInt(machineoffline, 10)];
-                chart9.update(0);
-                
+                //chart9.data.datasets[0].data = [parseInt(machineonline), parseInt(machineoffline)];
+                //chart9.update(0);
+                donutchartsystem(machineonline, machineoffline);
+                document.getElementById("systemspan").innerHTML = parseInt(machineonline) + parseInt(machineoffline);
+                cccc.series[0].setData(parseInt(machineonline,10), parseInt(machineoffline,10));
+                cccc.series[1].setData(parseInt(workclose,10), parseInt(workopen,10));
+                //chart9.data.datasets.pop();
+                //chart9.data.datasets.push({
+                //    label: [],
+                //    backgroundColor: ['#da4265', 'white'],
+                //    data: [parseInt(machineonline), parseInt(machineoffline)]
+                //});
+                //chart9.update(0);
             }
             else {
-                console.log("no values");
-            }   
+                    console.log("no values");
+                 }
         }        
     }
     function OnErrorCall_(respo) {
@@ -1389,8 +1409,7 @@ function ddlIndexChange(value) {
         error: OnErrorCall_
     });
     function OnSuccess_(response) {
-        designChart(response);
-        
+        designChart(response);        
     }
     function OnErrorCall_(respo) {
         console.log(respo);
@@ -1577,21 +1596,23 @@ function updatelivechart(name, message) {
          
             myChart13.data.datasets[0].data = co2array;
             myChart13.update(0);
-
-            var cc1 = window.direction;
-            cc1.data.current = (((arraydata[6] / 1000.00) * arraydata[5]) ).toFixed(3);
-            console.log((arraydata[6] / 1000.00) * arraydata[5]/1000);
-            cc1.update(0);
-            var co2 = document.getElementById("co2value");
-            co2.innerText = arraydata[10] + " ";
-            var bright = document.getElementById("brightness");
-            bright.innerText = arraydata[13] + " ";
-            var methanol = document.getElementById("FormalDehydevalue");
-            methanol.innerText = arraydata[11] + " mg/m3";
-            var volt = document.getElementById("voltage");
-            volt.innerText = arraydata[5] + " V";
-            var elec = document.getElementById("Electricity");
-            elec.innerText = (((arraydata[6] / 1000.00) * arraydata[5])).toFixed(3) + " w";
+            if (arraydata[6] != '--') {
+                var cc1 = window.direction;
+                cc1.data.current = (((arraydata[6] / 1000.00) * arraydata[5])).toFixed(3);
+                console.log((arraydata[6] / 1000.00) * arraydata[5] / 1000);
+                cc1.update(0);
+                var co2 = document.getElementById("co2value");
+                co2.innerText = arraydata[10] + " ";
+                var bright = document.getElementById("brightness");
+                bright.innerText = arraydata[13] + " ";
+                var methanol = document.getElementById("FormalDehydevalue");
+                methanol.innerText = arraydata[11] + " mg/m3";
+                var volt = document.getElementById("voltage");
+                volt.innerText = arraydata[5] + " V";
+                var elec = document.getElementById("Electricity");
+                elec.innerText = (((arraydata[6] / 1000.00) * arraydata[5])).toFixed(3) + " w";
+            }
+            
         };
     };
 }
@@ -1889,7 +1910,6 @@ function designChart(response) {
             },
         }
     });
-
     //line chart
     var ctx = document.getElementById("lineChart");
     ctx.height = 130;
@@ -1978,4 +1998,37 @@ function designChart(response) {
 
         }
     }); 
+}
+
+function donutchartsystem(on,off) {
+    var ctx = document.getElementById('c5');
+    chart9 = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'doughnut',
+        // The data for our dataset
+        data: {
+            labels: ["Centrol Control Machine", ""],
+            datasets: [{
+                backgroundColor: ['#da4265', 'white'],
+                borderColor: '#fff',
+                data: [on, off],
+                borderWidth: [0, 0],
+            }]
+        },
+        // Configuration options go here
+        options: {
+            maintainAspectRatio: false,
+            cutoutPercentage: 80,
+            title: {
+                display: false,
+                text: 'No. of Central Control Machine',
+            },
+            animation: {
+                animateRotete: true,
+            },
+            legend: {
+                display: false
+            },
+        }
+    });
 }

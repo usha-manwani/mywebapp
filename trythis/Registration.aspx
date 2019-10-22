@@ -82,7 +82,7 @@
 
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="PhoneNo"
                     CssClass="text-danger" ErrorMessage="The Phone Number is required." />
-                <asp:RegularExpressionValidator runat="server" ControlToValidate="PhoneNo" ValidationExpression = "\+(\(|)[\d]{2}(\)|)\-(\(|)[\d]{3}(\)|)\-(\(|)[\d]{8}(\)|)"
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="PhoneNo" ValidationExpression = "[\d]{11}"
                     CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number "></asp:RegularExpressionValidator>
                 <br />                
                 <asp:LinkButton runat="server" ID="PhoneNoLink"  Enabled="true" 

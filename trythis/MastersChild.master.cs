@@ -36,8 +36,7 @@ namespace WebCresij
                 dtIns = dt;
                 this.PopulateTreeView(dt, 0, null);
                 nodenames = new string[TreeMenuView.Nodes.Count];
-            }
-           
+            }           
         }
         public void PopulateTreeView(DataTable dtParent, int ParentId, TreeNode treeNode)
         {
@@ -126,10 +125,7 @@ namespace WebCresij
                             ipsloc.Add(row[1].ToString(), row[0].ToString());
                         }
                     }
-                    catch (Exception ex)
-                    {
-
-                    }
+                    catch (Exception ex){}
                     for (int i = 0; i < deviceloc.Length; i++)
                     {
                         deviceloc[i] = dt.Rows[i][1].ToString() + "," + dt.Rows[i][0].ToString();

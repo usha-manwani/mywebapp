@@ -15,8 +15,7 @@ namespace WebCresij
     public partial class Registration : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-          
+        {          
         }
         protected void CreateUser_Click(object sender, EventArgs e)
         {
@@ -28,17 +27,17 @@ namespace WebCresij
                 {
                     no = no.Replace(c, string.Empty);
                 }
-                 long phone = Convert.ToInt64(no);
+                long phone = Convert.ToInt64(no);
                 string connString = null;
                 connString = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
                 MySqlConnection con = new MySqlConnection(connString);
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("sp_Registration", con) { CommandType = CommandType.StoredProcedure };
-                cmd.Parameters.AddWithValue("User_ID", UserID.Text);
-                cmd.Parameters.AddWithValue("User_Name", User_Name.Text);
+                cmd.Parameters.AddWithValue("userid", UserID.Text);
+                cmd.Parameters.AddWithValue("UserName", User_Name.Text);
                 cmd.Parameters.AddWithValue("Password", Password.Text);
                 cmd.Parameters.AddWithValue("Phone_Number", phone);
-                cmd.Parameters.AddWithValue("Request_Status", "Pending");
+                //cmd.Parameters.AddWithValue("Request_Status", "Pending");
                 cmd.Parameters.Add("@k", MySqlDbType.Int32);
                 cmd.Parameters["@k"].Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();

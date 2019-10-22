@@ -105,7 +105,16 @@ namespace WebCresij
                     idata.Add(machineOffline);
                     idata.Add(workOpen);
                     idata.Add(workClose);
-                }    
+                }
+                else
+                {
+                    DataTable dt = pt.totalMachines();
+                    string m = dt.Rows[0][0].ToString();
+                    idata.Add(0);
+                    idata.Add(m);
+                    idata.Add(0);
+                    idata.Add(m);
+                }
             }
             else
             {
@@ -279,8 +288,7 @@ namespace WebCresij
                 }
             }
             idata.Add(gradeids);
-            idata.Add(gname);
-            
+            idata.Add(gname);           
             return idata;
         }
     }

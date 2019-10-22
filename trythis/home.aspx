@@ -453,7 +453,7 @@
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div>
+                            <div id="donutstatus">
                                 <canvas id="c5" height="100%" style="width:100px!important; min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip3" class="chartjs-tooltip">
                                     <div class="centered">
@@ -588,7 +588,6 @@
                 title: {                    
                     text: '系统状态',
                     style: {
-
                         color: '#fff',
                         textTransform: 'uppercase',
                         fontSize: '16px',

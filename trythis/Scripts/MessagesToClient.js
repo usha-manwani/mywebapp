@@ -6,12 +6,9 @@
     chat.client.broadcastMessage = function (name, message) {
         // Html encode display name and message. 
         //var tab = document.getElementById("MainContent_masterchildBody_GridView1");
-        var alliprows = document.getElementsByClassName("iprows");
-        
+        var alliprows = document.getElementsByClassName("iprows");        
         for (i = 0; i < alliprows.length; i++) {
-
             var cellIp = alliprows[i].cells[2];
-            
             var arraydata = message.split(',');
             if (cellIp.innerHTML == name)
             {                
@@ -176,7 +173,6 @@
         });
     });
 });
-
 function triggerclick() {
     $('#refresh').trigger('click');
     console.log("after click");

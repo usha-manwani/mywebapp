@@ -6,9 +6,7 @@
     <link href="ajaxfiles/Background.css" rel="stylesheet" />
     <link href="ajaxfiles/Tabs.css" rel="stylesheet" />
     <link href="Content/options.css?v=1" rel="stylesheet" />
-    <style>
-      
-  </style>
+
 </asp:Content>
 <asp:Content ID="Main" ContentPlaceHolderID="masterBody" runat="server">
     <script src="ajaxfiles/Localization.Resources.debug.js"></script>
@@ -28,7 +26,11 @@
                                 <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;<span><%=Resources.Resource.Add%></span>
                             </HeaderTemplate>
                             <ContentTemplate>
-                                <asp:LinkButton runat="server" Text="<%$Resources:Resource, AddInstitutes %>" ID="AddInstitutes" OnClientClick="displayPopup(); return false;" Font-Underline="True"
+                                <asp:LinkButton runat="server" Text="Add University" ID="AddUniv" 
+                                    OnClientClick="displayUnivPopup();return false;" Font-Underline="True"
+                                    Font-Bold="True" Font-Size="20px" ForeColor="#2f323a"></asp:LinkButton><br />
+                                <asp:LinkButton runat="server" Text="<%$Resources:Resource, AddInstitutes %>" 
+                                    ID="AddInstitutes" OnClientClick="displayPopup(); return false;" Font-Underline="True"
                                     Font-Bold="True" Font-Size="20px" ForeColor="#2f323a"></asp:LinkButton>
                                 <asp:TreeView ID="TreeMenuView1" EnableClientScript="true" runat="server"
                                     OnSelectedNodeChanged="TreeMenuView1_SelectedNodeChanged" 
@@ -67,7 +69,35 @@
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <div style="position: center;">
-
+                     <div id="idAddUniv" class="modal scroll">
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <div class=" row " style="padding-right: 20px;">
+                                <div class="panel-heading col ">
+                                    <h4><span>UniversityName</span></h4>
+                                </div>
+                                <span onclick="hideUnivDiv();" style="cursor: pointer">&times;</span>
+                            </div>
+                            <div>
+                                <div class="row ">
+                                    <asp:TextBox ID="TextBox2" runat="server" Visible="false"></asp:TextBox>
+                                    <div class="form-horizontal">
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="tbuniv_Name"
+                                                CssClass="col-md-5 labelpadding" Text="University Name"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="tbuniv_Name" CssClass="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 50%; float: left; margin-right: 30px;">                                    
+                                    <div class="col">
+                                        <asp:Button ID="Button3" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideGrade();" /></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div id="id01" class="modal scroll">
                         <div class="modal-content">
 
@@ -222,7 +252,12 @@
 
                     <script>
 
-
+                        function displayUnivPopup() {
+                            document.getElementById("idAddUniv").style.display = 'inline-block';
+                        }
+                        function hideUnivDiv() {
+                            document.getElementById("idAddUniv").style.display = 'none';
+                        }
                         function displayGrade() {
                             document.getElementById('idGrade').style.display = 'inline-block';
                         }
@@ -322,6 +357,7 @@
                             document.getElementById("camdiv").appendChild(div);
 
                         }
+                        
                     </script>
                     <%--add all details finished--%>
                     <%--Edit all details--%>

@@ -1,219 +1,210 @@
 ﻿﻿$(function () {
     var ipAddress = "";
     var chat = $.connection.myHub;
-    chat.client.broadcastMessage = function (name, message) {
-         
+    chat.client.broadcastMessage = function (name, message) {        
          tbleupdate(name, message);
-        if (name == ipAddress) {
-            var arraydata = message.split(',');
-            if (arraydata[1] == "Heartbeat") {
-                if (arraydata[3] == 'OPEN') {
-                    var img = document.getElementById("systempower");
-                    img.src = "Images/onimages/syspoweron.png";
-                }
-                else {
-                    var img = document.getElementById("systempower");
-                    img.src = "Images/offimages/sysof.png";
-                }
-                if (arraydata[5] == 'On') {
-                    var imgpc = document.getElementById("pcpower");
-                    imgpc.src = "Images/onimages/pcpoweron.png";
-                }
-                else {
-                    var imgpc = document.getElementById("pcpower");
-                    imgpc.src = "Images/offimages/pcof.png";
-                }
-                if (arraydata[12] == 'Locked') {
-                    var src = document.getElementById('syslock');
-                    src.src = "Images/onimages/syslock.png";
-                }
-                else {
-                    var src = document.getElementById('syslock');
-                    src.src = "Images/onimages/sysunlock.png";
-                }
-                if (arraydata[13] == 'Locked') {
-                    var src = document.getElementById('podiumlock');
-                    src.src = "Images/onimages/podiumlock.png";
-                }
-                else {
-                    var src = document.getElementById('podiumlock');
-                    src.src = "Images/onimages/podiumunlock.png";
-                }
-                if (arraydata[14] == 'Locked') {
-                    var src = document.getElementById('classlock');
-                    src.src = "Images/onimages/classlock.png";
-                }
-                else {
-                    var src = document.getElementById('classlock');
-                    src.src = "Images/onimages/classunlock.png";
-                }
-                uncheck();
-                switch (arraydata[11]) {
-                    case 'Desktop':
-                        var desk = document.getElementById('desktop');
-                        document.getElementById('desktop').checked = true;
-                        $(desk).closest("td").find("img").attr('src', "Images/onimages/desktop.png");                        
-                        
-                        break;
-                    case 'Laptop':
-                        document.getElementById('laptop').checked = true;
-                        var laptop = document.getElementById('laptop');
-                        $(laptop).closest("td").find("img").attr('src',"Images/onimages/laptopon.png");
-                       
-                        break;
-                    case 'Digital Curtain':
-                        document.getElementById('platform').checked = true;
-                        $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-                        break;
-                    case 'Digital Screen':
-                        document.getElementById('digitalEquipment').checked = true;
-                        $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-                        break;
-                    case 'DVD':
-                        document.getElementById('dvd').checked = true;
-                        $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
-                        break;
-                    case 'TV':
-                        document.getElementById('tv').checked = true;
-                        $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
-                        break;
-                    case 'Video Camera':
-                        document.getElementById('camera').checked = true;
-                        $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
-                        break;
-                    case 'Blu-Ray DVD':
-                        document.getElementById('bluray').checked = true;
-                        $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
-                        break;
-                    case 'Recording System':
-                        document.getElementById('recorder').checked = true;
-                        $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
-                        break;
-                }
+        //if (name == ipAddress) {
+        //    var arraydata = message.split(',');
+        //    if (arraydata[1] == "Heartbeat") {
+        //        if (arraydata[3] == 'OPEN') {
+        //            var img = document.getElementById("systempower");
+        //            img.src = "Images/onimages/syspoweron.png";
+        //        }
+        //        else {
+        //            var img = document.getElementById("systempower");
+        //            img.src = "Images/offimages/sysof.png";
+        //        }
+        //        if (arraydata[5] == 'On') {
+        //            var imgpc = document.getElementById("pcpower");
+        //            imgpc.src = "Images/onimages/pcpoweron.png";
+        //        }
+        //        else {
+        //            var imgpc = document.getElementById("pcpower");
+        //            imgpc.src = "Images/offimages/pcof.png";
+        //        }
+        //        if (arraydata[12] == 'Locked') {
+        //            var src = document.getElementById('syslock');
+        //            src.src = "Images/onimages/syslock.png";
+        //        }
+        //        else {
+        //            var src = document.getElementById('syslock');
+        //            src.src = "Images/onimages/sysunlock.png";
+        //        }
+        //        if (arraydata[13] == 'Locked') {
+        //            var src = document.getElementById('podiumlock');
+        //            src.src = "Images/onimages/podiumlock.png";
+        //        }
+        //        else {
+        //            var src = document.getElementById('podiumlock');
+        //            src.src = "Images/onimages/podiumunlock.png";
+        //        }
+        //        if (arraydata[14] == 'Locked') {
+        //            var src = document.getElementById('classlock');
+        //            src.src = "Images/onimages/classlock.png";
+        //        }
+        //        else {
+        //            var src = document.getElementById('classlock');
+        //            src.src = "Images/onimages/classunlock.png";
+        //        }
+        //        uncheck();
+        //        switch (arraydata[11]) {
+        //            case 'Desktop':
+        //                var desk = document.getElementById('desktop');
+        //                document.getElementById('desktop').checked = true;
+        //                $(desk).closest("td").find("img").attr('src', "Images/onimages/desktop.png");                                                
+        //                break;
+        //            case 'Laptop':
+        //                document.getElementById('laptop').checked = true;
+        //                var laptop = document.getElementById('laptop');
+        //                $(laptop).closest("td").find("img").attr('src',"Images/onimages/laptopon.png");                       
+        //                break;
+        //            case 'Digital Curtain':
+        //                document.getElementById('platform').checked = true;
+        //                $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
+        //                break;
+        //            case 'Digital Screen':
+        //                document.getElementById('digitalEquipment').checked = true;
+        //                $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
+        //                break;
+        //            case 'DVD':
+        //                document.getElementById('dvd').checked = true;
+        //                $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
+        //                break;
+        //            case 'TV':
+        //                document.getElementById('tv').checked = true;
+        //                $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
+        //                break;
+        //            case 'Video Camera':
+        //                document.getElementById('camera').checked = true;
+        //                $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
+        //                break;
+        //            case 'Blu-Ray DVD':
+        //                document.getElementById('bluray').checked = true;
+        //                $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
+        //                break;
+        //            case 'Recording System':
+        //                document.getElementById('recorder').checked = true;
+        //                $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
+        //                break;
+        //        }
+        //        if (arraydata[6] == 'Closed') {
+        //            var src = document.getElementById("projectorOn");
+        //            src.src = "Images/offimages/proj1.png";
+        //        }
+        //        else {
+        //            var src = document.getElementById("projectorOn");
+        //            src.src = "Images/onimages/projectoron1.png";
+        //        }
+        //    }
+        //    else {
+        //        for (j = 2; j < arraydata.length; j++) {
+        //            if (arraydata[1] == "KeyValue") {
+        //                switch (arraydata[2]) {
+        //                    case 'SystemON':
+        //                        var img = document.getElementById("systempower");
+        //                        img.src = "Images/onimages/syspoweron.png";
+        //                        break;
+        //                    case 'SystemOff':
+        //                        var img = document.getElementById("systempower");
+        //                        img.src = "Images/offimages/sysof.png";
+        //                        break;
+        //                    case 'DSDown':
+        //                        $('#dsdown').closest("td").find("img").attr('src', "Images/onimages/down.png");
+        //                        $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
+        //                        $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
+        //                        break;
+        //                    case 'DSUp':
+        //                        $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
+        //                        $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
+        //                        $('#dsup').closest("td").find("img").attr('src', "Images/onimages/up.png");
+        //                        break;
+        //                    case 'DSStop':
+        //                        $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
+        //                        $('#dsstop').closest("td").find("img").attr('src', "Images/onimages/stop.png");
+        //                        $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
+        //                        break;
+        //                    default:
+        //                        break;
+        //                }
+        //            }
+        //            else if (arraydata[1] == "LEDIndicator") {
+        //                if (arraydata[2] == "SystemSwitchOn") {
+        //                    var img = document.getElementById("systempower");
+        //                    img.src = "Images/onimages/syspoweron.png";
+        //                    if (arraydata.length > 4)
+        //                    {
+        //                        var imgpc = document.getElementById("pcpower");
+        //                        switch (arraydata[4])
+        //                        {
+        //                            case 'ComputerOff':
+        //                                imgpc.src = "Images/offimages/pcof.png";
+        //                                break;
+        //                            case 'ComputerOn':
+        //                                imgpc.src = "Images/onimages/pcpoweron.png";
+        //                                break;
+        //                        }
+        //                    }
+        //                    uncheck();
+        //                    switch (arraydata[3]) {
+        //                        case 'Desktop':
+        //                            document.getElementById('desktop').checked = true;
+        //                            $('#desktop').closest("td").find("img").attr('src', "Images/onimages/desktop.png");
+        //                            break;
+        //                        case 'Laptop':
+        //                            document.getElementById('laptop').checked = true;
+        //                            $('#laptop').closest("td").find("img").attr('src', "Images/onimages/laptopon.png");
+        //                            break;
+        //                        case 'DigitalCurtain':
+        //                            document.getElementById('platform').checked = true;
+        //                            $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
+        //                            break;
+        //                        case 'DigitalScreen':
+        //                            document.getElementById('digitalEquipment').checked = true;
+        //                            $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
+        //                            break;
+        //                        case 'DVD':
+        //                            document.getElementById('dvd').checked = true;
+        //                            $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
+        //                            break;
+        //                        case 'TV':
+        //                            document.getElementById('tv').checked = true;
+        //                            $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
+        //                            break;
+        //                        case 'VideoCamera':
+        //                            document.getElementById('camera').checked = true;
+        //                            $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
+        //                            break;
+        //                        case 'Blu-RayDVD':
+        //                            document.getElementById('bluray').checked = true;
+        //                            $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
+        //                            break;
+        //                        case 'RecordingSystem':
+        //                            document.getElementById('recorder').checked = true;
+        //                            $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
+        //                            break;
+        //                        case 'TurnOffLights':
+        //                            tab.rows[i].cells[10].innerHTML = 'Off';
+        //                            break;
+        //                        case 'CentralLocking':
+        //                            tab.rows[i].cells[12].innerHTML = 'Locked';
+        //                            break;
+        //                        case 'PodiumLock':
+        //                            tab.rows[i].cells[13].innerHTML = 'Locked';
+        //                            break;
+        //                        case 'ClassLock':
+        //                            tab.rows[i].cells[14].innerHTML = 'Locked';
+        //                            break;
+        //                    }
+        //                }
+        //                else if (arraydata[2] == "SystemSwitchOff") {
+        //                    var img = document.getElementById("systempower");
+        //                    img.src = "Images/offimages/sysof.png";
+        //                }
+        //            }
 
-                if (arraydata[6] == 'Closed') {
-                    var src = document.getElementById("projectorOn");
-                    src.src = "Images/offimages/proj1.png";
-                }
-                else {
-                    var src = document.getElementById("projectorOn");
-                    src.src = "Images/onimages/projectoron1.png";
-                }
-
-            }
-            else {
-                for (j = 2; j < arraydata.length; j++) {
-                    if (arraydata[1] == "KeyValue") {
-                        switch (arraydata[2]) {
-                            case 'SystemON':
-                                var img = document.getElementById("systempower");
-                                img.src = "Images/onimages/syspoweron.png"; 
-                                break;
-                            case 'SystemOff':
-                                var img = document.getElementById("systempower");
-                                img.src = "Images/offimages/sysof.png";
-                                break;
-                            case 'DSDown':
-                                $('#dsdown').closest("td").find("img").attr('src', "Images/onimages/down.png");
-                                $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
-                                $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
-                                break;
-                            case 'DSUp':
-                                $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
-                                $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
-                                $('#dsup').closest("td").find("img").attr('src', "Images/onimages/up.png");
-                                break;
-                            case 'DSStop':
-                                $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
-                                $('#dsstop').closest("td").find("img").attr('src', "Images/onimages/stop.png");
-                                $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
-                                break;
-                            default:
-                                break
-                        }
-                    }
-                    else if (arraydata[1] == "LEDIndicator") {
-
-                        if (arraydata[2] == "SystemSwitchOn") {
-                            var img = document.getElementById("systempower");
-                            img.src = "Images/onimages/syspoweron.png";
-                            if (arraydata.length > 4)
-                            {
-                                var imgpc = document.getElementById("pcpower");
-                                switch (arraydata[4])
-                                {
-                                    case 'ComputerOff':
-
-                                        imgpc.src = "Images/offimages/pcof.png";
-                                        break;
-                                    case 'ComputerOn':
-                                        imgpc.src = "Images/onimages/pcpoweron.png";
-                                        break;
-                                }
-
-                            }
-                            uncheck();
-                            switch (arraydata[3]) {
-                                case 'Desktop':
-                                    document.getElementById('desktop').checked = true;
-                                    $('#desktop').closest("td").find("img").attr('src', "Images/onimages/desktop.png");
-                                    break;
-                                case 'Laptop':
-                                    document.getElementById('laptop').checked = true;
-                                    $('#laptop').closest("td").find("img").attr('src', "Images/onimages/laptopon.png");
-                                    break;
-                                case 'DigitalCurtain':
-                                    document.getElementById('platform').checked = true;
-                                    $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-                                    break;
-                                case 'DigitalScreen':
-                                    document.getElementById('digitalEquipment').checked = true;
-                                    $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-                                    break;
-                                case 'DVD':
-                                    document.getElementById('dvd').checked = true;
-                                    $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
-                                    break;
-                                case 'TV':
-                                    document.getElementById('tv').checked = true;
-                                    $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
-                                    break;
-                                case 'VideoCamera':
-                                    document.getElementById('camera').checked = true;
-                                    $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
-                                    break;
-                                case 'Blu-RayDVD':
-                                    document.getElementById('bluray').checked = true;
-                                    $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
-                                    break;
-                                case 'RecordingSystem':
-                                    document.getElementById('recorder').checked = true;
-                                    $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
-                                    break;
-                                case 'TurnOffLights':
-                                    tab.rows[i].cells[10].innerHTML = 'Off';
-                                    break;
-                                case 'CentralLocking':
-                                    tab.rows[i].cells[12].innerHTML = 'Locked';
-                                    break;
-                                case 'PodiumLock':
-                                    tab.rows[i].cells[13].innerHTML = 'Locked';
-                                    break;
-                                case 'ClassLock':
-                                    tab.rows[i].cells[14].innerHTML = 'Locked';
-                                    break;
-
-                            }
-                        }
-                        else if (arraydata[2] == "SystemSwitchOff") {
-                            var img = document.getElementById("systempower");
-                            img.src = "Images/offimages/sysof.png";
-                        }
-                    }
-
-                }
-            }
-        };
+        //        }
+        //    }
+        //};
     };
     var tryingToReconnect = false;
 
@@ -283,8 +274,7 @@
             }
             alert(proj);
         });
-        //$(document).on('click', '.aclass', function () {
-                      
+        //$(document).on('click', '.aclass', function () {                      
         //    ipAddress = $(this).closest('tr').find('input').val();
         //    sessionStorage.setItem('ipofremote', ipAddress);
         //    console.log(ipAddress);
@@ -292,13 +282,10 @@
         //    chat.server.sendData(); 
         //});        
         $(document).on('click', '.trying', function () {
-            
-            if ($(this).hasClass("fa-angle-up")) {                
-                $(this).removeClass("fa-angle-up").addClass("fa-angle-down");                
-                 
-            } else {                
+            if ($(this).hasClass("fa-angle-up")) {
+                $(this).removeClass("fa-angle-up").addClass("fa-angle-down");
+            } else {
                 $(this).removeClass("fa-angle-down").addClass("fa-angle-up");
-                          
             }
         });
         $(document).on("click", "#syslock", function () {
@@ -753,19 +740,19 @@ function tbleupdate(name, message) {
             }
             else if (arraydata[1] == "LEDIndicator") {
                 if (arraydata[2] == "SystemSwitchOn") {
-                    chkbox[k].checked = true;
-                    switch (arraydata[4]) {
-                        case "ComputerOff":
-                            var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                    chkbox[k].checked = true;    
+                    if (arraydata[4] == "Computer") {
+                        var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                        if (desktop.hasClass("iconColor")) {
                             desktop.removeClass("iconColor");
                             desktop.addClass("red");
-                            break;
-                        case "ComputerOn":
-                            var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                        }
+                        else {
                             desktop.addClass("iconColor");
                             desktop.removeClass("red");
-                            break;
+                        }
                     }
+                      
                     switch (arraydata[3]) {
                         case 'Desktop':
                             var media = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");

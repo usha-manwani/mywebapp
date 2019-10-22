@@ -521,6 +521,7 @@
     <Content Include="Scripts\fontawesome\solid.min.js" />
     <Content Include="Scripts\fontawesome\v4-shims.js" />
     <Content Include="Scripts\fontawesome\v4-shims.min.js" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -531,6 +532,7 @@
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
     <Content Include="Scripts\MaintainanceScript.js" />
     <Content Include="Scripts\tablesorter\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\Treeview.js" />
     <Content Include="Scripts\WebForms\WebFormsBundle.js" />
     <Content Include="Services\MaintainanceWebService.asmx" />
     <Content Include="src\Chimera.cpp" />
