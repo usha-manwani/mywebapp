@@ -1142,7 +1142,6 @@ function CreateAllChart(value) {
     }
     var aData;
     var jsonData = JSON.stringify({
-
         name: value
     });
     $.ajax({
@@ -1381,7 +1380,7 @@ function CreateAllChart(value) {
     }
     function OnErrorCall_(respo) {
         console.log(respo);
-    }    
+    }
 }
 
 function clearCharts() {
@@ -1390,13 +1389,12 @@ function clearCharts() {
         myChart.destroy();
         myChart2.destroy();
         console.log("destroyed chart");
-    }    
+    }
 }
 
 function ddlIndexChange(value) {
    
     var jsonData = JSON.stringify({
-
         name: value
     });
     $.ajax({
@@ -1432,7 +1430,6 @@ function ddltimeclass(time, loc) {
     });
     function OnSuccess_(response) {
         designChart(response);
-
     }
     function OnErrorCall_(respo) {
         console.log(respo);
@@ -1440,9 +1437,7 @@ function ddltimeclass(time, loc) {
 }
 
 function updatelivechart(name, message) {
-
-    var ipName = document.getElementById("MainContent_masterchildBody_ipgraph").value;
-    
+    var ipName = document.getElementById("MainContent_masterchildBody_ipgraph").value;    
     //if (defaultip == "") {
     //    defaultip = ipName;
     //    timenow.length = 20;
@@ -1484,10 +1479,10 @@ function updatelivechart(name, message) {
         console.log(message);
         if (arraydata[0] == "Temp") {
             var today = new Date();
-            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();            
             timenow.shift();
             timenow.push(time);
+
             //temp chart update
             temp.shift();
             temp.push(arraydata[1]);
@@ -1540,13 +1535,11 @@ function updatelivechart(name, message) {
             if (arraydata[4] > 90) {
                 var mini;
                 if (arraydata[2] > arraydata[3]) {
-
                     mini = Math.ceil(arraydata[3]);
                 }
                 else
                     mini = Math.ceil(arraydata[2]);
                 myChart2.options.scales = {
-
                     xAxes: [{
                         display: true,
                         gridLines: {
@@ -1580,22 +1573,25 @@ function updatelivechart(name, message) {
                     }]
                 }
             }
+
             //2nd Chart               
             myChart2.data.datasets[0].data = humidity;
             myChart2.data.datasets[1].data = hum2;
             myChart2.data.datasets[2].data = hum10;
             myChart2.data.labels = timenow;
             myChart2.update(0);
+            //
             var cc = window.speed;
             cc.data.current = arraydata[5];
             console.log(cc.data.current);
             cc.update(0);
+            //
             myChart13.data.labels = timenow;
             co2array.shift();
             co2array.push(arraydata[10]);
-         
             myChart13.data.datasets[0].data = co2array;
             myChart13.update(0);
+            //
             if (arraydata[6] != '--') {
                 var cc1 = window.direction;
                 cc1.data.current = (((arraydata[6] / 1000.00) * arraydata[5])).toFixed(3);
@@ -1611,14 +1607,12 @@ function updatelivechart(name, message) {
                 volt.innerText = arraydata[5] + " V";
                 var elec = document.getElementById("Electricity");
                 elec.innerText = (((arraydata[6] / 1000.00) * arraydata[5])).toFixed(3) + " w";
-            }
-            
+            }            
         };
     };
 }
 
 var TempModalShow1 = {
-
     "type": "gauge",
     "data": {
         "datasets": [
@@ -1680,7 +1674,6 @@ var TempModalShow1 = {
         "hover": {
             "mode": null
         },
-
     }
 };
 function ShowTempModal1() {
@@ -1997,7 +1990,7 @@ function designChart(response) {
             },
 
         }
-    }); 
+    });
 }
 
 function donutchartsystem(on,off) {

@@ -10,7 +10,8 @@ namespace WebCresij
     public class Userdetails
     {
        
-        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings
+            ["CresijCamConnectionString"].ConnectionString;
         public DataTable getUserDetails(string s)
         {
             DataTable dtuser = new DataTable();

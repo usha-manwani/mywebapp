@@ -534,6 +534,7 @@
     <Content Include="Scripts\tablesorter\jquery.tablesorter.min.js" />
     <Content Include="Scripts\Treeview.js" />
     <Content Include="Scripts\WebForms\WebFormsBundle.js" />
+    <Content Include="Services\GetSideMenu.asmx" />
     <Content Include="Services\MaintainanceWebService.asmx" />
     <Content Include="src\Chimera.cpp" />
     <Content Include="src\Chimera.h" />
@@ -2188,6 +2189,7 @@
     <Compile Include="exportdata.aspx.designer.cs">
       <DependentUpon>exportdata.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\GetMenuDataHelper.cs" />
     <Compile Include="Maintainance.aspx.cs">
       <DependentUpon>Maintainance.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2226,6 +2228,10 @@
     </Compile>
     <Compile Include="Services\ChartData.asmx.cs">
       <DependentUpon>ChartData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\GetSideMenu.asmx.cs">
+      <DependentUpon>GetSideMenu.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\MaintainanceWebService.asmx.cs">
