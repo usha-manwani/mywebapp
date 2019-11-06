@@ -1042,7 +1042,7 @@
     <value>学校名字</value>
   </data>
   <data name="Screen" xml:space="preserve">
-    <value>电动屏</value>
+    <value>电动幕</value>
   </data>
   <data name="Speaker" xml:space="preserve">
     <value>音响</value>
@@ -1082,5 +1082,47 @@
   </data>
   <data name="NoMoreCam" xml:space="preserve">
     <value>Can not have more than 4 camera with same IP address.</value>
+  </data>
+  <data name="AC1" xml:space="preserve">
+    <value>空调</value>
+  </data>
+  <data name="ACFreshAir" xml:space="preserve">
+    <value>空调/新风</value>
+  </data>
+  <data name="AirSystem" xml:space="preserve">
+    <value>新风</value>
+  </data>
+  <data name="Bluraydvd" xml:space="preserve">
+    <value>蓝光DVD</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="dvdControls" xml:space="preserve">
+    <value>DVD</value>
+  </data>
+  <data name="LightControl" xml:space="preserve">
+    <value>灯光</value>
+  </data>
+  <data name="ProjectorControl" xml:space="preserve">
+    <value>投影机</value>
+  </data>
+  <data name="RecorderControls" xml:space="preserve">
+    <value>录播</value>
+  </data>
+  <data name="ScreenCurtain" xml:space="preserve">
+    <value>电动幕/窗帘</value>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="SystemControl" xml:space="preserve">
+    <value>系统</value>
+  </data>
+  <data name="tvcontrol" xml:space="preserve">
+    <value>电视机</value>
   </data>
 </root>

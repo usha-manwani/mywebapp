@@ -33,7 +33,7 @@ namespace WebCresij
                 MySqlConnection con = new MySqlConnection(connString);
                 con.Open();
                 MySqlCommand cmd = new MySqlCommand("sp_Registration", con) { CommandType = CommandType.StoredProcedure };
-                cmd.Parameters.AddWithValue("userid", UserID.Text);
+                cmd.Parameters.AddWithValue("userids", UserID.Text);
                 cmd.Parameters.AddWithValue("UserName", User_Name.Text);
                 cmd.Parameters.AddWithValue("Password", Password.Text);
                 cmd.Parameters.AddWithValue("Phone_Number", phone);
@@ -45,9 +45,18 @@ namespace WebCresij
                 con.Close();
                 if (k > 0 )
                 {
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", 
-                        "alert('Registered Successfully')", true);
-                    Response.Redirect("Index.aspx", false);
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", 
+                    //    "alert('Registered Successfully')", true);
+                    string message = "Registered Successfully!!";
+                    string url = "../Index.aspx";
+                    string script = " alert('";
+                    script += message;
+                    script += "');";
+                    script += "window.location = '";
+                    script += url;
+                    script += "'; ";
+                    ScriptManager.RegisterStartupScript(this,this.GetType(), "Redirect", script, true);
+                    //Response.Redirect("Index.aspx", false);
                 }
                 else
                 {
@@ -59,7 +68,9 @@ namespace WebCresij
             {
                 string message = ex.Message;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('" + message + "')", true);
-            }           
+                
+            }
+            
         }
     }
 }

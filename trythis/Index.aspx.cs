@@ -100,7 +100,7 @@ namespace WebCresij
                 }
                 UserActivities.UserLogs.Task1(u,n,1); /// Saving login Task
                 //bool sessionAdd =  AddSession(u);
-                Response.Redirect("~/status.aspx");
+                Response.Redirect("~/Home.aspx");
             }
             else if (k == -9)
             {

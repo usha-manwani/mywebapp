@@ -207,7 +207,7 @@ namespace WebCresij
             if (e.CommandName.Equals("Delete"))
             {
                 int n = Convert.ToInt32(e.CommandArgument);
-                string query = "Delete from FaultTask where Id=" + n;
+                string query = "Delete from Fault_Task where Id=" + n;
                 DeletefromFaultTask(query);
             }
             if (e.CommandName.Equals("Update"))
@@ -228,7 +228,7 @@ namespace WebCresij
         {
             string sendername = ((TextBox)gvInputTask.Rows[e.RowIndex].FindControl("tasktext")).Text;
             int id = Convert.ToInt32(((Label)gvInputTask.Rows[e.RowIndex].FindControl("idOfTask")).Text);
-            string query = "Update FaultTask set Task ='" + sendername + "' where Id=" + id;
+            string query = "Update Fault_Task set Task ='" + sendername + "' where Id=" + id;
             PopulateTree.AnyTask(query);
             TaskDetails();
         }
@@ -267,8 +267,8 @@ namespace WebCresij
                     drCurrentRow = dt.NewRow();
                     drCurrentRow["TimeToReport"] = DateTime.Now;
                     drCurrentRow["Task"] = "Enter the task here";
-                    string query = "Insert into FaultTask values('" + drCurrentRow["Task"] +
-                         "','" + drCurrentRow["TimeToReport"] + "','')";
+                    string query = "Insert into Fault_Task (task, timetoreport) values('" + drCurrentRow["Task"] +
+                         "', now())";
                     PopulateTree.AnyTask(query);
                     dt.Rows.Add(drCurrentRow);
                     //gvInputTask.DataSource = dt;

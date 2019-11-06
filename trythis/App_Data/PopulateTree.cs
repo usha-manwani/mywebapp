@@ -555,14 +555,14 @@ namespace WebCresij
                 using (MySqlCommand cmd = new MySqlCommand("sp_deleteCamera", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@r", MySqlDbType.Int32);
-                    cmd.Parameters["@r"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@result", MySqlDbType.Int32);
+                    cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                     cmd.Parameters.AddWithValue("@loc", loc);
                     try
                     {
                         con.Open();
                         cmd.ExecuteNonQuery();
-                        result = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                        result = Convert.ToInt32(cmd.Parameters["@result"].Value);
                     }
                     catch (Exception ex)
                     {
@@ -1170,14 +1170,14 @@ namespace WebCresij
                 try
                 {
                     
-                    using(MySqlCommand cmd = new MySqlCommand("sp_UpdateSchedule", con))
+                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateSchedule", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         
-                        cmd.Parameters.AddWithValue("@ID", ID);
+                        cmd.Parameters.AddWithValue("@loc", ID);
                         cmd.Parameters.AddWithValue("@time", starttime);
                         cmd.Parameters.AddWithValue("@stoptime", stoptime);
-                        cmd.Parameters.AddWithValue("@timer", timer);
+                        cmd.Parameters.AddWithValue("@timer1", timer);
                         cmd.Parameters.AddWithValue("@mon", mon);
                         cmd.Parameters.AddWithValue("@tue",tue);
                         cmd.Parameters.AddWithValue("@wed",wed);
@@ -1265,6 +1265,30 @@ namespace WebCresij
                 }
             }
             return dt;
+        }
+
+        public  void UpdateMachineTimer(string timer, string loc)
+        {
+            using(MySqlConnection conn = new MySqlConnection(constr))
+            {
+                using(MySqlCommand cmd = new MySqlCommand("sp_timerMachineUpdate", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@timer1", timer);
+                    cmd.Parameters.AddWithValue("@loc", loc);
+                    try
+                    {
+                        if(conn.State != ConnectionState.Open){
+                            conn.Open();
+                        }
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                }
+            }
         }
         #endregion
 
@@ -1366,8 +1390,8 @@ namespace WebCresij
                     " join Class_Details c on c.ID = cc.location " +
                     "join Grade_Details g on g.ID = c.GradeID "+
                     "join Institute_Details id on id.ID = g.InsID where "+
-                    " gd.InsID in (select id from institute_details where ins_id = '" + id +
-                     "') group by gd.InsID";
+                    " g.InsID in (select id from institute_details where ins_id = '" + id +
+                     "') group by g.InsID";
                 try
                 {
                     using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
@@ -1398,8 +1422,8 @@ namespace WebCresij
                     " from Status s join Class_Details c on c.ID = s.Class " +
                     "join Grade_Details g on g.ID = c.GradeID " +
                     "join Institute_Details id on id.ID = g.InsID where " +
-                    "MachineStatus='Online' and gd.InsID in (select id from institute_details where ins_id = '" + id +
-                     "') group by gd.InsID, MachineStatus";
+                    "MachineStatus='Online' and g.InsID in (select id from institute_details where ins_id = '" + id +
+                     "') group by g.InsID, MachineStatus";
                 try
                 {
                     using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))
@@ -1430,20 +1454,55 @@ namespace WebCresij
 
         public void SaveDatainDatabase(string sender, string data)
         {
-            string[] data1 = data.Split(',');
+            string[] status = data.Split(',');
 
-            string query = "update Status set WorkStatus='" + data1[3] + 
-                "', PCStatus='" + data1[5] + "'"
-              + " where MachineIP = '" + sender + "'";
+            string s = "";
+            if (status[2] == "在线")
+                s = "Online";
+            else
+                s = "Offline";
+            string t = "";
+            if (status[3] == "运行中")
+                t = "OPEN";
+            else if (status[3] == "待机")
+                t = "CLOSED";
+
+            string u = "";
+            if (status[5] == "已关机")
+                u = "Off";
+            else if (status[5] == "已开机")
+                u = "On";
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 try
                 {
-                    using (MySqlCommand da = new MySqlCommand(query, con))
+                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateStatus", con))
                     {
-                        if (con.State != ConnectionState.Open)
-                            con.Open();
-                        da.ExecuteNonQuery();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@ip", sender);
+
+                        cmd.Parameters.AddWithValue("@mstat", s);
+
+                        cmd.Parameters.AddWithValue("@wstat", t);
+
+                        cmd.Parameters.AddWithValue("@cstat", u);
+
+                        try
+                        {
+                            if (con.State != ConnectionState.Open)
+                            {
+                                con.Open();
+                            }
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            // Console.WriteLine(ex.Message);
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -1507,7 +1566,7 @@ namespace WebCresij
             DataTable dtcam = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "select CameraIP, ID, password from Camera_Details where location in (select classID from Class_Details where ID = '" + loc+ "')";
+                string query = "select CameraIP, port, user_id, password from Camera_Details where location = "+loc;
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     try

@@ -14,6 +14,7 @@
         .scroll {
             overflow-y: auto;
         }
+
             .scroll::-webkit-scrollbar {
                 width: 10px;
                 background-color: #404040;
@@ -345,17 +346,18 @@
     </style>
 </head>
 <body style="overflow-x: hidden !important">
+
     <form runat="server">
-        
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
         <div id="control">
-            <div style="color:white; font-size:1.5em">
-            <asp:Label runat="server" ID="insName"></asp:Label>
-            <span>>></span>
-            <asp:Label runat="server" ID="GradeName"></asp:Label>
-            <span>>></span>
-            <asp:Label runat="server" ID="ClassName"></asp:Label>
-           <hr/>
-        </div>
+            <div style="color: white; font-size: 1.5em">
+                <asp:Label runat="server" ID="insName"></asp:Label>
+                <span>>></span>
+                <asp:Label runat="server" ID="GradeName"></asp:Label>
+                <span>>></span>
+                <asp:Label runat="server" ID="ClassName"></asp:Label>
+                <hr />
+            </div>
             <input id="sessionInputIP" type="hidden" value='<%= Session["DeviceIP"] %>' />
             <input id="sessionInput1" type="hidden" value='<%= Session["loc"] %>' />
             <input id="dev" type="hidden" value='<%=Session["devices"] %>' />
@@ -367,26 +369,26 @@
                             <div id="system" class="divcontrols tablestyle">
                                 <table style="height: 100%; width: 100%">
                                     <tr class="controlHeaderRow">
-                                        <td colspan="6" style="text-align: center">System Control
+                                        <td colspan="6" style="text-align: center"><%=Resources.Resource.SystemControl%>
                                         </td>
                                     </tr>
                                     <tr style="align-items: center; align-content: center;">
                                         <td colspan="3" style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_212.png" id="systempower"
-                                                    class="imgclick" style="width:45%" /></span>
+                                                    class="imgclick" style="width: 45%" /></span>
                                         </td>
                                         <td colspan="3" style="text-align: center">
                                             <span>
                                                 <img src="Images/AllImages/images/图标_212.png" id="pcpower"
-                                                    class="imgclick" style="width:45%" /></span></td>
+                                                    class="imgclick" style="width: 45%" /></span></td>
 
                                     </tr>
                                     <tr style="align-items: center; align-content: center;">
 
                                         <td colspan="2" style="text-align: center">
                                             <span>
-                                                
+
 
                                                 <img src="Images/中控首页按钮/on/lock1open.png" id="sysLock"
                                                     class="imgclick imgsize" /></span>
@@ -409,7 +411,7 @@
                             <div id="Projector" class="divcontrols tablestyle">
                                 <table style="height: 100%; width: 100%">
                                     <tr class="controlHeaderRow">
-                                        <td colspan="6" style="text-align: center">Projector Control
+                                        <td colspan="6" style="text-align: center"><%=Resources.Resource.ProjectorControl%>
                                         </td>
                                     </tr>
 
@@ -457,7 +459,7 @@
                             <div class="divcontrols tablestyle ">
                                 <table style="width: 100%; height: 100%;">
                                     <tr class="controlHeaderRow">
-                                        <td colspan="6" style="text-align: center">Light Control
+                                        <td colspan="6" style="text-align: center"><%=Resources.Resource.Light%>
                                         </td>
                                     </tr>
                                     <tr>
@@ -466,30 +468,30 @@
                                                 <table style="width: 100%; height: 100%; font-size: 12px; margin-top: -2px" id="myTable">
 
                                                     <tr class="buttonEffect">
-                                                        <td id="light1">Light 1
+                                                        <td id="light1"><%=Resources.Resource.Light%> 1
                                                         </td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="light2">Light 2
+                                                        <td id="light2"><%=Resources.Resource.Light%> 2
                                                         </td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="light3">Light 3</td>
+                                                        <td id="light3"><%=Resources.Resource.Light%> 3</td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="light4">Light 4 </td>
+                                                        <td id="light4"><%=Resources.Resource.Light%> 4 </td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="light5">Light 5</td>
+                                                        <td id="light5"><%=Resources.Resource.Light%> 5</td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="light6">Light 6</td>
+                                                        <td id="light6"><%=Resources.Resource.Light%> 6</td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="light7">Light 7</td>
+                                                        <td id="light7"><%=Resources.Resource.Light%> 7</td>
                                                     </tr>
                                                     <tr style="color: white; cursor: pointer">
-                                                        <td id="light8">Light 8 </td>
+                                                        <td id="light8"><%=Resources.Resource.Light%> 8 </td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -627,20 +629,26 @@
                                                 </div>
                                                 <div style="height: 40%; margin-left: -20px; margin-top: -5px; background-color: #232140">
                                                     <fieldset style="border-top: 1px solid #4ecdc4">
-                                                        <legend align="center" style="width: auto; color: white; font-size: 15px;">Options</legend>
+                                                        <legend align="center" style="width: auto; color: white; font-size: 15px;"><%=Resources.Resource.Options%></legend>
                                                     </fieldset>
-                                                    <table style="width: 100%">
-                                                        <tr>
-                                                            <td style="text-align: center;">
-                                                                <button class="btnstyle" id="lighton">
-                                                                    On</button>
-                                                            </td>
-                                                            <td style="text-align: center;">
-                                                                <button class="btnstyle" id="lightoff">
-                                                                    Off</button>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                    <asp:UpdatePanel runat="server">
+                                                        <ContentTemplate>
+                                                            <table style="width: 100%">
+                                                                <tr>
+                                                                    <td style="text-align: center;">
+                                                                        <button class="btnstyle" id="lighton">
+                                                                            <%=Resources.Resource.On%></button>
+                                                                    </td>
+                                                                    <td style="text-align: center;">
+                                                                        <button class="btnstyle" id="lightoff">
+                                                                            <%=Resources.Resource.Off%></button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ContentTemplate>
+
+                                                    </asp:UpdatePanel>
+
                                                 </div>
                                             </div>
                                         </td>
@@ -653,7 +661,7 @@
                             <div class="divcontrols tablestyle">
                                 <table style="width: 100%; height: 100%;">
                                     <tr class="controlHeaderRow">
-                                        <td colspan="6" style="text-align: center">Screen & Curtains Control
+                                        <td colspan="6" style="text-align: center"><%=Resources.Resource.ScreenCurtain%>
                                         </td>
                                     </tr>
                                     <tr>
@@ -662,28 +670,28 @@
                                                 <table style="width: 100%; height: 100%; font-size: 12px; margin-top: -2px;"
                                                     id="curtainTable">
                                                     <tr class="buttonEffect">
-                                                        <td id="screen1">Screen 1</td>
+                                                        <td id="screen1"><%=Resources.Resource.Screen%> 1</td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="screen2">Screen 2</td>
+                                                        <td id="screen2"><%=Resources.Resource.Screen%> 2</td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="curtain1">Curtain 1</td>
+                                                        <td id="curtain1"><%=Resources.Resource.Curtain%> 1</td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="curtain2">Curtain 2</td>
+                                                        <td id="curtain2"><%=Resources.Resource.Curtain%> 2</td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="curtain3">Curtain 3</td>
+                                                        <td id="curtain3"><%=Resources.Resource.Curtain%> 3</td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="curtain4">Curtain 4</td>
+                                                        <td id="curtain4"><%=Resources.Resource.Curtain%> 4</td>
                                                     </tr>
                                                     <tr class="buttonEffect">
-                                                        <td id="curtain5">Curtain 5</td>
+                                                        <td id="curtain5"><%=Resources.Resource.Curtain%> 5</td>
                                                     </tr>
                                                     <tr>
-                                                        <td id="curtain6" style="color: white; cursor: pointer;">Curtain 6</td>
+                                                        <td id="curtain6" style="color: white; cursor: pointer;"><%=Resources.Resource.Curtain%> 6</td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -694,15 +702,15 @@
                                                             <tr>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_132.png"
-                                                                        id="screenup1" class="imgclick imgsize2"/>
+                                                                        id="screenup1" class="imgclick imgsize2" />
                                                                 </td>
 
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png"
-                                                                        id="screendown1" class="imgclick imgsize2"/></td>
+                                                                        id="screendown1" class="imgclick imgsize2" /></td>
                                                                 <td style="text-align: center">
                                                                     <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png"
-                                                                        id="screenstop1" class="imgclick imgsize2"/></td>
+                                                                        id="screenstop1" class="imgclick imgsize2" /></td>
                                                             </tr>
                                                         </table>
                                                     </div>
@@ -821,52 +829,59 @@
                                                 </div>
                                                 <div style="height: 40%; background-color: #232140; margin-top: -5px;" id="curtainOptions">
                                                     <fieldset style="border-top: 1px solid #4ecdc4">
-                                                        <legend align="center" style="width: auto; color: white; font-size: 15px;">Options</legend>
+                                                        <legend align="center" style="width: auto; color: white; font-size: 15px;"><%=Resources.Resource.Options%></legend>
                                                     </fieldset>
-
-                                                    <table style="width: 100%; height: 90%; margin-top: -15px;">
+                                                    <asp:UpdatePanel runat="server">
+                                                        <ContentTemplate>
+                                                             <table style="width: 100%; height: 90%; margin-top: -15px;">
                                                         <tr>
                                                             <td style="text-align: center;">
                                                                 <button class="btnstyle" id="curtainbtnopen">
-                                                                    Open</button>
+                                                                    <%=Resources.Resource.Open%></button>
                                                             </td>
                                                             <td style="text-align: center;">
                                                                 <button class="btnstyle" id="curtainbtnclose">
-                                                                    Close</button>
+                                                                    <%=Resources.Resource.Close%></button>
                                                             </td>
                                                             <td style="text-align: center;">
                                                                 <button class="btnstyle" id="curtainbtnstop">
-                                                                    Stop</button>
+                                                                    <%=Resources.Resource.Stop%></button>
                                                             </td>
                                                         </tr>
                                                     </table>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                   
                                                 </div>
                                                 <div style="height: 40%; background-color: #232140; margin-top: -5px;" id="screenOptions">
                                                     <fieldset style="border-top: 1px solid #4ecdc4">
                                                         <legend align="center" style="width: auto; color: white; font-size: 15px;">Options</legend>
                                                     </fieldset>
-                                                    <table style="width: 100%">
+                                                    <asp:UpdatePanel runat="server">
+                                                        <ContentTemplate>
+                                                             <table style="width: 100%">
                                                         <tr>
                                                             <td style="text-align: center;">
                                                                 <button class="btnstyle" id="screenbtnup">
-                                                                    Up</button>
+                                                                    <%=Resources.Resource.Up%></button>
                                                             </td>
                                                             <td style="text-align: center;">
                                                                 <button class="btnstyle" id="screenbtndown">
-                                                                    Down</button>
+                                                                    <%=Resources.Resource.Down%></button>
                                                             </td>
                                                             <td style="text-align: center;">
                                                                 <button class="btnstyle" id="screenbtnstop">
-                                                                    Stop</button>
+                                                                    <%=Resources.Resource.Stop%></button>
                                                             </td>
                                                         </tr>
                                                     </table>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>                                                   
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -877,11 +892,8 @@
                             <div id="media" class="divcontrols MediaSignalTable">
                                 <table style="height: 100%; width: 100%">
                                     <tr class="controlHeaderRow">
-                                        <td colspan="2" style="text-align: center">Media Signals
-                                           
-                                        </td>
+                                        <td colspan="2" style="text-align: center"><%=Resources.Resource.MediaSignal%></td>
                                     </tr>
-                                    
                                     <tr>
                                         <td style="text-align: center">
                                             <label>
@@ -905,7 +917,7 @@
                                             <label>
                                                 <input type="radio" value="3" name="test" id="platform"
                                                     data-target=".displaynone">
-                                                <img src="Images/AllImages/images/图标_194.png" class="imgclick  imgsize">
+                                                <img src="Images/AllImages/images/图标_194.png" class="imgclick imgsize">
                                             </label>
                                         </td>
 
@@ -913,7 +925,7 @@
                                             <label>
                                                 <input type="radio" value="4" name="test"
                                                     id="digitalEquipment" data-target=".displaynone">
-                                                <img src="Images/AllImages/images/图标_194.png" class="imgclick  imgsize">
+                                                <img src="Images/AllImages/images/图标_194.png" class="imgclick imgsize">
                                             </label>
                                         </td>
                                     </tr>
@@ -923,7 +935,7 @@
                                             <label>
                                                 <input type="radio" value="5" name="test" id="dvd"
                                                     data-target="#dvdcontrols">
-                                                <img src="Images/AllImages/images/图标_246.png" class="imgclick  imgsize">
+                                                <img src="Images/AllImages/images/图标_246.png" class="imgclick imgsize">
                                             </label>
                                         </td>
 
@@ -931,7 +943,7 @@
                                             <label>
                                                 <input type="radio" value="6" name="test" id="bluray"
                                                     data-target="#bluraydvd">
-                                                <img src="Images/AllImages/images/图标_272.png" class="imgclick  imgsize">
+                                                <img src="Images/AllImages/images/图标_272.png" class="imgclick imgsize">
                                             </label>
                                         </td>
                                     </tr>
@@ -941,7 +953,7 @@
                                             <label>
                                                 <input type="radio" value="7" name="test" id="tv"
                                                     data-target="#tvcontrols">
-                                                <img src="Images/AllImages/images/图标_298.png" class="imgclick  imgsize">
+                                                <img src="Images/AllImages/images/图标_298.png" class="imgclick imgsize">
                                             </label>
                                         </td>
 
@@ -949,7 +961,7 @@
                                             <label>
                                                 <input type="radio" value="8" name="test" id="camera"
                                                     data-target="#Camera">
-                                                <img src="Images/AllImages/images/图标_220.png" class="imgclick  imgsize">
+                                                <img src="Images/AllImages/images/图标_220.png" class="imgclick imgsize">
                                             </label>
                                         </td>
                                     </tr>
@@ -958,7 +970,7 @@
                                             <label>
                                                 <input type="radio" value="9" name="test" id="recorder"
                                                     data-target="#recordercontrol">
-                                                <img src="Images/AllImages/images/图标_324.png" class="imgclick  imgsize">
+                                                <img src="Images/AllImages/images/图标_324.png" class="imgclick imgsize">
                                             </label>
                                         </td>
                                         <td>no text</td>
@@ -967,74 +979,74 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div >
+                            <div>
                                 <div id="dvdcontrols" class="displaynone">
                                     <div id="dvdsubmenu" class="divcontrols  MediaSignalTable">
                                         <table style="width: 100%; height: 100%">
                                             <tr class="controlHeaderRow">
-                                                <td colspan="2" style="text-align: center">DVD Controls
+                                                <td colspan="2" style="text-align: center"><%=Resources.Resource.dvdControls%>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_19.png" id="dvdpoweron"
-                                                         class="imgclick  imgsize" />
+                                                        class="imgclick  imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_53.png" id="dvdstop"
-                                                         class="imgclick  imgsize" />
+                                                        class="imgclick  imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_87.png" id="playdvd"
-                                                         class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_55.png" id="dvdpause"
-                                                         class="imgclick  imgsize" />
+                                                        class="imgclick  imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_121.png" id="dvdback"
-                                                       class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_89.png" id="dvdforward"
-                                                         class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_123.png" id="dvdpre"
-                                                       class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_155.png" id="dvdnext"
-                                                      class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_21.png" id="dvdexit"
-                                                         class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
                                 <div id="bluraydvd" class="displaynone">
-                                    <div id="bludvdsubmenu" class="divcontrols MediaSignalTable" >
+                                    <div id="bludvdsubmenu" class="divcontrols MediaSignalTable">
                                         <table style="width: 100%; height: 100%">
                                             <tr class="controlHeaderRow">
-                                                <td colspan="2" style="text-align: center">Blu-ray DVD Controls
+                                                <td colspan="2" style="text-align: center"><%=Resources.Resource.Bluraydvd%>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_19.png" id="bludvdpoweron"
-                                                         class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_53.png" id="bludvdstop"
@@ -1048,7 +1060,7 @@
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_55.png" id="bludvdpause"
-                                                         class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1068,7 +1080,7 @@
                                                 </td>
                                                 <td style="text-align: center">
                                                     <img src="Images/AllImages/子菜单/默认状态/DVD、蓝光控制/子菜单_155.png" id="bludvdnext"
-                                                         class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1084,14 +1096,14 @@
                                     <div id="camerasubmenu" class="divcontrols MediaSignalTable">
                                         <table style="width: 100%; height: 100%">
                                             <tr class="controlHeaderRow">
-                                                <td colspan="2" style="text-align: center">Camera Controls
+                                                <td colspan="2" style="text-align: center"><%=Resources.Resource.Camera%>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
 
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_27.png" id="tcampoweroff"
-                                                         class="imgclick imgsize" />
+                                                        class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_29.png" id="scampoweroff"
@@ -1100,22 +1112,22 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
-                                                    <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_61.png" 
+                                                    <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_61.png"
                                                         id="rotate" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
-                                                    <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_63.png" 
-                                                         id="wb" class="imgclick imgsize" />
+                                                    <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_63.png"
+                                                        id="wb" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_95.png"
-                                                       id="plus" class="imgclick imgsize" />
+                                                        id="plus" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_97.png"
-                                                         id="minus" class="imgclick imgsize" />
+                                                        id="minus" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1124,24 +1136,24 @@
                                                         id="savecam" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
-                                                    <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_131.png" 
+                                                    <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_131.png"
                                                         id="changecam" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
-                                                    <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_163.png" 
+                                                    <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_163.png"
                                                         id="stopcam" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_165.png"
-                                                     id="novideo" class="imgclick imgsize" />
+                                                        id="novideo" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/摄像机控制/子菜单_197.png"
-                                                       id="nocam" class="imgclick imgsize" />
+                                                        id="nocam" class="imgclick imgsize" />
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -1152,7 +1164,7 @@
                                     <div id="tvsubmenu" class="divcontrols MediaSignalTable">
                                         <table style="width: 100%; height: 80%">
                                             <tr class="controlHeaderRow">
-                                                <td colspan="2" style="text-align: center">TV Controls
+                                                <td colspan="2" style="text-align: center"><%=Resources.Resource.tvcontrol%>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1162,13 +1174,13 @@
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_25.png"
-                                                       id="inputtv" class="imgclick imgsize" />
+                                                        id="inputtv" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_57.png"
-                                                      id="oktv" class="imgclick imgsize" />
+                                                        id="oktv" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_59.png"
@@ -1178,17 +1190,17 @@
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_91.png"
-                                                       id="plustv" class="imgclick imgsize" />
+                                                        id="plustv" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_93.png"
-                                                       id="minustv" class="imgclick imgsize" />
+                                                        id="minustv" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/电视机控制/子菜单_125.png"
-                                                       id="exittv" class="imgclick imgsize" />
+                                                        id="exittv" class="imgclick imgsize" />
                                                 </td>
                                                 <td></td>
                                             </tr>
@@ -1199,13 +1211,13 @@
                                     <div id="recordermenu" class="divcontrols MediaSignalTable">
                                         <table style="width: 100%; height: 100%">
                                             <tr class="controlHeaderRow">
-                                                <td colspan="2" style="text-align: center">Recorder Controls
+                                                <td colspan="2" style="text-align: center"><%=Resources.Resource.RecorderControls%>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_31.png"
-                                                       id="recpoweron" class="imgclick imgsize" />
+                                                        id="recpoweron" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_33.png"
@@ -1215,21 +1227,21 @@
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_65.png"
-                                                       id="recplay" class="imgclick imgsize" />
+                                                        id="recplay" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_67.png"
-                                                      id="recstop" class="imgclick imgsize" />
+                                                        id="recstop" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_99.png"
-                                                       id="recchange" class="imgclick imgsize" />
+                                                        id="recchange" class="imgclick imgsize" />
                                                 </td>
                                                 <td class="text-center">
                                                     <img src="Images/AllImages/子菜单/默认状态/录播系统控制/子菜单_101.png"
-                                                     id="recsave" class="imgclick imgsize" />
+                                                        id="recsave" class="imgclick imgsize" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -1246,73 +1258,77 @@
                     <div style="height: 200px; border: 1px solid #4ecdc4;">
                         <table style="width: 100%; height: 100%;">
                             <tr class="controlHeaderRow">
-                                <td colspan="6" style="text-align: center">AC & Fresh Air System Control
+                                <td colspan="6" style="text-align: center"><%=Resources.Resource.ACFreshAir%>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div  style="height:100%">
+                                    <div style="height: 100%">
                                         <div style="width: 20%; height: 100%; border-right: 1px solid #4ecdc4; float: left">
                                             <table style="width: 100%; height: 100%; font-size: 12px; margin-top: -2px;" id="actable">
                                                 <tr class="buttonEffect">
-                                                    <td id="ac1">AC 1</td>
+                                                    <td id="ac1"><%=Resources.Resource.AC1%> 1</td>
                                                 </tr>
                                                 <tr class="buttonEffect">
-                                                    <td id="ac2">AC 2</td>
+                                                    <td id="ac2"><%=Resources.Resource.AC1%> 2</td>
                                                 </tr>
                                                 <tr class="buttonEffect">
-                                                    <td id="ac3">AC 3</td>
+                                                    <td id="ac3"><%=Resources.Resource.AC1%> 3</td>
                                                 </tr>
                                                 <tr class="buttonEffect">
-                                                    <td id="ac4">AC 4</td>
+                                                    <td id="ac4"><%=Resources.Resource.AC1%> 4</td>
                                                 </tr>
                                                 <tr class="buttonEffect">
-                                                    <td id="air1">AirSystem 1</td>
+                                                    <td id="air1"><%=Resources.Resource.AirSystem%> 1</td>
                                                 </tr>
                                                 <tr class="buttonEffect">
-                                                    <td id="air2">AirSystem 2</td>
+                                                    <td id="air2"><%=Resources.Resource.AirSystem%> 2</td>
                                                 </tr>
                                                 <tr class="buttonEffect">
-                                                    <td id="air3">AirSystem 3</td>
+                                                    <td id="air3"><%=Resources.Resource.AirSystem%> 3</td>
                                                 </tr>
                                                 <tr>
-                                                    <td id="air4" style="color: white; cursor: pointer">AirSystem 4</td>
+                                                    <td id="air4" style="color: white; cursor: pointer"><%=Resources.Resource.AirSystem%> 4</td>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div style="width: 80%; height: 100%;float:right">
-                                           
-                                           <table id="ac1div" style="width: 100%; height: 100%">
-                                                    <tr>
-                                                        <td align="center">
+                                        <div style="width: 80%; height: 100%; float: right">
+
+                                            <table id="ac1div" style="width: 100%; height: 100%">
+                                                <tr>
+                                                    <td align="center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="ac1on" />
-                                                    </td><td align="center">
+                                                    </td>
+                                                    <td align="center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_09.png" class="imgclick imgsize1" id="ac1off" />
-                                                    </td><td align="center">
+                                                    </td>
+                                                    <td align="center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_22.png" class="imgclick imgsize1" id="ac1cool" />
-                                                    </td><td align="center">
+                                                    </td>
+                                                    <td align="center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="ac1heat" />
-                                                    </td></tr>
-                                               
+                                                    </td>
+                                                </tr>
+
                                                 <tr style="padding-left: 20px">
                                                     <td align="center">
                                                         <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="ac1plus" />
                                                     </td>
-                                                   <td align="center">
+                                                    <td align="center">
                                                         <img src="Images/AllImages/空调/images/空调_19.png" class="imgclick imgsize1" id="ac1minus" />
                                                     </td>
-                                                   <td align="center">
+                                                    <td align="center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_32.png" class="imgclick imgsize1" id="ac1fan" />
                                                     </td>
                                                     <td align="center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="ac1fanOn" />
                                                     </td>
                                                 </tr>
-                                                     </table>
-                                            
+                                            </table>
+
 
                                             <table style="width: 100%; height: 100%" id="ac2div">
-                                                <tr >
+                                                <tr>
                                                     <td style="text-align: center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="ac2on" />
                                                     </td>
@@ -1326,7 +1342,7 @@
                                                         <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="ac2heat" />
                                                     </td>
                                                 </tr>
-                                                <tr >
+                                                <tr>
                                                     <td style="text-align: center">
                                                         <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="ac2plus" />
                                                     </td>
@@ -1374,7 +1390,7 @@
                                             </table>
 
                                             <table style="width: 100%; height: 100%" id="ac4div">
-                                                <tr >
+                                                <tr>
                                                     <td style="text-align: center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="ac4on" />
                                                     </td>
@@ -1388,7 +1404,7 @@
                                                         <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="ac4heat" />
                                                     </td>
                                                 </tr>
-                                                <tr >
+                                                <tr>
                                                     <td style="text-align: center">
                                                         <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="ac4plus" />
                                                     </td>
@@ -1419,7 +1435,7 @@
                                                         <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="air1heat" />
                                                     </td>
                                                 </tr>
-                                                <tr >
+                                                <tr>
                                                     <td style="text-align: center">
                                                         <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="air1plus" />
                                                     </td>
@@ -1450,7 +1466,7 @@
                                                         <img src="Images/AllImages/空调/默认状态/空调_24.png" class="imgclick imgsize1" id="air2heat" />
                                                     </td>
                                                 </tr>
-                                                <tr >
+                                                <tr>
                                                     <td style="text-align: center">
                                                         <img src="Images/AllImages/空调/images/空调_17.png" class="imgclick imgsize1" id="air2plus" />
                                                     </td>
@@ -1497,7 +1513,7 @@
                                                 </tr>
                                             </table>
 
-                                            <table style="width: 100%; height:100%" id="air4div">
+                                            <table style="width: 100%; height: 100%" id="air4div">
                                                 <tr>
                                                     <td style="text-align: center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_07.png" class="imgclick imgsize1" id="air4on" />
@@ -1524,13 +1540,13 @@
                                                     </td>
                                                     <td style="text-align: center">
                                                         <img src="Images/AllImages/空调/默认状态/空调_34.png" class="imgclick imgsize1" id="air4fanOn" />
-                                                       
+
                                                     </td>
                                                 </tr>
                                             </table>
-                                </div>
-                                </div>
-                                    </td>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -1539,7 +1555,7 @@
                     <div style="height: 200px; width: 100%; border: none">
                         <fieldset class="fieldSetControl" style="width: 100%; color: white;">
                             <legend align="center" style="width: auto; font-size: 16px;">
-                                <span>Sound Control</span></legend>
+                                <span><%=Resources.Resource.Sound%></span></legend>
                         </fieldset>
                         <div id="Microphone" class="divcontrols">
                             <table>

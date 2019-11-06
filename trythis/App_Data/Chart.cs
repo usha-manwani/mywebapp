@@ -40,7 +40,7 @@ namespace WebCresij
             using(MySqlConnection con= new MySqlConnection(connString))
             {
                 try {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_SaveTempData", con))
+                    using (MySqlCommand cmd = new MySqlCommand("sp_insertTemperature", con)) // sp_SaveTempData
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@ip", ip);
@@ -373,7 +373,7 @@ namespace WebCresij
         public DataTable getDataforClass(string value)
         {
             DataTable dt = new DataTable();
-            string q = "select cast(date as time(0)) time , temperature, Humidity as humid, pm25, pm10" +
+            string q = "select time(date) as time , temperature as temp, Humidity as humid, pm25, pm10" +
                 " from temprature_details WHERE date >= date_sub(now(), Interval 6 hour) " +
                 "and location = '"+value+"' order by date desc";
             using (MySqlConnection con = new MySqlConnection(connString))
@@ -623,6 +623,113 @@ namespace WebCresij
                 }
             }
             return dt;
+        }
+
+        #endregion
+
+        #region Working Hours date
+        public DataTable WorkingHours(string name)
+        {
+            DataTable dt = new DataTable();
+            string query = WorkingHoursQuery(name);
+            using(MySqlConnection con = new MySqlConnection(connString))
+             {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        if(con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
+                        sqlDataAdapter.Fill(dt);
+                    }
+                }
+                catch (MySqlException ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }           
+            return dt;
+        }
+
+        protected string WorkingHoursQuery(string name)
+        {
+            string n = name.Substring(0, 3);
+            string query = "";
+            switch (n)
+            {
+                case "Cla":
+                    query = "select format(sum(projectorHour),2) as projhour, format(sum(pcHour),2) as pchour, " +
+                        " format(sum(recorderHour),2) as recorderhour,format(sum(ACHour), 2) as achour, " +
+                        " format(sum(systemHour), 2) as syshour, format(sum(screenHour), 2) as screenhour " +
+                        "from machineworkinghours where ip in(select ccip from centralcontrol where location " +
+                        "in(select id from class_details where classid = '"+name+ "' COLLATE utf8mb4_unicode_ci))";
+                    break;
+                case "Gra":
+                    query = "select format(sum(projectorHour),2) as projhour, format(sum(pcHour),2) as pchour, " +
+                        " format(sum(recorderHour),2) as recorderhour,format(sum(ACHour), 2) as achour, " +
+                        " format(sum(systemHour), 2) as syshour, format(sum(screenHour), 2) as screenhour " +
+                        "from machineworkinghours where ip in(select ccip from centralcontrol where location " +
+                        "in(select id from class_details where gradeid in (select id from grade_details "+
+                        " where grade_id='" + name + "' COLLATE utf8mb4_unicode_ci)))";
+                    break;
+                case "Ins":
+                    query = "select format(sum(projectorHour),2) as projhour, format(sum(pcHour),2) as pchour, " +
+                        " format(sum(recorderHour),2) as recorderhour,format(sum(ACHour), 2) as achour, " +
+                        " format(sum(systemHour), 2) as syshour, format(sum(screenHour), 2) as screenhour " +
+                        "from machineworkinghours where ip in(select ccip from centralcontrol where location " +
+                        "in(select id from class_details where gradeid in (select id from grade_details " +
+                        " where insid in (select id from institute_details where ins_id='" + name + "' COLLATE utf8mb4_unicode_ci))))";
+                    break;
+               default:
+                    query = "select format(sum(projectorHour),2) as projhour, format(sum(pcHour),2) as pchour, " +
+                        " format(sum(recorderHour),2) as recorderhour,format(sum(ACHour), 2) as achour, " +
+                        " format(sum(systemHour), 2) as syshour, format(sum(screenHour), 2) as screenhour " +
+                        "from machineworkinghours";
+                    break;
+            }
+            return query;
+        }
+        #endregion
+
+        #region save count of devices
+        public void Savedevicecount(string[] data)
+        {
+            using (MySqlConnection con = new MySqlConnection(connString))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("sp_InsertorUpdateDevicesCount", con))
+                {
+                    try
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("projector", data[0]);
+                        cmd.Parameters.AddWithValue("comp", data[1]);
+                        cmd.Parameters.AddWithValue("record", data[2]);
+                        cmd.Parameters.AddWithValue("actemp", data[3]);
+                        cmd.Parameters.AddWithValue("scr", data[4]);
+                        cmd.Parameters.AddWithValue("loc", data[5]);
+                        if(con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
         }
 
         #endregion

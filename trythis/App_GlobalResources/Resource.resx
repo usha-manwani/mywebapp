@@ -1083,4 +1083,46 @@
   <data name="NoMoreCam" xml:space="preserve">
     <value>Can not have more than 4 camera with same IP address. </value>
   </data>
+  <data name="AC1" xml:space="preserve">
+    <value>AC</value>
+  </data>
+  <data name="ACFreshAir" xml:space="preserve">
+    <value>AC &amp; Fresh Air System</value>
+  </data>
+  <data name="AirSystem" xml:space="preserve">
+    <value>AirSystem</value>
+  </data>
+  <data name="Bluraydvd" xml:space="preserve">
+    <value>Blu-Ray DVD Controls</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="dvdControls" xml:space="preserve">
+    <value>DVD Controls</value>
+  </data>
+  <data name="LightControl" xml:space="preserve">
+    <value>Light Controls</value>
+  </data>
+  <data name="ProjectorControl" xml:space="preserve">
+    <value>Projector Controls</value>
+  </data>
+  <data name="RecorderControls" xml:space="preserve">
+    <value>Recorder Controls</value>
+  </data>
+  <data name="ScreenCurtain" xml:space="preserve">
+    <value>Screen &amp; Curtain Controls</value>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Sound Controls</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="SystemControl" xml:space="preserve">
+    <value>System Controls</value>
+  </data>
+  <data name="tvcontrol" xml:space="preserve">
+    <value>TVControls</value>
+  </data>
 </root>

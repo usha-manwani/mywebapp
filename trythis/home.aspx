@@ -84,8 +84,7 @@
             font-size: 12px !important;
         }
         .row{
-            margin-bottom:-20px;
-           
+            margin-bottom:-20px;           
         }
         .custommb{
             margin-top:-3px;
@@ -105,20 +104,19 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="masterchildBody" ID="MainBody" runat="server">
 
-    <script src="Scripts/jquery-3.4.1.min.js"></script>    
-   
+    <script src="Scripts/jquery-3.4.1.min.js"></script>   
     <script src="Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
-    <script src="Scripts/StatusData.js?v=8"></script>
+    <script src="Scripts/StatusData.js?v=9"></script>
    
     <div class="row" id="ddl" style="background-color: #1e1e36;
         min-height: 100px; min-width:80%">
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <div class="row" style="min-height: 100px;">
-                    <div class="col-xl-3 col-lg-3 col-sm-12 col-md-3 mbcustom" 
-                        style="margin-top: -15px; min-width:100px"">
+                    <div class="col-xl-3 col-lg-3 col-sm-12 col-md-3 mbcustom"
+                        style="margin-top: -15px; min-width:100px">
                         <h5><span style="color: white;">
                             <%=Resources.Resource.TempratureChartHead%>
                             </span></h5>
@@ -177,7 +175,83 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
+     <div style="clear: both"></div>           
 
+            <div class="row">
+                <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 mbcustom">
+                    <div class="row" style="margin-left: -20px;">
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+                            <div>
+                                <canvas id="c1" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
+                                <div id="chartjs-tooltip" class="chartjs-tooltip">
+                                    <div class="centered">
+                                        <span id ="span1">20</span><br />
+                                        <span style="font-size:small; color: white">投影机</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+                            <div>
+                                <canvas id="c2" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
+                                <div id="chartjs-tooltip1" class="chartjs-tooltip">
+                                    <div class="centered">
+                                        <span id ="span2">200</span><br />
+                                        <span style="font-size:small; color: white">电脑</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+                            <div>
+                                <canvas id="c3" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
+                                <div id="chartjs-tooltip2" class="chartjs-tooltip">
+                                    <div class="centered">
+                                        <span id ="span3">30</span><br />
+                                        <span style="font-size:small; color: white">录播</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+                            <div>
+                                <canvas id="c4" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
+                                <div id="chartjs-tooltip5" class="chartjs-tooltip">
+                                    <div class="centered">
+                                        <span id ="span4">25</span><br />
+                                        <span style="font-size:small; color: white">空调</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+                            <div id="donutstatus">
+                                <canvas id="c5" height="100%" style="width:100px!important; min-width:50px!important"></canvas>
+                                <div id="chartjs-tooltip3" class="chartjs-tooltip">
+                                    <div class="centered">
+                                        <span id="systemspan">68</span>
+                                        <br />
+                                        <span style="font-size:small; color: white">中控</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+                            <div >
+                                <canvas id="c6" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
+                                <div id="chartjs-tooltip4" class="chartjs-tooltip">
+                                    <div class="centered">
+                                        <span id ="span6">34</span>
+                                        <br />
+                                        <span style="font-size:small; color: white">屏幕</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <div style="clear: both"></div>  
     <div class="row">
         <div class="animated fadeIn col-lg-12 col-md-12 col-sm-12">
             <!-- Widgets-->
@@ -286,38 +360,7 @@
                     </div>
                 </div>
             </div>
-            <div style="clear: both"></div>
-
-            <div class="row" style="margin-bottom:-50px">
-                <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12  mbcustom fullWidth1">
-                    <div class="card" style="background-color: #191b28;
-                        height: 350px;min-width:380px">
-                        <div class="card-body divstyle" >
-                            <div style="height: 280px;" id="teamdiv">
-                                <h4 class="mb-3 custommb" style="text-align: center;
-                                    font-weight: bold;"><span>
-                                    <%=Resources.Resource.Temperature%>
-                                                        </span></h4>
-                                <canvas id="team-chart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 mbcustom fullWidth1">
-                    <div class="card" style="background-color: #191b28;
-                        height: 350px; min-width:380px">
-                        <div class="card-body divstyle" >
-                            <div style="height: 270px" id="humdiv">
-                                <h4 class="mb-3 custommb" style="text-align:center;
-                                    font-weight: bold; "><span>
-                                    <%=Resources.Resource.Humidity%>
-                                                         </span> </h4>
-                                <canvas id="lineChart" ></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
             <div style="clear: both"></div>
 
             <div class="row">
@@ -335,7 +378,7 @@
                         <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
                                 <div class="card-body divstyle" id="BarChart">
-                                    <div style="max-height:200px">
+                                    <div style="max-height:200px" id="usedhourdiv">
                                     <h4 class="mb-3 custommb" style="text-align:center; 
                                         font-weight: bold;">
                                         <span>使用时间</span></h4>
@@ -403,77 +446,33 @@
                     </div>
                 </div>
             </div>
-            <div style="clear: both"></div>           
+            <div style="clear: both"></div>
 
-            <div class="row">
-                <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 mbcustom">
-                    <div class="row" style="margin-left: -20px;">
-                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div>
-                                <canvas id="c1" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
-                                <div id="chartjs-tooltip" class="chartjs-tooltip">
-                                    <div class="centered">
-                                        <span >20</span><br />
-                                        <span style="font-size:small; color: white">投影机</span>
-                                    </div>
-                                </div>
+            <div class="row" style="margin-bottom:-50px">
+                <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12  mbcustom fullWidth1">
+                    <div class="card" style="background-color: #191b28;
+                        height: 350px;min-width:380px">
+                        <div class="card-body divstyle" >
+                            <div style="height: 280px;" id="teamdiv">
+                                <h4 class="mb-3 custommb" style="text-align: center;
+                                    font-weight: bold;"><span>
+                                    <%=Resources.Resource.Temperature%>
+                                                        </span></h4>
+                                <canvas id="team-chart"></canvas>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div>
-                                <canvas id="c2" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
-                                <div id="chartjs-tooltip1" class="chartjs-tooltip">
-                                    <div class="centered">
-                                        <span >200</span><br />
-                                        <span style="font-size:small; color: white">电脑</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div>
-                                <canvas id="c3" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
-                                <div id="chartjs-tooltip2" class="chartjs-tooltip">
-                                    <div class="centered">
-                                        <span >30</span><br />
-                                        <span style="font-size:small; color: white">录播</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div>
-                                <canvas id="c4" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
-                                <div id="chartjs-tooltip5" class="chartjs-tooltip">
-                                    <div class="centered">
-                                        <span >25</span><br />
-                                        <span style="font-size:small; color: white">空调</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div id="donutstatus">
-                                <canvas id="c5" height="100%" style="width:100px!important; min-width:50px!important"></canvas>
-                                <div id="chartjs-tooltip3" class="chartjs-tooltip">
-                                    <div class="centered">
-                                        <span id="systemspan">68</span>
-                                        <br />
-                                        <span style="font-size:small; color: white">中控</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div >
-                                <canvas id="c6" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
-                                <div id="chartjs-tooltip4" class="chartjs-tooltip">
-                                    <div class="centered">
-                                        <span >34</span>
-                                        <br />
-                                        <span style="font-size:small; color: white">屏幕</span>
-                                    </div>
-                                </div>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-12 col-md-12 col-sm-12 mbcustom fullWidth1">
+                    <div class="card" style="background-color: #191b28;
+                        height: 350px; min-width:380px">
+                        <div class="card-body divstyle" >
+                            <div style="height: 270px" id="humdiv">
+                                <h4 class="mb-3 custommb" style="text-align:center;
+                                    font-weight: bold; "><span>
+                                    <%=Resources.Resource.Humidity%>
+                                                         </span> </h4>
+                                <canvas id="lineChart" ></canvas>
                             </div>
                         </div>
                     </div>
@@ -554,9 +553,9 @@
     <script src="ScriptsLInks/highcharts.js"></script>
     <script src="ScriptsLInks/highcharts-more.js"></script>
     <script src="ScriptsLInks/highcharts-3d.js"></script>
-
+    <script src="ScriptsLInks/modules/no-data-to-display.js"></script>
     <script>
-
+        Highcharts.setOptions({ lang: { noData: "No Data to Display" } });
             var pieColors = (function () {
                 var colors = [],
                     base = Highcharts.getOptions().colors[0],
@@ -646,7 +645,7 @@
                     slicedOffset: 10,
                     name: '系统状态',
                     data: [
-                        ['故障', 10],
+                        ['待机', 10],
                         {
                             name: '使用中',
                             y: 50,

@@ -27,10 +27,12 @@ namespace WebCresij
                 ddlInstitute.DataValueField = "Ins_ID";
                 ddlInstitute.DataBind();
                 string select = Resources.Resource.Select;
-                ddlInstitute.Items.Insert(0, new ListItem("All", "All"));
+                int num = ddlInstitute.Items.Count;
+                
+                ddlInstitute.Items.Insert(num, new ListItem("All", "All"));
                 //ddlTime.Enabled = false;
                 HttpContext.Current.Session["ipforgraph"] = "";
-               
+                FillGradeDDL();
                 //if (ddlClass.SelectedValue == "NA")
                 //{
                 //    ipgraph.Value = "NA";
@@ -62,7 +64,10 @@ namespace WebCresij
             ddlClass.Items.Clear();
             string select = Resources.Resource.Select;
             ddlClass.Items.Insert(0, new ListItem(select, "NA"));
-            string insID = ddlInstitute.SelectedValue;
+            FillGradeDDL();
+           
+            
+           // string insID = ddlInstitute.SelectedValue;
             //if (insID == "All")
             //{
             //    ddlTime.Enabled = false;
@@ -71,24 +76,7 @@ namespace WebCresij
             //{
             //    ddlTime.Enabled = true;
             //}
-            string query = "select grade_ID, Grade_Name from Grade_Details where InsID " +
-                " in (select id from Institute_details where ins_id='" + insID + "')";
-            DataTable dt = PopulateTree.ExecuteCommand(query);
-            ddlGrade.DataSource = dt;
-            ddlGrade.DataTextField = "Grade_Name";
-            ddlGrade.DataValueField = "Grade_ID";
-            ddlGrade.DataBind();
-            lbllive.Text = "";
-            ddlTime.SelectedItem.Selected = false;
-            ddlTime.Items.FindByValue("0").Selected = true;
-            ddlGrade.Items.Insert(0, new ListItem(select, "NA"));
-            HttpContext.Current.Session["ipforgraph"] = "";
-            if(ddlClass.SelectedValue == "NA")
-            {
-                ipgraph.Value = "NA";
-                ScriptManager.RegisterStartupScript(this, typeof(Page),
-                    "MyChartKey2", "CreateAllChart('"+insID+"');", true);
-            }
+            
         }
 
         protected void ddlGrade_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,25 +86,11 @@ namespace WebCresij
             ddlTime.Items.FindByValue("0").Selected = true;
             ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartclear3", "clearCharts();", true);
             ddlClass.Items.Clear();
-            ddlClass.DataSource = null;
-            ddlClass.DataBind();
-            string gradeID = ddlGrade.SelectedValue;
-            string query = "select ClassID, ClassName from Class_Details  " +
-                " where GradeID in(select id from Grade_details where grade_id ='" + gradeID + "')";
-            DataTable dt = PopulateTree.ExecuteCommand(query);
-            ddlClass.DataSource = dt;
-            ddlClass.DataTextField = "ClassName";
-            ddlClass.DataValueField = "ClassID";
-            ddlClass.DataBind();
-            string select = Resources.Resource.Select;
-            ddlClass.Items.Insert(0, new ListItem(select, "NA"));
-            HttpContext.Current.Session["ipforgraph"] = "";
-            if (ddlClass.SelectedValue == "NA")
-            {
-                ipgraph.Value = "NA";
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey3",
-                    "CreateAllChart('"+gradeID+"');", true);
-            }
+            // ddlClass.DataSource = null;
+            //ddlClass.DataBind();
+            FillClassDDL();
+            
+
         }
 
         protected void ddlClass_SelectedIndexChanged(object sender, EventArgs e)
@@ -184,5 +158,49 @@ namespace WebCresij
         //{
         //    CountMachines();
         //}
+
+        protected void FillGradeDDL()
+        {
+            string insID = ddlInstitute.SelectedValue;
+            string query = "select grade_ID, Grade_Name from Grade_Details where InsID " +
+                " in (select id from Institute_details where ins_id='" + insID + "')";
+            DataTable dt = PopulateTree.ExecuteCommand(query);
+            ddlGrade.DataSource = dt;
+            ddlGrade.DataTextField = "Grade_Name";
+            ddlGrade.DataValueField = "Grade_ID";
+            ddlGrade.DataBind();
+            lbllive.Text = "";
+            ddlTime.SelectedItem.Selected = false;
+            ddlTime.Items.FindByValue("0").Selected = true;
+            ddlGrade.Items.Insert(0, new ListItem("Select", "NA"));
+            HttpContext.Current.Session["ipforgraph"] = "";
+            if (ddlClass.SelectedValue == "NA")
+            {
+                ipgraph.Value = "NA";
+                ScriptManager.RegisterStartupScript(this, typeof(Page),
+                    "MyChartKey2", "CreateAllChart('" + insID + "');", true);
+            }
+        }
+
+        protected void FillClassDDL()
+        {
+            string gradeID = ddlGrade.SelectedValue;
+            string query = "select ClassID, ClassName from Class_Details  " +
+                " where GradeID in(select id from Grade_details where grade_id ='" + gradeID + "')";
+            DataTable dt = PopulateTree.ExecuteCommand(query);
+            ddlClass.DataSource = dt;
+            ddlClass.DataTextField = "ClassName";
+            ddlClass.DataValueField = "ClassID";
+            ddlClass.DataBind();
+            string select = Resources.Resource.Select;
+            ddlClass.Items.Insert(0, new ListItem(select, "NA"));
+            HttpContext.Current.Session["ipforgraph"] = "";
+            if (ddlClass.SelectedValue == "NA")
+            {
+                ipgraph.Value = "NA";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey3",
+                    "CreateAllChart('" + gradeID + "');", true);
+            }
+        }
     }
 }

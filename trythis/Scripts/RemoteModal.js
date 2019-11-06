@@ -65,7 +65,7 @@ $(function () {
             
             var arraydata = message.split(',');
             if (arraydata[1] == "Heartbeat") {
-                if (arraydata[3] == 'CLOSED') {
+                if (arraydata[3] == '待机') {
                     var img = document.getElementById("systempower");
                     img.src = "Images/AllImages/images/图标_210.png";
                     NoNotification(arraydata);
@@ -74,7 +74,7 @@ $(function () {
                     var img = document.getElementById("systempower");
                     img.src = "Images/中控首页按钮/on/systemon.png"; 
 
-                    if (arraydata[5] == 'On') {
+                    if (arraydata[5] == '已开机') {
                         var imgpc = document.getElementById("pcpower");
                         imgpc.src = "Images/中控首页按钮/on/pcon.png";
                     }
@@ -83,25 +83,25 @@ $(function () {
                         imgpc.src = "Images/AllImages/images/图标_212.png";
                     }
 
-                    if (arraydata[9] == 'Stop') {
+                    if (arraydata[9] == '停') {
                         $('#screendown1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_134.png");
                         $('#screenstop1').closest("td").find("img").attr('src', "Images/中控首页按钮/on/screenstop.png");
                         $('#screenup1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_132.png");
 
                     }
-                    else if (arraydata[9] == 'Down') {
+                    else if (arraydata[9] == '降') {
                         $('#screendown1').attr('src', "Images/中控首页按钮/on/screendown.png");
                         $('#screenstop1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png");
                         $('#screenup1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_132.png");
 
                     }
-                    else if (arraydata[9] == 'Up') {
+                    else if (arraydata[9] == '升') {
                         $('#screendown1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_134.png");
                         $('#screenstop1').attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_136.png");
                         $('#screenup1').attr('src', "Images/中控首页按钮/on/screenup.png");
 
                     }
-                    if (arraydata[12] == 'Locked') {
+                    if (arraydata[12] == '锁定') {
                         var src = document.getElementById('sysLock');
                         src.src = "Images/中控首页按钮/on/lock1.png";
                     }
@@ -109,7 +109,7 @@ $(function () {
                         var src = document.getElementById('sysLock');
                         src.src = "Images/中控首页按钮/on/lock1open.png";
                     }
-                    if (arraydata[13] == 'Locked') {
+                    if (arraydata[13] == '锁定') {
                         var src = document.getElementById('podiumLock');
                         src.src = "Images/中控首页按钮/on/lock2.png";
                     }
@@ -117,7 +117,7 @@ $(function () {
                         var src = document.getElementById('podiumLock');
                         src.src = "Images/中控首页按钮/on/lock2open.png";
                     }
-                    if (arraydata[14] == 'Locked') {
+                    if (arraydata[14] == '锁定') {
                         var src = document.getElementById('classLock');
                         src.src = "Images/中控首页按钮/on/lock3.png";
                     }
@@ -127,23 +127,23 @@ $(function () {
                     }
                     uncheck();
                     switch (arraydata[11]) {
-                        case 'Desktop':
+                        case '台式电脑':
                             var desk = document.getElementById('desktop');
                             document.getElementById('desktop').checked = true;
                             $(desk).closest("td").find("img").attr('src', "Images/中控首页按钮/on/desk1.png");
 
                             break;
-                        case 'Laptop':
+                        case '手提电脑':
                             document.getElementById('laptop').checked = true;
                             var laptop = document.getElementById('laptop');
                             $(laptop).closest("td").find("img").attr('src', "Images/中控首页按钮/on/lap1.png");
 
                             break;
-                        case 'Digital Curtain':
+                        case '数码展台':
                             document.getElementById('platform').checked = true;
                             $('#platform').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
                             break;
-                        case 'Digital Screen':
+                        case '数码设备':
                             document.getElementById('digitalEquipment').checked = true;
                             $('#digitalEquipment').closest("td").find("img").attr('src', "Images/中控首页按钮/on/mediadevice.png");
                             break;
@@ -151,25 +151,25 @@ $(function () {
                             document.getElementById('dvd').checked = true;
                             $('#dvd').closest("td").find("img").attr('src', "Images/中控首页按钮/on/dvd.png");
                             break;
-                        case 'TV':
+                        case '电视机':
                             document.getElementById('tv').checked = true;
                             $('#tv').closest("td").find("img").attr('src', "Images/中控首页按钮/on/tv.png");
                             break;
-                        case 'Video Camera':
+                        case '摄像机':
                             document.getElementById('camera').checked = true;
                             $('#camera').closest("td").find("img").attr('src', "Images/中控首页按钮/on/cam.png");
                             break;
-                        case 'Blu-Ray DVD':
+                        case '蓝光DVD':
                             document.getElementById('bluray').checked = true;
                             $('#bluray').closest("td").find("img").attr('src', "Images/中控首页按钮/on/blu.png");
                             break;
-                        case 'Recording System':
+                        case '录播':
                             document.getElementById('recorder').checked = true;
                             $('#recorder').closest("td").find("img").attr('src', "Images/中控首页按钮/on/recorder.png");
                             break;
                     }
 
-                    if (arraydata[6] == 'Closed') {
+                    if (arraydata[6] == '已关机') {
 
                         var src = document.getElementById("projectorOff");
                         src.src = "Images/中控首页按钮/on/projred.png";

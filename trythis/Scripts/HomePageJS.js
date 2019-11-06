@@ -17,7 +17,7 @@ $(function () {
             if (lastStatus == "Offline") {
 
                 var statusshow = document.getElementById("devicestatus");
-                statusshow.innerHTML = "Online";
+                statusshow.innerHTML = "在线";
                 document.getElementById("deviceStatusHidden").value = "Online";
                 statusshow.style.color = "lightgreen";
                 statusshow.style.fontWeight = "bolder";
@@ -42,7 +42,7 @@ $(function () {
 
                 }
                 else if (arraydata[1] == "Heartbeat") {
-                    if (arraydata[3] == 'CLOSED') {
+                    if (arraydata[3] == '待机') {
                         var img = document.getElementById("syspower");
                         img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
                         closedstatus(arraydata);
@@ -59,7 +59,7 @@ $(function () {
                         //    img.src = "Images/greyed/sysgrey.png";
                         //    $(img).removeClass('oncolor');
                         //}
-                        if (arraydata[5] == 'On') {
+                        if (arraydata[5] == '已开机') {//On
                             var imgpc = document.getElementById("ppower");
                             imgpc.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png";
                             $(imgpc).addClass('oncolor');
@@ -69,7 +69,7 @@ $(function () {
                             imgpc.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png";
                             $(imgpc).removeClass('oncolor');
                         }
-                        if (arraydata[12] == 'Locked') {
+                        if (arraydata[12] == '锁定') {//Locked
                             var src = document.getElementById('lock');
                             src.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png";
                             $(src).addClass('oncolor');
@@ -79,7 +79,7 @@ $(function () {
                             src.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
                             $(src).addClass('oncolor');
                         }
-                        if (arraydata[9] == 'Stop') {
+                        if (arraydata[9] == '停') {
                             var img = document.getElementById("Scdown");
                             img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png";
                             $(img).removeClass('oncolor');
@@ -90,7 +90,7 @@ $(function () {
                             img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png";
                             $(img).addClass('oncolor');
                         }
-                        else if (arraydata[9] == 'Down') {
+                        else if (arraydata[9] == '降') {//Down
                             var img = document.getElementById("Scdown");
                             img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png";
                             $(img).addClass('oncolor');
@@ -101,7 +101,7 @@ $(function () {
                             img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png";
                             $(img).removeClass('oncolor');
                         }
-                        else if (arraydata[9] == 'Up') {
+                        else if (arraydata[9] == '升') {//Up
                             var img = document.getElementById("Scup");
                             img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_132.png";
                             $(img).addClass('oncolor');
@@ -112,7 +112,7 @@ $(function () {
                             img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png";
                             $(img).removeClass('oncolor');
                         }
-                        if (arraydata[8] == 'Open') {
+                        if (arraydata[8] == '开') {//Open
                             var curtain = document.getElementById('CurtainOpen');
                             curtain.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_106.png";
                             $(curtain).addClass('oncolor');
@@ -123,7 +123,7 @@ $(function () {
                             curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png";
                             $(curtain).removeClass('oncolor');
                         }
-                        else if (arraydata[8] == 'Close') {
+                        else if (arraydata[8] == '关') {//Close
                             var curtain = document.getElementById('CurtainClose');
                             curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png";
                             $(curtain).addClass('oncolor');
@@ -135,7 +135,7 @@ $(function () {
                             $(curtain).removeClass('oncolor');
 
                         }
-                        else if (arraydata[8] == 'Stop')
+                        else if (arraydata[8] == '停')//Stop
                         {
                             var curtain = document.getElementById('CurtainClose');
                             curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png";
@@ -149,7 +149,7 @@ $(function () {
 
                         }
                         switch (arraydata[11]) {
-                            case 'Desktop':
+                            case '台式电脑'://Desktop
                                 var img = document.getElementById('desktop1');
                                 img.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_158.png";
                                 $(img).addClass('oncolor');
@@ -158,7 +158,7 @@ $(function () {
                                 document.getElementById('Moremedia').src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_162.png";
                                 $(document.getElementById('Moremedia')).removeClass('oncolor');
                                 break;
-                            case 'Laptop':
+                            case '手提电脑'://Laptop
                                 var img = document.getElementById('laptop1');
                                 img.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_160.png";
                                 $(img).addClass('oncolor');
@@ -179,7 +179,7 @@ $(function () {
 
                         }
 
-                        if (arraydata[6] == 'Closed') {
+                        if (arraydata[6] == '已关机') {//Closed
                             var proj1 = document.getElementById('projgreen');
                             proj1.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_184.png";
                             $(proj1).removeClass('oncolor');
@@ -195,7 +195,7 @@ $(function () {
                             proj2.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_186.png";
                             $(proj2).removeClass('oncolor');
                         }
-                        if (arraydata[10] == 'Off') {
+                        if (arraydata[10] == '关') {//Off
                             var light1 = document.getElementById("lighton");
                             light1.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png";
                             $(light1).removeClass('oncolor');
@@ -383,7 +383,7 @@ $(function () {
 
                 }
             }
-            if (arraydata[2] == 'Offline' || arraydata[1] == 'Unsuccessful') {
+            if (arraydata[2] == 'Offline' || arraydata[1] == 'Unsuccessful' || arraydata[2] =='离线') {
                 allGrey();
                 document.getElementById("devicestatus").innerHTML = "Offline";
                 document.getElementById("deviceStatusHidden").value = "Offline";
@@ -395,7 +395,7 @@ $(function () {
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         AllNormal();
         chat.server.sendControlKeys(ipAddress, "8B B9 00 03 05 01 09");
-        console.log("control to machine");
+        
         SetVolume = function (val) {
             var lastVal = this.document.getElementById("volchange").innerText;
             var img = document.getElementById("volsymbol");
@@ -460,8 +460,10 @@ $(function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 57 61");
         });
         $(document).on("click", "#syspower", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 03 05 01 09");
+            if($(this).hasClass("oncolor"))
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 05 02 1F 2A");
+            else
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 05 02 1E 29");
         });
         $(document).on("click", "#ppower", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");

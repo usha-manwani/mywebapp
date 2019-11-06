@@ -15,6 +15,7 @@
     <script src="ajaxfiles/BaseScripts.debug.js"></script>
     <script src="ajaxfiles/Tabs.debug.js"></script>
     <script src="ajaxfiles/DynamicPopulate.debug.js"></script>
+    <script src ="Scripts/Options.js?version=1"></script>
     <asp:ScriptManagerProxy ID="sc1" runat="server"></asp:ScriptManagerProxy>
     <div>
         <asp:UpdatePanel runat="server">
@@ -26,9 +27,12 @@
                                 <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;<span><%=Resources.Resource.Add%></span>
                             </HeaderTemplate>
                             <ContentTemplate>
-                                <asp:LinkButton runat="server" Text="Add University" ID="AddUniv" 
-                                    OnClientClick="displayUnivPopup();return false;" Font-Underline="True"
+                                <asp:LinkButton runat="server" Text="Add/Edit No. Of Devices" ID="AddEditlink" 
+                                    OnClientClick="displaydevicesPopup();return false;" Font-Underline="True"
                                     Font-Bold="True" Font-Size="20px" ForeColor="#2f323a"></asp:LinkButton><br />
+                                <%--<asp:LinkButton runat="server" Text="Add University" ID="AddUniv" 
+                                    OnClientClick="displayUnivPopup();return false;" Font-Underline="True"
+                                    Font-Bold="True" Font-Size="20px" ForeColor="#2f323a"></asp:LinkButton><br />--%>
                                 <asp:LinkButton runat="server" Text="<%$Resources:Resource, AddInstitutes %>" 
                                     ID="AddInstitutes" OnClientClick="displayPopup(); return false;" Font-Underline="True"
                                     Font-Bold="True" Font-Size="20px" ForeColor="#2f323a"></asp:LinkButton>
@@ -95,6 +99,72 @@
                                     <div class="col">
                                         <asp:Button ID="Button3" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideGrade();" /></div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id ="addeditdevices" class ="modal scroll">
+                        <div class="modal-content">
+                            <div class=" row " style="padding-right: 20px;">
+                                <div class="panel-heading col ">
+                                    <h4><span>Add or Edit No. Of Devices</span></h4>
+                                </div>
+                                <span onclick="hidedevicesDiv();" style="cursor: pointer">&times;</span>
+                            </div>
+                            <div>
+                                <div class="row ">
+                                   
+                                    <div class="form-horizontal">
+                                        <div class="form-group row margintop">
+                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="ddlInstitute"
+                                                CssClass="col-md-5 labelpadding" Text="Select Institute"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:DropDownList Width="100px" AutoPostBack="false"                            
+                                            CssClass="btn btn-default border-dark" ID="ddlInstitute" 
+                                            runat="server" ForeColor="#1E1E36" >                            
+                                        </asp:DropDownList>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="projtb"
+                                                CssClass="col-md-5 labelpadding" Text="No. OF Projectors"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="projtb" CssClass="form-control " />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="pctb"
+                                                CssClass="col-md-5 labelpadding" Text="No. Of PC"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="pctb" CssClass="form-control " />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="recordtb"
+                                                CssClass="col-md-5 labelpadding" Text="No. Of Recorder"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="recordtb" CssClass="form-control " />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="actb"
+                                                CssClass="col-md-5 labelpadding" Text="No. Of AC"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="actb" CssClass="form-control " />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="screentb"
+                                                CssClass="col-md-5 labelpadding" Text="No. Of Digital Booth"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="screentb" CssClass="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 50%; float: left; margin-right: 30px;">                                    
+                                        <asp:Button ID="Button2" Text="<%$Resources:Resource, Save %>" runat="server"
+                                            OnClientClick="saveandhideDevices();" /></div>                                
                             </div>
                         </div>
                     </div>
@@ -250,115 +320,7 @@
                     </div>
 
 
-                    <script>
-
-                        function displayUnivPopup() {
-                            document.getElementById("idAddUniv").style.display = 'inline-block';
-                        }
-                        function hideUnivDiv() {
-                            document.getElementById("idAddUniv").style.display = 'none';
-                        }
-                        function displayGrade() {
-                            document.getElementById('idGrade').style.display = 'inline-block';
-                        }
-                        function displayClass() {
-                            document.getElementById('idClass').style.display = 'inline-block';
-                        }
-                        function displayCam() {
-                            document.getElementById('idCamera').style.display = 'inline-block';
-                        }
-                        function displayPopup() {
-                            document.getElementById('id01').style.display = 'inline-block';
-                        }
-                        function xx() {
-                            document.getElementById('idGrade').style.display = 'none';
-                        }
-                        function xx1() {
-                            document.getElementById('id01').style.display = 'none';
-                        }
-                        function hideClass() {
-                            document.getElementById('idClass').style.display = 'none';
-                        }
-                        function hideCam() {
-                            document.getElementById('idCamera').style.display = 'none';
-                        }
-                        function duplicateIP() {
-                            var message = ' <%=Resources.Resource.AlertErrorIP%>'
-                            alert(message);
-                        }
-                        function CamIns() {
-                            var message = ' <%=Resources.Resource.NoMoreCam%>'
-                            alert(message);
-                        }
-                        function camError() {
-                            var message = ' <%=Resources.Resource.AlertError%>'
-                            alert(message);
-                        }
-
-                        //Get Modal for Ins Grade
-
-
-                        function GetDynamicTextBoxIns(value) {
-                            return '<div class="form-group">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Grade %>" CssClass="col-sm-2 control-label" Font-Bold="True"/>' +
-                                '<div class="col-sm-10"><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
-                        }
-
-                        function AddTextGrade1() {
-                            var div = document.createElement('DIV');
-                            div.innerHTML = GetDynamicTextBoxIns("");
-                            document.getElementById("TextBoxContainer1").appendChild(div);
-                        }
-
-                        // Get the modal
-                        function GetDynamicTextBox(value) {
-                            return '<div class="form-group row  margintop">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Grade %>" CssClass="col-md-5 control-label labelpadding" Font-Bold="True"/>' +
-                                '<div class="col-md-7"><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
-                        }
-
-                        function AddTextGrade() {
-                            var div = document.createElement('DIV');
-                            div.innerHTML = GetDynamicTextBox("");
-                            document.getElementById("TextBoxContainer").appendChild(div);
-
-                        }
-
-                        function GetDynamicTextClass(value) {
-                            return '<div class="form-group row  margintop">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Class %>" CssClass="col-md-5 control-label labelpadding" Font-Bold="True"/>' +
-                        '<div class="col-md-7"><input name = "DynamicTextClass" class="form-control" type="text" value = "' + value + '" /></div></div>' +
-                        '<div class="form-group row  margintop">' + '<asp:Label runat="server" Text="<%$Resources:Resource, CCIPAddress %>" CssClass="col-md-5 control-label labelpadding" Font-Bold="True"/>' +
-                                '<div class="col-md-7"><input name = "DynamicIP" class="form-control" type="text" value = "' + value + '" /></div></div>';
-                        }
-
-                        function AddTextClass() {
-                            var div = document.createElement('DIV');
-                            div.innerHTML = GetDynamicTextClass("");
-                            document.getElementById("TextContainer").appendChild(div);
-                        }
-                        function GetDynamicCamDetails(value) {
-                            return '<span style="color: #C0C0C0"><%=Resources.Resource.AddCam%></span><section><div class="form-horizontal">'
-                        + '<table style="width:100%;"><tr class="margintop"><td style="text-align:center"> <div class = "form-group">' +
-            '<asp:label runat="server" Text="<%$Resources:Resource, CamIP %>" CssClass=" control-label" Fond-Bold="True"/>' +
-                        '<div ><input name="IP" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
-                        '<td style="text-align:center"><div class = "form-group">' +
-            '<asp:label runat="server" Text="<%$Resources:Resource, PortNo %>" CssClass=" control-label" Fond-Bold="True"/>' +
-                        '<div ><input name="Port" class="form-control" type="text" value="' + value + '"' +
-                        '</div></div></td></tr>' +
-                        '<tr class="margintop"><td style="text-align:center"><div class = "form-group">' +
-            '<asp:label runat="server" Text="<%$Resources:Resource, UserID %>" CssClass=" control-label" Fond-Bold="True"/>' +
-                        '<div ><input name="User" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
-                        '<td style="text-align:center"><div class = "form-group">' +
-            '<asp:label runat="server" Text="<%$Resources:Resource, Password %>" CssClass=" control-label" Fond-Bold="True"/>' +
-                                '<div ><input name="Pass" class="form-control" type="text" value="'
-                                + value + '"/></div></div></td></tr></table></div><section>'
-                        }
-                        function AddTextCam() {
-                            var div = document.createElement('DIV');
-                            div.innerHTML = GetDynamicCamDetails("");
-                            document.getElementById("camdiv").appendChild(div);
-
-                        }
-                        
-                    </script>
+                 
                     <%--add all details finished--%>
                     <%--Edit all details--%>
 
@@ -444,28 +406,7 @@
                     </div>
 
 
-                    <script>
-                        function Rename() {
-                            document.getElementById('DivRename').style.display = 'Flex';
-                        }
-                        function EditCam() {
-                            document.getElementById('edit').style.display = 'Flex';
-                        }
-                        function hideEdit() {
-                            document.getElementById('edit').style.display = 'none';
-                        }
-                        function hideRename() {
-                            document.getElementById('DivRename').style.display = 'none';
-                        }
-                        function DeviceNotEdit() {
-                            var message = '<%=Resources.Resource.AlertEditIP%>'
-                            alert(message);
-                        }
-                        function donothing() {
-                            var message = '<%=Resources.Resource.AlertEditNot%>'
-                            alert(message);
-                        }
-                    </script>
+                  
 
                     <%--Edit all detals finished--%>
 
@@ -520,61 +461,70 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-    <script>
-        function ConfirmDel() {
-            document.getElementById('del').style.display = 'Flex';
-        }
-        function hideDelConfirm() {
-            document.getElementById('del').style.display = 'none';
-        }
-        function hideDelNot() {
-            document.getElementById('delnot').style.display = 'none';
-        }
-        function nodelete() {
-            var message = '<%=Resources.Resource.AlertDelete%>';
-            alert(message);
-        }
-    </script>
-    <script>
-        // Get the modal
-        var c = document.getElementById('idClass');
-        var modal = document.getElementById('id01');
-        var m = document.getElementById('idGrade');
-        var cam = document.getElementById('idCamera');
-        var del = document.getElementById('del');
-        var dn = document.getElementById('delnot');
-        var ec = document.getElementById('edit');
+    
+  <script>
+function GetDynamicCamDetails(value) {
+    return '<span style="color: #C0C0C0"><%=Resources.Resource.AddCam%></span><section><div class="form-horizontal">'
+        + '<table style="width:100%;"><tr class="margintop"><td style="text-align:center"> <div class = "form-group">' +
+        '<asp:label runat="server" Text="<%$Resources:Resource, CamIP %>" CssClass=" control-label" Fond-Bold="True"/>' +
+        '<div ><input name="IP" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
+        '<td style="text-align:center"><div class = "form-group">' +
+        '<asp:label runat="server" Text="<%$Resources:Resource, PortNo %>" CssClass=" control-label" Fond-Bold="True"/>' +
+        '<div ><input name="Port" class="form-control" type="text" value="' + value + '"' +
+        '</div></div></td></tr>' +
+        '<tr class="margintop"><td style="text-align:center"><div class = "form-group">' +
+        '<asp:label runat="server" Text="<%$Resources:Resource, UserID %>" CssClass=" control-label" Fond-Bold="True"/>' +
+        '<div ><input name="User" class="form-control" type="text" value="' + value + '"/></div></div></td>' +
+        '<td style="text-align:center"><div class = "form-group">' +
+        '<asp:label runat="server" Text="<%$Resources:Resource, Password %>" CssClass=" control-label" Fond-Bold="True"/>' +
+        '<div ><input name="Pass" class="form-control" type="text" value="'
+        + value + '"/></div></div></td></tr></table></div><section>'
+}
+function AddTextCam() {
+    var div = document.createElement('DIV');
+    div.innerHTML = GetDynamicCamDetails("");
+    document.getElementById("camdiv").appendChild(div);
 
-        // When the user clicks anywhere outside of the modal, close it
-        document.body.onclick = function (event) {
-            if (event.target == del) {
-                del.style.display = "none";
-            }
+      }
+      //Get Modal for Ins Grade
 
-            else if (event.target == cam) {
 
-                cam.style.display = "none";
+function GetDynamicTextBoxIns(value) {
+    return '<div class="form-group">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Grade %>" CssClass="col-sm-2 control-label" Font-Bold="True"/>' +
+        '<div class="col-sm-10"><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
+}
 
-            }
-            else if (event.target == modal) {
-                modal.style.display = "none";
-            }
-            else if (event.target == m) {
-                m.style.display = "none";
-            }
-            else if (event.target == c) {
-                c.style.display = "none";
-            }
-            else if (event.target == dn) {
-                dn.style.display = "none";
-            }
-            else if (event.target == ec) {
-                ec.style.display = 'none';
-            }
-        }
-        function closeframe() {
-            document.getElementById('id01').style.display = "none";
-        }
-    </script>
+function AddTextGrade1() {
+    var div = document.createElement('DIV');
+    div.innerHTML = GetDynamicTextBoxIns("");
+    document.getElementById("TextBoxContainer1").appendChild(div);
+}
+
+// Get the modal
+function GetDynamicTextBox(value) {
+    return '<div class="form-group row  margintop">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Grade %>" CssClass="col-md-5 control-label labelpadding" Font-Bold="True"/>' +
+        '<div class="col-md-7"><input name = "DynamicTextBox" class="form-control" type="text" value = "' + value + '" /></div></div>'
+}
+
+function AddTextGrade() {
+    var div = document.createElement('DIV');
+    div.innerHTML = GetDynamicTextBox("");
+    document.getElementById("TextBoxContainer").appendChild(div);
+
+}
+
+function GetDynamicTextClass(value) {
+    return '<div class="form-group row  margintop">' + '<asp:Label runat="server" Text="<%$Resources:Resource, Class %>" CssClass="col-md-5 control-label labelpadding" Font-Bold="True"/>' +
+        '<div class="col-md-7"><input name = "DynamicTextClass" class="form-control" type="text" value = "' + value + '" /></div></div>' +
+        '<div class="form-group row  margintop">' + '<asp:Label runat="server" Text="<%$Resources:Resource, CCIPAddress %>" CssClass="col-md-5 control-label labelpadding" Font-Bold="True"/>' +
+        '<div class="col-md-7"><input name = "DynamicIP" class="form-control" type="text" value = "' + value + '" /></div></div>';
+}
+
+function AddTextClass() {
+    var div = document.createElement('DIV');
+    div.innerHTML = GetDynamicTextClass("");
+    document.getElementById("TextContainer").appendChild(div);
+}
+  </script>
     <%--Delete finished--%>
 </asp:Content>

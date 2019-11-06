@@ -620,7 +620,7 @@
                     <%=Resources.Resource.IPAddress%>: &nbsp;
                     <script>document.write('<%= Session["DeviceIP"] %>')</script>&nbsp;<br />
                     <%=Resources.Resource.Status%>: &nbsp;<span id="devicestatus" 
-                        style="font-weight: bold">Offline</span>
+                        style="font-weight: bold">离线<!--Offline--></span>
                 </p>
                     </div>
             </div>

@@ -3,34 +3,35 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="positionCenter">
-     <h2 style="text-align:center"><asp:Label runat="server" ID="loginHead" Text="<%$Resources:Resource, Login %>"></asp:Label></h2>    
+     <h2 style="text-align:center"><asp:Label runat="server" ID="loginHead" 
+         Text="<%$Resources:Resource, Login %>"></asp:Label></h2>    
     <div class="row">
         <div class="col-12">
-            <section id="loginForm"  >
-                <div class="form-horizontal" >
-                    <h4 style="text-align:center"><asp:Label runat="server" Text="<%$Resources:Resource, loginAccount %>" ID="heading1" ></asp:Label>
-                        </h4>
+            <section id="loginForm">
+                <div class="form-horizontal">
+                    <h4 style="text-align:center">
+                        <asp:Label runat="server" Text="<%$Resources:Resource, loginAccount %>" ID="heading1" ></asp:Label>
+                    </h4>
                     <hr style="background-color:white; height:1.5px;"/>
                     <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
                         <p class="text-danger">
-                            <asp:Literal runat="server" ID="FailureText" />
+                            <asp:Literal runat="server" ID="FailureText"/>
                         </p>
                     </asp:PlaceHolder>
-                    
-                    <div class=" row" >
+                    <div class="row" >
                         <asp:Label runat="server" AssociatedControlID="UserName" ID="userLabel"
                             CssClass="col-md-5 " Text="<%$Resources:Resource, UserPhone %>" ></asp:Label>
                         <div class="col-md-7">
-                            <asp:TextBox runat="server" ID="UserName" CssClass="form-control"  />
+                            <asp:TextBox runat="server" ID="UserName" CssClass="form-control"/>
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="UserName"
                                 CssClass="text-danger" ErrorMessage="The user name field is required." />
                         </div>
-                    </div>                    
+                    </div>
                     <div class="form-group row">
                         <asp:Label runat="server" AssociatedControlID="Password" ID="passLabel"
                             CssClass="col-md-5 control-label" Text="<%$Resources:Resource, Password %>" ></asp:Label>
                         <div class="col-md-7">
-                            <asp:TextBox runat="server" ID="Password" TextMode="Password"  CssClass="form-control" />                           
+                            <asp:TextBox runat="server" ID="Password" TextMode="Password"  CssClass="form-control" />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="Password" 
                                 CssClass="text-danger" ErrorMessage="The password field is required." />
                         </div>
@@ -47,15 +48,15 @@
                     <div class="form-group">
                         <div class="col-md-12" style="text-align:center">
                             <asp:Button runat="server" ID="btnLogin" CommandName="Login" OnClick="LogIn"
-                                Text="<%$Resources:Resource, Login %>" 
+                                Text="<%$Resources:Resource, Login %>"
                                 CssClass="btn btn-outline-light" />
                         </div>
                     </div>
                 </div>
-                <p>                    
+                <p>
                   <asp:Label Text="<%$Resources:Resource, noAccount %>" runat="server" ID="registerLabel"></asp:Label>
                <asp:HyperLink runat="server" ID="RegisterHyperLink"  ForeColor="DeepSkyBlue"
-                        ViewStateMode="Disabled"  Text="<%$Resources:Resource, RegisterLink %>" 
+                        ViewStateMode="Disabled"  Text="<%$Resources:Resource, RegisterLink %>"
                         NavigateUrl="~/Registration.aspx"></asp:HyperLink>
                     </p>
             </section>
@@ -66,17 +67,5 @@
             </section>
         </div>--%>
     </div>
-        </div>
-    <script type="text/javascript">
-        var wsUri = "ws://127.0.0.1:1200/",
-            websocket = new WebSocket(wsUri); 
-        websocket.onopen = function (e) {
-        writeToScreen("CONNECTED");
-        doSend("WebSocket connected now as tcp client");
-    };
-
-    websocket.onclose = function (e) {
-        writeToScreen("DISCONNECTED");
-    };
-    </script>
+        </div>    
 </asp:Content>

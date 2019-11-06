@@ -142,7 +142,8 @@ namespace WebCresij.UserActivities
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "select * from user_logs order by Time desc";
+                string query = "select ul.userid, ud.user_name as username, ul.task, ul.time " +
+                    "from user_logs ul join user_details ud on ul.userid = ud.user_id order by Time desc";
                 try
                 {
                     using (MySqlDataAdapter da = new MySqlDataAdapter(query, con))

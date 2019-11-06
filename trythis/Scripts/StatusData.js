@@ -1,6 +1,8 @@
 ﻿
 var myChart;
-var myChart2, myChart3, myChart4, myChart5, chart9;
+var myChart2;
+var myChart3;
+var myChart4 = {}; var myChart5; var chart9;
 var temp = new Array();
 var humidity = new Array();
 var hum2 = new Array();
@@ -42,7 +44,8 @@ var defaultip = "";
         
     //};
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
-       // console.log("connection started");
+        // console.log("connection started");
+       
         $(document).on("click", "#team-chart", function () {            
             var classvalue = $('#MainContent_masterchildBody_ddlClass').val();
             if (classvalue.includes("Cla")) {
@@ -120,67 +123,7 @@ var defaultip = "";
         //var now = new Date();
         //var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
-        var ctx = document.getElementById("UsedBarChart");
-        myChart4 = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ["投影机", "电脑", "录播", "空调", "中控", "屏幕"],
-                datasets: [{
-                    label: '# 小时',
-                    data: [12, 19, 13, 15, 10, 8],
-                    backgroundColor: [
-                        'rgba(0,44,237, .9)',
-                        'rgba(0,44,237, 0.9)',
-                        'rgba(0,44,237, 0.9)',
-                        'rgba(0,44,237, 0.9)',
-                        'rgba(0,44,237, 0.9)',
-                        'rgba(0,44,237, 0.9)'
-                    ],
-                    borderColor: [
-                        'rgba(0,44,237,1)',
-                        'rgba(0,44,237, 1)',
-                        'rgba(0,44,237, 1)',
-                        'rgba(0,44,237, 1)',
-                        'rgba(0,44,237, 1)',
-                        'rgba(0,44,237, 0.9)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                zeroLineColor: 'white',
-                legend: {
-                    display: true,
-                    position: 'bottom',
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            
-                        },
-                        gridLines: {
-                            zeroLineColor: '#fff',
-                            display: false,
-                        }
-                        
-                    }],
-                    xAxes: [{
-                        gridLines: {
-                            zeroLineColor: '#fff',
-                            display: false,
-                        },
-                        ticks: {
-                            fontSize: 12,
-                            fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-                        }
-                    }],
-                    
-                }
-            }
-
-        });
+        
 
         var ctx = document.getElementById('c1');
         chart5 = new Chart(ctx, {
@@ -571,6 +514,8 @@ var defaultip = "";
 })(jQuery);
 
 Chart.defaults.global.animation.duration = 0;
+
+
 
 var configSpeed = {
    
@@ -1128,10 +1073,8 @@ function CreateChart() {
                     }
                 }]
             },
-
         }
-    });   
-    
+    });
 }
 function CreateAllChart(value) {
     if (myChart != null) {
@@ -1153,15 +1096,36 @@ function CreateAllChart(value) {
         success: OnSuccess_,
         error: OnErrorCall_
     });
+
+    
     function OnSuccess_(response) {
-       // chart9.destroy();
+        // chart9.destroy();
+        clearCharts();
         aData = response.d;
         var alabel = aData[0];
         var temperature = aData[1];
         var humid = aData[2];
         var pm25 = aData[3];
         var pm10 = aData[4];
-        var temptick = Math.ceil(Math.min.apply(null, temperature));
+        var workinghours = aData[9];
+        var donutcharts = aData[10];
+        document.getElementById('span1').innerText = donutcharts[0];
+        document.getElementById('span2').innerText = donutcharts[1];
+        document.getElementById('span3').innerText = donutcharts[2];
+        document.getElementById('span4').innerText = donutcharts[3];
+        document.getElementById('span6').innerText = donutcharts[4];
+        if (workinghours.length == 0) {
+            myChart4.data.datasets.data = [0, 0, 0, 0, 0, 0];
+            myChart4.update();
+        }
+        else if (workinghours.length > 0) {
+            WorkingHourChart(workinghours);
+        }
+        var temptick;
+        if (temperature.length > 0)
+            temptick = Math.ceil(Math.min.apply(null, temperature));
+        else
+            temptick = 10;
         var ctx = document.getElementById("team-chart");
         ctx.height = 130;
         myChart = new Chart(ctx, {
@@ -1350,28 +1314,18 @@ function CreateAllChart(value) {
             var n = parseInt(machineonline) + parseInt(machineoffline);
             if (n == 0) {
                 document.getElementById("systemspan").innerHTML = 0;
-                cccc.series[0].setData(0, 1);
-                cccc.series[1].setData(0, 1);
+                cccc.series[0].setData([]);                
+                cccc.series[1].setData([]);                
                 donutchartsystem(machineonline, machineoffline);
                //chart9.data.datasets[0].data = [0, 1];
                //chart9.update(0);
             }
             else if (typeof Number(machineonline) == 'number')
-            {
-                //ccc.series[0].setData([[Math.random()], [Math.random()]]);
-                //chart9.data.datasets[0].data = [parseInt(machineonline), parseInt(machineoffline)];
-                //chart9.update(0);
-                donutchartsystem(machineonline, machineoffline);
+            {              
                 document.getElementById("systemspan").innerHTML = parseInt(machineonline) + parseInt(machineoffline);
-                cccc.series[0].setData(parseInt(machineonline,10), parseInt(machineoffline,10));
-                cccc.series[1].setData(parseInt(workclose,10), parseInt(workopen,10));
-                //chart9.data.datasets.pop();
-                //chart9.data.datasets.push({
-                //    label: [],
-                //    backgroundColor: ['#da4265', 'white'],
-                //    data: [parseInt(machineonline), parseInt(machineoffline)]
-                //});
-                //chart9.update(0);
+                cccc.series[0].setData([['在线', parseInt(machineonline, 10)], ['离线',parseInt(machineoffline,10)]]);
+                cccc.series[1].setData([['故障', parseInt(workclose, 10)], ['使用中',parseInt(workopen, 10)]]);
+                donutchartsystem(machineonline, machineoffline);                
             }
             else {
                     console.log("no values");
@@ -1390,6 +1344,7 @@ function clearCharts() {
         myChart2.destroy();
         console.log("destroyed chart");
     }
+    
 }
 
 function ddlIndexChange(value) {
@@ -1407,6 +1362,7 @@ function ddlIndexChange(value) {
         error: OnErrorCall_
     });
     function OnSuccess_(response) {
+        
         designChart(response);        
     }
     function OnErrorCall_(respo) {
@@ -1438,41 +1394,7 @@ function ddltimeclass(time, loc) {
 
 function updatelivechart(name, message) {
     var ipName = document.getElementById("MainContent_masterchildBody_ipgraph").value;    
-    //if (defaultip == "") {
-    //    defaultip = ipName;
-    //    timenow.length = 20;
-    //    temp.length = 20;
-    //    humidity.length = 20;
-    //    hum10.length = 20;
-    //    hum2.length = 20;
-        
-    //    for (i = 0; i < 20; i++) {
-    //        temp[i] = 0;
-    //        humidity[i] = 0;
-    //        hum2[i] = 0;
-    //        hum10[i] = 0;
-    //        timenow[i] = "";
-    //    }
-    //}
-    //else {
-    //    if (defaultip != ipName) {
-    //        defaultip = ipName;
-    //        timenow.length = 20;
-    //        temp.length = 20;
-    //        humidity.length = 20;
-    //        hum10.length = 20;
-    //        hum2.length = 20;
-    //        pm10 = 0;
-    //        pm25 = 0;
-    //        for (i = 0; i < 20; i++) {
-    //            temp[i] = 0;
-    //            humidity[i] = 0;
-    //            hum2[i] = 0;
-    //            hum10[i] = 0;
-    //            timenow[i] = "";
-    //        }
-    //    }
-    //}
+    
     if (name == ipName) {
         console.log(name);
         var arraydata = message.split(',');
@@ -1810,9 +1732,9 @@ function ShowTempModal2() {
     });
 }
 
-$(document).ready(function () {
-    CreateAllChart("All");  
-});
+//$(document).ready(function () {
+//    CreateAllChart("All");  
+//});
 
 function designChart(response) {
     aData = response.d;
@@ -1822,7 +1744,20 @@ function designChart(response) {
     var humid = aData[2];
     var pm25 = aData[3];
     var pm10 = aData[4];
-    var temptick = Math.ceil(Math.min.apply(null, temperature));
+    var workinghours = aData[5];
+    if (workinghours.length == 0) {
+        myChart4.data.datasets.data = [0, 0, 0, 0, 0, 0];
+        myChart4.update();
+    }
+    else if (workinghours.length > 0) {
+        WorkingHourChart(workinghours);
+    }
+    var temptick;
+    if (temperature.length > 0)
+        temptick = Math.ceil(Math.min.apply(null, temperature));
+    else
+        temptick = 10;
+    clearCharts();
     var ctx = document.getElementById("team-chart");
     ctx.height = 130;
     myChart = new Chart(ctx, {
@@ -1993,7 +1928,11 @@ function designChart(response) {
     });
 }
 
-function donutchartsystem(on,off) {
+function donutchartsystem(on, off) {
+    if (on == off && on == 0) {
+        on = 0;
+        off = 1;
+    }
     var ctx = document.getElementById('c5');
     chart9 = new Chart(ctx, {
         // The type of chart we want to create
@@ -2025,3 +1964,131 @@ function donutchartsystem(on,off) {
         }
     });
 }
+
+function WorkingHourChart(hours) {
+    
+    $('#UsedBarChart').replaceWith($('<canvas id="UsedBarChart" style="max-height: 150px"></canvas>'));
+    var ctx = document.getElementById("UsedBarChart");
+   
+    myChart4 = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ["投影机", "电脑", "录播", "空调", "中控", "屏幕"],
+            datasets: [{
+                label: '# 小时',
+                data: [hours[0], hours[1], hours[2], hours[3], hours[4], hours[5]],
+                backgroundColor: [
+                    'rgba(0,44,237, .9)',
+                    'rgba(0,44,237, 0.9)',
+                    'rgba(0,44,237, 0.9)',
+                    'rgba(0,44,237, 0.9)',
+                    'rgba(0,44,237, 0.9)',
+                    'rgba(0,44,237, 0.9)'
+                ],
+                borderColor: [
+                    'rgba(0,44,237,1)',
+                    'rgba(0,44,237, 1)',
+                    'rgba(0,44,237, 1)',
+                    'rgba(0,44,237, 1)',
+                    'rgba(0,44,237, 1)',
+                    'rgba(0,44,237, 0.9)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            zeroLineColor: 'white',
+            legend: {
+                display: true,
+                position: 'bottom',
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+
+                    },
+                    gridLines: {
+                        zeroLineColor: '#fff',
+                        display: false,
+                    }
+
+                }],
+                xAxes: [{
+                    gridLines: {
+                        zeroLineColor: '#fff',
+                        display: false,
+                    },
+                    ticks: {
+                        fontSize: 12,
+                        fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                    }
+                }],
+
+            },
+        }
+    });
+}
+
+var ctx1 = document.getElementById("UsedBarChart");
+myChart4 = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+        labels: ["投影机", "电脑", "录播", "空调", "中控", "屏幕"],
+        datasets: [{
+            label: '# 小时',
+            data: [12, 19, 13, 15, 10, 8],
+            backgroundColor: [
+                'rgba(0,44,237, .9)',
+                'rgba(0,44,237, 0.9)',
+                'rgba(0,44,237, 0.9)',
+                'rgba(0,44,237, 0.9)',
+                'rgba(0,44,237, 0.9)',
+                'rgba(0,44,237, 0.9)'
+            ],
+            borderColor: [
+                'rgba(0,44,237,1)',
+                'rgba(0,44,237, 1)',
+                'rgba(0,44,237, 1)',
+                'rgba(0,44,237, 1)',
+                'rgba(0,44,237, 1)',
+                'rgba(0,44,237, 0.9)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        maintainAspectRatio: false,
+        zeroLineColor: 'white',
+        legend: {
+            display: true,
+            position: 'bottom',
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+
+                },
+                gridLines: {
+                    zeroLineColor: '#fff',
+                    display: false,
+                }
+
+            }],
+            xAxes: [{
+                gridLines: {
+                    zeroLineColor: '#fff',
+                    display: false,
+                },
+                ticks: {
+                    fontSize: 12,
+                    fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                }
+            }],
+
+        }
+    }
+
+});

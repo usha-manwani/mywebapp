@@ -241,7 +241,7 @@
                                     <Columns>
                                         <asp:BoundField DataField="docinfo" />
                                         <asp:BoundField DataField="UserName" />
-                                        <asp:TemplateField>
+                                        <%--<asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkdelete" runat="server" 
                                                     Text="<%$Resources:Resource, Delete %>"
@@ -250,7 +250,7 @@
 
                                                 </asp:LinkButton>
                                             </ItemTemplate>
-                                        </asp:TemplateField>
+                                        </asp:TemplateField>--%>
                                         <asp:TemplateField>
                                             <ItemTemplate>
                                                 <asp:LinkButton ID="lnkDownload" 

@@ -19,8 +19,7 @@ namespace WebCresij
         {
             //ScriptManager.GetCurrent(Page).RegisterPostBackControl(export);
             if (!IsPostBack)
-            {
-                
+            {                
                 string query = "select * from Institute_Details";
                 DataTable dt = PopulateTree.ExecuteCommand(query);
                 ddlInstitute.DataSource = dt;
@@ -29,13 +28,12 @@ namespace WebCresij
                 ddlInstitute.DataBind();
                 // string select = Resources.Resource.Select;
                 // ddlInstitute.Items.Insert(0, new ListItem(select, "NA"));
-                //excelgrd.Enabled = false;
+                // excelgrd.Enabled = false;
                 excelgrd.Enabled = true;
                 svbtn.Visible = true;
                 export.Visible = true;
                 Fillgradeddl();
-                BindGriddata(ddlInstitute.SelectedValue);
-                
+                BindGriddata(ddlInstitute.SelectedValue);                
             }
         }
         protected void ddlInstitute_SelectedIndexChanged(object sender, EventArgs e)
@@ -457,7 +455,8 @@ namespace WebCresij
         protected void svbtn_Click(object sender, EventArgs e)
         {
             string ID = "";
-            ID= ddlClass.SelectedValue;
+            Button btn = (Button)sender;
+            ID = ddlClass.SelectedValue;
             if (ID != "NA" && !string.IsNullOrEmpty(ID))
             {
                 ID = ddlClass.SelectedValue;
@@ -472,9 +471,8 @@ namespace WebCresij
                 {
                     ID = ddlInstitute.SelectedValue;
                 }
-
             }
-                Button btn = (Button)sender;
+            
             if (!string.IsNullOrEmpty(ID))
             {
                 //string ip = PopulateTree.getIP(ID);
@@ -486,9 +484,9 @@ namespace WebCresij
                 {
                     string timer = "";
                     if (chkTimer.Checked == true)
-                        timer = "true";
+                        timer = "已启动";//true
                     else
-                        timer = "false";
+                        timer = "未启动";//false假
                     foreach (GridViewRow r in excelgrd.Rows)
                     {
                         string time = (r.FindControl("txtTime") as TextBox).Text;
@@ -516,7 +514,7 @@ namespace WebCresij
                         string sat = (r.FindControl("txtSat") as TextBox).Text;
                         string sun = (r.FindControl("txtSun") as TextBox).Text;
                         string starttime = time.Substring(0, 5);
-                        string stoptime = time.Substring(6, 5);
+                        string stoptime  = time.Substring(6, 5);
                         if (string.IsNullOrEmpty(mon) && string.IsNullOrWhiteSpace(mon))
                         {
                             mon = "";
@@ -557,6 +555,7 @@ namespace WebCresij
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "Fail", "AlertFail('" + text + "');", true);
                         }
                     }
+                    populateTree.UpdateMachineTimer(timer, ID);
                 }
                 catch (Exception ex)
                 {
@@ -781,12 +780,17 @@ namespace WebCresij
         {
                 if (dt.Rows.Count > 0)
                 {
-                    if (dt.Rows[0]["timer"].ToString() == "true")
+                
+                if (dt.Rows[0]["timer"].ToString() == "已启动")//true
                     {
                         chkTimer.Checked = true;
                     }
+                    else
+                    {
+                        chkTimer.Checked = false;
+                    }
                     dt.Columns.Add("Time");
-                dt.Columns["Time"].SetOrdinal(0);
+                    dt.Columns["Time"].SetOrdinal(0);
                 
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {

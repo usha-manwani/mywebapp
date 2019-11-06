@@ -232,8 +232,14 @@
         }
         chat.server.sendData();
         $(document).on('change', "input[name='toggle']:checkbox", function () {
-                ipAddress = this.value;
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");
+            var ipAdd = this.value;
+            if (this.checked) {
+                chat.server.sendControlKeys(ipAdd, "8B B9 00 04 02 04 1F 29");//close
+            }
+            else {
+                chat.server.sendControlKeys(ipAdd, "8B B9 00 04 02 04 1E 28");//open
+            }
+               // chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");
         });
         $(document).on('click', "*[name='volIcon']", function () {           
             var vol = $(this).closest('table').find('input').val();
@@ -272,7 +278,7 @@
                 this.style.color = "#67ec3a";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 33 3d");               
             }
-            alert(proj);
+            //alert(proj);
         });
         //$(document).on('click', '.aclass', function () {                      
         //    ipAddress = $(this).closest('tr').find('input').val();
@@ -281,151 +287,151 @@
         //    openRemote(ipAddress);
         //    chat.server.sendData(); 
         //});        
-        $(document).on('click', '.trying', function () {
-            if ($(this).hasClass("fa-angle-up")) {
-                $(this).removeClass("fa-angle-up").addClass("fa-angle-down");
-            } else {
-                $(this).removeClass("fa-angle-down").addClass("fa-angle-up");
-            }
-        });
-        $(document).on("click", "#syslock", function () {
-            var src = document.getElementById('syslock');
-            if (src.src.indexOf("Images/unlock.png") != -1)
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
-            else
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");
-        });
-        $(document).on("click", "#podiumlock", function () {
-            var src = document.getElementById('podiumlock');
-            if (src.src.indexOf("Images/unlock.png") != -1)
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2e 38");
-            else
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2f 39");
-        });
-        $(document).on("click", "#classlock", function () {
-            var src = document.getElementById('classlock');
-            if (src.src.indexOf("Images/unlock.png") != -1)
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 69");
-            else
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 60 6A");
-        });
-        $(document).on("click", "#dsup", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 6A");
-        });
-        $(document).on("click", "#dcopen", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
-        });
-        $(document).on("click", "#dsstop", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 77 81");
-        });
-        $(document).on("click", "#dcstop", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
-        });
-        $(document).on("click", "#dsdown", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
-        });
-        $(document).on("click", "#dcclose", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
-        });
-        $(document).on("click", "#desktop", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 10 1A");
-            $('[class^="displaynone"]').hide();
-        });
-        $(document).on("click", "#laptop", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 11 1b");
-            $('[class^="displaynone"]').hide();
-        });
-        $(document).on("click", "#platform", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 12 1c");
-            $('[class^="displaynone"]').hide();
-        });
-        $(document).on("click", "#digitalEquipment", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 13 1d");
-            $('[class^="displaynone"]').hide();
-        });
-        $(document).on("click", "#dvd", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 14 1e");
-            $('[class^="displaynone"]').hide();
-            var target = $(this).attr('data-target')
-            $(target).show();
-        });
-        $(document).on("click", "#tv", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 15 1f");
-            $('[class^="displaynone"]').hide();
-            var target = $(this).attr('data-target')
-            $(target).show();
-        });
-        $(document).on("click", "#bluray", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 1a 24");
-            $('[class^="displaynone"]').hide();
-            var target = $(this).attr('data-target')
-            $(target).show();
+        //$(document).on('click', '.trying', function () {
+        //    if ($(this).hasClass("fa-angle-up")) {
+        //        $(this).removeClass("fa-angle-up").addClass("fa-angle-down");
+        //    } else {
+        //        $(this).removeClass("fa-angle-down").addClass("fa-angle-up");
+        //    }
+        //});
+        //$(document).on("click", "#syslock", function () {
+        //    var src = document.getElementById('syslock');
+        //    if (src.src.indexOf("Images/unlock.png") != -1)
+        //        chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
+        //    else
+        //        chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");
+        //});
+        //$(document).on("click", "#podiumlock", function () {
+        //    var src = document.getElementById('podiumlock');
+        //    if (src.src.indexOf("Images/unlock.png") != -1)
+        //        chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2e 38");
+        //    else
+        //        chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2f 39");
+        //});
+        //$(document).on("click", "#classlock", function () {
+        //    var src = document.getElementById('classlock');
+        //    if (src.src.indexOf("Images/unlock.png") != -1)
+        //        chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 69");
+        //    else
+        //        chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 60 6A");
+        //});
+        //$(document).on("click", "#dsup", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 5f 6A");
+        //});
+        //$(document).on("click", "#dcopen", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
+        //});
+        //$(document).on("click", "#dsstop", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 77 81");
+        //});
+        //$(document).on("click", "#dcstop", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
+        //});
+        //$(document).on("click", "#dsdown", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
+        //});
+        //$(document).on("click", "#dcclose", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 05 5f 6A");
+        //});
+        //$(document).on("click", "#desktop", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 10 1A");
+        //    $('[class^="displaynone"]').hide();
+        //});
+        //$(document).on("click", "#laptop", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 11 1b");
+        //    $('[class^="displaynone"]').hide();
+        //});
+        //$(document).on("click", "#platform", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 12 1c");
+        //    $('[class^="displaynone"]').hide();
+        //});
+        //$(document).on("click", "#digitalEquipment", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 13 1d");
+        //    $('[class^="displaynone"]').hide();
+        //});
+        //$(document).on("click", "#dvd", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 14 1e");
+        //    $('[class^="displaynone"]').hide();
+        //    var target = $(this).attr('data-target')
+        //    $(target).show();
+        //});
+        //$(document).on("click", "#tv", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 15 1f");
+        //    $('[class^="displaynone"]').hide();
+        //    var target = $(this).attr('data-target')
+        //    $(target).show();
+        //});
+        //$(document).on("click", "#bluray", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 1a 24");
+        //    $('[class^="displaynone"]').hide();
+        //    var target = $(this).attr('data-target')
+        //    $(target).show();
             
-        });
-        $(document).on("click", "#camera", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 16 20");
-            $('[class^="displaynone"]').hide();
-            var target = $(this).attr('data-target')
-            $(target).show();
+        //});
+        //$(document).on("click", "#camera", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 16 20");
+        //    $('[class^="displaynone"]').hide();
+        //    var target = $(this).attr('data-target')
+        //    $(target).show();
             
-        });
-        $(document).on("click", "#recorder", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 19 23");
-            $('[class^="displaynone"]').hide();
-            var target = $(this).attr('data-target')
-            $(target).show();
-        });
-        $(document).on("click", "#projectorOn", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 33 3d");
-        });
-        $(document).on("click", "#projectorOff", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 43 4d");
-        });
-        $(document).on("click", "#hdmi", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 34 3E");
-        });
-        $(document).on("click", "#projVideo", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 35 3f");
-        });
-        $(document).on("click", "#vga", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 44 4e");
-        });
-        $(document).on("click", "#volminus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2b");
-        });
-        $(document).on("click", "#volplus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2a");
-        });
-        $(document).on("click", "#mute", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 2c");
-        });
-        $(document).on("click", "#wiredvolplus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 23 2d");
-        });
-        $(document).on("click", "#wiredmute", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 25 2f");
-        });
-        $(document).on("click", "#wiredvolminus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 24 2e");
-        });
-        $(document).on("click", "#wirelessvolplus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 73 7d");
-        });
-        $(document).on("click", "#wirelessvolminus", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");
-        });
-        $(document).on("click", "#wirelessmute", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
-        });
-        $(document).on("click", "#systempower", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");
-        });
-        $(document).on("click", "#pcpower", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");
-        });
-        $(document).on("change", "*[name ='test']", function () {
+        //});
+        //$(document).on("click", "#recorder", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 19 23");
+        //    $('[class^="displaynone"]').hide();
+        //    var target = $(this).attr('data-target')
+        //    $(target).show();
+        //});
+        //$(document).on("click", "#projectorOn", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 33 3d");
+        //});
+        //$(document).on("click", "#projectorOff", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 43 4d");
+        //});
+        //$(document).on("click", "#hdmi", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 34 3E");
+        //});
+        //$(document).on("click", "#projVideo", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 35 3f");
+        //});
+        //$(document).on("click", "#vga", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 44 4e");
+        //});
+        //$(document).on("click", "#volminus", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2b");
+        //});
+        //$(document).on("click", "#volplus", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2a");
+        //});
+        //$(document).on("click", "#mute", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 2c");
+        //});
+        //$(document).on("click", "#wiredvolplus", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 23 2d");
+        //});
+        //$(document).on("click", "#wiredmute", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 25 2f");
+        //});
+        //$(document).on("click", "#wiredvolminus", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 24 2e");
+        //});
+        //$(document).on("click", "#wirelessvolplus", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 73 7d");
+        //});
+        //$(document).on("click", "#wirelessvolminus", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");
+        //});
+        //$(document).on("click", "#wirelessmute", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
+        //});
+        //$(document).on("click", "#systempower", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");
+        //});
+        //$(document).on("click", "#pcpower", function () {
+        //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");
+        //});
+        //$(document).on("change", "*[name ='test']", function () {
     
-        });
+        //});
         $(document).on("change", "*[name ='classnames']", function () {
             console.log("clicked Class Name");
             var val = $(this).closest('.tdcenter').find('input:checkbox').attr('value');
@@ -436,7 +442,7 @@
             for (i = 0; i < checkedids.length; i++) {
                 if (checkedids[i].checked) {
                     var ipadd = checkedids[i].value;
-                    chat.server.sendControlKeys(ipadd, "8B B9 00 04 02 04 C1 CB");
+                    chat.server.sendControlKeys(ipadd, "8B B9 00 04 05 02 1F 2A");
                 }
             }
         });
@@ -445,7 +451,7 @@
             for (i = 0; i < checkedids.length; i++) {
                 if (checkedids[i].checked) {
                     var ipadd = checkedids[i].value;
-                    chat.server.sendControlKeys(ipadd, "8B B9 00 04 02 04 C0 CA");
+                    chat.server.sendControlKeys(ipadd, "8B B9 00 04 05 02 1E 29");
                 }
             }
         });
@@ -628,13 +634,13 @@ function tbleupdate(name, message) {
     for (k = 0; k < chkbox.length; k++) {
         if (chkbox[k].value == name) {            
             if (arraydata[1] == "Heartbeat") {
-                if (arraydata[3] == 'OPEN') {
+                if (arraydata[3] == '运行中') {//OPEN
                     chkbox[k].checked = true;
                 }
                 else {
                     chkbox[k].checked = false;
                 }
-                if (arraydata[5] == 'On') {
+                if (arraydata[5] == '已开机') {//On
                     var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
                     desktop.addClass("iconColor");
                     desktop.removeClass("red");                   
@@ -644,7 +650,7 @@ function tbleupdate(name, message) {
                     desktop.removeClass("iconColor");
                     desktop.addClass("red");
                 }
-                if (arraydata[12] == 'Locked') {
+                if (arraydata[12] == '锁定') {//Locked
                     var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");                    
                     syslocked.addClass("fa-lock");                   
                     syslocked.removeClass("fa-unlock");
@@ -658,7 +664,7 @@ function tbleupdate(name, message) {
                     syslocked.removeClass("fa-lock");
                     syslocked.removeClass("red");
                 }
-                if (arraydata[6] == 'Closed') {
+                if (arraydata[6] == '已关机') {//Closed
                     var proj = $(chkbox[k]).closest('table').find("*[name='projIcon']");
                     proj.addClass("red");
                     proj.removeClass("iconColor");
@@ -669,30 +675,30 @@ function tbleupdate(name, message) {
                     proj.removeClass("red");
                 }               
                 switch (arraydata[11]) {
-                    case "Desktop":
+                    case "台式电脑":
                         var media = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         media.removeClass("^='fa-'");
                         media.title = "desktop";
                         media.addClass("fa-desktop");
                         media.addClass("iconColor");
                         break;
-                    case "Laptop":
+                    case "手提电脑":
                         var laptop = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");                                                
                         laptop.removeClass("^='fa-'");                       
                         laptop.addClass("iconColor");
                         laptop.addClass("fa-laptop");                        
                         break;
-                    case "Digital Curtain":
+                    case "数码展台":
                         var curtain = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         curtain.removeClass("^='fa-'");
                         curtain.addClass("fa-window-maximize");
                         curtain.addClass("iconColor");  
                         var cur = $(chkbox[k]).closest('table').find("#curtainMain");
-                        if (arraydata[8] == 'Stop') {
+                        if (arraydata[8] == '停') {//Stop
                             $(cur).attr('src', 'Images/imgs/curtainclose32.png');
                         }
                         else {
-                            if (arraydata[8] == 'close') {
+                            if (arraydata[8] == '关') {//Close
                                 cur.src = 'Images/imgs/curtain32.png';
                             }
                             else {
@@ -700,25 +706,25 @@ function tbleupdate(name, message) {
                             }
                         }
                         break;
-                    case "Video Camera":
+                    case "摄像机"://Vid Cam
                         var camera = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         camera.removeClass("^='fa-'");
                         camera.addClass("fa-camera");
                         camera.addClass("iconColor");                        
                         break;
-                    case "Digital Screen":
+                    case "数码设备"://Screen
                         var sc = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         sc.removeClass("^='fa-'");
                         sc.addClass("iconColor");
                         sc.addClass("fa-mobile");                       
                         break;
-                    case "TV":
+                    case "电视机"://TV
                         var tv = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         tv.removeClass("^='fa-'");
                         tv.addClass("iconColor");
                         tv.addClass("fa-tv");
                         break;
-                    case "Blu-Ray DVD":
+                    case "蓝光DVD":
                         var blu = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         blu.removeClass("^='fa-'");
                         blu.addClass("iconColor");
@@ -730,7 +736,7 @@ function tbleupdate(name, message) {
                         dvd.addClass("iconColor");
                         dvd.addClass("fa-compact-disc");
                         break;
-                    case 'Recording System':
+                    case '录播':
                         var rec = $(chkbox[k]).closest('table').find("*[name='mediaIcon']");
                         rec.removeClass("^='fa-'");
                         rec.addClass("iconColor");
@@ -832,7 +838,7 @@ function tbleupdate(name, message) {
                 if (arraydata[2] == 'SystemON') {
                     chkbox[k].checked = true;
                 }
-                else {
+                else if (arraydata[2] =='SystemOff') {
                     chkbox[k].checked = false;
                 }
             }           

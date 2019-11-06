@@ -74,35 +74,33 @@ namespace WebCresij
                         treeNode.ChildNodes.Add(child);
                 }
             }
-            TreeMenuView.ExpandDepth = 3;
+            TreeMenuView.ExpandDepth = 1;
         }
 
         public static DataTable ExecuteCommand(string Text)
         {
+            DataTable dt = new DataTable();
             try
             {
                 con = new MySqlConnection(constr);
                 MySqlDataAdapter da = new MySqlDataAdapter(Text, con);
-
                 //Opening Connection  
                 if (con.State != ConnectionState.Open)
                     con.Open();
-
-                DataTable dt = new DataTable();
                 //Loading all data in a datatable from datareader  
                 da.Fill(dt);
                 //Closing the connection  
-                con.Close();
-                return dt;
+                con.Close();               
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+               // throw;
             }
             finally
             {
                 con.Close();
             }
+            return dt;
         }
 
         protected void TreeMenuView_SelectedNodeChanged(object sender, EventArgs e)
@@ -112,7 +110,9 @@ namespace WebCresij
             {
                 HttpContext.Current.Session["GradeName"] = TreeMenuView.SelectedNode.Text;
                 HttpContext.Current.Session["InstituteID"] = TreeMenuView.SelectedNode.Parent.Text;
-                DataTable dt = ExecuteCommand("select cd.ClassName as loc ,cc.ccip as ip from CentralControl cc join Class_Details cd on cd.ID=cc.location where cd.GradeID='" + TreeMenuView.SelectedNode.Value + "' order by cd.ClassName");
+                DataTable dt = ExecuteCommand("select cd.ClassName as loc ,cc.ccip as ip from " +
+                    "CentralControl cc join Class_Details cd on cd.ID=cc.location where cd.GradeID='"
+                    + TreeMenuView.SelectedNode.Value + "' order by cd.ClassName");
                 if (dt.Rows.Count > 0)
                 {
                     string[] deviceloc = new string[dt.Rows.Count];

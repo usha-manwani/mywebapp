@@ -30,7 +30,7 @@ namespace WebCresij
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        string videostream = "rtsp://" + dt.Rows[i]["ID"] + ":" + dt.Rows[i]["password"] + "@" + dt.Rows[i]["CameraIP"] + ":554/";
+                        string videostream = "rtsp://" + dt.Rows[i]["user_ID"] + ":" + dt.Rows[i]["password"] + "@" + dt.Rows[i]["CameraIP"] + ":554/";
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "videostream" + i, "Cam" + (i + 1) + "('" + videostream + "');", true);
                     }
                 }

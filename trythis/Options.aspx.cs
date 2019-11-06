@@ -19,6 +19,12 @@ namespace WebCresij
         {            
             if(!IsPostBack)
             {
+                string query = "select * from institute_details";
+                DataTable dt = PopulateTree.ExecuteCommand(query);
+                ddlInstitute.DataSource = dt;
+                ddlInstitute.DataTextField = "Ins_Name";
+                ddlInstitute.DataValueField = "Ins_ID";
+                ddlInstitute.DataBind();
                 fillTree.function(TreeMenuView1, e);
                 fillTree.function(TreeViewEdit, e);
                 fillTree.function(TreeViewDelete, e);

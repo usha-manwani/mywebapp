@@ -143,11 +143,15 @@ namespace WebCresij
                     total = dt.Rows[0][0].ToString();
                 }
                 offline = (Convert.ToInt32(total) - Convert.ToInt32(Online)).ToString();
+                
                 idata.Add(Online);
                 idata.Add(offline);
                 idata.Add(workopen);
                 idata.Add(workclose);
             }
+            List<object> hours = GetWorkingHours(name);
+            idata.Add(hours);
+            idata.Add(GetNoOfDevices(name));
             return idata;
         }
 
@@ -218,7 +222,8 @@ namespace WebCresij
             idata.Add(temperature);
             idata.Add(humid);
             idata.Add(pm25);
-            idata.Add(pm10);            
+            idata.Add(pm10);
+            idata.Add(GetWorkingHours(name));
             return idata;
         }
 
@@ -290,6 +295,55 @@ namespace WebCresij
             idata.Add(gradeids);
             idata.Add(gname);           
             return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetWorkingHours(string name)
+        {
+            DataTable dt = chart.WorkingHours(name);
+            List<object> list = new List<object>();
+            if (dt.Rows.Count > 0)
+            {
+                for(int i=0; i<dt.Columns.Count;i++)
+                {                    
+                    list.Add(dt.Rows[0][i].ToString());
+                }
+            }
+            return list;
+        }
+        [WebMethod]
+        public List<object> SaveDevicesCount(string[] name)
+        {
+            
+            chart.Savedevicecount(name);
+            List<object> result = new List<object>();
+            return result;
+            
+        }
+
+        public List<object> GetNoOfDevices(string name)
+        {
+            string query = "";
+            if (name == "All")
+            {
+                query = "select sum(proj), sum(pc), sum(recorder), sum(ac) ,sum(screen) from noofdevices";
+            }
+            else
+            query = "select proj, pc, recorder, ac ,screen from noofdevices where location = '"+name+"'";
+            DataTable dt= PopulateTree.ExecuteCommand(query);
+            List<object> result = new List<object>();
+            if (dt.Rows.Count > 0)
+            {
+                
+                for(int i=0; i<dt.Columns.Count;i++)
+                result.Add(dt.Rows[0][i]);
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                    result.Add("0");
+            }
+            return result;
         }
     }
 }
