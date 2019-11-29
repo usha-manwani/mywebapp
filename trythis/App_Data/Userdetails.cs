@@ -27,7 +27,9 @@ namespace WebCresij
                         MySqlDataAdapter sa = new MySqlDataAdapter(cmd);
                         sa.Fill(dtuser);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -55,7 +57,9 @@ namespace WebCresij
                         MySqlDataAdapter sa = new MySqlDataAdapter(cmd);
                         sa.Fill(dtuser);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -84,7 +88,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
 
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex) { }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     
                     finally
                     {
@@ -112,7 +118,9 @@ namespace WebCresij
 
 
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex){ }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
 
                     finally
                     {

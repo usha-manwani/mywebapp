@@ -15,7 +15,7 @@
     <script src="ajaxfiles/BaseScripts.debug.js"></script>
     <script src="ajaxfiles/Tabs.debug.js"></script>
     <script src="ajaxfiles/DynamicPopulate.debug.js"></script>
-    <script src ="Scripts/Options.js?version=1"></script>
+    <script src ="Scripts/Options.js?version=2"></script>
     <asp:ScriptManagerProxy ID="sc1" runat="server"></asp:ScriptManagerProxy>
     <div>
         <asp:UpdatePanel runat="server">
@@ -27,7 +27,7 @@
                                 <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;<span><%=Resources.Resource.Add%></span>
                             </HeaderTemplate>
                             <ContentTemplate>
-                                <asp:LinkButton runat="server" Text="Add/Edit No. Of Devices" ID="AddEditlink" 
+                                <asp:LinkButton runat="server" Text="<%$Resources:Resource, AddEditNoDevice %>" ID="AddEditlink" 
                                     OnClientClick="displaydevicesPopup();return false;" Font-Underline="True"
                                     Font-Bold="True" Font-Size="20px" ForeColor="#2f323a"></asp:LinkButton><br />
                                 <%--<asp:LinkButton runat="server" Text="Add University" ID="AddUniv" 
@@ -51,7 +51,9 @@
                             <ContentTemplate>
                                 <asp:TextBox runat="server" Visible="false"></asp:TextBox>
                                 <asp:TreeView ID="TreeViewEdit" ToolTip="Edit Details" runat="server"
-                                    OnSelectedNodeChanged="TreeViewEdit_SelectedNodeChanged" NodeStyle-NodeSpacing="5px" CssClass="leftspace" ForeColor="#2F323A">
+                                    OnSelectedNodeChanged="TreeViewEdit_SelectedNodeChanged" 
+                                    NodeStyle-NodeSpacing="5px" CssClass="leftspace" ForeColor="#2F323A"
+                                    >
                                 </asp:TreeView>
                             </ContentTemplate>
                         </cc1:TabPanel>
@@ -105,8 +107,8 @@
                     <div id ="addeditdevices" class ="modal scroll">
                         <div class="modal-content">
                             <div class=" row " style="padding-right: 20px;">
-                                <div class="panel-heading col ">
-                                    <h4><span>Add or Edit No. Of Devices</span></h4>
+                                <div class="panel-heading col">
+                                    <h4><span><%=Resources.Resource.AddEditNoDevice%></span></h4>
                                 </div>
                                 <span onclick="hidedevicesDiv();" style="cursor: pointer">&times;</span>
                             </div>
@@ -116,48 +118,48 @@
                                     <div class="form-horizontal">
                                         <div class="form-group row margintop">
                                              <asp:Label runat="server" Font-Bold="true" AssociatedControlID="ddlInstitute"
-                                                CssClass="col-md-5 labelpadding" Text="Select Institute"></asp:Label>
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, SelectInstitute %>"></asp:Label>
                                             <div class="col-md-7">
                                                 <asp:DropDownList Width="100px" AutoPostBack="false"                            
                                             CssClass="btn btn-default border-dark" ID="ddlInstitute" 
-                                            runat="server" ForeColor="#1E1E36" >                            
+                                            runat="server" ForeColor="#1E1E36" onChange="GetMachineCounts(this);return false;">                            
                                         </asp:DropDownList>
                                             </div>
                                             
                                         </div>
                                         <div class="form-group row margintop">
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="projtb"
-                                                CssClass="col-md-5 labelpadding" Text="No. OF Projectors"></asp:Label>
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, NoOfProjector %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="projtb" CssClass="form-control " />
+                                                <asp:TextBox runat="server" ID="projtb" CssClass="form-control" Text="0"/>
                                             </div>
                                         </div>
                                         <div class="form-group row margintop">
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="pctb"
-                                                CssClass="col-md-5 labelpadding" Text="No. Of PC"></asp:Label>
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, NoOfPC %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="pctb" CssClass="form-control " />
+                                                <asp:TextBox runat="server" ID="pctb" CssClass="form-control" Text="0"/>
                                             </div>
                                         </div>
                                         <div class="form-group row margintop">
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="recordtb"
-                                                CssClass="col-md-5 labelpadding" Text="No. Of Recorder"></asp:Label>
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, NoOfRecorder %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="recordtb" CssClass="form-control " />
+                                                <asp:TextBox runat="server" ID="recordtb" CssClass="form-control" Text="0" />
                                             </div>
                                         </div>
                                         <div class="form-group row margintop">
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="actb"
-                                                CssClass="col-md-5 labelpadding" Text="No. Of AC"></asp:Label>
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, NoOfAC %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="actb" CssClass="form-control " />
+                                                <asp:TextBox runat="server" ID="actb" CssClass="form-control" Text="0"/>
                                             </div>
                                         </div>
                                         <div class="form-group row margintop">
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="screentb"
-                                                CssClass="col-md-5 labelpadding" Text="No. Of Digital Booth"></asp:Label>
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, NoofBooth %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="screentb" CssClass="form-control " />
+                                                <asp:TextBox runat="server" ID="screentb" CssClass="form-control" Text="0"/>
                                             </div>
                                         </div>
                                     </div>
@@ -179,8 +181,8 @@
 
                             </div>
 
-                            <div>
-                                <div class="form-group" style="width: 30%; float: left">
+                            <div class="form-group">
+                                <div  style="width: 30%; float: left">
                                     <asp:Label runat="server" Font-Bold="true" AssociatedControlID="txtIns" CssClass="col-lg-3 control-label" Text="<%$Resources:Resource, InsName %>"></asp:Label>
                                 </div>
                                 <div style="width: 40%; float: left">
@@ -225,11 +227,12 @@
                             <div>
                                 <div class="row ">
                                     <asp:TextBox ID="instext" runat="server" Visible="false"></asp:TextBox>
-                                    <div id="TextBoxContainer" class="form-horizontal">
+                                    <div id="TextBoxContainer" class="form-horizontal"  style="width: 90%">
                                         <div class="form-group row margintop">
+                                            
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="Grade_Name"
-                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Grade %>"></asp:Label>
-                                            <div class="col-md-7">
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Grade %>"></asp:Label>                                
+                                            <div class="col-md-7" >
                                                 <asp:TextBox runat="server" ID="Grade_Name" CssClass="form-control " />
                                             </div>
                                         </div>
@@ -237,9 +240,11 @@
                                 </div>
                                 <div class="row" style="width: 50%; float: left; margin-right: 30px;">
                                     <div class="col">
-                                        <asp:Button ID="btnaddgrade" Text="<%$Resources:Resource, Add %>" runat="server" OnClientClick="AddTextGrade(); return false;" /></div>
+                                        <asp:Button ID="btnaddgrade" Text="<%$Resources:Resource, Add %>" runat="server" 
+                                            OnClientClick="AddTextGrade(); return false;" /></div>
                                     <div class="col">
-                                        <asp:Button ID="save" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideGrade();" OnClick="btnGradesave_Click" /></div>
+                                        <asp:Button ID="save" Text="<%$Resources:Resource, Save %>" runat="server" OnClientClick="hideGrade();"
+                                            OnClick="btnGradesave_Click" /></div>
                                 </div>
                             </div>
                         </div>
@@ -295,9 +300,9 @@
                                 <span onclick="hideCam();"
                                     style="cursor: pointer">&times;</span>
                             </div>
-                            <div class="row" style="float: left">
+                            <div class="row" style="float: left; ">
                                 <asp:TextBox Visible="false" runat="server" ID="tbSelectedClass"></asp:TextBox>
-                                <div class="form-group row margintop">
+                                <div class="form-group row margintop" style="width:90%">
                                     <asp:Label Text="<%$Resources:Resource, CCIPAddress %>" AssociatedControlID="ccSystem" runat="server" CssClass="col-md-5 control-label" Font-Bold="True"></asp:Label>
                                     <div class="col-md-7">
                                         <asp:TextBox runat="server" CssClass="form-control" ID="ccSystem"></asp:TextBox>
@@ -405,7 +410,74 @@
 
                     </div>
 
-
+                     <div id ="edithours" class ="modal scroll">
+                        <div class="modal-content">
+                            <div class=" row " style="padding-right: 20px;">
+                                <div class="panel-heading col">
+                                    <h4><span><%= Resources.Resource.ChangeUsesTime%></span></h4>
+                                </div>
+                                <span onclick="hidehourDiv();" style="cursor: pointer">&times;</span>
+                            </div>
+                            <div>
+                                <p id="workingHourslocation" runat="server"><span>
+                                    <asp:Label runat="server" ID="hourins" Text=""></asp:Label> &nbsp;>>
+                                    <asp:Label runat="server" ID="hourgrade" Text=""></asp:Label>&nbsp;>>
+                                    <asp:Label runat="server" ID="hourclass" Text=""></asp:Label>
+                                                             </span></p>
+                                <div class="row ">
+                                   <input type="hidden" id="hiddenworkip" value="" />
+                                    <div class="form-horizontal">
+                                       
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="projhour"
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Projector %>"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="projhour" CssClass="form-control" Text="0"/>&nbsp;<%=Resources.Resource.Hours %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="pchour"
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Computer %>"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="pchour" CssClass="form-control" Text="0"/>&nbsp;<%=Resources.Resource.Hours %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="recordhour"
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Recorder %>"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="recordhour" CssClass="form-control" Text="0" />&nbsp;<%=Resources.Resource.Hours %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="achour"
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, AC %>"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="achour" CssClass="form-control" Text="0"/>&nbsp;<%=Resources.Resource.Hours %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="syshour"
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, CentralControl %>"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="syshour" CssClass="form-control" Text="0"/>&nbsp;<%=Resources.Resource.Hours %>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row margintop">
+                                            <asp:Label runat="server" Font-Bold="true" AssociatedControlID="screenhour"
+                                                CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Screen %>"></asp:Label>
+                                            <div class="col-md-7">
+                                                <asp:TextBox runat="server" ID="screenhour" CssClass="form-control" Text="0"/>&nbsp;<%=Resources.Resource.Hours %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="width: 50%; float: left; margin-right: 30px;">                                    
+                                        <asp:Button ID="Button4" Text="<%$Resources:Resource, Save %>" runat="server"
+                                            OnClientClick="saveandhideworkinghour();" /></div>                                
+                            </div>
+                        </div>
+                    </div>
                   
 
                     <%--Edit all detals finished--%>

@@ -13,6 +13,33 @@ namespace WebCresij {
     public partial class HomePage {
         
         /// <summary>
+        /// Iframe2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe Iframe2;
+        
+        /// <summary>
+        /// Iframe3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe Iframe3;
+        
+        /// <summary>
+        /// Iframe4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlIframe Iframe4;
+        
+        /// <summary>
         /// iptocam control.
         /// </summary>
         /// <remarks>

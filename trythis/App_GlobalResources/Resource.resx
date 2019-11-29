@@ -124,7 +124,7 @@
     <value>Login</value>
   </data>
   <data name="loginAccount" xml:space="preserve">
-    <value>Use a local account to log in.</value>
+    <value>Use a local account to login</value>
   </data>
   <data name="noAccount" xml:space="preserve">
     <value>if you don't have a local account.</value>
@@ -997,7 +997,7 @@
     <value>CentralControl</value>
   </data>
   <data name="Computer" xml:space="preserve">
-    <value>电脑</value>
+    <value>Computer</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
@@ -1124,5 +1124,77 @@
   </data>
   <data name="tvcontrol" xml:space="preserve">
     <value>TVControls</value>
+  </data>
+  <data name="AddNewFaultInfo" xml:space="preserve">
+    <value>Add New Fault Info</value>
+  </data>
+  <data name="GoToControl" xml:space="preserve">
+    <value>Go to Control </value>
+  </data>
+  <data name="HandledBy" xml:space="preserve">
+    <value>Handled By(Optional)</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="ProjectorAndPC" xml:space="preserve">
+    <value>Projector&amp;PC</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>low</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="AddEditNoDevice" xml:space="preserve">
+    <value>Add/Edit No. Of Devices</value>
+  </data>
+  <data name="NoOfAC" xml:space="preserve">
+    <value>No Of AC</value>
+  </data>
+  <data name="NoofBooth" xml:space="preserve">
+    <value>No Of Digital Screen</value>
+  </data>
+  <data name="NoOfPC" xml:space="preserve">
+    <value>No Of PC</value>
+  </data>
+  <data name="NoOfProjector" xml:space="preserve">
+    <value>No Of Projector</value>
+  </data>
+  <data name="NoOfRecorder" xml:space="preserve">
+    <value>No Of Recorder</value>
+  </data>
+  <data name="distname" xml:space="preserve">
+    <value>District Name</value>
+  </data>
+  <data name="PhoneNum" xml:space="preserve">
+    <value>Phone No.</value>
+  </data>
+  <data name="Vol" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="WiredVol" xml:space="preserve">
+    <value>Wired Mic Vol</value>
+  </data>
+  <data name="WirelessVol" xml:space="preserve">
+    <value>Wireless Mic Vol</value>
+  </data>
+  <data name="ChangeUsesTime" xml:space="preserve">
+    <value>Change Device uses Time</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>Hours</value>
+  </data>
+  <data name="WorkingHours" xml:space="preserve">
+    <value>Working Hours</value>
+  </data>
+  <data name="Recorder" xml:space="preserve">
+    <value>Recorder</value>
+  </data>
+  <data name="MultimediaDevice" xml:space="preserve">
+    <value>Multimedia Device</value>
   </data>
 </root>

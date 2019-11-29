@@ -9,7 +9,7 @@
     <script src="Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
-    <script src="Scripts/RemoteModal.js?v=5"></script>
+    <script src="Scripts/RemoteModal.js?v=6"></script>
     <style>
         .scroll {
             overflow-y: auto;
@@ -54,10 +54,12 @@
         }*/
         .imgsize {
             width: 50%;
+            
         }
 
         .imgsize1 {
             width: 55%;
+            
         }
 
         .imgsize2 {
@@ -890,7 +892,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <div id="media" class="divcontrols MediaSignalTable">
-                                <table style="height: 100%; width: 100%">
+                                <table style="height: 100%; width: 100%; max-height:350px;max-width:220px">
                                     <tr class="controlHeaderRow">
                                         <td colspan="2" style="text-align: center"><%=Resources.Resource.MediaSignal%></td>
                                     </tr>

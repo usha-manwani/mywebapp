@@ -364,7 +364,9 @@ namespace WebCresij
                     dtCurrentTable = dt;
                     ViewState["CurrentTable"] = dtCurrentTable;
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     if (ddlClass.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlClass.SelectedValue))
                     {
@@ -557,7 +559,9 @@ namespace WebCresij
                     }
                     populateTree.UpdateMachineTimer(timer, ID);
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     string text = Resources.Resource.AlertTime2;
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "time", "timewrong('" + text + "');", true);
@@ -720,7 +724,9 @@ namespace WebCresij
                 //    }
 
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 string text = Resources.Resource.AlertTime6;
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "fileformat", "fileFormat('" + text + "');", true);
@@ -802,7 +808,9 @@ namespace WebCresij
                         excelgrd.DataBind();
                         ViewState["CurrentTable"] = dt;
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
                         Response.Redirect("Schedule.aspx");
                     }
@@ -813,7 +821,9 @@ namespace WebCresij
                     {
                         bindgrd();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
                         Response.Redirect("Schedule.aspx");
                     }

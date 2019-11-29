@@ -10,13 +10,15 @@ namespace WebCresij
 {
     public class PopulateTree
     {
-
-        #region Create Tree
-        static DataTable dt = new DataTable();
-        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
-
-        public void cam(TreeView t, string ptId, TreeNode c)
+        #region
+         
+        #endregion
+        #region create edit tree
+        public void EditCam(TreeView t, string ptId, TreeNode c)
         {
+            string multimediadevice = Resources.Resource.ResourceManager.GetString("MultimediaDevice");
+            string came = Resources.Resource.ResourceManager.GetString("Camera");
+            string change = Resources.Resource.ResourceManager.GetString("ChangeUsesTime");
 
             DataTable dtcam = ExecuteCommand("Select CamName, CameraID, CameraIP from Camera_Details where " +
                 "location in (select id from class_details where classid ='" + ptId + "')");
@@ -24,7 +26,7 @@ namespace WebCresij
             {
                 TreeNode nodeCam = new TreeNode
                 {
-                    Text = "Camera",
+                    Text = came,
                     Value = "Camera"
                 };
                 c.ChildNodes.Add(nodeCam);
@@ -46,7 +48,120 @@ namespace WebCresij
             {
                 TreeNode nodeCentral = new TreeNode
                 {
-                    Text = "Multimedia Device",
+                    Text = multimediadevice,
+                    Value = "Multimedia"
+                };
+                c.ChildNodes.Add(nodeCentral);
+                foreach (DataRow row in dtControlDevice.Rows)
+                {
+                    TreeNode child = new TreeNode
+                    {
+                        Text = row[0].ToString(),
+                        Value = row[0].ToString()
+                    };
+                    nodeCentral.ChildNodes.Add(child);
+                }
+                TreeNode node = new TreeNode
+                {
+                    Text = change,
+                    Value = ptId
+                };
+                c.ChildNodes.Add(node);
+            }
+            
+            
+        }
+        
+        public void Editfunction(TreeView t, EventArgs args)
+        {
+            if (t.Nodes.Count > 0)
+            {
+                t.Nodes.Clear();
+            }
+            DataTable dt = ExecuteCommand("Select ins_name, ID, ins_id from Institute_Details order by ins_name");
+            this.EditPopulateTreeView(dt, 0, null, t);
+        }
+        private void EditPopulateTreeView(DataTable dtParent, int ParentId, TreeNode treeNode, TreeView t)
+        {
+            string val;
+            foreach (DataRow row in dtParent.Rows)
+            {
+                val = row[2].ToString();
+                TreeNode child = new TreeNode
+                {
+                    Text = row[0].ToString(),
+                    Value = row[1].ToString(),
+                    ToolTip = row[2].ToString(),
+                };
+                if (ParentId == 0)
+                {
+                    t.Nodes.Add(child);
+                    DataTable dtChild = ExecuteCommand("Select Grade_Name, Id,grade_id from Grade_Details where InsID  in" +
+                        "(select id from `cresijdatabase`.institute_details where ins_id='" + val + "') order by Grade_Name");
+                    EditPopulateTreeView(dtChild, int.Parse(child.Value), child, t);
+                }
+                else
+                {
+                    if (ParentId != 0)
+                    {
+                        treeNode.ChildNodes.Add(child);
+                        DataTable dtclass = ExecuteCommand("Select ClassName, Id, classId from Class_Details where GradeID in" +
+                            "(select id from grade_details where grade_id='" + val + "') order by ClassName");
+                        if (dtclass.Rows.Count == 0)
+                        {
+                            EditCam(t, val, child);
+                        }
+
+                        EditPopulateTreeView(dtclass, int.Parse(child.Value), child, t);
+                    }
+                    else
+                        treeNode.ChildNodes.Add(child);
+                }
+            }
+            t.CollapseAll();
+        }
+        #endregion
+
+        #region Create Tree
+        static DataTable dt = new DataTable();
+        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+
+        
+
+        public void cam(TreeView t, string ptId, TreeNode c)
+        {
+            string multimediadevice = Resources.Resource.ResourceManager.GetString("MultimediaDevice");
+            string came = Resources.Resource.ResourceManager.GetString("Camera");
+           
+            DataTable dtcam = ExecuteCommand("Select CamName, CameraID, CameraIP from Camera_Details where " +
+                "location in (select id from class_details where classid ='" + ptId + "')");
+            if (dtcam.Rows.Count > 0)
+            {
+                TreeNode nodeCam = new TreeNode
+                {
+                    Text = came,
+                    Value = "Camera"
+                };
+                c.ChildNodes.Add(nodeCam);
+                foreach (DataRow row in dtcam.Rows)
+                {
+                    TreeNode child = new TreeNode
+                    {
+                        Text = row[0].ToString(),
+                        Value = row[2].ToString()
+
+                    };
+                    nodeCam.ChildNodes.Add(child);
+                }
+            }
+            DataTable dtControlDevice = ExecuteCommand("Select CCIP,Location from CentralControl where " +
+                "location in (select id from class_details where classid ='" + ptId + "')");
+
+            if (dtControlDevice.Rows.Count > 0)
+            {
+                TreeNode nodeCentral = new TreeNode
+                {
+                    Text = multimediadevice,
                     Value = "Multimedia"
                 };
                 c.ChildNodes.Add(nodeCentral);
@@ -128,7 +243,9 @@ namespace WebCresij
                 //Closing the connection  
                
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                 
             }
@@ -177,7 +294,9 @@ namespace WebCresij
                         con.Open();
                         cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -210,7 +329,9 @@ namespace WebCresij
                     }
 
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch(Exception ex) { }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 finally
                 {
                     con.Close();
@@ -237,7 +358,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         //result = Convert.ToInt32(cmd.Parameters["@Ids"].Value);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -266,7 +389,9 @@ namespace WebCresij
                         con.Open();
                         cmd.ExecuteNonQuery();                       
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex){}
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     finally
                     {
                         con.Close();
@@ -296,7 +421,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@Ids"].Value);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -336,7 +463,9 @@ namespace WebCresij
                            result= Convert.ToInt32(cmd.Parameters["@result"].Value);
                         }
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex){}
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     finally
                     {
                         con.Close();
@@ -372,7 +501,9 @@ namespace WebCresij
                     }
 
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     result = -2;
                 }
@@ -393,13 +524,13 @@ namespace WebCresij
             int result ;
             using(MySqlConnection con= new MySqlConnection(constr))
             {
-                using(MySqlCommand cmd = new MySqlCommand("sp_delCC", con))
+                using(MySqlCommand cmd = new MySqlCommand("sp_delCConLocation", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@ip", ccip);
+                    cmd.Parameters.AddWithValue("@ips", ccip);
                     cmd.Parameters.AddWithValue("@loc", loc);
-                    cmd.Parameters.Add("@result", MySqlDbType.Int32);
-                    cmd.Parameters["@result"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@r", MySqlDbType.Int32);
+                    cmd.Parameters["@r"].Direction = ParameterDirection.Output;
                     try
                     {
                         if (con.State != ConnectionState.Open)
@@ -407,9 +538,11 @@ namespace WebCresij
                             con.Open();
                         }
                         cmd.ExecuteNonQuery();
-                        result= Convert.ToInt32(cmd.Parameters["@result"].Value);
+                        result= Convert.ToInt32(cmd.Parameters["@r"].Value);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
                         result = -1;
                     }
@@ -442,7 +575,9 @@ namespace WebCresij
                             cid = Convert.ToInt32(cmd.Parameters["@r"].Value);
                         }
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -472,7 +607,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -504,7 +641,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -535,7 +674,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@r"].Value);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -564,7 +705,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@result"].Value);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -584,17 +727,19 @@ namespace WebCresij
                 using (MySqlCommand cmd = new MySqlCommand("sp_deleteCentralControl", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@r", MySqlDbType.Int32);
-                    cmd.Parameters["@r"].Direction = ParameterDirection.Output;
+                    cmd.Parameters.Add("@result", MySqlDbType.Int32);
+                    cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                     cmd.Parameters.AddWithValue("@loc", loc);
                     try
                     {
                         if(con.State!=ConnectionState.Open)
                         con.Open();
                         cmd.ExecuteNonQuery();
-                        result = Convert.ToInt32(cmd.Parameters["@r"].Value);
+                        result = Convert.ToInt32(cmd.Parameters["@result"].Value);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -618,7 +763,9 @@ namespace WebCresij
                             con.Open();
                         int result= cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -650,7 +797,9 @@ namespace WebCresij
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         da.Fill(dt);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -683,7 +832,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
 
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -708,7 +859,9 @@ namespace WebCresij
                         con.Open();
                         cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -734,7 +887,9 @@ namespace WebCresij
                         con.Open();
                         cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -759,7 +914,9 @@ namespace WebCresij
                         con.Open();
                         cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     { }
                     finally
                     {
@@ -784,7 +941,9 @@ namespace WebCresij
                         con.Open();
                         cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -907,7 +1066,9 @@ namespace WebCresij
                     cmd.ExecuteNonQuery();
                     result = Convert.ToInt32(cmd.Parameters["@result"].Value);
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     result = -2;
                 }
@@ -950,7 +1111,9 @@ namespace WebCresij
                         cmd1.ExecuteNonQuery();
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     result = -3;
                 }
@@ -983,7 +1146,9 @@ namespace WebCresij
                         }
                         
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 }catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     result = "";
                 }
@@ -1017,7 +1182,9 @@ namespace WebCresij
 
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     result = "";
                 }
@@ -1047,7 +1214,9 @@ namespace WebCresij
                         cmd.Parameters.AddWithValue("@ip", ip);
                         result = cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
                         result = -2;
                     }
@@ -1108,7 +1277,9 @@ namespace WebCresij
                             con.Open();
                         }
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -1143,7 +1314,9 @@ namespace WebCresij
                         result = cmd.ExecuteNonQuery();
 
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
                         result = -2;
                     }
@@ -1192,7 +1365,9 @@ namespace WebCresij
                         success = cmd.ExecuteNonQuery();
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     success = -1;
                 }
@@ -1222,7 +1397,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -1254,7 +1431,9 @@ namespace WebCresij
                             }
                         }
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -1283,7 +1462,9 @@ namespace WebCresij
                         }
                         cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -1309,7 +1490,9 @@ namespace WebCresij
                         da.Fill(dtStatus);
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -1342,7 +1525,9 @@ namespace WebCresij
                         da.Fill(dtStatus);
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -1369,7 +1554,9 @@ namespace WebCresij
                         da.Fill(dtStatus);
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -1401,7 +1588,9 @@ namespace WebCresij
                         da.Fill(dtStatus);
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -1433,7 +1622,9 @@ namespace WebCresij
                         da.Fill(dtStatus);
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -1449,7 +1640,7 @@ namespace WebCresij
     }
     public class CentralControl
     {
-        string constr = System.Configuration.ConfigurationManager.
+        readonly string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["CresijCamConnectionString"].ConnectionString;
 
         public void SaveDatainDatabase(string sender, string data)
@@ -1495,7 +1686,9 @@ namespace WebCresij
                             }
                             cmd.ExecuteNonQuery();
                         }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                         catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                         {
                             // Console.WriteLine(ex.Message);
                         }
@@ -1505,7 +1698,9 @@ namespace WebCresij
                         }
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -1566,7 +1761,7 @@ namespace WebCresij
             DataTable dtcam = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "select CameraIP, port, user_id, password from Camera_Details where location = "+loc;
+                string query = "select CameraIP, user_id, password, port from Camera_Details where location = " + loc;
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     try
@@ -1614,7 +1809,9 @@ namespace WebCresij
                         }
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -1684,7 +1881,9 @@ namespace WebCresij
                         }
                         cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -1727,7 +1926,9 @@ namespace WebCresij
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         da.Fill(dt);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex) { }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 }
             }
             return dt;
@@ -1755,7 +1956,9 @@ namespace WebCresij
                         cmd.ExecuteNonQuery();
                         r = Convert.ToInt32( cmd.Parameters["@result"].Value);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
                         r = 0;
                     }
@@ -1786,7 +1989,9 @@ namespace WebCresij
                         }
                         cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }

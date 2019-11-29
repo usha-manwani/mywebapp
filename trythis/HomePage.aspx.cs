@@ -12,8 +12,8 @@ namespace WebCresij
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
-            OpenCam();            
+            
+            
         }
 
         private void OpenCam()
@@ -30,16 +30,44 @@ namespace WebCresij
                 {
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
-                        string videostream = "rtsp://" + dt.Rows[i]["user_ID"] + ":" + dt.Rows[i]["password"] + "@" + dt.Rows[i]["CameraIP"] + ":554/";
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "videostream" + i, "Cam" + (i + 1) + "('" + videostream + "');", true);
+                        int width = 0;
+                        int height = 0;
+                        string divp = "divPlugin";
+                        string hid = "plugin";
+                        int port = 80;
+                        string func = "GetPlugin";
+                        if (i == 0)
+                        {
+                            width = 490;
+                            height = 300;
+                            divp = "divPlugin";
+                            hid = "plugin";
+                            func = "GetPlugin";
+                        }
+                        else
+                        {
+                            width = 90;
+                            height = 60;
+                            divp = "divPlugin"+i;
+                            hid = "plugin"+i;
+                            func = "GetPlugin" + i;
+                        }
+                        //string videostream = "rtsp://" + dt.Rows[i]["user_ID"] + ":" + dt.Rows[i]["password"] + "@" + dt.Rows[i]["CameraIP"] + ":554/"
+                        //   ;
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "videostream" + i, func+"('"+ dt.Rows[i]["CameraIP"] 
+                            +"','"+ dt.Rows[i]["user_ID"] +"','"+ dt.Rows[i]["password"] +"',"+port+","+width+","+height+",'"+ divp+"','"+hid+"');", true);
                     }
                 }
             }
-            catch 
+            catch
             {
                 Response.Redirect("Logout.aspx");
             }
             
+        }
+        public void GetallCam()
+        {
+            OpenCam();
         }
     }
 }

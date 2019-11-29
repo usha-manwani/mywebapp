@@ -1,11 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site2.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="WebCresij.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <style>
+         @media screen and (max-width: 280px) and (max-height:450px)
+        {
+            .paddingtop{
+                padding-top:20%;
+            }
+            label{
+                color:white;
+            }
+        }
+        .paddingtop{
+            padding: 10% 0 2% 2%;
+            max-width:500px;
+            margin:0 auto;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="positionCenter">
+   
+    <div class="form-horizontal paddingtop" >
      <h2 style="text-align:center"><asp:Label runat="server" ID="loginHead" 
          Text="<%$Resources:Resource, Login %>"></asp:Label></h2>    
-    <div class="row">
+    <div class="row" >
         <div class="col-12">
             <section id="loginForm">
                 <div class="form-horizontal">
@@ -48,7 +65,7 @@
                     <div class="form-group">
                         <div class="col-md-12" style="text-align:center">
                             <asp:Button runat="server" ID="btnLogin" CommandName="Login" OnClick="LogIn"
-                                Text="<%$Resources:Resource, Login %>"
+                                Text="<%$Resources:Resource, Login%>"
                                 CssClass="btn btn-outline-light" />
                         </div>
                     </div>
@@ -66,6 +83,10 @@
                 <uc:OpenAuthProviders runat="server" ID="OpenAuthLogin" />
             </section>
         </div>--%>
+        
     </div>
-        </div>    
+        
+        </div>  
+    
+    
 </asp:Content>

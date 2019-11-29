@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestPAge.aspx.cs" Inherits="WebCresij.TestPAge" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TestPAge.aspx.cs" Inherits="WebCresij.TestPAge1" %>
 
 <!DOCTYPE html>
 
@@ -13,79 +13,126 @@
     <script src="Scripts/jquery-3.4.1.min.js"></script>
     <script src="Scripts/Treeview.js"></script>
     <script src="Scripts/sensor.js"></script>
+    <link href="HikVision/demo.css" rel="stylesheet" />
+    
 </head>
+    
 <body>
     <form id="form1" runat="server">
-        <div class="container-fluid no-gutter">
+        <%--<div class="container-fluid no-gutter">
             <div class="col-2 left no-gutter float-left">
                 <div class="logo">
                     <img class="logo rounded-circle clearfix" src="images/logo.jpg" alt=""/></div>
                 <h3 class="text-center clearfix">北京大学</h3>
                 <p class="text-center font-weight-light" style="margin-bottom: 0;">BEIJING UNIVERSITY</p>
                 <p class="text-center font-weight-light">智慧教室综合管理系统</p>
-                <div class="component" id="menu-left">
-                    
-                    
-                </div>
-            </div>
-            <div>
-                <div style="-moz-box-shadow: inset 0 0 15px #000000; 
-                            -webkit-box-shadow: inset 0 0 15px #000000;
-                            box-shadow: inset 0 0 15px #000000;  overflow:hidden ;
-                            display:inline-block" id="divplugin1">
-                            <%--<iframe src="src/Chimera.htm" height="390" width="640" 
-                                frameborder="0" wmode="opaque"></iframe>--%>
-                            <object id="plugin_inst_1" type="application/x-chimera-plugin" 
-                                height="360" width="640">
-                                <param name="autoplay" value="true" />
-                                <param name="src" id="src1" value="rtsp://admin:admin123@172.168.10.94:554/cam/realmonitor?channel=1&subtype=1" />
-                                <param name="network-caching" value="300" />
-                                <param name="allow-fullscreen" value="true" />
-                                <param name="mute" value="true" />
-                               <%-- <param name="audio" value="100" />--%>
-                            </object>
-                            <div style="display: none">
-                                <textarea id="qml_edit" cols="80" rows="20">
-                                    import QtQuick 2.1
-                                    import QmlVlc 0.1
+                <div class="component" id="menu-left"></div>
+                
+            </div>           
+           
+        </div>--%>
+    <div style =" margin-left:300px!important">
+                   <div class="left">
+    <div id="divPlugin" class="plugin"></div>
+    <fieldset class="login">
+        <legend>Login</legend>
+        <table cellpadding="0" cellspacing="3" border="0">
+            <tr>
+                <td class="tt">IP address</td>
+                <td><input id="loginip" type="text" class="txt" value="172.168.10.96" /></td>
+                <td class="tt">Port</td>
+                <td><input id="port" type="text" class="txt" value="80" /></td>
+            </tr>
+            <tr>
+                <td class="tt">User name</td>
+                <td><input id="username" type="text" class="txt" value="admin" /></td>
+                <td class="tt">Password</td>
+                <td><input id="password" type="password" class="txt" value="admin123" /></td>
+            </tr>
+            <tr>
+                <td class="tt">Device port</td>
+                <td colspan="2"><input id="deviceport" type="text" class="txt" />（optional）</td>
+                <td>
+                    Split screen&nbsp;
+                    <select class="sel2" onchange="changeWndNum(this.value);">
+                        <option value="1">1x1</option>
+                        <option value="2" selected>2x2</option>
+                        <option value="3">3x3</option>
+                        <option value="4">4x4</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="tt">RTSP port</td>
+                <td colspan="3"><input id="rtspport" type="text" class="txt" />（optional）</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input type="button" class="btn" value="Login" onclick="clickLogin();" />
+                    <input type="button" class="btn" value="Logout" onclick="clickLogout();" />
+                    <input type="button" class="btn2" value="Get basic info" onclick="clickGetDeviceInfo();" />
+                </td>
+            </tr>
+            <tr>
+                <td class="tt">Logined devices</td>
+                <td>
+                    <select id="ip" class="sel" onchange="getChannelInfo();getDevicePort();"></select>
+                </td>
+                <td class="tt">Channel list</td>
+                <td>
+                    <select id="channels" class="sel"></select>
+                </td>
+                <td>
+                    <input type="button" class="btn" value="Start preview" onclick="clickStartRealPlay();" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+  
+</div>
+<%--<div class="left">
+    <fieldset class="preview">
+        <legend>Browse</legend>
+        <table cellpadding="0" cellspacing="3" border="0">
+            <tr>
+                <td class="tt">Stream type</td>
+                <td>
+                    <select id="streamtype" class="sel">
+                        <option value="1">Main stream</option>
+                        <option value="2">Sub stream</option>
+                        <option value="3">Third stream</option>
+                        <option value="4">Transcode stream</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="button" class="btn" value="Start preview" onclick="clickStartRealPlay();" />
+                    <input type="button" class="btn" value="Stop preview" onclick="clickStopRealPlay();" />
+                </td>
+            </tr>
+            
+        </table>
+    </fieldset>
 
-                                    Rectangle {
-                                        color: bgcolor
-                                        VlcVideoSurface {
-                                            id: videoOutput;
-                                            source: vlcPlayer;
-                                            anchors.fill: parent;
-                                        }
-                                        MouseArea {
-                                            anchors.fill: videoOutput;
-                                            onClicked: vlcPlayer.toggleFullscreen();
-                                        }
-                                        Text {
-                                            id: text;
-                                            color: "white";
-                                        }
-                                        Component.onCompleted: {
-                                            vlcPlayer.onMediaPlayerBuffering.connect( onBuffering )
-                                        }
-                                        function onBuffering( percents ) {
-                                            if( percents < 100 )
-                                            text.text = "Buffering: " + percents +"%";
-                                            else
-                                            text.text = "no signal";
-                                        }
-                                    }
-                                </textarea>
-                                <button onclick="plugin1().qml = getByID('qml_edit').value; 
-                                    getByID('qml_error').innerHTML = plugin1().qmlError;">
-                                    load qml</button>
-                                <br />
-                                <span id="qml_error" style="color: red;" />
-                            </div>
-                        </div>
-            </div>
-        </div>
+</div>--%>
+<div class="left">
+    <fieldset class="operate">
+        <legend>Operation information</legend>
+        <div id="opinfo" class="opinfo"></div>
+    </fieldset>
+    
+</div>
+                </div>
+         
     </form>
 </body>
 <script src="Scripts/umd/popper.min.js"></script>
 <script src="Scripts/bootstrap.min.js"></script>
+<script src="HikVision/codebase/webVideoCtrl.js"></script>
+
+<script src="HikVision/Hikvision.js"></script>
+    <script>
+
+    </script>    
 </html>
+
+    

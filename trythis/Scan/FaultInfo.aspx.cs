@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij.Scan
 {
-    public partial class FaultInfo : System.Web.UI.Page
+    public partial class FaultInfo : BasePage
     {
         static string ip;
         protected void Page_Load(object sender, EventArgs e)
@@ -56,7 +56,12 @@ namespace WebCresij.Scan
             {
                 MaintainanceData md = new MaintainanceData();
                 md.InsertFaultInfo(ip,via,priority,district,user,desc,phone, stat);
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "Submit", "alert('Submitted Successfully');", true);
             }
+            txtdistrict.Text = "";
+            txtuser.Text = "";
+            txtdesc.Text = "";
+            txtphone.Text = "";
         }
 
         protected void logout_Click(object sender, EventArgs e)

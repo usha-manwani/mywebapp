@@ -13,6 +13,15 @@ namespace WebCresij.Scan {
     public partial class MobileLogin {
         
         /// <summary>
+        /// gotoFault control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton gotoFault;
+        
+        /// <summary>
         /// heading1 control.
         /// </summary>
         /// <remarks>
@@ -83,5 +92,23 @@ namespace WebCresij.Scan {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Login;
+        
+        /// <summary>
+        /// registerLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label registerLabel;
+        
+        /// <summary>
+        /// linkregister control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkregister;
     }
 }

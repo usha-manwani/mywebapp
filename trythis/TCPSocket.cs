@@ -60,7 +60,9 @@ namespace WebCresij
                 }
 
             }
+#pragma warning disable CS0168 // The variable 'e' is declared but never used
             catch (Exception e)
+#pragma warning restore CS0168 // The variable 'e' is declared but never used
             {
 
             }
@@ -149,7 +151,9 @@ namespace WebCresij
 
 
             }
+#pragma warning disable CS0168 // The variable 'e' is declared but never used
             catch (Exception e)
+#pragma warning restore CS0168 // The variable 'e' is declared but never used
             {
 
             }

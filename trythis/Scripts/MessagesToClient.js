@@ -45,6 +45,12 @@
                         case 'DSUp':
                             alliprows[i].cells[10].innerHTML = '升';//Up
                             break;
+                        case 'projopen':
+                            alliprows[i].cells[7].innerHTML = '已开机';
+                            break;
+                        case 'projoff':
+                            alliprows[i].cells[7].innerHTML = '已关机';
+                            break;                        
                         default:
                             break;
                     }
@@ -52,13 +58,13 @@
                 else if (arraydata[1] == "LEDIndicator") {
                     if (arraydata[2] == "SystemSwitchOn") {
                         alliprows[i].cells[4].innerHTML = "运行中"; //Open
-                            if (arraydata[4] == "Computer") {
-                                if (alliprows[i].cells[6].innerHTML == '已开机') {//On
-                                    alliprows[i].cells[6].innerHTML = '已关机';//Off
-                                }                                    
-                                   else
-                                    alliprows[i].cells[6].innerHTML = '已开机';   //On                                
-                            }
+                            //if (arraydata[4] == "Computer") {
+                            //    if (alliprows[i].cells[6].innerHTML == '已开机') {//On
+                            //        alliprows[i].cells[6].innerHTML = '已关机';//Off
+                            //    }                                    
+                            //       else
+                            //        alliprows[i].cells[6].innerHTML = '已开机';   //On                                
+                            //}
                        
                         switch (arraydata[3]) {
                             case 'Desktop':
@@ -127,6 +133,14 @@
                     else if (arraydata[2] == "SystemSwitchOff") {
                         alliprows[i].cells[4].innerHTML = "待机";//CLOSED
                     }
+                }
+                else if (arraydata[1] == "PanelKey") {
+                    if (arraydata[2] == "PCON")
+                        alliprows[i].cells[6].innerHTML = '已开机';
+
+                    else if (arraydata[2] == "PCOFF")
+                        alliprows[i].cells[6].innerHTML = '已关机';
+
                 }
                 else if (arraydata[0] == "Temp") {
                     alliprows[i].cells[16].innerHTML = arraydata[1];

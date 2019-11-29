@@ -87,5 +87,31 @@ namespace WebCresij.Services
             idata.Add(classname);
             return idata;
         }
+
+        [WebMethod]
+        public List<object> GetCamDetails(string name)
+        {
+            DataTable dt = new DataTable();
+            CentralControl cc = new CentralControl();
+            dt = cc.CamDetails(name);
+            List<object> idata = new List<object>();
+            if (dt.Rows.Count > 0)
+            {
+                
+                for(int i = 0; i < dt.Rows.Count; i++)
+                {
+                    List<object> list = new List<object>();
+                    for (int k =0; k < dt.Columns.Count; k++)
+                    {                       
+                        list.Add(dt.Rows[i][k].ToString());
+                    }
+                    idata.Add(list);
+                    
+                }
+            }
+            return idata;
+        }
     }
+
+
 }

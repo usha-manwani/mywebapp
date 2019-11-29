@@ -2,7 +2,8 @@
 var myChart;
 var myChart2;
 var myChart3;
-var myChart4 = {}; var myChart5; var chart9;
+ var myChart5; var chart9;
+
 var temp = new Array();
 var humidity = new Array();
 var hum2 = new Array();
@@ -12,8 +13,7 @@ var co2array = new Array();
 var defaultip = "";
 (function ($) {
     
-    var chat = $.connection.myHub;
-   // console.log("connection started 1");
+    var chat = $.connection.myHub;   
 
     for (i = 0; i < 20; i++) {
         temp[i] = 0;
@@ -43,6 +43,27 @@ var defaultip = "";
     //    CreateAllChart(v);
         
     //};
+    chat.client.machineCounts = function (counts) {
+        var data = counts.split(',');
+        var compoff = parseInt(data[2]) - parseInt(data[0]);
+        var projoff = parseInt(data[2]) - parseInt(data[1]);
+        compchart.series[0].setData([parseInt(data[0], 10), parseInt(compoff, 10)]);
+        compchart.update({
+            tooltip: {
+                style: {
+                    display: "block",
+                }
+            }
+        });
+        projchart.series[0].setData([parseInt(data[1], 10), parseInt(projoff)]);
+        projchart.update({
+            tooltip: {
+                style: {
+                    display: "block",
+                }
+            }
+        });
+    }
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         // console.log("connection started");
        
@@ -120,226 +141,7 @@ var defaultip = "";
         //Team chart
         Chart.defaults.global.defaultFontColor = "#fff";
         Chart.defaults.scale.gridLines.color = "#f2faf8"        
-        //var now = new Date();
-        //var time = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
 
-        
-
-        var ctx = document.getElementById('c1');
-        chart5 = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'doughnut',
-
-            // The data for our dataset
-            data: {
-                labels: ["No of projectors", ""],
-                datasets: [{                    
-                    backgroundColor: ['#2c76b2', 'white'],
-                    borderColor: '#fff',
-                    data: [20, 5],
-                    borderWidth: [0, 0],
-                }]
-            },
-
-            // Configuration options go here
-            options: {
-                maintainAspectRatio: false,
-                cutoutPercentage: 80,
-                title: {
-                    display: false,
-                    text: 'No. of Projector',
-                    position: 'bottom',
-                },
-                animation: {
-                    animateRotete: true,
-                },
-                legend: {
-                    display: false
-                },
-                
-            }
-        });
-
-        var ctx = document.getElementById('c2');
-        chart6 = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'doughnut',
-
-            // The data for our dataset
-            data: {
-                labels: ["Computers", ""],
-                datasets: [{
-
-                    backgroundColor: ['#1759d3', 'white'],
-                    borderColor: '#fff',
-                    data: [110, 10],
-                    borderWidth: [0, 0],
-                }]
-            },
-
-            // Configuration options go here
-            options: {
-                maintainAspectRatio: false,
-                cutoutPercentage: 80,
-                title: {
-                    display: false,
-                    text: 'No. of Computers',
-                    
-                },
-                animation: {
-                    animateRotete: true,
-                },
-                legend: {
-                    display: false
-                },
-
-            }
-        });
-
-        var ctx = document.getElementById('c3');        
-        chart7 = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'doughnut',
-
-            // The data for our dataset
-            data: {
-                labels: ["AC", ""],
-                datasets: [{
-
-                    backgroundColor: ['#6140a8', 'white'],
-                    borderColor: '#fff',
-                    data: [80, 15],
-                    borderWidth: [0, 0],
-                }]
-            },
-
-            // Configuration options go here
-            options: {
-                maintainAspectRatio: false,
-                cutoutPercentage: 80,
-                title: {
-                    display: false,
-                    text: 'No. of AC',
-                   
-                },
-                animation: {
-                    animateRotete: true,
-                },
-                legend: {
-                    display: false
-                },
-
-            }
-        });
-
-        var ctx = document.getElementById('c4');                
-        chart8 = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'doughnut',
-
-            // The data for our dataset
-            data: {
-                labels: ["FreshAir System", ""],
-                datasets: [{
-
-                    backgroundColor: ['#fb635a', 'white'],
-                    borderColor: '#fff',
-                    data: [200, 120],
-                    borderWidth: [0, 0],
-                }]
-            },
-
-            // Configuration options go here
-            options: {
-                maintainAspectRatio: false,
-                cutoutPercentage: 80,
-                title: {
-                    display: false,
-                    text: 'No. of Fresh Air System',
-                    
-                },
-                animation: {
-                    animateRotete: true,
-                },
-                legend: {
-                    display: false
-                },
-
-            }
-        });
-
-        var ctx = document.getElementById('c5');
-        chart9 = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'doughnut',
-
-            // The data for our dataset
-            data: {
-                labels: ["Centrol Control Machine", ""],
-                datasets: [{
-                    backgroundColor: ['#da4265', 'white'],
-                    borderColor: '#fff',
-                    data: [100, 25],
-                    borderWidth: [0, 0],
-                }]
-            },
-
-            // Configuration options go here
-            options: {
-                maintainAspectRatio: false,
-                cutoutPercentage: 80,
-                title: {
-                    display: false,
-                    text: 'No. of Central Control Machine',
-
-                },
-                animation: {
-                    animateRotete: true,
-                },
-                legend: {
-                    display: false
-                },
-            }
-        });
-
-        var ctx = document.getElementById('c6');        
-        chart10 = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'doughnut',
-
-            // The data for our dataset
-            data: {
-                labels: ["Screen", ""],
-                datasets: [{
-
-                    backgroundColor: ['#7b4358', 'white'],
-                    borderColor: '#fff',
-                    data: [80, 15],
-                    borderWidth: [0, 0],
-                }]
-            },
-
-            // Configuration options go here
-            options: {
-                maintainAspectRatio: false,
-                cutoutPercentage: 80,
-                title: {
-                    display: false,
-                    text: 'No. of Digital Screen',
-                   
-                },
-                animation: {
-                    animateRotete: true,
-                },
-                legend: {
-                    display: false
-                },
-                toolTips: {
-                    display: true,
-                }
-            }
-        }); 
-        
         var ctx = document.getElementById("brightdonut");
         myChart12 = new Chart(ctx, {
             type: 'doughnut',
@@ -368,7 +170,7 @@ var defaultip = "";
                     display: true,
                     position:'bottom',
                 },
-                toolTips: {
+                tooltips: {
                     display: true,
                 }
             }
@@ -463,58 +265,14 @@ var defaultip = "";
                 },
             }
         });
+
        
-        // Chart.types.Doughnut.extend({
-        //    name: "DoughnutTextInside",
-        //    showTooltip: function () {
-        //        this.chart.ctx.save();
-        //        Chart.types.Doughnut.prototype.showTooltip.apply(this, arguments);
-        //        this.chart.ctx.restore();
-        //    },
-        //    draw: function () {
-        //        Chart.types.Doughnut.prototype.draw.apply(this, arguments);
-
-        //        var width = this.chart.width,
-        //            height = this.chart.height;
-
-        //        var fontSize = (height / 114).toFixed(2);
-        //        this.chart.ctx.font = fontSize + "em Verdana";
-        //        this.chart.ctx.textBaseline = "middle";
-
-        //        var text = "82%",
-        //            textX = Math.round((width - this.chart.ctx.measureText(text).width) / 2),
-        //            textY = height / 2;
-
-        //        this.chart.ctx.fillText(text, textX, textY);
-        //    }
-        //});
-
-        //var data = [{
-        //    value: 30,
-        //    color: "#F7464A"
-        //}, {
-        //    value: 50,
-        //    color: "#E2EAE9"
-        //}];
-
-        //var DoughnutTextInsideChart = new Chart($('#c5')[0].getContext('2d')).DoughnutTextInside(data, {
-        //    responsive: true
-        //});
-
-        //var machineonline = document.getElementById("MainContent_masterchildBody_machineStatus").innerText;
-        //var machineoffline = document.getElementById("MainContent_masterchildBody_total").innerText;
-        //var type = Number(machineonline);
-        //if (typeof type == 'number') {            
-        //    chart9.data.datasets[0].data = [parseInt(machineonline, 10), parseInt(machineoffline, 10)];
-        //    chart9.update(0);
-        //    document.getElementById("systemspan").innerText = parseInt(machineonline, 10) + parseInt(machineoffline, 10);
-        //}
- 
     });
+    CreateAllChart("All");
 })(jQuery);
 
 Chart.defaults.global.animation.duration = 0;
-
+Chart.defaults.global.tooltips.enabled = true;
 
 
 var configSpeed = {
@@ -729,26 +487,7 @@ window.onload = function () {
    
 };
 
-//function func() {   
-//        var machineonline = document.getElementById("MainContent_masterchildBody_machineStatus").innerText;
-//        var machineoffline = document.getElementById("MainContent_masterchildBody_total").innerText;
-//        var work = document.getElementById("MainContent_masterchildBody_work").innerText;
-//        var work1 = document.getElementById("MainContent_masterchildBody_work1").innerText;
-//        var type = Number(machineonline);
-//        if (typeof type == 'number') {
-//            cccc.series[0].setData([[parseInt(machineonline, 10)], [parseInt(machineoffline, 10)]]);
-//            cccc.series[1].setData([[parseInt(work1, 10)], [parseInt(work, 10)]]);
-//            ccc.series[0].setData([[Math.random()], [Math.random()]]);
-//            chart9.data.datasets[0].data = [parseInt(machineonline, 10), parseInt(machineoffline, 10)];
-//            chart9.update(0);
-//            document.getElementById("systemspan").innerText = parseInt(machineonline, 10) + parseInt(machineoffline, 10);
-//        }
-//        else {
-//            console.log("no values");
-//        }   
-//};
 
-//setInterval(func, 30 * 1000);
 $(window).on('load', setWidth);
 $(window).on('resize', setWidth);
 
@@ -1076,6 +815,7 @@ function CreateChart() {
         }
     });
 }
+
 function CreateAllChart(value) {
     if (myChart != null) {
         myChart.destroy();
@@ -1109,17 +849,14 @@ function CreateAllChart(value) {
         var pm10 = aData[4];
         var workinghours = aData[9];
         var donutcharts = aData[10];
-        document.getElementById('span1').innerText = donutcharts[0];
-        document.getElementById('span2').innerText = donutcharts[1];
-        document.getElementById('span3').innerText = donutcharts[2];
-        document.getElementById('span4').innerText = donutcharts[3];
-        document.getElementById('span6').innerText = donutcharts[4];
+
         if (workinghours.length == 0) {
-            myChart4.data.datasets.data = [0, 0, 0, 0, 0, 0];
-            myChart4.update();
+            usedhourchart.series[0].setData([0, 0, 0, 0, 0, 0]);
+            
         }
         else if (workinghours.length > 0) {
-            WorkingHourChart(workinghours);
+            usedhourchart.series[0].setData([parseFloat(workinghours[0], 10), parseFloat(workinghours[1], 10), parseFloat(workinghours[2], 10), 
+                parseFloat(workinghours[3], 10), parseFloat(workinghours[4], 10), parseFloat(workinghours[5], 10)]);
         }
         var temptick;
         if (temperature.length > 0)
@@ -1297,6 +1034,34 @@ function CreateAllChart(value) {
 
         var val = String(value);
         if (val.includes("Ins") || val.includes("All")) {
+            for (i = 0; i < donutcharts.length; i++) {
+                if (donutcharts[i] == null) {
+                    donutcharts[i] = 0;
+                }
+            }
+            if (donutcharts.length > 0) {
+                var tt = "<br/>" + donutcharts[1] + "<br/> 电脑";
+                compchart.setTitle({ text: tt });
+                tt = "<br/>" + donutcharts[0] + "<br/> 投影机";
+                projchart.setTitle({ text: tt });
+                tt = "<br/>" + donutcharts[2] + "<br/> 录播";
+                c3chart.setTitle({ text: tt });
+                tt = "<br/>" + donutcharts[3] + "<br/> 空调";
+                c4chart.setTitle({ text: tt });
+                tt = "<br/>" + donutcharts[4] + "<br/> 屏幕";
+                c6chart.setTitle({ text: tt });
+            }
+            else {
+                compchart.setTitle({ text: 0 });
+                
+                projchart.setTitle({ text: 0 });
+                
+                c3chart.setTitle({ text: 0 });
+                
+                c4chart.setTitle({ text: 0 });
+               
+                c6chart.setTitle({ text: 0 });
+            }
             var machineonline = aData[5];
             var machineoffline = aData[6];
             var workopen = aData[7];
@@ -1313,19 +1078,26 @@ function CreateAllChart(value) {
             //var type = Number(machineonline);            
             var n = parseInt(machineonline) + parseInt(machineoffline);
             if (n == 0) {
-                document.getElementById("systemspan").innerHTML = 0;
+                //document.getElementById("systemspan").innerHTML = 0;
                 cccc.series[0].setData([]);                
                 cccc.series[1].setData([]);                
-                donutchartsystem(machineonline, machineoffline);
+                //donutchartsystem(machineonline, machineoffline);
                //chart9.data.datasets[0].data = [0, 1];
                //chart9.update(0);
             }
             else if (typeof Number(machineonline) == 'number')
             {              
-                document.getElementById("systemspan").innerHTML = parseInt(machineonline) + parseInt(machineoffline);
+                //document.getElementById("systemspan").innerHTML = parseInt(machineonline) + parseInt(machineoffline);
+                //if (syschart != undefined)
+                    
+               // syschart.title.text = n + " 中控";
+               //systemOnline(parseInt(machineonline), parseInt(machineoffline));
                 cccc.series[0].setData([['在线', parseInt(machineonline, 10)], ['离线',parseInt(machineoffline,10)]]);
-                cccc.series[1].setData([['故障', parseInt(workclose, 10)], ['使用中',parseInt(workopen, 10)]]);
-                donutchartsystem(machineonline, machineoffline);                
+                cccc.series[1].setData([['待机', parseInt(workclose, 10)], ['使用中', parseInt(workopen, 10)]]);
+                syschart.series[0].setData([[parseInt(machineonline, 10)], [parseInt(machineoffline, 10)]]);
+                var tt = "<br/>" + n + "<br/> 中控";
+                syschart.setTitle({ text: tt });
+               // donutchartsystem(machineonline, machineoffline);                
             }
             else {
                     console.log("no values");
@@ -1373,8 +1145,7 @@ function ddlIndexChange(value) {
 function ddltimeclass(time, loc) {
     var obj = {};
     obj.name = time;
-    obj.location = loc;
-    
+    obj.location = loc;    
     $.ajax({
         type: "POST",
         url: "Services/ChartData.asmx/GetCustomData",
@@ -1598,6 +1369,7 @@ var TempModalShow1 = {
         },
     }
 };
+
 function ShowTempModal1() {
     var data = {
         labels: [
@@ -1746,11 +1518,12 @@ function designChart(response) {
     var pm10 = aData[4];
     var workinghours = aData[5];
     if (workinghours.length == 0) {
-        myChart4.data.datasets.data = [0, 0, 0, 0, 0, 0];
-        myChart4.update();
+        usedhourchart.series[0].setData([0, 0, 0, 0, 0, 0]);
+
     }
     else if (workinghours.length > 0) {
-        WorkingHourChart(workinghours);
+        usedhourchart.series[0].setData([parseFloat(workinghours[0], 10), parseFloat(workinghours[1], 10), parseFloat(workinghours[2], 10),
+        parseFloat(workinghours[3], 10), parseFloat(workinghours[4], 10), parseFloat(workinghours[5], 10)]);
     }
     var temptick;
     if (temperature.length > 0)
@@ -1928,167 +1701,44 @@ function designChart(response) {
     });
 }
 
-function donutchartsystem(on, off) {
-    if (on == off && on == 0) {
-        on = 0;
-        off = 1;
-    }
-    var ctx = document.getElementById('c5');
-    chart9 = new Chart(ctx, {
+function computerOnline(total, data) {
+    $('#c2').replaceWith($('<canvas id="c2" height="100%" style="width:100px!important;min-width:50px!important"></canvas>'));
+    var ctx = document.getElementById('c2');
+    chart6 = new Chart(ctx, {
         // The type of chart we want to create
         type: 'doughnut',
+
         // The data for our dataset
         data: {
-            labels: ["Centrol Control Machine", ""],
+            labels: ["On", "Off"],
             datasets: [{
-                backgroundColor: ['#da4265', 'white'],
+                backgroundColor: ['#1759d3', 'white'],
                 borderColor: '#fff',
-                data: [on, off],
+                data: [total, data],
                 borderWidth: [0, 0],
             }]
         },
+
         // Configuration options go here
         options: {
+           
             maintainAspectRatio: false,
             cutoutPercentage: 80,
-            title: {
-                display: false,
-                text: 'No. of Central Control Machine',
-            },
+            //title: {
+            //    display: false,
+            //    text: 'No. of Computers',
+            //},
             animation: {
                 animateRotete: true,
             },
             legend: {
-                display: false
+                display:false,
             },
+           
         }
     });
 }
 
-function WorkingHourChart(hours) {
-    
-    $('#UsedBarChart').replaceWith($('<canvas id="UsedBarChart" style="max-height: 150px"></canvas>'));
-    var ctx = document.getElementById("UsedBarChart");
-   
-    myChart4 = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ["投影机", "电脑", "录播", "空调", "中控", "屏幕"],
-            datasets: [{
-                label: '# 小时',
-                data: [hours[0], hours[1], hours[2], hours[3], hours[4], hours[5]],
-                backgroundColor: [
-                    'rgba(0,44,237, .9)',
-                    'rgba(0,44,237, 0.9)',
-                    'rgba(0,44,237, 0.9)',
-                    'rgba(0,44,237, 0.9)',
-                    'rgba(0,44,237, 0.9)',
-                    'rgba(0,44,237, 0.9)'
-                ],
-                borderColor: [
-                    'rgba(0,44,237,1)',
-                    'rgba(0,44,237, 1)',
-                    'rgba(0,44,237, 1)',
-                    'rgba(0,44,237, 1)',
-                    'rgba(0,44,237, 1)',
-                    'rgba(0,44,237, 0.9)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            maintainAspectRatio: false,
-            zeroLineColor: 'white',
-            legend: {
-                display: true,
-                position: 'bottom',
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true,
 
-                    },
-                    gridLines: {
-                        zeroLineColor: '#fff',
-                        display: false,
-                    }
 
-                }],
-                xAxes: [{
-                    gridLines: {
-                        zeroLineColor: '#fff',
-                        display: false,
-                    },
-                    ticks: {
-                        fontSize: 12,
-                        fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-                    }
-                }],
 
-            },
-        }
-    });
-}
-
-var ctx1 = document.getElementById("UsedBarChart");
-myChart4 = new Chart(ctx1, {
-    type: 'bar',
-    data: {
-        labels: ["投影机", "电脑", "录播", "空调", "中控", "屏幕"],
-        datasets: [{
-            label: '# 小时',
-            data: [12, 19, 13, 15, 10, 8],
-            backgroundColor: [
-                'rgba(0,44,237, .9)',
-                'rgba(0,44,237, 0.9)',
-                'rgba(0,44,237, 0.9)',
-                'rgba(0,44,237, 0.9)',
-                'rgba(0,44,237, 0.9)',
-                'rgba(0,44,237, 0.9)'
-            ],
-            borderColor: [
-                'rgba(0,44,237,1)',
-                'rgba(0,44,237, 1)',
-                'rgba(0,44,237, 1)',
-                'rgba(0,44,237, 1)',
-                'rgba(0,44,237, 1)',
-                'rgba(0,44,237, 0.9)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        maintainAspectRatio: false,
-        zeroLineColor: 'white',
-        legend: {
-            display: true,
-            position: 'bottom',
-        },
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-
-                },
-                gridLines: {
-                    zeroLineColor: '#fff',
-                    display: false,
-                }
-
-            }],
-            xAxes: [{
-                gridLines: {
-                    zeroLineColor: '#fff',
-                    display: false,
-                },
-                ticks: {
-                    fontSize: 12,
-                    fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-                }
-            }],
-
-        }
-    }
-
-});

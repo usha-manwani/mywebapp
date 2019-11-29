@@ -92,7 +92,9 @@ namespace WebCresij
                 //Closing the connection  
                 con.Close();               
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
                // throw;
             }
@@ -125,7 +127,9 @@ namespace WebCresij
                             ipsloc.Add(row[1].ToString(), row[0].ToString());
                         }
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex){}
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     for (int i = 0; i < deviceloc.Length; i++)
                     {
                         deviceloc[i] = dt.Rows[i][1].ToString() + "," + dt.Rows[i][0].ToString();
@@ -161,7 +165,9 @@ namespace WebCresij
                     }
                     HttpContext.Current.Session["DeviceIP"] = ip;
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                    // HttpContext.Current.Session["DeviceIP"] = ip;
                 }

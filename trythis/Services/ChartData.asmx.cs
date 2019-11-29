@@ -249,7 +249,7 @@ namespace WebCresij
             }
             idata.Add(names);
             idata.Add(ip);
-            dt = chart.getGradeName(gradeid);
+            dt = chart.GetGradeName(gradeid);
             string gradename = dt.Rows[0][1].ToString();
             string insname = dt.Rows[0][0].ToString();
             idata.Add(insname);
@@ -302,11 +302,18 @@ namespace WebCresij
         {
             DataTable dt = chart.WorkingHours(name);
             List<object> list = new List<object>();
-            if (dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0 && !string.IsNullOrEmpty(dt.Rows[0][0].ToString()))
             {
                 for(int i=0; i<dt.Columns.Count;i++)
                 {                    
                     list.Add(dt.Rows[0][i].ToString());
+                }
+            }
+            else
+            {
+                for (int i = 0; i < dt.Columns.Count; i++)
+                {
+                    list.Add(0);
                 }
             }
             return list;
@@ -338,12 +345,43 @@ namespace WebCresij
                 for(int i=0; i<dt.Columns.Count;i++)
                 result.Add(dt.Rows[0][i]);
             }
-            else
+            //else
+            //{
+            //    for (int i = 0; i < 5; i++)
+            //        result.Add(0);
+            //}
+            return result;
+        }
+
+        [WebMethod]
+        public List<object> DevicesService(string name)
+        {
+            List<object> result = new List<object>();
+            result= GetNoOfDevices(name);
+            return result;
+        }
+
+        [WebMethod]
+        public List<object> GetWorkingHoursIP(string name)
+        {
+            List<object> result = new List<object>();
+            DataTable dt = chart.WorkingHoursMachine(name);
+
+            if (dt.Rows.Count > 0)
             {
-                for (int i = 0; i < 5; i++)
-                    result.Add("0");
+                dt.Columns.Add("Class", typeof(string));
+                dt.Rows[0]["Class"] = name;
+                for (int i = 0; i < dt.Columns.Count; i++)
+                    result.Add(dt.Rows[0][i].ToString());
             }
             return result;
+        }
+
+        [WebMethod]
+        public string SaveWorkingHours(string[] name)
+        {
+            chart.Saveworkinghours(name);
+            return "";
         }
     }
 }

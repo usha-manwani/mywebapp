@@ -21,6 +21,10 @@ namespace WebCresij
             if(!IsPostBack)
             {
                 Session.Clear();
+                if (Request.Browser.IsMobileDevice && Request.QueryString["desktop"]!="true")
+                {
+                    Response.Redirect("~/Mobile/Login.aspx");
+                }
                 if (Request.Cookies["cresijuserid"] != null && Request.Cookies["cresijpwd"] != null)
                 {
                     UserName.Text = Request.Cookies["cresijuserid"].Value;
@@ -146,5 +150,11 @@ namespace WebCresij
             }
             return true;
         }
+
+        //protected void Page_PreInit(object sender, EventArgs e)
+        //{
+        //    if (Request.Browser.IsMobileDevice)
+        //        Response.Redirect("~/Mobile/Login.aspx");
+        //}
     }
 }

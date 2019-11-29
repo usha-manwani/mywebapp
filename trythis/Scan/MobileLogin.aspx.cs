@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 namespace WebCresij.Scan
 {
-    public partial class MobileLogin : Page
+    public partial class MobileLogin : BasePage
     {
         static string ip;
         protected void Page_Load(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace WebCresij.Scan
                         n = cmd.Parameters["@usernametemp"].Value.ToString();
                         u = cmd.Parameters["@userids"].Value.ToString();
 
-                        if (k.ToString().Contains("1"))
+                        if (k.ToString().Contains("1") || k.ToString().Contains("3"))
                         {
                             HttpContext.Current.Session["MobileUserId"] = u;
                             string url = "../Scan/QrControlPage.aspx?ip=" + ip + "&username=" + n;
@@ -98,6 +98,15 @@ namespace WebCresij.Scan
                     }
                 }
             }
-        }       
+        }
+        protected void gotoFault_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Scan/FaultInfo1.aspx?ip=" + ip, true);
+        }
+
+        protected void linkregister_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Scan/Registration.aspx?ip=" + ip, true);
+        }
     }
 }

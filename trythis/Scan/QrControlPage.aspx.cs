@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij.Scan
 {
-    public partial class QrControlPage : System.Web.UI.Page
+    public partial class QrControlPage : BasePage
     {
         string ip ;
         string username = "";

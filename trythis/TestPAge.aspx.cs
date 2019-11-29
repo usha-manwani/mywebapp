@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class TestPAge : System.Web.UI.Page
+    public partial class TestPAge1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

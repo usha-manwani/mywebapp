@@ -431,9 +431,9 @@
                                                  CssClass="btn btn-default border-light" 
                                                 ForeColor="White" BackColor="#1E1E36"
                                                 selectedValue='<%#Eval("priority") %>'>
-                                                <asp:ListItem Text="Low" Value="Low"></asp:ListItem>
-                                                <asp:ListItem Text="Medium" Value="Medium"></asp:ListItem>
-                                                <asp:ListItem Text="High" Value="High"></asp:ListItem>
+                                                <asp:ListItem Text="<%$Resources:Resource, Low %>" Value="Low"></asp:ListItem>
+                                                <asp:ListItem Text="<%$Resources:Resource, Medium %>" Value="Medium"></asp:ListItem>
+                                                <asp:ListItem Text="<%$Resources:Resource, High %>" Value="High"></asp:ListItem>
                                             </asp:DropDownList>
                                             <%--<asp:TextBox ID="txtPriority" runat="server"
                                                 Text='<%#Eval("priority")%>' />--%>
@@ -443,9 +443,9 @@
                                             <asp:DropDownList runat="server" ID="ddlnewPriority"
                                                   CssClass="btn btn-default border-light" 
                                                 ForeColor="White" BackColor="#1E1E36">
-                                                <asp:ListItem Text="Low" Value="Low"></asp:ListItem>
-                                                <asp:ListItem Text="Medium" Value="Medium"></asp:ListItem>
-                                                <asp:ListItem Text="High" Value="High"></asp:ListItem>
+                                                <asp:ListItem Text="<%$Resources:Resource, Low %>" Value="Low"></asp:ListItem>
+                            <asp:ListItem Text="<%$Resources:Resource, Medium %>" Value="Medium"></asp:ListItem>
+                            <asp:ListItem Text="<%$Resources:Resource, High %>" Value="High"></asp:ListItem>
                                             </asp:DropDownList>
                                         <%--<asp:TextBox ID="newpriority" runat="Server"/> --%>                   
                                         </FooterTemplate>
@@ -459,8 +459,8 @@
                                                  CssClass="btn btn-default border-light"
                                                  selectedValue='<%#Eval("stat") %>'
                                                 ForeColor="White" BackColor="#1E1E36">
-                                                <asp:ListItem Text="Pending" Value="Pending"></asp:ListItem>
-                                                <asp:ListItem Text="Resolved" Value="Resolved"></asp:ListItem>
+                                                <asp:ListItem Text="<%$Resources:Resource, Pending %>" Value="Pending"></asp:ListItem>
+                                                <asp:ListItem Text="<%$Resources:Resource, Resolved %>" Value="Resolved"></asp:ListItem>
                                             </asp:DropDownList>
                                        <%--     <asp:TextBox ID="txtstat" runat="server"
                                                 Text='<%#Eval("stat") %>' />--%>
@@ -470,8 +470,8 @@
                                             <asp:DropDownList runat="server" ID="ddlnewStat"
                                                 CssClass="btn btn-default border-light"
                                                 ForeColor="White" BackColor="#1E1E36">
-                                                <asp:ListItem Text="Pending" Value="Pending"></asp:ListItem>
-                                                <asp:ListItem Text="Resolved" Value="Resolved"></asp:ListItem>
+                                                <asp:ListItem Text="<%$Resources:Resource, Pending %>" Value="Pending"></asp:ListItem>
+                                                <asp:ListItem Text="<%$Resources:Resource, Resolved %>" Value="Resolved"></asp:ListItem>
                                             </asp:DropDownList>
                                         <%--<asp:TextBox ID="newstat" runat="Server"/>      --%>              
                                         </FooterTemplate>                                    
@@ -492,17 +492,17 @@
                                     </ItemTemplate>
                                     <EditItemTemplate>
                                         <asp:LinkButton ID="btnupdate" runat="server" 
-                                            CommandName="Update" Text="Update" />
+                                            CommandName="Update" Text="<%$Resources:Resource, update %>" />
                                         <asp:LinkButton ID="btncancel" runat="server" 
-                                            CommandName="Cancel" Text="Cancel"/>
+                                            CommandName="Cancel" Text="<%$Resources:Resource, Cancel %>"/>
                                     </EditItemTemplate>
                                     
                                     <FooterTemplate>
                                         <asp:LinkButton ID="lnkInsertFault" runat="server"
                                             Font-Size="12px" UseSubmitBehavior="False"
-                                            ForeColor="Yellow" CommandName ="Insert">
+                                            ForeColor="Yellow" CommandName ="Insert" Text="<%$Resources:Resource, Save%>">
                                             <i class="fa fa-plus" aria-hidden="true"></i>
-                                            Save
+                                            
                                         </asp:LinkButton>
                                     </FooterTemplate>
                                 </asp:TemplateField>
@@ -571,7 +571,7 @@
                         PageSize="10" Width="95%" PagerStyle-ForeColor="White"
                         AllowPaging="true" OnPageIndexChanging="gvinspect_PageIndexChanging"                        
                         PagerStyle-BorderStyle="None" OnRowDataBound="gvinspect_RowDataBound"
-                        DataKeyNames="sno">
+                        DataKeyNames="sno" EmptyDataText="No Data to Display !!">
                         <HeaderStyle CssClass="hidden-phone" ForeColor="WhiteSmoke" 
                             Font-Size="Smaller" HorizontalAlign="Center" />
                         <RowStyle CssClass=" center" BackColor="White" 
@@ -771,7 +771,7 @@
                 <div class="col-lg-12 col-sm-12 col-md-12" style="min-height: 300px;">
                     <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-                             <span>Select Institute  </span>
+                             <span><%=Resources.Resource.SelectInstitute%>  </span>
                             <asp:DropDownList Width="100px" AutoPostBack="true"
                                 OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                                 CssClass="btn btn-default border-light" ID="ddlInstitute"
@@ -865,7 +865,7 @@
                                                 ID="UpdateTaskRow" ForeColor="Yellow"
                                                 CommandName="Update"
                                                 CommandArgument='<%#Eval("Id") %>'
-                                                Text='Save' Font-Underline="true">
+                                                Text='<%$Resources:Resource, Save %>' Font-Underline="true">
                                             </asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>

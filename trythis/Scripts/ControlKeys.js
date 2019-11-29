@@ -275,7 +275,7 @@
                 chat.server.sendControlKeys(proj, "8B B9 00 04 02 04 43 4d");    
             }                
             else {
-                this.style.color = "#67ec3a";
+                //this.style.color = "#67ec3a";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 33 3d");               
             }
             //alert(proj);
@@ -672,6 +672,7 @@ function tbleupdate(name, message) {
                 else {
                     var proj = $(chkbox[k]).closest('table').find("*[name='projIcon']");
                     proj.addClass("iconColor");
+                    proj.style.color = "#67ec3a";
                     proj.removeClass("red");
                 }               
                 switch (arraydata[11]) {
@@ -747,17 +748,17 @@ function tbleupdate(name, message) {
             else if (arraydata[1] == "LEDIndicator") {
                 if (arraydata[2] == "SystemSwitchOn") {
                     chkbox[k].checked = true;    
-                    if (arraydata[4] == "Computer") {
-                        var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
-                        if (desktop.hasClass("iconColor")) {
-                            desktop.removeClass("iconColor");
-                            desktop.addClass("red");
-                        }
-                        else {
-                            desktop.addClass("iconColor");
-                            desktop.removeClass("red");
-                        }
-                    }
+                    //if (arraydata[4] == "Computer") {
+                    //    var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                    //    if (desktop.hasClass("iconColor")) {
+                    //        desktop.removeClass("iconColor");
+                    //        desktop.addClass("red");
+                    //    }
+                    //    else {
+                    //        desktop.addClass("iconColor");
+                    //        desktop.removeClass("red");
+                    //    }
+                    //}
                       
                     switch (arraydata[3]) {
                         case 'Desktop':
@@ -841,7 +842,45 @@ function tbleupdate(name, message) {
                 else if (arraydata[2] =='SystemOff') {
                     chkbox[k].checked = false;
                 }
-            }           
+                if (arraydata[2] == 'projoff') {
+                    var proj = $(chkbox[k]).closest('table').find("*[name='projIcon']");
+                    proj.addClass("red");
+                    proj.removeClass("iconColor");
+                }
+                else if (arraydata[2] == 'projopen') {
+                    var proj = $(chkbox[k]).closest('table').find("*[name='projIcon']");
+                    proj.addClass("iconColor");
+                    //proj.style.color = "#67ec3a";
+                    proj.removeClass("red");
+                }
+                
+                if (arraydata[2] == 'syslock') {
+                    var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");
+                    syslocked.addClass("fa-lock");
+                    syslocked.removeClass("fa-unlock");
+                    syslocked.removeClass("iconColor");
+                    syslocked.addClass("red");
+                }
+                else if (arraydata[2] == 'sysunlock') {
+                    var syslocked = $(chkbox[k]).closest('table').find("*[name='lockIcon']");
+                    syslocked.addClass("fa-unlock");
+                    syslocked.addClass("iconColor");
+                    syslocked.removeClass("fa-lock");
+                    syslocked.removeClass("red");
+                }
+            }
+            else if (arraydata[1] == "PanelKey") {
+                if (arraydata[2] == "PCON") {
+                    var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                    desktop.addClass("iconColor");
+                    desktop.removeClass("red");
+                }
+                else if (arraydata[2] == "PCOFF") {
+                    var desktop = $(chkbox[k]).closest('table').find("*[name='desktopIcon']");
+                    desktop.removeClass("iconColor");
+                    desktop.addClass("red");
+                }
+            }
         }
     }
 }

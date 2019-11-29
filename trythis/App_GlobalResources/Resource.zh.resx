@@ -175,7 +175,7 @@
     <value>添加新用户</value>
   </data>
   <data name="AuthenticateUsers" xml:space="preserve">
-    <value>验证用户</value>
+    <value>教室审批</value>
   </data>
   <data name="CardLogs" xml:space="preserve">
     <value>卡日志记录</value>
@@ -1124,5 +1124,77 @@
   </data>
   <data name="tvcontrol" xml:space="preserve">
     <value>电视机</value>
+  </data>
+  <data name="AddNewFaultInfo" xml:space="preserve">
+    <value>故障申报</value>
+  </data>
+  <data name="GoToControl" xml:space="preserve">
+    <value>设备控制</value>
+  </data>
+  <data name="HandledBy" xml:space="preserve">
+    <value>报修人(选填)</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="ProjectorAndPC" xml:space="preserve">
+    <value>投影机和电脑</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>高</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>低</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>中</value>
+  </data>
+  <data name="AddEditNoDevice" xml:space="preserve">
+    <value>新增/编辑设备数量</value>
+  </data>
+  <data name="NoOfAC" xml:space="preserve">
+    <value>空调数量</value>
+  </data>
+  <data name="NoofBooth" xml:space="preserve">
+    <value>屏幕数量</value>
+  </data>
+  <data name="NoOfPC" xml:space="preserve">
+    <value>电脑数量</value>
+  </data>
+  <data name="NoOfProjector" xml:space="preserve">
+    <value>投影机数量</value>
+  </data>
+  <data name="NoOfRecorder" xml:space="preserve">
+    <value>录播数量</value>
+  </data>
+  <data name="distname" xml:space="preserve">
+    <value>班级号</value>
+  </data>
+  <data name="PhoneNum" xml:space="preserve">
+    <value>报修人电话号码</value>
+  </data>
+  <data name="Vol" xml:space="preserve">
+    <value>主音量</value>
+  </data>
+  <data name="WiredVol" xml:space="preserve">
+    <value>手持话筒</value>
+  </data>
+  <data name="WirelessVol" xml:space="preserve">
+    <value>胸挂式话筒</value>
+  </data>
+  <data name="ChangeUsesTime" xml:space="preserve">
+    <value>修改设备使用时长</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>小时</value>
+  </data>
+  <data name="WorkingHours" xml:space="preserve">
+    <value>工作时长(单位:小时)</value>
+  </data>
+  <data name="Recorder" xml:space="preserve">
+    <value>录播</value>
+  </data>
+  <data name="MultimediaDevice" xml:space="preserve">
+    <value>设备信息</value>
   </data>
 </root>

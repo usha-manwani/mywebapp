@@ -1,10 +1,20 @@
 ﻿
 function saveandhideDevices() {
     var proj = document.getElementById('MainContent_masterchildBody_masterBody_projtb').value;
+    if (proj == null || proj == '')
+        proj = 0;
     var pc = document.getElementById('MainContent_masterchildBody_masterBody_pctb').value;
+    if (pc == null || pc == '')
+        pc = 0;
     var recorder = document.getElementById('MainContent_masterchildBody_masterBody_recordtb').value;
+    if (recorder == null || recorder == '')
+        recorder = 0;
     var ac = document.getElementById('MainContent_masterchildBody_masterBody_actb').value;
+    if (ac == null || ac == '')
+        ac = 0;
     var screen = document.getElementById('MainContent_masterchildBody_masterBody_screentb').value;
+    if (screen == null || screen == '')
+        screen = 0;
     var loc = $('#MainContent_masterchildBody_masterBody_ddlInstitute').val();
     var name =[];
     name[0] = proj;
@@ -36,6 +46,9 @@ function saveandhideDevices() {
 }
 function displaydevicesPopup() {
     document.getElementById("addeditdevices").style.display = 'inline-block';
+    var ddl = document.getElementById("MainContent_masterchildBody_masterBody_ddlInstitute");
+    GetMachineCounts(ddl);
+   
 }
 function hidedevicesDiv() {
     document.getElementById("addeditdevices").style.display = 'none';
@@ -70,15 +83,16 @@ function hideClass() {
 function hideCam() {
     document.getElementById('idCamera').style.display = 'none';
 }
-function duplicateIP() {
-    var message = ' <%=Resources.Resource.AlertErrorIP%>'
+function duplicateIP(message) {
+    hideCam();
+   // var message = ' <%=Resources.Resource.AlertErrorIP%>'
     alert(message);
 }
 function CamIns() {
     var message = ' <%=Resources.Resource.NoMoreCam%>'
     alert(message);
 }
-function camError() {
+function camError(message) {
     var message = ' <%=Resources.Resource.AlertError%>'
     alert(message);
 }
@@ -202,6 +216,157 @@ document.body.onclick = function (event) {
 }
 function closeframe() {
     document.getElementById('id01').style.display = "none";
+}
+
+function GetMachineCounts(thi) {
+    var value = thi.value;
+    var jsonData = JSON.stringify({
+        name: value
+    });
+    $.ajax({
+        type: "POST",
+        url: "Services/ChartData.asmx/DevicesService",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess_,
+        error: OnErrorCall_
+    });
+    function OnSuccess_(response) {
+        var idata = response.d;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_projtb').value = idata[0];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_projtb').value = 0;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_pctb').value = idata[1];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_pctb').value = 0;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_recordtb').value = idata[2];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_recordtb').value = 0;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_actb').value = idata[3];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_actb').value = 0;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_screentb').value = idata[4];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_screentb').value = 0;
+    }
+    function OnErrorCall_(respo) {
+        console.log(respo);
+    }
+}
+
+
+function GetWorkingHours(thi) {
+    var value = thi;
+    
+    var jsonData = JSON.stringify({
+        name: value
+    });
+    $.ajax({
+        type: "POST",
+        url: "Services/ChartData.asmx/GetWorkingHoursIP",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess_,
+        error: OnErrorCall_
+    });
+    function OnSuccess_(response) {
+        var idata = response.d;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_projhour').value = idata[0];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_projhour').value = 0;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_pchour').value = idata[1];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_pchour').value = 0;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_recordhour').value = idata[2];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_recordhour').value = 0;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_achour').value = idata[3];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_achour').value = 0;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_syshour').value = idata[4];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_syshour').value = 0;
+        if (idata[0] != null)
+            document.getElementById('MainContent_masterchildBody_masterBody_screenhour').value = idata[5];
+        else
+            document.getElementById('MainContent_masterchildBody_masterBody_screenhour').value = 0;
+        if (idata[0]!=null)
+        document.getElementById("hiddenworkip").value = idata[6];
+
+    }
+    function OnErrorCall_(respo) {
+        console.log(respo);
+    }
+}
+
+saveandhideworkinghour = function () {
+    var proj = document.getElementById('MainContent_masterchildBody_masterBody_projhour').value;
+    if (proj == null || proj == '')
+        proj = 0;
+    var pc = document.getElementById('MainContent_masterchildBody_masterBody_pchour').value;
+    if (pc == null || pc == '')
+        pc = 0;
+    var recorder = document.getElementById('MainContent_masterchildBody_masterBody_recordhour').value;
+    if (recorder == null || recorder == '')
+        recorder = 0;
+    var ac = document.getElementById('MainContent_masterchildBody_masterBody_achour').value;
+    if (ac == null || ac == '')
+        ac = 0;
+    var sys = document.getElementById('MainContent_masterchildBody_masterBody_syshour').value;
+    if (sys == null || sys == '')
+        sys = 0;
+    var screen = document.getElementById('MainContent_masterchildBody_masterBody_screenhour').value;
+    if (screen == null || screen == '')
+        screen = 0;
+    
+    var name = [];
+    name[0] = proj;
+    name[1] = pc;
+    name[2] = recorder;
+    name[3] = ac;
+    name[4] = sys;
+    name[5] = screen;
+    name[6] = document.getElementById("hiddenworkip").value;
+    var jsonData = JSON.stringify({
+        name: name
+    });
+    $.ajax({
+        type: "POST",
+        url: "Services/ChartData.asmx/SaveWorkingHours",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess_,
+        error: OnErrorCall_
+    });
+    function OnSuccess_(response) {
+
+        console.log("saved");
+    }
+    function OnErrorCall_(respo) {
+        console.log(respo);
+    }
+}
+function hidehourDiv() {
+    document.getElementById("edithours").style.display = "none";
+}
+
+function showworkingHour(thi) {
+    GetWorkingHours(thi);
+    document.getElementById("edithours").style.display = "block";
+    return false;
 }
 
 

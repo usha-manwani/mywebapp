@@ -212,7 +212,15 @@
                             var img = document.getElementById("systempower");
                             img.src = "Images/icons/switchred.png";
                         }
-                    }                
+                }   
+                    else if (arraydata[1] == "PanelKey") {
+                        if (arraydata[2] == "PCON")
+                            $('#ppower').closest("td").find("img").attr('src', "../Images/中控首页按钮/on/pcon.png");
+
+                        else if (arraydata[2] == "PCOFF")
+                            $('#ppower').closest("td").find("img").attr('src', "../Images/AllImages/images/图标_212.png");
+
+                    }
             }
         };
     };

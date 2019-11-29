@@ -23,7 +23,7 @@
                             <asp:TreeView runat="server" OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
                                 ID="TreeMenuView" NodeStyle-NodeSpacing="0.5px" OnTreeNodeExpanded="TreeMenuView_TreeNodeExpanded"
                                 OnTreeNodeCollapsed="TreeMenuView_TreeNodeCollapsed" 
-                                RootNodeStyle-CssClass="text-bold" ForeColor="White" >
+                                RootNodeStyle-CssClass="text-bold" ForeColor="White">
                                 <RootNodeStyle Font-Size="1.5em" />
                             </asp:TreeView>
                         </ContentTemplate>

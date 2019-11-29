@@ -8,6 +8,7 @@
     
     <script type="text/javascript">
         var src = sessionStorage.getItem('videosrc');
+        src = src +  "cam/realmonitor?channel=1&subtype=2";
         document.onkeydown = function (evt) {
             evt = evt || window.event;
             var isEscape = false;

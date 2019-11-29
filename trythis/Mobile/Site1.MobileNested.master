@@ -1,0 +1,103 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site1.Mobile.Master" AutoEventWireup="true" CodeBehind="Site1.MobileNested.master.cs" Inherits="WebCresij.Mobile.Site1_MobileNested" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .icon-bar {
+            width: 100% !important;
+            background-color: #555;
+            overflow: auto;
+        }
+
+            .icon-bar a {
+                float: left;
+                width: 20%;
+                text-align: center;
+                padding: 12px 0;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 24px;
+            }
+
+                .icon-bar a:hover {
+                    background-color: #000;
+                }
+
+        .active {
+            background-color: #4CAF50;
+        }
+        .menutext {
+            font-size: 1em;
+        }
+
+        @media screen and (max-width: 370px) {
+            /*.menutext {
+                display: none;
+            }*/
+        }
+
+        @media screen and (max-width: 768px) {
+            /*.menutext {
+                font-size: 0.7em;
+            }*/
+
+            .icon-bar a {
+                font-size: 20px;
+            }
+            .icon-bar li{
+                display:flex;
+            }
+        }
+
+        .mobile-container {
+  max-width: 480px;
+  margin: auto;
+  background-color: #555;
+  height: 500px;
+  color: white;
+  border-radius: 10px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+}
+
+.topnav #myLinks {
+  display: none;
+}
+
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.topnav a.icon {
+  background: black;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+ul {
+  list-style-type: none;
+}
+
+    </style>
+    <asp:ContentPlaceHolder ID="childMasterhead" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <p style="text-align:right"><a href="Home.aspx" style="font-size:2em;"><i class="fa fa-home" style="color:white">
+        </i><%=Resources.Resource.Home %></a></p>
+   
+    
+ 
+   <asp:ContentPlaceHolder ID="childmastercontent" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>

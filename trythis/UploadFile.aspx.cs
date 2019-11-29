@@ -75,32 +75,41 @@ namespace WebCresij
                 string fn = fileName;
                 if (!string.IsNullOrEmpty(fn))
                 {
-                    while (File.Exists(Server.MapPath("~/Uploads/" + fn)))
+                    if(Path.GetExtension(fileName) ==".zip" || Path.GetExtension(fileName) == ".rar")
                     {
-                        fn = Path.GetFileNameWithoutExtension(fileName);
-                        fn = fn + "(" + count + ")";
-                        string extension = Path.GetExtension(fileName);
-                        fn = fn + extension;
-                        count++;
+                        ScriptManager.RegisterStartupScript(this, this.GetType(),
+                                "NoarchiveFile", "alert(You cannot upload archive files!!)", true);
                     }
-                    fileName = fn;
-                    try
+                    else
                     {
-                        string fname = "~/Uploads/" + fileName;
-                        fuSample.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fileName);
-                       
-                        up.AddFileDetail(HttpContext.Current.Session["UserId"].ToString(),
-                            fn, "Personal");
-                        UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
-                        HttpContext.Current.Session["UserName"].ToString(), 5);
-                        updateGrid();
-                       // Response.Redirect(Request.Url.AbsoluteUri);
+                        while (File.Exists(Server.MapPath("~/Uploads/" + fn)))
+                        {
+                            fn = Path.GetFileNameWithoutExtension(fileName);
+                            fn = fn + "(" + count + ")";
+                            string extension = Path.GetExtension(fileName);
+                            fn = fn + extension;
+                            count++;
+                        }
+                        fileName = fn;
+                        try
+                        {
+                            string fname = "~/Uploads/" + fileName;
+                            fuSample.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fileName);
+
+                            up.AddFileDetail(HttpContext.Current.Session["UserId"].ToString(),
+                                fn, "Personal");
+                            UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
+                            HttpContext.Current.Session["UserName"].ToString(), 5);
+                            updateGrid();
+                            // Response.Redirect(Request.Url.AbsoluteUri);
+                        }
+                        catch (HttpException)
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(),
+                                "alertMessage", "alert('Max File size allowed is 500')", true);
+                        }
                     }
-                    catch (HttpException)
-                    {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), 
-                            "alertMessage", "alert('Max File size included is 500')", true);
-                    }
+                    
                 }
                 else
                 {
@@ -130,7 +139,9 @@ namespace WebCresij
                         "alert('You cannot delete File uploaded by Other Users')", true);
                 }
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
 
             }

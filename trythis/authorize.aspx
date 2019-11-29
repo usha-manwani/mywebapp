@@ -28,15 +28,15 @@
                 </asp:GridView>
                 <div id="roleModal" class="modal" style="display: none; max-width: 500px; min-height: 800px; position: absolute;">
                     <div class="modal-content">
-                        <p><span><%=Resources.Resource.Role%></span></p>
-                        <span onclick="close3();"
-                            class="w3-button w3-display-topright">&times;</span>
+                        <p><span><%=Resources.Resource.Role%></span><span onclick="close3();"
+                            style="cursor: pointer;float:right;font-size:24px;color:red">&times;</span></p>
+                        
                         <asp:CheckBoxList ID="CheckBoxList1" runat="server">
                             <asp:ListItem Text="<%$Resources:Resource, Admin %>" Value="1"></asp:ListItem>
                             <asp:ListItem Text="<%$Resources:Resource, LiveFeed %>" Value="2"></asp:ListItem>
                             <asp:ListItem Text="<%$Resources:Resource, manageDevice %>" Value="3"></asp:ListItem>
                             <asp:ListItem Text="<%$Resources:Resource, DocUploadDownload %>" Value="4"></asp:ListItem>
-                            <asp:ListItem Text="Maintainance" Value="5"></asp:ListItem>
+                            <asp:ListItem Text="<%$Resources:Resource, Maintainance %>" Value="5"></asp:ListItem>
                             <asp:ListItem Text="<%$Resources:Resource, EditUsers %>" Value="6"></asp:ListItem>
                         </asp:CheckBoxList>
 

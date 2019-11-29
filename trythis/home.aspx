@@ -108,7 +108,7 @@
     <script src="Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
-    <script src="Scripts/StatusData.js?v=9"></script>
+    <script src="Scripts/StatusData.js?v=18"></script>
    
     <div class="row" id="ddl" style="background-color: #1e1e36;
         min-height: 100px; min-width:80%">
@@ -181,29 +181,36 @@
                 <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 mbcustom">
                     <div class="row" style="margin-left: -20px;">
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div>
-                                <canvas id="c1" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
-                                <div id="chartjs-tooltip" class="chartjs-tooltip">
-                                    <div class="centered">
-                                        <span id ="span1">20</span><br />
-                                        <span style="font-size:small; color: white">投影机</span>
+                            
+                                <%--<canvas id="c1" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
+                                <div id="chartjs-tooltip" class="chartjs-tooltip">--%>
+                                    <div id="c1" style="width:170px; height:170px">
+                                        
                                     </div>
-                                </div>
-                            </div>
+                                <%--<span id ="span1" class="centered">20</span><br />
+                                        <span style="font-size:small; color: white">投影机</span>--%>
+                                
+                            <%--</div>--%>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div>
+                            <div id="c2" style="width:170px; height:170px">
+                                        
+                                    </div>
+                            <%--<div>
                                 <canvas id="c2" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip1" class="chartjs-tooltip">
                                     <div class="centered">
-                                        <span id ="span2">200</span><br />
+                                        <span id ="span2">20</span><br />
                                         <span style="font-size:small; color: white">电脑</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div>
+                            <div id="c3" style="width:170px; height:170px">
+                                        
+                                    </div>
+                            <%--<div>
                                 <canvas id="c3" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip2" class="chartjs-tooltip">
                                     <div class="centered">
@@ -211,10 +218,13 @@
                                         <span style="font-size:small; color: white">录播</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div>
+                            <div id="c4" style="width:170px; height:170px">
+                                        
+                                    </div>
+                            <%--<div>
                                 <canvas id="c4" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip5" class="chartjs-tooltip">
                                     <div class="centered">
@@ -222,10 +232,13 @@
                                         <span style="font-size:small; color: white">空调</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div id="donutstatus">
+                            <div id="c5" style="width:170px; height:170px">
+                                        
+                                    </div>
+                            <%--<div id="donutstatus">
                                 <canvas id="c5" height="100%" style="width:100px!important; min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip3" class="chartjs-tooltip">
                                     <div class="centered">
@@ -234,10 +247,13 @@
                                         <span style="font-size:small; color: white">中控</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                            <div >
+                            <div id="c6" style="width:170px; height:170px">
+                                        
+                                    </div>
+                            <%--<div >
                                 <canvas id="c6" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip4" class="chartjs-tooltip">
                                     <div class="centered">
@@ -246,7 +262,7 @@
                                         <span style="font-size:small; color: white">屏幕</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
                     </div>
                 </div>
@@ -377,13 +393,13 @@
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 fullWidth2">
                             <div class="card" style="background-color: #191b28; height: 250px">
-                                <div class="card-body divstyle" id="BarChart">
-                                    <div style="max-height:200px" id="usedhourdiv">
+                                <div class="card-body divstyle" id="BarChartUsedHour">
+                                    <%--<div style="max-height:200px" id="usedhourdiv">
                                     <h4 class="mb-3 custommb" style="text-align:center; 
                                         font-weight: bold;">
                                         <span>使用时间</span></h4>
                                     <canvas id="UsedBarChart" style="max-height: 150px">
-                                    </canvas></div>
+                                    </canvas></div>--%>
                                 </div>
                             </div>
                         </div>
@@ -726,7 +742,354 @@
                     liveRedraw: false
                 }
             });
-  
+         
+        var syschart =new Highcharts.chart("c5", {
+        chart: {
+            type: 'pie',
+            options3d: {
+            enabled: false,
+            },
+            backgroundColor: 'transparent',
+            plotBackgroundColor: 'transparent',
+        },                
+        plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 80,
+            dataLabels: {
+                enabled: false,
+            },
+            colors: ['#da4265', 'white'],
+            borderWidth: 0,
+            shadow: false,
+            center: ['50%', '50%'],
+            }        
+        },
+        series: [{
+        size: '100%',
+            innerSize: '75%',
+        name:'中控',
+        data: [['On', 0], ['Off', 1]],
+        }],
+        title: {
+            text: "中控",
+            verticalAlign: 'middle',
+            y: 3,
+            style: {
+            color: 'rgb(223,196,58)',
+            },
+        },
+        credits: {
+            enabled: false
+        },
+        });
+      
+        var projchart =new Highcharts.chart("c1", {
+        chart: {
+            type: 'pie',
+            options3d: {
+            enabled: false,
+            },
+            backgroundColor: 'transparent',
+            plotBackgroundColor: 'transparent',
+        },                
+        plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 80,
+            dataLabels: {
+                enabled: false,
+            },
+            colors: ['#2c76b2', 'white'],
+            borderWidth: 0,
+            shadow: false,
+            center: ['50%', '50%'],
+            }        
+        },
+        series: [{
+        size: '100%',
+            innerSize: '75%',
+        name:'投影机',
+        data: [['On', 1], ['Off', 0]],
+        }],
+        title: {
+            text: "投影机",
+            verticalAlign: 'middle',
+            y: 3,
+            style: {
+            color: 'rgb(223,196,58)',
+            },
+        },
+        credits: {
+            enabled: false
+            },
+        tooltip: {
+            style:{
+                display:"none",
+            }
+        }            
+        });
+
+        
+        var compchart =new Highcharts.chart("c2", {
+        chart: {
+            type: 'pie',
+            options3d: {
+            enabled: false,
+            },
+            backgroundColor: 'transparent',
+            plotBackgroundColor: 'transparent',
+        },                
+        plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 80,
+            dataLabels: {
+                enabled: false,
+            },
+            colors: ['#1759d3', 'white'],
+            borderWidth: 0,
+            shadow: false,
+            center: ['50%', '50%'],
+            }        
+        },
+        series: [{
+        size: '100%',
+            innerSize: '75%',
+        name:'电脑',
+        data: [['On', 1], ['Off', 0]],
+        }],
+        title: {
+            text: "电脑",
+            verticalAlign: 'middle',
+            y: 3,
+            style: {
+            color: 'rgb(223,196,58)',
+            },
+        },
+        credits: {
+            enabled: false
+            },
+        tooltip: {
+            style:{
+                display:"none",
+            }
+        }
+        });
+        
+        var c3chart =new Highcharts.chart("c3", {
+        chart: {
+            type: 'pie',
+            options3d: {
+            enabled: false,
+            },
+            backgroundColor: 'transparent',
+            plotBackgroundColor: 'transparent',
+        },                
+        plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 80,
+            dataLabels: {
+                enabled: false,
+            },
+            colors: ['#6140a8', 'white'],
+            borderWidth: 0,
+            shadow: false,
+            center: ['50%', '50%'],
+            }        
+        },
+        series: [{
+        size: '100%',
+            innerSize: '75%',
+        name:'录播',
+        data: [['On',1],['Off',0]],
+        }],
+        title: {
+            text: "录播",
+            verticalAlign: 'middle',
+            y: 3,
+            style: {
+            color: 'rgb(223,196,58)',
+            },
+        },
+        credits: {
+            enabled: false
+            },
+        tooltip: {
+            style:{
+                display:"none",
+            }
+        }
+        });
+        
+        var c4chart =new Highcharts.chart("c4", {
+        chart: {
+            type: 'pie',
+            options3d: {
+            enabled: false,
+            },
+            backgroundColor: 'transparent',
+            plotBackgroundColor: 'transparent',
+        },                
+        plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 80,
+            dataLabels: {
+                enabled: false,
+            },
+            colors: ['#fb635a', 'white'],
+            borderWidth: 0,
+            shadow: false,
+            center: ['50%', '50%'],
+            }        
+        },
+        series: [{
+        size: '100%',
+            innerSize: '75%',
+        name:'空调',
+        data: [['On',1],['Off',0]],
+        }],
+        title: {
+            text: "空调",
+            verticalAlign: 'middle',
+            y: 3,
+            style: {
+            color: 'rgb(223,196,58)',
+            },
+        },
+        credits: {
+            enabled: false
+            },
+        tooltip: {
+            style:{
+                display:"none",
+            }
+        }
+        });
+
+        var c6chart =new Highcharts.chart("c6", {
+            chart: {
+            type: 'pie',
+            options3d: {
+            enabled: false,
+            },
+            backgroundColor: 'transparent',
+            plotBackgroundColor: 'transparent',
+            },                
+            plotOptions: {
+            pie: {
+            innerSize: 100,
+            depth: 80,
+            dataLabels: {
+                enabled: false,
+            },
+            colors: ['#7b4358', 'white'],
+            borderWidth: 0,
+            shadow: false,
+            center: ['50%', '50%'],
+            }        
+            },
+            series: [{
+                size: '100%',
+                innerSize: '75%',
+                name:'屏幕',
+                data: [['On',1],['Off',0]],
+            }],
+            title: {
+            text: "屏幕",
+            verticalAlign: 'middle',
+            y: 3,
+            style: {
+            color: 'rgb(223,196,58)',
+            },
+        },
+        credits: {
+            enabled: false
+            },
+            tooltip: {
+            style:{
+                display:"none",
+            }
+        }
+        });
+
+        
+      
+        var usedhourchart = Highcharts.chart('BarChartUsedHour', {
+            chart: {
+                backgroundColor: 'transparent',
+                plotBackgroundColor: 'transparent',
+                type: 'column',
+                animation: {
+                    enabled: false,
+                },
+            }, 
+            xAxis: {
+                categories: ["投影机", "电脑", "录播", "空调", "中控", "屏幕"],
+                crosshair: true,
+                 labels: {
+                format:'{value}',
+                    style: {
+                        color: '#FFFFFF',
+                        
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                text: ' # of Hours'
+                },
+                gridLineWidth: 0,
+                labels: {
+                format:'{value}',
+                    style: {
+                        color: '#FFFFFF',
+                        
+                    }
+                }
+            },
+            tooltip: {
+                    pointFormat: ' <b>{point.y:.f}</b>'
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    colors: pieColors,
+                    dataLabels: {
+                            enabled: true,
+                            format: '{point.name}',
+                            style: { fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+                                lineHeight: '18px', fontSize: '12px', color: '#fff',
+                                stroke: 'none', fontWeight: 'normal'
+                            }
+                    }
+                },
+                
+            },
+             series: [{
+                    name:"使用时间",
+                    data: [9.9, 1.5, 6.4, 9.2, 4.0, 6.0]
+
+            }],
+            title: {
+                    text: '使用时间',
+                    dispaly: false,
+                    style: {
+
+                        color: '#fff',
+                        textTransform: 'uppercase',
+                        fontSize: '16px',
+                        fontWeight: 'bold'
+                    }
+            },
+            credits: {
+                    enabled: false
+            },
+        })
     </script>
 
     <link href="css/style.css" rel="stylesheet">

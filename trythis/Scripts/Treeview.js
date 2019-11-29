@@ -1,18 +1,23 @@
-﻿
-var jsonData = JSON.stringify({
-    name: ""
+﻿$j = jQuery.noConflict();
+$j(function () {
+    var jsonData = JSON.stringify({
+        name: ""
+    });
+    $j.ajax({
+        type: "POST",
+        url: "Services/GetSideMenu.asmx/GetInstitute",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess_,
+        error: OnErrorCall_
+    });
 });
-$.ajax({
-    type: "POST",
-    url: "Services/GetSideMenu.asmx/GetInstitute",
-    data: jsonData,
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: OnSuccess_,
-    error: OnErrorCall_
-});
+
 function OnSuccess_(response) {
+  
     ListInstitute(response);
+    
 }
 function OnErrorCall_(respo) {
     console.log(respo);
@@ -25,11 +30,12 @@ function ListInstitute(response) {
     var menuleft = document.getElementById("menu-left");
     for (i = 0; i < insid.length; i++) {
         var divs = document.createElement('div');
-        divs.className = 'card';        
+        divs.className = 'card';     
+        menuleft.appendChild(divs);
         var div1 = document.createElement('div');
         div1.className = 'card-header';
-        $(div1).attr('data-toggle', 'collapse');
-        $(div1).attr('data-target', '#' + insid[i]);
+        $j(div1).attr('data-toggle', 'collapse');
+        $j(div1).attr('data-target', '#' + insid[i]);
         divs.appendChild(div1);       
         div1.innerHTML = '<i class="fa fa-folder-open" aria-hidden="ture"></i>' + insname[i];
         var div2 = document.createElement('div');
@@ -38,7 +44,7 @@ function ListInstitute(response) {
             div2.classList = 'collapse no-gutters show institute';
         }
         div2.id = insid[i];
-        $(div2).attr('data-parent', '#menu-left');
+        $j(div2).attr('data-parent', '#menu-left');
         divs.appendChild(div2);
         var div3 = document.createElement('div');
         div3.classList = 'card-body no-gutter';
@@ -46,7 +52,7 @@ function ListInstitute(response) {
         var div4 = document.createElement('div');
         div4.classList = 'btn-group-vertical col-12 no-gutter insertgrade';
         div3.appendChild(div4);
-        menuleft.appendChild(divs);
+        
         GetGrade(insid[i]);
     }    
 }
@@ -55,7 +61,7 @@ function GetGrade(insid) {
     var jsonData = JSON.stringify({
         name: insid
     });
-    $.ajax({
+    $j.ajax({
         type: "POST",
         url: "Services/GetSideMenu.asmx/GetGrades",
         data: jsonData,
@@ -75,8 +81,9 @@ function ListGrade(response,insid) {
     var data = response.d;
     var gradeid = data[0];
     var name = data[1];
-    var parentid = '#' + insid;
-    var maindiv = $(parentid).find('.insertgrade');
+    var parentid = ('#' + insid).toString();
+    //var parentid = document.getElementById(insid);
+    var maindiv = $j(parentid).find('.insertgrade');
     
     if (gradeid.length > 0) {
         for (i = 0; i < gradeid.length; i++) {
@@ -85,7 +92,7 @@ function ListGrade(response,insid) {
             maindiv[0].appendChild(div1);
             var div2 = document.createElement('div');
             div2.classList = 'menu-item btn-block text-left small';
-            $(div2).attr('data-toggle', 'dropdown');
+            $j(div2).attr('data-toggle', 'dropdown');
             div1.appendChild(div2);            
             div2.innerHTML = '<i class="fa grade fa-th" aria-hidden="ture"></i>' + name[i];
             var ul1 = document.createElement('ul');
@@ -102,7 +109,7 @@ function GetClass(gradeid,ul1) {
     var jsonData = JSON.stringify({
         name: gradeid
     });
-    $.ajax({
+    $j.ajax({
         type: "POST",
         url: "Services/GetSideMenu.asmx/GetClasses",
         data: jsonData,
@@ -134,3 +141,4 @@ function ListClass(response, ul1) {
         }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" 
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master"
     AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="WebCresij.HomePage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
@@ -13,21 +13,21 @@
             border-radius: 15px;
         }*/
         .imgsize {
-
             width: 100%;
-            max-width:65px;
-            min-width:25px;
+            max-width: 65px;
+            min-width: 25px;
         }
-        .imgsize1
-        {
-            width: 40%;
 
+        .imgsize1 {
+            width: 40%;
         }
-        .sizePlugin{
-            width:100%;
-            height:100%;
-            margin-bottom:-40px;
+
+        .sizePlugin {
+            width: 100%;
+            height: 100%;
+            margin-bottom: -40px;
         }
+
         .imgclick:hover {
             -webkit-border-radius: 20%;
             -moz-border-radius: 20%;
@@ -99,8 +99,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 70%;
-           
-           min-height: 90%;
+            min-height: 90%;
         }
 
         .blueDiv {
@@ -229,39 +228,44 @@
 
         ul.dropdown-menu li {
             xdisplay: inline;
-            float:left;
+            float: left;
             cwidth: 100%;
             xheight: 40px;
             padding: 0px;
-            margin-bottom:-5px
+            margin-bottom: -5px
         }
 
         ul.dropdown-menu {
-            margin-top:-30px!important;
+            margin-top: -30px !important;
             width: 600px;
         }
 
-        #doc{
-            width:700px
-        }
-        #dev{
-            width:650px
-        }
-        #queryMenu{
-            width:250px
-        }
-        #allmenu{
-            width:600px
+        #doc {
+            width: 700px
         }
 
-        #muteimg:active{
+        #dev {
+            width: 650px
+        }
+
+        #queryMenu {
+            width: 250px
+        }
+
+        #allmenu {
+            max-width: 600px
+        }
+
+        #muteimg:active {
             box-shadow: 0 2px #666;
             transform: translateY(1px);
         }
-        #muteimg:hover{
-            cursor:pointer;
+
+        #muteimg:hover {
+            cursor: pointer;
         }
-        .oncolor{
+
+        .oncolor {
             -webkit-border-radius: 20%;
             -moz-border-radius: 20%;
             border-radius: 20%;
@@ -269,26 +273,37 @@
             -moz-box-shadow: 0px 0px 6px 6px rgba(132,220,142, 0.67);
             box-shadow: 0px 0px 6px 6px rgba(132,220,142, 0.67);
         }
-        @media only screen and (max-height: 600px), screen and (max-width: 1000px){
-            body{
-                overflow:scroll;
+
+        @media only screen and (max-height: 600px), screen and (max-width: 1000px) {
+            body {
+                overflow: scroll;
             }
         }
-        .marginBottom{
-            margin-bottom:5px
+
+        .marginBottom {
+            margin-bottom: 5px
         }
-        .marginTop{
-            margin:-15px
+
+        .marginTop {
+            margin: -15px
         }
-        .marginTop1{
-            margin:-5px
+
+        .marginTop1 {
+            margin: -5px
         }
+
         iframe.width-changed {
             width: 100%;
             display: block;
             border: 0;
             height: 0;
             margin: 0;
+        }
+        @media only screen and (max-width: 600px){
+            #allmenu {
+                display:table-cell;
+                vertical-align: middle;
+            }
         }
     </style>
 </asp:Content>
@@ -298,136 +313,61 @@
     <script src="Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
-    <script src="Scripts/HomePageJS.js?v=18"></script>
-
-    <div class="row " style="padding-left: 50px; max-width: 100%; min-width: 70%;
-        margin-top:-10px; height:95%">
+    <script src="Scripts/HomePageJS.js?v=19"></script>
+    <link href="HikVision/demo.css" rel="stylesheet" />
+    <div class="row " style="padding-left: 50px; max-width: 100%; min-width: 70%; margin-top: -10px; height: 95%">
         <div class="col-lg-8 col-md-12 col-sm-12" id="pluginsrow">
-            <div class="row">
-                <div class="row shadowRow" style="width: 100%; min-width:220px">
-                    <div class="col-lg-9 col-md-9 col-sm-12" >
-                        <div style="-moz-box-shadow: inset 0 0 15px #000000; 
-                            -webkit-box-shadow: inset 0 0 15px #000000;
-                            box-shadow: inset 0 0 15px #000000;  overflow:hidden ;
-                            display:inline-block" id="divplugin1">
-                            <%--<iframe src="src/Chimera.htm" height="390" width="640" 
-                                frameborder="0" wmode="opaque"></iframe>--%>
-                            <object id="plugin_inst_1" type="application/x-chimera-plugin" 
-                                height="360" width="640">
-                                <param name="autoplay" value="true" />
-                                <param name="src" id="src1" value="" />
-                                <param name="network-caching" value="300" />
-                                <param name="allow-fullscreen" value="true" />
-                                <param name="mute" value="true" />
-                               <%-- <param name="audio" value="100" />--%>
-                            </object>
-                            <div style="display: none">
-                                <textarea id="qml_edit" cols="80" rows="20">
-                                    import QtQuick 2.1
-                                    import QmlVlc 0.1
-
-                                    Rectangle {
-                                        color: bgcolor
-                                        VlcVideoSurface {
-                                            id: videoOutput;
-                                            source: vlcPlayer;
-                                            anchors.fill: parent;
-                                        }
-                                        MouseArea {
-                                            anchors.fill: videoOutput;
-                                            onClicked: vlcPlayer.toggleFullscreen();
-                                        }
-                                        Text {
-                                            id: text;
-                                            color: "white";
-                                        }
-                                        Component.onCompleted: {
-                                            vlcPlayer.onMediaPlayerBuffering.connect( onBuffering )
-                                        }
-                                        function onBuffering( percents ) {
-                                            if( percents < 100 )
-                                            text.text = "Buffering: " + percents +"%";
-                                            else
-                                            text.text = "no signal";
-                                        }
-                                    }
-                                </textarea>
-                                <button onclick="plugin1().qml = getByID('qml_edit').value; 
-                                    getByID('qml_error').innerHTML = plugin1().qmlError;">
-                                    load qml</button>
-                                <br />
-                                <span id="qml_error" style="color: red;" />
+            <div class="row" >
+                <div class="row shadowRow" style="width: 100%; min-width: 280px;">
+                    <div class="col-lg-9 col-md-9 col-sm-12">
+                        <div style="-moz-box-shadow: inset 0 0 10px #000000; -webkit-box-shadow: inset 0 0 10px #000000; 
+                            box-shadow: inset 0 0 10px #000000; overflow: hidden; max-height: 330px; 
+                            max-width: 550px; display: inline-block" id="divplugin1">
+                            <div id="divPlugin" class="plugin">
                             </div>
+                            <input type="hidden" id="hiddenplugin" value="" />
                         </div>
-                        <div style="height:60px">
-                        <span class="btn btn-outline-light font-weight-bolder" 
-                            onclick="goToFull();" style="margin-top:5px" >[&nbsp;&nbsp;]</span>
-                            &nbsp;&nbsp;
-                            <span class="btn  font-weight-bolder" id="imgspan" 
-                                onclick="muteVideo();" style="margin-top:5px">
-                                <img id="muteimg" 
-                                    src="Images/中控首页按钮/首页按钮-默认状态/总音量静音.png" 
+                        <div style="height: 60px">
+                            <span class="btn  font-weight-bolder" id="imgspan"
+                                onclick="clickOpenSound();" style="margin-top: 5px">
+                                <img id="muteimg"
+                                    src="Images/中控首页按钮/首页按钮-默认状态/总音量静音.png"
                                     height="40" width="40" />
-                                </span></div>
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-sm-12 " style="color: white; ">
-                        <div class="row" >
-                            <div class="col-lg-10 col-md-6 col-sm-10"
-                                style="margin-bottom: -15px; min-width: 144px">
-                                <object id="plugin_inst_2"
-                                    type="application/x-chimera-plugin" class="sizePlugin">
-                                    <param name="autoplay" value="true" />
-                                    <param name="mrl" id="src2" value="" />
-                                    <param name="network-caching" value="300" />
-                                    <param name="mute" value="true" />
-                                </object>
-                            </div>
-                        
-                            <div class="col-lg-10 col-md-6 col-sm-10"
-                                style="margin-bottom: -15px; min-width: 144px">
-                                <object id="plugin_inst_3"
-                                    type="application/x-chimera-plugin" class="sizePlugin">
-                                    <param name="autoplay" value="true" />
-                                    <param name="mrl" id="src3" value="" />
-                                    <param name="network-caching" value="300" />
-                                    <param name="mute" value="true" />
-                                </object>
-                            </div>
-
-                            <div class="col-lg-10 col-md-6 col-sm-10"
-                                style="margin-bottom: -15px; min-width: 144px">
-                                <object id="plugin_inst_4"
-                                    type="application/x-chimera-plugin" class="sizePlugin">
-                                    <param name="autoplay" value="true" />
-                                    <param name="mrl" id="src4" value="" />
-                                    <param name="network-caching" value="300" />
-                                    <param name="mute" value="true" />
-                                </object>
-                            </div>
-                        
-                           <%-- <div class="col-lg-10 col-md-6 col-sm-10" style="margin-bottom:-15px">
-                            <object id="plugin_inst_5"
-                                type="application/x-chimera-plugin" class="sizePlugin">
-                                <param name="autoplay" value="true" />
-                                <param name="mrl" id="src5" value="" />
-                                <param name="network-caching" value="300" />
-                                <param name="mute" value="true" />
-                            </object>
-                                </div>--%>
-                        
-                    </div>
+                            </span>
                         </div>
+                    </div>
+                    <script src="HikVision/codebase/webVideoCtrl.js"></script>
+                    <div class="col-lg-3 col-md-12 col-sm-12 " style="color: white;">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-6 col-sm-10" onclick="changeplaycam();return false;"
+                                style="margin-bottom: -15px; min-width: 144px; max-height: 120px">
+                                <iframe id="Iframe2" style="background-color: #1e1e36; height: 120px"
+                                    src="~/HikVision/Plugin1.html" name="frameplugin1"
+                                    width="100%" runat="server" frameborder="0"></iframe>
+                            </div>
+                            <div class="col-lg-10 col-md-6 col-sm-10" onclick="changeplaycam1();return false;"
+                                style="margin-bottom: -15px; min-width: 144px; max-height: 120px">
+                                <iframe id="Iframe3" style="background-color: #1e1e36; height: 120px"
+                                    src="~/HikVision/Plugin2.html" name="frameplugin2"
+                                    width="100%" runat="server" frameborder="0"></iframe>
+                            </div>
+                            <div class="col-lg-10 col-md-6 col-sm-10" onclick="changeplaycam2();return false;"
+                                style="margin-bottom: -15px; min-width: 144px; max-height: 120px">
+                                <iframe id="Iframe4" style="background-color: #1e1e36; height: 120px"
+                                    src="~/HikVision/Plugin3.html" name="frameplugin3"
+                                    width="100%" runat="server" frameborder="0"></iframe>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-            <div class="row marginTop" style=" margin-left: -50px;">
+            <div class="row marginTop" style="margin-left: -50px;">
                 <div class="col-lg-3 col-md-6 col-sm-12">
 
-                    <div class="row marginBottom " >
+                    <div class="row marginBottom ">
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">
-                            &nbsp;系统&nbsp;</legend>
-                    </fieldset>
+                            <legend align="center" style="width: auto; font-size: 16px;">&nbsp;系统&nbsp;</legend>
+                        </fieldset>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <span>
                                 <img src="Images/greyed/sysgrey.png" id="syspower"
@@ -447,9 +387,8 @@
 
                     <div class="row  marginTop">
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">
-                            &nbsp;屏幕&nbsp;</legend>
-                    </fieldset>
+                            <legend align="center" style="width: auto; font-size: 16px;">&nbsp;屏幕&nbsp;</legend>
+                        </fieldset>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/scup.png" id="Scup"
                                 class="imgclick imgsize" />
@@ -470,9 +409,8 @@
 
                     <div class="row marginBottom">
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">
-                            &nbsp;信号切换&nbsp;</legend>
-                    </fieldset>
+                            <legend align="center" style="width: auto; font-size: 16px;">&nbsp;信号切换&nbsp;</legend>
+                        </fieldset>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/desktop.png"
                                 id="desktop1"
@@ -492,9 +430,8 @@
 
                     <div class="row  marginTop">
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">
-                            &nbsp;窗帘&nbsp;</legend>
-                    </fieldset>
+                            <legend align="center" style="width: auto; font-size: 16px;">&nbsp;窗帘&nbsp;</legend>
+                        </fieldset>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/copengrey.png" id="CurtainOpen"
                                 class="imgclick imgsize" />
@@ -515,9 +452,8 @@
 
                     <div class="row marginBottom" style="text-align: center">
                         <fieldset class="fieldSetControl">
-                        <legend align="center" style="width: auto; font-size: 16px;">
-                            &nbsp;投影机&nbsp;</legend>
-                    </fieldset>
+                            <legend align="center" style="width: auto; font-size: 16px;">&nbsp;投影机&nbsp;</legend>
+                        </fieldset>
                         <div class="col-lg-6  col-md-6 col-sm-6  col-6">
                             <img src="Images/greyed/proj1.png" id="projgreen"
                                 class="imgclick imgsize" />
@@ -529,10 +465,9 @@
                     </div>
 
                     <div class="row marginTop" style="text-align: center">
-                        <fieldset class="fieldSetControl" >
-                        <legend align="center" style="width: auto; font-size: 16px;">
-                            &nbsp;<%=Resources.Resource.Light%>&nbsp;</legend>
-                    </fieldset>
+                        <fieldset class="fieldSetControl">
+                            <legend align="center" style="width: auto; font-size: 16px;">&nbsp;<%=Resources.Resource.Light%>&nbsp;</legend>
+                        </fieldset>
                         <div class="col-lg-6  col-md-6 col-sm-6  col-6">
                             <img src="Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png"
                                 id="lighton" class="imgclick imgsize" />
@@ -544,16 +479,17 @@
 
                     </div>
 
-                    <input id="InputIP" type="hidden" value='<%= Session["DeviceIP"] %>'  />
-                    <input id="deviceStatusHidden" type="hidden" value='Offline'  />
-                    <asp:HiddenField ID="iptocam" Value="" runat="server"/>
+                    <input id="InputIP" type="hidden" value='<%= Session["DeviceIP"] %>' />
+                    <input id="deviceStatusHidden" type="hidden" value='Offline' />
+                    <input id="loccam" type="hidden" value='<%= Session["LocForCam"] %>' />
+                    <asp:HiddenField ID="iptocam" Value="" runat="server" />
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-12">
                     <div class="row marginBottom">
-                        <fieldset class="fieldSetControl"  id="volfieldset">
-                        <legend align="center" style="width: auto; font-size: 16px;">
-                            &nbsp;音量&nbsp;</legend></fieldset>
+                        <fieldset class="fieldSetControl" id="volfieldset">
+                            <legend align="center" style="width: auto; font-size: 16px;">&nbsp;音量&nbsp;</legend>
+                        </fieldset>
                         <table style="height: auto; width: 100%;">
                             <tr style="align-items: center; align-content: center;">
                                 <td style="text-align: center; background-color: #1e1e36; width: 5%">
@@ -564,10 +500,9 @@
                                 </td>
                                 <td>
                                     <input id="vol-control" type="range" min="0" step="1" max="99"
-                                         onchange="SetVolume(this.value)" 
-                                        style="min-width:150px"/>
-                                    &nbsp;<span id="volchange" style="color: white; 
-                                        font-size: 16px; width: 10%">50</span></td>
+                                        onchange="SetVolume(this.value)"
+                                        style="min-width: 150px" />
+                                    &nbsp;<span id="volchange" style="color: white; font-size: 16px; width: 10%">50</span></td>
 
                             </tr>
 
@@ -575,17 +510,16 @@
                                 <td style="text-align: center; width: 5%">
                                     <span>
                                         <img src="Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png"
-                                             id="micIcon" height="40" />
+                                            id="micIcon" height="40" />
                                     </span>
 
                                 </td>
                                 <td>
-                                    <input id="mic-control" type="range" min="0" 
+                                    <input id="mic-control" type="range" min="0"
                                         step="1" max="99"
-                                        onchange="MicControl(this.value)" 
-                                        style="min-width:150px" />
-                                    <span id="micchange" style="color: white; 
-                                    font-size: 16px; width: 10%;">50</span></td>
+                                        onchange="MicControl(this.value)"
+                                        style="min-width: 150px" />
+                                    <span id="micchange" style="color: white; font-size: 16px; width: 10%;">50</span></td>
                             </tr>
                         </table>
                     </div>
@@ -593,9 +527,9 @@
                     <div class="row" style="text-align: center">
                         <div class="col-lg-12" style="text-align: center;">
                             <span>
-                                <img src="Images/中控首页按钮/全部菜单.png" 
+                                <img src="Images/中控首页按钮/全部菜单.png"
                                     class="imgclick" id="yellowbuttons"
-                                    onclick="DisplayModal(); return false;" 
+                                    onclick="DisplayModal(); return false;"
                                     height="50" width="50" />
                             </span>
                         </div>
@@ -606,115 +540,113 @@
             </div>
         </div>
 
-        <div class="col-lg-2 col-md-6 col-sm-8" style="max-height: 90%; padding-top:30px;
-            min-width:200px" id="sidesrow;">
+        <div class="col-lg-2 col-md-6 col-sm-8" style="max-height: 90%; padding-top: 30px; min-width: 200px"
+            id="sidesrow;">
             <div class="row " style="border: 1px solid white;">
-                <div class="col-lg-12 col-md-12 col-sm-12" style=" margin-bottom: 10px;
-                font-size: 14px;">
-                <p style="color: white">
-                    <script> document.write(new Date().toDateString()); </script>
-                    <br />
-                    <%=Resources.Resource.ClassName%>:  &nbsp;
+                <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 10px; font-size: 14px;">
+                    <p style="color: white">
+                        <script> document.write(new Date().toDateString()); </script>
+                        <br />
+                        <%=Resources.Resource.ClassName%>:  &nbsp;
                     <script>document.write('<%= Session["LocToDisplay"] %>')</script>
-                    <br />
-                    <%=Resources.Resource.IPAddress%>: &nbsp;
-                    <script>document.write('<%= Session["DeviceIP"] %>')</script>&nbsp;<br />
-                    <%=Resources.Resource.Status%>: &nbsp;<span id="devicestatus" 
-                        style="font-weight: bold">离线<!--Offline--></span>
-                </p>
-                    </div>
+                        <br />
+                        <%=Resources.Resource.IPAddress%>: &nbsp;
+                    <script>document.write('<%= Session["DeviceIP"] %>')</script>
+                        &nbsp;<br />
+                        <%=Resources.Resource.Status%>: &nbsp;<span id="devicestatus"
+                            style="font-weight: bold">离线</span><!--Offline-->
+                    </p>
+                </div>
             </div>
-            <div class="row" style="border: 1px dashed white; 
-border-top:none;min-width:200px">
+            <div class="row" style="border: 1px dashed white; border-top: none; min-width: 200px">
                 <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="row marginBottom marginTop1" 
-                style="border-bottom: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_07.png" 
-                        class="imgsize1"/>
-                </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
-                width:50%" id="tempvalue">21°C</span>
-            </div>
-            <div class="row marginBottom marginTop1" 
-                style="border-bottom: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_09.png" 
-                        class="imgsize1" />
-                </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
-                width:50%" id="humidvalue">45%</span>
-            </div>
-            <div class="row  marginBottom marginTop1" 
-                style="border-bottom: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_17.png" 
-                        class="imgsize1" />
-                </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
-                    width:50%" id="pmvalue">12µg/m3</span>
-            </div>
-            <div class="row marginBottom marginTop1" 
-                style="border-bottom: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_19.png"
-                        class="imgsize1" />
-                </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
-                width:50%" id="co2">350ppm</span>
-            </div>
-            <div class="row marginBottom marginTop1" 
-                style="border-bottom: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_27.png"
-                        class="imgsize1" />
-                </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px; 
-                    width:50%" id="intensityvalue">1500nits</span>
-            </div>
-            <div class="row marginBottom marginTop1" 
-                style="border-bottom: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_29.png" 
-                        class="imgsize1" />
-                </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;
-                width:50%" id="methanalvalue">8.1mg/m3</span>
-            </div>
-            <div class="row marginBottom marginTop1" 
-                style="border-bottom: 1px dashed #aeb2b7; ">
-                <span style="text-align: left; width:50%">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_37.png"
-                        class="imgsize1" />
-                </span>
-                <span style="font-size:18px; color:#ffaa4d;padding-top:10px;
-                    width:50%" id="voltvalue">220V</span>
-            </div>
-            <div class="row marginBottom marginTop1" >
-                <div style="width:40%;float:left;text-align: left;margin:auto">
-                    <img src="Images/中控首页按钮/环境图标/背景图-（03_39.png"  class="imgsize1" />
-                </div>
-                <div style="width:60%">
-                    <div style="border-bottom: 1px solid #aeb2b7;
-                    width:100%;margin-top:-20px">
-                        <span style="font-size:18px; color:#ffaa4d;padding-top:10px;" >
-                            1:&nbsp;&nbsp;<span id="I1">0.06KW</span></span>
+                    <div class="row marginBottom marginTop1"
+                        style="border-bottom: 1px dashed #aeb2b7;">
+                        <span style="text-align: left; width: 50%">
+                            <img src="Images/中控首页按钮/环境图标/背景图-（03_07.png"
+                                class="imgsize1" />
+                        </span>
+                        <span style="font-size: 18px; color: #ffaa4d; padding-top: 10px; width: 50%"
+                            id="tempvalue">21°C</span>
                     </div>
-                    <div style="border-bottom: 1px solid #aeb2b7;width:100%">
-                    <span style="font-size:18px;color:#ffaa4d">2:&nbsp;&nbsp;
-                    <span id="I2">0.07KW</span></span></div>
-                <div style="border-bottom: 1px solid #aeb2b7;width:100%">
-                    <span style="font-size:18px;color:#ffaa4d">3:&nbsp;&nbsp;
+                    <div class="row marginBottom marginTop1"
+                        style="border-bottom: 1px dashed #aeb2b7;">
+                        <span style="text-align: left; width: 50%">
+                            <img src="Images/中控首页按钮/环境图标/背景图-（03_09.png"
+                                class="imgsize1" />
+                        </span>
+                        <span style="font-size: 18px; color: #ffaa4d; padding-top: 10px; width: 50%"
+                            id="humidvalue">45%</span>
+                    </div>
+                    <div class="row  marginBottom marginTop1"
+                        style="border-bottom: 1px dashed #aeb2b7;">
+                        <span style="text-align: left; width: 50%">
+                            <img src="Images/中控首页按钮/环境图标/背景图-（03_17.png"
+                                class="imgsize1" />
+                        </span>
+                        <span style="font-size: 18px; color: #ffaa4d; padding-top: 10px; width: 50%"
+                            id="pmvalue">12µg/m3</span>
+                    </div>
+                    <div class="row marginBottom marginTop1"
+                        style="border-bottom: 1px dashed #aeb2b7;">
+                        <span style="text-align: left; width: 50%">
+                            <img src="Images/中控首页按钮/环境图标/背景图-（03_19.png"
+                                class="imgsize1" />
+                        </span>
+                        <span style="font-size: 18px; color: #ffaa4d; padding-top: 10px; width: 50%"
+                            id="co2">350ppm</span>
+                    </div>
+                    <div class="row marginBottom marginTop1"
+                        style="border-bottom: 1px dashed #aeb2b7;">
+                        <span style="text-align: left; width: 50%">
+                            <img src="Images/中控首页按钮/环境图标/背景图-（03_27.png"
+                                class="imgsize1" />
+                        </span>
+                        <span style="font-size: 18px; color: #ffaa4d; padding-top: 10px; width: 50%"
+                            id="intensityvalue">1500nits</span>
+                    </div>
+                    <div class="row marginBottom marginTop1"
+                        style="border-bottom: 1px dashed #aeb2b7;">
+                        <span style="text-align: left; width: 50%">
+                            <img src="Images/中控首页按钮/环境图标/背景图-（03_29.png"
+                                class="imgsize1" />
+                        </span>
+                        <span style="font-size: 18px; color: #ffaa4d; padding-top: 10px; width: 50%"
+                            id="methanalvalue">8.1mg/m3</span>
+                    </div>
+                    <div class="row marginBottom marginTop1"
+                        style="border-bottom: 1px dashed #aeb2b7;">
+                        <span style="text-align: left; width: 50%">
+                            <img src="Images/中控首页按钮/环境图标/背景图-（03_37.png"
+                                class="imgsize1" />
+                        </span>
+                        <span style="font-size: 18px; color: #ffaa4d; padding-top: 10px; width: 50%"
+                            id="voltvalue">220V</span>
+                    </div>
+                    <div class="row marginBottom marginTop1">
+                        <div style="width: 40%; float: left; text-align: left; margin: auto">
+                            <img src="Images/中控首页按钮/环境图标/背景图-（03_39.png" class="imgsize1" />
+                        </div>
+                        <div style="width: 60%">
+                            <div style="border-bottom: 1px solid #aeb2b7; width: 100%; margin-top: -20px">
+                                <span style="font-size: 18px; color: #ffaa4d; padding-top: 10px;">1:&nbsp;&nbsp;<span id="I1">0.06KW</span></span>
+                            </div>
+                            <div style="border-bottom: 1px solid #aeb2b7; width: 100%">
+                                <span style="font-size: 18px; color: #ffaa4d">2:&nbsp;&nbsp;
+                    <span id="I2">0.07KW</span></span>
+                            </div>
+                            <div style="border-bottom: 1px solid #aeb2b7; width: 100%">
+                                <span style="font-size: 18px; color: #ffaa4d">3:&nbsp;&nbsp;
                     <span id="I3">0.08KW</span></span>
-                </div>
-                <div style="width:100%; margin-bottom:-20px">
-                    <span style="font-size:18px;color:#ffaa4d">4:&nbsp;&nbsp;
+                            </div>
+                            <div style="width: 100%; margin-bottom: -20px">
+                                <span style="font-size: 18px; color: #ffaa4d">4:&nbsp;&nbsp;
                     <span id="I4">0.05KW</span></span>
-                </div>
-                </div>
+                            </div>
+                        </div>
 
-            </div>
                     </div>
+                </div>
             </div>
         </div>
 
@@ -722,21 +654,21 @@ border-top:none;min-width:200px">
 
     <div id="RemoteControl" class="modal scroll">
         <div class="modal-content ">
-            <header class="row" >
-                <span 
-                onclick="document.getElementById('RemoteControl').style.display='none'"
+            <header class="row">
+                <span
+                    onclick="document.getElementById('RemoteControl').style.display='none'"
                     class="w3-button w3-display-topright">&times;</span>
             </header>
-           
-                <iframe id="Iframe1" style="background-color: #1e1e36; 
-                min-height:700px" src="~/controlRemote.aspx" class="scroll"
-                width="100%" runat="server" frameborder="0"></iframe>            
+
+            <iframe id="Iframe1" style="background-color: #1e1e36; min-height: 700px"
+                src="~/controlRemote.aspx" class="scroll"
+                width="100%" runat="server" frameborder="0"></iframe>
         </div>
     </div>
 
-    <script>
-        $(window).on('load', onLoad);
-        $(window).on('resize', setWidth);
+
+    <%--<script>
+        
         function mainchange() {
             var mainContentWidth = document.getElementById("main-content").offsetWidth;
             if (mainContentWidth > 950 && mainContentWidth < 1100) {
@@ -844,80 +776,11 @@ border-top:none;min-width:200px">
         }
         function onLoad() {
             setWidth();
-            addEvent(document.getElementById('plugin_inst_1'), 'MediaPlayerPaused', onPause1);
-            addEvent(document.getElementById('plugin_inst_2'), 'MediaPlayerPaused', onPause2);
-            addEvent(document.getElementById('plugin_inst_3'), 'MediaPlayerPaused', onPause3);
-            addEvent(document.getElementById('plugin_inst_4'), 'MediaPlayerPaused', onPause4);
-            // addEvent(document.getElementById('plugin_inst_5'), 'MediaPlayerPaused', onPause5);
-            console.log("function attacked");
+            
         }
-        function onPause1() {
-            console.log("paused");
-            var player1 = document.getElementById('plugin_inst_1');
-            var video = document.getElementById('src1').value;
-            player1.play(video);
-            console.log("player1" + video);
-        }
-        function onPause2() {
-            console.log("paused");
-            var player1 = document.getElementById('plugin_inst_1');
-            var player2 = document.getElementById('plugin_inst_2');
-            var video2 = document.getElementById('src2').value;
-            var video1 = document.getElementById('src1').value;
-            var sub = video1 + video2.substring(39);
-            player2.play(video2);
-            player1.play(video2.substring(0, video2.length - 35));
-            document.getElementById('src1').value = video2.substring(0, 39);
-            console.log("player2 " + sub);
-            console.log("player1" + video2.substring(0, 39));
-        }
-        function onPause3() {
-            console.log("paused");
-            var player1 = document.getElementById('plugin_inst_1');
-            var player2 = document.getElementById('plugin_inst_3');
-            var video2 = document.getElementById('src3').value;
-            var video1 = document.getElementById('src1').value;
-            var sub = video1 + video2.substring(39);
-            player2.play(video2);
-            player1.play(video2.substring(0, video2.length - 35));
-            document.getElementById('src1').value = video2.substring(0, 39);
-            console.log("player2 " + sub);
-            console.log("player1" + video2.substring(0, 39));
-        }
-        function onPause4() {
-            console.log("paused");
-            var player1 = document.getElementById('plugin_inst_1');
-            var player2 = document.getElementById('plugin_inst_4');
-            var video2 = document.getElementById('src4').value;
-            var video1 = document.getElementById('src1').value;
-            var sub = video1 + video2.substring(39);
-            player2.play(video2);
-            player1.play(video2.substring(0, video2.length - 35));
-            document.getElementById('src1').value = video2.substring(0, 39);
-            console.log("player2 " + sub);
-            console.log("player1" + video2.substring(0, 39));
-        }
-        //function onPause5() {
-        //    console.log("paused");
-        //    var player1 = document.getElementById('plugin_inst_1');
-        //    var player2 = document.getElementById('plugin_inst_5');
-        //    var video2 = document.getElementById('src5').value;
-        //    player2.play(video2);
-        //    player1.play(video2.substring(0, video2.length-35));
-        //    document.getElementById('src1').value = video2.substring(0, 39);
-        //    console.log("player1" + video2.substring(0, video2.length-35));
-        //}
-
         function muteVideo() {
             document.getElementById('plugin_inst_1').toggleMute();
-            var imgmute = document.getElementById('muteimg');
-            var src1 = $(imgmute).attr('src');
-            if (src1 == "Images/中控首页按钮/首页按钮-默认状态/总音量静音.png") {
-                $(imgmute).attr('src', "Images/中控首页按钮/首页按钮-默认状态/总音量.png");
-            }
-            else {
-                $(imgmute).attr('src', "Images/中控首页按钮/首页按钮-默认状态/总音量静音.png");
-            }
+            clickOpenSound()
         }
 
         function goToFull() {
@@ -957,6 +820,96 @@ border-top:none;min-width:200px">
             mainchange();
         });
 
+    </script>--%>
+
+    <script src="HikVision/codebase/webVideoCtrl.js"></script>
+    <script src="Scripts/WebPlugin.js"></script>
+    <script>
+
+
+        //function onLoad() {
+        //    setWidth();
+
+        //}
+
+        //function mainchange() {
+        //    var mainContentWidth = document.getElementById("main-content").offsetWidth;
+        //    if (mainContentWidth > 1000 && mainContentWidth < 1400) {
+        //        $('#pluginsrow').removeClass('col-lg-8');
+        //        $('#pluginsrow').addClass('col-lg-10');
+
+        //        console.log("inside maincontent width calculation");
+        //        document.getElementById('plugin_inst_1').width = 480;
+        //        document.getElementById('plugin_inst_1').height = 270;
+        //    }
+        //}
+
+        function setWidth() {
+            var width = $(window).width();
+            var heightwindow = $(document).height();
+            console.log("window resize");
+            console.log("doc height " + heightwindow);
+            if (heightwindow < 922) {
+                console.log("inside height column");
+                $("body").css("overflow", "Scroll");
+            }
+            else {
+                $("body").css("overflow", "hidden");
+            }
+            var mainContentWidth = document.getElementById("main-content").offsetWidth;
+            console.log("window width for plugin " + width);
+            console.log("main content width " + mainContentWidth);
+            if (width > 1020 && width < 1500) {
+                document.getElementById('plugin_inst_1').width = 480;
+                document.getElementById('plugin_inst_1').height = 270;
+                $('#sidesrow').removeClass('col-lg-2').addClass('col-lg-3');
+                if (width < 1300) {
+                    $('#pluginsrow').removeClass('col-lg-8');
+                    $('#pluginsrow').removeClass('col-lg-10');
+                    $('#pluginsrow').addClass('col-lg-12');
+
+                }
+                else {
+                    $('#pluginsrow').removeClass('col-lg-8');
+                    $('#pluginsrow').removeClass('col-lg-12');
+                    $('#pluginsrow').addClass('col-lg-10');
+                }
+                $("body").css("overflow", "Scroll");
+            }
+            else if (width > 1500 && width <= 1600) {
+                document.getElementById('plugin_inst_1').width = 640;
+                document.getElementById('plugin_inst_1').height = 360;
+                $('#pluginsrow').removeClass('col-lg-8');
+                $('#pluginsrow').removeClass('col-lg-12');
+                $('#pluginsrow').addClass('col-lg-10');
+                $("body").css("overflow", "Scroll");
+                $('#sidesrow').removeClass('col-lg-3').addClass('col-lg-2');
+            }
+            else if (width > 1600) {
+                document.getElementById('plugin_inst_1').width = 640;
+                document.getElementById('plugin_inst_1').height = 360;
+                $('#pluginsrow').removeClass('col-lg-10');
+                $('#pluginsrow').addClass('col-lg-8');
+                $('#pluginsrow').removeClass('col-lg-12');
+                $("body").css("overflow", "hidden");
+                $('#sidesrow').removeClass('col-lg-3').addClass('col-lg-2');
+            }
+            else if (width > 500 && width < 1020) {
+                document.getElementById('plugin_inst_1').width = 320;
+                document.getElementById('plugin_inst_1').height = 180;
+                $('#pluginsrow').removeClass('col-lg-8');
+                $('#pluginsrow').removeClass('col-lg-10');
+                $('#pluginsrow').addClass('col-lg-12');
+                $("body").css("overflow", "Scroll");
+
+            }
+            else if (width < 500) {
+                document.getElementById('plugin_inst_1').width = 160;
+                document.getElementById('plugin_inst_1').height = 90;
+                $("body").css("overflow", "Scroll");
+            }
+        }
+        
     </script>
 
 </asp:Content>

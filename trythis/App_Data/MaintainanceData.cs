@@ -39,7 +39,9 @@ namespace WebCresij
                         result= Convert.ToInt32(cmd.Parameters["@result"].Value);
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
                     result = -1;
                 }

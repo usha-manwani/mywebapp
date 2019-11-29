@@ -26,8 +26,10 @@ namespace WebCresij
                 ddlInstitute.DataValueField = "Ins_ID";
                 ddlInstitute.DataBind();
                 fillTree.function(TreeMenuView1, e);
-                fillTree.function(TreeViewEdit, e);
+                fillTree.Editfunction(TreeViewEdit, e);
+                
                 fillTree.function(TreeViewDelete, e);
+                
             }
             else
             {
@@ -35,7 +37,6 @@ namespace WebCresij
                 HttpContext.Current.Session["UserName"].ToString(), 3);
             }
         }
-
         #region Add
         protected void TreeMenuView1_SelectedNodeChanged(object sender, EventArgs e)
         {
@@ -79,7 +80,8 @@ namespace WebCresij
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "error3", "camError();", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "error3", "alert('" + message + "');", true);
                 bindTree();
             }
                       
@@ -105,7 +107,8 @@ namespace WebCresij
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "error1", "camError();", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "gradesaveerror1", "alert('" + message + "');", true);
             }
             finally
             {
@@ -159,7 +162,8 @@ namespace WebCresij
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "error1", "camError();", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "classaveerror1", "alert('" + message + "');", true);
             }
             finally
             {
@@ -182,7 +186,8 @@ namespace WebCresij
                     }
                     if (f != 0 && f != 1)
                     {
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alertip", "duplicateIP();", true);
+                        string message = Resources.Resource.ResourceManager.GetString("AlertErrorIP");
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alertip", "alert('" + message + "');", true);
                     }
                 }                
                     string[] ip = Request.Form.GetValues("IP");
@@ -208,23 +213,29 @@ namespace WebCresij
                     }
                     if(result == -2)
                     {
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "showcamins", "CamIns();", true);
+                        string message = Resources.Resource.ResourceManager.GetString("NoMoreCam");
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "showcamins", "alert('"+message+"');", true);
                     }                                           
                     else if(result==-1)
+                        
                     {
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alertip1", "duplicateIP();", true);
+                        string message = Resources.Resource.ResourceManager.GetString("AlertErrorIP");
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "alertip1", "alert('"+message+"');", true);
                     }
                 }                
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "camError", "camError();", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "camError", "alert('"+message+"');", true);
             }
             finally
             {
                 bindTree();
                 EmptyTextBox();
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "HideCam", "hideCam();", true);
+               // ScriptManager.RegisterStartupScript(this, typeof(Page), "HideCam", "hideCam();", true);
                 
             }
            
@@ -258,10 +269,11 @@ namespace WebCresij
             try
             {
                 int level = TreeViewEdit.SelectedNode.Depth;
+                
                 if (level == 4)
                 {
                     tbSelectedClass.Text = TreeViewEdit.SelectedNode.Parent.Parent.ToolTip;
-                    if (TreeViewEdit.SelectedNode.Parent.Text == "Camera")
+                    if (TreeViewEdit.SelectedNode.Parent.Value == "Camera")
                     {
                         string p = TreeViewEdit.SelectedNode.Text;
                         try
@@ -274,22 +286,36 @@ namespace WebCresij
                             passEditcam.Text = dt.Rows[0]["password"].ToString();
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowEditCam", "EditCam();", true);
                         }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                         catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                         {
                             bindTree();
                         }
 
                     }
+                    
                     else
                     {
-                        txtRename.Text = TreeViewEdit.SelectedNode.Text;
-                        tbRename.Text = TreeViewEdit.SelectedNode.Text;
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowRename", "Rename();", true);
+                        
+                            txtRename.Text = TreeViewEdit.SelectedNode.Text;
+                            tbRename.Text = TreeViewEdit.SelectedNode.Text;
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowRename", "Rename();", true);
+                        
+                        
                     }
                 }
                 else if (level == 3)
                 {
-                    TreeViewEdit.SelectedNode.Expand();
+                    //AddClearTime(TreeViewEdit.SelectedNode, TreeViewEdit.SelectedNode.ChildNodes[0].Text, e);
+                    if (TreeViewEdit.SelectedNode.Text == "修改设备使用时长")
+                    {
+                        hourclass.Text = TreeViewEdit.SelectedNode.Parent.Text;
+                        hourgrade.Text = TreeViewEdit.SelectedNode.Parent.Parent.Text;
+                        hourins.Text = TreeViewEdit.SelectedNode.Parent.Parent.Parent.Text;
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "Showworkhour", "showworkingHour('" + TreeViewEdit.SelectedNode.Value + "');", true);
+                    }
+                    //TreeViewEdit.SelectedNode.Expand();
                    // ScriptManager.RegisterStartupScript(this, typeof(Page), "donothing", "donothing();", true);
                 }
                 else
@@ -302,7 +328,8 @@ namespace WebCresij
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "error6", "camError();", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "error6", "alert('" + message + "');", true);
                 bindTree();
                 EmptyTextBox();
             }
@@ -316,7 +343,8 @@ namespace WebCresij
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "error2", "camError();", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "savecamerror2", "alert('" + message + "');", true);
             }
             finally
             {
@@ -349,7 +377,8 @@ namespace WebCresij
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "error4", "camError();", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "saverenameerror2", "alert('" + message + "');", true);
             }
             finally
             {
@@ -372,7 +401,8 @@ namespace WebCresij
             }
             catch
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "error1", "camError();", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "deleteerror1", "alert('" + message + "');", true);
                 bindTree();
                 EmptyTextBox();
             }           
@@ -386,7 +416,7 @@ namespace WebCresij
                 int result = 2;
                 if (TreeViewDelete.SelectedNode.Depth == 3)
                 {
-                    if (TreeViewDelete.SelectedNode.Text=="Camera")
+                    if (TreeViewDelete.SelectedNode.Value=="Camera")
                     {
                         
                         result = fillTree.DelAllCam(TreeViewDelete.SelectedNode.Parent.ToolTip);
@@ -398,7 +428,7 @@ namespace WebCresij
                 }
                 if (TreeViewDelete.SelectedNode.Depth == 4)
                 {
-                    if (TreeViewDelete.SelectedNode.Parent.Text == "Camera")
+                    if (TreeViewDelete.SelectedNode.Parent.Value == "Camera")
                     {
                         result = fillTree.delCam(cam, TreeViewDelete.SelectedNode.Parent.Parent.ToolTip);
                     }
@@ -424,9 +454,12 @@ namespace WebCresij
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", "alert('The requested Item can not be deleted at this moment. Please try later'); ", true);
                 }                
             }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "error5", "camError();", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "error5", "alert('" + message + "');", true);
             }
             finally
             {
@@ -441,7 +474,7 @@ namespace WebCresij
         protected void bindTree()
         {
             fillTree.function(TreeMenuView1, null);
-            fillTree.function(TreeViewEdit, null);
+            fillTree.Editfunction(TreeViewEdit, null);
             fillTree.function(TreeViewDelete, null);
         }      
 
@@ -457,5 +490,14 @@ namespace WebCresij
             passEditcam.Text = "";
             
         }
+
+        //protected void TreeViewEdit_TreeNodeExpanded(object sender, TreeNodeEventArgs e)
+        //{
+        //    if (e.Node.Depth == 3 && e.Node.Text!= "Camera")
+        //    {
+        //        AddClearTime(TreeViewEdit.SelectedNode, TreeViewEdit.SelectedNode.ChildNodes[0].Text, e);
+        //    }
+        //        e.Node.Expand();            
+        //}
     }
 }

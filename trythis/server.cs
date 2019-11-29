@@ -16,8 +16,12 @@ namespace WebCresij
     {
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         DataTable dt = new DataTable();
+#pragma warning disable CS0414 // The field 'server.t' is assigned but its value is never used
         Thread t = null;
+#pragma warning restore CS0414 // The field 'server.t' is assigned but its value is never used
+#pragma warning disable CS0169 // The field 'server.clientList' is never used
         List<string> clientList;
+#pragma warning restore CS0169 // The field 'server.clientList' is never used
 
 
         //ServerSocket ss;
@@ -40,7 +44,9 @@ namespace WebCresij
                         MySqlDataAdapter da = new MySqlDataAdapter(cmd);
                         da.Fill(dt);
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }

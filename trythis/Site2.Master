@@ -26,19 +26,14 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <style>
         .positionCenter {
-            padding: 15px;
-            padding-left: 10px;
+            /*padding: 15px;*/
             position: absolute;
             top: 50%;
             left: 50%;
             -ms-transform: translateX(-50%) translateY(-50%);
             -webkit-transform: translate(-50%,-50%);
             transform: translate(-50%,-50%);
-            max-width: 550px;
-            min-width: 250px;
-            width:50%;
-            height:50%;
-        }
+        } 
 
         .width100 {
             width: 100%;
@@ -119,6 +114,11 @@
                 </asp:ContentPlaceHolder>
             </div>
         </div>
+        
     </form>
+    <footer style="float:right">
+        <a href="Mobile/Login.aspx" style="text-align:right!important"><i class="fa fa-mobile"></i>Go to Mobile Version</a>
+        <br />
+    </footer>
 </body>
 </html>

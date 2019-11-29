@@ -356,7 +356,9 @@ namespace WebCresij
                             }
                             sqlData.Fill(dt);
                         }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                         catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                         {
 
                         }
@@ -456,7 +458,9 @@ namespace WebCresij
                         da.Fill(dtStatus);
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -483,7 +487,9 @@ namespace WebCresij
                         da.Fill(dtStatus);
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -592,7 +598,7 @@ namespace WebCresij
             return dt;
         }
 
-        public DataTable getGradeName(string gradeid)
+        public DataTable GetGradeName(string gradeid)
         {
             DataTable dt = new DataTable();
 
@@ -646,7 +652,9 @@ namespace WebCresij
                         sqlDataAdapter.Fill(dt);
                     }
                 }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (MySqlException ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 {
 
                 }
@@ -655,6 +663,41 @@ namespace WebCresij
                     con.Close();
                 }
             }           
+            return dt;
+        }
+        public DataTable WorkingHoursMachine(string name)
+        {
+            DataTable dt = new DataTable();
+            string query = "select format(sum(projectorHour),2) as projhour, format(sum(pcHour),2) as pchour, "+
+                         "format(sum(recorderHour), 2) as recorderhour,format(sum(ACHour), 2) as achour, "+
+                        "format(sum(systemHour), 2) as syshour, format(sum(screenHour), 2) as screenhour"+
+                       " from machineworkinghours where ip in(select ccip from centralcontrol "+
+                       " where location in (select id from class_details where classid = '"+name+"'))";
+            using (MySqlConnection con = new MySqlConnection(connString))
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
+                        sqlDataAdapter.Fill(dt);
+                    }
+                }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+                catch (MySqlException ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
             return dt;
         }
 
@@ -696,6 +739,46 @@ namespace WebCresij
             }
             return query;
         }
+
+        public void Saveworkinghours(string[] data)
+        {
+            if (!string.IsNullOrEmpty(data[6]))
+            {
+                using (MySqlConnection con = new MySqlConnection(connString))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_changeMachineTime", con))
+                    {
+                        try
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("projector", data[0]);
+                            cmd.Parameters.AddWithValue("comp", data[1]);
+                            cmd.Parameters.AddWithValue("record", data[2]);
+                            cmd.Parameters.AddWithValue("actemp", data[3]);
+                            cmd.Parameters.AddWithValue("scr", data[5]);
+                            cmd.Parameters.AddWithValue("sys", data[4]);
+                            cmd.Parameters.AddWithValue("loc", data[6]);
+                            if (con.State != ConnectionState.Open)
+                            {
+                                con.Open();
+                            }
+                            cmd.ExecuteNonQuery();
+                        }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+                        catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+                        {
+
+                        }
+                        finally
+                        {
+                            con.Close();
+                        }
+                    }
+                }
+            }
+            
+        }
         #endregion
 
         #region save count of devices
@@ -720,7 +803,9 @@ namespace WebCresij
                         }
                         cmd.ExecuteNonQuery();
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch(Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }

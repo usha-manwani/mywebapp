@@ -184,7 +184,9 @@ namespace WebCresij.UserActivities
                     {
                         count = Convert.ToInt32(cmd.ExecuteScalar());   
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }
@@ -215,7 +217,9 @@ namespace WebCresij.UserActivities
                     {
                         count = Convert.ToInt32(cmd.ExecuteScalar());
                     }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     {
 
                     }

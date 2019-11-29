@@ -192,6 +192,11 @@ namespace WebCresij.Hubsfile
                 }  
             }                     
         }
+
+        public void CountOfMachines(string counts)
+        {
+            Clients.All.machineCounts(counts);
+        }
     }
     public class HexEncoding
     {

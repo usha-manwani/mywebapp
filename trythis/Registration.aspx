@@ -13,12 +13,22 @@
         }        
     </script>
 
-   
+   <style>
+        @media screen and (max-width: 280px) and (max-height:450px)
+        {
+            .paddingtop{
+                padding-top:30%;
+            }
+            label{
+                color:white;
+            }
+        }
+   </style>
     <%--<p class="text-danger">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>--%>
 
-    <div class="form-horizontal positionCenter"  >
+    <div class="form-horizontal paddingtop" style="margin:0 auto; max-width:500px" >
          <h2 style="text-align:center"><span><%=Resources.Resource.Register%></span></h2>
         <h4 style="text-align:center"><span><%=Resources.Resource.NewAccount%></span></h4>
         <hr style="background-color:white; height:1.5px;"/>

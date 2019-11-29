@@ -74,7 +74,7 @@ $(function () {
                     var img = document.getElementById("systempower");
                     img.src = "Images/中控首页按钮/on/systemon.png"; 
 
-                    if (arraydata[5] == '已开机') {
+                    if (arraydata[5] == '已开机') {//on
                         var imgpc = document.getElementById("pcpower");
                         imgpc.src = "Images/中控首页按钮/on/pcon.png";
                     }
@@ -208,6 +208,15 @@ $(function () {
                             $('#screenstop1').closest("td").find("img").attr('src',"Images/中控首页按钮/on/screenstop.png");
                             $('#screenup1').closest("td").find("img").attr('src', "Images/中控首页按钮/首页按钮-默认状态/控制页面_132.png");
                             break;
+                        case 'projopen':
+                            $('#projectorOn').closest("td").find("img").attr('src', "../Images/中控首页按钮/on/projgreen.png");
+                            $('#projred').closest("td").find("img").attr('src', "../Images/AllImages/images/图标_186.png");                            
+                            break;
+                        case 'projoff':
+                            $('#projectorOn').closest("td").find("img").attr('src', "../Images/AllImages/images/图标_184.png");
+                            $('#projred').closest("td").find("img").attr('src', "../Images/中控首页按钮/on/projred.png");
+                            break;
+                        
                         case 'volplus':
                             if (document.getElementById("volValue").innerText >= 50) {
                                 var img = document.getElementById("volicons");
@@ -262,6 +271,7 @@ $(function () {
                                 img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦静音.png";
                             }
                             break;
+                        
                         default:
                             break
                     }
@@ -271,16 +281,16 @@ $(function () {
                     if (arraydata[2] == "SystemSwitchOn") {
                         var img = document.getElementById("systempower");
                         img.src = "Images/中控首页按钮/on/systemon.png";
-                        if (arraydata[4] == "Computer") {
-                            var imgpc = document.getElementById("pcpower");
-                            var sourceof = imgpc.getAttribute('src');
-                            if (sourceof == "Images/AllImages/images/图标_212.png") {
-                                imgpc.src = "Images/中控首页按钮/on/pcon.png";
-                            }
-                            else {
-                                imgpc.src = "Images/AllImages/images/图标_212.png";
-                            }
-                        }
+                        //if (arraydata[4] == "Computer") {
+                        //    var imgpc = document.getElementById("pcpower");
+                        //    var sourceof = imgpc.getAttribute('src');
+                        //    if (sourceof == "Images/AllImages/images/图标_212.png") {
+                        //        imgpc.src = "Images/中控首页按钮/on/pcon.png";
+                        //    }
+                        //    else {
+                        //        imgpc.src = "Images/AllImages/images/图标_212.png";
+                        //    }
+                        //}
                         
                         uncheck();
                         switch (arraydata[3]) {
@@ -362,6 +372,14 @@ $(function () {
                         var img = document.getElementById("systempower");
                         img.src = "Images/AllImages/images/图标_210.png";
                     }
+                }
+                else if (arraydata[1] == "PanelKey") {
+                    if (arraydata[2] == "PCON")
+                        $('#pcpower').closest("td").find("img").attr('src', "../Images/中控首页按钮/on/pcon.png");
+
+                    else if (arraydata[2] == "PCOFF")
+                        $('#pcpower').closest("td").find("img").attr('src', "../Images/AllImages/images/图标_212.png");
+
                 }
             }
         };

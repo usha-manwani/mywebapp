@@ -65,9 +65,9 @@ namespace WebCresij
             string select = Resources.Resource.Select;
             ddlClass.Items.Insert(0, new ListItem(select, "NA"));
             FillGradeDDL();
-           
-            
-           // string insID = ddlInstitute.SelectedValue;
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey1", "CreateAllChart('"+ddlInstitute.SelectedValue+"');", true);
+
+            // string insID = ddlInstitute.SelectedValue;
             //if (insID == "All")
             //{
             //    ddlTime.Enabled = false;
@@ -76,7 +76,7 @@ namespace WebCresij
             //{
             //    ddlTime.Enabled = true;
             //}
-            
+
         }
 
         protected void ddlGrade_SelectedIndexChanged(object sender, EventArgs e)
@@ -85,6 +85,8 @@ namespace WebCresij
             ddlTime.SelectedItem.Selected = false;
             ddlTime.Items.FindByValue("0").Selected = true;
             ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartclear3", "clearCharts();", true);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey3",
+                   "CreateAllChart('" + ddlGrade.SelectedValue+ "');", true);
             ddlClass.Items.Clear();
             // ddlClass.DataSource = null;
             //ddlClass.DataBind();
@@ -174,12 +176,12 @@ namespace WebCresij
             ddlTime.Items.FindByValue("0").Selected = true;
             ddlGrade.Items.Insert(0, new ListItem("Select", "NA"));
             HttpContext.Current.Session["ipforgraph"] = "";
-            if (ddlClass.SelectedValue == "NA")
-            {
-                ipgraph.Value = "NA";
-                ScriptManager.RegisterStartupScript(this, typeof(Page),
-                    "MyChartKey2", "CreateAllChart('" + insID + "');", true);
-            }
+            //if (ddlClass.SelectedValue == "NA")
+            //{
+            //    ipgraph.Value = "NA";
+            //    ScriptManager.RegisterStartupScript(this, typeof(Page),
+            //        "MyChartKey2", "CreateAllChart('" + insID + "');", true);
+            //}
         }
 
         protected void FillClassDDL()
@@ -195,12 +197,12 @@ namespace WebCresij
             string select = Resources.Resource.Select;
             ddlClass.Items.Insert(0, new ListItem(select, "NA"));
             HttpContext.Current.Session["ipforgraph"] = "";
-            if (ddlClass.SelectedValue == "NA")
-            {
-                ipgraph.Value = "NA";
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey3",
-                    "CreateAllChart('" + gradeID + "');", true);
-            }
+            //if (ddlClass.SelectedValue == "NA")
+            //{
+            //    ipgraph.Value = "NA";
+            //    ScriptManager.RegisterStartupScript(this, typeof(Page), "MyChartKey3",
+            //        "CreateAllChart('" + gradeID + "');", true);
+            //}
         }
     }
 }

@@ -135,8 +135,10 @@
         position: absolute;
         width: 100%;
         z-index: 1001;
+        
+        transform: rotateY(0deg)!important;
     }
-
+    
 
     /* body container */
     #main-content {
