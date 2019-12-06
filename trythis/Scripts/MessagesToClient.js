@@ -109,26 +109,26 @@
 
                         }
                         if (arraydata[5] == "CentralLock") {
-                            if (alliprows[i].cells[13].innerHTML == '锁定')//Locked
-                                alliprows[i].cells[13].innerHTML = '解锁'; //Unlock
-                            else{
-                                alliprows[i].cells[13].innerHTML = '锁定'//Locked
-                            }
+                            alliprows[i].cells[13].innerHTML == '锁定'//Locked
+                        } 
+                        else{
+                            alliprows[i].cells[13].innerHTML = '解锁'; //Unlock
                         }
+                        
                         if (arraydata[5] == "PodiumLock") {
-                            if (alliprows[i].cells[14].innerHTML == '锁定')//Locked
-                                alliprows[i].cells[14].innerHTML = '解锁';//Unlock
-                            else{
-                                alliprows[i].cells[14].innerHTML = '锁定'//Locked
-                            }
+                            alliprows[i].cells[14].innerHTML == '锁定'//Locked
+                        }       
+                        else{
+                            alliprows[i].cells[14].innerHTML = '解锁';//Unlock
                         }
+                        
                         if (arraydata[5] == "ClassLock") {
-                            if (alliprows[i].cells[15].innerHTML == '锁定')//Locked
-                                alliprows[i].cells[15].innerHTML = '解锁';//Unlock
-                            else{
-                                alliprows[i].cells[15].innerHTML = '锁定'//Locked
-                            }
+                            alliprows[i].cells[15].innerHTML == '锁定'//Locked
+                        }       
+                        else{
+                            alliprows[i].cells[15].innerHTML = '解锁';//Unlock
                         }
+                        
                     }
                     else if (arraydata[2] == "SystemSwitchOff") {
                         alliprows[i].cells[4].innerHTML = "待机";//CLOSED
@@ -161,18 +161,7 @@
                         alliprows[i].cells[j].innerHTML = arraydata[j];
                     }
                 }
-                //else if (arraydata[1] == "PanelKey") {
-                //    switch (arraydata[2]) {
-                //        case 'ComputerSystemON':
-                //            alliprows[i].cells[5].innerHTML = 'On';
-                //            break;  
-                //        case 'ComputerSystemOFF':
-                //                alliprows[i].cells[5].innerHTML = 'Off';
-                //            break;
-                //        default:
-                //            break;
-                //    }
-                //}
+                
             }
         }
     };

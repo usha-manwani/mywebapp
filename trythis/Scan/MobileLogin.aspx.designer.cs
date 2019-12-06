@@ -94,21 +94,21 @@ namespace WebCresij.Scan {
         protected global::System.Web.UI.WebControls.Button Login;
         
         /// <summary>
-        /// registerLabel control.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label registerLabel;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// linkregister control.
+        /// LinkButton1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkregister;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
     }
 }

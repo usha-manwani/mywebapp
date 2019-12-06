@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -26,7 +27,7 @@ namespace WebCresij.Scan
                     string userid = HttpContext.Current.Session["MobileUserId"].ToString();
                     if (userid != null)
                     {
-
+                        GetLocation(ip);
                     }
                     else
                     {
@@ -56,7 +57,10 @@ namespace WebCresij.Scan
             {
                 MaintainanceData md = new MaintainanceData();
                 md.InsertFaultInfo(ip,via,priority,district,user,desc,phone, stat);
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "Submit", "alert('Submitted Successfully');", true);
+                UserActivities.UserLogs.Task1(HttpContext.Current.Session["MobileUserId"].ToString(),
+                    HttpContext.Current.Session["MobileUserName"].ToString(), 17);
+                string message = Resources.Resource.ResourceManager.GetString("SubmitSuccess");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "Submit", "alert('" + message + "');", true);
             }
             txtdistrict.Text = "";
             txtuser.Text = "";
@@ -66,13 +70,20 @@ namespace WebCresij.Scan
 
         protected void logout_Click(object sender, EventArgs e)
         {
-            HttpContext.Current.Session["MobileUserId"] = "";
-            Response.Redirect("../Scan/MobileLogin.aspx?ip=" + ip);
+            Response.Redirect("../Scan/Logout.aspx?ip=" + ip);
         }
 
         protected void gotoControl_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Scan/QrControlPage.aspx?ip=" + ip, true);
+        }
+
+        protected void GetLocation(string ip)
+        {
+            DataTable dt = PopulateTree.GetlocationIP(ip);
+            insName.Text = dt.Rows[0][2].ToString() + " >> ";
+            GradeName.Text = dt.Rows[0][1].ToString() + " >> ";
+            ClassName.Text = dt.Rows[0][0].ToString();
         }
     }
 }

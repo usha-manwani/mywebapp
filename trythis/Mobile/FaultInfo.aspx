@@ -3,6 +3,7 @@
     <style>
         .padding-top{
             padding-top:5%;
+            max-width:600px;
         }
     </style>
 </asp:Content>

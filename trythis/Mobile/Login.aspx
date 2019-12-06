@@ -59,6 +59,7 @@
              <a href="Registration.aspx"><%=Resources.Resource.RegisterLink %></a> 
                
                     </p>
+         
     </div>
          
          

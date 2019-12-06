@@ -1197,4 +1197,166 @@
   <data name="MultimediaDevice" xml:space="preserve">
     <value>Multimedia Device</value>
   </data>
+  <data name="ChangeCamDetails" xml:space="preserve">
+    <value>Edit Camera Details</value>
+  </data>
+  <data name="ChangeIPAddress" xml:space="preserve">
+    <value>Edit IP Address</value>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>Click Here</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="OneTimeRegistration" xml:space="preserve">
+    <value>For One Time Registration</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>Start Time</value>
+  </data>
+  <data name="StopTime" xml:space="preserve">
+    <value>Stop TIme</value>
+  </data>
+  <data name="InputDate" xml:space="preserve">
+    <value>Date cannot be empty</value>
+  </data>
+  <data name="InputTime" xml:space="preserve">
+    <value>Please insert time</value>
+  </data>
+  <data name="InsertConfirmPassword" xml:space="preserve">
+    <value>Confirm Password box cannot be empty</value>
+  </data>
+  <data name="InsertID" xml:space="preserve">
+    <value>UserId cannot be empty</value>
+  </data>
+  <data name="InsertName" xml:space="preserve">
+    <value>Name cannot be empty</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>Please insert Password</value>
+  </data>
+  <data name="InsertPhone" xml:space="preserve">
+    <value>Phone cannot be empty</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Enter only alphanumeric password and length must be between 8 to 15 characters</value>
+  </data>
+  <data name="PasswordNotMatch" xml:space="preserve">
+    <value>Password do not match</value>
+  </data>
+  <data name="WriteDescription" xml:space="preserve">
+    <value>Description box cannot be empty</value>
+  </data>
+  <data name="Descriptionbox" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="SingleRequestToApprove" xml:space="preserve">
+    <value>SingleTime User Request To Approve</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>Approve</value>
+  </data>
+  <data name="AudioFileLog" xml:space="preserve">
+    <value>Played audio/video file</value>
+  </data>
+  <data name="ClassToOnOff" xml:space="preserve">
+    <value>Select classes to on/off the Multiple devices</value>
+  </data>
+  <data name="ConfigPageLog" xml:space="preserve">
+    <value>Visited Configuration Settings Page</value>
+  </data>
+  <data name="ControlPageLog" xml:space="preserve">
+    <value>Visited Machine Control Page</value>
+  </data>
+  <data name="DelDocLog" xml:space="preserve">
+    <value>Deleted Document</value>
+  </data>
+  <data name="DownloadDocLog" xml:space="preserve">
+    <value>Downloaded Document</value>
+  </data>
+  <data name="EditedIcCardLog" xml:space="preserve">
+    <value>Edited IC Card Details</value>
+  </data>
+  <data name="FaultInfoLog" xml:space="preserve">
+    <value>Submitted new Fault Information through phone</value>
+  </data>
+  <data name="LoggedScanLog" xml:space="preserve">
+    <value>Logged in through Scanning the QR Code</value>
+  </data>
+  <data name="NewIcCardLog" xml:space="preserve">
+    <value>Registered new IC Card</value>
+  </data>
+  <data name="NologinTime" xml:space="preserve">
+    <value>Your cannot login now. Please try later!</value>
+  </data>
+  <data name="PendingAlert" xml:space="preserve">
+    <value>UserID is in pending state !! \nPlease try after some time!!</value>
+  </data>
+  <data name="PhoneUseridExists" xml:space="preserve">
+    <value>UserID or phone Number already in use. Please try using different UserId and Number</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="ScheduleLog" xml:space="preserve">
+    <value>Edited Schedule</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select All</value>
+  </data>
+  <data name="StatusPageLog" xml:space="preserve">
+    <value>Visited Status Page</value>
+  </data>
+  <data name="SubmitSuccess" xml:space="preserve">
+    <value>Submitted Successfully!</value>
+  </data>
+  <data name="SystemOff" xml:space="preserve">
+    <value>System Off</value>
+  </data>
+  <data name="SystemOn" xml:space="preserve">
+    <value>System On</value>
+  </data>
+  <data name="SystemUnlock" xml:space="preserve">
+    <value>System Unlock</value>
+  </data>
+  <data name="TempUserLoggedScanLog" xml:space="preserve">
+    <value>Temporary User Logged in through Scanning the QR Code</value>
+  </data>
+  <data name="UnselectAll" xml:space="preserve">
+    <value>Unselect All</value>
+  </data>
+  <data name="UpdatedInsLog" xml:space="preserve">
+    <value>Updated Institute, Grade or Class Details</value>
+  </data>
+  <data name="UploadDocLog" xml:space="preserve">
+    <value>Uploaded document</value>
+  </data>
+  <data name="UserActionLog" xml:space="preserve">
+    <value>Performed User related actions</value>
+  </data>
+  <data name="UseridExists" xml:space="preserve">
+    <value>This userId already Exists!! Please type a new userid.</value>
+  </data>
+  <data name="WaitingforAdmin" xml:space="preserve">
+    <value>Registration Successful. Waiting for Administrator Permission.</value>
+  </data>
+  <data name="WrongIDPassword" xml:space="preserve">
+    <value>Wrong ID or Password!! Please try again!</value>
+  </data>
+  <data name="TimerOff" xml:space="preserve">
+    <value>Timer Off</value>
+  </data>
+  <data name="TimerOn" xml:space="preserve">
+    <value>Timer On</value>
+  </data>
+  <data name="SystemOffline" xml:space="preserve">
+    <value>System Offline</value>
+  </data>
+  <data name="SystemOnline" xml:space="preserve">
+    <value>System Online</value>
+  </data>
+  <data name="CentralizedControl" xml:space="preserve">
+    <value>Centralized Control</value>
+  </data>
 </root>

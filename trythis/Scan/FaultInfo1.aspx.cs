@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,6 +18,10 @@ namespace WebCresij.Scan
             {
                 string url = "../Scan/MobileLogin.aspx";
                 Response.Redirect(url, true);
+            }
+            else
+            {
+                GetLocation(ip);
             }
             
         }
@@ -38,12 +43,20 @@ namespace WebCresij.Scan
             {
                 MaintainanceData md = new MaintainanceData();
                 md.InsertFaultInfo(ip, via, priority, district, user, desc, phone, stat);
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "Submit", "alert('Submitted Successfully');", true);
+                string message = Resources.Resource.ResourceManager.GetString("SubmitSuccess");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "Submit", "alert('"+message+"');", true);
             }
             txtdistrict.Text = "";
             txtuser.Text = "";
             txtdesc.Text = "";
             txtphone.Text = "";
+        }
+        protected void GetLocation(string ip)
+        {
+            DataTable dt = PopulateTree.GetlocationIP(ip);
+            insName.Text = dt.Rows[0][2].ToString() + " >> ";
+            GradeName.Text = dt.Rows[0][1].ToString() + " >> ";
+            ClassName.Text = dt.Rows[0][0].ToString();
         }
     }
 }

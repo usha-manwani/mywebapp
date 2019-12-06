@@ -3,208 +3,7 @@
     var chat = $.connection.myHub;
     chat.client.broadcastMessage = function (name, message) {        
          tbleupdate(name, message);
-        //if (name == ipAddress) {
-        //    var arraydata = message.split(',');
-        //    if (arraydata[1] == "Heartbeat") {
-        //        if (arraydata[3] == 'OPEN') {
-        //            var img = document.getElementById("systempower");
-        //            img.src = "Images/onimages/syspoweron.png";
-        //        }
-        //        else {
-        //            var img = document.getElementById("systempower");
-        //            img.src = "Images/offimages/sysof.png";
-        //        }
-        //        if (arraydata[5] == 'On') {
-        //            var imgpc = document.getElementById("pcpower");
-        //            imgpc.src = "Images/onimages/pcpoweron.png";
-        //        }
-        //        else {
-        //            var imgpc = document.getElementById("pcpower");
-        //            imgpc.src = "Images/offimages/pcof.png";
-        //        }
-        //        if (arraydata[12] == 'Locked') {
-        //            var src = document.getElementById('syslock');
-        //            src.src = "Images/onimages/syslock.png";
-        //        }
-        //        else {
-        //            var src = document.getElementById('syslock');
-        //            src.src = "Images/onimages/sysunlock.png";
-        //        }
-        //        if (arraydata[13] == 'Locked') {
-        //            var src = document.getElementById('podiumlock');
-        //            src.src = "Images/onimages/podiumlock.png";
-        //        }
-        //        else {
-        //            var src = document.getElementById('podiumlock');
-        //            src.src = "Images/onimages/podiumunlock.png";
-        //        }
-        //        if (arraydata[14] == 'Locked') {
-        //            var src = document.getElementById('classlock');
-        //            src.src = "Images/onimages/classlock.png";
-        //        }
-        //        else {
-        //            var src = document.getElementById('classlock');
-        //            src.src = "Images/onimages/classunlock.png";
-        //        }
-        //        uncheck();
-        //        switch (arraydata[11]) {
-        //            case 'Desktop':
-        //                var desk = document.getElementById('desktop');
-        //                document.getElementById('desktop').checked = true;
-        //                $(desk).closest("td").find("img").attr('src', "Images/onimages/desktop.png");                                                
-        //                break;
-        //            case 'Laptop':
-        //                document.getElementById('laptop').checked = true;
-        //                var laptop = document.getElementById('laptop');
-        //                $(laptop).closest("td").find("img").attr('src',"Images/onimages/laptopon.png");                       
-        //                break;
-        //            case 'Digital Curtain':
-        //                document.getElementById('platform').checked = true;
-        //                $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-        //                break;
-        //            case 'Digital Screen':
-        //                document.getElementById('digitalEquipment').checked = true;
-        //                $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-        //                break;
-        //            case 'DVD':
-        //                document.getElementById('dvd').checked = true;
-        //                $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
-        //                break;
-        //            case 'TV':
-        //                document.getElementById('tv').checked = true;
-        //                $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
-        //                break;
-        //            case 'Video Camera':
-        //                document.getElementById('camera').checked = true;
-        //                $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
-        //                break;
-        //            case 'Blu-Ray DVD':
-        //                document.getElementById('bluray').checked = true;
-        //                $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
-        //                break;
-        //            case 'Recording System':
-        //                document.getElementById('recorder').checked = true;
-        //                $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
-        //                break;
-        //        }
-        //        if (arraydata[6] == 'Closed') {
-        //            var src = document.getElementById("projectorOn");
-        //            src.src = "Images/offimages/proj1.png";
-        //        }
-        //        else {
-        //            var src = document.getElementById("projectorOn");
-        //            src.src = "Images/onimages/projectoron1.png";
-        //        }
-        //    }
-        //    else {
-        //        for (j = 2; j < arraydata.length; j++) {
-        //            if (arraydata[1] == "KeyValue") {
-        //                switch (arraydata[2]) {
-        //                    case 'SystemON':
-        //                        var img = document.getElementById("systempower");
-        //                        img.src = "Images/onimages/syspoweron.png";
-        //                        break;
-        //                    case 'SystemOff':
-        //                        var img = document.getElementById("systempower");
-        //                        img.src = "Images/offimages/sysof.png";
-        //                        break;
-        //                    case 'DSDown':
-        //                        $('#dsdown').closest("td").find("img").attr('src', "Images/onimages/down.png");
-        //                        $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
-        //                        $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
-        //                        break;
-        //                    case 'DSUp':
-        //                        $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
-        //                        $('#dsstop').closest("td").find("img").attr('src', "Images/offimages/stopscreen.PNG");
-        //                        $('#dsup').closest("td").find("img").attr('src', "Images/onimages/up.png");
-        //                        break;
-        //                    case 'DSStop':
-        //                        $('#dsdown').closest("td").find("img").attr('src', "Images/offimages/screendown.PNG");
-        //                        $('#dsstop').closest("td").find("img").attr('src', "Images/onimages/stop.png");
-        //                        $('#dsup').closest("td").find("img").attr('src', "Images/offimages/up.PNG");
-        //                        break;
-        //                    default:
-        //                        break;
-        //                }
-        //            }
-        //            else if (arraydata[1] == "LEDIndicator") {
-        //                if (arraydata[2] == "SystemSwitchOn") {
-        //                    var img = document.getElementById("systempower");
-        //                    img.src = "Images/onimages/syspoweron.png";
-        //                    if (arraydata.length > 4)
-        //                    {
-        //                        var imgpc = document.getElementById("pcpower");
-        //                        switch (arraydata[4])
-        //                        {
-        //                            case 'ComputerOff':
-        //                                imgpc.src = "Images/offimages/pcof.png";
-        //                                break;
-        //                            case 'ComputerOn':
-        //                                imgpc.src = "Images/onimages/pcpoweron.png";
-        //                                break;
-        //                        }
-        //                    }
-        //                    uncheck();
-        //                    switch (arraydata[3]) {
-        //                        case 'Desktop':
-        //                            document.getElementById('desktop').checked = true;
-        //                            $('#desktop').closest("td").find("img").attr('src', "Images/onimages/desktop.png");
-        //                            break;
-        //                        case 'Laptop':
-        //                            document.getElementById('laptop').checked = true;
-        //                            $('#laptop').closest("td").find("img").attr('src', "Images/onimages/laptopon.png");
-        //                            break;
-        //                        case 'DigitalCurtain':
-        //                            document.getElementById('platform').checked = true;
-        //                            $('#platform').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-        //                            break;
-        //                        case 'DigitalScreen':
-        //                            document.getElementById('digitalEquipment').checked = true;
-        //                            $('#digitalEquipment').closest("td").find("img").attr('src', "Images/onimages/projector.png");
-        //                            break;
-        //                        case 'DVD':
-        //                            document.getElementById('dvd').checked = true;
-        //                            $('#dvd').closest("td").find("img").attr('src', "Images/onimages/dvdon.png");
-        //                            break;
-        //                        case 'TV':
-        //                            document.getElementById('tv').checked = true;
-        //                            $('#tv').closest("td").find("img").attr('src', "Images/onimages/tv.png");
-        //                            break;
-        //                        case 'VideoCamera':
-        //                            document.getElementById('camera').checked = true;
-        //                            $('#camera').closest("td").find("img").attr('src', "Images/onimages/camera.png");
-        //                            break;
-        //                        case 'Blu-RayDVD':
-        //                            document.getElementById('bluray').checked = true;
-        //                            $('#bluray').closest("td").find("img").attr('src', "Images/onimages/bluraydvd.png");
-        //                            break;
-        //                        case 'RecordingSystem':
-        //                            document.getElementById('recorder').checked = true;
-        //                            $('#recorder').closest("td").find("img").attr('src', "Images/onimages/recorder.png");
-        //                            break;
-        //                        case 'TurnOffLights':
-        //                            tab.rows[i].cells[10].innerHTML = 'Off';
-        //                            break;
-        //                        case 'CentralLocking':
-        //                            tab.rows[i].cells[12].innerHTML = 'Locked';
-        //                            break;
-        //                        case 'PodiumLock':
-        //                            tab.rows[i].cells[13].innerHTML = 'Locked';
-        //                            break;
-        //                        case 'ClassLock':
-        //                            tab.rows[i].cells[14].innerHTML = 'Locked';
-        //                            break;
-        //                    }
-        //                }
-        //                else if (arraydata[2] == "SystemSwitchOff") {
-        //                    var img = document.getElementById("systempower");
-        //                    img.src = "Images/offimages/sysof.png";
-        //                }
-        //            }
-
-        //        }
-        //    }
-        //};
+        
     };
     var tryingToReconnect = false;
 
@@ -465,6 +264,26 @@
             var checkedids = document.getElementsByName('selectclass');
             for (i = 0; i < checkedids.length; i++) {
                 checkedids[i].checked = false;
+            }
+        });
+
+        $(document).on("click", "#btnlock", function () {
+            var checkedids = document.getElementsByName('selectclass');
+            for (i = 0; i < checkedids.length; i++) {
+                if (checkedids[i].checked) {
+                    var ipadd = checkedids[i].value;
+                    chat.server.sendControlKeys(ipadd, "8B B9 00 04 02 04 2c 36");
+                }
+            }
+        });
+
+        $(document).on("click", "#btnunlock", function () {
+            var checkedids = document.getElementsByName('selectclass');
+            for (i = 0; i < checkedids.length; i++) {
+                if (checkedids[i].checked) {
+                    var ipadd = checkedids[i].value;
+                    chat.server.sendControlKeys(ipadd, "8B B9 00 04 02 04 2d 37");
+                }
             }
         });
     });
@@ -917,11 +736,11 @@ $(window).on('resize', setWidth);
 function setWidth() {
     var width = $(window).width();
 
-    if (width < 1401 && width > 1199) {
+    if (width < 1401 && width > 1150) {
         var div = document.getElementsByClassName('fixwidth');
         if (div.length > 0) {
             for (i = 0; i < div.length; i++) {
-                div[i].className = "col-xl-2 col-lg-6 fixwidth";
+                div[i].className = "col-xl-2 col-lg-5 fixwidth";
             }
         }
     }

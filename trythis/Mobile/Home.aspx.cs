@@ -20,6 +20,7 @@ namespace WebCresij.Mobile
                     authuser.Visible = false;
                     int[] roleIds = roleids.ToCharArray().Select(x => (int)char.GetNumericValue(x)).ToArray();
                     DisplayRole(roleIds);
+                    GetFaultCount();
                 }
                 else
                 {
@@ -43,8 +44,37 @@ namespace WebCresij.Mobile
                 if(roleIds[i]==1 || roleIds[i] == 6)
                 {
                     authuser.Visible = true;
+                    int total= Userdetails.totalPendingUser();
+                    string num = total.ToString();
+                    if(total> 9)
+                    {
+                        num = "9+";
+                    }
+                    if (num.Contains("0") && num.Length == 1)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "nousercount", "RemoveBadge();", true);
+                    }
+                    else
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "usercount", "updateBadge('"+num+"');", true);
                 }
             }
+        }
+
+        private void GetFaultCount()
+        {
+            int total= MaintainanceData.GetFaultCount();
+            string num = total.ToString();
+            if (total > 9)
+            {
+                num = "9+";
+            }
+            if (num.Contains("0") && num.Length == 1)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "nofaultcount", "RemoveFaultBadge();", true);
+            }
+            else
+                // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "faultcount", "updateFaultBadge('" + num + "')", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "faultcount", "updateFaultBadge('" + num + "');", true);
         }
     }
 }

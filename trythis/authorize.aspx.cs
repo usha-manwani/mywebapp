@@ -15,10 +15,10 @@ namespace WebCresij
         {
             if (!IsPostBack)
             {
-
-                
                 gv2.DataSource = ud.getUserDetailsPending();
                 gv2.DataBind();
+                TempUserGrid.DataSource = ud.GetPendingTempUser();
+                TempUserGrid.DataBind();
             }
         }
         protected void Button2_Click(object sender, EventArgs e)
@@ -71,6 +71,30 @@ namespace WebCresij
             Session["usertoapprove"] = gv2.Rows[rowindex].Cells[0].Text;
            // userIdhid.Value = gv2.Rows[rowindex].Cells[0].Text;
             ScriptManager.RegisterStartupScript(this, typeof(Page), "MyKey", "displayoption()", true);
+        }
+
+        protected void userapprove_Click(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            //Get rowindex
+            int rowindex = gvr.RowIndex;
+            string userid = TempUserGrid.Rows[rowindex].Cells[0].Text;
+            ud.UpdateOneTimeUser(userid, "Approved");
+            TempUserGrid.DataSource = ud.GetPendingTempUser();
+            TempUserGrid.DataBind();
+        }
+
+        protected void UserReject_Click(object sender, EventArgs e)
+        {
+            LinkButton btn = (LinkButton)sender;
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            //Get rowindex
+            int rowindex = gvr.RowIndex;
+            string userid = TempUserGrid.Rows[rowindex].Cells[0].Text;
+            ud.RejectOneTimeUser(userid);
+            TempUserGrid.DataSource = ud.GetPendingTempUser();
+            TempUserGrid.DataBind();
         }
     }
 }

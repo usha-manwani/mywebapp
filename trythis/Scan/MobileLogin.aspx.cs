@@ -71,20 +71,52 @@ namespace WebCresij.Scan
                         if (k.ToString().Contains("1") || k.ToString().Contains("3"))
                         {
                             HttpContext.Current.Session["MobileUserId"] = u;
+                            HttpContext.Current.Session["MobileUserName"] = n;
+                            UserActivities.UserLogs.LoggedinUser(u);
+                            UserActivities.UserLogs.Task1(u, n, 1);
                             string url = "../Scan/QrControlPage.aspx?ip=" + ip + "&username=" + n;
                             Response.Redirect(url, true);
                         }
-                        else if (k == -9)
-                        {
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg1", "alert('UserID is in pending state !! \nPlease try after some time!!');", true);
-                        }
-                        else if (!k.ToString().Contains("3"))
-                        {
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg2", "alert('You are not authorised to login here');", true);
-                        }
                         else
                         {
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg", "alert('Wrong ID or Password!! Please try again!');", true);
+                            //if (k == -9)
+                            //{
+                            //    ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg1", "alert('UserID is in pending state !! \nPlease try after some time!!');", true);
+                            //}
+                            //else if (!k.ToString().Contains("3"))
+                            //{
+                            //    ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg2", "alert('You are not authorised to login here');", true);
+                            //}
+                            /*else*/
+                            if (k==0)
+                            {
+                                int hour = DateTime.Now.Hour;
+                                int min = DateTime.Now.Minute;
+                                var time = hour.ToString("D2") + ":" + min.ToString();
+                                Userdetails ud = new Userdetails();
+                                List<object> r = ud.LoginTempuser(UserName.Text.Trim(), Password.Text.Trim(), time, ip);
+                                if (Convert.ToInt32(r[0]) == 1)
+                                {
+                                    HttpContext.Current.Session["MobileUserId"] = UserName.Text.Trim();
+                                    HttpContext.Current.Session["MobileUserName"] = r[1].ToString();
+                                    UserActivities.UserLogs.Task1(UserName.Text.Trim(), r[1].ToString(), 1);
+                                    UserActivities.UserLogs.LoggedinUser(UserName.Text.Trim());
+                                    string url = "../Scan/SingleTimeControlPage.aspx?ip=" + ip+ "&username=" + UserName.Text.Trim();
+                                    Response.Redirect(url, true);
+                                }
+                                else if (Convert.ToInt32(r[0]) == -1)
+                                {
+                                    string message = Resources.Resource.ResourceManager.GetString("NologinTime");
+                                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alertnotime", 
+                                        "alert('"+message+"');", true);
+                                }
+                                else
+                                {
+                                    string message = Resources.Resource.ResourceManager.GetString("WrongIDPassword");
+                                    ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg", "alert('" + message + "');", true);
+                                }
+                                    
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -107,6 +139,11 @@ namespace WebCresij.Scan
         protected void linkregister_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Scan/Registration.aspx?ip=" + ip, true);
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Scan/OneTimeRegistration.aspx?ip=" + ip, true);
         }
     }
 }

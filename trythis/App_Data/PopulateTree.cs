@@ -1333,7 +1333,7 @@ namespace WebCresij
 
         #region Schedule
         public int setSchedule(string ID,string starttime, 
-            string stoptime, string timer,
+            string stoptime, string timeron, string timeroff,
             string mon,string tue,string wed,string thu,
             string fri, string sat,string sun)
         {
@@ -1341,16 +1341,15 @@ namespace WebCresij
             using(MySqlConnection con = new MySqlConnection(constr))
             {
                 try
-                {
-                    
+                {                    
                     using (MySqlCommand cmd = new MySqlCommand("sp_UpdateSchedule", con))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        
+                        cmd.CommandType = CommandType.StoredProcedure;                        
                         cmd.Parameters.AddWithValue("@loc", ID);
-                        cmd.Parameters.AddWithValue("@time", starttime);
+                        cmd.Parameters.AddWithValue("@starttime", starttime);
                         cmd.Parameters.AddWithValue("@stoptime", stoptime);
-                        cmd.Parameters.AddWithValue("@timer1", timer);
+                        cmd.Parameters.AddWithValue("@timer1", timeron);
+                        cmd.Parameters.AddWithValue("@timer2", timeroff);
                         cmd.Parameters.AddWithValue("@mon", mon);
                         cmd.Parameters.AddWithValue("@tue",tue);
                         cmd.Parameters.AddWithValue("@wed",wed);
@@ -1637,6 +1636,34 @@ namespace WebCresij
         }
 
         #endregion
+
+        #region MobilePages Data
+        public static DataTable GetlocationIP(string ip)
+        {
+            DataTable dt = new DataTable();
+            using(MySqlConnection con = new MySqlConnection(constr))
+            {
+                string query = "select cd.ClassName, gd.grade_name, ins.ins_name from institute_details "+
+                    " ins join grade_details gd on gd.insid = ins.id join class_details cd on gd.id = "+
+                    "cd.GradeID join centralcontrol cc on cc.location = cd.id where cc.ccip = '"+ip+"' ";
+                try
+                {
+                    using(MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        MySqlDataAdapter sqlDataAdapter = new MySqlDataAdapter(cmd);
+                        sqlDataAdapter.Fill(dt);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            return dt;
+        }
+        #endregion
     }
     public class CentralControl
     {
@@ -1788,6 +1815,42 @@ namespace WebCresij
         }
         #endregion
 
+        public DataTable GetStatusOnGrade(int id)
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT gd.Grade_Name as Grade, ip as CCIP,cd.ClassName as loc, " +
+                      "Status,workstatus as PowerStatus,Timer as TimerService,pcstatus as ComputerPower " +
+                     ",projectorstatus as ProjectorPower,  " +
+                   "Projhour as ProjectorUsedHour, Curtain as CurtainStatus, Screen as ScreenStatus, " +
+                      "light, MediaSignal, centrallock ,  " +
+                      "PodiumLock, ClassLock, temperature, humidity, " +
+                      "pm25, pm10 from `cresijdatabase`.temp_centralcontrol cc " +
+                     "join `cresijdatabase`.Class_Details cd on cc.loc = cd.id " +
+                      "join `cresijdatabase`.Grade_Details gd on gd.id = cd.GradeID " +
+                      "where cc.loc in (select id from `cresijdatabase`.Class_Details where " +
+                      "GradeID = "+id+") order by gd.id, cd.ClassName";
+            using(MySqlConnection con = new MySqlConnection(constr))
+            {
+                using(MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
+                    try
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        
+                        mySqlDataAdapter.Fill(dt);
+                    }
+                    catch(Exception ex) { }
+                    finally
+                    {
+                        mySqlDataAdapter.Dispose();
+                        con.Close();
+                    }
+                }
+            }
+            return dt;
+        }
         public DataTable Getlocation(string ip)
         {
             DataTable dt = new DataTable();

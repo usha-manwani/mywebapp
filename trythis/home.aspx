@@ -649,10 +649,10 @@
 
                         {
                             name: '在线',
-                            y: 90,
+                            y: 1,
                             selected: true
                         },
-                        ['离线', 15],
+                        ['离线', 0],
                     ],
                 }, {
                     type: 'pie',
@@ -661,10 +661,10 @@
                     slicedOffset: 10,
                     name: '系统状态',
                     data: [
-                        ['待机', 10],
+                        ['待机', 0],
                         {
                             name: '使用中',
-                            y: 50,
+                            y: 1,
                             selected: true
                         },
                     ],

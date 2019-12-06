@@ -36,7 +36,8 @@ namespace WebCresij
             
             if(r!=1 || v!=1)
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "successIns", "alert('Some error occured. Please try again')", true);
+                string message = Resources.Resource.ResourceManager.GetString("AlertError1");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "successIns", "alert('"+message+"')", true);
             }
         }
 

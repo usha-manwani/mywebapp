@@ -313,7 +313,7 @@
     <script src="Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
-    <script src="Scripts/HomePageJS.js?v=19"></script>
+    <script src="Scripts/HomePageJS.js?v=23"></script>
     <link href="HikVision/demo.css" rel="stylesheet" />
     <div class="row " style="padding-left: 50px; max-width: 100%; min-width: 70%; margin-top: -10px; height: 95%">
         <div class="col-lg-8 col-md-12 col-sm-12" id="pluginsrow">
@@ -422,7 +422,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
 
-                            <img src="Images/greyed/more.png" id="Moremedia"
+                            <img src="Images/AllImages/images/图标_194.png" id="Moremedia"
                                 class="imgclick imgsize" />
                         </div>
                     </div>

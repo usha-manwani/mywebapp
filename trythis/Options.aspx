@@ -21,7 +21,7 @@
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <div class="leftspace" oncontextmenu="return false;">
-                    <cc1:TabContainer runat="server" BorderStyle="None" CssClass="fancy fancy-green">
+                    <cc1:TabContainer runat="server" BorderStyle="None" CssClass="fancy fancy-green" ID="tabpanel">
                         <cc1:TabPanel ID="addpaneltab" runat="server" BorderStyle="None">
                             <HeaderTemplate>
                                 <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;<span><%=Resources.Resource.Add%></span>
@@ -404,6 +404,37 @@
                                 <div class="col">
                                     <asp:Button ID="cancelRename" runat="server" Text="<%$Resources:Resource, Cancel %>"
                                         OnClientClick="hideRename(); return false;" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                     <div id="DivEditMachineIP" class="modal">
+                        <asp:TextBox runat="server" ID="hiddenEditip" Visible="false"></asp:TextBox>
+                        <div class="modal-content" style="width: 500px; height: 400px; text-align: center;">
+                            <div class=" row " style="padding-right: 20px;">
+                                <div class="panel-heading col ">
+                                    <h4><span><%=Resources.Resource.ChangeIPAddress%></span></h4>
+                                </div>
+                                <span onclick="hideEditIPModal();"
+                                    class="w3-button w3-display-topright">&times;</span>
+                            </div>
+                            <div class="row " style="padding-left: 20px; padding-top: 40px;">
+                                <asp:Label runat="server" Text="<%$Resources:Resource, IPAddress %>" AssociatedControlID="tbRename"></asp:Label>
+                                &nbsp;
+                   
+                                <asp:TextBox ID="edittbip" runat="server" CssClass="form-control"></asp:TextBox>
+                                <br />
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <asp:Button ID="Saveeditip" runat="server" Text="<%$Resources:Resource, Save %>" OnClick="Saveeditip_Click" />
+                                </div>
+                                <div class="col">
+                                    <asp:Button ID="Button6" runat="server" Text="<%$Resources:Resource, Cancel %>"
+                                        OnClientClick="hideEditIPModal(); return false;" />
                                 </div>
                             </div>
                         </div>

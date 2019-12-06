@@ -374,11 +374,16 @@ $(function () {
                     }
                 }
                 else if (arraydata[1] == "PanelKey") {
-                    if (arraydata[2] == "PCON")
-                        $('#pcpower').closest("td").find("img").attr('src', "../Images/中控首页按钮/on/pcon.png");
+                    if (arraydata[2] == "PCON") {
+                        var imgpc = document.getElementById("pcpower");
+                        imgpc.src = "Images/中控首页按钮/on/pcon.png";
+                    }
 
-                    else if (arraydata[2] == "PCOFF")
-                        $('#pcpower').closest("td").find("img").attr('src', "../Images/AllImages/images/图标_212.png");
+                    else if (arraydata[2] == "PCOFF") {
+                        var imgpc = document.getElementById("pcpower");
+                        imgpc.src = "Images/AllImages/images/图标_212.png";
+                    }
+                        
 
                 }
             }
@@ -983,65 +988,86 @@ $(function () {
         RemoteVol = function (val) {
             var lastVal = this.document.getElementById("volValue").innerText;
             if (lastVal > val && val > 0) {
-                var img = document.getElementById("volicons");
-                //if (val > 50) {
-                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
-                //}
-                //else {
+                var img = document.getElementById("volicons");                
                     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
-                //}
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2B");
+                    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2B");
+                if (parseInt(lastVal) > 10) {
+                    document.getElementById("vol").value = parseInt(lastVal) - 10;
+                    this.document.getElementById("volValue").innerText = parseInt(lastVal) - 10;
+                }
+                else {
+                    document.getElementById("vol").value = 0;
+                    this.document.getElementById("volValue").innerText = 0;
+                }
             }
             else if (val == 0) {
                 
                 var img = document.getElementById("volicons");
                 img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量静音.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 2C");
+                document.getElementById("vol").value = 0;
+                this.document.getElementById("volValue").innerText = 0;
             }
             else if (lastVal < val) {
                 var img = document.getElementById("volicons");
-                //if (val > 50) {
-                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
-                //}
-                //else {
+                
                     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
-               // }
+               
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2A");
+                if (parseInt(lastVal) < 90) {
+                    document.getElementById("vol").value = parseInt(lastVal) + 10;
+                    this.document.getElementById("volValue").innerText = parseInt(lastVal) + 10;
+                }
+                else {
+                    document.getElementById("vol").value = 99;
+                    this.document.getElementById("volValue").innerText = 99;
+
+                }
             }
-            this.document.getElementById("volValue").innerText = val;
             
-            console.log('After: ' + val);
         };
         WirelessRemoteMic = function (val) {
             var lastVal = this.document.getElementById("wirelessValue").innerText;
             if (lastVal > val && val > 0) {
                 var img = document.getElementById("wirelessicons");
-                //if (val < 50) {
-                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
-                //}
-                //else {
+                
                     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
-                //}
+                
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");
+                if (parseInt(lastVal) > 10) {
+                    document.getElementById("wirelessvol").value = parseInt(lastVal) - 10;
+                    this.document.getElementById("wirelessValue").innerText = parseInt(lastVal) - 10;
+                }
+                else {
+                    document.getElementById("wirelessvol").value = 0;
+                    this.document.getElementById("wirelessValue").innerText = 0;
+                }
             }
             else if (val == 0) {
                 
                 var img = document.getElementById("wirelessicons");
                 img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦静音.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
+                document.getElementById("wirelessvol").value = 0;
+                this.document.getElementById("wirelessValue").innerText = 0;
             }
             else if (lastVal < val) {
                 var img = document.getElementById("wirelessicons");
-                //if (val < 50) {
-                //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
-                //}
-                //else {
+               
                     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
-                //}
+                
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 73 7d");
+                if (parseInt(lastVal) < 90) {
+                    document.getElementById("wirelessvol").value = parseInt(lastVal) + 10;
+                    this.document.getElementById("wirelessValue").innerText = parseInt(lastVal) + 10;
+                }
+                else {
+                    document.getElementById("wirelessvol").value = 99;
+                    this.document.getElementById("wirelessValue").innerText = 99;
+
+                }
             }
-            this.document.getElementById("wirelessValue").innerText = val;
-            console.log('After: ' + val);
+           
         };
         WiredRemoteMic = function (val) {
             var lastVal = this.document.getElementById("wiredValue").innerText;
@@ -1055,11 +1081,22 @@ $(function () {
                 //}
                 
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 24 2e");
+                if (parseInt(lastVal) > 10) {
+                    document.getElementById("wiredvol").value = parseInt(lastVal) - 10;
+                    this.document.getElementById("wiredValue").innerText = parseInt(lastVal) - 10;
+                }
+                else {
+                    document.getElementById("wiredvol").value = 0;
+                    this.document.getElementById("wiredValue").innerText = 0;
+                    
+                }
             }
             else if (val == 0) {
                 var img = document.getElementById("wiredicons");
                 img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦静音.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 25 2f");
+                document.getElementById("wiredvol").value = 0;
+                this.document.getElementById("wiredValue").innerText = 0;
             }
             else if (lastVal < val) {
 
@@ -1071,9 +1108,17 @@ $(function () {
                     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
                 //}
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 23 2d");
+                if (parseInt(lastVal) < 90) {
+                    document.getElementById("wiredvol").value = parseInt(lastVal) + 10;
+                    this.document.getElementById("wiredValue").innerText = parseInt(lastVal) + 10;
+                }
+                else {
+                    document.getElementById("wiredvol").value = 99;
+                    this.document.getElementById("wiredValue").innerText = 99;
+
+                }
             }
-            this.document.getElementById("wiredValue").innerText = val;
-            console.log('After: ' + val);
+            
         };
     });
 

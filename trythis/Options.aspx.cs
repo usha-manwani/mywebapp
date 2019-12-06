@@ -16,9 +16,14 @@ namespace WebCresij
         PopulateTree fillTree = new PopulateTree();
         static DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
-        {            
+        {
+            string tabindex = Request.QueryString["tab"];
             if(!IsPostBack)
             {
+                if (!string.IsNullOrEmpty(tabindex))
+                {
+                    tabpanel.ActiveTabIndex = Convert.ToInt32(tabindex);
+                }
                 string query = "select * from institute_details";
                 DataTable dt = PopulateTree.ExecuteCommand(query);
                 ddlInstitute.DataSource = dt;
@@ -26,13 +31,13 @@ namespace WebCresij
                 ddlInstitute.DataValueField = "Ins_ID";
                 ddlInstitute.DataBind();
                 fillTree.function(TreeMenuView1, e);
-                fillTree.Editfunction(TreeViewEdit, e);
-                
+                fillTree.Editfunction(TreeViewEdit, e);                
                 fillTree.function(TreeViewDelete, e);
                 
             }
             else
             {
+                
                 UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
                 HttpContext.Current.Session["UserName"].ToString(), 3);
             }
@@ -299,8 +304,9 @@ namespace WebCresij
                     {
                         
                             txtRename.Text = TreeViewEdit.SelectedNode.Text;
-                            tbRename.Text = TreeViewEdit.SelectedNode.Text;
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowRename", "Rename();", true);
+                            edittbip.Text = TreeViewEdit.SelectedNode.Text;
+                            edittbip.Text = TreeViewEdit.SelectedNode.Text;
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowRename2", "ShowEditIPModal();", true);
                         
                         
                     }
@@ -322,7 +328,7 @@ namespace WebCresij
                 {
                     txtRename.Text = TreeViewEdit.SelectedNode.ToolTip;
                     tbRename.Text = TreeViewEdit.SelectedNode.Text;
-                    ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowRename", "Rename();", true);
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "ShowRename3", "Rename();", true);
                 }
                 TreeViewEdit.SelectedNode.Selected = false;
             }
@@ -388,6 +394,25 @@ namespace WebCresij
             }
             
         }
+        protected void Saveeditip_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                fillTree.UpdateCentralControl(edittbip.Text, tbSelectedClass.Text);
+            }
+            catch
+            {
+                string message = Resources.Resource.ResourceManager.GetString("AlertError");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "editiperror2", "alert('" + message + "');", true);
+            }
+            finally
+            {
+                bindTree();
+                EmptyTextBox();
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "Hideeditip", "hideEditIPModal();", true);
+            }
+
+        }
         #endregion
 
         #region delete
@@ -395,7 +420,7 @@ namespace WebCresij
         protected void TreeViewDelete_SelectedNodeChanged(object sender, EventArgs e)
         {
             try
-            {               
+            {
                 delvalue.Text = TreeViewDelete.SelectedValue;
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "ConfirmDel", "ConfirmDel();", true);
             }
@@ -488,8 +513,10 @@ namespace WebCresij
             portEdit.Text = "";
             idEditcam.Text = "";
             passEditcam.Text = "";
-            
+            edittbip.Text = "";
         }
+
+        
 
         //protected void TreeViewEdit_TreeNodeExpanded(object sender, TreeNodeEventArgs e)
         //{

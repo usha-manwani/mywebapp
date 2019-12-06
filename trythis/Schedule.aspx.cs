@@ -60,7 +60,7 @@ namespace WebCresij
             ddlGrade.Items.Insert(0, new ListItem(select, "NA"));
             query = "SELECT StartTime as starttime, StopTime as stoptime,Monday "+
                "as Monday, Tuesday as Tuesday,Wednesday as Wednesday ,Thursday as Thursday ,"+
-              "Friday as Friday ,Saturday as Saturday,Sunday as Sunday, timer FROM Schedule "+
+              "Friday as Friday ,Saturday as Saturday,Sunday as Sunday, TimerOn, TimerOff FROM Schedule "+
                "where location = '"+insID+"' order by StartTime asc";
 
             //dt = PopulateTree.ExecuteCommand(query);
@@ -195,7 +195,7 @@ namespace WebCresij
             {
                 query = "SELECT StartTime as starttime, StopTime as stoptime," +
                 " Monday, Tuesday,Wednesday , Thursday ," +
-                "Friday ,Saturday, Sunday, timer FROM Schedule "
+                "Friday ,Saturday, Sunday, TimerOn, TimerOff FROM Schedule "
                 + " where Location = '" + ID + "' COLLATE utf8mb4_unicode_ci order by StartTime asc";
                                 
             }
@@ -379,8 +379,7 @@ namespace WebCresij
                     else if (ddlInstitute.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlInstitute.SelectedValue))
                     {
                         BindGriddata(ddlInstitute.SelectedValue);
-                    }
-                    
+                    }                    
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "time1", "timevalue();", true);
                 }
             }
@@ -484,11 +483,16 @@ namespace WebCresij
                 HttpContext.Current.Session["UserName"].ToString(), 11);
                 try
                 {
-                    string timer = "";
-                    if (chkTimer.Checked == true)
-                        timer = "已启动";//true
+                    string TimerOn = "";
+                    if (chkTimerOn.Checked == true)
+                        TimerOn = "已启动";//true
                     else
-                        timer = "未启动";//false假
+                        TimerOn = "未启动";//false假
+                    string TimerOff = "";
+                    if (chkTimerOff.Checked == true)
+                        TimerOff = "已启动";//true
+                    else
+                        TimerOff = "未启动";//false假
                     foreach (GridViewRow r in excelgrd.Rows)
                     {
                         string time = (r.FindControl("txtTime") as TextBox).Text;
@@ -545,7 +549,7 @@ namespace WebCresij
                         {
                             sun = "";
                         }
-                        int success = populateTree.setSchedule(ID, starttime, stoptime, timer, mon, tue, wed, thu, fri, sat, sun);
+                        int success = populateTree.setSchedule(ID, starttime, stoptime, TimerOn,TimerOff, mon, tue, wed, thu, fri, sat, sun);
                         //if (success >= 0 && (btn.Text == "Save" || btn.Text == "保存"))
                         //{
                         //    string text = Resources.Resource.AlertTime3;
@@ -557,7 +561,14 @@ namespace WebCresij
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "Fail", "AlertFail('" + text + "');", true);
                         }
                     }
-                    populateTree.UpdateMachineTimer(timer, ID);
+                    if(chkTimerOn.Checked || chkTimerOff.Checked)
+                    {
+                        populateTree.UpdateMachineTimer("已启动", ID);
+                    }
+                    else
+                    {
+                        populateTree.UpdateMachineTimer("未启动", ID);
+                    }
                 }
 #pragma warning disable CS0168 // The variable 'ex' is declared but never used
                 catch (Exception ex)
@@ -594,8 +605,7 @@ namespace WebCresij
         protected void export_Click(object sender, EventArgs e)
         {
             svbtn_Click(sender, e);
-            excelgrd.AllowPaging = false;
-            
+            excelgrd.AllowPaging = false;            
             DataTable dt1 = (DataTable)ViewState["CurrentTable"];
             try
             {
@@ -609,10 +619,8 @@ namespace WebCresij
             }
             dt1.TableName = "Schedule";
             using (XLWorkbook wb = new XLWorkbook())
-            {
-                
+            {                
                 wb.Worksheets.Add(dt1);
-
                 Response.Clear();
                 Response.Buffer = true;
                 Response.Charset = "";
@@ -681,10 +689,6 @@ namespace WebCresij
                     //Read the first Sheet from Excel file.
                     IXLWorksheet workSheet = workBook.Worksheet(1);
 
-                    //Create a new DataTable.
-                    
-
-                    //Loop through the Worksheet rows.
                     bool firstRow = true;
                     foreach (IXLRow row in workSheet.Rows())
                     {
@@ -708,21 +712,10 @@ namespace WebCresij
                                 i++;
                             }
                         }
-
-                        
                     }
                 }
                 excelgrd.DataSource = dt;
                 excelgrd.DataBind();
-                //    DataTable dt = GetDataTableFromExcel(Server.MapPath("~/Uploads/") + fileName, true);
-                //    excelgrd.DataSource = dt;
-                //    excelgrd.DataBind();
-                //    if (excelgrd.Rows.Count == 0)
-                //    {
-                //        string text = Resources.Resource.AlertTime5;
-                //        ScriptManager.RegisterStartupScript(this, typeof(Page), "importempty", "importEmptyFile('" + text + "');", true);
-                //    }
-
             }
 #pragma warning disable CS0168 // The variable 'ex' is declared but never used
             catch (Exception ex)
@@ -749,89 +742,87 @@ namespace WebCresij
                 if (!string.IsNullOrEmpty(fileName))
                     File.Delete(Server.MapPath("~/Uploads/") + fileName);
             }
-        
         }
         public static DataTable GetDataTableFromExcel(string path, bool hasHeader = true)
         {
-                using (var pck = new ExcelPackage())
+            using (var pck = new ExcelPackage())
+            {
+                using (var stream = File.OpenRead(path))
                 {
-                    using (var stream = File.OpenRead(path))
-                    {
-                        pck.Load(stream);
-                    }
-                    var ws = pck.Workbook.Worksheets.First();
-                    DataTable tbl = new DataTable();
-                    foreach (var firstRowCell in ws.Cells[1, 1, 1, ws.Dimension.End.Column])
-                    {
-                        tbl.Columns.Add(hasHeader ? firstRowCell.Text : string.Format("Column {0}", firstRowCell.Start.Column));
-                    }
-                    var startRow = hasHeader ? 2 : 1;
-
-
-                    for (int rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
-                    {
-                        var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
-                        DataRow row = tbl.Rows.Add();
-                        foreach (var cell in wsRow)
-                        {
-                            row[cell.Start.Column - 1] = cell.Text;
-                        }
-                    }
-
-
-                    return tbl;
+                    pck.Load(stream);
                 }
+                var ws = pck.Workbook.Worksheets.First();
+                DataTable tbl = new DataTable();
+                foreach (var firstRowCell in ws.Cells[1, 1, 1, ws.Dimension.End.Column])
+                {
+                    tbl.Columns.Add(hasHeader ? firstRowCell.Text : string.Format("Column {0}", firstRowCell.Start.Column));
+                }
+                var startRow = hasHeader ? 2 : 1;
+                for (int rowNum = startRow; rowNum <= ws.Dimension.End.Row; rowNum++)
+                {
+                    var wsRow = ws.Cells[rowNum, 1, rowNum, ws.Dimension.End.Column];
+                    DataRow row = tbl.Rows.Add();
+                    foreach (var cell in wsRow)
+                    {
+                        row[cell.Start.Column - 1] = cell.Text;
+                    }
+                }
+                return tbl;
+            }
         }
         protected void GetData(DataTable dt)
         {
-                if (dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
+            {
+                if (dt.Rows[0]["TimerOn"].ToString() == "已启动")//true
                 {
-                
-                if (dt.Rows[0]["timer"].ToString() == "已启动")//true
-                    {
-                        chkTimer.Checked = true;
-                    }
-                    else
-                    {
-                        chkTimer.Checked = false;
-                    }
-                    dt.Columns.Add("Time");
-                    dt.Columns["Time"].SetOrdinal(0);
-                
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        dt.Rows[i]["Time"] = dt.Rows[i]["starttime"] + "-" + dt.Rows[i]["stoptime"];
-                    }
-                    try
-                    {
-                        excelgrd.DataSource = dt;
-                        excelgrd.DataBind();
-                        ViewState["CurrentTable"] = dt;
-                    }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
-                    catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
-                    {
-                        Response.Redirect("Schedule.aspx");
-                    }
+                    chkTimerOn.Checked = true;
                 }
                 else
                 {
-                    try
-                    {
-                        bindgrd();
-                    }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
-                    catch (Exception ex)
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
-                    {
-                        Response.Redirect("Schedule.aspx");
-                    }
+                    chkTimerOn.Checked = false;
                 }
+                if (dt.Rows[0]["TimerOff"].ToString() == "已启动")//true
+                {
+                    chkTimerOff.Checked = true;
+                }
+                else
+                {
+                    chkTimerOff.Checked = false;
+                }
+                dt.Columns.Add("Time");
+                dt.Columns["Time"].SetOrdinal(0);
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dt.Rows[i]["Time"] = dt.Rows[i]["starttime"] + "-" + dt.Rows[i]["stoptime"];
+                }
+                try
+                {
+                    excelgrd.DataSource = dt;
+                    excelgrd.DataBind();
+                    ViewState["CurrentTable"] = dt;
+                }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+                catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+                {
+                    Response.Redirect("Schedule.aspx");
+                }
+            }
+            else
+            {
+                try
+                {
+                    bindgrd();
+                }
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+                catch (Exception ex)
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+                {
+                    Response.Redirect("Schedule.aspx");
+                }
+            }
         }
-
-        
-    }
-
-    
+    }    
 }

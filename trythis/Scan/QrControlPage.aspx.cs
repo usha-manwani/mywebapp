@@ -57,8 +57,8 @@ namespace WebCresij.Scan
 
         protected void logout_Click(object sender, EventArgs e)
         {
-            HttpContext.Current.Session["MobileUserId"] = "";
-            Response.Redirect("../Scan/MobileLogin.aspx?ip=" + ip);
+            
+            Response.Redirect("../Scan/Logout.aspx?ip=" + ip);
         }
 
         protected void gotoFault_Click(object sender, EventArgs e)

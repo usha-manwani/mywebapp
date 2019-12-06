@@ -361,6 +361,7 @@
     <Content Include="assets\js\init\peitychart-init.js" />
     <Content Include="assets\js\init\vector-init.js" />
     <Content Include="assets\js\init\weather-init.js" />
+    <Content Include="assets\js\jquery-ui.min.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\Schedule.js" />
     <Content Include="assets\js\vmap.sampledata.js" />
@@ -389,6 +390,9 @@
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\ie10-viewport-bug-workaround.css" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\normalize.min.css" />
     <Content Include="Content\options.css" />
     <Content Include="Content\regular.css" />
@@ -513,21 +517,30 @@
     <Content Include="Maintainance.aspx" />
     <Content Include="Mobile\AuthenticateUser.aspx" />
     <Content Include="Mobile\Control.aspx" />
+    <Content Include="Mobile\ControlGrade.aspx" />
     <Content Include="Mobile\FaultInfo.aspx" />
     <Content Include="Mobile\Home.aspx" />
     <Content Include="Mobile\Login.aspx" />
     <Content Include="Mobile\Logout.aspx" />
-    <Content Include="Mobile\OneTimeRegistration.aspx" />
+    <Content Include="Scan\mobileqr\booth.png" />
+    <Content Include="Scan\mobileqr\desktop.png" />
+    <Content Include="Scan\mobileqr\laptop.png" />
+    <Content Include="Scan\mobileqr\proector1.png" />
+    <Content Include="Scan\mobileqr\projector2.png" />
+    <Content Include="Scan\mobileqr\system.png" />
     <Content Include="Mobile\Registration.aspx" />
     <Content Include="Mobile\Status.aspx" />
     <Content Include="Scan\Error.aspx" />
     <Content Include="Scan\FaultInfo.aspx" />
     <Content Include="Scan\FaultInfo1.aspx" />
+    <Content Include="Scan\Logout.aspx" />
     <Content Include="Scan\MobileLogin.aspx" />
+    <Content Include="Scan\mobileqr\systemoff.png" />
     <Content Include="Scan\OneTimeRegistration.aspx" />
     <Content Include="Scan\QrControl.js" />
     <Content Include="Scan\QrControlPage.aspx" />
     <Content Include="Scan\Registration.aspx" />
+    <Content Include="Scan\SingleTimeControlPage.aspx" />
     <Content Include="ScriptsLInks\highcharts-3d.js" />
     <Content Include="ScriptsLInks\highcharts-more.js" />
     <Content Include="ScriptsLInks\highcharts.js" />
@@ -751,8 +764,11 @@
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
     <Content Include="Scripts\MaintainanceScript.js" />
     <Content Include="Scripts\MobileControl.js" />
+    <Content Include="Scripts\MobileControlGrade.js" />
+    <Content Include="Scripts\MobileHomePage.js" />
+    <Content Include="Scripts\OneTimeRegistration.js" />
     <Content Include="Scripts\Options.js" />
-    <Content Include="Scripts\sensor.js" />
+    <Content Include="Scripts\SingleTimeControl.js" />
     <Content Include="Scripts\tablesorter\jquery.tablesorter.min.js" />
     <Content Include="Scripts\Treeview.js" />
     <Content Include="Scripts\WebForms\WebFormsBundle.js" />
@@ -810,7 +826,6 @@
     <Content Include="src\X11\Chimera_X11.h" />
     <Content Include="src\basic_1.htm" />
     <Content Include="Services\ChartData.asmx" />
-    <Content Include="TestPAge.aspx" />
     <Content Include="UserControl\ResourcesControl.ascx" />
     <Content Include="VideoPlay\FAQ.aspx" />
     <Content Include="HomePage.aspx" />
@@ -1974,6 +1989,13 @@
     <Compile Include="Mobile\Control.aspx.designer.cs">
       <DependentUpon>Control.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Mobile\ControlGrade.aspx.cs">
+      <DependentUpon>ControlGrade.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mobile\ControlGrade.aspx.designer.cs">
+      <DependentUpon>ControlGrade.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Mobile\FaultInfo.aspx.cs">
       <DependentUpon>FaultInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2001,13 +2023,6 @@
     </Compile>
     <Compile Include="Mobile\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Mobile\OneTimeRegistration.aspx.cs">
-      <DependentUpon>OneTimeRegistration.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Mobile\OneTimeRegistration.aspx.designer.cs">
-      <DependentUpon>OneTimeRegistration.aspx</DependentUpon>
     </Compile>
     <Compile Include="Mobile\Registration.aspx.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
@@ -2051,6 +2066,13 @@
     <Compile Include="Scan\FaultInfo1.aspx.designer.cs">
       <DependentUpon>FaultInfo1.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Scan\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scan\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Scan\MobileLogin.aspx.cs">
       <DependentUpon>MobileLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2079,6 +2101,13 @@
     <Compile Include="Scan\Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Scan\SingleTimeControlPage.aspx.cs">
+      <DependentUpon>SingleTimeControlPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Scan\SingleTimeControlPage.aspx.designer.cs">
+      <DependentUpon>SingleTimeControlPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Services\ChartData.asmx.cs">
       <DependentUpon>ChartData.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -2097,13 +2126,6 @@
     </Compile>
     <Compile Include="Site1.Mobile.Master.designer.cs">
       <DependentUpon>Site1.Mobile.Master</DependentUpon>
-    </Compile>
-    <Compile Include="TestPAge.aspx.cs">
-      <DependentUpon>TestPAge.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestPAge.aspx.designer.cs">
-      <DependentUpon>TestPAge.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserActivities\UserLogs.cs" />
     <Compile Include="UserControl\ResourcesControl.ascx.cs">

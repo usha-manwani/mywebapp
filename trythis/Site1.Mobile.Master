@@ -44,8 +44,7 @@
 <body>
     <form id="form1" runat="server">
         <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePartialRendering="true"></asp:ScriptManager>
-        <div>
-            
+        <div>            
             <div class="container body-content width100" style="font-size: medium; color: white!important;">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>

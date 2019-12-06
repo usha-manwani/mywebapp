@@ -58,7 +58,7 @@
             </asp:Label>
             <asp:TextBox runat="server" ID="User_Name" CssClass="form-control col-lg-3" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="User_Name"
-                CssClass="text-danger" ErrorMessage="The user name field is required." />
+                CssClass="text-danger" ErrorMessage="<%$Resources:Resource,InsertName%>" />
         </div>
         <div class="form-group row rowMargin">
             <asp:Label runat="server" AssociatedControlID="UserID"
@@ -68,7 +68,7 @@
             <cc1:FilteredTextBoxExtender runat="server" ID="filterId"
                 FilterType="UppercaseLetters,LowercaseLetters,Numbers" TargetControlID="UserID" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="UserID"
-                CssClass="text-danger" ErrorMessage="The User ID field is required." />
+                CssClass="text-danger" ErrorMessage="<%$Resources:Resource,InsertID %>" />
         </div>
         <div class="form-group row rowMargin">
             <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-lg-2 control-label">
@@ -79,7 +79,7 @@
                 FilterType="UppercaseLetters,LowercaseLetters,Numbers, Custom"
                 TargetControlID="Password" ValidChars="@!_%$#" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="Password"
-                CssClass="text-danger" ErrorMessage="The password field is required." />
+                CssClass="text-danger" ErrorMessage="<%$Resources:Resource,InsertPassword %>" />
         </div>
         <div class="form-group row rowMargin">
             <asp:Label runat="server" AssociatedControlID="ConfirmPassword"
@@ -89,10 +89,10 @@
                 CssClass="form-control col-lg-3" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPassword"
                 CssClass="text-danger" Display="Dynamic" 
-                ErrorMessage="The confirm password field is required." />
+                ErrorMessage="<%$Resources:Resource,InsertConfirmPassword %>" />
             <asp:CompareValidator runat="server" ControlToCompare="Password" 
                 ControlToValidate="ConfirmPassword" CssClass="text-danger" Display="Dynamic"
-                ErrorMessage="The password and confirmation password do not match."/>
+                ErrorMessage="<%$Resources:Resource,PasswordNotMatch %>"/>
         </div>
         <div class="form-group row rowMargin">
             <asp:Label runat="server" AssociatedControlID="CheckBoxList1"
@@ -116,7 +116,7 @@
             <asp:TextBox runat="server" ID="PhoneNo" placeHolder="12312345678"
                 CssClass="form-control col-lg-3" ClientIDMode="Static" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="PhoneNo"
-                CssClass="text-danger" ErrorMessage="The Phone Number is required." />
+                CssClass="text-danger" ErrorMessage="<%$Resources:Resource,InsertPhone%>" />
             <asp:RegularExpressionValidator runat="server" ControlToValidate="PhoneNo"
                 ValidationExpression="[\d]{11}"
                 CssClass="text-danger" ErrorMessage="Please enter a valid Phone Number ">

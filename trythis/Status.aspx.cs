@@ -16,7 +16,10 @@ namespace WebCresij
         protected void Page_Load(object sender, EventArgs e)
         {                  
             if (!IsPostBack)
-            {
+            {                
+                Timer1.Interval = 90000;
+                Timer1.Enabled = true;
+                Timer1.Tick += Timer1_Tick;
                 if(HttpContext.Current.Session["UserId"] != null)
                 {
                     UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
@@ -30,13 +33,20 @@ namespace WebCresij
                     string select = Resources.Resource.Select;
                     //ddlins.Items.Insert(0, new ListItem(select, "NA"));
                     loadGrid(dt.Rows[0]["id"].ToString());
+                    FillGradeDDL();
                 }
                 else
                 {
                     Response.Redirect("Logout.aspx");
-                }                
+                }
+                GetMachineCount();
             }
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg2", "triggerclick();", true);
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            GetMachineCount();
         }
 
         private void loadGrid( string insID)
@@ -50,13 +60,7 @@ namespace WebCresij
                 GridView1.DataSource = ds;
                 GridView1.DataBind();
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg1", "triggerclick();", true);
-                //hubContext = GlobalHost.ConnectionManager.GetHubContext<Hubsfile.MyHub>();
-                //foreach (GridViewRow row in GridView1.Rows)
-                //{
-                //    string ip = row.Cells[1].Text;
-                //    string data = "8B B9 00 03 05 01 09";
-                //    hubContext.Clients.All.SendControl(ip, data);
-                //}
+                
             }
             catch
             {
@@ -71,177 +75,92 @@ namespace WebCresij
 
         protected void ddlins_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GridView1.PageIndex = 0;
+            GridView1.PageIndex = 0;            
             loadGrid(ddlins.SelectedValue);
+            ddlGrade.Items.Clear();
             
+            FillGradeDDL();
         }
 
         protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridView1.PageIndex = e.NewPageIndex;
+            if (ddlGrade.SelectedIndex>0)
+            {
+                LoadGridwithGrade(ddlGrade.SelectedValue);
+            }
+            else
             loadGrid(ddlins.SelectedValue);
         }
 
+        protected void ddlGrade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlGrade.SelectedIndex == 0)
+            {
+                loadGrid(ddlins.SelectedValue);
+            }
+            else
+            {
+                CentralControl cc = new CentralControl();
+                DataTable dt = cc.GetStatusOnGrade(Convert.ToInt32(ddlGrade.SelectedValue));
+                try
+                {
+                    GridView1.DataSource = dt;
+                    GridView1.DataBind();
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "triggerclick", "triggerclick();", true);
+                }
+                catch (Exception ex)
+                {
 
-        //protected void Timer1_Tick()
-        //{
-        //    DataTable ScoresTable = Application["ScoreTable"] as DataTable;
-        //    if(ScoresTable == null){
-        //        Hubsfile.UpdateDevice up = new Hubsfile.UpdateDevice();
-        //        ScoresTable = up.update();
-        //    }
-        //    rptData.DataSource = ScoresTable;
-        //    rptData.DataBind();
-        //    //DataTable dt1 = null;
-        //    //GridView1.DataSource = dt1;
-        //    //GridView1.DataBind();
-        //}
+                }
+            }   
+        }
 
-        //public DataTable updateData(DataTable dt)
-        //{
-        //    DataTable dt1 = new DataTable();
+        protected void FillGradeDDL()
+        {
+            string insID = ddlins.SelectedValue;
+            string query = "select ID, Grade_Name from Grade_Details where InsID = '" + insID + "'";
+            DataTable dt = PopulateTree.ExecuteCommand(query);
+            ddlGrade.DataSource = dt;
+            ddlGrade.DataTextField = "Grade_Name";
+            ddlGrade.DataValueField = "ID";
+            ddlGrade.DataBind();
+            string select = Resources.Resource.Select;
+            ddlGrade.Items.Insert(0, new ListItem(select, "NA"));
+        }
+        protected void LoadGridwithGrade(string g)
+        {
+            CentralControl cc = new CentralControl();
+            DataTable dt = cc.GetStatusOnGrade(Convert.ToInt32(g));
+            try
+            {
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "triggerclick1", "triggerclick();", true);
+            }
+            catch (Exception ex)
+            {
 
-        //    foreach (DataRow dr in dt.Rows)
-        //    {
-        //        DataRow row = dt1.NewRow();
-        //        row[0] = dr[0];
-        //        if (Convert.ToInt32( dr[20]) != -1)
-        //        { 
+            }
+        }
 
-        //            if (Convert.ToByte( dr[6])== Convert.ToByte(0xc4))
-        //            {
-        //                row[3] = "Online";
-        //            }
-        //        if (Convert.ToByte( dr[8] )== Convert.ToByte(0x00))
-        //        {
-        //            row[4] = "Closed";
-        //        }
-        //        else
-        //            row[4] = "Open";
-
-        //        if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
-        //        {
-        //            row[6] = "OFF";
-        //        }
-        //        else
-        //            row[6] = "ON";
-
-        //        if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
-        //        {
-        //            row[15] = "Locked";
-        //        }
-        //        else
-        //            row[15] = "Opened";
-
-
-        //        if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
-        //        {
-        //            row[14] = "Locked";
-        //        }
-        //        else
-        //            row[14] = "Opened";
-
-
-        //        switch (Convert.ToInt32(dr[6]))
-        //        {
-        //            case 1:
-        //               row[12] = "Desktop PC";
-        //                break;
-        //            case 2:
-        //                row[12] = "Laptop";
-        //                break;
-        //            case 3:
-        //                row[12] = "Digital Booth";
-        //                break;
-        //            case 4:
-        //                row[12] = "Digital Equipment";
-        //                break;
-        //            case 5:
-        //                row[12] = "DVD";
-        //                break;
-        //            case 6:
-        //                row[12] = "Blu-Ray DVD";
-        //                break;
-        //            case 7:
-        //                row[12] = "TV set";
-        //                break;
-        //            case 8:
-        //                row[12] = "VCR";
-        //                break;
-        //            case 9:
-        //                row[12] = "Recording System";
-        //                break;
-        //            default:
-        //                row[12] = "No system Detected";
-        //                break;
-        //        }
-
-        //        if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
-        //        {
-        //            row[13] = "Locked";
-        //        }
-        //        else
-        //            row[13] = "Open";
-
-        //        if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
-        //        {
-        //            row[7] = "Closed";
-        //        }
-        //        else
-        //            row[7] = "Open";
-
-        //        switch (Convert.ToInt32(dr[6]))
-        //        {
-        //            case 1:
-        //                row[10] = "Open";
-        //                break;
-        //            case 2:
-        //                row[10] = "Down";
-        //                break;
-        //            case 0:
-        //                row[10] = "Stop";
-        //                break;
-        //        }
-        //        switch (Convert.ToInt32(dr[6]))
-        //        {
-        //            case 1:
-        //                row[9] = "Open";
-        //                break;
-        //            case 2:
-        //                row[9] = "Down";
-        //                break;
-        //            case 0:
-        //                row[9] = "Stop";
-        //                break;
-        //        }
-        //        if (Convert.ToByte(dr[6]) == Convert.ToByte(0x00))
-        //        {
-        //            row[11] = "OFF";
-        //        }
-        //        else
-        //            row[11] = "On";
-
-        //    }
-
-
-        //            else
-        //            {
-
-        //            if (Convert.ToByte(dr[6]) == Convert.ToByte(0xc9))
-        //            {
-        //                row[3] = "Offline";
-        //            }
-        //        }
-        //    }
-
-
-
-
-
-        //    return dt;
-
-        //}
+        protected void GetMachineCount()
+        {
+            PopulateTree populateTree = new PopulateTree();
+            DataTable dt= populateTree.GetStatus();
+            if(dt.Rows.Count > 0){
+                labelonline.Text ="#"+ Resources.Resource.ResourceManager.GetString("SystemOnline") + " : " + dt.Select("MachineStatus='Online'").Count().ToString();
+                labeloffline.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOffline") + " : " + dt.Select("MachineStatus='Offline'").Count().ToString();
+                labelstatuson.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOn") + " : " + dt.Select("WorkStatus='OPEN'").Count().ToString();
+                labelstatusoff.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOff") + " : " + dt.Select("WorkStatus ='CLOSED'").Count().ToString();
+            }
+            else
+            {
+                labelonline.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOnline") + " : " + "0" ;
+                labeloffline.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOffline") + " : " +" 0";
+                labelstatuson.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOn") + " : " +" 0";
+                labelstatusoff.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOff") + " : " +" 0";
+            }
+        }
     }
-  
-
 }

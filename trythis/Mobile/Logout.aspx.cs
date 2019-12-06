@@ -22,7 +22,7 @@ namespace WebCresij.Mobile
             HttpContext.Current.Session["UserId"] = null;
             HttpContext.Current.Session.Clear();
             HttpContext.Current.Session.Abandon();
-            Response.Redirect("Login.aspx");
+            Response.Redirect("../Mobile/Login.aspx");
         }
     }
 }

@@ -197,6 +197,25 @@ namespace WebCresij.Hubsfile
         {
             Clients.All.machineCounts(counts);
         }
+
+        public void GetTempUsersToDelete(string userids)
+        {
+            string[] user = userids.Split(',');
+            RemoveOneTimeUser(user);
+        }
+
+        public void RemoveOneTimeUser(string[] userid)
+        {
+            Userdetails ud = new Userdetails();
+            foreach(string s in userid)
+            {
+               int r= ud.RejectOneTimeUser(s);
+                if (r == 1)
+                {
+                    Clients.All.logoutTempUsers(s);
+                }
+            }
+        }
     }
     public class HexEncoding
     {

@@ -255,49 +255,7 @@
         .MediaSignalTable {
             border: 1px solid #4ecdc4;
             width: 220px !important;
-        }
-        /*.tab {
-            float: left;
-            border: 1px solid #4ecdc4;
-            width: 30%;
-            height: 200px;
-        }
-
-            
-            .tab button {
-                display: block;
-                background-color: inherit;
-                color: white;
-                padding: 22px 16px;
-                width: 100%;
-                border: none;
-                outline: none;
-                text-align: left;
-                cursor: pointer;
-                transition: 0.3s;
-                font-size: 17px;
-            }
-
-                
-                .tab button:hover {
-                    background-color: #ddd;
-                }
-
-                
-                .tab button.active {
-                    background-color: #ccc;
-                }
-
-       
-        .tabcontent {
-            float: left;
-            padding: 0px 12px;
-            border: 1px solid #ccc;
-            width: 70%;
-            border-left: none;
-            height: 200px;
-            color: white;
-        }*/
+        }       
 
         .buttonEffect {
             cursor: pointer;
@@ -384,14 +342,11 @@
                                             <span>
                                                 <img src="Images/AllImages/images/图标_212.png" id="pcpower"
                                                     class="imgclick" style="width: 45%" /></span></td>
-
                                     </tr>
                                     <tr style="align-items: center; align-content: center;">
 
                                         <td colspan="2" style="text-align: center">
                                             <span>
-
-
                                                 <img src="Images/中控首页按钮/on/lock1open.png" id="sysLock"
                                                     class="imgclick imgsize" /></span>
                                         </td>

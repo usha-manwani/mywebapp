@@ -91,7 +91,7 @@
     <script src="Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>
-    <script src="Scripts/ControlKeys.js?v=19"></script>
+    <script src="Scripts/ControlKeys.js?v=20"></script>
     <h4 style="color:white;margin-top:-1rem">
         <asp:Label runat="server" ID="insName"></asp:Label>
         <asp:Label runat="server" ID="GradeName"></asp:Label>
@@ -99,18 +99,22 @@
         <hr style="background-color:black"/>
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <div class="row" style="margin-bottom:-1.5rem; margin-top:-1rem">
-        <span class="col-lg-3 col-md-6 col-sm-9" style="font-size:1rem; color:white">
-            Select classes to on/off the Multiple devices</span>
-                <div class="col-lg-1 col-md-1 col-sm-3">
-        <button class="btn btn-outline-light " value="ON/OFF" id="btnOn"> On</button></div>
-                <div class="col-lg-1 col-md-1 col-sm-3">
-        <button class="btn btn-outline-light " value="ON/OFF" id="btnOff"> Off</button></div>
-                <div class="col-lg-3"></div>
-                <div class="col-lg-1 col-md-1 col-sm-3" style="float:right">
-        <button class=" btn btn-link" value="ON/OFF" id="SelectAll"> Select All</button></div>
-                <div class="col-lg-2 col-md-1 col-sm-3" style="float:right">
-        <button class=" btn btn-link" value="ON/OFF" id="UnselectAll"> Unselect All</button></div>
+            <div class="row" style="margin-bottom:-1.5rem; margin-top:-1rem; text-align:center">
+        <span class="col-xl-2 col-lg-3 col-md-6 col-sm-10" style="font-size:1rem; color:white">
+            <%=Resources.Resource.ClassToOnOff %></span>
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
+        <button class="btn btn-outline-light " value="ON" id="btnOn"> <%=Resources.Resource.SystemOn %></button></div>
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
+        <button class="btn btn-outline-light " value="OFF" id="btnOff"> <%=Resources.Resource.SystemOff %></button></div>
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5" >
+        <button class="btn btn-outline-light " value="lock" id="btnlock"> <%=Resources.Resource.SystemLock %></button></div>
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
+        <button class="btn btn-outline-light " value="unlock" id="btnunlock"> <%=Resources.Resource.SystemUnlock%></button></div>
+                
+                <div class="col-xl-1 col-lg-2 col-md-3 col-sm-5" style="float:right">
+        <button class=" btn btn-link" value="select" id="SelectAll"> <%=Resources.Resource.SelectAll %></button></div>
+                <div class="col-xl-1 col-lg-2 col-md-3 col-sm-5" style="float:right">
+        <button class=" btn btn-link" value="unselect" id="UnselectAll"> <%=Resources.Resource.UnselectAll %></button></div>
         </div>
         </ContentTemplate>
     </asp:UpdatePanel>

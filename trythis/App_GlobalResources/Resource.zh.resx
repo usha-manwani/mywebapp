@@ -274,7 +274,7 @@
     <value>管理员（完全访问）</value>
   </data>
   <data name="AuthorizeUser" xml:space="preserve">
-    <value>通过选择任务授权用户</value>
+    <value>管理用户注册请求</value>
   </data>
   <data name="AuthUser" xml:space="preserve">
     <value>授权用户...</value>
@@ -559,7 +559,7 @@
     <value>星期日</value>
   </data>
   <data name="SystemLock" xml:space="preserve">
-    <value>系统锁</value>
+    <value>系统锁定</value>
   </data>
   <data name="Temperature" xml:space="preserve">
     <value>温度</value>
@@ -721,7 +721,7 @@
     <value>左</value>
   </data>
   <data name="NewName" xml:space="preserve">
-    <value>班级名称</value>
+    <value>名称</value>
   </data>
   <data name="none" xml:space="preserve">
     <value>无校验</value>
@@ -1196,5 +1196,167 @@
   </data>
   <data name="MultimediaDevice" xml:space="preserve">
     <value>设备信息</value>
+  </data>
+  <data name="ChangeCamDetails" xml:space="preserve">
+    <value>修改摄像机参数</value>
+  </data>
+  <data name="ChangeIPAddress" xml:space="preserve">
+    <value>修改IP地址</value>
+  </data>
+  <data name="ClickHere" xml:space="preserve">
+    <value>点击此处</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="OneTimeRegistration" xml:space="preserve">
+    <value>临时注册</value>
+  </data>
+  <data name="StartTime" xml:space="preserve">
+    <value>开始使用时间</value>
+  </data>
+  <data name="StopTime" xml:space="preserve">
+    <value>结束使用时间</value>
+  </data>
+  <data name="InputDate" xml:space="preserve">
+    <value>请输入日期</value>
+  </data>
+  <data name="InputTime" xml:space="preserve">
+    <value>请输入使用时间</value>
+  </data>
+  <data name="InsertConfirmPassword" xml:space="preserve">
+    <value>请输入确认密码</value>
+  </data>
+  <data name="InsertID" xml:space="preserve">
+    <value>请输入用户名</value>
+  </data>
+  <data name="InsertName" xml:space="preserve">
+    <value>请输入姓名</value>
+  </data>
+  <data name="InsertPassword" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="InsertPhone" xml:space="preserve">
+    <value>请输入电话号码</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>请输入8-15位长度的数字密码</value>
+  </data>
+  <data name="PasswordNotMatch" xml:space="preserve">
+    <value>密码不一致</value>
+  </data>
+  <data name="WriteDescription" xml:space="preserve">
+    <value>请输入申请用途</value>
+  </data>
+  <data name="Descriptionbox" xml:space="preserve">
+    <value>用途描述</value>
+  </data>
+  <data name="SingleRequestToApprove" xml:space="preserve">
+    <value>临时用户注册请求</value>
+  </data>
+  <data name="AudioFileLog" xml:space="preserve">
+    <value>播放音视频文件</value>
+  </data>
+  <data name="ClassToOnOff" xml:space="preserve">
+    <value>请选择控制班级</value>
+  </data>
+  <data name="ConfigPageLog" xml:space="preserve">
+    <value>查看系统配置页</value>
+  </data>
+  <data name="ControlPageLog" xml:space="preserve">
+    <value>查看设备控制页</value>
+  </data>
+  <data name="DelDocLog" xml:space="preserve">
+    <value>删除文件</value>
+  </data>
+  <data name="DownloadDocLog" xml:space="preserve">
+    <value>下载文件</value>
+  </data>
+  <data name="EditedIcCardLog" xml:space="preserve">
+    <value>IC卡详细设置</value>
+  </data>
+  <data name="FaultInfoLog" xml:space="preserve">
+    <value>手机提交故障信息</value>
+  </data>
+  <data name="LoggedScanLog" xml:space="preserve">
+    <value>扫码并登录</value>
+  </data>
+  <data name="NewIcCardLog" xml:space="preserve">
+    <value>新IC卡注册</value>
+  </data>
+  <data name="NologinTime" xml:space="preserve">
+    <value>当前时段此用户登录无权限，禁止登录。</value>
+  </data>
+  <data name="PendingAlert" xml:space="preserve">
+    <value>此用户尚未通过验证，请稍候重试。</value>
+  </data>
+  <data name="PhoneUseridExists" xml:space="preserve">
+    <value>此用户名或手机号已被使用，请重新输入。</value>
+  </data>
+  <data name="ScheduleLog" xml:space="preserve">
+    <value>编辑课程表</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="StatusPageLog" xml:space="preserve">
+    <value>查看状态页</value>
+  </data>
+  <data name="SubmitSuccess" xml:space="preserve">
+    <value>提交成功！</value>
+  </data>
+  <data name="SystemOff" xml:space="preserve">
+    <value>系统关</value>
+  </data>
+  <data name="SystemOn" xml:space="preserve">
+    <value>系统开</value>
+  </data>
+  <data name="SystemUnlock" xml:space="preserve">
+    <value>系统解锁</value>
+  </data>
+  <data name="TempUserLoggedScanLog" xml:space="preserve">
+    <value>临时用户扫码并登录</value>
+  </data>
+  <data name="UnselectAll" xml:space="preserve">
+    <value>取消全选</value>
+  </data>
+  <data name="UpdatedInsLog" xml:space="preserve">
+    <value>修改学校，年级或班级。</value>
+  </data>
+  <data name="UploadDocLog" xml:space="preserve">
+    <value>上传文件</value>
+  </data>
+  <data name="UserActionLog" xml:space="preserve">
+    <value>编辑用户权限</value>
+  </data>
+  <data name="UseridExists" xml:space="preserve">
+    <value>此用户已存在，请重新输入。</value>
+  </data>
+  <data name="WaitingforAdmin" xml:space="preserve">
+    <value>请等待系统管理员的验证</value>
+  </data>
+  <data name="WrongIDPassword" xml:space="preserve">
+    <value>用户名或密码错误，请重试</value>
+  </data>
+  <data name="Approve" xml:space="preserve">
+    <value>同意</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>拒绝</value>
+  </data>
+  <data name="TimerOff" xml:space="preserve">
+    <value>定时关</value>
+  </data>
+  <data name="TimerOn" xml:space="preserve">
+    <value>定时开</value>
+  </data>
+  <data name="SystemOffline" xml:space="preserve">
+    <value>总系统离线</value>
+  </data>
+  <data name="SystemOnline" xml:space="preserve">
+    <value>总系统在线</value>
+  </data>
+  <data name="CentralizedControl" xml:space="preserve">
+    <value>集中管控</value>
   </data>
 </root>

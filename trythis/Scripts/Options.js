@@ -150,6 +150,13 @@ function EditCam() {
 function hideEdit() {
     document.getElementById('edit').style.display = 'none';
 }
+
+function hideEditIPModal() {
+    document.getElementById('DivEditMachineIP').style.display = 'none';
+}
+function ShowEditIPModal() {
+    document.getElementById('DivEditMachineIP').style.display = 'Flex';
+}
 function hideRename() {
     document.getElementById('DivRename').style.display = 'none';
 }

@@ -94,10 +94,9 @@ ul {
     <asp:ContentPlaceHolder ID="childMasterhead" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div style="max-width:600px">
     <p style="text-align:right"><a href="Home.aspx" style="font-size:2em;"><i class="fa fa-home" style="color:white">
         </i><%=Resources.Resource.Home %></a></p>
-   
-    
- 
+        </div>
    <asp:ContentPlaceHolder ID="childmastercontent" runat="server"></asp:ContentPlaceHolder>
 </asp:Content>

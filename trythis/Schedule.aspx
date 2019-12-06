@@ -44,7 +44,7 @@
                     <h4 style="margin-bottom:-10px;margin-top:-10px;color:white"><span><%=Resources.Resource.Schedule%></span></h4>
                   
                     <div class="row" style="margin-bottom:-20px" >
-                        <div class="col-lg-7 col-md-12 col-sm-12">
+                        <div class="col-xl-5 col-lg-8 col-md-12 col-sm-12">
                             <div class="row" style="margin-bottom:-15px;" >
                         <div class="col-lg-3 col-md-3 col-sm-12">
                             <span style="color:white"><%=Resources.Resource.CreateSchedule%></span>
@@ -76,13 +76,17 @@
                          </div> 
                              </div>
                         </div>
-                        <div class="col-lg-5 col-md-6 col-sm-12" >
+                        <div class="col-xl-7 col-lg-8 col-md-12 col-sm-12" >
                             <div class="row" style="margin-bottom:-20px">
                                 <div class="col-lg-2 col-md-4 col-sm-4" >
-                                    <div style="text-align:center;margin-top:-6%"><asp:CheckBox ID="chkTimer" runat="server" Text="<%$Resources:Resource, Timer %>"
-                                         ForeColor="White"/></div>
+                                    <div style="text-align:center;margin-top:-6%"><asp:CheckBox ID="chkTimerOn"
+                                        runat="server" Text="<%$Resources:Resource, TimerOn %>" ForeColor="White"/></div>
                                 </div>
-                                <div class="col-lg-5 col-md-4 col-sm-4">
+                                <div class="col-lg-2 col-md-4 col-sm-4" >
+                                    <div style="text-align:center;margin-top:-6%"><asp:CheckBox ID="chkTimerOff" 
+                                        runat="server" Text="<%$Resources:Resource, TimerOff %>" ForeColor="White"/></div>
+                                </div>
+                                <div class="col-lg-3 col-md-4 col-sm-4">
                                     <label for="txtmin" >
                                         <span style="color:white"><%=Resources.Resource.EarlyBoot%></span></label>
                                      <select name="EarlyBoot" id="EarlyBootMins" class="btn btn-default border-light"
@@ -105,7 +109,7 @@
                                         <span style="color:white"><%=Resources.Resource.Mins%></span>
                                     </label>                                        
                                 </div>
-                                <div class="col-lg-5 col-md-4 col-sm-4">
+                                <div class="col-lg-3 col-md-4 col-sm-4">
                                     <label for="txtmin" >
                                         <span style="color:white"><%=Resources.Resource.DelayBoot%></span></label>
                                     <select name="DelayBoot" id="DelayBootMins" class="btn btn-default border-light"
@@ -148,7 +152,7 @@
                   <asp:AsyncPostBackTrigger ControlID="excelgrd" />
               </Triggers>
               <ContentTemplate>
-     <div style=" margin-top:-20px;">
+     <div style=" margin-top:-20px; min-width:700px">
        <asp:GridView ID="excelgrd" runat="server" Font-Size="Small" ViewStateMode="Enabled"
            EmptyDataRowStyle-BackColor="Black" ShowFooter="true" Width="100%"
            ShowHeaderWhenEmpty="true" RowStyle-HorizontalAlign="Center"

@@ -45,8 +45,7 @@ namespace WebCresij.UserActivities
         {
             
             if (tasknumber == 1)
-            {
-                
+            {                
                 return TaskList.Task1;
             }
             else if (tasknumber == 2)
@@ -98,11 +97,22 @@ namespace WebCresij.UserActivities
             {
                 return TaskList.Task13;
             }
-            else 
+            else if(tasknumber==14)
             {
                 return TaskList.Task14;
             }
-
+            else if (tasknumber == 15)
+            {
+                return TaskList.Task15;
+            }
+            else if(tasknumber == 16)
+            {
+                return TaskList.Task16;
+            }
+            else
+            {
+                return TaskList.Task17;
+            }
         }
         public static void LoggedinUser(string userID)
         {           
@@ -235,20 +245,23 @@ namespace WebCresij.UserActivities
     }
     public class TaskList
     {
-        public static string Task1 { get; } = "Login";
-        public static string Task2 { get; } = "Logout";
-        public static string Task3 { get; } = "Updated Institute, Grade or Class Details";
-        public static string Task4 { get; } = "Performed User related actions";
-        public static string Task5 { get; } = "Uploaded document";
-        public static string Task6 { get; } = "Downloaded Document";
-        public static string Task7 { get; } = "Deleted Document";
-        public static string Task8 { get; } = "Played audio video file";
-        public static string Task9 { get; } = "Registered new IC Card";
-        public static string Task10 { get; } = "Edited IC Card Details";
-        public static string Task11 { get; } = "Edited Schedule";
-        public static string Task12 { get; } = "Visited Status Page";
-        public static string Task13 { get; } = "Visited Configuration Settings Page";        
-        public static string Task14 { get; } = "Visited Machine Control Page";            
-
+        public static string Task1 { get; } = Resources.Resource.ResourceManager.GetString("Login");
+        public static string Task2 { get; } = Resources.Resource.ResourceManager.GetString("SignOut");
+        public static string Task3 { get; } = Resources.Resource.ResourceManager.GetString("UpdatedInsLog");
+        public static string Task4 { get; } = Resources.Resource.ResourceManager.GetString("UserActionLog");
+        public static string Task5 { get; } = Resources.Resource.ResourceManager.GetString("UploadDocLog");
+        public static string Task6 { get; } = Resources.Resource.ResourceManager.GetString("DownloadDocLog");
+        public static string Task7 { get; } = Resources.Resource.ResourceManager.GetString("DelDocLog");
+        public static string Task8 { get; } = Resources.Resource.ResourceManager.GetString("AudioFileLog");
+        public static string Task9 { get; } = Resources.Resource.ResourceManager.GetString("NewIcCardLog");
+        public static string Task10 { get; } = Resources.Resource.ResourceManager.GetString("EditedIcCardLog");
+        public static string Task11 { get; } = Resources.Resource.ResourceManager.GetString("ScheduleLog");
+        public static string Task12 { get; } = Resources.Resource.ResourceManager.GetString("StatusPageLog");
+        public static string Task13 { get; } = Resources.Resource.ResourceManager.GetString("ConfigPageLog");        
+        public static string Task14 { get; } = Resources.Resource.ResourceManager.GetString("ControlPageLog");
+        public static string Task15 { get; } = Resources.Resource.ResourceManager.GetString("LoggedScanLog");
+        public static string Task16 { get; } = Resources.Resource.ResourceManager.GetString("TempUserLoggedScanLog");
+        public static string Task17 { get; } = Resources.Resource.ResourceManager.GetString("FaultInfoLog");
+      
     }
 }

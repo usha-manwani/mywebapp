@@ -41,7 +41,7 @@ $(function () {
             var arraydata = message.split(',');
             if (arraydata[0] == "NetworkControl") {
                 if (arraydata[1] == 'PanelKey') {
-                    if (arraydata[2] == "ComputerSystemON") {
+                    if (arraydata[2] == "PCON") {
                         var imgpc = document.getElementById("ppower");
                         imgpc.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png";
                         $(imgpc).addClass('oncolor');
@@ -60,6 +60,17 @@ $(function () {
                         img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
                         closedstatus(arraydata);
                         $(img).removeClass('oncolor');
+                        if (arraydata[12] == '锁定') {//Locked
+                            var src = document.getElementById('lock');
+                            src.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png";
+                            $(src).addClass('oncolor');
+                        }
+                        else if (arraydata[12] == '解锁') {
+                            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
+                            var src = document.getElementById('lock');
+                            src.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
+                            $(src).addClass('oncolor');
+                        }
                     }
                     else {
                         var img = document.getElementById("syspower");
@@ -87,7 +98,7 @@ $(function () {
                             src.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png";
                             $(src).addClass('oncolor');
                         }
-                        else {
+                        else if (arraydata[12] == '解锁'){
                             var src = document.getElementById('lock');
                             src.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
                             $(src).addClass('oncolor');
@@ -180,7 +191,7 @@ $(function () {
                                 document.getElementById('Moremedia').src = "../Images/AllImages/images/图标_194.png";
                                 $(document.getElementById('Moremedia')).removeClass('oncolor');
                                 break;
-                            default:
+                            case '数码展台':
                                 var img = document.getElementById('Moremedia');
                                 img.src = "../Images/AllImages/images/图标_194.png";
                                 $(img).addClass('oncolor');
@@ -350,6 +361,16 @@ $(function () {
                     }
                 }
                 else if (arraydata[1] == "LEDIndicator") {
+                    if (arraydata[5] == "CentralLock") {
+                        var imglock = document.getElementById('lock');
+                        document.getElementById('lock').src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png";
+                        $(imglock).addClass('oncolor');
+                    }
+                    else if (arraydata[5] == "CentralLockoff") {
+                        var imglock = document.getElementById('lock');
+                        document.getElementById('lock').src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
+                        $(imglock).addClass('oncolor');
+                    }
                     if (arraydata[2] == "SystemSwitchOn") {
                         var img = document.getElementById("syspower");
                         img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
@@ -385,7 +406,7 @@ $(function () {
                                 document.getElementById('Moremedia').src = "../Images/AllImages/images/图标_194.png";
                                 $(document.getElementById('Moremedia')).removeClass('oncolor');
                                 break;
-                            default:
+                            case 'DigitalCurtain':
                                 var img = document.getElementById('Moremedia');
                                 img.src = "../Images/AllImages/images/图标_194.png";
                                 $(img).addClass('oncolor');
@@ -395,49 +416,17 @@ $(function () {
                                 $(document.getElementById('desktop1')).removeClass('oncolor');
                                 break;
                         }
-                        if (arraydata[5] == "CentralLock") {
-                            var imglock = document.getElementById('lock');
-                            document.getElementById('lock').src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png";
-                            $(imglock).addClass('oncolor');
-                        }
-                        else {
-                            var imglock = document.getElementById('lock');
-                            document.getElementById('lock').src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
-                            $(imglock).addClass('oncolor');
-                        }
+                        
                     }
                     else if (arraydata[2] == "SystemSwitchOff") {
                         var img = document.getElementById("syspower");
                         img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
                         $(img).removeClass('oncolor');
-
                     }
                 }
-                else if (arraydata[1] == "PanelKey") {
-                    if (arraydata[2] == "PCON")
-                        $('#ppower').closest("td").find("img").attr('src', "../Images/中控首页按钮/on/pcon.png");
-
-                    else if (arraydata[2] == "PCOFF")
-                        $('#ppower').closest("td").find("img").attr('src', "../Images/AllImages/images/图标_212.png");
-
-                }
+                
             }
-            if (arraydata[0] == "Temp") {
-                document.getElementById("tempvalue").innerHTML = arraydata[1] + " °C";
-                document.getElementById("humidvalue").innerHTML = arraydata[2] + "%";
-                document.getElementById("pmvalue").innerHTML = arraydata[3] + " µg/m3";
-                if (arraydata[5] != "--") {
-                    document.getElementById("co2").innerHTML = arraydata[10] + "ppm";
-                    document.getElementById("intensityvalue").innerHTML = arraydata[13] + "nits";
-                    document.getElementById("methanalvalue").innerHTML = arraydata[11] + "mg/m3";
-                    document.getElementById("voltvalue").innerHTML = arraydata[5] + "V";
-                    document.getElementById("I1").innerHTML = (((arraydata[6] / 1000.00) * arraydata[5]) / 1000.00).toFixed(2) + "KW";
-                    document.getElementById("I2").innerHTML = (((arraydata[7] / 1000.00) * arraydata[5]) / 1000.00).toFixed(2) + "KW";
-                    document.getElementById("I3").innerHTML = (((arraydata[8] / 1000.00) * arraydata[5]) / 1000.00).toFixed(2) + "KW";
-                    document.getElementById("I4").innerHTML = (((arraydata[9] / 1000.00) * arraydata[5]) / 1000.00).toFixed(2) + "KW";
-
-                }
-            }
+            
             if (arraydata[2] == 'Offline' || arraydata[1] == 'Unsuccessful' || arraydata[2] == '离线') {
                 allGrey();
                 document.getElementById("devicestatus").innerHTML = "离线"; //Offline
@@ -457,18 +446,35 @@ $(function () {
             img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
             if (lastVal > val && val > 0) {
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2B");
-
+                if (parseInt(lastVal) > 10) {
+                    document.getElementById("vol-control").value = parseInt(lastVal) - 10;
+                    this.document.getElementById("volchange").innerText = parseInt(lastVal) - 10;
+                }
+                else {
+                    document.getElementById("vol-control").value = 0;
+                    this.document.getElementById("volchange").innerText = 0;
+                }
             }
             else if (val == 0) {
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/总音量静音.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 2C");
+                this.document.getElementById("volchange").innerText = 0;
+                document.getElementById("vol-control").value = 0;
             }
             else if (lastVal < val) {
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2A");
+                if (parseInt(lastVal) < 90) {
+                    document.getElementById("vol-control").value = parseInt(lastVal) + 10;
+                    this.document.getElementById("volchange").innerText = parseInt(lastVal) + 10;
+                }
+                else {
+                    document.getElementById("vol-control").value = 99;
+                    this.document.getElementById("volchange").innerText = 99;
+
+                }
 
             }
-            this.document.getElementById("volchange").innerText = val;
-            //console.log('After: ' + val);
+            
         };
         MicControl = function (val) {
             var lastVal = this.document.getElementById("micchange").innerText;
@@ -476,16 +482,35 @@ $(function () {
             img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
             if (lastVal > val && val > 0) {
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");
+                if (parseInt(lastVal) > 10) {
+                    document.getElementById("mic-control").value = parseInt(lastVal) - 10;
+                    this.document.getElementById("micchange").innerText = parseInt(lastVal) - 10;
+                }
+                else {
+                    document.getElementById("mic-control").value = 0;
+                    this.document.getElementById("micchange").innerText = 0;
+                    
+                }
             }
             else if (val == 0) {
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/无线麦静音.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
+                this.document.getElementById("micchange").innerText = 0;
+                document.getElementById("mic-control").value = 0;
             }
             else if (lastVal < val) {
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 73 7d");
+                if (parseInt(lastVal) < 90) {
+                    document.getElementById("mic-control").value = parseInt(lastVal) + 10;
+                    this.document.getElementById("micchange").innerText = parseInt(lastVal) + 10;
+                }
+                else {
+                    document.getElementById("mic-control").value = 99;
+                    this.document.getElementById("micchange").innerText = 99;
+
+                }
             }
-            this.document.getElementById("micchange").innerText = val;
-            console.log('After: ' + val);
+            
         };
         WiredMicControl = function (val) {
             var lastVal = this.document.getElementById("wiredmicchange").innerText;
@@ -493,11 +518,22 @@ $(function () {
                 var img = document.getElementById("wiredmicIcon");
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 24 2e");
+                if (parseInt(lastVal) > 10) {
+                    document.getElementById("wiredmic-control").value = parseInt(lastVal) - 10;
+                    this.document.getElementById("wiredmicchange").innerText = parseInt(lastVal) - 10;
+                }
+                else {
+                    document.getElementById("wiredmic-control").value = 0;
+                    this.document.getElementById("wiredmicchange").innerText = 0;
+
+                }
             }
             else if (val == 0) {
                 var img = document.getElementById("wiredmicIcon");
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/有线麦静音.png";
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 25 2f");
+                this.document.getElementById("wiredmicchange").innerText = 0;
+                document.getElementById("wiredmic-control").value = 0;
             }
             else if (lastVal < val) {
 
@@ -506,8 +542,17 @@ $(function () {
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
 
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 23 2d");
+                if (parseInt(lastVal) < 90) {
+                    document.getElementById("wiredmic-control").value = parseInt(lastVal) + 10;
+                    this.document.getElementById("wiredmicchange").innerText = parseInt(lastVal) + 10;
+                }
+                else {
+                    document.getElementById("wiredmic-control").value = 99;
+                    this.document.getElementById("wiredmicchange").innerText = 99;
+
+                }
             }
-            this.document.getElementById("wiredmicchange").innerText = val;
+            
         };
 
         $(document).on("click", "#lock", function () {
@@ -625,6 +670,7 @@ function sysGrey() {
     $(img).removeClass("imgclick oncolor");
     $("#vol-control").prop("disabled", true);
     $("#mic-control").prop("disabled", true);
+    $("#wiredmic-control").prop("disabled", true);
     
 }
 
@@ -688,37 +734,24 @@ function AllNormal() {
 
 function closedstatus(arraydata) {
 
-
-
-    //}
-    //else {
-    //    var img = document.getElementById("syspower");
-    //    img.src = "Images/greyed/sysgrey.png";
-    //    $(img).removeClass('oncolor');
-    //}
-    //if (arraydata[5] == 'On') {
     var imgpc = document.getElementById("ppower");
-    imgpc.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png";
-    //$(imgpc).addClass('oncolor').removeClass('imgclick');
+    imgpc.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png";    
     $(imgpc).removeClass('imgclick oncolor');
-    //}
-    //else {
-    //    var imgpc = document.getElementById("ppower");
-    //    imgpc.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png";
-    //    $(imgpc).removeClass('imgclick oncolor');
-    //}
+
     if (arraydata[12] == 'Locked') {
         var src = document.getElementById('lock');
         src.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_214.png";
-
-        $(src).removeClass('imgclick oncolor');
+        $(src).removeClass('oncolor');
+        $(src).addClass('imgclick');
     }
     else {
         var src = document.getElementById('lock');
         src.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_216.png";
         //$(src).addClass(' oncolor').removeClass('imgclick');
-        $(src).removeClass('imgclick oncolor');
+        $(src).removeClass('oncolor');
+        $(src).addClass('imgclick');
     }
+       
     //if (arraydata[9] == 'Stop') {
     var img = document.getElementById("Scdown");
     img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png";
@@ -729,30 +762,7 @@ function closedstatus(arraydata) {
     var img = document.getElementById("scStop");
     img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png";
     $(img).removeClass('imgclick oncolor');
-    //}
-    //else if (arraydata[9] == 'Down') {
-    //    var img = document.getElementById("Scdown");
-    //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png";
-    //    $(img).removeClass('imgclick');
-    //    var img = document.getElementById("Scup");
-    //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_132.png"
-    //    $(img).removeClass('imgclick oncolor');
-    //    var img = document.getElementById("scStop");
-    //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png";
-    //    $(img).removeClass('imgclick oncolor');
-    //}
-    //else if (arraydata[9] == 'Up') {
-    //    var img = document.getElementById("Scup");
-    //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_132.png";
-    //    $(img).removeClass('imgclick  oncolor');
-    //    var img = document.getElementById("Scdown");
-    //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png";
-    //    $(img).removeClass('imgclick oncolor');
-    //    var img = document.getElementById("scStop");
-    //    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_136.png";
-    //    $(img).removeClass('imgclick oncolor');
-    //}
-    //if (arraydata[8] == 'Open') {
+    
     var curtain = document.getElementById('CurtainOpen');
     curtain.src = "../Images/中控首页按钮/首页按钮-默认状态/控制页面_106.png";
     $(curtain).removeClass('imgclick oncolor');
@@ -762,34 +772,7 @@ function closedstatus(arraydata) {
     var curtain = document.getElementById('CurtainStop');
     curtain.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png";
     $(curtain).removeClass('imgclick oncolor');
-    //}
-    //else if (arraydata[8] == 'Close') {
-    //    var curtain = document.getElementById('CurtainClose');
-    //    curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png";
-    //    $(curtain).addClass('oncolor').removeClass('imgclick');
-    //    var curtain = document.getElementById('CurtainStop');
-    //    curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png";
-    //    $(curtain).removeClass('imgclick oncolor');
-    //    var curtain = document.getElementById('CurtainOpen');
-    //    curtain.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_106.png";
-    //    $(curtain).removeClass('imgclick oncolor');
-
-    //}
-    //else (arraydata[8] == 'Stop')
-    //{
-    //    var curtain = document.getElementById('CurtainClose');
-    //    curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png";
-    //    $(curtain).removeClass('imgclick oncolor');
-    //    var curtain = document.getElementById('CurtainStop');
-    //    curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png";
-    //    $(curtain).addClass('oncolor').removeClass('imgclick');
-    //    var curtain = document.getElementById('CurtainOpen');
-    //    curtain.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_106.png";
-    //    $(curtain).removeClass('imgclick oncolor');
-
-    //}
-    //switch (arraydata[11]) {
-    //    case 'Desktop':
+    
     var img = document.getElementById('desktop1');
     img.src = "../Images/中控首页按钮/首页按钮-默认状态/控制页面_158.png";
     $(img).removeClass('imgclick oncolor');
@@ -797,27 +780,7 @@ function closedstatus(arraydata) {
     $(document.getElementById('laptop1')).removeClass('imgclick oncolor');
     document.getElementById('Moremedia').src = "../Images/AllImages/images/图标_194.png";
     $(document.getElementById('Moremedia')).removeClass('imgclick oncolor');
-    //        break;
-    //    case 'Laptop':
-    //        var img = document.getElementById('laptop1');
-    //        img.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_160.png";
-    //        $(img).addClass('oncolor').removeClass('imgclick');
-    //        document.getElementById('desktop1').src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_158.png";
-    //        $(document.getElementById('desktop1')).removeClass('imgclick oncolor');
-    //        document.getElementById('Moremedia').src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_162.png";
-    //        $(document.getElementById('Moremedia')).removeClass('imgclick oncolor');
-    //        break;
-    //    default:
-    //        var img = document.getElementById('Moremedia');
-    //        img.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_162.png";
-    //        $(img).addClass('oncolor').removeClass('imgclick');
-    //        document.getElementById('laptop1').src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_160.png";
-    //        $(document.getElementById('laptop1')).removeClass('imgclick oncolor');
-    //        document.getElementById('desktop1').src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_158.png";
-    //        $(document.getElementById('desktop1')).removeClass('imgclick oncolor');
-    //        break;
-
-    //}
+    
 
     if (arraydata[6] == 'Closed') {
         var proj1 = document.getElementById('projgreen');
@@ -913,6 +876,7 @@ function addclickeffect() {
 
     $("#vol-control").prop("disabled", false);
     $("#mic-control").prop("disabled", false);
+    $("#wiredmic-control").prop("disabled", false);
    
 }
 

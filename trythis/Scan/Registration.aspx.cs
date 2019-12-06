@@ -46,7 +46,7 @@ namespace WebCresij.Scan
                 {
                     //ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage", 
                     //    "alert('Registered Successfully')", true);
-                    string message = "Registered Successfully!!";
+                    string message = Resources.Resource.ResourceManager.GetString("WaitingforAdmin");
                     string url = "../Scan/MobileLogin.aspx?ip="+ip;
                     string script = " alert('";
                     script += message;
@@ -55,12 +55,13 @@ namespace WebCresij.Scan
                     script += url;
                     script += "'; ";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "Redirect", script, true);
-                    //Response.Redirect("Index.aspx", false);
+                   
                 }
                 else
                 {
+                    string message = Resources.Resource.ResourceManager.GetString("PhoneUseridExists");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alertMessage",
-                        "alert('UserID or phone Number already in use. Please try using different UserId and Number')", true);
+                        "alert('"+message+"')", true);
                 }
             }
             catch (Exception ex)

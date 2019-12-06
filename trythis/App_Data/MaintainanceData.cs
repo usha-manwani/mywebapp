@@ -80,5 +80,28 @@ namespace WebCresij
                 }
             }
         }
+
+        public static int GetFaultCount()
+        {
+            int result=0;
+            using(MySqlConnection con = new MySqlConnection(constr))
+            {
+                string query = "Select count(sno) from fault_info where status='Pending'";
+                using(MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    try
+                    {
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        result = Convert.ToInt32( cmd.ExecuteScalar());
+                    }
+                    catch(Exception ex)
+                    {
+                        
+                    }
+                }
+            }
+            return result;
+        }
     }
 }

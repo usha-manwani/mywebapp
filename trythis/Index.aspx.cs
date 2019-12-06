@@ -108,11 +108,13 @@ namespace WebCresij
             }
             else if (k == -9)
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg1", "alert('UserID is in pending state !! \nPlease try after some time!!');", true);
+                string message = Resources.Resource.ResourceManager.GetString("PendingAlert");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg1", "alert('"+message+"'); ", true);
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg", "alert('Wrong ID or Password!! Please try again!');", true);
+                string message = Resources.Resource.ResourceManager.GetString("WrongIDPassword");
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg", "alert('" + message + "');", true);
             }                       
         }
 
