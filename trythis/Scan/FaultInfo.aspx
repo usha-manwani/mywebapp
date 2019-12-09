@@ -64,7 +64,7 @@
                     <asp:Label runat="server" AssociatedControlID="txtdistrict" ID="Label2"
                         CssClass="col-4 control-label" Text="<%$Resources:Resource, distname %>"></asp:Label>
                     <div class="col-8">
-                        <asp:TextBox runat="server" ID="txtdistrict" CssClass="form-control txtsize border-dark" />
+                        <asp:TextBox runat="server" ID="txtdistrict" CssClass="form-control txtsize border-dark" Enabled="false"/>
                         <asp:RequiredFieldValidator runat="server" Text="*Required" CssClass="color"
                             ControlToValidate="txtdistrict"></asp:RequiredFieldValidator>
                     </div>

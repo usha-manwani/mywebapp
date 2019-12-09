@@ -34,13 +34,10 @@
             <div id="hiddendiv" style="width: 100%">
                 <div style="color: white; font-size: 1em; padding-left: 5%">
                     <asp:Label runat="server" Style="color: goldenrod" ID="insName"></asp:Label>
-
                     <asp:Label runat="server" Style="color: goldenrod" ID="GradeName"></asp:Label>
-
                     <asp:Label runat="server" Style="color: goldenrod" ID="ClassName"></asp:Label>
                     <hr style="background-color: goldenrod" />
                 </div>
-
             </div>
         </div>
 
@@ -67,7 +64,7 @@
                             <asp:Label runat="server" AssociatedControlID="txtdistrict" ID="Label2"
                                 CssClass="col-4 control-label" Text="<%$Resources:Resource, distname %>"></asp:Label>
                             <div class="col-8">
-                                <asp:TextBox runat="server" ID="txtdistrict" CssClass="form-control txtsize border-dark" />
+                                <asp:TextBox runat="server" ID="txtdistrict" CssClass="form-control txtsize border-dark" Enabled="false"/>
                                 <asp:RequiredFieldValidator runat="server" Text="*Required" CssClass="color"
                                     ControlToValidate="txtdistrict"></asp:RequiredFieldValidator>
                             </div>
@@ -78,7 +75,6 @@
                                 CssClass="col-4 control-label" Text="<%$Resources:Resource, handledBy %>"></asp:Label>
                             <div class="col-8">
                                 <asp:TextBox runat="server" ID="txtuser" CssClass="form-control txtsize border-dark" />
-
                             </div>
                         </div>
 
@@ -116,7 +112,6 @@
                                     <asp:ListItem Text="<%$Resources:Resource, Pending %>" Value="Pending"></asp:ListItem>
                                     <asp:ListItem Text="<%$Resources:Resource, Resolved %>" Value="Resolved"></asp:ListItem>
                                 </asp:DropDownList>
-
                             </div>
                         </div>
 

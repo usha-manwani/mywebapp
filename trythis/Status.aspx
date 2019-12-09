@@ -61,7 +61,7 @@
                             </asp:DropDownList>
                         &nbsp;&nbsp;&nbsp;
                             <label for="ddlins" style="color:white; font-size:large">&nbsp;<span style="padding-right:10px">
-                                <%=Resources.Resource.SelectInstitute%></span></label>
+                                <%=Resources.Resource.SelectGrade%></span></label>
                             <asp:DropDownList Width="100px" ID="ddlGrade" AutoPostBack="true"
                             CssClass="btn btn-default border dropdown"
                             OnSelectedIndexChanged="ddlGrade_SelectedIndexChanged"

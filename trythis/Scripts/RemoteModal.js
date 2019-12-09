@@ -277,7 +277,12 @@ $(function () {
                     }
                 }
                 else if (arraydata[1] == "LEDIndicator") {
+                    if (arraydata[5] == "CentralLock") {
 
+                        document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1.png";
+                    }
+                    else if (arraydata[5] == "CentralLockoff")
+                        document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1open.png"; 
                     if (arraydata[2] == "SystemSwitchOn") {
                         var img = document.getElementById("systempower");
                         img.src = "Images/中控首页按钮/on/systemon.png";
@@ -343,14 +348,7 @@ $(function () {
                                 tab.rows[i].cells[14].innerHTML = 'Locked';
                                 break;
 
-                        }
-                        if (arraydata[5] == "CentralLock") {
-
-                            document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1.png";
-                        }
-                        else 
-                            document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1open.png";                            
-                        
+                        }           
                                
                         if (arraydata[6] == "PodiumLockoff") {
 
@@ -866,9 +864,9 @@ $(function () {
         $(document).on("click", "#sysLock", function () {
             var img = $(this).attr("src");            
             if (img == "Images/中控首页按钮/on/lock1.png")            
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 02 2d 35");
             else
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 02 2c 34");
             //var img = $(this).attr("src");
             //if (img == "Images/中控首页按钮/on/lock1.png" ) {
             //    chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");

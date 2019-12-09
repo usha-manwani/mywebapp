@@ -55,7 +55,7 @@ $jq(function () {
                             $jq(src).addClass('oncolor');
                         }
                         else if (arraydata[12] == '解锁'){
-                            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
+                            //chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 02 2c 34");
                             var src = document.getElementById('lock');
                             src.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
                             $jq(src).addClass('oncolor');
@@ -505,9 +505,9 @@ $jq(function () {
             var imgpc = document.getElementById('lock');
             var source = imgpc.getAttribute('src');
             if (source == "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png")
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2d 37");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 02 2d 35");
             else
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 2c 36");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 02 2c 34");
         });
         $jq(document).on("click", "#Scup", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 76 80");

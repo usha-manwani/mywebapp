@@ -59,7 +59,11 @@
         });
         $(document).on('click', "*[name='lockIcon']",function () {          
             var lock = $(this).closest('table').find('input').val();
-            chat.server.sendControlKeys(lock, "8B B9 00 04 02 04 2d 37");           
+            if ($(this).hasClass('fa-lock'))
+                chat.server.sendControlKeys(lock, "8B B9 00 04 02 02 2d 35");
+            else {
+                chat.server.sendControlKeys(lock, "8B B9 00 04 02 02 2c 34");
+            }
         });
         $(document).on('click', "*[name='desktopIcon']", function () {           
             var desktop = $(this).closest('table').find('input').val();

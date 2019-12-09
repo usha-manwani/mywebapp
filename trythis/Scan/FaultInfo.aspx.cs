@@ -80,10 +80,26 @@ namespace WebCresij.Scan
 
         protected void GetLocation(string ip)
         {
-            DataTable dt = PopulateTree.GetlocationIP(ip);
-            insName.Text = dt.Rows[0][2].ToString() + " >> ";
-            GradeName.Text = dt.Rows[0][1].ToString() + " >> ";
-            ClassName.Text = dt.Rows[0][0].ToString();
+            try
+            {
+                DataTable dt = PopulateTree.GetlocationIP(ip);
+                insName.Text = dt.Rows[0][2].ToString() + " >> ";
+                GradeName.Text = dt.Rows[0][1].ToString() + " >> ";
+                ClassName.Text = dt.Rows[0][0].ToString();
+                txtdistrict.Text = dt.Rows[0][0].ToString();
+            }
+            catch(Exception ex)
+            {
+                string message = Resources.Resource.ResourceManager.GetString("AlertError1");
+                string url = "../Scan/MobileLogin.aspx?ip=" + ip;
+                string script = " alert('";
+                script += message;
+                script += "');";
+                script += "window.location = '";
+                script += url;
+                script += "'; ";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "Redirect", script, true);
+            }
         }
     }
 }

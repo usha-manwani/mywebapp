@@ -20,14 +20,14 @@ $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         var data = document.getElementById("ContentPlaceHolder1_childmastercontent_ipadd").value;
         var ip = data.split(',');
         for (i = 0; i < ip.length; i++) {
-            chat.server.sendControlKeys(ip[i], "8B B9 00 04 02 04 2c 36");
+            chat.server.sendControlKeys(ip[i], "8B B9 00 04 02 02 2c 34");
         }
     });
     $(document).on("click", "#ContentPlaceHolder1_childmastercontent_BtnUnlock", function () {
         var data = document.getElementById("ContentPlaceHolder1_childmastercontent_ipadd").value;
         var ip = data.split(',');
         for (i = 0; i < ip.length; i++) {
-            chat.server.sendControlKeys(ip[i], "8B B9 00 04 02 04 2d 37");
+            chat.server.sendControlKeys(ip[i], "8B B9 00 04 02 02 2d 35");
         }
     });
     

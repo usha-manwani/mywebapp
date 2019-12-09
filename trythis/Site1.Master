@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <title><%: Page.Title %> - Cresij Web Platform</title>
+    <title><%: Page.Title %> - 成都医学院</title>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>

@@ -313,7 +313,7 @@
     <script src="Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
-    <script src="Scripts/HomePageJS.js?v=23"></script>
+    <script src="Scripts/HomePageJS.js?v=24"></script>
     <link href="HikVision/demo.css" rel="stylesheet" />
     <div class="row " style="padding-left: 50px; max-width: 100%; min-width: 70%; margin-top: -10px; height: 95%">
         <div class="col-lg-8 col-md-12 col-sm-12" id="pluginsrow">

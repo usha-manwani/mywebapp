@@ -1359,4 +1359,16 @@
   <data name="CentralizedControl" xml:space="preserve">
     <value>集中管控</value>
   </data>
+  <data name="SelectGrade" xml:space="preserve">
+    <value>再次选择</value>
+  </data>
+  <data name="WelcomeString" xml:space="preserve">
+    <value>欢迎来到成都医学院</value>
+  </data>
+  <data name="DesktopVersion" xml:space="preserve">
+    <value>切换到电脑端</value>
+  </data>
+  <data name="MobileVersion" xml:space="preserve">
+    <value>切换到移动端</value>
+  </data>
 </root>

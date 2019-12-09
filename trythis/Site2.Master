@@ -91,7 +91,7 @@
                 <nav class="navbar navbar-fixed-top navbar-light" style="background-color: #1e1e36;">
                     <div class="container-fluid">
                         <div class="navbar-header navbar-brand" style="font-size: large; float: left; color: white">
-                            Welcome to Cresij Cam 
+                            <%=Resources.Resource.WelcomeString %>
                         </div>
                         <div>
                             <ul class="nav navbar-nav float-right">
@@ -118,7 +118,8 @@
         
     </form>
     <footer style="float:right">
-        <a href="Mobile/Login.aspx" style="text-align:right!important;padding-right:5px"><i class="fa fa-mobile-alt"></i>Go to Mobile Version</a>
+        <a href="Mobile/Login.aspx" style="text-align:right!important;padding-right:5px">
+            <i class="fa fa-mobile-alt"></i>&nbsp;<%=Resources.Resource.MobileVersion %></a>
         <br />
     </footer>
 </body>

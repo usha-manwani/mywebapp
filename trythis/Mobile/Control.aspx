@@ -176,7 +176,7 @@
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="childmastercontent" runat="server">
-    <script src="../Scripts/MobileControl.js?v=7"></script>
+    <script src="../Scripts/MobileControl.js?v=8"></script>
     <h4 style="text-align:center"><%=Resources.Resource.GoToControl %></h4>
     <div class=" sidebar-toggle-box" data-placement="right" data-original-title="Toggle Navigation" style="font-size:2em;">
                             <i class="fa fa-bars " aria-hidden="true"></i>

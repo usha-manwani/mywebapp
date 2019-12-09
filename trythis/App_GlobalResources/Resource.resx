@@ -1168,7 +1168,7 @@
     <value>No Of Recorder</value>
   </data>
   <data name="distname" xml:space="preserve">
-    <value>District Name</value>
+    <value>Class Name</value>
   </data>
   <data name="PhoneNum" xml:space="preserve">
     <value>Phone No.</value>
@@ -1358,5 +1358,17 @@
   </data>
   <data name="CentralizedControl" xml:space="preserve">
     <value>Centralized Control</value>
+  </data>
+  <data name="SelectGrade" xml:space="preserve">
+    <value>Select Grade</value>
+  </data>
+  <data name="WelcomeString" xml:space="preserve">
+    <value>Welcome to Chengdu Medical College</value>
+  </data>
+  <data name="DesktopVersion" xml:space="preserve">
+    <value>Switch to Desktop </value>
+  </data>
+  <data name="MobileVersion" xml:space="preserve">
+    <value>Switch to Mobile</value>
   </data>
 </root>

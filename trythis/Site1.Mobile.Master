@@ -52,7 +52,7 @@
         </div>
     </form>
     <footer>
-        <a href="../Index.aspx?desktop=true"><i class="fa fa-desktop"></i>Go to Desktop Version</a>
+        <a href="../Index.aspx?desktop=true"><i class="fa fa-desktop"></i>&nbsp;<%=Resources.Resource.DesktopVersion %></a>
     </footer>
 </body>
 </html>

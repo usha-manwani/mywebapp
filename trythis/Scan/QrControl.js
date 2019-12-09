@@ -30,7 +30,7 @@
                     }
                     else if (arraydata[12] == '解锁') {//unlock
                         document.getElementById("lockstatus").value = 'unlock';
-                        chat.server.sendControlKeys(ip, "8B B9 00 04 02 04 2c 36");
+                        //chat.server.sendControlKeys(ip, "8B B9 00 04 02 02 2c 34");
                         var imglock = document.getElementById('lock');
                         document.getElementById('lock').src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
                         $(imglock).addClass('oncolor');
@@ -420,9 +420,9 @@
         });
         $(document).on("click", "#lock", function () {
             if (document.getElementById("lockstatus").value == 'lock')
-                chat.server.sendControlKeys(ip, "8B B9 00 04 02 04 2d 37");
+                chat.server.sendControlKeys(ip, "8B B9 00 04 02 02 2d 35");
             else {
-                chat.server.sendControlKeys(ip, "8B B9 00 04 02 04 2c 36");
+                chat.server.sendControlKeys(ip, "8B B9 00 04 02 02 2c 34");
             }
         });
 
