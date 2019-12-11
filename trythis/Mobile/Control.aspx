@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mobile/Site1.MobileNested.master" AutoEventWireup="true" CodeBehind="Control.aspx.cs" Inherits="WebCresij.Mobile.Control" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mobile/Site1.MobileNested.master" AutoEventWireup="true" 
+    CodeBehind="Control.aspx.cs" Inherits="WebCresij.Mobile.Control" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="childMasterhead" runat="server">
     <style>

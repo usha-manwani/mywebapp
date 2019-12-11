@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Mobile.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebCresij.Mobile.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Mobile.Master" AutoEventWireup="true" 
+    CodeBehind="Login.aspx.cs" Inherits="WebCresij.Mobile.Login" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
    <style>
         @media screen and (max-width: 280px) and (max-height:450px)

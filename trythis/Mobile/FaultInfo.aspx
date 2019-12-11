@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mobile/Site1.MobileNested.master" AutoEventWireup="true" CodeBehind="FaultInfo.aspx.cs" Inherits="WebCresij.Mobile.FaultInfo" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mobile/Site1.MobileNested.master" AutoEventWireup="true" 
+    CodeBehind="FaultInfo.aspx.cs" Inherits="WebCresij.Mobile.FaultInfo" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="childMasterhead" runat="server">
     <style>
         .padding-top{

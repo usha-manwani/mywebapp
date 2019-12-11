@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Mobile.Master" AutoEventWireup="true" CodeBehind="OneTimeRegistration.aspx.cs" Inherits="WebCresij.Scan.OneTimeRegistration" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Mobile.Master" AutoEventWireup="true" CodeBehind="OneTimeRegistration.aspx.cs" 
+    Inherits="WebCresij.Scan.OneTimeRegistration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>
         input{

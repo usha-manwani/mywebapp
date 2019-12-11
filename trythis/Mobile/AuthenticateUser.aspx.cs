@@ -12,12 +12,21 @@ namespace WebCresij.Mobile
         Userdetails ud = new Userdetails();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            string s = HttpContext.Current.Session["UserId"].ToString();
+            string roleids = HttpContext.Current.Session["role"].ToString();
+            if (s != null)
             {
-                gv2.DataSource = ud.getUserDetailsPending();
-                gv2.DataBind();
-                TempUserGrid.DataSource = ud.GetPendingTempUser();
-                TempUserGrid.DataBind();
+                if (!IsPostBack)
+                {
+                    gv2.DataSource = ud.getUserDetailsPending();
+                    gv2.DataBind();
+                    TempUserGrid.DataSource = ud.GetPendingTempUser();
+                    TempUserGrid.DataBind();
+                }
+            }
+            else
+            {
+                Response.Redirect("../Mobile/Login.aspx");
             }
         }
         protected void Button2_Click(object sender, EventArgs e)

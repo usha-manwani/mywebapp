@@ -383,5 +383,37 @@ namespace WebCresij
             chart.Saveworkinghours(name);
             return "";
         }
+
+        [WebMethod]
+        public List<object> GetCountStat(string name)
+        {
+            List<object> idata = new List<object>();
+            PopulateTree pt = new PopulateTree();
+            DataTable temp1 = pt.GetStatus();
+            if (temp1.Rows.Count > 0)
+            {
+                string machineOnline = temp1.Select("MachineStatus='Online'").Count().ToString();
+                string machineOffline = temp1.Select("MachineStatus='Offline'").Count().ToString();
+                string workOpen = temp1.Select("WorkStatus='OPEN'").Count().ToString();
+                string workClose = temp1.Select("WorkStatus='CLOSED'").Count().ToString();
+                DataTable dt = pt.totalMachines();
+                machineOffline = (Convert.ToInt32(dt.Rows[0][0]) - Convert.ToInt32(machineOnline)).ToString();
+                idata.Add(machineOnline);
+                idata.Add(machineOffline);
+                idata.Add(workOpen);
+                idata.Add(workClose);
+            }
+            else
+            {
+                DataTable dt = pt.totalMachines();
+                string m = dt.Rows[0][0].ToString();
+                idata.Add(0);
+                idata.Add(m);
+                idata.Add(0);
+                idata.Add(0);
+            }
+
+            return idata;
+        } 
     }
 }

@@ -2,6 +2,7 @@
     // Declare a proxy to reference the hub.
     
     var chat = $.connection.myHub;
+    updateCount();
     // Create a function that the hub can call to broadcast messages.
     chat.client.broadcastMessage = function (name, message) {
         // Html encode display name and message. 
@@ -56,6 +57,12 @@
                     }
                 }
                 else if (arraydata[1] == "LEDIndicator") {
+                    if (arraydata[5] == "CentralLock") {
+                        alliprows[i].cells[13].innerHTML == '锁定'//Locked
+                    }
+                    else {
+                        alliprows[i].cells[13].innerHTML = '解锁'; //Unlock
+                    }
                     if (arraydata[2] == "SystemSwitchOn") {
                         alliprows[i].cells[4].innerHTML = "运行中"; //Open
                             //if (arraydata[4] == "Computer") {
@@ -108,12 +115,7 @@
                                 break;
 
                         }
-                        if (arraydata[5] == "CentralLock") {
-                            alliprows[i].cells[13].innerHTML == '锁定'//Locked
-                        } 
-                        else{
-                            alliprows[i].cells[13].innerHTML = '解锁'; //Unlock
-                        }
+                        
                         
                         if (arraydata[5] == "PodiumLock") {
                             alliprows[i].cells[14].innerHTML == '锁定'//Locked
@@ -185,6 +187,32 @@ function triggerclick() {
     console.log("after click");
 }
 
+window.setInterval(updateCount, 50000);
+
+function updateCount() {
+    var jsonData = JSON.stringify({
+        name: ""
+    });
+    $.ajax({
+        type: "POST",
+        url: "../Services/ChartData.asmx/GetCountStat",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess_,
+        error: OnErrorCall_
+    });
+}
+function OnSuccess_(response) {
+    var adata = response.d;
+    document.getElementById('labelonline').innerText = adata[0];
+    document.getElementById('labeloffline').innerText = adata[1];
+    document.getElementById('labelstatuson').innerText = adata[2];
+    document.getElementById('labelstatusoff').innerText = adata[3];
+}
+function OnErrorCall_(respo) {
+    console.log(respo);
+}
 
 
 

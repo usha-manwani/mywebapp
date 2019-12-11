@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mobile/Site1.MobileNested.master" AutoEventWireup="true" CodeBehind="ControlGrade.aspx.cs" Inherits="WebCresij.Mobile.ControlGrade" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mobile/Site1.MobileNested.master" AutoEventWireup="true" 
+    CodeBehind="ControlGrade.aspx.cs" Inherits="WebCresij.Mobile.ControlGrade" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="childMasterhead" runat="server">
    <script src="../Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="../Scripts/jquery.signalR-2.4.1.min.js"></script>

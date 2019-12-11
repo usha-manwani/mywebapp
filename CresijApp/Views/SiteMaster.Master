@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteMaster.master.cs" Inherits="CresijApp.Views.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <title><%: Page.Title %> - 成都医学院</title>
+    <link href="../CssContent/Chart.min.css" rel="stylesheet" />
+    <link href="../Scripts/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../CssContent/sensor.css" rel="stylesheet" />
+    <link href="../Scripts/font/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="../Scripts/jquery-3.4.1.min.js"></script>
+    <script src="../Scripts/dist/js/Chart.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container-fluid no-gutter">
+            <div class="col-2 left no-gutter float-left">
+                <%--<div class="logo"><img class="logo rounded-circle clearfix" src="images/logo.jpg" alt=""></div>--%>
+                <h3 class="text-center clearfix">北京大学</h3>
+                <p class="text-center font-weight-light" style="margin-bottom: 0;">Chengdu UNIVERSITY</p>
+                <p class="text-center font-weight-light">智慧教室综合管理系统</p>
+                <div class="component" id="menu-left">
+
+                    <div class="copyright small">
+                        Powered by
+                        <br>
+                        CRESIJ Intelligent Technology
+                        <br>
+                        &copy; 2019
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 float-left no-gutter window-right">
+    <ul class="nav small">
+      <li class="nav-item welcome" style="padding-left: 20px; padding-right: 20px;"><i class="fa fa-user-circle" aria-hidden="true"></i> 欢迎你，张三丰</li>
+      <li class="nav-item"> <a href="" class="nav-link navleft"><i class="fa fa-home"></i> 主页</a> </li>
+      <li class="nav-item"> <a href="" class="nav-link"><i class="fa fa-user-circle-o" aria-hidden="true"></i> 用户</a> </li>
+      <li class="nav-item"> <a href="" class="nav-link"><i class="fa fa-database" aria-hidden="true"></i> 资源</a> </li>
+      <li class="nav-item"> <a href="" class="nav-link"><i class="fa fa-cog" aria-hidden="true"></i> 设置</a> </li>
+      <li class="nav-item"> <a href="" class="nav-link"><i class="fa fa-address-card" aria-hidden="true"></i> IC卡管理</a> </li>
+      <li class="nav-item"> <a href="" class="nav-link"><i class="fa fa-briefcase" aria-hidden="true"></i> 运维管理</a> </li>
+      <li class="nav-item"> <a href="" class="nav-link"><i class="fa fa-handshake-o" aria-hidden="true"></i> 支持</a> </li>
+      <li class="nav-item dropdown"> <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v" aria-hidden="true"></i> 更多</a>
+        <div class="dropdown-menu dropdown-menu-md-left"> <a href="" class="dropdown-item small"><i class="fa fa-angle-right" aria-hidden="true"></i> 菜单111</a> <a href="" class="dropdown-item small"><i class="fa fa-angle-right" aria-hidden="true"></i> 菜单222</a>
+          <div class="dropdown-divider"></div>
+          <a href="" class="dropdown-item small"><i class="fa fa-angle-right" aria-hidden="true"></i> 菜单111</a> <a href="" class="dropdown-item small"><i class="fa fa-angle-right" aria-hidden="true"></i> 菜单222</a></div>
+      </li>
+      <li class="nav-item dropdown float-right"> <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">CH</a>
+        <div class="dropdown-menu dropdown-menu-md-left"> <a href="" class="dropdown-item small"><i class="fa fa-angle-right" aria-hidden="true"></i> Chinese(简体中文)</a> <a href="" class="dropdown-item small"><i class="fa fa-angle-right" aria-hidden="true"></i> English</a></div>
+      </li>
+      <li class="nav-item float-right"> <a href="" class="nav-link"><i class="fa fa-dashboard" aria-hidden="true"></i></a> </li>
+      <li class="nav-item float-right" style="margin-left: 30px;"> <a href="" class="nav-link"><i class="fa fa-power-off red" aria-hidden="true"></i></a> </li>
+    </ul>
+            <asp:ContentPlaceHolder ID="siteContainer" runat="server">
+            </asp:ContentPlaceHolder>
+                </div>
+        </div>
+    </form>
+    
+    
+    <script src="../Scripts/umd/popper.min.js"></script>
+    <script src="../Scripts/dist/js/bootstrap.min.js"></script>
+    <script src="../Scripts/sensor.js"></script>
+    <script src="../Scripts/Treeview.js"></script>
+</body>
+</html>

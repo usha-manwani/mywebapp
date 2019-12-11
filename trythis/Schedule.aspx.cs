@@ -32,6 +32,7 @@ namespace WebCresij
                 excelgrd.Enabled = true;
                 svbtn.Visible = true;
                 export.Visible = true;
+                deleteSchedule.Visible = true;
                 Fillgradeddl();
                 BindGriddata(ddlInstitute.SelectedValue);                
             }
@@ -68,6 +69,7 @@ namespace WebCresij
             if (dt.Rows.Count > 0)
             {
                 GetData(dt);
+                deleteSchedule.Visible = true;
             }
             else
             {
@@ -92,97 +94,46 @@ namespace WebCresij
             ddlClass.Items.Insert(0, new ListItem(select, "NA"));
             if (ddlGrade.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlGrade.SelectedValue))
             {
-                dt= PopulateTree.GetSchedule(ddlGrade.SelectedValue);
-                //query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
-                //" as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
-                //"[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
-                //+ " where ID = '" + ddlGrade.SelectedValue + "' order by StartTime asc";
-
+                dt = PopulateTree.GetSchedule(ddlGrade.SelectedValue);                
             }
-            //dt = PopulateTree.ExecuteCommand(query);
+            else
+            {
+                dt = PopulateTree.GetSchedule(ddlInstitute.SelectedValue);
+            }
             if (dt.Rows.Count > 0)
             {
                 GetData(dt);
             }
             else
             {
-                bindgrd();
-               // query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
-               //" as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
-               //"[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
-               //+ " where ID = '" + ddlInstitute.SelectedValue + "' order by StartTime asc";
-
-               // dt = PopulateTree.ExecuteCommand(query);
-               // if (dt.Rows.Count > 0)
-               // {
-               //     GetData(dt);
-               // }
-               // else
-               // {
-               //     bindgrd();
-               // }
+                bindgrd();               
             }
-            //BindGriddata();
-
-
         }
         protected void ddlClass_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           // string query = "";
+        {           
             DataTable dt = new DataTable();
 
             string ClassID = ddlClass.SelectedValue;
             if (ClassID != "NA" && !string.IsNullOrEmpty(ClassID))
             {
-               dt= PopulateTree.GetSchedule(ClassID);
-                //query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
-                //" as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
-                //"[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
-                //+ " where ID = '" + ClassID + "' order by StartTime asc";
-
-                
+               dt= PopulateTree.GetSchedule(ClassID);                 
             }
-             //dt= PopulateTree.ExecuteCommand(query);
+            else if(ddlGrade.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlGrade.SelectedValue))
+            {
+                dt = PopulateTree.GetSchedule(ddlGrade.SelectedValue);
+            }
+            else
+            {
+                dt = PopulateTree.GetSchedule(ddlInstitute.SelectedValue);
+            }
             if (dt.Rows.Count > 0)
             {
                 GetData(dt);
             }
             else
             {
-                bindgrd();
-                //if (ddlGrade.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlGrade.SelectedValue))
-                //{
-                //    query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
-                //    " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
-                //    "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
-                //    + " where ClassID = '" + ddlGrade.SelectedValue + "' order by StartTime asc";
-                    
-                //}
-                //dt = PopulateTree.ExecuteCommand(query);
-                //if (dt.Rows.Count > 0)
-                //{
-                //    GetData(dt);
-                //}
-                //else
-                //{
-                //    query = "SELECT [StartTime] as starttime, StopTime as stoptime,[Mon]" +
-                //   " as Monday, [Tue] as Tuesday,[Wed] as Wednesday ,[Thu] as Thursday ," +
-                //   "[Fri] as Friday ,[Sat] as Saturday,[Sun] as Sunday, timer FROM[CresijCam].[dbo].[Schedule] "
-                //   + " where ID = '" + ddlInstitute.SelectedValue + "' order by StartTime asc";
-
-                //    dt = PopulateTree.ExecuteCommand(query);
-                //    if (dt.Rows.Count > 0)
-                //    {
-                //        GetData(dt);
-                //    }
-                //    else
-                //    {
-                //        bindgrd();
-                //    }
-                //}
-               
+                bindgrd();  
             }
-            //BindGriddata();
             ScriptManager.RegisterStartupScript(this, typeof(Page), "import", "importFile();", true);
         }
         private void BindGriddata(string ID)
@@ -223,6 +174,7 @@ namespace WebCresij
             if (dt.Rows.Count > 0)
             {
                 GetData(dt);
+
             }
             
             
@@ -772,24 +724,30 @@ namespace WebCresij
         }
         protected void GetData(DataTable dt)
         {
+            
             if (dt.Rows.Count > 0)
             {
                 if (dt.Rows[0]["TimerOn"].ToString() == "已启动")//true
                 {
                     chkTimerOn.Checked = true;
+                    
                 }
                 else
                 {
                     chkTimerOn.Checked = false;
+                    
                 }
                 if (dt.Rows[0]["TimerOff"].ToString() == "已启动")//true
                 {
                     chkTimerOff.Checked = true;
+                   
                 }
                 else
                 {
                     chkTimerOff.Checked = false;
                 }
+                
+               
                 dt.Columns.Add("Time");
                 dt.Columns["Time"].SetOrdinal(0);
 
@@ -822,6 +780,64 @@ namespace WebCresij
                 {
                     Response.Redirect("Schedule.aspx");
                 }
+            }
+        }
+
+        protected void DeleteSchedule_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string ID = "";
+                Button btn = (Button)sender;
+                ID = ddlClass.SelectedValue;
+                if (ID != "NA" && !string.IsNullOrEmpty(ID))
+                {
+                    ID = ddlClass.SelectedValue;
+                }
+                else
+                {
+                    if (ddlGrade.SelectedValue != "NA" && !string.IsNullOrEmpty(ddlGrade.SelectedValue))
+                    {
+                        ID = ddlGrade.SelectedValue;
+                    }
+                    else
+                    {
+                        ID = ddlInstitute.SelectedValue;
+                    }
+                }
+                if (!string.IsNullOrEmpty(ID))
+                {
+                    PopulateTree populateTree = new PopulateTree();
+                    populateTree.DelOldSchedule(ID);
+                    string successdel = Resources.Resource.ResourceManager.GetString("SuccessDelete");
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "deleteSuccess", "alert('"+successdel+"');", true);
+                    DataTable dt = PopulateTree.GetSchedule(ID);
+                    string timer = "未启动";
+                    if (dt.Rows.Count > 0)
+                    {
+                        
+                        if (dt.Rows[0]["TimerOff"].ToString() == "已启动" || dt.Rows[0]["TimerOn"].ToString() == "已启动")
+                        {
+                            timer = "已启动";
+                        }
+                        else
+                        {
+                            timer = "未启动";
+                        }
+                        
+                        populateTree.UpdateMachineTimer(timer, ID);
+                        GetData(dt);
+                    }
+                    else
+                    {
+                        populateTree.UpdateMachineTimer(timer, ID);
+                        bindgrd();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("Schedule.aspx");
             }
         }
     }    

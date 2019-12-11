@@ -16,10 +16,8 @@ namespace WebCresij
         protected void Page_Load(object sender, EventArgs e)
         {                  
             if (!IsPostBack)
-            {                
-                Timer1.Interval = 90000;
-                Timer1.Enabled = true;
-                Timer1.Tick += Timer1_Tick;
+            {
+              
                 if(HttpContext.Current.Session["UserId"] != null)
                 {
                     UserActivities.UserLogs.Task1(HttpContext.Current.Session["UserId"].ToString(),
@@ -34,19 +32,21 @@ namespace WebCresij
                     //ddlins.Items.Insert(0, new ListItem(select, "NA"));
                     loadGrid(dt.Rows[0]["id"].ToString());
                     FillGradeDDL();
+                   // GetMachineCount();
                 }
                 else
                 {
                     Response.Redirect("Logout.aspx");
                 }
-                GetMachineCount();
+                
             }
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg2", "triggerclick();", true);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "showcount", "updateCount();", true);
         }
 
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            GetMachineCount();
+           // GetMachineCount();
         }
 
         private void loadGrid( string insID)
@@ -144,23 +144,6 @@ namespace WebCresij
             }
         }
 
-        protected void GetMachineCount()
-        {
-            PopulateTree populateTree = new PopulateTree();
-            DataTable dt= populateTree.GetStatus();
-            if(dt.Rows.Count > 0){
-                labelonline.Text ="#"+ Resources.Resource.ResourceManager.GetString("SystemOnline") + " : " + dt.Select("MachineStatus='Online'").Count().ToString();
-                labeloffline.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOffline") + " : " + dt.Select("MachineStatus='Offline'").Count().ToString();
-                labelstatuson.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOn") + " : " + dt.Select("WorkStatus='OPEN'").Count().ToString();
-                labelstatusoff.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOff") + " : " + dt.Select("WorkStatus ='CLOSED'").Count().ToString();
-            }
-            else
-            {
-                labelonline.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOnline") + " : " + "0" ;
-                labeloffline.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOffline") + " : " +" 0";
-                labelstatuson.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOn") + " : " +" 0";
-                labelstatusoff.Text = "#" + Resources.Resource.ResourceManager.GetString("SystemOff") + " : " +" 0";
-            }
-        }
+        
     }
 }

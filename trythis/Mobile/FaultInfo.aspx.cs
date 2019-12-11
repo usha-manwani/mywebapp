@@ -12,7 +12,15 @@ namespace WebCresij.Mobile
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            FillData();
+            string s = HttpContext.Current.Session["UserId"].ToString();
+            string roleids = HttpContext.Current.Session["role"].ToString();
+            if (s != null)
+            { FillData(); }
+            else
+            {
+                Response.Redirect("../Mobile/Login.aspx");
+            }
+    
         }
         protected void FillData()
         {

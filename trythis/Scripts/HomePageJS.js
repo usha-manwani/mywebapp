@@ -459,8 +459,7 @@ $jq(function () {
                 }
                 else {
                     document.getElementById("vol-control").value = 99;
-                    this.document.getElementById("volchange").innerText = 99;
-                    
+                    this.document.getElementById("volchange").innerText = 99;                    
                 }
 
             }

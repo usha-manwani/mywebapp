@@ -36,6 +36,7 @@ namespace WebCresij.Mobile
                 }
             }
             ScriptManager.RegisterStartupScript(this, typeof(Page), "alertmsg2", "triggerclick();", true);
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "showcount", "updateCount();", true);
         }
 
         private void loadGrid(string insID)

@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="tempratureCharts.aspx.cs" Inherits="WebCresij.tempratureCharts" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.master" AutoEventWireup="true" CodeBehind="tempratureCharts.aspx.cs"
+    Inherits="WebCresij.tempratureCharts" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
     <%--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">--%>
     <link href="Content/normalize.min.css" rel="stylesheet" />

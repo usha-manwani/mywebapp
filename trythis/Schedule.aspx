@@ -232,7 +232,9 @@
                        </script>
         <asp:Button ID="svbtn" runat="server" Text="<%$Resources:Resource, Save %>" OnClick="svbtn_Click" Visible="false" CssClass="btn btn-info"/>
         <asp:Button ID="export" runat="server" Text="<%$Resources:Resource, ExportToExcel %>" Visible="false" CssClass="btn btn-info"
-             OnClick="export_Click"/>                           
+             OnClick="export_Click"/>  
+         <asp:Button ID="deleteSchedule" runat="server" Text="<%$Resources:Resource, Delete %>" OnClick="DeleteSchedule_Click" 
+             Visible="false" CssClass="btn btn-info" />
             </div>
             
        </ContentTemplate>

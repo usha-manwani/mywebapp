@@ -1371,4 +1371,7 @@
   <data name="MobileVersion" xml:space="preserve">
     <value>Switch to Mobile</value>
   </data>
+  <data name="SuccessDelete" xml:space="preserve">
+    <value>Successfully Deleted!</value>
+  </data>
 </root>

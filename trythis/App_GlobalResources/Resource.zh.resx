@@ -1371,4 +1371,7 @@
   <data name="MobileVersion" xml:space="preserve">
     <value>切换到移动端</value>
   </data>
+  <data name="SuccessDelete" xml:space="preserve">
+    <value>删除成功！</value>
+  </data>
 </root>

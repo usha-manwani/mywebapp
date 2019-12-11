@@ -13,7 +13,7 @@ namespace WebCresij.Mobile
         {
             try
             {
-                string s = HttpContext.Current.Session["UserName"].ToString();
+                string s = HttpContext.Current.Session["UserId"].ToString();
                 string roleids = HttpContext.Current.Session["role"].ToString();
                 if (s != null)
                 {
@@ -24,7 +24,6 @@ namespace WebCresij.Mobile
                 }
                 else
                 {
-
                     Response.Redirect("../Mobile/Login.aspx");
                 }
             }

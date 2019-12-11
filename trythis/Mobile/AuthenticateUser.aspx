@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mobile/Site1.MobileNested.master" AutoEventWireup="true" CodeBehind="AuthenticateUser.aspx.cs" Inherits="WebCresij.Mobile.AuthenticateUser" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Mobile/Site1.MobileNested.master" AutoEventWireup="true" 
+    CodeBehind="AuthenticateUser.aspx.cs" Inherits="WebCresij.Mobile.AuthenticateUser" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="childMasterhead" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="childmastercontent" runat="server">

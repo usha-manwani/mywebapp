@@ -26,34 +26,43 @@ namespace WebCresij.Mobile
         public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            string s = HttpContext.Current.Session["UserId"].ToString();
+            string roleids = HttpContext.Current.Session["role"].ToString();
+            if (s != null)
             {
-                if (!this.IsPostBack)
+                if (!IsPostBack)
                 {
-                    string ins = Resources.Resource.ResourceManager.GetString("Institutes");
-                     root = new TreeNode(ins, "");
-                    root.SelectAction = TreeNodeSelectAction.Expand;
-                    TreeMenuView.Nodes.Add(root);
-                    DataTable dt = ExecuteCommand("Select ins_name, ID, ins_id from Institute_Details order by ins_name");
-                    dtIns = dt;
-                    this.PopulateTreeView(dt, 0, null);
-                    DefaultClass();
-                   // nodenames = new string[TreeMenuView.Nodes.Count];
-
-                }
-                else
-                {
-                    string Ip = Session["DeviceIP"].ToString();
-                    CentralControl ct = new CentralControl();
-                    DataTable dt1 = ct.Getlocation(Ip);
-                    if (dt1.Rows.Count > 0)
+                    if (!this.IsPostBack)
                     {
-                        insName.Text = dt1.Rows[0][0].ToString();
-                        GradeName.Text = dt1.Rows[0][1].ToString();
-                        ClassName.Text = dt1.Rows[0][2].ToString();
-                        
+                        string ins = Resources.Resource.ResourceManager.GetString("Institutes");
+                        root = new TreeNode(ins, "");
+                        root.SelectAction = TreeNodeSelectAction.Expand;
+                        TreeMenuView.Nodes.Add(root);
+                        DataTable dt = ExecuteCommand("Select ins_name, ID, ins_id from Institute_Details order by ins_name");
+                        dtIns = dt;
+                        this.PopulateTreeView(dt, 0, null);
+                        DefaultClass();
+                        // nodenames = new string[TreeMenuView.Nodes.Count];
+
+                    }
+                    else
+                    {
+                        string Ip = Session["DeviceIP"].ToString();
+                        CentralControl ct = new CentralControl();
+                        DataTable dt1 = ct.Getlocation(Ip);
+                        if (dt1.Rows.Count > 0)
+                        {
+                            insName.Text = dt1.Rows[0][0].ToString();
+                            GradeName.Text = dt1.Rows[0][1].ToString();
+                            ClassName.Text = dt1.Rows[0][2].ToString();
+
+                        }
                     }
                 }
+            }
+            else
+            {
+                Response.Redirect("../Mobile/Login.aspx");
             }
         }
 

@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div style="background-color:black">
+        <div id="divPlugin2" style="background-color:black; height:100px">
+
+        </div>
+        <span id="switch2" style="text-align:center; display:none; font-size:smaller; color:white; cursor:pointer"
+              onclick="clickonSwitch2(); return false;">Click to switch</span>
+        <input type="hidden" id="hiddenplugin2" value="" />
+    </div>
+</body>
+</html>
+<script src="codebase/webVideoCtrl.js"></script>
+<script>
+
+    function GetPlugin2(ip, user, pass, port) {
+
+        WebVideoCtrl.I_InitPlugin("100%", "80px", {
+            bWndFull: false,
+            iPackageType: 2,
+            szColorProperty: " plugin-background: ffffff; sub-background: none; sub-border: none; sub-border-select: none ",
+            cbInitPluginComplete: function () {
+                ru = WebVideoCtrl.I_InsertOBJECTPlugin("divPlugin2");
+                //
+                // check plugin to see whether it is the latest
+                if (-1 == WebVideoCtrl.I_CheckPluginVersion()) {
+                    alert("Detect the latest version, please double click WebComponentsKit.exe to update!");
+                    return;
+                }
+            }
+
+        });
+
+        camLogin2(ip, user, pass, port)
+
+    }
+    function camLogin2(ip, user, pass, port) {
+        var szIdentity = ip + "_" + port;
+        var iret = WebVideoCtrl.I_Login(ip, 1, port, user, pass, {
+            success: function (xmlDoc) {
+
+                console.log(szIdentity);
+                document.getElementById('hiddenplugin2').value = ip;
+                console.log(szIdentity + " login success！");
+                ChangePlay2(szIdentity);
+
+            },
+            error: function (status, xmlDoc) {
+                console.log(szIdentity + " login failed！", status, xmlDoc);
+            }
+        });
+        if (-1 == iret) {
+            console.log(szIdentity + " login already !");
+            ChangePlay2(szIdentity);
+        }
+    }
+    function StartPlay2(szIdentity) {
+        WebVideoCtrl.I_StartRealPlay(szIdentity,
+            {
+                iStreamType: 2,
+
+                success: function () {
+                    szInfo = "start real play success！";
+                    console.log(szIdentity + " " + szInfo);
+                    document.getElementById("switch2").style.display = "block";
+                },
+                error: function (status, xmlDoc) {
+                    if (403 === status) {
+                        szInfo = "Device do not support Websocket extracting the flow！";
+                    } else {
+                        szInfo = "start real play failed！";
+                    }
+                    console.log(szIdentity + " " + szInfo);
+                }
+            }
+        )
+    };
+    function getid() {
+        return document.getElementById('hiddenplugin2').value;
+    }
+    function setid(ip) {
+        document.getElementById('hiddenplugin2').value = ip;
+    }
+    function ChangePlay2(szIdentity) {
+        var oWndInfo = WebVideoCtrl.I_GetWindowStatus(0);
+        if (oWndInfo != null) {// stop play first
+            WebVideoCtrl.I_Stop({
+                success: function () {
+                    StartPlay2(szIdentity);
+                }
+            });
+        } else {
+            StartPlay2(szIdentity);
+        }
+    }
+
+    function clickonSwitch2() {
+        parent.changeplaycam2();
+    }
+</script>

@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Mobile.Master" AutoEventWireup="true" CodeBehind="SingleTimeControlPage.aspx.cs" Inherits="WebCresij.Scan.SingleTimeControlPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Mobile.Master" AutoEventWireup="true" 
+    CodeBehind="SingleTimeControlPage.aspx.cs" Inherits="WebCresij.Scan.SingleTimeControlPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style>

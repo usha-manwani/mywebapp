@@ -86,13 +86,17 @@
                         <td  style=" width: 50%;color:white" colspan="2">
                             <asp:UpdatePanel runat="server">
                                 <ContentTemplate>
-                                    <asp:Label runat="server" ID="labelonline" Text=""></asp:Label>                           
+                                    <span><%=Resources.Resource.SystemOnline %>: <span  id="labelonline">0</span> </span>
+                                                              
                             &nbsp;&nbsp;&nbsp;
-                            <asp:Label runat="server" ID="labeloffline" Text=""></asp:Label>
+                                    <span ><%=Resources.Resource.SystemOffline %>: <span id="labeloffline">0</span></span>
+                           
                             &nbsp;&nbsp;&nbsp;
-                            <asp:Label runat="server" ID="labelstatuson" Text=""></asp:Label>                           
+                                    <span ><%=Resources.Resource.SystemOn %>: <span id="labelstatuson">0</span></span>
+                                                       
                             &nbsp;&nbsp;&nbsp;
-                            <asp:Label runat="server" ID="labelstatusoff" Text=""></asp:Label>
+                                    <span ><%=Resources.Resource.SystemOff %>: <span id="labelstatusoff">0</span></span>
+                            
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                             
@@ -220,7 +224,7 @@
         </asp:UpdatePanel>
         <input type="hidden" value="0" id="pageindex"/>
     </div>
-    <asp:Timer ID="Timer1" runat="server"></asp:Timer>
+   <%--<asp:Timer ID="Timer1" runat="server"></asp:Timer>--%>
 </asp:Content>
 <%--</asp:Content>--%>
 
