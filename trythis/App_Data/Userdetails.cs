@@ -332,5 +332,35 @@ namespace WebCresij
             }
             return count;
         }
+
+        public int ChangePass(string userid, string oldpass, string newpass)
+        {
+            int r = 0;
+            using(MySqlConnection con = new MySqlConnection(constr))
+            {
+                string query = "update user_details set password = '"+newpass+
+                    "' where user_id ='" + userid + "' and password ='" + oldpass + "'";
+                try
+                {
+                    using(MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        if(con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        r = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    r = -1;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return r;
+        }
     }
 }

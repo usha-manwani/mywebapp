@@ -20,7 +20,7 @@ namespace CresijApp.DataAccess
            ["CresijCamConnectionString"].ConnectionString;
             try
             {                
-                string query = "Select Ins_id, Ins_name from Institute_Details";
+                string query = "Select ins_id, Ins_name from Institute_Details";
                 using (MySqlConnection conn = new MySqlConnection(constr))
                 {                
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
@@ -50,7 +50,7 @@ namespace CresijApp.DataAccess
             string constr = ConfigurationManager.ConnectionStrings
            ["CresijCamConnectionString"].ConnectionString;
             DataTable dt = new DataTable();
-            string query = "Select Grade_id, Grade_name from Grade_Details gd where " +
+            string query = "Select grade_id, Grade_name from Grade_Details gd where " +
                 "insid in ( select id from institute_details where ins_id ='" + ins + "')";
             using (MySqlConnection conn = new MySqlConnection(constr))
             {

@@ -113,5 +113,15 @@ namespace CresijApp.Services
             }
             return idata;
         }
+
+        [WebMethod]
+        public List<object> GetApAdd(string name)
+        {
+            List<object> idata = new List<object>();
+            CentralControl cc = new CentralControl();
+            string ip = cc.GetIp(name);
+            idata.Add(ip);
+            return idata;
+        }
     }
 }

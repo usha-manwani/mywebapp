@@ -75,7 +75,7 @@
                 <span><%=Resources.Resource.ConfirmPassword%></span>
             </asp:Label>
             <div class="col-md-7">
-                <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control" />
+                <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control"/>
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPassword"
                     CssClass="text-danger" Display="Dynamic" ErrorMessage="<%$Resources:Resource,InsertConfirmPassword %>" />
                 <asp:CompareValidator runat="server" ControlToCompare="Password" ControlToValidate="ConfirmPassword"

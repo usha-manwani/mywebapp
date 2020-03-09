@@ -9,7 +9,7 @@
     <script src="Scripts/jquery.signalR-2.4.1.js"></script>
     <script src="Scripts/jquery.signalR-2.4.1.min.js"></script>
     <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script>
-    <script src="Scripts/RemoteModal.js?v=7"></script>
+    <script src="Scripts/RemoteModal.js?v=8"></script>
     <style>
         .scroll {
             overflow-y: auto;

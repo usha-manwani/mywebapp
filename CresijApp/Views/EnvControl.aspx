@@ -1,41 +1,67 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/SiteMaster.Master" AutoEventWireup="true" CodeBehind="EnvControl.aspx.cs" Inherits="CresijApp.Views.EnvControl" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+     <style>
+        .pluginstyle{
+            -moz-box-shadow: inset 0 0 10px #808080;
+            -webkit-box-shadow: inset 0 0 10px #808080;
+            box-shadow: inset 0 0 10px #808080;
+            overflow: hidden; 
+            height:330px!important;
+            min-height:330px;
+            width:80%!important;
+            display:inline-block;
+            text-align:left
+        }
+        .smallplugin{
+            min-width: 144px; 
+            max-height: 120px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="siteContainer" runat="server">
+    <script src="../HikVision/codebase/webVideoCtrl.js"></script>
     <div class="col-12 float-left">
       <h3 class="h3tt float-left"><i class="fa fa-desktop"></i> Class 01</h3>
       <div class="float-right mt-4">
         <label for="">
-          <botton class="btn btn-secondary btn-sm float-right"><i class="fa fa-desktop"></i> 辅教设备</botton>
+          <a href="Control.aspx" class="btn btn-secondary btn-sm float-right"><i class="fa fa-desktop"></i> 辅教设备</a>
         </label>
         <label for="">
-          <botton class="btn btn-primary btn-sm float-right active"><i class="fa fa-leaf"></i> 环境设备</botton>
+          <a href="#" class="btn btn-primary btn-sm float-right active"><i class="fa fa-leaf"></i> 环境设备</a>
         </label>
         <label for="">
-          <botton class="btn btn-secondary btn-sm float-right"><i class="fa fa-camera"></i> 录课设备</botton>
+          <a href="#" class="btn btn-secondary btn-sm float-right"><i class="fa fa-camera"></i> 录课设备</a>
         </label>
       </div>
       <div class="stat-card col-12 float-left">
-        <div class="col-8 no-gutter float-left" style="padding: 15px 0;">
-          <div class="box-video"> <img src="images/001.jpg" alt=""> </div>
+        <div class="col-7 no-gutter float-left" style="padding: 15px 0;">
+          <div class="box-video"> 
+              <div id="divPlugin" class="plugin pluginstyle">
+               </div>
+              <input type="hidden" id="hiddenplugin" value="" /> </div>
           <div class="col-12 controler no-gutter clearfix" style="padding-bottom: 0;">
-            <form action="">
+           
               <label>
-                <input value="teacher" name="listen" type="radio" checked="true">
+                <input value="teacher" name="listen" type="radio" checked>
                 <i>教师音频</i><span class="fa fa-volume-up"></span></label>
               <label>
                 <input value="room" name="listen" type="radio" >
                 <i>课室音频</i><span class="fa fa-volume-up"></span></label>
               <label>
                 <input value="call" name="listen" type="radio">
-                <i>呼叫</i><span class="fa fa-phone"></span></label>
-            </form>
+                <i>呼叫</i><span class="fa fa-phone"></span></label>            
           </div>
         </div>
-        <div class="col-1 float-left" style="padding-right: 0;">
-          <p class="sbox-video"><img src="images/001.jpg" alt=""></p>
-          <p class="sbox-video"><img src="images/001.jpg" alt=""></p>
-          <p class="sbox-video"><img src="images/001.jpg" alt=""></p>
+        <div class="col-2 float-left" style="padding-right: 0;">
+          <p class="sbox-video smallplugin"><iframe id="Iframe2" style=" height: 120px"
+                                    src="~/HikVision/Plugin1.html" name="frameplugin1"
+                                    width="100%" runat="server" frameborder="0"></iframe></p>
+          <p class="sbox-video smallplugin"><iframe id="Iframe3" style=" height: 120px"
+                                    src="~/HikVision/Plugin2.html" name="frameplugin2"
+                                    width="100%" runat="server" frameborder="0"></iframe></p>
+          <p class="sbox-video smallplugin"><iframe id="Iframe4" style=" height: 120px"
+                                    src="~/HikVision/Plugin3.html" name="frameplugin3"
+                                    width="100%" runat="server" frameborder="0"></iframe></p>
         </div>
         <div class="right-card card col-3 float-right no-gutter" style="margin-right: -15px;">
           <div class="card-header small">
@@ -86,6 +112,9 @@
       </div>
     </div>
     <div class="w-100 clearfix float-left" style="height: 30px;"></div>
+    <div id="envcontrol" style="display:none">
+
+    
     <div class="col-4 float-left">
       <div class="stat-card no-gutter ">
         <div class="col-4 float-left text-center header" style="background: #fafafa; height: 120px;"> <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
@@ -94,13 +123,13 @@
         <div class="col-8 float-left small controler2 pt-4">
           <div class="controler-item float-left"><i class="fa fa-lightbulb-o"></i> 讲台灯光
             <label class="rounded-pill ml-3" for="">
-              <input type="checkbox">
+              <input type="checkbox" id="light1">
             </label>
           </div>
           <div class="w-100 clearfix"></div>
           <div class="controler-item float-left pr-4"><i class="fa fa-lightbulb-o"></i> 课室灯光
             <label class="rounded-pill ml-3" for="">
-              <input type="checkbox">
+              <input type="checkbox"  id="light2">
             </label>
           </div>
         </div>
@@ -116,16 +145,16 @@
             <tr>
               <th><i class="fa fa-columns"></i></th>
               <td>讲台窗帘</td>
-              <td class="btns"><input type="radio" name="env" class="radio s-left ml-0">
-                <input checked type="radio" name="env" class="radio s-pause ml-0">
-                <input type="radio" name="env" class="radio s-right ml-0"></td>
+              <td class="btns"><input type="radio" name="env" class="radio s-left ml-0" value="open">
+                <input type="radio" name="env" class="radio s-pause ml-0" value="stop">
+                <input type="radio" name="env" class="radio s-right ml-0" value="close"></td>
             </tr>
             <tr>
               <th><i class="fa fa-columns"></i></th>
               <td>讲台窗帘</td>
-              <td class="btns"><input type="radio" name="env2" class="radio s-left ml-0">
-                <input checked type="radio" name="env2" class="radio s-pause ml-0">
-                <input type="radio" name="env2" class="radio s-right ml-0"></td>
+              <td class="btns"><input type="radio" name="env2" class="radio s-left ml-0" value="open">
+                <input type="radio" name="env2" class="radio s-pause ml-0" value="stop">
+                <input type="radio" name="env2" class="radio s-right ml-0" value="close"></td>
             </tr>
           </table>
         </div>
@@ -139,27 +168,33 @@
         <div class="col-8 float-left small controler2" style="padding-top: 20px;">
           <div class="controler-item float-left pr-4" style="padding-right:;">空调1
             <label class="rounded-pill ml-3" for="">
-              <input type="checkbox">
+              <input type="checkbox" id="ac1">
             </label>
           </div>
           <div class="controler-item float-left">空调2
             <label class="rounded-pill ml-3" for="">
-              <input type="checkbox">
+              <input type="checkbox" id="ac2">
             </label>
           </div>
           <div class="w-100 clearfix"></div>
           <div class="controler-item float-left pr-4">空调3
             <label class="rounded-pill ml-3" for="">
-              <input type="checkbox">
+              <input type="checkbox" id="ac3">
             </label>
           </div>
           <div class="controler-item float-left">空调4
             <label class="rounded-pill ml-3" for="">
-              <input type="checkbox">
+              <input type="checkbox" id="ac4">
             </label>
           </div>
         </div>
       </div>
     </div>
     <div class="w-100 clearfix float-left" style="height: 30px;"></div>
+        </div>
+    <script src="../Scripts/WebPlugin.js"></script>
+
+     <script src="../Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src='<%: ResolveClientUrl("~/signalr/hubs") %>'> </script> 
+    <script src="../Scripts/EnvControl.js"></script>
 </asp:Content>

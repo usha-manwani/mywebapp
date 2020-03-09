@@ -1,21 +1,25 @@
-﻿function checkIframeLoaded() {
+﻿$ = jQuery.noConflict();
+function checkIframeLoaded() {
     var iframe_content = $("#MainContent_masterchildBody_Iframe4").contents();
-
     if (iframe_content.length > 0) {
         clearInterval(checkIframeLoadedInterval);
         callCam();
     }
 }
 
-
-function GetPlugin(ip, user, pass, port, width, height, divid, hidden) {
-    var ru;
+function GetPlugin(ip, user, pass, port) {//ip, user, pass, port, width, height, divid, hidden
+    var iRet = WebVideoCtrl.I_CheckPluginInstall();
+    if (-1 == iRet) {
+        alert(" please download and install the plugin WebComponentsKit.exe!");
+        window.open("../HikVision/DownloadPlugin.aspx");
+        return;
+    }
     WebVideoCtrl.I_InitPlugin("100%", "100%", {
         bWndFull: true,
         iPackageType: 2,
         szColorProperty: " plugin-background: ffffff; sub-background: none; sub-border: none; sub-border-select: none ",
         cbInitPluginComplete: function () {
-           ru=  WebVideoCtrl.I_InsertOBJECTPlugin(divid);
+            ru = WebVideoCtrl.I_InsertOBJECTPlugin("divPlugin");
             //
             // check plugin to see whether it is the latest
             if (-1 == WebVideoCtrl.I_CheckPluginVersion()) {
@@ -23,24 +27,22 @@ function GetPlugin(ip, user, pass, port, width, height, divid, hidden) {
                 return;
             }
         }
-        
     });
-    console.log(divid+"  "  +ru);
-    camLogin(ip, user, pass, port, hidden)
+    console.log("plugin in main page initialized  "  +ru);
+    camLogin(ip, user, pass, port);
 
 }
 var user = ''; var pass = ''; 
 function camLogin(ip, user, pass, port) {
+    
     var szIdentity;
     szIdentity = ip + "_" + port;
     var iret = WebVideoCtrl.I_Login(ip, 1, port, user, pass, {
-        success: function (xmlDoc) {
-            
+        success: function (xmlDoc) {            
             console.log(szIdentity);
             document.getElementById('hiddenplugin').value = ip;
             console.log(szIdentity + " login success！");
             ChangePlay(szIdentity);
-
         },
         error: function (status, xmlDoc) {
             console.log(szIdentity + " login failed！", status, xmlDoc);
@@ -55,7 +57,6 @@ function StartPlay(szIdentity) {
     WebVideoCtrl.I_StartRealPlay(szIdentity,
         {
             iStreamType: 2,
-
             success: function () {
                 szInfo = "start real play success！";
                 console.log(szIdentity + " " + szInfo);
@@ -94,13 +95,10 @@ $(function () {
                 return;
             }
         }
-
     });
-    console.log("initializn plugin");
-    camLogin('172.168.10.96', 'admin', 'admin123', '80');
+    console.log("plugin in main page initialized  " + ru);
+   // camLogin('172.168.10.96', 'admin', 'admin123', '80');
 });
-
-
 
 //document.onclick = function (event) {
 //    if (event.target == modal) {
@@ -113,16 +111,15 @@ $(function () {
 //};
 
 //ajax call to get cam details
-function callCam() {
-
+function callCam(id) {
     var aData;
-    var val = document.getElementById("loccam").value;
+    var val = id;
     var jsonData = JSON.stringify({
         name: val
     });
     $.ajax({
         type: "POST",
-        url: "Services/GetSideMenu.asmx/GetCamDetails",
+        url: "../Services/GetSideMenu.asmx/GetCamDetails",
         data: jsonData,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -135,27 +132,36 @@ function callCam() {
         if (aData.length > 0) {
             console.log("method is called");
             for (i = 0; i < aData.length; i++) {
+
                 var cam = aData[i];
-               
+                console.log(cam[0]);
                 if (i == 0) {
-                    camLogin(cam[0], cam[1], cam[2], 80);
                     user = cam[1];
                     pass = cam[2];
+
+                    GetPlugin(cam[0], user, pass, 80);
+                    //camLogin(cam[0], user, pass, 80);
+
                 }
-                   
                 else if (i == 1) {
                     window.frames['frameplugin1'].GetPlugin1(cam[0], cam[1], cam[2], 80);
-                    //window.frames['frameplugin1'].camLogin1(cam[0], cam[1], cam[2], 80);
-                    
                 }
                 else if (i == 2) {
                     window.frames['frameplugin2'].GetPlugin1(cam[0], cam[1], cam[2], 80);
-                    //document.getElementById('#MainContent_masterchildBody_Iframe3').contentWindow.camLogin2(cam[0], cam[1], cam[2], 80, "");
                 }
                 else if (i == 3) {
                     window.frames['frameplugin3'].GetPlugin1(cam[0], cam[1], cam[2], 80);
-                    //document.getElementById('#MainContent_masterchildBody_Iframe4').contentWindow.camLogin3(cam[0], cam[1], cam[2], 80, "");
                 }
+            }
+        }
+        else {
+            var sz = document.getElementById('hiddenplugin').value +"_80";
+            stopLogout(sz);
+            
+            var ip = window.frames['frameplugin1'].getid();
+            if (ip.length > 0) {
+                var sz1 = ip + "_80";
+                window.frames['frameplugin1'].stopLogout(sz1);
             }
         }
     }
@@ -168,8 +174,8 @@ var checkIframeLoadedInterval = setInterval(checkIframeLoaded, 1000);
 
 
 function changeplaycam1() {
-    var frame = $("#MainContent_masterchildBody_Iframe1").contents();
-    if (frame.length > 0) {
+   // var frame = $("#MainContent_masterchildBody_Iframe1").contents();
+    //if (frame.length > 0) {
         var ip = window.frames['frameplugin1'].getid();
         if (ip.length > 0) {
             var temp = document.getElementById('hiddenplugin').value;
@@ -179,7 +185,7 @@ function changeplaycam1() {
             window.frames['frameplugin1'].camLogin1(temp, user, pass, 80);
             //window.frames['frameplugin1'].StartPlay1(temp+ "_" + 80);
         }
-    }
+    //}
 }
 function changeplaycam2() {
     var frame = $("#MainContent_masterchildBody_Iframe2").contents();
@@ -239,6 +245,19 @@ function clickOpenSound() {
         }
         
     }
+}
+
+function stopLogout(sz) {
+    var oWndInfo = WebVideoCtrl.I_GetWindowStatus(0);
+    if (oWndInfo != null) {// stop play first
+        WebVideoCtrl.I_Stop({
+            success: function () {
+                document.getElementById('hiddenplugin').value = "";
+                console.log("stopped playing");
+            }
+        });
+    }
+    WebVideoCtrl.I_Logout(sz);
 }
 
 

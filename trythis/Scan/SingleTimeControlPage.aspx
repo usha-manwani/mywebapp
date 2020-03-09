@@ -393,5 +393,5 @@
             </div>
         </fieldset>
     </div>
-    <script src="../Scripts/SingleTimeControl.js"></script>
+    <script src="../Scripts/SingleTimeControl.js?v=1"></script>
 </asp:Content>

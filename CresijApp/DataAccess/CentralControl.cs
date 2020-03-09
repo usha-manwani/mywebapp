@@ -130,7 +130,7 @@ namespace CresijApp.DataAccess
             DataTable dtcam = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "select CameraIP, user_id, password, port from Camera_Details where location = " + loc;
+                string query = "select CameraIP, user_id, password, port from Camera_Details where location in (select id from class_details where classid = '" + loc + "')";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     try
@@ -226,6 +226,21 @@ namespace CresijApp.DataAccess
                 }
                 return dt;
             }
+        }
+        public string GetIp( string name)
+        {
+            string ip = "";
+            using(MySqlConnection con = new MySqlConnection(constr))
+            {
+                string query = "select ccip from CentralControl where location in (select id from class_details where classid = '" + name + "')";
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    if (con.State != ConnectionState.Open)
+                        con.Open();
+                    ip = cmd.ExecuteScalar().ToString();
+                }
+            }
+            return ip;
         }
     }
 }

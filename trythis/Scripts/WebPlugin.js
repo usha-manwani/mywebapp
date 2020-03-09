@@ -235,5 +235,15 @@ function clickOpenSound() {
     }
 }
 
+function camvolControl(value) {
+    var oWndInfo = WebVideoCtrl.I_GetWindowStatus(0);
+    if (oWndInfo != null) {
+        var iRet = WebVideoCtrl.I_SetVolume(value, 0);
+        document.getElementById("camvolchange").innerText = value;
+        console.log(iRet);
+    }
+
+}
+
 
 

@@ -522,6 +522,7 @@
     <Content Include="Mobile\Home.aspx" />
     <Content Include="Mobile\Login.aspx" />
     <Content Include="Mobile\Logout.aspx" />
+    <Content Include="ResetPassword.aspx" />
     <Content Include="Scan\mobileqr\booth.png" />
     <Content Include="Scan\mobileqr\desktop.png" />
     <Content Include="Scan\mobileqr\laptop.png" />
@@ -2044,6 +2045,13 @@
     </Compile>
     <Compile Include="Mobile\Status.aspx.designer.cs">
       <DependentUpon>Status.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Scan\Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

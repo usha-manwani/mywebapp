@@ -21,9 +21,8 @@
                     <asp:UpdatePanel runat="server">                        
                         <ContentTemplate>
                             <asp:TreeView runat="server" OnSelectedNodeChanged="TreeMenuView_SelectedNodeChanged"
-                                ID="TreeMenuView" NodeStyle-NodeSpacing="0.5px" OnTreeNodeExpanded="TreeMenuView_TreeNodeExpanded"
-                                OnTreeNodeCollapsed="TreeMenuView_TreeNodeCollapsed" 
-                                RootNodeStyle-CssClass="text-bold" ForeColor="White">
+                                ID="TreeMenuView" NodeStyle-NodeSpacing="0.5px" SelectedNodeStyle-BackColor="#4ECDC4"
+                                RootNodeStyle-CssClass="text-bold" ForeColor="White" >
                                 <RootNodeStyle Font-Size="1.5em" />
                             </asp:TreeView>
                         </ContentTemplate>

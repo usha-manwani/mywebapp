@@ -849,14 +849,21 @@ function CreateAllChart(value) {
         var pm10 = aData[4];
         var workinghours = aData[9];
         var donutcharts = aData[10];
+        if (workinghours.length == 0) {
+            usedhourchart.series[0].setData([0, 0, 0]);
+
+        }
+        else if (workinghours.length > 0) {
+            usedhourchart.series[0].setData([parseFloat(workinghours[0], 10), parseFloat(workinghours[1], 10), parseFloat(workinghours[4], 10)]);
+        }
 
         if (workinghours.length == 0) {
             usedhourchart.series[0].setData([0, 0, 0, 0, 0, 0]);
-            
+
         }
         else if (workinghours.length > 0) {
-            usedhourchart.series[0].setData([parseFloat(workinghours[0], 10), parseFloat(workinghours[1], 10), parseFloat(workinghours[2], 10), 
-                parseFloat(workinghours[3], 10), parseFloat(workinghours[4], 10), parseFloat(workinghours[5], 10)]);
+            usedhourchart.series[0].setData([parseFloat(workinghours[0], 10), parseFloat(workinghours[1], 10), parseFloat(workinghours[2], 10),
+            parseFloat(workinghours[3], 10), parseFloat(workinghours[4], 10), parseFloat(workinghours[5], 10)]);
         }
         var temptick;
         if (temperature.length > 0)
@@ -1504,9 +1511,9 @@ function ShowTempModal2() {
     });
 }
 
-//$(document).ready(function () {
-//    CreateAllChart("All");  
-//});
+$(document).ready(function () {
+    CreateAllChart("All");  
+});
 
 function designChart(response) {
     aData = response.d;
@@ -1517,6 +1524,14 @@ function designChart(response) {
     var pm25 = aData[3];
     var pm10 = aData[4];
     var workinghours = aData[5];
+    if (workinghours.length == 0) {
+        usedhourchart.series[0].setData([0, 0, 0]);
+
+    }
+    else if (workinghours.length > 0) {
+        usedhourchart.series[0].setData([parseFloat(workinghours[0], 10), parseFloat(workinghours[1], 10),
+        parseFloat(workinghours[4], 10)]);
+    }
     if (workinghours.length == 0) {
         usedhourchart.series[0].setData([0, 0, 0, 0, 0, 0]);
 

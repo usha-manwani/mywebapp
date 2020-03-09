@@ -1,5 +1,4 @@
-﻿
-var ipAddress = "";
+﻿var ipAddress = "";
 function uncheck() {
     $('#desktop').closest("td").find("img").attr('src', "Images/AllImages/images/图标_158.png");
 
@@ -61,10 +60,15 @@ $(function () {
    // console.log(ipAddress);
     chat.client.broadcastMessage = function (name, message) {
        // console.log(name + "    and  " + ipAddress);
-        if (name == ipAddress) {
-            
+        if (name == ipAddress) {            
             var arraydata = message.split(',');
             if (arraydata[1] == "Heartbeat") {
+                if (arraydata[12] == '锁定') {
+                    document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1.png";
+                }
+                else {
+                    document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1open.png"; 
+                }
                 if (arraydata[3] == '待机') {
                     var img = document.getElementById("systempower");
                     img.src = "Images/AllImages/images/图标_210.png";
@@ -72,8 +76,8 @@ $(function () {
                 }
                 else {
                     var img = document.getElementById("systempower");
-                    img.src = "Images/中控首页按钮/on/systemon.png"; 
-
+                    img.src = "Images/中控首页按钮/on/systemon.png";
+                
                     if (arraydata[5] == '已开机') {//on
                         var imgpc = document.getElementById("pcpower");
                         imgpc.src = "Images/中控首页按钮/on/pcon.png";
@@ -101,14 +105,7 @@ $(function () {
                         $('#screenup1').attr('src', "Images/中控首页按钮/on/screenup.png");
 
                     }
-                    if (arraydata[12] == '锁定') {
-                        var src = document.getElementById('sysLock');
-                        src.src = "Images/中控首页按钮/on/lock1.png";
-                    }
-                    else {
-                        var src = document.getElementById('sysLock');
-                        src.src = "Images/中控首页按钮/on/lock1open.png";
-                    }
+                    
                     if (arraydata[13] == '锁定') {
                         var src = document.getElementById('podiumLock');
                         src.src = "Images/中控首页按钮/on/lock2.png";
@@ -170,7 +167,6 @@ $(function () {
                     }
 
                     if (arraydata[6] == '已关机') {
-
                         var src = document.getElementById("projectorOff");
                         src.src = "Images/中控首页按钮/on/projred.png";
                         document.getElementById("projectorOn").src = "Images/AllImages/images/图标_184.png";
@@ -182,7 +178,6 @@ $(function () {
                 }
             }
             else {
-
                 if (arraydata[1] == "KeyValue") {
                     switch (arraydata[2]) {
                         case 'SystemON':
@@ -210,11 +205,11 @@ $(function () {
                             break;
                         case 'projopen':
                             $('#projectorOn').closest("td").find("img").attr('src', "../Images/中控首页按钮/on/projgreen.png");
-                            $('#projred').closest("td").find("img").attr('src', "../Images/AllImages/images/图标_186.png");                            
+                            $('#projectorOff').closest("td").find("img").attr('src', "../Images/AllImages/images/图标_186.png");                            
                             break;
                         case 'projoff':
                             $('#projectorOn').closest("td").find("img").attr('src', "../Images/AllImages/images/图标_184.png");
-                            $('#projred').closest("td").find("img").attr('src', "../Images/中控首页按钮/on/projred.png");
+                            $('#projectorOff').closest("td").find("img").attr('src', "../Images/中控首页按钮/on/projred.png");
                             break;
                         
                         case 'volplus':
@@ -270,15 +265,13 @@ $(function () {
                                 var img = document.getElementById("wiredicons");
                                 img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/有线麦静音.png";
                             }
-                            break;
-                        
+                            break;                        
                         default:
                             break
                     }
                 }
                 else if (arraydata[1] == "LEDIndicator") {
                     if (arraydata[5] == "CentralLock") {
-
                         document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1.png";
                     }
                     else if (arraydata[5] == "CentralLockoff")
@@ -286,17 +279,14 @@ $(function () {
                     if (arraydata[2] == "SystemSwitchOn") {
                         var img = document.getElementById("systempower");
                         img.src = "Images/中控首页按钮/on/systemon.png";
-                        //if (arraydata[4] == "Computer") {
-                        //    var imgpc = document.getElementById("pcpower");
-                        //    var sourceof = imgpc.getAttribute('src');
-                        //    if (sourceof == "Images/AllImages/images/图标_212.png") {
-                        //        imgpc.src = "Images/中控首页按钮/on/pcon.png";
-                        //    }
-                        //    else {
-                        //        imgpc.src = "Images/AllImages/images/图标_212.png";
-                        //    }
-                        //}
-                        
+                        if (arraydata[4] == "Computer") {
+                            var imgpc = document.getElementById("pcpower");                            
+                            imgpc.src = "Images/中控首页按钮/on/pcon.png";
+                            }
+                        else if (arraydata[4] == "ComputerOff") {
+                            var imgpc = document.getElementById("pcpower");
+                            imgpc.src = "Images/AllImages/images/图标_212.png";
+                        }
                         uncheck();
                         switch (arraydata[3]) {
                             case 'Desktop':
@@ -394,6 +384,7 @@ $(function () {
         ipAddress = document.getElementById("sessionInputIP").value;
         //ipAddress = sessionStorage.getItem('ipofremote');
         chat.server.checkStatus(ipAddress);
+        chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 02 2d 35");
         $(document).on("click", "#screen1", function () {
             var tble = document.getElementById("curtainTable");
             $(tble).find('td').each(function (column, td) {
@@ -976,7 +967,12 @@ $(function () {
         });
 
         $(document).on("click", "#systempower", function () {
-            chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 18 22");
+            var source = $(this).attr('src');
+            if (source == "Images/中控首页按钮/on/systemon.png")
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 1F 29");
+            else {
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 1E 28");//open
+            }
         });
         $(document).on("click", "#pcpower", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");
@@ -1124,15 +1120,13 @@ $(function () {
 function NoNotification(arraydata) {
     var imgpc = document.getElementById("pcpower");
     imgpc.src = "Images/AllImages/images/图标_212.png";
-    if (arraydata[12] == 'Locked') {
-        var src = document.getElementById('sysLock');
-        src.src = "Images/AllImages/images/图标_262.png";
+    if (arraydata[12] == '锁定') {
+        document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1.png";
     } 
     else {
-        var src = document.getElementById('sysLock');
-        src.src = "Images/AllImages/images/图标_264.png";
+        document.getElementById("sysLock").src = "Images/中控首页按钮/on/lock1open.png";
     }
-    if (arraydata[13] == 'Locked') {
+    if (arraydata[13] == '锁定') {
         var src = document.getElementById('podiumLock');
         src.src = "Images/AllImages/images/PodiumLock.png";
     }
@@ -1140,7 +1134,7 @@ function NoNotification(arraydata) {
         var src = document.getElementById('podiumLock');
         src.src = "Images/AllImages/images/图标_216.png";
     }
-    if (arraydata[14] == 'Locked') {
+    if (arraydata[14] == '锁定') {
         var src = document.getElementById('classLock');
         src.src = "Images/AllImages/images/图标_236.png";
     }
@@ -1148,11 +1142,9 @@ function NoNotification(arraydata) {
         var src = document.getElementById('classLock');
         src.src = "Images/AllImages/images/图标_238.png";
     }
-    uncheck();
-    
+    uncheck();    
 
-    if (arraydata[6] == 'Closed') {
-
+    if (arraydata[6] == '已关机') {
         var src = document.getElementById("projectorOff");
         src.src = "Images/AllImages/images/图标_186.png";
         //document.getElementById("projectorOn").src = "Images/AllImages/images/图标_184.png";

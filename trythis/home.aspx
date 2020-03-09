@@ -126,7 +126,7 @@
                         <asp:DropDownList Width="100px" AutoPostBack="true"
                             OnSelectedIndexChanged="ddlInstitute_SelectedIndexChanged"
                             CssClass="btn btn-default border-light" ID="ddlInstitute" 
-                            runat="server" ForeColor="White" BackColor="#1E1E36">                            
+                            runat="server" ForeColor="White" BackColor="#1E1E36">
                         </asp:DropDownList>
                     </div>
                     <div class="col-xl-2 col-lg-2 col-md-3 col-sm-12 float-none mbcustom"
@@ -177,6 +177,7 @@
     </div>
      <div style="clear: both"></div>           
 
+           
             <div class="row">
                 <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12 mbcustom">
                     <div class="row" style="margin-left: -20px;">
@@ -185,7 +186,6 @@
                                 <%--<canvas id="c1" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip" class="chartjs-tooltip">--%>
                                     <div id="c1" style="width:170px; height:170px">
-                                        
                                     </div>
                                 <%--<span id ="span1" class="centered">20</span><br />
                                         <span style="font-size:small; color: white">投影机</span>--%>
@@ -194,8 +194,7 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div id="c2" style="width:170px; height:170px">
-                                        
-                                    </div>
+                            </div>
                             <%--<div>
                                 <canvas id="c2" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip1" class="chartjs-tooltip">
@@ -208,8 +207,7 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div id="c3" style="width:170px; height:170px">
-                                        
-                                    </div>
+                            </div>
                             <%--<div>
                                 <canvas id="c3" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip2" class="chartjs-tooltip">
@@ -222,8 +220,7 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div id="c4" style="width:170px; height:170px">
-                                        
-                                    </div>
+                            </div>
                             <%--<div>
                                 <canvas id="c4" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip5" class="chartjs-tooltip">
@@ -236,8 +233,7 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div id="c5" style="width:170px; height:170px">
-                                        
-                                    </div>
+                            </div>
                             <%--<div id="donutstatus">
                                 <canvas id="c5" height="100%" style="width:100px!important; min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip3" class="chartjs-tooltip">
@@ -251,8 +247,7 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
                             <div id="c6" style="width:170px; height:170px">
-                                        
-                                    </div>
+                            </div>
                             <%--<div >
                                 <canvas id="c6" height="100%" style="width:100px!important;min-width:50px!important"></canvas>
                                 <div id="chartjs-tooltip4" class="chartjs-tooltip">
@@ -280,7 +275,7 @@
                             <div class="card-left  float-left" style="width: 50%">
                                 <span><%=Resources.Resource.brightness%></span>
                                 <br />
-                                <span id="brightness" style="font-size:small;
+                                <span id="brightness" style="
                                     font-size-adjust:0.60" 
                                     class="count float-left ">0</span>
                                 <span>lx</span>
@@ -305,7 +300,7 @@
                             <div class="card-left float-left" style="width: 50%">
                                 <span>CO2</span>
                                 <br />
-                                <span id="co2value" style="font-size:small;
+                                <span id="co2value" style="
                                     font-size-adjust:0.60" class="count float-left">0</span>
                                 <span>PPM</span>
                             </div>
@@ -1017,7 +1012,7 @@
 
         
       
-        var usedhourchart = Highcharts.chart('BarChartUsedHour', {
+         var usedhourchart = Highcharts.chart('BarChartUsedHour', {
             chart: {
                 backgroundColor: 'transparent',
                 plotBackgroundColor: 'transparent',
@@ -1072,7 +1067,7 @@
             },
              series: [{
                     name:"使用时间",
-                    data: [9.9, 1.5, 6.4, 9.2, 4.0, 6.0]
+                    data: [0,0,0,0,0,0]
 
             }],
             title: {

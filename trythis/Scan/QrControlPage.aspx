@@ -296,6 +296,6 @@
         <div class="clearfix"></div>
             </div>
     </div>
-    <script src="QrControl.js?version=9"></script>
+    <script src="QrControl.js?version=10"></script>
 
 </asp:Content>

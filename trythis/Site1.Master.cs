@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace WebCresij
 {
-    public partial class Site1 : System.Web.UI.MasterPage
+    public partial class Site1 : MasterPage
     {
        
         protected void Page_Load(object sender, EventArgs e)
@@ -33,8 +30,7 @@ namespace WebCresij
                     displayRole(roleIds, roleids);
                 }
                 else
-                {
-                   
+                {                   
                     Response.Redirect("~/Index.aspx");
                 }
             }
@@ -44,8 +40,7 @@ namespace WebCresij
             }
             Response.ClearHeaders();
             Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
-            Response.AddHeader("Pragma", "no-cache");
-           
+            Response.AddHeader("Pragma", "no-cache");           
         }
         
         private void displayRole(int[] roleIds, string roleids)
@@ -59,9 +54,9 @@ namespace WebCresij
             downloadDoc.Visible = false;
             delDoc.Visible = false;
             maintainanceLink.Visible = false;
-            //addUser.Visible = false;
-            //removeUser.Visible = false;
-            //approveUser.Visible = false;
+            addUser.Visible = false;
+            removeUser.Visible = false;
+            approveUser.Visible = false;
             navbarDropdown1.Visible = false;
             navbarDropdown.Visible = false;
             dashboard.Visible = false;
@@ -85,10 +80,7 @@ namespace WebCresij
                 }
                 else
                 {
-                    if (roleIds[i] == 2)
-                    {
-
-                    }
+                    if (roleIds[i] == 2){}
                     else if (roleIds[i] == 3)
                     {
                         navbarDropdown2.Visible = true;
@@ -99,7 +91,6 @@ namespace WebCresij
                         uploadDoc.Visible = true;
                         downloadDoc.Visible = true;
                         delDoc.Visible = true;
-
                     }
                     else if (roleIds[i] == 5)
                     {
@@ -109,12 +100,9 @@ namespace WebCresij
                     else if (roleIds[i] == 6)
                     {
                         navbarDropdown.Visible = true;
-                    }
-                    
+                    }                    
                 }               
             }                       
-        }
-
-      
+        }      
     }
 }

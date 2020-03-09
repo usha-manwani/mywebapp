@@ -277,6 +277,7 @@
 
         if (ip != "") {
             chat.server.sendControlKeys(ip, "8B B9 00 03 05 01 09");
+            chat.server.sendControlKeys(ip, "8B B9 00 04 02 02 2d 35");
         }
         $(document).on("click", "#syspower", function () {
             if ($(this).hasClass("oncolor"))
@@ -298,7 +299,6 @@
                     document.getElementById("vol-control").value = 0;
                     this.document.getElementById("volchange").innerText = 0;
                 }
-
             }
             else if (val == 0) {
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/总音量静音.png";
@@ -315,11 +315,8 @@
                 else {
                     document.getElementById("vol-control").value = 99;
                     this.document.getElementById("volchange").innerText = 99;
-
                 }
-
             }
-
         };
         MicControl = function (val) {
             var lastVal = this.document.getElementById("micchange").innerText;
@@ -354,11 +351,8 @@
                 else {
                     document.getElementById("mic-control").value = 99;
                     this.document.getElementById("micchange").innerText = 99;
-
                 }
             }
-
-
         }
         WiredMicControl = function (val) {
             var lastVal = this.document.getElementById("wiredmicchange").innerText;
@@ -425,7 +419,6 @@
                 chat.server.sendControlKeys(ip, "8B B9 00 04 02 02 2c 34");
             }
         });
-
     })
 })(jQuery);
 
@@ -450,8 +443,7 @@
         $(pp).removeClass("imgclick oncolor");
         var pp = document.getElementById('lock');
         pp.src = "../Images/greyed/lock1.png";
-        $(pp).removeClass("imgclick oncolor");
-        
+        $(pp).removeClass("imgclick oncolor");        
     }
 
     function addclickeffect() {

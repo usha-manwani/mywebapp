@@ -202,22 +202,22 @@ namespace WebCresij {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor navbarDropdown4;
         
         /// <summary>
-        /// a2 control.
+        /// query control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor a2;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor query;
         
         /// <summary>
-        /// A3 control.
+        /// about control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor A3;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor about;
         
         /// <summary>
         /// moreMenu control.
@@ -263,6 +263,15 @@ namespace WebCresij {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor config;
+        
+        /// <summary>
+        /// passchange control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor passchange;
         
         /// <summary>
         /// logouts control.

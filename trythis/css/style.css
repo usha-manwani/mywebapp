@@ -17,10 +17,11 @@ Website: http://Alvarez.is/
 /* BASIC THEME CONFIGURATION */
 body {
     color: #797979;
-    background-color: #1e1e36 font-family: 'Ruda', sans-serif;
+    background-color: #1e1e36;
+    font-family: 'Ruda', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
-    font-size: 1rem;   
+    font-size: 1rem!important;    
 }
 gridviewclass:last-child > table {
     border: none !important
@@ -477,7 +478,7 @@ ul.sidebar-menu li a.active, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:fo
 
 
 ul.sidebar-menu li a i {
-    font-size: 15px;
+    font-size: 1.5rem;
     padding-right: 6px;
 }
 

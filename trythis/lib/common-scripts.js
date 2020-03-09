@@ -1,17 +1,17 @@
 /*---LEFT BAR ACCORDION----*/
 $(function () {
    
-  $('#nav-accordion').dcAccordion({
-    eventType: 'click',
-    autoClose: true,
-    saveState: true,
-    disableLink: true,
-    speed: 'slow',
-    showCount: false,
-    autoExpand: true,
-    //        cookie: 'dcjq-accordion-1',
-    classExpand: 'dcjq-current-parent'
-  });
+  //$('#nav-accordion').dcAccordion({
+  //  eventType: 'click',
+  //  autoClose: true,
+  //  saveState: true,
+  //  disableLink: true,
+  //  speed: 'slow',
+  //  showCount: false,
+  //  autoExpand: true,
+  //  //        cookie: 'dcjq-accordion-1',
+  //  classExpand: 'dcjq-current-parent'
+  //});
 });
 
 var Script = function () {
@@ -42,19 +42,19 @@ var Script = function () {
                 $('#container').removeClass('sidebar-close');              
                 $('#sidebar > ul').show();
             }
-            if (wSize > 1100 && wSize < 1300)
+            if (wSize > 1000 && wSize < 1300)
             {
-                $('div').css('font-size', "14px");
+                $('body').css('font-size', "14px");
                 console.log("font decresed");
             }
             
-            else if (wSize > 1300) {
-                $('div').css('font-size', "16px");
-                console.log("font incresed");
-            }
-            else if (wSize<1100)
+            //else if (wSize > 1300) {
+            //    $('div').css('font-size', "16px");
+            //    console.log("font incresed");
+            //}
+            else if (wSize<1000)
             {
-                $('div').css('font-size', "12px");
+                $('body').css('font-size', "12px");
                 console.log("font smallest");
             }
         }

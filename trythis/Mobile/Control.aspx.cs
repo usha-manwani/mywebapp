@@ -34,7 +34,8 @@ namespace WebCresij.Mobile
                 {
                     if (!this.IsPostBack)
                     {
-                        string ins = Resources.Resource.ResourceManager.GetString("Institutes");
+                       // string ins = Resources.Resource.ResourceManager.GetString("Institutes");
+                        string ins = "莱阳卫校";
                         root = new TreeNode(ins, "");
                         root.SelectAction = TreeNodeSelectAction.Expand;
                         TreeMenuView.Nodes.Add(root);

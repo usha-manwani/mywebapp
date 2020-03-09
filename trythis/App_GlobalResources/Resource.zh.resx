@@ -1374,4 +1374,22 @@
   <data name="SuccessDelete" xml:space="preserve">
     <value>删除成功！</value>
   </data>
+  <data name="ccip" xml:space="preserve">
+    <value>中控IP</value>
+  </data>
+  <data name="ClassRoom" xml:space="preserve">
+    <value>教室</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>成都医学院</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>重置密码</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>原密码</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>新密码</value>
+  </data>
 </root>

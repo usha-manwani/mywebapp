@@ -141,13 +141,21 @@ function ListClass(response, ul1) {
         for (i = 0; i < classid.length; i++) {
             var li1 = document.createElement('li');
             li1.id = classid[i];
+            $(li1).addClass('getclassid');
             ul1.appendChild(li1);
             var link = document.createElement('span');
-           // link.href = "";
-            link.className = 'dropdown-item';
+            // link.href = "";
+            $(link).addClass('dropdown-item');
+            //link.className = 'dropdown-item getclassid';
             link.innerHTML = '<i class="fa fa-angle-double-right" aria-hidden="true"></i>' + name[i];
             li1.appendChild(link);
         }
     }
 }
+
+
+
+
+
+
 

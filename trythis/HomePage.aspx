@@ -334,6 +334,13 @@
                                     src="Images/中控首页按钮/首页按钮-默认状态/总音量静音.png"
                                     height="40" width="40" />
                             </span>
+                            
+                                
+                                    <%--<input id="camvol-control" type="range" min="0"
+                                        step="1" max="99"
+                                        onchange="camvolControl(this.value)"
+                                        style="min-width: 150px" />
+                                    <span id="camvolchange" style="color: white; font-size: 16px; width: 10%;">50</span>--%>
                         </div>
                     </div>
                     <script src="HikVision/codebase/webVideoCtrl.js"></script>
@@ -542,7 +549,7 @@
 
         <div class="col-lg-2 col-md-6 col-sm-8" style="max-height: 90%; padding-top: 30px; min-width: 200px"
             id="sidesrow;">
-            <div class="row " style="border: 1px solid white;">
+            <div class="row " style="border: 1px solid white;min-width:200px;">
                 <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 10px; font-size: 14px;">
                     <p style="color: white">
                         <script> document.write(new Date().toDateString()); </script>
@@ -823,7 +830,7 @@
     </script>--%>
 
     <script src="HikVision/codebase/webVideoCtrl.js"></script>
-    <script src="Scripts/WebPlugin.js"></script>
+    <script src="Scripts/WebPlugin.js?v=1"></script>
     <script>
 
 

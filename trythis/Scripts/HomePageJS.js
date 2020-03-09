@@ -43,7 +43,7 @@ $jq(function () {
 
                 }
                 else if (arraydata[1] == "Heartbeat") {
-                    if (arraydata[3] == '待机') {
+                    if (arraydata[3] == '待机') {//off
                         var img = document.getElementById("syspower");
                         img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
                         closedstatus(arraydata);
@@ -54,7 +54,7 @@ $jq(function () {
                             src.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_262.png";
                             $jq(src).addClass('oncolor');
                         }
-                        else if (arraydata[12] == '解锁'){
+                        else if (arraydata[12] == '解锁'){ //on
                             //chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 02 2c 34");
                             var src = document.getElementById('lock');
                             src.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_264.png";
@@ -224,7 +224,6 @@ $jq(function () {
                             light2.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png";
                             $jq(light2).removeClass('oncolor');
                         }
-
                     }
                 }
             }
@@ -234,24 +233,23 @@ $jq(function () {
                         case 'SystemON':
                             var img = document.getElementById("syspower");
                             img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
-                            $jq(img).addClass('oncolor');
-                            if (arraydata[2] == 'projopen') {
-                                var proj1 = document.getElementById('projgreen');
-                                proj1.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_184.png";
-                                $jq(proj1).addClass('oncolor');
-                                var proj2 = document.getElementById('projred');
-                                proj2.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_186.png";
-                                $jq(proj2).removeClass('oncolor');
-                            }
-                            else if (arraydata[2] == 'projoff') {
-                                var proj1 = document.getElementById('projgreen');
-                                proj1.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_184.png";
-                                $jq(proj1).removeClass('oncolor');
-                                var proj2 = document.getElementById('projred');
-                                proj2.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_186.png";
-                                $jq(proj2).addClass('oncolor');
-
-                            }
+                            $jq(img).addClass('oncolor');                            
+                            break;
+                        case 'projopen':
+                            var proj1 = document.getElementById('projgreen');
+                            proj1.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_184.png";
+                            $jq(proj1).addClass('oncolor');
+                            var proj2 = document.getElementById('projred');
+                            proj2.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_186.png";
+                            $jq(proj2).removeClass('oncolor');
+                            break;
+                        case 'projoff':
+                            var proj1 = document.getElementById('projgreen');
+                            proj1.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_184.png";
+                            $jq(proj1).removeClass('oncolor');
+                            var proj2 = document.getElementById('projred');
+                            proj2.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_186.png";
+                            $jq(proj2).addClass('oncolor');
                             break;
                         case 'SystemOff':
                             var img = document.getElementById("syspower");
@@ -327,6 +325,39 @@ $jq(function () {
                                 img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/无线麦静音.png";
                             }
                             break;
+                        case 'curtain1open':
+                            var curtain = document.getElementById('CurtainOpen');
+                            curtain.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_106.png";
+                            $jq(curtain).addClass('oncolor');
+                            var curtain = document.getElementById('CurtainClose');
+                            curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png";
+                            $jq(curtain).removeClass('oncolor');
+                            var curtain = document.getElementById('CurtainStop');
+                            curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png";
+                            $jq(curtain).removeClass('oncolor');
+                            break;
+                        case 'curtain1close':
+                            var curtain = document.getElementById('CurtainClose');
+                            curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png";
+                            $jq(curtain).addClass('oncolor');
+                            var curtain = document.getElementById('CurtainStop');
+                            curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png";
+                            $jq(curtain).removeClass('oncolor');
+                            var curtain = document.getElementById('CurtainOpen');
+                            curtain.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_106.png";
+                            $jq(curtain).removeClass('oncolor');
+                            break;
+                        case 'curtain1stop':
+                            var curtain = document.getElementById('CurtainClose');
+                            curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_108.png";
+                            $jq(curtain).removeClass('oncolor');
+                            var curtain = document.getElementById('CurtainStop');
+                            curtain.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_110.png";
+                            $jq(curtain).addClass('oncolor');
+                            var curtain = document.getElementById('CurtainOpen');
+                            curtain.src = "Images/中控首页按钮/首页按钮-默认状态/控制页面_106.png";
+                            $jq(curtain).removeClass('oncolor');
+                            break;
                         default:
                             break;
                     }
@@ -347,17 +378,14 @@ $jq(function () {
                         img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
                         $jq(img).addClass('oncolor');
                         if (arraydata[4] == "Computer") {
-                            var imgpc = document.getElementById("ppower");
-                            var source = imgpc.getAttribute('class');
+                            var imgpc = document.getElementById("ppower");                            
                             imgpc.setAttribute('src', "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png");
-                            $jq(imgpc).addClass('oncolor');
-                            //if (source.includes('oncolor')) {
-                            //    $jq(imgpc).removeClass('oncolor');
-                            //}
-                            //else {
-                            //    // imgpc.setAttribute('src', "Images/greyed/pcgrey.png");
-                            //    $jq(imgpc).addClass('oncolor');
-                            //}
+                            $jq(imgpc).addClass('oncolor');                            
+                        }
+                        else if (arraydata[4] == "ComputerOff"){
+                            var imgpc = document.getElementById("ppower");                            
+                            imgpc.setAttribute('src', "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_212.png");
+                            $jq(imgpc).removeClass('oncolor');
                         }
                         switch (arraydata[3]) {
                             case 'Desktop':
@@ -427,7 +455,7 @@ $jq(function () {
     $jq.connection.hub.start({ waitForPageLoad: false }).done(function () {
         AllNormal();
         chat.server.sendControlKeys(ipAddress, "8B B9 00 03 05 01 09");
-        
+        chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 02 2d 35");
         SetVolume = function (val) {
             var lastVal = this.document.getElementById("volchange").innerText;
             var img = document.getElementById("volsymbol");
@@ -439,8 +467,8 @@ $jq(function () {
                     this.document.getElementById("volchange").innerText = parseInt(lastVal) - 10;
                 }
                 else {
-                    document.getElementById("vol-control").value =0;
-                    this.document.getElementById("volchange").innerText = 0;                    
+
+                    this.document.getElementById("volchange").innerText = val;                    
                 }
 
             }
@@ -475,8 +503,8 @@ $jq(function () {
                     this.document.getElementById("micchange").innerText = parseInt(lastVal) - 10;
                 }
                 else {
-                    document.getElementById("mic-control").value = 0;
-                    this.document.getElementById("micchange").innerText = 0;
+                     
+                    this.document.getElementById("micchange").innerText = val;
                 }
             }
             else if (val == 0) {
@@ -530,12 +558,12 @@ $jq(function () {
             if ($jq(this).hasClass("oncolor")) {
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 05 02 1F 2A");
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 03 05 01 09");
-            }                
+            }
             else
             {
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 04 05 02 1E 29");
                 chat.server.sendControlKeys(ipAddress, "8B B9 00 03 05 01 09");
-            }                
+            }
         });
         $jq(document).on("click", "#ppower", function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");
@@ -556,15 +584,12 @@ $jq(function () {
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 12 1c");
         });
     });
-
 });
 
-function allGrey(){
-  
+function allGrey(){  
     var img = document.getElementById("ppower");
     img.src = "Images/greyed/pcgrey.png" ;
-    $jq(img).removeClass("imgclick oncolor");
-   
+    $jq(img).removeClass("imgclick oncolor");   
     var img = document.getElementById("lock");
     img.src = "Images/greyed/lock1.png" ;
     $jq(img).removeClass("imgclick oncolor");
@@ -607,12 +632,10 @@ function allGrey(){
     var img = document.getElementById("Moremedia");
     img.src = "Images/AllImages/images/图标_194.png";
     $(img).removeClass("imgclick oncolor");
-   
-    
 }
 function sysGrey() {
     var img = document.getElementById("syspower");
-    img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_210.png";
+    img.src = "Images/greyed/sysgrey.png";
     $jq(img).removeClass("imgclick oncolor");
     $jq("#vol-control").prop("disabled", true);
     $jq("#mic-control").prop("disabled", true);
@@ -625,8 +648,7 @@ function AllNormal() {
     $jq(img).addClass("imgclick");
     var img = document.getElementById("ppower");
     img.src = "Images/greyed/pcgrey.png";
-    $jq(img).addClass("imgclick");
-    
+    $jq(img).addClass("imgclick");    
     var img = document.getElementById("lock");
     img.src = "Images/greyed/lock1.png";
     $jq(img).addClass("imgclick");
@@ -656,29 +678,23 @@ function AllNormal() {
     $jq(img).addClass("imgclick");
     var img = document.getElementById("projgreen");
     img.src = "Images/greyed/proj1.png";
-    $jq(img).addClass("imgclick");
-    
+    $jq(img).addClass("imgclick");    
     var img = document.getElementById("projred");
-    img.src = "Images/greyed/proj2.png" ;
+    img.src = "Images/greyed/proj2.png";
     $jq(img).addClass("imgclick");
-   
     var img = document.getElementById("lighton");
     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_112.png";
     $jq(img).addClass("imgclick");
-   
     var img = document.getElementById("lightoff");
     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png";
     $jq(img).addClass("imgclick");
-   
     var img = document.getElementById("Moremedia");
     img.src = "Images/AllImages/images/图标_194.png";
-    $(img).addClass("imgclick");
-    
+    $(img).addClass("imgclick");    
     $jq("#vol-control").prop("disabled", false);
     $jq("#mic-control").prop("disabled", false);
     $jq("#yellowbuttons").addClass("imgclick");
 }
-
 
 function Cam1(ipadd) {
     var player1 = document.getElementById('plugin_inst_1');
@@ -731,12 +747,11 @@ function closedstatus(arraydata) {
     else {
         var src = document.getElementById('lock');
         src.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_216.png";
-        //$(src).addClass(' oncolor').removeClass('imgclick');
+        //$jq(src).addClass(' oncolor').removeClass('imgclick');
         $jq(src).removeClass('oncolor');
         $jq(src).addClass('imgclick');
-    }
+    }    
     
-    //if (arraydata[9] == 'Stop') {
     var img = document.getElementById("Scdown");
     img.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_134.png";
     $jq(img).removeClass('imgclick oncolor');
@@ -799,7 +814,6 @@ function closedstatus(arraydata) {
         light2.src = "Images/AllImages/全部按钮/控制全页面-默认状态/控制页面_168.png";
         $jq(light2).removeClass('imgclick oncolor');
     }
-
 }
 
 function addclickeffect() {

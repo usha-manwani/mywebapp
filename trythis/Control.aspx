@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.Master" AutoEventWireup="true" CodeBehind="Control.aspx.cs" Inherits="WebCresij.Control" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MastersChild.Master" AutoEventWireup="true" 
+    CodeBehind="Control.aspx.cs" Inherits="WebCresij.Control" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">
 <style type="text/css">
 .imgclick:active{
@@ -10,8 +11,8 @@
     -moz-border-radius: 10px;
     border-radius: 10px;
     -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 245, 0.67);
-    -moz-box-shadow:    0px 0px 30px 0px rgba(0, 0, 245, 0.67);
-    box-shadow:         0px 0px 30px 0px rgba(0, 0, 245, 0.67);
+    -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 245, 0.67);
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 245, 0.67);
 }
 [type=radio] { 
   position: absolute;
@@ -84,7 +85,8 @@
 </style>
     <link href="Content/ControlStyle.css?v=1" rel="stylesheet" />
     <link href="css/toggleswitch.css" rel="stylesheet" />
-    <link href="http://www.cssscript.com/wp-includes/css/sticky.css" rel="stylesheet" type="text/css">
+    <link href="http://www.cssscript.com/wp-includes/css/sticky.css" 
+        rel="stylesheet" type="text/css">
     <!--Reference the SignalR library. -->  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
@@ -103,23 +105,29 @@
         <span class="col-xl-2 col-lg-3 col-md-6 col-sm-10" style="font-size:1rem; color:white">
             <%=Resources.Resource.ClassToOnOff %></span>
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
-        <button class="btn btn-outline-light " value="ON" id="btnOn"> <%=Resources.Resource.SystemOn %></button></div>
+        <button class="btn btn-outline-light " value="ON" id="btnOn"> 
+            <%=Resources.Resource.SystemOn %></button></div>
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
-        <button class="btn btn-outline-light " value="OFF" id="btnOff"> <%=Resources.Resource.SystemOff %></button></div>
+        <button class="btn btn-outline-light " value="OFF" id="btnOff"> 
+            <%=Resources.Resource.SystemOff %></button></div>
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5" >
-        <button class="btn btn-outline-light " value="lock" id="btnlock"> <%=Resources.Resource.SystemLock %></button></div>
+        <button class="btn btn-outline-light " value="lock" id="btnlock"> 
+            <%=Resources.Resource.SystemLock %></button></div>
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-5">
-        <button class="btn btn-outline-light " value="unlock" id="btnunlock"> <%=Resources.Resource.SystemUnlock%></button></div>
-                
+        <button class="btn btn-outline-light " value="unlock" id="btnunlock"> 
+            <%=Resources.Resource.SystemUnlock%></button></div>                
                 <div class="col-xl-1 col-lg-2 col-md-3 col-sm-5" style="float:right">
-        <button class=" btn btn-link" value="select" id="SelectAll"> <%=Resources.Resource.SelectAll %></button></div>
+        <button class=" btn btn-link" value="select" id="SelectAll">
+            <%=Resources.Resource.SelectAll %></button></div>
                 <div class="col-xl-1 col-lg-2 col-md-3 col-sm-5" style="float:right">
-        <button class=" btn btn-link" value="unselect" id="UnselectAll"> <%=Resources.Resource.UnselectAll %></button></div>
+        <button class=" btn btn-link" value="unselect" id="UnselectAll">
+            <%=Resources.Resource.UnselectAll %></button></div>
         </div>
         </ContentTemplate>
     </asp:UpdatePanel>
     <div class="container-fluid">
-        <div class="row clearfix" id="smallcontrol" style="width: 90%; min-width: 800px; max-width: 100%">
+        <div class="row clearfix" id="smallcontrol"
+            style="width: 90%; min-width: 800px; max-width: 100%">
             <input type="hidden" name="ipForRemote" value="<%= Session["MyVariable"]%>"/>
         </div>
     </div>
@@ -129,5 +137,4 @@
     <input id="InputIP" type="hidden" value='<%= Session["DeviceIP"] %>'/>
     <asp:TextBox Style="display:none" ID="ipAddressToSend" runat="server"></asp:TextBox>
     <asp:ScriptManagerProxy ID="ScriptManagerProxy1" runat="server"></asp:ScriptManagerProxy>
-  
 </asp:Content>

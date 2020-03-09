@@ -13,8 +13,7 @@
                     EmptyDataText="<%$Resources:Resource, NoPending %>">
                     <HeaderStyle BackColor="white" Font-Bold="false" HorizontalAlign="Center" 
                         CssClass="table table-striped table-bordered table-hover" ForeColor="#1e1e36"/>
-                    <RowStyle ForeColor="white" HorizontalAlign="Center"/>
-                    
+                    <RowStyle ForeColor="white" HorizontalAlign="Center"/>                    
                     <Columns>
                         <asp:BoundField DataField="userid" HeaderText="<%$Resources:Resource, UserID %>" HeaderStyle-HorizontalAlign="Left" />
                         <asp:BoundField DataField="username" HeaderText="<%$Resources:Resource, User %>" HeaderStyle-HorizontalAlign="Left" />
@@ -29,8 +28,7 @@
                 <div id="roleModal" class="modal" style="display: none; max-width: 500px; min-height: 800px; position: absolute;">
                     <div class="modal-content">
                         <p><span><%=Resources.Resource.Role%></span><span onclick="close3();"
-                            style="cursor: pointer;float:right;font-size:24px;color:red">&times;</span></p>
-                        
+                            style="cursor: pointer;float:right;font-size:24px;color:red">&times;</span></p>                        
                         <asp:CheckBoxList ID="CheckBoxList1" runat="server">
                             <asp:ListItem Text="<%$Resources:Resource, Admin %>" Value="1"></asp:ListItem>
                             <asp:ListItem Text="<%$Resources:Resource, LiveFeed %>" Value="2"></asp:ListItem>
@@ -39,7 +37,6 @@
                             <asp:ListItem Text="<%$Resources:Resource, Maintainance %>" Value="5"></asp:ListItem>
                             <asp:ListItem Text="<%$Resources:Resource, EditUsers %>" Value="6"></asp:ListItem>                            
                         </asp:CheckBoxList>
-
                         <asp:Button ID="Button1" runat="server" Text="<%$Resources:Resource, Ok %>"
                             CssClass="btn" OnClick="Button2_Click" />
                     </div>

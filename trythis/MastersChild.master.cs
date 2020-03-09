@@ -16,19 +16,22 @@ namespace WebCresij
         //int i = 0;
         // public event EventHandler selected;
         //int role = Convert.ToInt32(HttpContext.Current.Session["role"]);
-        TreeNode root = new TreeNode(Resources.Resource.Institutes);        
+        //TreeNode root = new TreeNode("莱阳卫校"); 
+        TreeNode root = new TreeNode(Resources.Resource.Institutes);
         static MySqlConnection con;
         public static DataTable dtIns = new DataTable("InsDetails");
         public static DataTable dtGrade = new DataTable("GradeDetails");
         public static DataTable dtClass = new DataTable("ClassDetails");
         public DataTable dt = new DataTable();
         PopulateTree tree = new PopulateTree();
-        public static string c = "";
+        
         // static DataTable dt = new DataTable();
-        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        public static string constr = System.Configuration.ConfigurationManager.ConnectionStrings
+            ["CresijCamConnectionString"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
+            if (!IsPostBack)
             {
                 root.SelectAction = TreeNodeSelectAction.Expand;               
                 TreeMenuView.Nodes.Add(root);
@@ -36,7 +39,8 @@ namespace WebCresij
                 dtIns = dt;
                 this.PopulateTreeView(dt, 0, null);
                 nodenames = new string[TreeMenuView.Nodes.Count];
-            }           
+                TreeviewHelper.RestoreTreeViewStateFromSession(TreeMenuView);
+            }            
         }
         public void PopulateTreeView(DataTable dtParent, int ParentId, TreeNode treeNode)
         {
@@ -107,6 +111,8 @@ namespace WebCresij
 
         protected void TreeMenuView_SelectedNodeChanged(object sender, EventArgs e)
         {
+            TreeviewHelper.StoreTreeViewStateToSession((TreeView)sender);
+            // TreeNode t = (TreeNode)sender;
             string devicelocations = string.Empty;
             if (TreeMenuView.SelectedNode.Depth == 2)
             {
@@ -127,9 +133,9 @@ namespace WebCresij
                             ipsloc.Add(row[1].ToString(), row[0].ToString());
                         }
                     }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+                    #pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     catch (Exception ex){}
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+                        #pragma warning restore CS0168 // The variable 'ex' is declared but never used
                     for (int i = 0; i < deviceloc.Length; i++)
                     {
                         deviceloc[i] = dt.Rows[i][1].ToString() + "," + dt.Rows[i][0].ToString();
@@ -143,10 +149,11 @@ namespace WebCresij
                 {
                     HttpContext.Current.Session["devices"] = devicelocations;
                 }
+                
                 Response.Redirect("~/Control.aspx");
             }
             if (TreeMenuView.SelectedNode.Depth == 3)
-            {
+            {                
                 HttpContext.Current.Session["LocToDisplay"] = TreeMenuView.SelectedNode.Text;
                 HttpContext.Current.Session["LocForCam"] = TreeMenuView.SelectedValue;
                 string ip = "";
@@ -180,17 +187,90 @@ namespace WebCresij
             else
             {
                 TreeMenuView.SelectedNode.Expand();
+            }            
+        }      
+    }
+
+    public static class TreeviewHelper
+    {
+        private static string strVarName="";
+        public static void RestoreTreeViewStateFromSession(TreeView tvIn)
+        {
+            // Takes the Session-stored TreeView state and restores it
+            // to the passed-in TreeView control.
+            // Call this method on entry to the page.  Nothing will
+            // happen if the variable doesn't exist.
+            //string strVarName;
+            // See if stored data exists for this treeview
+            //strVarName = "tv_" + HttpContext.Current.Request.ServerVariables["path_info"];
+
+            //if(strVarName.ToUpper() == "TV_/HOMEPAGE" || strVarName.ToUpper() =="TV_/CONTROL" || strVarName.ToUpper() == "TV_/HOME")
+            //{
+            if (HttpContext.Current.Session[strVarName] + "" != "")
+            {
+                string strSelectedNodeIndex = "";
+                foreach (string strCurrent in HttpContext.Current.Session[strVarName].ToString().Split(','))
+                {
+                    if (strSelectedNodeIndex == "") // First element in list is selected node
+                    {
+                        strSelectedNodeIndex = strCurrent;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            tvIn.FindNode(strCurrent).Expanded = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            //eat exception
+                        }
+                    }
+                }
+                try
+                {
+                    // Verify that node exists before setting SelectedNodeIndex
+                    TreeNode tnTest = tvIn.FindNode(strSelectedNodeIndex);
+                    // Select the node (will only happen if it exists)
+                    tvIn.FindNode(strSelectedNodeIndex).Select();
+                    // Ensure the selected node's parent is expanded
+                    tvIn.FindNode(tvIn.SelectedNode.ValuePath).Parent.Expanded = true;
+                }
+                catch (Exception ex)
+                {
+                    // eat exception
+                }
             }
+            //}
+            HttpContext.Current.Session.Remove(strVarName);
         }
 
-        protected void TreeMenuView_TreeNodeExpanded(object sender, TreeNodeEventArgs e)
+        public static void StoreTreeViewStateToSession(TreeView tvIn)
         {
-            e.Node.Expand();
+            // Takes the TreeView's state and saves it in a Session variable
+            // Call this method before leaving the page if we expect to be back
+            //string strVarName;
+            string strList = "";            
+            strVarName = "tv_" + HttpContext.Current.Request.ServerVariables["path_info"];
+            if (HttpContext.Current.Session[strVarName] + "" != "")
+            {
+                HttpContext.Current.Session.Remove(strVarName);
+            }
+            StoreTreeViewStateToSession_Recurse(tvIn.Nodes[0], ref strList);
+            strList = tvIn.SelectedNode.ValuePath + strList;
+           
+            HttpContext.Current.Session.Add(strVarName, strList);
         }
-
-        protected void TreeMenuView_TreeNodeCollapsed(object sender, TreeNodeEventArgs e)
+        private static void StoreTreeViewStateToSession_Recurse(TreeNode tnIn, ref string strList)
         {
-            e.Node.Collapse();
+            if (tnIn.Expanded == true)
+            {
+                strList = "," + tnIn.ValuePath + strList;
+            }
+            foreach (TreeNode tnCurrent in tnIn.ChildNodes)
+            {
+                StoreTreeViewStateToSession_Recurse(tnCurrent, ref strList);
+            }
         }
     }
 }

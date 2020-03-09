@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <title><%: Page.Title %> - 成都医学院</title>
+    <title><%: Page.Title %><%=Resources.Resource.Title %></title>
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
@@ -25,19 +25,19 @@
         <link href="Content/fontawesome-all.min.css" rel="stylesheet" />
         <link href="Content/font-awesome.min.css" rel="stylesheet" />
         <link href="Content/fontawesome.min.css" rel="stylesheet" />
-        <link href="Content/solid.min.css" rel="stylesheet" />                
-        <script src="Scripts/jquery-3.4.1.min.js"></script>  
+        <link href="Content/solid.min.css" rel="stylesheet" />
+        <script src="Scripts/jquery-3.4.1.min.js"></script>
         <script src="Scripts/umd/popper.min.js"></script>
         <script src="Scripts/bootstrap.min.js"></script>
         <script src="Scripts/fontawesome/brands.min.js"></script>
         <script src="Scripts/fontawesome/all.min.js"></script>
         <script src="Scripts/fontawesome/solid.min.js"></script>
-        <script src="Scripts/fontawesome/fontawesome.min.js"></script>   
+        <script src="Scripts/fontawesome/fontawesome.min.js"></script>
     </asp:PlaceHolder>
     <style type="text/css">
         body{
             background-color:#1e1e36!important
-        }
+        }        
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -105,7 +105,7 @@
                             </ul>
                         </li>
                                 &nbsp;
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" style="display:none">
                             <a class="nav-link dropdown-toggle caret-off" runat="server" href="#" id="navbarDropdown1"
                                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-file" aria-hidden="true"></i>&nbsp; 
@@ -142,7 +142,7 @@
                             </ul>
                         </li>
                                 &nbsp;
-                        <li class="nav-item dropdown" style="cursor: pointer;">
+                         <li class="nav-item dropdown" style="cursor: pointer;">
                             <a class="nav-link dropdown-toggle caret-off" runat="server" id="ICcard" role="button"
                                 data-toggle="dropdown" aria-expanded="false" aria-haspopup="true" style="overflow: hidden;">
                                 <img src="Images/imgs/smCard.png" height="20" width="20"
@@ -166,7 +166,8 @@
                             </ul>
                         </li>
                                 &nbsp;
-                        <li class="nav-item">
+                       
+                                <li class="nav-item">
                             <a class="nav-link" href="Maintainance.aspx" runat="server" id="maintainanceLink">
                                 <i class="fa fa-cog" aria-hidden="true"></i>
                                 &nbsp;<span><%=Resources.Resource.Maintainance%></span></a>
@@ -177,11 +178,11 @@
                                         <i class="fa fa-life-ring" aria-hidden="true"></i>&nbsp;
                                 <span><%=Resources.Resource.Support%></span>
                                     </a>
-                                    <ul class="dropdown-menu" id="queryMenu" aria-labelledby="navbarDropdown4">
-                                        <li><a class="dropdown-item" id="a2" runat="server" href="Contact.aspx">
+                                     <ul class="dropdown-menu" id="queryMenu" aria-labelledby="navbarDropdown4">
+                                        <li><a class="dropdown-item" id="query" runat="server" href="Contact.aspx">
                                             <i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.Query%></span></a></li>
-                                        <li><a class="dropdown-item" id="A3" runat="server" href="About.aspx">
+                                        <li><a class="dropdown-item" id="about" runat="server" href="About.aspx">
                                             <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.About%></span></a></li>
                                     </ul>
@@ -206,6 +207,9 @@
                                 <li><a id="config" class="dropdown-item" runat="server" href="Configuration.aspx">
                                     <i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.Config%></span></a></li>
+                                <li><a class="dropdown-item" href="ResetPassword.aspx" id="passchange" runat="server">
+                                    <i class="fa fa-key" aria-hidden="true"></i>&nbsp;
+                                    <span><%=Resources.Resource.ChangePassword %></span></a></li>
                                 <li><a class="dropdown-item" href="logout.aspx" id="logouts" runat="server">
                                     <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp;
                                     <span><%=Resources.Resource.SignOut%></span></a></li>
@@ -233,24 +237,12 @@
                     </div>
                 </nav>
                 <div style="background-color: #1e1e36; width:100%">
-                <section id="container" class="sidebar-close">
-                    <%-- <div style="float:right; flex:1; overflow-x:auto; " class=" col-sm-12 col-md-12 col-lg-12 ">--%>
-                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                    </asp:ContentPlaceHolder>
-                    <%-- <footer class="site-footer position-sticky">
-                    <div class="text-center" style="font-size: small">
-                        <p>
-                            &copy; Copyrights <strong>Cresij</strong>. All Rights Reserved
-                        </p>
-                        <div class="credits" style="font-size: small">
-                            Created By  <a href="https://google.com/">Usha Phulwani</a>
-                        </div>
-                    </div>
-                </footer>--%>
-                </section>
-            </div>
-            </div>
-            
+                    <section id="container" class="sidebar-close">                    
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                        </asp:ContentPlaceHolder>                        
+                    </section>                    
+                </div>
+            </div>            
         </div>
     </form>    
     <script class="include" type="text/javascript" src="lib/jquery.dcjqaccordion.2.7.js"></script>
