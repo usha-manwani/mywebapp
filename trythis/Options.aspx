@@ -377,6 +377,17 @@
                                         <asp:TextBox runat="server" ID="passEditcam" CssClass="form-control"></asp:TextBox>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <asp:Label runat="server" Text="Channel Id" 
+                                        CssClass=" control-label" AssociatedControlID="chedit"></asp:Label>
+                                    <div>
+                                        <asp:DropDownList runat="server" ID="chedit" CssClass="form-control">
+                                            <asp:ListItem Value="1">1</asp:ListItem>
+                                            <asp:ListItem Value="2">2</asp:ListItem>
+                                        </asp:DropDownList>
+                                        
+                                    </div>
+                                </div>
                                 <br />
                             </div>
                             <div class="row" style="width: 50%; margin-top: 50px; float: left; margin-right: 30px;">
@@ -476,7 +487,7 @@
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="projhour"
                                                 CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Projector %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="projhour" CssClass="form-control" Text="0" />
+                                                <asp:TextBox runat="server" ID="projhour" CssClass="form-control" Text="0" Width="150px"/>
                                                 &nbsp;<%=Resources.Resource.Hours %>
                                             </div>
                                         </div>
@@ -484,7 +495,7 @@
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="pchour"
                                                 CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Computer %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="pchour" CssClass="form-control" Text="0" />
+                                                <asp:TextBox runat="server" ID="pchour" CssClass="form-control" Text="0" Width="150px"/>
                                                 &nbsp;<%=Resources.Resource.Hours %>
                                             </div>
                                         </div>
@@ -492,7 +503,7 @@
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="recordhour"
                                                 CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Recorder %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="recordhour" CssClass="form-control" Text="0" />
+                                                <asp:TextBox runat="server" ID="recordhour" CssClass="form-control" Text="0" Width="150px"/>
                                                 &nbsp;<%=Resources.Resource.Hours %>
                                             </div>
                                         </div>
@@ -500,7 +511,7 @@
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="achour"
                                                 CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, AC %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="achour" CssClass="form-control" Text="0" />
+                                                <asp:TextBox runat="server" ID="achour" CssClass="form-control" Text="0" Width="150px"/>
                                                 &nbsp;<%=Resources.Resource.Hours %>
                                             </div>
                                         </div>
@@ -508,7 +519,7 @@
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="syshour"
                                                 CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, CentralControl %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="syshour" CssClass="form-control" Text="0" />
+                                                <asp:TextBox runat="server" ID="syshour" CssClass="form-control" Text="0" Width="150px"/>
                                                 &nbsp;<%=Resources.Resource.Hours %>
                                             </div>
                                         </div>
@@ -516,7 +527,7 @@
                                             <asp:Label runat="server" Font-Bold="true" AssociatedControlID="screenhour"
                                                 CssClass="col-md-5 labelpadding" Text="<%$Resources:Resource, Screen %>"></asp:Label>
                                             <div class="col-md-7">
-                                                <asp:TextBox runat="server" ID="screenhour" CssClass="form-control" Text="0" />
+                                                <asp:TextBox runat="server" ID="screenhour" CssClass="form-control" Text="0" Width="150px"/>
                                                 &nbsp;<%=Resources.Resource.Hours %>
                                             </div>
                                         </div>
@@ -596,7 +607,13 @@
         '<td style="text-align:center"><div class = "form-group">' +
         '<asp:label runat="server" Text="<%$Resources:Resource, Password %>" CssClass=" control-label" Fond-Bold="True"/>' +
         '<div ><input name="Pass" class="form-control" type="text" value="'
-        + value + '"/></div></div></td></tr></table></div><section>'
+        + value + '"/></div></div></td></tr>' +
+        '<tr class="margintop"><td style="text-align:center"><div class = "form-group">' +
+        '<asp:label runat="server" Text="Channel ID:" CssClass=" control-label" Fond-Bold="True"/>' +
+        '<div ><select name="Channel" class="form-control" style="width:200px;"><option value="1" selected> 1</option>'+
+                '<option value="2">2</option></select></div></div></td>' +
+        '<td style="text-align:center"></td></tr>'+
+        '</table></div><section>'
 }
 function AddTextCam() {
     var div = document.createElement('DIV');

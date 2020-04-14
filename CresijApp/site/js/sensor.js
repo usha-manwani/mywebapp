@@ -54,15 +54,62 @@ $(document).ready(function(){
 		var menuurl = $(this).attr("j-menu-href");
 		var menubox = $(this).attr("j-menu-box");
 		var pageurl = $(this).attr("j-page-href");
-		var pagebox = $(this).attr("j-page-box");
+        var pagebox = $(this).attr("j-page-box");
+        
 		if( typeof menuurl == "string"){
-			$(menubox).load(menuurl);
-			setTimeout(function(){
-				$(pagebox).load(pageurl);
-			},30);
+            $(menubox).load(menuurl);
+            
+			//setTimeout(function(){
+			//	$(pagebox).load(pageurl);
+			//},30);
 		}else{
 		}
-		if( typeof pageurl == "string"){
+        if (typeof pageurl == "string") {
+            if (pageurl.includes("EditOrganisation.html")) {
+                console.log(pageurl.substring(46));
+                $("#orgsno").attr('value', pageurl.substring(46));
+            }
+            else if (pageurl.includes("Edit_Teacher.html")) {
+                console.log(pageurl.substring(42));
+                $("#teacherid").attr('value', pageurl.substring(42));
+            }
+            else if (pageurl.includes("Edit_Student.html")) {
+                console.log(pageurl.substring(42));
+                $("#studentid").attr('value', pageurl.substring(42));
+            }
+            else if (pageurl.includes("DeleteOrg.html")) {
+                console.log(pageurl.substring(34));
+                $("#orgsno").attr('value', pageurl.substring(34));
+            }
+            else if (pageurl.includes("DeleteTeacher.html")) {
+                console.log("teache id "+pageurl.substring(38));
+                $("#teacherid").attr('value', pageurl.substring(38));
+            }
+            else if (pageurl.includes("DeleteStudent.html")) {
+                console.log("stu id " +pageurl.substring(38));
+                $("#studentid").attr('value', pageurl.substring(38));
+            }
+            else if (pageurl.includes("Edit_Classroom.html")) {
+                console.log("Class id " + pageurl.substring(44));
+                $("#classid").attr('value', pageurl.substring(44));
+            }
+            else if (pageurl.includes("DeleteClassroom.html")) {
+                console.log("Class id " + pageurl.substring(40));
+                $("#classid").attr('value', pageurl.substring(40));
+            }
+            else if (pageurl.includes("Edit_UserInfo.html")) {
+                
+                $("#userId").attr('value', pageurl.substring(43));
+                console.log($("#userId").val());
+            }
+            else if (pageurl.includes("Delete_User.html")) {
+                console.log("user id " + pageurl.substring(36));
+                $("#userId").attr('value', pageurl.substring(36));
+            }
+            else if (pageurl.includes("002-1-1.html")) {
+                console.log("sch id " + pageurl.substring(35));
+                $("#schid").attr('value', pageurl.substring(35));
+            }
 			$(pagebox).load(pageurl);
 			console.log("page:"+pageurl+"***box:"+pagebox);
 		}else{
@@ -250,12 +297,18 @@ $(document).ready(function(){
 	});
 
 	//表格提示框
-	$("body").on("mousemove",".jshowinfo",function(){
-		$(this).children(".jinfo").fadeIn("fast");
+    $("body").on("mousemove",".jshowinfo",function(){
+        $(this).children(".jinfo").fadeIn("fast");
 		$(this).on("mouseleave",function(){
 			$(this).children(".jinfo").fadeOut("fast");
 		})
-	});
+    });
+    //$(document).off("mousemove").on("mousemove", ".jshowinfo", function () {
+    //    $(this).children(".jinfo").fadeIn("fast");
+    //    $(this).on("mouseleave", function () {
+    //        $(this).children(".jinfo").fadeOut("fast");
+    //    })
+    //}); 
 
 		// if( $(this).children("input[type='checkbox']").prop("checked") ){
 		// 	$(this).parents("table").find("input[type='checkbox']").prop("checked");

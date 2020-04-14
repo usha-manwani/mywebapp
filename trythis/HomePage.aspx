@@ -392,7 +392,7 @@
 
                     </div>
 
-                    <div class="row  marginTop">
+                    <div class="row  marginTop" style="display:none">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;屏幕&nbsp;</legend>
                         </fieldset>
@@ -435,7 +435,7 @@
                     </div>
 
 
-                    <div class="row  marginTop">
+                    <div class="row  marginTop" style="display:none">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;窗帘&nbsp;</legend>
                         </fieldset>
@@ -471,7 +471,7 @@
                         </div>
                     </div>
 
-                    <div class="row marginTop" style="text-align: center">
+                    <div class="row marginTop" style="text-align: center;display:none">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;<%=Resources.Resource.Light%>&nbsp;</legend>
                         </fieldset>
@@ -493,7 +493,7 @@
                 </div>
 
                 <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="row marginBottom">
+                    <div class="row marginBottom" style="display:none">
                         <fieldset class="fieldSetControl" id="volfieldset">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;音量&nbsp;</legend>
                         </fieldset>
@@ -565,7 +565,7 @@
                     </p>
                 </div>
             </div>
-            <div class="row" style="border: 1px dashed white; border-top: none; min-width: 200px">
+            <div class="row" style="border: 1px dashed white; border-top: none; min-width: 200px; display:none">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row marginBottom marginTop1"
                         style="border-bottom: 1px dashed #aeb2b7;">
@@ -830,7 +830,7 @@
     </script>--%>
 
     <script src="HikVision/codebase/webVideoCtrl.js"></script>
-    <script src="Scripts/WebPlugin.js?v=1"></script>
+    <script src="Scripts/WebPlugin.js?v=2"></script>
     <script>
 
 

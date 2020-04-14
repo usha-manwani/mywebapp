@@ -41,7 +41,6 @@ namespace CresijApp.Services
                     insid.Add(dataRow[0].ToString());
                     insname.Add(dataRow[1].ToString());
                 }
-
             }
             idata.Add(insid);
             idata.Add(insname);
@@ -99,7 +98,6 @@ namespace CresijApp.Services
             List<object> idata = new List<object>();
             if (dt.Rows.Count > 0)
             {
-
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     List<object> list = new List<object>();
@@ -108,7 +106,6 @@ namespace CresijApp.Services
                         list.Add(dt.Rows[i][k].ToString());
                     }
                     idata.Add(list);
-
                 }
             }
             return idata;

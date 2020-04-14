@@ -46,6 +46,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.3.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.3.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=5.0.4.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.0.4\lib\net45\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -75,6 +78,7 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
@@ -84,6 +88,7 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -160,8 +165,21 @@
     <Content Include="images\logo.jpg" />
     <Content Include="images\logo.png" />
     <Content Include="images\ty.svg" />
+    <Content Include="Scripts\AddClassroom.js" />
+    <Content Include="Scripts\AddEditOrganisation.js" />
+    <Content Include="Scripts\AddStudent.js" />
+    <Content Include="Scripts\AddTeacher.js" />
+    <Content Include="Scripts\Add_UserInfo.js" />
+    <Content Include="Scripts\CapitalInfoJS.js" />
     <Content Include="Scripts\Chart.bundle.min.js" />
+    <Content Include="Scripts\ClassroomInfo.js" />
     <Content Include="Scripts\ControlClick.js" />
+    <Content Include="Scripts\CourseManagement.js" />
+    <Content Include="Scripts\DeleteClass.js" />
+    <Content Include="Scripts\DeleteOrganisation.js" />
+    <Content Include="Scripts\DeleteStudent.js" />
+    <Content Include="Scripts\DeleteTeacher.js" />
+    <Content Include="Scripts\Delete_User.js" />
     <Content Include="Scripts\dist\css\bootstrap-grid.css" />
     <Content Include="Scripts\dist\css\bootstrap-grid.min.css" />
     <Content Include="Scripts\dist\css\bootstrap-reboot.css" />
@@ -173,6 +191,11 @@
     <Content Include="Scripts\dist\js\bootstrap.js" />
     <Content Include="Scripts\dist\js\bootstrap.min.js" />
     <Content Include="Scripts\dist\js\Chart.min.js" />
+    <Content Include="Scripts\EditClassInfo.js" />
+    <Content Include="Scripts\EditOrgInfo.js" />
+    <Content Include="Scripts\EditStudentInfo.js" />
+    <Content Include="Scripts\EditTeacherInfo.js" />
+    <Content Include="Scripts\Edit_UserInfo.js" />
     <Content Include="Scripts\EnvControl.js" />
     <Content Include="Scripts\font\css\font-awesome.css" />
     <Content Include="Scripts\font\css\font-awesome.min.css" />
@@ -187,20 +210,30 @@
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\GetOrgInfo.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
+    <Content Include="Scripts\Schedule.js" />
     <Content Include="Scripts\sensor.js" />
+    <Content Include="Scripts\StudentInfo.js" />
+    <Content Include="Scripts\TeacherInfo.js" />
+    <Content Include="Scripts\TransferApplication.js" />
     <Content Include="Scripts\Treeview.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\uploadExcel.js" />
     <Content Include="Scripts\WebPlugin.js" />
+    <Content Include="Services\DeleteOrgData.asmx" />
+    <Content Include="Services\GetOrganisationData.asmx" />
     <Content Include="Services\GetSideMenu.asmx" />
+    <Content Include="Services\SaveOrganisationData.asmx" />
+    <Content Include="Services\ScheduleData.asmx" />
     <Content Include="site\back\video.html" />
     <Content Include="site\components\left_menu.html" />
     <Content Include="site\components\top_menu.html" />
@@ -236,20 +269,35 @@
     <Content Include="site\js\moment.min.js" />
     <Content Include="site\js\moment.zh-cn.js" />
     <Content Include="site\js\sensor.js" />
+    <Content Include="Scripts\UserInfo.js" />
     <Content Include="site\window\alert\conf.html" />
     <Content Include="site\window\alert\confer_delete.html" />
     <Content Include="site\window\alert\coordinate.html" />
     <Content Include="site\window\alert\course-tiaokeshenpi.html" />
     <Content Include="site\window\alert\course-yuyueshenpi.html" />
+    <Content Include="site\window\alert\data\AddOrganisation.html" />
+    <Content Include="site\window\alert\data\AddUserData.html" />
     <Content Include="site\window\alert\data\add_room.html" />
     <Content Include="site\window\alert\data\add_student.html" />
     <Content Include="site\window\alert\data\add_teacher.html" />
     <Content Include="site\window\alert\data\auth.html" />
+    <Content Include="site\window\alert\data\Edit_UserInfo.html" />
+    <Content Include="site\window\alert\UploadFile.aspx" />
+    <Content Include="site\window\alert\data\UploadFile.html" />
+    <Content Include="site\window\alert\DeleteClassroom.html" />
     <Content Include="site\window\alert\data\distribute.html" />
     <Content Include="site\window\alert\data\edit.html" />
+    <Content Include="site\window\alert\data\EditOrganisation.html" />
+    <Content Include="site\window\alert\data\Edit_Classroom.html" />
+    <Content Include="site\window\alert\data\Edit_Student.html" />
+    <Content Include="site\window\alert\data\Edit_Teacher.html" />
     <Content Include="site\window\alert\data\setting.html" />
     <Content Include="site\window\alert\data\synchro.html" />
     <Content Include="site\window\alert\data\transfer.html" />
+    <Content Include="site\window\alert\DeleteOrg.html" />
+    <Content Include="site\window\alert\DeleteStudent.html" />
+    <Content Include="site\window\alert\DeleteTeacher.html" />
+    <Content Include="site\window\alert\Delete_User.html" />
     <Content Include="site\window\alert\import_xls.html" />
     <Content Include="site\window\alert\interactive_settings.html" />
     <Content Include="site\window\alert\state_fail.html" />
@@ -318,8 +366,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="DataAccess\CentralControl.cs" />
     <Compile Include="DataAccess\Chart.cs" />
+    <Compile Include="DataAccess\DeleteOrgDetails.cs" />
     <Compile Include="DataAccess\GetMenuDataHelper.cs" />
+    <Compile Include="DataAccess\GetOrgData.cs" />
     <Compile Include="DataAccess\PopulateTree.cs" />
+    <Compile Include="DataAccess\Schedule.cs" />
+    <Compile Include="DataAccess\SetOrgData.cs" />
     <Compile Include="DataAccess\Userdetails.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -328,9 +380,32 @@
     <Compile Include="HubsFile\Startup.cs" />
     <Compile Include="HubsFile\UpdateDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DeleteOrgData.asmx.cs">
+      <DependentUpon>DeleteOrgData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\GetOrganisationData.asmx.cs">
+      <DependentUpon>GetOrganisationData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Services\GetSideMenu.asmx.cs">
       <DependentUpon>GetSideMenu.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\SaveOrganisationData.asmx.cs">
+      <DependentUpon>SaveOrganisationData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\ScheduleData.asmx.cs">
+      <DependentUpon>ScheduleData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\UploadFile.aspx.cs">
+      <DependentUpon>UploadFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\UploadFile.aspx.designer.cs">
+      <DependentUpon>UploadFile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Control.aspx.cs">
       <DependentUpon>Control.aspx</DependentUpon>
@@ -466,6 +541,8 @@
     <Folder Include="App_Themes\Theme1\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+    <Folder Include="Templates\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

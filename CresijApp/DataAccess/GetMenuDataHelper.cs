@@ -22,7 +22,7 @@ namespace CresijApp.DataAccess
             {                
                 string query = "Select ins_id, Ins_name from Institute_Details";
                 using (MySqlConnection conn = new MySqlConnection(constr))
-                {                
+                {
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(cmd))

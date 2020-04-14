@@ -1,0 +1,4 @@
+﻿<--Heading-->
+Devicename, Assetno, model, specification, device type,price,factory, date of manufacture, date of purchase, date of delivery, warranty time,location Type, Equipment Status
+<--Below is a sample data. copy your data below sample data line in the same format as the above heading. While saving file please make sure to select utf-8 encoding-->
+<--W1700, ZC00002, model02, specs, type, 30000, zhuyuan, 2019-10-02, 2020-01-07, 2020-01-07, 2, public, working-->

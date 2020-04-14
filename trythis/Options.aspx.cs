@@ -218,11 +218,13 @@ namespace WebCresij
                 string[] port = Request.Form.GetValues("Port");
                 string[] user = Request.Form.GetValues("User");
                 string[] pass = Request.Form.GetValues("Pass");
+                string[] channel = Request.Form.GetValues("Channel");
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 var i = serializer.Serialize(ip);
                 var p = serializer.Serialize(port);
                 var u = serializer.Serialize(user);
                 var pas = serializer.Serialize(pass);
+                var chan = serializer.Serialize(channel);
                 if (ip != null)
                 {
                     int result = -2;
@@ -232,9 +234,14 @@ namespace WebCresij
                         var id = user[n];
                         var pa = pass[n];
                         var portno = port[n];
+                        var chid = channel[n];
+                        if (string.IsNullOrEmpty(chid))
+                        {
+                            chid = "1";
+                        }
                         if(!string.IsNullOrEmpty(camip)&& !string.IsNullOrEmpty(id) 
                             &&!string.IsNullOrEmpty(pa) && !string.IsNullOrEmpty(portno))
-                            result = fillTree.InsertCam(camip, id, pa, portno,
+                            result = fillTree.InsertCam(camip, id, pa, portno, chid,
                                 tbSelectedClass.Text, instext.Text);
                     }
                     if(result == -2)
@@ -306,7 +313,8 @@ namespace WebCresij
                             camEditIP.Text = dt.Rows[0]["CameraIP"].ToString();
                             portEdit.Text = dt.Rows[0]["portNo"].ToString();
                             idEditcam.Text = dt.Rows[0]["ID"].ToString();
-                            passEditcam.Text = dt.Rows[0]["password"].ToString();
+                            passEditcam.Text = dt.Rows[0]["password"].ToString();                            
+                            chedit.SelectedValue = dt.Rows[0]["channelid"].ToString();
                             ScriptManager.RegisterStartupScript(this, typeof(Page),
                                 "ShowEditCam", "EditCam();", true);
                         }
@@ -368,7 +376,7 @@ namespace WebCresij
             {
                 string prent = hiddencamName.Text;
                 fillTree.updateCam(camEditIP.Text, passEditcam.Text,
-                    idEditcam.Text, portEdit.Text, prent);
+                    idEditcam.Text, portEdit.Text, chedit.SelectedValue, prent);
             }
             catch
             {

@@ -55,7 +55,7 @@ namespace WebCresij
                         //string videostream = "rtsp://" + dt.Rows[i]["user_ID"] + ":" + dt.Rows[i]["password"] + "@" + dt.Rows[i]["CameraIP"] + ":554/"
                         //   ;
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "videostream" + i, func+"('"+ dt.Rows[i]["CameraIP"] 
-                            +"','"+ dt.Rows[i]["user_ID"] +"','"+ dt.Rows[i]["password"] +"',"+port+","+width+","+height+",'"+ divp+"','"+hid+"');", true);
+                            +"','"+ dt.Rows[i]["user_ID"] +"','"+ dt.Rows[i]["password"] + "'," + port+","+width+","+height+",'"+ divp+"','"+hid+"');", true);
                     }
                 }
             }

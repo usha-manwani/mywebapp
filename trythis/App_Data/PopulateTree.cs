@@ -436,7 +436,7 @@ namespace WebCresij
             return result;
         }
 
-        public int InsertCam(string camIP, string userId, string camPass, string port, string loc,string insID)
+        public int InsertCam(string camIP, string userId, string camPass, string port, string chid, string loc,string insID)
         {
 
             int result = -1;
@@ -454,6 +454,7 @@ namespace WebCresij
                             cmd.Parameters.AddWithValue("@loc", loc);
                             cmd.Parameters.AddWithValue("@userid", userId);
                             cmd.Parameters.AddWithValue("@portno", port);
+                            cmd.Parameters.AddWithValue("@chid", chid);
                             cmd.Parameters.AddWithValue("@camprovider", "HikVision");
                             cmd.Parameters.AddWithValue("@ins", insID);
                             cmd.Parameters.Add("@result", MySqlDbType.VarChar, -1);
@@ -812,7 +813,7 @@ namespace WebCresij
             return dt;
         }
 
-        public void updateCam(string ip, string pass, string id, string port, string camName)
+        public void updateCam(string ip, string pass, string id, string port, string chan, string camName)
         {
             int portNo = Convert.ToInt32(port);
             DataTable dt = new DataTable();
@@ -825,6 +826,7 @@ namespace WebCresij
                     cmd.Parameters.AddWithValue("@ip", ip);
                     cmd.Parameters.AddWithValue("@pass", pass);
                     cmd.Parameters.AddWithValue("@portno", portNo);
+                    cmd.Parameters.AddWithValue("@chid", chan);
                     cmd.Parameters.AddWithValue("@cameraName", camName);
                     try
                     {
@@ -1737,7 +1739,7 @@ namespace WebCresij
                 }
             }
         }
-    
+
         public DataSet ControlDetails(string InsID)
         {
 
@@ -1745,8 +1747,8 @@ namespace WebCresij
             //DataTable dt;
             using (MySqlConnection connection = new MySqlConnection(constr))
             {
-                string query = "SELECT gd.Grade_Name as Grade, ip as CCIP,cd.ClassName as loc, "+
-                     " Status,workstatus as PowerStatus,Timer as TimerService,pcstatus as ComputerPower"+
+                string query = "SELECT gd.Grade_Name as Grade, ip as CCIP,cd.ClassName as loc, " +
+                     " Status,workstatus as PowerStatus,Timer as TimerService,pcstatus as ComputerPower" +
                      ",projectorstatus as ProjectorPower, " +
                    " Projhour as ProjectorUsedHour, Curtain as CurtainStatus, Screen as ScreenStatus," +
                      " light, MediaSignal, centrallock , " +
@@ -1756,17 +1758,17 @@ namespace WebCresij
                      " join `cresijdatabase`.Grade_Details gd on gd.id = cd.GradeID" +
                      " where cc.loc in " +
                      " (select id from `cresijdatabase`.Class_Details where GradeID in " +
-                    " (select id from `cresijdatabase`.Grade_Details where insid = "+InsID+")) " +
+                    " (select id from `cresijdatabase`.Grade_Details where insid = " + InsID + ")) " +
                      " order by gd.id, cd.ClassName";
                 try
                 {
                     connection.Open();
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        
+
                         //command.Notification = null;
                         //dt = new DataTable();
-                        
+
                         if (connection.State == ConnectionState.Closed)
                             connection.Open();
                         MySqlDataAdapter da = new MySqlDataAdapter(command);
@@ -1783,7 +1785,7 @@ namespace WebCresij
         }
 
         #region cam
-        public DataTable CamDetails (string loc)
+        public DataTable CamDetails(string loc)
         {
             DataTable dtcam = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
@@ -1813,6 +1815,38 @@ namespace WebCresij
             }
             return dtcam;
         }
+
+        public string GetCamChannel(string ip){
+            string channel = "";
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                string query = "select channelid from cresijdatabase.Camera_Details where CameraIP ='" + ip +"'";
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    try
+                    {
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+
+                        }
+                        channel = cmd.ExecuteScalar().ToString();
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            return channel;
+
+        }
+
+
         #endregion
 
         public DataTable GetStatusOnGrade(int id)

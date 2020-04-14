@@ -61,10 +61,31 @@
         }
     }
     function StartPlay3(szIdentity) {
+        var arrayofString = szIdentity.split("_");
+        var ip = arrayofString[0];
+        var jsonData = JSON.stringify({
+            name: ip
+        });
+        $.ajax({
+            type: "POST",
+            url: "Services/GetSideMenu.asmx/GetCamChannel",
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccess_,
+            error: OnErrorCall_
+        });
+        function OnSuccess_(response) {
+            console.log("method called");
+            var channel;
+            if (response.d == undefined || response.d == null)
+                channel = 1;
+            else
+                channel = parseInt(response.d);
         WebVideoCtrl.I_StartRealPlay(szIdentity,
             {
                 iStreamType: 2,
-
+                iChannelID: channel,
                 success: function () {
                     szInfo = "start real play success！";
                     console.log(szIdentity + " " + szInfo);
@@ -79,7 +100,11 @@
                     console.log(szIdentity + " " + szInfo);
                 }
             }
-        )
+            )
+        }
+        function OnErrorCall_(respo) {
+            console.log("didnt get channel id ", + respo.d);
+        } 
     };
 
     function getid() {

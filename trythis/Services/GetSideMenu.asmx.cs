@@ -111,6 +111,14 @@ namespace WebCresij.Services
             }
             return idata;
         }
+
+        [WebMethod]
+        public string GetCamChannel(string name)
+        {
+            CentralControl cc = new CentralControl();
+            string channel = cc.GetCamChannel(name);
+            return channel;
+        }
     }
 
 

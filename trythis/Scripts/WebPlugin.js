@@ -52,10 +52,16 @@ function camLogin(ip, user, pass, port) {
     }
 }
 function StartPlay(szIdentity) {
+    var arrayofString = szIdentity.split("_");
+    var ip = arrayofString[0];
+    GetChannelId(szIdentity, ip);
+};
+
+function StartRealPlay(szIdentity, channel) {
     WebVideoCtrl.I_StartRealPlay(szIdentity,
         {
             iStreamType: 2,
-
+            iChannelID:channel,
             success: function () {
                 szInfo = "start real play success！";
                 console.log(szIdentity + " " + szInfo);
@@ -68,13 +74,12 @@ function StartPlay(szIdentity) {
                 }
                 console.log(szIdentity + " " + szInfo);
             }
-        }
-    )
-};
-
+        });
+}
 // Init plugin parameters and insert the plugin
 console.log("initializn plugin");
 $(function () {
+    
     var iRet = WebVideoCtrl.I_CheckPluginInstall();    
     if (-1 == iRet) {
         alert(" please download and install the plugin WebComponentsKit.exe!");
@@ -243,6 +248,36 @@ function camvolControl(value) {
         console.log(iRet);
     }
 
+}
+
+function GetChannelId(szIdentity, ip) {
+    console.log("Get channelId method called "+ip);
+    var channel;
+    
+    var jsonData = JSON.stringify({
+        name: ip
+    });
+    $.ajax({
+        type: "POST",
+        url: "Services/GetSideMenu.asmx/GetCamChannel",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccess_,
+        error: OnErrorCall_
+    });
+    function OnSuccess_(response) {
+        console.log("method called");
+        var channel;
+        if (response.d == undefined || response.d == null)
+            channel = 1;
+        else
+            channel = parseInt(response.d);
+        StartRealPlay(szIdentity, channel);
+    }
+    function OnErrorCall_(respo) {
+        console.log("didnt get channel id ", + respo.d);
+    }
 }
 
 

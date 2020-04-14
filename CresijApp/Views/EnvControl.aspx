@@ -114,7 +114,6 @@
     <div class="w-100 clearfix float-left" style="height: 30px;"></div>
     <div id="envcontrol" style="display:none">
 
-    
     <div class="col-4 float-left">
       <div class="stat-card no-gutter ">
         <div class="col-4 float-left text-center header" style="background: #fafafa; height: 120px;"> <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
