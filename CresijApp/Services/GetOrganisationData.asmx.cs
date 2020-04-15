@@ -350,6 +350,5 @@ namespace CresijApp.Services
             idata.Add(dt.Rows[0][5].ToString());
             return idata;
         }
-       
     }
 }
