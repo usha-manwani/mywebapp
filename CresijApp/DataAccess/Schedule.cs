@@ -13,37 +13,15 @@ namespace CresijApp.DataAccess
             ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         readonly string constring = System.Configuration.ConfigurationManager.
             ConnectionStrings["SchoolConnectionString"].ConnectionString;
-        //public DataTable GetSchedule()
-        //{
-        //    DataTable dt = new DataTable();
-        //    try
-        //    {
-        //        using (MySqlConnection con = new MySqlConnection(constr))
-        //        {
-        //            string query = "select concat_ws(', ',teacherName, Coursename, classname, weekstart, weekEnd, dayno, section)" +
-        //                           " as details , dayno, classname from scheduletable";
-        //            using (MySqlCommand cmd = new MySqlCommand(query, con))
-        //            {
-        //                MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-        //                dataAdapter.Fill(dt);
-        //            }
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
-
-        //    }
-           
-        //    return dt;
-        //}
-        public DataTable GetCourse()
+        public DataTable GetSchedule()
         {
             DataTable dt = new DataTable();
             try
             {
-                using (MySqlConnection con = new MySqlConnection(constring))
+                using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = "select  section,className, coursename, id from schedule";
+                    string query = "select concat_ws(', ',teacherName, Coursename, classname, weekstart, weekEnd, dayno, section)" +
+                                   " as details , dayno, classname from scheduletable";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
@@ -51,24 +29,23 @@ namespace CresijApp.DataAccess
                     }
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
 
             }
-
+           
             return dt;
         }
-        public DataTable GetSchedule()
+        public DataTable GetCourse()
         {
             DataTable dt = new DataTable();
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
-                    
-                    using (MySqlCommand cmd = new MySqlCommand("sp_GetSchedule", con))
+                    string query = "select  section,className, coursename from schedule";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
                     }

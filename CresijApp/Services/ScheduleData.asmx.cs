@@ -24,26 +24,26 @@ namespace CresijApp.Services
             return "Hello World";
         }
 
-        //[WebMethod]
-        //public List<object> GetSchedule(string name)
-        //{
-        //    Schedule schedule = new Schedule();
-        //    DataTable dt=  schedule.GetSchedule();
-        //    List<object> idata = new List<object>();
-        //    List<string> data = new List<string>();
-        //    List<string> data1 = new List<string>();
-        //    List<string> data2 = new List<string>();
-        //    foreach (DataRow dr in dt.Rows)
-        //    {
-        //        data.Add(dr[0].ToString());
-        //        data1.Add(dr[1].ToString());
-        //        data2.Add(dr[2].ToString());
-        //    }
-        //    idata.Add(data);
-        //    idata.Add(data1);
-        //    idata.Add(data2);
-        //    return idata;
-        //}
+        [WebMethod]
+        public List<object> GetSchedule(string name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable dt=  schedule.GetSchedule();
+            List<object> idata = new List<object>();
+            List<string> data = new List<string>();
+            List<string> data1 = new List<string>();
+            List<string> data2 = new List<string>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                data.Add(dr[0].ToString());
+                data1.Add(dr[1].ToString());
+                data2.Add(dr[2].ToString());
+            }
+            idata.Add(data);
+            idata.Add(data1);
+            idata.Add(data2);
+            return idata;
+        }        
 
         [WebMethod]
         public List<object> GetCourse(string name)
@@ -54,35 +54,16 @@ namespace CresijApp.Services
             List<string> data = new List<string>();
             List<string> data1 = new List<string>();
             List<string> data2 = new List<string>();
-            List<string> data3 = new List<string>();
             foreach (DataRow dr in dt.Rows)
             {
                 data.Add(dr[0].ToString());
                 data1.Add(dr[1].ToString());
                 data2.Add(dr[2].ToString());
-                data3.Add(dr[3].ToString());
             }
             idata.Add(data);
             idata.Add(data1);
             idata.Add(data2);
-            idata.Add(data3);
             return idata;
         }
-
-        [WebMethod]
-        public List<object> GetSchedule(string name)
-        {
-            Schedule schedule = new Schedule();
-            DataTable dt = schedule.GetSchedule();
-            List<object> idata = new List<object>();
-            foreach(DataRow dr in dt.Rows)
-            {
-                idata.Add(dr.ItemArray);
-            }
-            //idata.Add(dt.Rows);
-            return idata;
-        }
-
-
     }
 }

@@ -217,7 +217,7 @@ table th{ color:#000;}
 .coursebox{
   border:1px solid #f5f5f5;
   padding: 10px;
-  position: relative!important;
+  position: relative;
   line-height: 18px;
   height: 100px;
 }
