@@ -81,5 +81,32 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
+
+        public DataTable GetCourseDetails(string[] name)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    string query = "select teachername, coursename, cs.Classname, " +
+                        "teachingbuilding, weekstart,weekend, dayno, section from schedule sc" +
+                        " join classdetails cs on sc.Classname = cs.classname " +
+                        "where sc.classname = '"+name[0]+"' and coursename = '"+name[1]+"' ";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return dt;
+
+        }
     }
 }

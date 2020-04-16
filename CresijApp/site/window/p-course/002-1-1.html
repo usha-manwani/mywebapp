@@ -9,15 +9,15 @@
     <h5><i class="fa fa-cog"></i>课程信息</h5>
     <table class="info_normal maxw900 w-100">
       <tr>
-        <td><span>课程名称：</span>机械制造与自动化</td>
-        <td><span>上课地点：</span>第一教学楼 301</td>
-        <td><span>上课时长：</span>2 节</td>
+        <td><span>课程名称：</span><span id="coursename">机械制造与自动化</span></td>
+        <td><span>上课地点：</span><span id="location">第一教学楼 301</span></td>
+        <td><span>上课时长：</span><span id="lessoncount">2 节</span></td>
         <td></td>
       </tr>
       <tr>
         <td colspan = 4>
           <span>调课原因：</span><br>
-          <textarea class="info_input w-100" name="name" rows="3" placeholder="请输入您的调课原因"></textarea>
+          <textarea class="info_input w-100" id="txtreason" name="name" rows="3" placeholder="请输入您的调课原因"></textarea>
         </td>
       </tr>
     </table>
@@ -33,11 +33,11 @@
     <tr class="bbgray">
       <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
       <td>周次</td>
-      <td>1-16</td>
+      <td id="oldweek">1-16</td>
       <td>
         <div class="searchbox float-left">
         <div class="searchbox2  float-left">
-          <div class="name">请选择周次</div>
+          <div class="name" id="newweek">请选择周次</div>
           <div class="list up">
             <div class="option">
               <a>第1周</a>
@@ -56,12 +56,21 @@
     <tr class="bbgray">
       <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
       <td>节次</td>
-      <td>星期五 第6节</td>
+      <td id="oldsession">星期五 第6节</td>
       <td>
         <div class="searchbox float-left">
         <div class="searchbox2  float-left">
-          <div class="name">星期几</div>
+          <div class="name" id="weekday">星期几</div>
           <div class="list up">
+              <!--<select id="weekdays" class="list up">
+                  <option class="option">星期一</option>
+                  <option class="option">星期二</option>
+                  <option class="option">星期三</option>
+                  <option class="option">星期四</option>
+                  <option class="option">星期五</option>
+                  <option class="option">星期六</option>
+                  <option class="option">星期天</option>
+              </select>-->
             <div class="option">
               <a>星期一</a>
             </div>
@@ -88,7 +97,7 @@
         </div>
         </div>
         <div class="searchbox2  float-left">
-          <div class="name">第几节</div>
+          <div class="name" id="section">第几节</div>
           <div class="list up">
             <div class="option">
               <a>第1节</a>
@@ -107,11 +116,11 @@
     <tr class="bbgray">
       <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
       <td>地点</td>
-      <td>第一教学楼 3-304</td>
+      <td id="beforelocation">第一教学楼 3-304</td>
       <td>
         <div class="searchbox float-left">
         <div class="searchbox2  float-left">
-          <div class="name">几号楼</div>
+          <div class="name" id="building">几号楼</div>
           <div class="list up">
             <div class="option">
               <a>第一教学楼</a>
@@ -126,7 +135,7 @@
           </div>
         </div>
         <div class="searchbox2  float-left">
-          <div class="name">几号课室</div>
+          <div class="name" id="classroom">几号课室</div>
           <div class="list up">
             <div class="level">
               <div class="leveltt">第一层</div>
@@ -185,11 +194,11 @@
     <tr class="bbgray">
       <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
       <td>任课教师</td>
-      <td>张三丰 教授</td>
+      <td id="oldteacher">张三丰 教授</td>
       <td>
         <div class="searchbox float-left">
         <div class="searchbox2  float-left">
-          <div class="name">请选择周次</div>
+          <div class="name" id="newteacher">请选择周次</div>
           <div class="list up">
             <div class="option">
               <a>第1周</a>
@@ -210,7 +219,9 @@
 
   <div class="bar01">
   <div class="searchbox float-left">
-    <a class="jbtn_sm show_jmodal JURL" j-page-href="window/alert/state_suc_2.html" j-page-box="#jcontent"><i class="fa fa-check" style="margin-top:10px; margin-right:5px;"></i>确定提交申请</a>
+    <a class="jbtn_sm show_jmodal" id="btnSaveTransfer" 
+       j-page-href="window/alert/state_suc_2.html" j-page-box="#jcontent">
+      <i class="fa fa-check" style="margin-top:10px; margin-right:5px;"></i>确定提交申请</a>
     <a class="jbtn_sm ml-2 bg_red JURL" j-page-href="window/p-course/002-1.html" j-page-box="#sec_box"><i class="fa fa-times" style="margin-top:10px; margin-right:5px;"></i>取消</a>
   </div>
   </div>

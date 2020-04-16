@@ -83,6 +83,18 @@ namespace CresijApp.Services
             return idata;
         }
 
-
+        [WebMethod]
+        public List<object> GetCourseDetails(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable dt = schedule.GetCourseDetails(name);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            //idata.Add(dt.Rows);
+            return idata;
+        }
     }
 }
