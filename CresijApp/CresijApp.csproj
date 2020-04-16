@@ -221,6 +221,7 @@
     <Content Include="Scripts\sensor.js" />
     <Content Include="Scripts\StudentInfo.js" />
     <Content Include="Scripts\TeacherInfo.js" />
+    <Content Include="Scripts\TransferApplication.js" />
     <Content Include="Scripts\Treeview.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />

@@ -106,6 +106,10 @@ $(document).ready(function(){
                 console.log("user id " + pageurl.substring(36));
                 $("#userId").attr('value', pageurl.substring(36));
             }
+            else if (pageurl.includes("002-1-1.html")) {
+                console.log("sch id " + pageurl.substring(35));
+                $("#schid").attr('value', pageurl.substring(35));
+            }
 			$(pagebox).load(pageurl);
 			console.log("page:"+pageurl+"***box:"+pagebox);
 		}else{
