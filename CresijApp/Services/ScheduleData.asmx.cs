@@ -17,7 +17,6 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class ScheduleData : WebService
     {
-
         [WebMethod]
         public string HelloWorld()
         {
@@ -94,6 +93,30 @@ namespace CresijApp.Services
                 idata.Add(dr.ItemArray);
             }
             //idata.Add(dt.Rows);
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> SaveTransferSchedule(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            int r = schedule.SaveTransferSchedule(name);
+            List<object> idata = new List<object>();            
+            return idata;
+        }
+        [WebMethod]
+        public List<object> getFreeWeek()
+        {
+            List<int> freeweek = new List<int>();
+            int maxweek = 22, minweek = 1;
+            Schedule schedule = new Schedule();
+            DataTable dt = schedule.GetFreeWeek();
+            List<object> idata = new List<object>();
+            foreach(DataRow dr in dt.Rows)
+            {
+                idata.Add(dr.ItemArray);                
+            }
+            
             return idata;
         }
     }

@@ -78,7 +78,6 @@ namespace CresijApp.DataAccess
             {
 
             }
-
             return dt;
         }
 
@@ -107,6 +106,49 @@ namespace CresijApp.DataAccess
 
             return dt;
 
+        }
+
+        public DataTable GetFreeWeek()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = "select classname, weekstart, weekend from schedule";
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+        public int SaveTransferSchedule(string[] name)
+        {
+            int num = 0;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetSchedule", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return num;
         }
     }
 }
