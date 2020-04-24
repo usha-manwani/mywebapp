@@ -46,10 +46,10 @@ function FillSchedule(data1) {
             }
             var column2 = row.insertCell(2);
 
-            if (data[2] != " ") {
-                column2.innerHTML = '<div class="coursebox state2 tk">' + data[2] + '<span class="intro">课</span>' +
+            if (data[1] != " ") {
+                column2.innerHTML = '<div class="coursebox state2 tk">' + data[1] + '<span class="intro">课</span>' +
                     '<a class="action JURL " j-page-href="window/p-course/002-1-1.html?index=' + data[0].replace(" ", "%20") +
-                    '&' + data[2].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
+                    '&' + data[1].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
                 column2.innerHTML = '<div class="coursebox state0"><span class="intro">课</span>' +
@@ -69,10 +69,10 @@ function FillSchedule(data1) {
             }
             var column4 = row.insertCell(4);
 
-            if (data[4] != " ") {
-                column4.innerHTML = '<div class="coursebox state2 tk">' + data[4] + '<span class="intro">课</span>' +
+            if (data[3] != " ") {
+                column4.innerHTML = '<div class="coursebox state2 tk">' + data[3] + '<span class="intro">课</span>' +
                     '<a class="action JURL disp" j-page-href="window/p-course/002-1-1.html?index=' + data[0].replace(" ", "%20") +
-                    '&' + data[4].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
+                    '&' + data[3].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
                 column4.innerHTML = '<div class="coursebox state0"><span class="intro">课</span>' +
@@ -91,10 +91,10 @@ function FillSchedule(data1) {
                     '<a class="action JURL" j-page-href="window/p-course/002-1-1.html" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             var column6 = row.insertCell(6);
-            if (data[6] != " ") {
-                column6.innerHTML = '<div class="coursebox state1 tk">' + data[6] + '<span class="intro">课</span>' +
+            if (data[5] != " ") {
+                column6.innerHTML = '<div class="coursebox state1 tk">' + data[5] + '<span class="intro">课</span>' +
                     '<a class="action JURL disp" j-page-href="window/p-course/002-1-1.html?index=' + data[0].replace(" ", "%20") +
-                    '&' + data[6].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
+                    '&' + data[5].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
                 column6.innerHTML = '<div class="coursebox state0"><span class="intro">课</span>' +
@@ -112,10 +112,10 @@ function FillSchedule(data1) {
                     '<a class="action JURL" j-page-href="window/p-course/002-1-1.html" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             var column8 = row.insertCell(8);
-            if (data[8] != " ") {
-                column8.innerHTML = '<div class="coursebox state1 tk">' + data[8] + '<span class="intro">课</span>' +
+            if (data[7] != " ") {
+                column8.innerHTML = '<div class="coursebox state1 tk">' + data[7] + '<span class="intro">课</span>' +
                     '<a class="action JURL disp" j-page-href="window/p-course/002-1-1.html?index=' + data[0].replace(" ", "%20") +
-                    '&' + data[8].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
+                    '&' + data[7].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
                 column8.innerHTML = '<div class="coursebox state0"><span class="intro">课</span>' +
@@ -132,10 +132,10 @@ function FillSchedule(data1) {
                     '<a class="action JURL" j-page-href="window/p-course/002-1-1.html" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             var column10 = row.insertCell(10);
-            if (data[10] != " ") {
-                column10.innerHTML = '<div class="coursebox state1 tk">' + data[10] + '<span class="intro">课</span>' +
+            if (data[9] != " ") {
+                column10.innerHTML = '<div class="coursebox state1 tk">' + data[9] + '<span class="intro">课</span>' +
                     '<a class="action JURL disp" j-page-href="window/p-course/002-1-1.html?index=' + data[0].replace(" ", "%20") +
-                    '&' + data[10].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
+                    '&' + data[9].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
                 column10.innerHTML = '<div class="coursebox state0"><span class="intro">课</span>' +
@@ -154,10 +154,10 @@ function FillSchedule(data1) {
             }
             var column12 = row.insertCell(12);
 
-            if (data[12] != " ") {
-                column12.innerHTML = '<div class="coursebox state1 tk">' + data[12] + '<span class="intro">课</span>' +
+            if (data[11] != " ") {
+                column12.innerHTML = '<div class="coursebox state1 tk">' + data[11] + '<span class="intro">课</span>' +
                     '<a class="action JURL disp" j-page-href="window/p-course/002-1-1.html?index=' + data[0].replace(" ", "%20") +
-                    '&' + data[12].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
+                    '&' + data[11].replace(" ", "%20") + '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
                 column12.innerHTML = '<div class="coursebox state0"><span class="intro">课</span>' +

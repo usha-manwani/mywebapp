@@ -45,8 +45,8 @@ function FillSchedule(data1) {
             }
             var column2 = row.insertCell(2);
 
-            if (data[2] != " ") {
-                column2.innerHTML = '<div class="coursebox state2">' + data[2] + '<span class="intro">课</span>' +
+            if (data[1] != " ") {
+                column2.innerHTML = '<div class="coursebox state2">' + data[1] + '<span class="intro">课</span>' +
                     '<a class="action" data-toggle="modal" datatarget="#tk_modal"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
@@ -65,8 +65,8 @@ function FillSchedule(data1) {
             }
             var column4 = row.insertCell(4);
 
-            if (data[4] != " ") {
-                column4.innerHTML = '<div class="coursebox state2">' + data[4] + '<span class="intro">课</span>' +
+            if (data[3] != " ") {
+                column4.innerHTML = '<div class="coursebox state2">' + data[3] + '<span class="intro">课</span>' +
                     '<a class="action" data-toggle="modal" datatarget="#tk_modal"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
@@ -85,8 +85,8 @@ function FillSchedule(data1) {
             }
             var column6 = row.insertCell(6);
 
-            if (data[6] != " ") {
-                column6.innerHTML = '<div class="coursebox state1">' + data[6] + '<span class="intro">课</span>' +
+            if (data[5] != " ") {
+                column6.innerHTML = '<div class="coursebox state1">' + data[5] + '<span class="intro">课</span>' +
                     '<a class="action" data-toggle="modal" datatarget="#tk_modal"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
@@ -104,8 +104,8 @@ function FillSchedule(data1) {
                     '<a class="action" data-toggle="modal" datatarget="#tk_modal"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             var column8 = row.insertCell(8);
-            if (data[8] != " ") {
-                column8.innerHTML = '<div class="coursebox state1">' + data[8] + '<span class="intro">课</span>' +
+            if (data[7] != " ") {
+                column8.innerHTML = '<div class="coursebox state1">' + data[7] + '<span class="intro">课</span>' +
                     '<a class="action" data-toggle="modal" datatarget="#tk_modal"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
@@ -122,8 +122,8 @@ function FillSchedule(data1) {
                     '<a class="action" data-toggle="modal" datatarget="#tk_modal"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             var column10 = row.insertCell(10);
-            if (data[10] != " ") {
-                column10.innerHTML = '<div class="coursebox state1">' + data[10] + '<span class="intro">课</span>' +
+            if (data[9] != " ") {
+                column10.innerHTML = '<div class="coursebox state1">' + data[9] + '<span class="intro">课</span>' +
                     '<a class="action" data-toggle="modal" datatarget="#tk_modal"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {
@@ -142,8 +142,8 @@ function FillSchedule(data1) {
             }
             var column12 = row.insertCell(12);
 
-            if (data[12] != " ") {
-                column12.innerHTML = '<div class="coursebox state1">' + data[12] + '<span class="intro">课</span>' +
+            if (data[11] != " ") {
+                column12.innerHTML = '<div class="coursebox state1">' + data[11] + '<span class="intro">课</span>' +
                     '<a class="action" data-toggle="modal" datatarget="#tk_modal"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {

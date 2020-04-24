@@ -162,7 +162,8 @@ $(document).ready(function(){
 		$(this).find(".list").fadeOut("fast");
 		$(this).children(".jactive").removeClass("jactive")
 	});
-	$("body").on("click",".option",function(){
+    $("body").on("click", ".option", function () {
+        
 		$(this).addClass("selected");
 		$(this).children("input").attr("checked","true");
 		$(this).parent(".list").fadeOut("fast");

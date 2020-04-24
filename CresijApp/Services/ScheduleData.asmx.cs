@@ -105,18 +105,174 @@ namespace CresijApp.Services
             return idata;
         }
         [WebMethod]
-        public List<object> getFreeWeek()
+        public List<BusySchedule> getFreeWeek()
         {
             List<int> freeweek = new List<int>();
-            int maxweek = 22, minweek = 1;
+            
             Schedule schedule = new Schedule();
-            DataTable dt = schedule.GetFreeWeek();
+            DataTable dt = schedule.GetScheduleFree(); //.GetFreeWeek();
+            List<BusySchedule> idata = new List<BusySchedule>();
+            //foreach(DataRow dr in dt.Rows)
+            //{
+            //    idata.Add(dr.ItemArray);                
+            //}
+           idata= GetFreeSchedule(dt);
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetFreeDay(string name)
+        {
+            List<int> freeweek = new List<int>();
+
+            Schedule schedule = new Schedule();
+            DataTable dt = schedule.GetFreeDay(Convert.ToInt32(name));
             List<object> idata = new List<object>();
-            foreach(DataRow dr in dt.Rows)
+            foreach (DataRow dr in dt.Rows)
             {
-                idata.Add(dr.ItemArray);                
+                idata.Add(dr.ItemArray);
+            }
+
+            return idata;
+        }
+
+        public List<BusySchedule> GetFreeSchedule(DataTable dt)
+        {
+            List<BusySchedule> idata = new List<BusySchedule>();
+            int maxweek = 22;
+            for(int i=1; i <= maxweek; i++)
+            {
+                BusySchedule schedule = new BusySchedule
+                {
+                    Week = i
+                };
+                try
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        if (Convert.ToInt32(dr[1]) <= i && Convert.ToInt32(dr[2]) >= i)
+                        {
+                            schedule.Day.Add(dr[3].ToString());
+                            schedule.Classnames.Add(dr[0].ToString());
+                            schedule.Section.Add(Convert.ToInt32(dr[4]));
+                        }
+                    }
+                    idata.Add(schedule);
+                   // GetWeekdays(idata);
+                }
+                catch(Exception ex)
+                {
+
+                }
             }
             
+            return idata;
+        }
+
+        public class BusySchedule
+        {
+            public int Week { get; set; }
+            public List<string> Day { get; set; }
+            public List<string> Classnames { get; set; }
+            public List<int> Section { get; set; }
+
+            public BusySchedule()
+            {
+                Day = new List<string>();
+                Classnames = new List<string>();
+                Section = new List<int>();
+            }
+        }
+
+        public void GetWeekdays(List<BusySchedule> idata)
+        {
+            string[] totaldays = new string[] { "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" };
+            
+
+            foreach(BusySchedule busy in idata)
+            {
+                foreach(string d in totaldays)
+                {
+                    if (busy.Day.Contains(d))
+                    {
+
+                    }
+                }
+            }
+        }
+
+        [WebMethod]
+        public List<object> GetBuilding()
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetBuilding();
+            List<object> idata = new List<object>();
+            foreach(DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            return idata;
+        }
+        [WebMethod]
+        public List<object> GetAvailClasses(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetAvailClasses(name[0],name[1]);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                if(Convert.ToInt32(dr[1])<42)
+                idata.Add(dr[0].ToString());
+            }
+            return idata;
+        }
+
+        [WebMethod]
+        public List<DaysAndSection> GetAvailDay(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetAvailDay(name[0], name[1]);
+            List<DaysAndSection> idata = new List<DaysAndSection>();
+            foreach (DataRow dr in r.Rows)
+            {
+                DaysAndSection section = new DaysAndSection();
+                for(int i=1; i <= 7; i++)
+                {
+                    section.Day = i;
+                    string[] sec = dr[1].ToString().Split(',');
+                    if (Convert.ToInt32(dr[0]) == i)
+                    {
+                        for(int k=0; k < sec.Length; k++)
+                        {
+                            section.Section.Remove(Convert.ToInt32(sec[k]));
+                        }                        
+                    }
+                }
+                idata.Add(section);
+            }
+            return idata;
+        }
+
+        public class DaysAndSection
+        {
+            public int Day { get; set; }
+            public List<int> Section { get; set; }
+            public DaysAndSection()
+            {
+                Section = new List<int>() { 1,3,5,7,9,11};
+            }
+        }
+
+        [WebMethod]
+        public List<object> GetTeacherDetail(string name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetTeacherDetail(name);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
             return idata;
         }
     }
