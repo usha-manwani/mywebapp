@@ -233,19 +233,23 @@ namespace CresijApp.Services
             Schedule schedule = new Schedule();
             DataTable r = schedule.GetAvailDay(name[0], name[1]);
             List<DaysAndSection> idata = new List<DaysAndSection>();
-            foreach (DataRow dr in r.Rows)
-            {
-                DaysAndSection section = new DaysAndSection();
+           
                 for(int i=1; i <= 7; i++)
                 {
-                    section.Day = i;
+                DaysAndSection section = new DaysAndSection();
+                section.Day = i;
+                foreach (DataRow dr in r.Rows)
+                {
+                   
                     string[] sec = dr[1].ToString().Split(',');
-                    if (Convert.ToInt32(dr[0]) == i)
+                    if (Convert.ToInt32(dr[0]) == section.Day )
                     {
-                        for(int k=0; k < sec.Length; k++)
+                        
+                        for (int k=0; k < sec.Length; k++)
                         {
                             section.Section.Remove(Convert.ToInt32(sec[k]));
-                        }                        
+                        }
+                        break;
                     }
                 }
                 idata.Add(section);

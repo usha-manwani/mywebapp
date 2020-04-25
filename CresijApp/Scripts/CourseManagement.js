@@ -1,4 +1,5 @@
 ﻿$ = jQuery.noConflict();
+console.log("course management ");
 $(function () {
     var jsonData = JSON.stringify({
         name: ""

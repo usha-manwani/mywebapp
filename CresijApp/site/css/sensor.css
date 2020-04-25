@@ -188,7 +188,8 @@ table th{ color:#000;}
   line-height: 30px;
   padding: 0 10px;
   background-color: #FCFCFC;
-  width: 100%;
+  width:100%;
+  z-index: 1;
 }
 .searchbox2 .list .option:hover{
   background-color: #93D46A;

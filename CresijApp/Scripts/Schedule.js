@@ -1,4 +1,5 @@
 ﻿$ = jQuery.noConflict();
+console.log("schedule page");
 $(function () {
     var jsonData = JSON.stringify({
         name: ""

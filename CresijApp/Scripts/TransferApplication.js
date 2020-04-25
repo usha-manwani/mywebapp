@@ -231,7 +231,7 @@ function OnSuccessBuilding(response) {
     var inner = [];
     for (i = 0; i < data.length; i++) {
 
-        inner += '<div class="option" name="building1"><a>' + data[i] + '</a></div>';
+        inner += '<option class="option" value="'+data[i]+'">' + data[i] + '</option>';
     }
     document.getElementById("buildinglist").innerHTML = inner;
     
@@ -240,10 +240,10 @@ function OnErrorCallBuilding(respo) {
     console.log(respo);
 }
 
-$("div[name='building1']").off("click").on("click",  function () {
+$("#buildinglist").off("change").on("change",  function () {
     var adata = [];
-    console.log(document.getElementById("building").innerText);
-    adata[1] = document.getElementById("building").innerText;
+    console.log($('#buildinglist option:selected').text());
+    adata[1] = $('#buildinglist option:selected').text();
     adata[0] = document.getElementById("newweek").innerText;
     var jsonData = JSON.stringify({
         name: adata
@@ -264,8 +264,7 @@ function OnSuccessClass(response) {
     var data = response.d;
     var inner = [];
     for (i = 0; i < data.length; i++) {
-
-        inner += '<div class="option classlist"><a>' + data[i] + '</a></div>';
+        inner += '<option class="option" value="'+data[i]+'">' + data[i] + '</option>';
     }
     document.getElementById("classlist").innerHTML = inner;
 }
@@ -273,10 +272,10 @@ function OnErrorCallClass(respo) {
     console.log(respo);
 }
 
-$(document).off("click").on("click", ".classlist", function () {
+$("#classlist").off("change").on("change", function () {
     var adata = [];
-    console.log(document.getElementById("classroom").innerText);
-    adata[1] = document.getElementById("classroom").innerText;
+    
+    adata[1] = $('#classlist option:selected').text();
     adata[0] = document.getElementById("newweek").innerText;
     var jsonData = JSON.stringify({
         name: adata
@@ -295,11 +294,12 @@ $(document).off("click").on("click", ".classlist", function () {
 
 var sections = [];
 function OnSuccessDay(response) {
-    var data = response.d;
+    var data1 = response.d;
     var inner = [];
-    for (i = 0; i < data.length; i++) {
-        var day = data[0];
-        var sec = data[1];
+    for (i = 0; i < data1.length; i++) {
+        var data = data1[i];
+        var day = data["Day"];
+        var sec = data["Section"];
         sections.push(sec);
         inner += '<option class="option" value = "'+day+'">' + day + '</option>';
     }
@@ -309,10 +309,10 @@ function OnErrorCallDay(respo) {
     console.log(respo);
 }
 
-$("#weekdays").off("click").on("click", function () {
+$("#weekdays").off("change").on("change", function () {
     
-    console.log(document.getElementById("weekday").innerText);
-    var day = document.getElementById("weekdays").val;
+    console.log(document.getElementById("weekdays").innerText);
+    var day = $('#weekdays option:selected').text();
     var inner = [];
     var currentsec = sections[parseInt(day) - 1];
     for (i = 0; i < currentsec.length; i++) {
