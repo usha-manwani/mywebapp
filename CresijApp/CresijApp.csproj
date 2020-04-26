@@ -173,6 +173,7 @@
     <Content Include="Scripts\CapitalInfoJS.js" />
     <Content Include="Scripts\Chart.bundle.min.js" />
     <Content Include="Scripts\ClassroomInfo.js" />
+    <Content Include="Scripts\ConfirmTransferSchedule.js" />
     <Content Include="Scripts\ControlClick.js" />
     <Content Include="Scripts\CourseManagement.js" />
     <Content Include="Scripts\DeleteClass.js" />

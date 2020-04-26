@@ -42,7 +42,7 @@ var weeklist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1
 function FillEditSchedule(data) {
     var idata = data[0];
     document.getElementById("coursename").innerText = idata[1];
-    document.getElementById("location").innerText = idata[7] + ", " + idata[2];
+    document.getElementById("location").innerText = idata[7] + "," + idata[2];
     document.getElementById("lessoncount").innerText = idata[6];
     
     document.getElementById("oldweek").innerText = idata[3];
@@ -94,7 +94,7 @@ $("#btnSaveTransfer").off('click').on('click', function () {
 function OnSuccess(response) {
     var idata = response.d;
     console.log(idata);
-    GetFreeWeek(idata);
+    $("#sec_box").load("window/p-course/002-1.html");
     
 }
 function OnErrorCall(respo) {
@@ -106,10 +106,10 @@ function SaveTransfer() {
     var coursename = document.getElementById("coursename").innerText;
     var reason = document.getElementById("txtreason").innerText;
     var week = document.getElementById("newweek").innerText;
-    var day = document.getElementById("weekday").innerText;
+    var day = $('#weekdays option:selected').val();
     var section = document.getElementById("section").innerText;
-    var building = document.getElementById("building").innerText;
-    var classroom = document.getElementById("classroom").innerText;
+    var building = $('#buildinglist option:selected').text();
+    var classroom = $('#classlist option:selected').text();
     var teacher = document.getElementById("newteacher").innerText;
     SaveTransferApplication(classname, coursename, reason, week, day, section, building, classroom, teacher);
 
@@ -296,12 +296,37 @@ var sections = [];
 function OnSuccessDay(response) {
     var data1 = response.d;
     var inner = [];
+    sections = [];
     for (i = 0; i < data1.length; i++) {
         var data = data1[i];
         var day = data["Day"];
         var sec = data["Section"];
+        var dayname = "";
         sections.push(sec);
-        inner += '<option class="option" value = "'+day+'">' + day + '</option>';
+        switch (day) {
+            case 1:
+                dayname = "Monday";
+                break;
+            case 2:
+                dayname = "Tuesday";
+                break;
+            case 3:
+                dayname = "Wednesday";
+                break;
+            case 4:
+                dayname = "Thursday";
+                break;
+            case 5:
+                dayname = "Friday";
+                break;
+            case 6:
+                dayname = "Saturday";
+                break;
+            case 7:
+                dayname = "Sunday";
+                break;
+        }
+        inner += '<option class="option" value = "' + day + '">' + dayname + '</option>';
     }
     document.getElementById("weekdays").innerHTML = inner;
 }
@@ -312,7 +337,7 @@ function OnErrorCallDay(respo) {
 $("#weekdays").off("change").on("change", function () {
     
     console.log(document.getElementById("weekdays").innerText);
-    var day = $('#weekdays option:selected').text();
+    var day = $('#weekdays option:selected').val();
     var inner = [];
     var currentsec = sections[parseInt(day) - 1];
     for (i = 0; i < currentsec.length; i++) {

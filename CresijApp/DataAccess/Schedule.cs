@@ -133,11 +133,11 @@ namespace CresijApp.DataAccess
         public int SaveTransferSchedule(string[] name)
         {
             int num = 0;
-            try
+            using (MySqlConnection con = new MySqlConnection(constring))
             {
-                using (MySqlConnection con = new MySqlConnection(constring))
+                try
                 {
-
+                
                     using (MySqlCommand cmd = new MySqlCommand("sp_InsertChangeSchedule", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -150,13 +150,21 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("buildingname",name[6]);
                         cmd.Parameters.AddWithValue("newcl",name[7]);
                         cmd.Parameters.AddWithValue("teacherid",name[8]);
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
                        num= cmd.ExecuteNonQuery();
+                        
                     }
                 }
-            }
-            catch (Exception ex)
-            {
+                
+                catch (Exception ex)
+                {
 
+                }
+                finally
+                {
+                    con.Close();
+                }
             }
             return num;
         }
@@ -237,7 +245,8 @@ namespace CresijApp.DataAccess
                 string query = "select sc.classname, count(section) as section "+
                                 "from schedule sc join classdetails cd on sc.classname = cd.classname "+
                                 "where weekStart <= "+week+" and weekend>= "+week+" and teachingbuilding = '"+building+"'"+
-                                "group by  sc.classname order by sc.classname; ";
+                                "group by  sc.classname  union select classname, '0' as section from classdetails where " +
+                                "teachingbuilding ='"+ building + "' and classname not in(select classname from schedule) order by classname ";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 
@@ -286,7 +295,31 @@ namespace CresijApp.DataAccess
                 string query = "select distinct(teachername) from schedule where coursename='"+coursename+"'";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
 
+            }
+            return dt;
+        }
+
+        public DataTable GetTransferSchedule()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = "select sc.classname as oldclass, newclass, concat(sc.weekstart, ',', sc.dayno ,',', sc.section) as oldtime, "+
+                            "concat(scd.newweek, ',', scd.newday, ',', scd.newsection) as newtime, sc.teacherName as oldteacher, "+
+                            "scd.NewTeacherid as newteacher, 'multimedia' as classtype , currentstatus "+
+                                "from schedulechange scd join schedule sc on sc.id = scd.idref ";
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);

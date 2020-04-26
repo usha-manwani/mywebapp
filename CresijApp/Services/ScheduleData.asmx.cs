@@ -101,7 +101,8 @@ namespace CresijApp.Services
         {
             Schedule schedule = new Schedule();
             int r = schedule.SaveTransferSchedule(name);
-            List<object> idata = new List<object>();            
+            List<object> idata = new List<object>();
+            idata.Add(r);
             return idata;
         }
         [WebMethod]
@@ -238,21 +239,27 @@ namespace CresijApp.Services
                 {
                 DaysAndSection section = new DaysAndSection();
                 section.Day = i;
-                foreach (DataRow dr in r.Rows)
+                if (r.Rows.Count > 0)
                 {
-                   
-                    string[] sec = dr[1].ToString().Split(',');
-                    if (Convert.ToInt32(dr[0]) == section.Day )
+                    foreach (DataRow dr in r.Rows)
                     {
-                        
-                        for (int k=0; k < sec.Length; k++)
+
+                        string[] sec = dr[1].ToString().Split(',');
+                        if (Convert.ToInt32(dr[0]) == section.Day)
                         {
-                            section.Section.Remove(Convert.ToInt32(sec[k]));
+
+                            for (int k = 0; k < sec.Length; k++)
+                            {
+                                section.Section.Remove(Convert.ToInt32(sec[k]));
+                            }
+
+                            break;
                         }
-                        break;
                     }
                 }
-                idata.Add(section);
+                
+                if (section.Section.Count>0)
+                    idata.Add(section);
             }
             return idata;
         }
@@ -277,6 +284,20 @@ namespace CresijApp.Services
             {
                 idata.Add(dr.ItemArray);
             }
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetTransferedSchedule()
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetTransferSchedule();
+            List<object> idata = new List<object>();
+            foreach(DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            
             return idata;
         }
     }
