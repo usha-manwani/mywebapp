@@ -300,5 +300,14 @@ namespace CresijApp.Services
             
             return idata;
         }
+
+        [WebMethod]
+        public int SaveScheduleStatus(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            int r = schedule.SaveScheduleStat(name);
+            
+            return r;
+        }
     }
 }

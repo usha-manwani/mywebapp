@@ -316,7 +316,7 @@ namespace CresijApp.DataAccess
             {
                 string query = "select sc.classname as oldclass, newclass, concat(sc.weekstart, ',', sc.dayno ,',', sc.section) as oldtime, "+
                             "concat(scd.newweek, ',', scd.newday, ',', scd.newsection) as newtime, sc.teacherName as oldteacher, "+
-                            "scd.NewTeacherid as newteacher, 'multimedia' as classtype , currentstatus "+
+                            "scd.NewTeacherid as newteacher, 'multimedia' as classtype , currentstatus, reason, sc.coursename , scd.id as id " +
                                 "from schedulechange scd join schedule sc on sc.id = scd.idref ";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -332,6 +332,37 @@ namespace CresijApp.DataAccess
 
             }
             return dt;
+        }
+
+        public int SaveScheduleStat(string[] stat)
+        {
+            int num = 0;
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    string query = "update ScheduleChange set currentstatus ='" + stat[0]+"' where id="+ stat[1];
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                       
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        num = cmd.ExecuteNonQuery();
+
+                    }
+                }
+
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return num;
+
         }
     }
 }
