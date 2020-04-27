@@ -77,8 +77,7 @@ $(document).off("click").on("click", ".taskmodal", function () {
    
     //$(".taskmodal:visible tr:eq(1) td:eq(1)").html(">>" + rowitem.find("td:eq(1)").text());
     
-    document.getElementById('taskmodal').style.display = 'block';
-    
+    document.getElementById('taskmodal').style.display = 'block';    
 })
 
 function savenewstat() {
