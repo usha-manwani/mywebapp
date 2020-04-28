@@ -219,6 +219,7 @@
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
     <Content Include="Scripts\Schedule.js" />
+    <Content Include="Scripts\ScheduleAppointment.js" />
     <Content Include="Scripts\sensor.js" />
     <Content Include="Scripts\StudentInfo.js" />
     <Content Include="Scripts\TeacherInfo.js" />
@@ -266,7 +267,9 @@
     <Content Include="site\images\ty.svg" />
     <Content Include="site\js\calendor.js" />
     <Content Include="site\js\Chart.bundle.min.js" />
+    <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="site\js\ip_input.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="site\js\moment.min.js" />
     <Content Include="site\js\moment.zh-cn.js" />
     <Content Include="site\js\sensor.js" />
