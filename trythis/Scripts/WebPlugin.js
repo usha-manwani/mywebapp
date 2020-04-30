@@ -129,7 +129,7 @@ function callCam() {
         error: OnErrorCall_
     });
     function OnSuccess_(response) {
-        console.log("web method for cam is working");
+        console.log("web method for cam is working " + response.d);
         aData = response.d;
         if (aData.length > 0) {
             console.log("method is called");
@@ -267,7 +267,7 @@ function GetChannelId(szIdentity, ip) {
         error: OnErrorCall_
     });
     function OnSuccess_(response) {
-        console.log("method called");
+        console.log("method called webplugin" + response.d);
         var channel;
         if (response.d == undefined || response.d == null)
             channel = 1;
