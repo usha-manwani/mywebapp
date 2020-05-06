@@ -222,6 +222,7 @@
     <Content Include="Scripts\ScheduleAppointment.js" />
     <Content Include="Scripts\sensor.js" />
     <Content Include="Scripts\StudentInfo.js" />
+    <Content Include="Scripts\SystemSetting.js" />
     <Content Include="Scripts\TeacherInfo.js" />
     <Content Include="Scripts\TransferApplication.js" />
     <Content Include="Scripts\Treeview.js" />
@@ -236,6 +237,7 @@
     <Content Include="Services\GetSideMenu.asmx" />
     <Content Include="Services\SaveOrganisationData.asmx" />
     <Content Include="Services\ScheduleData.asmx" />
+    <Content Include="Services\SystemSetting.asmx" />
     <Content Include="site\back\video.html" />
     <Content Include="site\components\left_menu.html" />
     <Content Include="site\components\top_menu.html" />
@@ -404,6 +406,11 @@
       <DependentUpon>ScheduleData.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Services\SystemSetting.asmx.cs">
+      <DependentUpon>SystemSetting.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\SystemSettingApi.cs" />
     <Compile Include="site\window\alert\UploadFile.aspx.cs">
       <DependentUpon>UploadFile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
