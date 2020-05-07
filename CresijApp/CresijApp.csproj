@@ -378,6 +378,7 @@
     <Compile Include="DataAccess\PopulateTree.cs" />
     <Compile Include="DataAccess\Schedule.cs" />
     <Compile Include="DataAccess\SetOrgData.cs" />
+    <Compile Include="DataAccess\SystemInfo.cs" />
     <Compile Include="DataAccess\Userdetails.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

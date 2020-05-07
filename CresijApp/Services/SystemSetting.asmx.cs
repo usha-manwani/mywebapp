@@ -26,13 +26,10 @@ namespace CresijApp.Services
             return "Hello World";
         }
 
-
         [WebMethod]
-        public string Saveimage(string data)
+        public string SaveSystemInfo(string[] data)
         {
-            byte[] imgarr = Convert.FromBase64String(data);
-            return "done";
-            /* Add further code here*/
+            return "";
         }
     }
 }
