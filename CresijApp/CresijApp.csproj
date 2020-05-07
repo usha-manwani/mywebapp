@@ -398,6 +398,9 @@
       <DependentUpon>GetSideMenu.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Services\Handler.ashx.cs">
+      <DependentUpon>Handler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Services\SaveOrganisationData.asmx.cs">
       <DependentUpon>SaveOrganisationData.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -410,7 +413,6 @@
       <DependentUpon>SystemSetting.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Services\SystemSettingApi.cs" />
     <Compile Include="site\window\alert\UploadFile.aspx.cs">
       <DependentUpon>UploadFile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -539,6 +541,7 @@
     <Content Include="site\font\scss\_screen-reader.scss" />
     <Content Include="site\font\scss\_stacked.scss" />
     <Content Include="site\font\scss\_variables.scss" />
+    <Content Include="Services\Handler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
