@@ -1,13 +1,18 @@
 ﻿$('#submitButton').off('click').on('click', function SubmitInfo() {
+
     console.log("submit button clicked");
     var scname = document.getElementsByName("SchoolName")[0].value;
+
     var scengname = document.getElementsByName("SchoolEngName")[0].value;
+
     var logo = $("#filepath").val();
+
     //reserve info
     if ($('input[name = "ReserveNonWorkDay"]').is(':checked'))
         var reservenonworkday = $('input[name = "ReserveNonWorkDay"]').val();
     else
         var reservenonworkday = "No";
+
     if ($('input[name = "ReserveAutoReview"]').is(':checked'))
         var reserveautoreview = $('input[name = "ReserveAutoReview"]').val();
     else
@@ -26,20 +31,22 @@
         var transferautoreview = "No";
     var transferstartdate = $('input[name = "TransferStartDate"]').val();
     var transferstopdate = $('input[name = "TransferStopDate"]').val();
-    
+
     var sections = (function () {
         var valor = [];
-        var section = [];
+        
         $('input[name = "Section"]').each(function () {
-            if (this.checked) {                
-                var starttime = $(this).children('input[name = "starttime"]').val();
-                var stoptime = $(this).children('input[name = "stoptime"]').val();
-                section.push($(this).val());
-                section.push(starttime);
-                section.push(stoptime);
-                valor.push(section);
-            }
+            if (this.checked) {
+                var starttime = $(this).closest('td').find('input[name = "starttime"]').val();
+                var stoptime = $(this).closest('td').find('input[name = "stoptime"]').val();
+                var item = {
+                    "section": $(this).val(),
+                    "starttime": starttime,
+                    "stoptime": stoptime
+                }
+                valor.push(item);
                 
+            }
         });
         return valor;
     })();
@@ -57,7 +64,47 @@
 
     var semstartdate = $('input[name = "semstartDate"]').val();
     var totalweeks = $('input[name = "totalweek"]').val();
-    var totalweeks = $('input[name = "semester"]:checked').val();
+    var semno = $('input[name = "semester"]:checked').val();
+    var object = {
+        "Schoolname": scname,
+        "Schooleng": scengname,
+        "Logourl": logo,
+        "Resnonwork": reservenonworkday,
+        "Resauto": reserveautoreview,
+        "Resstartdate": reservestartdate,
+        "Resstopdate": reservestopdate,
+        "Transfernonwork": transfernonworkday,
+        "Transferauto": transferautoreview,
+        "Transferstart": transferstartdate,
+        "Transferstop": transferstopdate,
+        //"Sectionselected": sections,
+        "Dayselected": days,
+        "Semesterstart": semstartdate,
+        "Weeks": totalweeks,
+        "Semestername": semno
+    };
+
+    var jsonData = JSON.stringify({
+        data :object
+    });
+
+    $.ajax({
+        type: 'POST',     
+        url: '../Services/SystemSetting.asmx/SaveSystemInfo',          
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        traditional: true,
+        processData: false,
+        data: jsonData,
+        success: function (response) {
+            alert("saved successfully");
+            console.log(response.d);
+        },
+        error: function (respo) {
+            alert("some issue occured");
+            console.log(respo);
+        }
+    });
 });
 
 $('#SchoolLogo').on('change', function () {
@@ -73,6 +120,7 @@ $('#SchoolLogo').on('change', function () {
             $("#fileProgress").hide();
             $("#lblMessage").html("<b>" + file.name + "</b> has been uploaded.");
             $("#filepath").val(file.path);
+            console.log("logo");
         },
         error: function () {
             $("#fileProgress").hide();
