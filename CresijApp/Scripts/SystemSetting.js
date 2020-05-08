@@ -1,5 +1,5 @@
 ﻿$('#submitButton').off('click').on('click', function SubmitInfo() {
-
+    uploadlogo();
     console.log("submit button clicked");
     var scname = document.getElementsByName("SchoolName")[0].value;
 
@@ -107,7 +107,9 @@
     });
 });
 
-$('#SchoolLogo').on('change', function () {
+//$('#SchoolLogo').on('change',
+
+function uploadlogo() {
 
     $.ajax({
         url: '../../../Services/Handler.ashx',
@@ -142,5 +144,6 @@ $('#SchoolLogo').on('change', function () {
             return fileXhr;
         }
     });
-});
+}
+//});
 
