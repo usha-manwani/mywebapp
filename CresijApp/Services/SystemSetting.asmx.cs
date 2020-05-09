@@ -31,8 +31,16 @@ namespace CresijApp.Services
             int result = 0;
             try
             {
+                var sec = data["Sectionselected"];
+                IEnumerable<Dictionary<string, object>> section = ((IEnumerable)sec).Cast<object>().ToList().Select(item => (Dictionary<string, object>)item);
+                List<SectionList> sectionlist = new List<SectionList>();
+                foreach (Dictionary<string,object> dr in section)
+                {
+                    var test = GetObject<SectionList>(dr);
+                    sectionlist.Add(test);
+                }
+                
                 var d = data["Dayselected"];
-               // List<object> result = ((IEnumerable)d).Cast<object>().ToList();
                 List<string> strings = ((IEnumerable)d).Cast<object>().ToList().Select(s => (string)s).ToList();
                 string schoolname = data["Schoolname"].ToString();
                 string schooleng = data["Schooleng"].ToString();
@@ -60,6 +68,10 @@ namespace CresijApp.Services
                     result=cc.SaveReserveAndTransferInfo("Transfer", data["Transfernonwork"].ToString(), data["Transferauto"].ToString(),
                         data["Transferstart"].ToString(), data["Transferstop"].ToString(), semname);
 
+                    foreach(SectionList s in sectionlist)
+                    {
+                        cc.SaveSectionsInfo(semname, s.Section, s.Starttime, s.Stoptime);
+                    }                    
                 }
             }
            catch(Exception ex)
@@ -67,7 +79,26 @@ namespace CresijApp.Services
 
             }
             return result.ToString();
-        }        
+        }
+
+        T GetObject<T>(Dictionary<string, object> dict)
+        {
+            Type type = typeof(T);
+            var obj = Activator.CreateInstance(type);
+
+            foreach (var kv in dict)
+            {
+                type.GetProperty(kv.Key).SetValue(obj, kv.Value);
+            }
+            return (T)obj;
+        }
+    }
+
+    public class SectionList
+    {
+        public string Section { get; set; }
+        public string Starttime { get; set; }
+        public string Stoptime { get; set; }
     }
 
 }

@@ -54,9 +54,39 @@ namespace CresijApp.DataAccess
             return result;
         }
 
-        public int SaveSectionsInfo()
+        public int SaveSectionsInfo(string semname, string section, string starttime, string stoptime)
         {
-            return 0;
+            int result = 0;
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_insertUpdateSection", con)) 
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@semname", semname);
+                        cmd.Parameters.AddWithValue("@sec", section);
+                        cmd.Parameters.AddWithValue("@starttime", starttime);
+                        cmd.Parameters.AddWithValue("@stoptime", stoptime);
+                        
+
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        result = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result = -1;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return result;
         }
         public int SaveReserveAndTransferInfo(string typ, string nonwork, string auto, string start,string end, string semname)
         {
@@ -65,7 +95,7 @@ namespace CresijApp.DataAccess
             {
                 try
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_InsertUpdateReserverTransfer", con)) // sp_SaveTempData
+                    using (MySqlCommand cmd = new MySqlCommand("sp_InsertUpdateReserverTransfer", con)) 
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@typ", typ);
@@ -75,6 +105,36 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("@startdate", start);
                         cmd.Parameters.AddWithValue("@enddate", end);
                         
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        result = cmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result = -1;
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return result;
+        }
+
+        public int DeleteSectionsInfo(string semname)
+        {
+            int result = 0;
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_deleteSection", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@semname", semname);                        
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
