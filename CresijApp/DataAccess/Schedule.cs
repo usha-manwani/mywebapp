@@ -364,5 +364,30 @@ namespace CresijApp.DataAccess
             return num;
 
         }
+
+        public DataTable GetScheduleForDate(string date)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                
+                using (MySqlConnection con = new MySqlConnection( constring))
+                {
+
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetScheduleforDate", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@customdate", date);
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
     }
 }

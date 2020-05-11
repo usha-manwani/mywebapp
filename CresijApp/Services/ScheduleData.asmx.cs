@@ -309,5 +309,19 @@ namespace CresijApp.Services
             
             return r;
         }
+
+        [WebMethod]
+        public List<object> GetScheduleForDate()
+        {
+            Schedule schedule = new Schedule();
+            string dd = DateTime.Now.ToString("yyyy-MM-dd");
+            DataTable r = schedule.GetScheduleForDate(dd);
+            List<object> data = new List<object>();
+            foreach(DataRow dr in r.Rows)
+            {
+                data.Add(dr.ItemArray);
+            }
+            return data;
+        }
     }
 }
