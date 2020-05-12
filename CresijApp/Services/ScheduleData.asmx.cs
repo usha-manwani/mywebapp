@@ -311,17 +311,31 @@ namespace CresijApp.Services
         }
 
         [WebMethod]
-        public List<object> GetScheduleForDate()
+        public List<object> GetScheduleForDate(string date)
         {
             Schedule schedule = new Schedule();
-            string dd = DateTime.Now.ToString("yyyy-MM-dd");
-            DataTable r = schedule.GetScheduleForDate(dd);
+            //string dd = DateTime.Now.ToString("yyyy-MM-dd");
+            DataTable r = schedule.GetScheduleForDate(date);
             List<object> data = new List<object>();
             foreach(DataRow dr in r.Rows)
             {
                 data.Add(dr.ItemArray);
             }
             return data;
+        }
+
+        [WebMethod]
+        public List<object> GetClassesByDateAndBuilding(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetAvailClasses(name[0], name[1]);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                if (Convert.ToInt32(dr[1]) < 42)
+                    idata.Add(dr[0].ToString());
+            }
+            return idata;
         }
     }
 }

@@ -1,12 +1,19 @@
 ﻿$ = jQuery.noConflict();
 console.log("schedule page");
 $(function () {
+
+    var date = new Date();
+    var d = date.getDate();
+    var m = date.getMonth() + 1; //Month from 0 to 11
+    var y = date.getFullYear();
+    var dd= '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+      
     var jsonData = JSON.stringify({
-        name: ""
+        date: dd
     });
     $.ajax({
         type: "POST",
-        url: "../Services/ScheduleData.asmx/GetSchedule",
+        url: "../Services/ScheduleData.asmx/GetScheduleForDate",
         data: jsonData,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -157,8 +164,53 @@ function FillSchedule(data1) {
     }
    
 }
-//$(document).ready(function () {
-//    $("#scheduletable").DataTable({
-//        "pageLength": 10
-//    });
-//})
+
+$(function () {
+    $.ajax({
+        type: "POST",
+        url: "../Services/ScheduleData.asmx/GetBuilding",
+        //data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccessBuilding,
+        error: OnErrorCall
+    });
+})
+
+function OnSuccessBuilding(respo) {
+    var data = respo.d;
+    var inner = [];
+    for (i = 0; i < data.length; i++) {
+        inner += '<option class="option" value="' + data[i] + '">' + data[i] + '</option>';
+    }
+    document.getElementById("selectedbuilding").innerHTML = inner;
+    console.log($('#selectedbuilding option:selected').text());
+}
+
+$("#selectedbuilding").off("change").on("change", function () {
+    var adata = [];
+    
+    adata[1] = $('#selectedbuilding option:selected').text();
+    adata[0] = $('input[name = "appointmentDate"]').val();
+    var jsonData = JSON.stringify({
+        name: adata
+    });
+    $.ajax({
+        type: "POST",
+        url: "../Services/ScheduleData.asmx/GetClassesByDateAndBuilding",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccessClass,
+        error: OnErrorCall
+    });
+
+});
+
+function OnSuccessClass(respo) {
+    console.log(respo.d);
+}
+
+function OnErrorCall(respo) {
+    console.log("error");
+}

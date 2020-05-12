@@ -116,8 +116,7 @@ namespace CresijApp.DataAccess
                 string query = "select classname, weekstart, weekend from schedule";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
-
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    using(MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
@@ -369,15 +368,37 @@ namespace CresijApp.DataAccess
         {
             DataTable dt = new DataTable();
             try
-            {
-                
+            {                
                 using (MySqlConnection con = new MySqlConnection( constring))
                 {
-
                     using (MySqlCommand cmd = new MySqlCommand("sp_GetScheduleforDate", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@customdate", date);
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return dt;
+        }
+
+        public DataTable GetClassesByDateAndBuilding(string date, string building)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_ScheduleByBuildingAndDate", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@date", date);
+                        cmd.Parameters.AddWithValue("@building", building);
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
                     }
