@@ -91,9 +91,7 @@ function Rejectnewstat() {
     console.log("Reject func worked");
     document.getElementById('taskmodal').style.display = 'none';
 }
-//$(document).off("click").on("click", ".close_taskmodal", function () {
-//    document.getElementById('taskmodal').style.display = 'none';
-//})
+
 function SaveCurrentStatus(stat, id) {
     var a=[];
     a[0] = stat;

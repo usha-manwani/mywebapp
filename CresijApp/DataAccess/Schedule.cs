@@ -135,8 +135,7 @@ namespace CresijApp.DataAccess
             using (MySqlConnection con = new MySqlConnection(constring))
             {
                 try
-                {
-                
+                {                
                     using (MySqlCommand cmd = new MySqlCommand("sp_InsertChangeSchedule", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -316,7 +315,7 @@ namespace CresijApp.DataAccess
                 string query = "select sc.classname as oldclass, newclass, concat(sc.weekstart, ',', sc.dayno ,',', sc.section) as oldtime, "+
                             "concat(scd.newweek, ',', scd.newday, ',', scd.newsection) as newtime, sc.teacherName as oldteacher, "+
                             "scd.NewTeacherid as newteacher, 'multimedia' as classtype , currentstatus, reason, sc.coursename , scd.id as id " +
-                                "from schedulechange scd join schedule sc on sc.id = scd.idref ";
+                                "from scheduletransfer scd join schedule sc on sc.id = scd.idref ";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -340,7 +339,7 @@ namespace CresijApp.DataAccess
             {
                 try
                 {
-                    string query = "update ScheduleChange set currentstatus ='" + stat[0]+"' where id="+ stat[1];
+                    string query = "update Scheduletransfer set currentstatus ='" + stat[0]+"' where id="+ stat[1];
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                        
@@ -397,7 +396,7 @@ namespace CresijApp.DataAccess
                     using (MySqlCommand cmd = new MySqlCommand("sp_ScheduleByBuildingAndDate", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@date", date);
+                        cmd.Parameters.AddWithValue("@customdate", date);
                         cmd.Parameters.AddWithValue("@building", building);
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
@@ -409,6 +408,159 @@ namespace CresijApp.DataAccess
 
             }
             return dt;
+        }
+
+        public string GetWeekByDate(string date)
+        {
+            string week = "";
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetWeekByDate", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@customdate", date);
+                        cmd.Parameters.Add("@weekno", MySqlDbType.String);
+                        cmd.Parameters["@weekno"].Direction = ParameterDirection.Output;
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        cmd.ExecuteNonQuery();
+                        week = cmd.Parameters["@weekno"].Value.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return week;
+        }
+
+        public string[] GetYearAndSemester(string date)
+        {
+            string[] data = new string[2];
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetYearAndSemester", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@customdate", date);
+                        cmd.Parameters.Add("@semname", MySqlDbType.String);
+                        cmd.Parameters["@semname"].Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add("@schoolyear", MySqlDbType.String);
+                        cmd.Parameters["@schoolyear"].Direction = ParameterDirection.Output;
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        cmd.ExecuteNonQuery();
+                        data[0] = cmd.Parameters["@semname"].Value.ToString();
+                        data[1] = cmd.Parameters["@schoolyear"].Value.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return data;
+        }
+
+        public int SaveReserveSchedule(string[] stat)
+        {
+            int num = 0;
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    string query = "INSERT INTO `organisationdatabase`.`schedulereserve` "+
+                    "(`SchoolYear`,`Semester`,`week`,`Date`,`Section`,`Classroom`,`BorrowingUnit`,`Workphone`,`PersonName`, " +
+                    "`PersonID`,`ContactNo`,`Purpose`,`Reason`,`ReservationDevices`,`Status`) "+
+                    "VALUES('"+stat[0]+"','"+stat[1] + "','" + stat[4] + "','" + stat[2] + "','" + stat[3] 
+                    +"','" + stat[5] + "','" + stat[6] + "','" + stat[7] + "','" + stat[8] + "','" + stat[9] + "','" + stat[10]
+                    + "','" + stat[11] + "','" + stat[12] + "','" + stat[13] + "','Pending')";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        num = cmd.ExecuteNonQuery();
+
+                    }
+                }
+
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return num;
+
+        }
+
+        public DataTable GetReserveSchedule()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = "select PersonID, date, PersonName, Classroom, section, purpose, status, id, " +
+                    "Schoolyear, semester,week, borrowingunit,workphone,contactno,reason,reservationdevices from schedulereserve";
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
+        public int ChangeReserveStatus(string[] stat)
+        {
+            int num = 0;
+            using (MySqlConnection con = new MySqlConnection(constring))
+            {
+                try
+                {
+                    string query = "UPDATE `organisationdatabase`.`schedulereserve` SET `Status` = '"+stat[0]+"' WHERE `id` =" + stat[1];
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+
+                        if (con.State != ConnectionState.Open)
+                            con.Open();
+                        num = cmd.ExecuteNonQuery();
+
+                    }
+                }
+
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return num;
+
         }
     }
 }

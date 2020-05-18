@@ -328,14 +328,58 @@ namespace CresijApp.Services
         public List<object> GetClassesByDateAndBuilding(string[] name)
         {
             Schedule schedule = new Schedule();
-            DataTable r = schedule.GetAvailClasses(name[0], name[1]);
+            DataTable r = schedule.GetClassesByDateAndBuilding(name[0], name[1]);
             List<object> idata = new List<object>();
             foreach (DataRow dr in r.Rows)
             {
-                if (Convert.ToInt32(dr[1]) < 42)
-                    idata.Add(dr[0].ToString());
+                idata.Add(dr.ItemArray);
             }
             return idata;
         }
+
+        [WebMethod]
+        public List<object> GetWeekYearSemester(string name)
+        {
+            List<object> idata = new List<object>();
+            Schedule sc = new Schedule();
+            string week = sc.GetWeekByDate(name);
+            string[] data = sc.GetYearAndSemester(name);
+            idata.Add(week);
+            idata.Add(data[0]);
+            idata.Add(data[1]);
+            return idata;
+        }
+
+        [WebMethod]
+        public int SaveReserveSchedule(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            int r = schedule.SaveReserveSchedule(name);
+            return r;
+        }
+
+        [WebMethod]
+        public List<object> GetReserveSchedule()
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetReserveSchedule();
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+
+            return idata;
+        }
+
+        [WebMethod]
+        public int ChangeReserveStatus(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            int r = schedule.ChangeReserveStatus(name);
+
+            return r;
+        }
+
     }
 }

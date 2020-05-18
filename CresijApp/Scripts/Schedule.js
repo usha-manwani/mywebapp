@@ -151,7 +151,6 @@ function FillSchedule(data1) {
                 column12.innerHTML = '<div class="coursebox state0"><span class="intro">课</span>' +
                     '<a class="action" data-toggle="modal" datatarget="#tk_modal"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
-
             $("#scheduletable").find('tbody').append($(row));
         }
     }

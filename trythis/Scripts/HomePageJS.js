@@ -566,6 +566,7 @@ $jq(function () {
             }
         });
         $jq(document).on("click", "#ppower", function () {
+            
             chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 17 21");
         });
         $jq(document).on("click", "#desktop1", function () {

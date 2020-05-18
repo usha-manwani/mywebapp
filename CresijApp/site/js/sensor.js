@@ -110,6 +110,15 @@ $(document).ready(function(){
                 console.log("sch id " + pageurl.substring(35));
                 $("#schid").attr('value', pageurl.substring(35));
             }
+            else if (pageurl.includes("003-1-1.html")) {
+                var d = pageurl.substring(37);
+                var strng = d.split('&');
+                var section = strng[0];
+                var classname = strng[1].substring(6);
+                
+                $("#section").attr('value', section);
+                $("#classroom").attr('value', classname);
+            }
 			$(pagebox).load(pageurl);
 			console.log("page:"+pageurl+"***box:"+pagebox);
 		}else{
