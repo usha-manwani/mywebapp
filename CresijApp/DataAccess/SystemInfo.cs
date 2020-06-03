@@ -12,7 +12,7 @@ namespace CresijApp.DataAccess
     {
         readonly string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["SchoolConnectionString"].ConnectionString;
-        public int SaveSystemInfo(string schoolname, string schooleng, string logourl, string semname, string weeks,string semstartdate, Dictionary<string,string> days)
+        public int SaveSystemInfo(string schoolname, string schooleng, string logourl, string semname, string weeks,string semstartdate, Dictionary<string,string> days,string semno)
         {
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
@@ -21,6 +21,7 @@ namespace CresijApp.DataAccess
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_insertSystemInfo", con)) // sp_SaveTempData
                     {
+                       
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@schname", schoolname);
                         cmd.Parameters.AddWithValue("@scheng", schooleng);
@@ -35,6 +36,7 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("@thu", days["Thursday"]);
                         cmd.Parameters.AddWithValue("@fri", days["Friday"]);
                         cmd.Parameters.AddWithValue("@sat", days["Saturday"]);
+                        cmd.Parameters.AddWithValue("@semno", Convert.ToInt32(semno));
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();

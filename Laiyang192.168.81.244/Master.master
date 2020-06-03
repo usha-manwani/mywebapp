@@ -1,0 +1,14 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MastersChild.Master" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="WebCresij.Master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="masterchildHead" runat="server">    
+    <asp:ContentPlaceHolder ID="masterHead" runat="server"></asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="masterchildBody" runat="server">
+    <div class="row">
+        <div class="col-xl-9 col-lg-12 col-md-12 main-chart">
+            <asp:ContentPlaceHolder ID="masterBody" runat="server"></asp:ContentPlaceHolder>
+        </div>
+        <div class="col-xl-3 col-lg-12  col-md-12" style="background-color: #1e1e36">
+            <asp:ContentPlaceHolder ID="masterSideBody" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </div>
+</asp:Content>

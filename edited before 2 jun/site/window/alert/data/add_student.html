@@ -1,0 +1,63 @@
+<div class="tt border-bottom">
+  <i class="fa fa-plus-circle"></i>
+  <span> 新建学生数据</span>
+</div>
+<table class="main_table my-4">
+  <tr>
+    <td class="text-right">学号</td>
+    <td><input type="text" style="width:220px;" id="id"></td>
+    <td class="text-right">电话</td>
+    <td><input type="text" style="width:220px;" id="phone"></td>
+  </tr>
+  <tr>
+    <td class="text-right">姓名</td>
+    <td><input type="text" style="width:220px;" id="name"></td>
+    <td class="text-right">身份证</td>
+    <td><input type="text" style="width:220px;" id="idcard"></td>
+  </tr>
+  <tr>
+    <td class="text-right">性别</td>
+    <td>
+      <div class="jdropdown2" style="width:220px;">
+      <div class="jdropdown2-box px-2">男</div>
+      <div class="jdropdown2-arrow text-center gray"><i class="fa fa-caret-down"></i></div>
+      <div class="jdropdown2-list" style="display:none; width:220px;">
+        <label><input type="radio" name="gender" value="男" checked><i class="fa fa-male"></i> 男</label>
+        <label><input type="radio" name="gender" value="女"><i class="fa fa-female"></i> 女</label>
+      </div>
+    </div>
+    </td>
+    <td class="text-right">一卡通</td>
+    <td><input type="text" style="width:220px;" id="onecard"></td>
+  </tr>
+  <tr>
+    <td class="text-right">年龄</td>
+    <td><input type="text" style="width:220px;" id="age"></td>
+    <td class="text-right pl-3">读取一卡通号</td>
+    <td>
+      <a class="jbtn_xs bg_green JURL px-3 white"><i class="fa fa-qrcode"></i> 读取</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="text-right">院系</td>
+    <td>
+      <div class="jdropdown2" style="width:220px;">
+      <div class="jdropdown2-box px-2">经济与管理学院</div>
+      <div class="jdropdown2-arrow text-center gray"><i class="fa fa-caret-down"></i></div>
+      <div class="jdropdown2-list" style="display:none; width:220px;">
+        <label><input type="radio" name="fac" value="经济与管理学院" checked>经济与管理学院</label>
+        <label><input type="radio" name="fac" value="机电工程学院">机电工程学院</label>
+        <label><input type="radio" name="fac" value="国土资源学院">国土资源学院</label>
+        <label><input type="radio" name="fac" value="材料与冶金学院">材料与冶金学院</label>
+      </div>
+    </div>
+    </td>
+    <td class="text-right"></td>
+    <td></td>
+  </tr>
+</table>
+<div class="btns btns_auto border-top w-100">
+<a class="bg_green alert_jmodal " id="AddStudentDetail" j-page-box="#jcontent"><i class="fa fa-check"></i> 确定</a>
+<a class="bg_red close_jmodal JURL"><i class="fa fa-close"></i> 取消</a>
+</div>
+<script src="../../../../Scripts/AddStudent.js"></script>

@@ -1,0 +1,375 @@
+
+<style>
+    .w3-modal {
+        z-index: 999;
+        display: none;
+        padding-top: 100px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.8)
+    }
+
+    .w3-modal-content {
+        margin: auto;
+        background-color: #fff;
+        position: absolute;
+        padding: 20px 0px 20px 20px;
+        outline: 0;
+        width: 660px;
+        top: 40%;
+        left: 30%;
+        /*height:350px;*/
+        max-height: 500px;
+    }
+
+    .w3-modal .w3-modal-content .btns a {
+        font-size: 12px;
+        display: block;
+        float: left;
+        margin-right: 10px !important;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .w3-container, .w3-panel {
+        padding: 0.01em 16px
+    }
+
+        .w3-container:after, .w3-container:before, .w3-panel:after, .w3-panel:before, .w3-row:after, .w3-row:before, .w3-row-padding:after, .w3-row-padding:before,
+        .w3-cell-row:before, .w3-cell-row:after, .w3-clear:after, .w3-clear:before, .w3-bar:before, .w3-bar:after {
+            content: "";
+            display: table;
+            clear: both
+        }
+
+    .w3-panel {
+        margin-top: 16px;
+        margin-bottom: 16px
+    }
+</style>
+  <div class="w-100 clearfix float-left" style="height: 30px;"></div>
+
+  <table class="main_table text-left" id="table_reserveList">
+      <tr>
+          <th><input type="checkbox" name="tiaoke"></th>
+          <th class="text-left">序号</th>
+          <th class="text-left">预约名称</th>
+          <th class="text-left">预约日期</th>
+          <th class="text-left">预约人</th>
+          <th class="text-left">预约课室</th>
+          <th class="text-left">课时</th>
+          <th class="text-left">预约用途</th>
+          <th class="text-left">当前状态</th>
+          <th style="display:none">id</th>
+          <th style="display:none">schoolyear</th>
+          <th style="display:none">semester</th>
+          <th style="display:none">week</th>
+          <th style="display:none">unit</th>
+          <th style="display:none">workph</th>
+          <th style="display:none">contact</th>
+          <th style="display:none">reason</th>
+          <th style="display:none">devices</th>
+          <th style="display:none">personid</th>
+          <th class="text-left">详情</th>
+
+      </tr>
+    <tr class="bbwhite tr_bg_alert">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="orange">待审批</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_alert">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="orange">待审批</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_suc">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="green">已通过</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_suc">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="green">已通过</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_suc">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="green">已通过</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_danger">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="red">驳回</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_danger">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="red">驳回</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_danger">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="red">驳回</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_disable">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="gray">过期</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_disable">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="gray">过期</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_disable">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="gray">过期</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_alert">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="orange">待审批</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_alert">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="orange">待审批</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+    <tr class="bbwhite tr_bg_alert">
+      <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+      <td>1</td>
+      <td>欧阳锋的教室预约</td>
+      <td>2019-00-00</td>
+      <td>欧阳锋</td>
+      <td>2-102</td>
+      <td>第1、2节</td>
+      <td>社团活动</td>
+      <td class="orange">待审批</td>
+      <td>
+        <a j-page-href="window/alert/course-yuyueshenpi.html" j-page-box="#jcontent" class="jbtn_xs btn_blue vis JURL show_jmodal"><i class="fa fa-eye"></i> 查看</a>
+      </td>
+    </tr>
+  </table>
+
+  <div id="taskmodal" class="w3-modal">
+
+      <div class="w3-modal-content">
+          <div class="tt border-bottom">
+              <i class="fa fa-file"></i>
+              <span> 来自张三丰老师的预约申请</span>
+          </div>
+          <table class="main_table gray my-4">
+              <tr>
+                  <td class="text-right black">学年</td>
+                  <td id="schoolyeardisc">2019-2020</td>
+                  <td class="text-right black">学期</td>
+                  <td id="semesterdisc">上学期</td>
+                  <td class="text-right black"></td>
+                  <td id="iddisc" style="display:none"></td>
+              </tr>
+              <tr>
+                  <td class="text-right black">星期</td>
+                  <td id="daydisc">星期一 双周</td>
+                  <td class="text-right black">时段</td>
+                  <td id="sectiondisc">第1-2节</td>
+                  <td class="text-right black"></td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td class="text-right black">开始周</td>
+                  <td id="weekdisc">22</td>
+                  <td class="text-right black">开始日期</td>
+                  <td id="datedisc">28</td>
+                  <td class="text-right black"></td>
+                  <td></td>
+              </tr>
+              <!--<tr>
+                  <td class="text-right black">开始日期</td>
+                  <td>2019-00-00</td>
+                  <td class="text-right black">结束日期</td>
+                  <td>2019-00-00</td>
+                  <td class="text-right black"></td>
+                  <td></td>
+              </tr>-->
+              <tr>
+                  <td class="text-right black">借用教室</td>
+                  <td id="classdisc">2-201</td>
+                  <td class="text-right black">借用单位</td>
+                  <td id="unitdisc">机电工程学院学生会</td>
+                  <td class="text-right black">单位电话</td>
+                  <td id="phonedisc">010-8888 9999</td>
+              </tr>
+              <tr>
+                  <td class="text-right black">预约人</td>
+                  <td id="namedisc">张无忌</td>
+                  <td class="text-right black">教师工号/学生学号</td>
+                  <td id="personiddisc">545157488</td>
+                  <td class="text-right black">联系电话</td>
+                  <td id="mobiledisc">13888 999 666</td>
+              </tr>
+              <tr>
+                  <td class="text-right black">预约原因</td>
+                  <td id="purposedisc">年度工作总结会</td>
+                  <td class="text-right black">预约用途</td>
+                  <td id="reasondisc" colspan="3">年度工作总结会</td>
+              </tr>
+              <tr>
+                  <td class="text-right black">预约设备</td>
+                  <td id="equipdisc" colspan="5">
+                      投影仪 电脑 扩音设备 空调 灯光
+                  </td>
+              </tr>
+          </table>
+          <div class="btns btns_auto border-top w-100" style="padding-top:10px">
+              <a class="bg_green text-white" onclick="savenewstat();" id="savesuccess"><i class="fa fa-check"></i>通过</a>
+              <!--<a class="bg_green alert_jmodal JURL" j-page-href="window/alert/state_suc.html" j-page-box="#jcontent"><i class="fa fa-check"></i> 通过</a>-->
+              <a class="bg_red text-white" onclick="Rejectnewstat();"><i class="fa fa-check"></i> 驳回</a>
+              <a class="bg_gray text-white" onclick="document.getElementById('taskmodal').style.display = 'none';"><i class="fa fa-close"></i> 取消</a>
+          </div>
+      </div>
+
+  </div>
+
+  <div class="jpager">
+    <a j-page-href="" j-page-box="" class="fa fa-fast-backward FIRST CTRL"></a>
+    <a j-page-href="" j-page-box="" class="fa fa-play fa-flip-horizontal PREV CTRL"></a>
+    <span class="JPAGER_CTRL">
+    <a j-page-href="" j-page-box="" class="page JPAGE active">1</a>
+    <a j-page-href="" j-page-box="" class="page JPAGE">2</a>
+    <a j-page-href="" j-page-box="" class="page JPAGE">3</a>
+    <a j-page-href="" j-page-box="" class="page JPAGE">4</a>
+    <a j-page-href="" j-page-box="" class="page JPAGE">5</a>
+    <a j-page-href="" j-page-box="" class="page JPAGE">6</a>
+    </span>
+    <a j-page-href="" j-page-box="" class="fa fa-play NEXT CTRL"></a>
+    <a j-page-href="" j-page-box="" class="fa fa-fast-forward LAST CTRL"></a>
+  </div>
+  <script src="../../../Scripts/ReserveScheduleList.js"></script>

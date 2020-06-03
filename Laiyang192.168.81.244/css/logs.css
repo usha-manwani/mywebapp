@@ -1,0 +1,10 @@
+﻿.icons1 {
+    color: cadetblue;
+}
+.icons1:active{
+    color:darkblue;
+}
+.icons1:hover{
+    color:steelblue;
+    
+}

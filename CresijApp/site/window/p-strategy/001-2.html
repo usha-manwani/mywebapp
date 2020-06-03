@@ -1,0 +1,723 @@
+<div class="col-12">
+  <h5>
+    <i class="fa fa-cog mr-1"></i>策略配置</h5>
+  <table class="info_normal">
+    <tr>
+      <td style="width:70px;">策略名称</td>
+      <td><input type="text" name="" value="">
+        <i class="fa fa-info-circle green mx-2"></i>1-63个字符，若使用中文字符，则一个中文占用3个字符</td>
+      <td class="pl-5">时间范围</td>
+      <td>
+        <div class="jdropdown2" style="width:100px;">
+          <div class="jdropdown2-box px-2">请选择</div>
+          <div class="jdropdown2-arrow text-center gray">
+            <i class="fa fa-caret-down"></i>
+          </div>
+          <div class="jdropdown2-list" style="display:none; width:100px;">
+            <label><input type="radio" name="bm-1">每天</label>
+            <label><input type="radio" name="bm-1">每周</label>
+            <label><input type="radio" name="bm-1">每月</label>
+            <label><input type="radio" name="bm-1">每学期</label>
+            <label><input type="radio" name="bm-1">按课表</label>
+          </div>
+        </div>
+      </td>
+      <td class="pl-5">时间范围</td>
+      <td>
+        <span class="input-group datetimepicker jdatetime"><input type="text" name="" value="" class="input-group-addon" style="width:100px;">
+          <i class="fa fa-calendar"></i></span></td>
+    </tr>
+    <tr>
+      <td>策略描述</td>
+      <td colspan="3">
+        <input type="text" name="" value="" style="width:690px;">
+      </td>
+    </tr>
+  </table>
+  <div class="w-100 clearfix float-left bbgray" style="height: 30px;"></div>
+  <h5>
+    <i class="fa fa-file-text mr-1"></i>服务内容</h5>
+  <div class="col-12 jfont12 mb-4">
+    <h6 class="bg_gray2 py-2 black jfont14 pl-3">
+      <label class="jfont12"><input type="checkbox" name="yuyue">
+        <i class="fa fa-check jcheckbox mr-2"></i>教辅设备</label>
+    </h6>
+    <div class="col-12 d-table">
+      <i class="fa fa-check jcheckbox2 jfsb-ctrl mr-3" style="float:left; margin-top:12px;"></i>
+
+      <div class="float-left d-flex align-items-center my-2 mr-4 gray">
+        <i class="fa fa-database mr-1"></i>系统
+        <span class="jf-12 font-weight-normal ml-2 gray">
+          <label style="height:20px;"><input type="checkbox" checked="checked" class="j-single">
+            <span class="jswift" style="width:60px;">
+              <i class="jswift-btn"></i>
+              <i class="on">关闭</i>
+              <i class="off">开启</i></span></label>
+        </span>
+      </div>
+
+      <!-- 动态被 禁用/启用 的选项 -->
+      <div class="jfsb-box d-table float-left position-relative">
+        <div class="j-mask3 position-absolute"></div>
+        <div class="float-left d-flex align-items-center my-2 mr-4 gray">
+          <i class="fa fa-database mr-1"></i>投影
+          <span class="jf-12 font-weight-normal ml-2 gray">
+            <label style="height:20px;"><input type="checkbox" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on">关闭</i>
+                <i class="off">开启</i></span></label>
+          </span>
+        </div>
+        <div class="float-left d-flex align-items-center my-2 mr-4 gray">
+          <i class="fa fa-columns fa-lg mr-1"></i>幕布
+          <span class="jf-12 font-weight-normal ml-2 gray">
+            <label style="height:20px;"><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:50px;">
+                <i class="jswift-btn"></i>
+                <i class="on">降</i>
+                <i class="off">升</i></span></label>
+          </span>
+        </div>
+        <div class="float-left d-flex align-items-center my-2 mr-4 gray">
+          <i class="fa fa-desktop fa-lg mr-1"></i>电脑
+          <span class="jf-12 font-weight-normal ml-2 gray">
+            <label style="height:20px;"><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on">关闭</i>
+                <i class="off">开启</i></span></label>
+          </span>
+        </div>
+        <div class="float-left d-flex align-items-center my-2 mr-4 gray">
+          <i class="fa fa-keyboard-o fa-lg mr-1"></i>面板
+          <span class="jf-12 font-weight-normal ml-2 gray">
+            <label style="height:20px;"><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on">锁定</i>
+                <i class="off">解锁</i></span></label>
+          </span>
+        </div>
+        <div class="float-left d-flex align-items-center my-2 mr-4 gray">
+          <i class="fa fa-plug fa-lg mr-1"></i>投影电源
+          <span class="jf-12 font-weight-normal ml-2 gray">
+            <label style="height:20px;"><input type="checkbox" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on">关闭</i>
+                <i class="off">开启</i></span></label>
+          </span>
+        </div>
+        <div class="float-left d-flex align-items-center my-2 mr-4 gray">
+          <i class="fa fa-plug fa-lg mr-1"></i>电脑电源
+          <span class="jf-12 font-weight-normal ml-2 gray">
+            <label style="height:20px;"><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on">关闭</i>
+                <i class="off">开启</i></span></label>
+          </span>
+        </div>
+        <div class="float-left d-flex align-items-center my-2 mr-4 gray">
+          <i class="fa fa-plug fa-lg mr-1"></i>扩音设备电源
+          <span class="jf-12 font-weight-normal ml-2 gray">
+            <label style="height:20px;"><input type="checkbox" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on">关闭</i>
+                <i class="off">开启</i></span></label>
+          </span>
+        </div>
+        <div class="float-left d-flex align-items-center my-2 mr-4 gray">
+          <i class="fa fa-plug fa-lg mr-1"></i>其它设备电源
+          <span class="jf-12 font-weight-normal ml-2 gray">
+            <label style="height:20px;"><input type="checkbox" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on">关闭</i>
+                <i class="off">开启</i></span></label>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-12 jfont12 mb-4">
+    <h6 class="bg_gray2 py-2 black jfont14 pl-3">
+      <label class="jfont12"><input type="checkbox" name="yuyue">
+        <i class="fa fa-check jcheckbox mr-2"></i>环境设备</label>
+    </h6>
+  </div>
+  <div class="col-12 jfont12 gray ml-4 my-2">
+    <i class="fa fa-sliders mr-2"></i>一般设备
+  </div>
+  <div class="col-12 row ml-4 jfont12">
+    <div class="stra-ctrl-pannel my-2 no-gutters j-ctrl-box j-set">
+      <div class="stat-card w-100 row no-gutters">
+        <div class="col-4 bg_status text-center white float-left" style="height:85px;">
+          <div class="j-forb"></div>
+          <i class="fa fa-lightbulb-o fa-2x pt-2"></i><br>
+          <div class="pb-2">课室灯</div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+            <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+          </div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+            <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+          </div>
+        </div>
+        <div class="col-8 gray float-left j-ctrl-pannel">
+          <div class="bg_black_1 j-mask2"></div>
+          <div class="bg_black_1 j-mask"></div>
+          <div class="pt-3 pl-3">
+            <label><input type="checkbox" name="yuyue">
+              <i class="fa fa-check jcheckbox mr-2"></i>
+            </label>光照度<
+            <input type="text" style="width:50px;">
+            lux时，<font class="green">开</font>
+          </div>
+          <div class="pt-2 pl-3">
+            <label><input type="checkbox" name="yuyue">
+              <i class="fa fa-check jcheckbox mr-2"></i>
+            </label>光照度>
+            <input type="text" style="width:50px;">
+            lux时，<font class="red">关</font>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stra-ctrl-pannel my-2 no-gutters j-ctrl-box j-open">
+      <div class="stat-card w-100 row no-gutters">
+        <div class="col-4 bg_status text-center white float-left" style="height:85px;">
+          <div class="j-forb"></div>
+          <i class="fa fa-lightbulb-o fa-2x pt-2"></i><br>
+          <div class="pb-2">讲台灯</div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+            <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+          </div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+            <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+          </div>
+        </div>
+        <div class="col-8 gray float-left j-ctrl-pannel">
+          <div class="bg_black_1 j-mask2"></div>
+          <div class="bg_black_1 j-mask"></div>
+          <div class="pt-3 pl-3">
+            <label><input type="checkbox" name="yuyue">
+              <i class="fa fa-check jcheckbox mr-2"></i>
+            </label>光照度<
+            <input type="text" style="width:50px;">
+            lux时，<font class="green">开</font>
+          </div>
+          <div class="pt-2 pl-3">
+            <label><input type="checkbox" name="yuyue">
+              <i class="fa fa-check jcheckbox mr-2"></i>
+            </label>光照度>
+            <input type="text" style="width:50px;">
+            lux时，<font class="red">关</font>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stra-ctrl-pannel my-2 no-gutters j-ctrl-box j-set">
+      <div class="stat-card w-100 row no-gutters not-active">
+        <div class="col-4 bg_status text-center white float-left" style="height:85px;">
+          <div class="j-forb"></div>
+          <i class="fa fa-columns fa-2x pt-2"></i><br>
+          <div class="pb-2">讲台窗帘</div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+            <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+          </div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+            <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+          </div>
+        </div>
+        <div class="col-8 gray float-left j-ctrl-pannel">
+          <div class="bg_black_1 j-mask2"></div>
+          <div class="bg_black_1 j-mask"></div>
+          <div class="pt-3 pl-3">
+            <label><input type="checkbox" name="yuyue">
+              <i class="fa fa-check jcheckbox mr-2"></i>
+            </label>光照度<
+            <input type="text" style="width:50px;">
+            lux时，<font class="green">开</font>
+          </div>
+          <div class="pt-2 pl-3">
+            <label><input type="checkbox" name="yuyue">
+              <i class="fa fa-check jcheckbox mr-2"></i>
+            </label>光照度>
+            <input type="text" style="width:50px;">
+            lux时，<font class="red">关</font>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stra-ctrl-pannel my-2 no-gutters j-ctrl-box j-set">
+      <div class="stat-card w-100 row no-gutters">
+        <div class="col-4 bg_status text-center white float-left" style="height:85px;">
+          <div class="j-forb"></div>
+          <i class="fa fa-columns fa-2x pt-2"></i><br>
+          <div class="pb-2">课室窗帘</div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+            <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+          </div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+            <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+          </div>
+        </div>
+        <div class="col-8 gray float-left j-ctrl-pannel">
+          <div class="bg_black_1 j-mask2"></div>
+          <div class="bg_black_1 j-mask"></div>
+          <div class="pt-3 pl-3">
+            <label><input type="checkbox" name="yuyue">
+              <i class="fa fa-check jcheckbox mr-2"></i>
+            </label>光照度<
+            <input type="text" style="width:50px;">
+            lux时，<font class="green">开</font>
+          </div>
+          <div class="pt-2 pl-3">
+            <label><input type="checkbox" name="yuyue">
+              <i class="fa fa-check jcheckbox mr-2"></i>
+            </label>光照度>
+            <input type="text" style="width:50px;">
+            lux时，<font class="red">关</font>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stra-ctrl-pannel my-2 no-gutters j-ctrl-box j-set">
+      <div class="stat-card w-100 row no-gutters">
+        <div class="col-4 bg_status text-center white float-left" style="height:85px;">
+          <div class="j-forb"></div>
+          <i class="fa fa-lightbulb-o fa-2x pt-2"></i><br>
+          <div class="pb-2">排风扇</div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+            <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+          </div>
+          <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+            <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+          </div>
+        </div>
+        <div class="col-8 gray float-left j-ctrl-pannel">
+          <div class="bg_black_1 j-mask2"></div>
+          <div class="bg_black_1 j-mask"></div>
+          <div class="pt-3 pl-3">
+            <label><input type="checkbox" name="yuyue">
+              <i class="fa fa-check jcheckbox mr-2"></i>
+            </label>CO<sub>2</sub>
+            < <input type="text" style="width:50px;">
+              mg/m<sup>3</sup>时，<font class="green">开</font>
+            </div>
+            <div class="pt-2 pl-3">
+              <label><input type="checkbox" name="yuyue">
+                <i class="fa fa-check jcheckbox mr-2"></i>
+              </label>HCHO>
+              <input type="text" style="width:50px;">
+              mg/m<sup>3</sup>时，<font class="red">关</font>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stra-ctrl-pannel-2 my-2 no-gutters j-ctrl-box j-set">
+        <div class="stat-card w-100 row no-gutters">
+          <div class="col-2 bg_status text-center white float-left" style="height:85px;">
+            <div class="j-forb"></div>
+            <i class="fa fa-lightbulb-o fa-2x pt-2"></i><br>
+            <div class="pb-2">新风系统</div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+              <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+            </div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+              <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+            </div>
+          </div>
+          <div class="col-10 gray float-left j-ctrl-pannel row no-gutters">
+            <div class="bg_black_1 j-mask2"></div>
+            <div class="bg_black_1 j-mask"></div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>PM2.5 >
+                <input type="text" style="width:50px;">
+                μg/m³，<font class="green">开</font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>PM10 >
+                <input type="text" style="width:50px;">
+                μg/m³，<font class="green">开</font>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>PM2.5 <
+                <input type="text" style="width:50px;">
+                μg/m³，<font class="red">关</font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>PM10 <
+                <input type="text" style="width:50px;">
+                μg/m³，<font class="red">关</font>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-12 jfont12 gray ml-4 mt-4 mb-2">
+      <i class="fa fa-snowflake-o mr-2"></i>空调设备
+    </div>
+    <div class="col-12 row jfont12 ml-4">
+      <div class="col-6 my-2 no-gutters j-ctrl-box j-set">
+        <div class="stat-card w-100 row no-gutters not-active">
+          <div class="col-2 bg_status text-center white float-left" style="height:85px;">
+            <div class="j-forb"></div>
+            <i class="fa fa-snowflake-o fa-2x pt-2"></i><br>
+            <div class="pb-2">空调-1</div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+              <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+            </div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+              <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+            </div>
+          </div>
+          <div class="col-10 gray float-left j-ctrl-pannel row no-gutters">
+            <div class="bg_black_1 j-mask2"></div>
+            <div class="bg_black_1 j-mask"></div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 <
+                <input type="text" style="width:50px;">
+                ℃时，<font class="blue">模式<i class="fa fa-sun-o ml-1"></i>
+                </font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 >
+                <input type="text" style="width:50px;">
+                ℃时，<font class="green">模式<i class="fa fa-snowflake-o ml-1"></i>
+                </font>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 >
+                <input type="text" style="width:50px;">
+                ℃时，<font class="red">关</font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 <
+                <input type="text" style="width:50px;">
+                ℃时，<font class="red">关</font>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 my-2 no-gutters j-ctrl-box j-open">
+        <div class="stat-card w-100 row no-gutters">
+          <div class="col-2 bg_status text-center white float-left" style="height:85px;">
+            <div class="j-forb"></div>
+            <i class="fa fa-snowflake-o fa-2x pt-2"></i><br>
+            <div class="pb-2">空调-2</div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+              <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+            </div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+              <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+            </div>
+          </div>
+          <div class="col-10 gray float-left j-ctrl-pannel row no-gutters">
+            <div class="bg_black_1 j-mask2"></div>
+            <div class="bg_black_1 j-mask"></div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 <
+                <input type="text" style="width:50px;">
+                ℃时，<font class="blue">模式<i class="fa fa-sun-o ml-1"></i>
+                </font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 >
+                <input type="text" style="width:50px;">
+                ℃时，<font class="green">模式<i class="fa fa-snowflake-o ml-1"></i>
+                </font>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 <
+                <input type="text" style="width:50px;">
+                ℃时，<font class="red">关</font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 >
+                <input type="text" style="width:50px;">
+                ℃时，<font class="red">关</font>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 my-2 no-gutters j-ctrl-box j-set">
+        <div class="stat-card w-100 row no-gutters">
+          <div class="col-2 bg_status text-center white float-left" style="height:85px;">
+            <div class="j-forb"></div>
+            <i class="fa fa-snowflake-o fa-2x pt-2"></i><br>
+            <div class="pb-2">空调-3</div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+              <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+            </div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+              <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+            </div>
+          </div>
+          <div class="col-10 gray float-left j-ctrl-pannel row no-gutters">
+            <div class="bg_black_1 j-mask2"></div>
+            <div class="bg_black_1 j-mask"></div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 <
+                <input type="text" style="width:50px;">
+                ℃时，<font class="blue">模式<i class="fa fa-sun-o ml-1"></i>
+                </font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 >
+                <input type="text" style="width:50px;">
+                ℃时，<font class="green">模式<i class="fa fa-snowflake-o ml-1"></i>
+                </font>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 <
+                <input type="text" style="width:50px;">
+                ℃时，<font class="red">关</font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 >
+                <input type="text" style="width:50px;">
+                ℃时，<font class="red">关</font>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 my-2 no-gutters j-ctrl-box j-set">
+        <div class="stat-card w-100 row no-gutters">
+          <div class="col-2 bg_status text-center white float-left" style="height:85px;">
+            <div class="j-forb"></div>
+            <i class="fa fa-snowflake-o fa-2x pt-2"></i><br>
+            <div class="pb-2">空调-4</div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-settings">
+              <i class="fa fa-cog mr-1"></i>按配置<i class="fa fa-repeat ml-3"></i>
+            </div>
+            <div class="py-1 JURL bg_black_05 align-self-bottom j-ctrl-btn j-by-openning">
+              <i class="fa fa-power-off mr-1"></i>常开<i class="fa fa-repeat ml-3"></i>
+            </div>
+          </div>
+          <div class="col-10 gray float-left j-ctrl-pannel row no-gutters">
+            <div class="bg_black_1 j-mask2"></div>
+            <div class="bg_black_1 j-mask"></div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 <
+                <input type="text" style="width:50px;">
+                ℃时，<font class="blue">模式<i class="fa fa-sun-o ml-1"></i>
+                </font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 >
+                <input type="text" style="width:50px;">
+                ℃时，<font class="green">模式<i class="fa fa-snowflake-o ml-1"></i>
+                </font>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="pt-3 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 <
+                <input type="text" style="width:50px;">
+                ℃时，<font class="red">关</font>
+              </div>
+              <div class="pt-2 pl-3">
+                <label><input type="checkbox" name="yuyue">
+                  <i class="fa fa-check jcheckbox mr-2"></i>
+                </label>温度 >
+                <input type="text" style="width:50px;">
+                ℃时，<font class="red">关</font>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="w-100 clearfix float-left bbgray" style="height: 30px;"></div>
+    <h5>
+      <i class="fa fa-th mr-1"></i>策略应用范围</h5>
+    <div class="col-12 jfont12 d-table" style="line-height:24px;">
+      <div class="float-left mr-3 pr-3 bg_gray2 d-inline-block mb-3">
+        <div class="bg_gray white float-left px-2">一号教学楼</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+      </div>
+      <div class="float-left mr-3 pr-3 bg_gray2 d-inline-block mb-3">
+        <div class="bg_gray white float-left px-2">一号教学楼</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+      </div>
+      <div class="float-left mr-3 pr-3 bg_gray2 d-inline-block mb-3">
+        <div class="bg_gray white float-left px-2">一号教学楼</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+      </div>
+      <div class="float-left mr-3 pr-3 bg_gray2 d-inline-block mb-3">
+        <div class="bg_gray white float-left px-2">一号教学楼</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+      </div>
+      <div class="float-left mr-3 pr-3 bg_gray2 d-inline-block mb-3">
+        <div class="bg_gray white float-left px-2">一号教学楼</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+        <div class="ml-3 float-left">101</div>
+      </div>
+    </div>
+    <div class="clearfix d-block">
+      <a class="jbtn_xs bg_blue white my-2 ml-3 clearfix show_jmodal JURL" j-page-href="window/alert/strategy/range.html" j-page-box="#jcontent">
+        <i class="fa fa-cog mr-1"></i>点击配置应用范围</a>
+    </div>
+    <div class="w-100 clearfix float-left bbgray" style="height: 30px;"></div>
+    <div class="bar01">
+      <div class="searchbox float-left">
+        <a class="jbtn_sm show_jmodal JURL" j-page-href="window/alert/state_suc_2.html" j-page-box="#jcontent">
+          <i class="fa fa-check" style="margin-top:10px; margin-right:5px;"></i>
+          应用</a>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    //日期插件
+    $(function () {
+      $('.datetimepicker').datetimepicker({
+        format: 'YYYY-MM-DD',
+        locale: 'zh-cn',
+        defaultDate: new Date(),
+        icons: {
+          previous: "fa fa-arrow-circle-left green",
+          next: "fa fa-arrow-circle-right green"
+        }
+      });
+      $('.datetimepicker-clock').datetimepicker({
+        format: 'LT',
+        locale: 'zh-cn',
+        icons: {
+          up: "fa fa-chevron-up green",
+          down: "fa fa-chevron-down green"
+        }
+      });
+    });
+    $(function () {
+      $(".jfsb-ctrl").on("click", function () {
+        if ($(this).hasClass("active")) {
+          $(".jfsb-box").removeClass("active");
+          $(this).removeClass("active");
+          return false;
+        } else {
+          $(".jfsb-box").addClass("active");
+          $(this).addClass("active");
+          return false;
+        }
+      });
+      //环境设备激活
+      $(".j-forb").on("click", function () {
+        if ($(this).closest(".stat-card").hasClass("not-active")) {
+          $(this).closest(".stat-card").removeClass("not-active");
+          $(this).closest(".stat-card").find(".bg_status").removeClass("forb");
+        } else {
+          $(this).closest(".stat-card").addClass("not-active");
+          $(this).closest(".stat-card").find(".bg_status").addClass("forb");
+        }
+      });
+    });
+  </script>

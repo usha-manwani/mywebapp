@@ -1,0 +1,43 @@
+<h3 class="h3tt float-left">
+  <i class="fa fa-sliders"></i>
+  设备管理</h3>
+<div class="float-left ml-4 nav_page" style="margin-top:33px;">
+  <!-- <div class="jbtn jdropdown JCHANNAV active"> <i class="fa fa-cog"></i> 设备控制 <i class=" jdown fa fa-caret-down"></i> <div class="jnavdrop"> <a class="JCHANMENU JURL j-t-show-01" j-page-href="window/p-equipment/001.html" j-page-box="#sec_box"
+  j-menu-href="window/menus/m-equipment-01.html" j-menu-box="#jpagetitle" j-pannel-href="window/p-equipment/ctrl-pannels/blank.html" j-pannel-box="#ctrl_pannels" j-sub-order="0"> <i class="fa fa-list"></i> 设备总览</a> <a class="JCHANMENU JURL
+  j-t-hidden-01" j-page-href="window/p-equipment/002.html" j-page-box="#sec_box" j-menu-href="window/menus/m-equipment-01.html" j-menu-box="#jpagetitle" j-pannel-href="window/p-equipment/ctrl-pannels/assist.html" j-pannel-box="#ctrl_pannels"
+  j-sub-order="1"> <i class="fa fa-desktop"></i> 教辅设备</a> <a class="JCHANMENU JURL j-t-hidden-01" j-page-href="window/p-equipment/002.html" j-page-box="#sec_box" j-menu-href="window/menus/m-equipment-01.html" j-menu-box="#jpagetitle"
+  j-pannel-href="window/p-equipment/ctrl-pannels/env.html" j-pannel-box="#ctrl_pannels" j-sub-order="2"> <i class="fa fa-leaf"></i> 环境设备</a> <a class="JCHANMENU JURL j-t-hidden-01" j-page-href="window/p-equipment/004.html" j-page-box="#sec_box"
+  j-menu-href="window/menus/m-equipment-01.html" j-menu-box="#jpagetitle" j-pannel-href="window/p-equipment/ctrl-pannels/blank.html" j-pannel-box="#ctrl_pannels" j-sub-order="3"> <i class="fa fa-camera"></i> 录课设备</a> </div> </div> -->
+
+  <div
+    class="jbtn JCHANMENU JURL TEST active"
+    j-page-href="window/p-equipment/001.html"
+    j-page-box="#sec_box"
+    j-menu-href="window/menus/m-equipment-01.html"
+    j-menu-box="#jpagetitle"
+    j-pannel-href="window/p-equipment/ctrl-pannels/blank.html"
+    j-pannel-box="#ctrl_pannels">
+    <i class="fa fa-cog"></i>
+    设备控制
+    <i class=" jdown fa fa-caret-down"></i>
+  </div>
+  <div class="jbtn JCHANMENU JURL TEST" j-page-href="window/p-equipment/005.html" j-page-box="#sec_box" j-menu-href="window/menus/m-equipment-05.html" j-menu-box="#jpagetitle">
+    <i class="fa fa-refresh"></i>
+    视频轮巡
+    <i class=" jdown fa fa-caret-down"></i>
+  </div>
+
+</div>
+<div class="stat-card col-12 float-left">
+  <div class="bar01" id="jpagetitle"></div>
+  <!-- secondary box begin -->
+  <div class="sec_box" id="sec_box"></div>
+  <!-- secondary box end -->
+  <div id="ctrl_pannels"></div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#sec_box").load("window/p-equipment/001.html");
+    $("#jpagetitle").load("window/menus/m-equipment-01.html");
+  });
+</script>

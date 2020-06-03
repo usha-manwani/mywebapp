@@ -1,0 +1,90 @@
+
+  <h4 class="tt01"><i class="fa fa-calendar mr-1"></i> 预约管理</h4>
+  <div class="nav2 JPAGENAV JPAGENAV-01">
+    <a j-page-href="window/p-course/003-1.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">预约申请</a>
+    <a j-page-href="window/p-course/003-2.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">预约审批</a>
+  </div>
+  <div class="searchbox">
+      <div class="searchbox2">
+          <select id="selectedbuilding" style="width:120px;"></select>
+          <!--<div class="name" id="selectedbuilding">教学楼名称</div>
+
+          <div class="list" id="listbuilding1">
+              <div class="option">
+                  <input type="radio" name="build"><label for="">第1教学楼</label>
+              </div>
+              <div class="option">
+                  <input type="radio" name="build"><label for="">第1教学楼</label>
+              </div>
+              <div class="option">
+                  <input type="radio" name="build"><label for="">第1教学楼</label>
+              </div>
+              <div class="option">
+                  <input type="radio" name="build"><label for="">第1教学楼</label>
+              </div>
+          </div>-->
+      </div>
+  <div class="searchbox2">
+
+    <span class="input-group datetimepicker jdatetime" style="background-color:none;">
+      <input type="text" name="appointmentDate" value="" class="input-group-addon" style="width:120px; background-color:none;"> 
+      <i class="fa fa-calendar"></i></span>
+<!--    <div class="list">
+      <div class="option">
+      <input type="radio" name="xuenian"><label for="">上学期</label>
+      </div>
+      <div class="option">
+      <input type="radio" name="xuenian"><label for="">下学期</label>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="">
+    <input type="text" name="" value="" class="inputgray">
+  </div>
+    <a class="jbtn_sm searchfilter" id="SearchFilter"><i class="fa fa-search" style="margin-top:10px; margin-right:5px;"></i>查询</a>
+  </div>
+
+<input type="hidden" id="section" />
+<input type="hidden" id="classroom" />
+<script type="text/javascript">
+  $(function () {
+    //$('.datetimepicker').datetimepicker({
+    //  format: 'YYYY-MM-DD',
+    //  locale: 'zh-cn',
+    //  defaultDate: new Date(),
+    //  icons:{
+    //    previous: "fa fa-arrow-circle-left green",
+    //    next: "fa fa-arrow-circle-right green",
+    //  }
+    //});
+    //$('.datetimepicker-clock').datetimepicker({
+    //  format: 'LT',
+    //  locale: 'zh-cn',
+    //  icons:{
+    //    up: "fa fa-chevron-up green",
+    //    down: "fa fa-chevron-down green",
+    //  }
+    //  });
+      var hd = new Holidays('CN');
+      var holidaysdata = hd.getHolidays(2020);
+
+      var dates = [];
+      for (i = 0; i < holidaysdata.length; i++) {
+          var d = holidaysdata[i];
+          dates.push(d["date"].split(' ')[0]);
+      }
+     
+      $('.datetimepicker').datepicker({
+          daysOfWeekDisabled: [0, 6],
+          format: 'yyyy-mm-dd',
+          datesDisabled: dates,
+          locale: 'zh-cn',
+          autoclose: true,
+          orientation: "bottom right"
+      });
+      var date = new Date();
+      var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      $('.datetimepicker').datepicker('setDate',today);
+  });
+</script>

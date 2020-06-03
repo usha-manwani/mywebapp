@@ -1,5 +1,6 @@
 // JavaScript Document
 $(document).ready(function(){
+	console.log("1111111111");
 	//框架初始化
 	$("#left_menu").load("components/left_menu.html");
 	$("#top_menu").load("components/top_menu.html");
@@ -32,15 +33,15 @@ $(document).ready(function(){
 		},20);
 	})
 
-	//range
-	$(".range").mousemove(function(){
-		var value = $(this).val();
-		$(this).css("background","linear-gradient(90deg, #67b930 " + value + "%, #d4d4d4 " + value + "%)");
-	});
-	$(".range").click(function(){
-		var value = $(this).val();
-		$(this).css("background","linear-gradient(90deg, #67b930 " + value + "%, #d4d4d4 " + value + "%)");
-	});
+	// //range
+	// $(".range").mousemove(function(){
+	// 	var value = $(this).val();
+	// 	$(this).css("background","linear-gradient(90deg, #67b930 " + value + "%, #d4d4d4 " + value + "%)");
+	// });
+	// $(".range").click(function(){
+	// 	var value = $(this).val();
+	// 	$(this).css("background","linear-gradient(90deg, #67b930 " + value + "%, #d4d4d4 " + value + "%)");
+	// });
 	//弹窗控制
 	$("body").on("click",".show_jmodal",function(){
 		$(".jmodal").fadeIn("fast");
@@ -54,73 +55,26 @@ $(document).ready(function(){
 		var menuurl = $(this).attr("j-menu-href");
 		var menubox = $(this).attr("j-menu-box");
 		var pageurl = $(this).attr("j-page-href");
-        var pagebox = $(this).attr("j-page-box");
-        
+		var pagebox = $(this).attr("j-page-box");
+		var pannelurl = $(this).attr("j-pannel-href");
+		var pannelbox = $(this).attr("j-pannel-box");
 		if( typeof menuurl == "string"){
-            $(menubox).load(menuurl);
-            
-			//setTimeout(function(){
-			//	$(pagebox).load(pageurl);
-			//},30);
+			$(menubox).load(menuurl);
+			console.log("菜单加载：" + menuurl + " => 目标:"+menubox);
+			setTimeout(function(){
+				$(pagebox).load(pageurl);
+				// console.log("页面加载：" + pageurl);
+			},30);
 		}else{
 		}
-        if (typeof pageurl == "string") {
-            if (pageurl.includes("EditOrganisation.html")) {
-                console.log(pageurl.substring(46));
-                $("#orgsno").attr('value', pageurl.substring(46));
-            }
-            else if (pageurl.includes("Edit_Teacher.html")) {
-                console.log(pageurl.substring(42));
-                $("#teacherid").attr('value', pageurl.substring(42));
-            }
-            else if (pageurl.includes("Edit_Student.html")) {
-                console.log(pageurl.substring(42));
-                $("#studentid").attr('value', pageurl.substring(42));
-            }
-            else if (pageurl.includes("DeleteOrg.html")) {
-                console.log(pageurl.substring(34));
-                $("#orgsno").attr('value', pageurl.substring(34));
-            }
-            else if (pageurl.includes("DeleteTeacher.html")) {
-                console.log("teache id "+pageurl.substring(38));
-                $("#teacherid").attr('value', pageurl.substring(38));
-            }
-            else if (pageurl.includes("DeleteStudent.html")) {
-                console.log("stu id " +pageurl.substring(38));
-                $("#studentid").attr('value', pageurl.substring(38));
-            }
-            else if (pageurl.includes("Edit_Classroom.html")) {
-                console.log("Class id " + pageurl.substring(44));
-                $("#classid").attr('value', pageurl.substring(44));
-            }
-            else if (pageurl.includes("DeleteClassroom.html")) {
-                console.log("Class id " + pageurl.substring(40));
-                $("#classid").attr('value', pageurl.substring(40));
-            }
-            else if (pageurl.includes("Edit_UserInfo.html")) {
-                
-                $("#userId").attr('value', pageurl.substring(43));
-                console.log($("#userId").val());
-            }
-            else if (pageurl.includes("Delete_User.html")) {
-                console.log("user id " + pageurl.substring(36));
-                $("#userId").attr('value', pageurl.substring(36));
-            }
-            else if (pageurl.includes("002-1-1.html")) {
-                console.log("sch id " + pageurl.substring(35));
-                $("#schid").attr('value', pageurl.substring(35));
-            }
-            else if (pageurl.includes("003-1-1.html")) {
-                var d = pageurl.substring(37);
-                var strng = d.split('&');
-                var section = strng[0];
-                var classname = strng[1].substring(6);
-                
-                $("#section").attr('value', section);
-                $("#classroom").attr('value', classname);
-            }
+		if( typeof pageurl == "string"){
 			$(pagebox).load(pageurl);
-			console.log("page:"+pageurl+"***box:"+pagebox);
+			console.log("页面加载："+pageurl+" => 目标:"+pagebox);
+		}else{
+		}
+		if( typeof pannelurl == "string"){
+			$(pannelbox).load(pannelurl);
+			console.log("page:"+pannelurl+" => 目标:"+pannelbox);
 		}else{
 		}
 	});
@@ -169,15 +123,17 @@ $(document).ready(function(){
 	});
 	$("body").on("mouseleave",".searchbox2",function(){
 		$(this).find(".list").fadeOut("fast");
-		$(this).children(".jactive").removeClass("jactive")
+		$(this).children(".jactive").removeClass("jactive");
 	});
-    $("body").on("click", ".option", function () {
-        
+	$("body").on("click",".option",function(){
 		$(this).addClass("selected");
 		$(this).children("input").attr("checked","true");
 		$(this).parent(".list").fadeOut("fast");
 		var name = $(this).text();
+		var dropTarget = $(this).attr("drop-target");
 		$(this).parents(".searchbox2").find(".name").text(name);
+		$(this).parents(".searchbox2").next(".searchbox2").find(".drop_statu").css("display","none");
+		$(this).parents(".searchbox2").next(".searchbox2").find("." + dropTarget).css("display","block");
 	});
 	//分页
 	$("body").on("click",".JPAGE",function(){
@@ -246,6 +202,7 @@ $(document).ready(function(){
 		$(this).addClass("active");
 		$(".jtab_box").css("display","none");
 		$(".jtab_box").eq(tabno).css("display","block");
+		$(".jtab_box").eq(tabno).find("img").addClass("active");
 	});
 	//常规下拉菜单
 	$("body").on("click",".jdropdown2",function(){
@@ -254,8 +211,8 @@ $(document).ready(function(){
 			$(this).children(".jdropdown2-list").fadeOut("fast");
 		});
 		$(this).children(".jdropdown2-list").children("label").click(function(){
-			var select_option = $(this).text();
-			$(this).parents(".jdropdown2").children(".jdropdown2-box").text(select_option);
+			var select_option = $(this).html();
+			$(this).parents(".jdropdown2").children(".jdropdown2-box").html(select_option);
 			$(this).parents(".jdropdown2-list").fadeOut("fast");
 		})
 	});
@@ -264,12 +221,12 @@ $(document).ready(function(){
 	$("body").on("click",".check_all_table",function(){
 		$(this).addClass("check_all_table_active white bg_green");
 		$(this).removeClass("check_all_table");
-		$(this).parents("table").find("input[type='checkbox']").prop("checked",true);
+		$(this).parents("table").find("input[type='checkbox']").not(".j-single").prop("checked",true);
 	});
 	$("body").on("click",".check_all_table_active",function(){
 		$(this).addClass("check_all_table");
 		$(this).removeClass("check_all_table_active white bg_green");
-		$(this).parents("table").find("input[type='checkbox']").prop("checked",false);
+		$(this).parents("table").find("input[type='checkbox']").not(".j-single").prop("checked",false);
 	});
 	//全选-tr
 	$("body").on("click",".check_all_tr",function(){
@@ -307,19 +264,279 @@ $(document).ready(function(){
 	});
 
 	//表格提示框
-    $("body").on("mousemove",".jshowinfo",function(){
-        $(this).children(".jinfo").fadeIn("fast");
+	$("body").on("mousemove",".jshowinfo",function(){
+		$(this).children(".jinfo").fadeIn("fast");
 		$(this).on("mouseleave",function(){
 			$(this).children(".jinfo").fadeOut("fast");
 		})
-    });
-    //$(document).off("mousemove").on("mousemove", ".jshowinfo", function () {
-    //    $(this).children(".jinfo").fadeIn("fast");
-    //    $(this).on("mouseleave", function () {
-    //        $(this).children(".jinfo").fadeOut("fast");
-    //    })
-    //}); 
+	});
+	//手动自动审核
+	$("body").on("click",".J-AM",function(){
+		if( $(".J-A").hasClass("d-none") ){
+			$(".J-A").removeClass("d-none");
+			$(".J-M").addClass("d-none");
+		}else{
+			$(".J-A").addClass("d-none");
+			$(".J-M").removeClass("d-none");
+		}
+	});
+	//播放控制
+	$("body").on("mousedown",".j-play-contrlo a",function(){
+		$(this).css({backgroundColor:"#3AC4F3",color:"#fff"});
+	});
+	$("body").on("mouseup",".j-play-contrlo a",function(){
+		$(this).css({backgroundColor:"#f5f5f5",color:"#8D8D8D"});
+	});
+	//播放列表
+	$("body").on("click",".j-play-list a",function(){
+		$(".j-play-list a").removeClass("active");
+		$(this).addClass("active");
+	});
+	//三级菜单隐藏指定容器
+	$("body").on("click",".j-t-show-01",function(){
+		setTimeout(function(){
+			$(".j-t-box-01").css("display","block");
+		},20);
+	});
+	$("body").on("click",".j-t-hidden-01",function(){
+		setTimeout(function(){
+			$(".j-t-box-01").css("display","none");
+		},20);
+	});
+	//设备参数设置
+	$("body").on("click",".j-ctrl-btn",function(){
+		if( $(this).parents(".j-ctrl-box").hasClass("j-set") ){
+			$(this).parents(".j-ctrl-box").removeClass("j-set");
+			$(this).parents(".j-ctrl-box").addClass("j-open");
+		}else{
+			$(this).parents(".j-ctrl-box").removeClass("j-open");
+			$(this).parents(".j-ctrl-box").addClass("j-set");
+		}
+	});
+	//按钮下拉菜单
+	$("body").on("click",".j-dropbox-btn3",function(){
+		$(this).next(".j-dropbox3").fadeIn("fast");
+	});
+	$("body").on("click",".j-dropbox-close3",function(){
+		$(this).parents(".j-dropbox3").fadeOut("fast");
+	});
+	//播放器控制
+	$("body").on("click",".j-ctrl-play",function(){
+		if( $(this).hasClass("fa-pause-circle") ){
+			$(this).removeClass("fa-pause-circle");
+			$(this).addClass("fa-play-circle");
+		}else{
+			$(this).removeClass("fa-play-circle");
+			$(this).addClass("fa-pause-circle");
+		}
+	});
+	$("body").on("click",".j-video-mode",function(){
+		$(".j-video-mode").removeClass("this");
+		$(this).addClass("this");
+	});
+	$("body").on("click",".j-position .selection",function(){
+		if( $(this).hasClass("active") ){
+			$(this).removeClass("active");
+			return false;
+		}else{
+			$(this).addClass("active");
+			return false;
+		}
+	});
+	$("body").on("click",".j-position-radio .selection",function(){
+		$(this).parents(".j-position-radio").children(".selection").removeClass("active");
+		$(this).addClass("active");
+	});
+	//云台控制效果
+	$("body").on("mousedown",".yuntai-btn",function(){
+		$(this).css("text-shadow","0 0 15px #3AC4F3");
+	});
+	$("body").on("mouseup",".yuntai-btn",function(){
+		$(this).css("text-shadow","none");
+	});
+	//active状态控制 (active status control)
+	$("body").on("click",".j-active-control-btn",function(){
+		$(this).parents(".j-active-control").children(".j-active-control-btn").removeClass("active");
+		$(this).addClass("active");
+	});
+	//视频窗布局激活 video layerout CTRL
+	$("body").on("click",".j-thumb01",function(){
+		$(this).parents(".j-thumb-opt").children("div").children(".j-thumb01").removeClass("active");
+		$(this).addClass("active");
+	});
+	//视频语音控制
+	$("body").on("click",".j-sound-btn",function(){
+		if( $(this).hasClass("active") ){
+			if( $(this).hasClass("call") ){
+				$(this).children("span").text("呼叫");
+				$(this).removeClass("active");
+			}else{
+				$(this).removeClass("active");
+			}
+		}else{
+			if( $(this).hasClass("call") ){
+				$(".j-sound-btn").removeClass("active");
+				$(this).children("span").text("挂断");
+				$(this).addClass("active");
+			}else{
+				$(".j-sound-btn").removeClass("active");
+				$(this).addClass("active");
+				$(".call").children("span").text("呼叫");
+			}
+		}
+	});
+	// 左侧菜单控制
+	// --校区
+	$("body").on("click",".left-menu-head",function(){
+		$(".left-menu-head").next(".left-menu-dropbox").css("display","none");
+		$(".left-menu-head").removeClass("active");
+		$(this).next(".left-menu-dropbox").css("display","block");
+		$(this).addClass("active");
+	});
+	// --楼栋
+	$("body").on("click",".L-CTRL-01",function(){
+		if( $(this).hasClass("fa-minus-square") ){
+			$(this).removeClass("fa-minus-square");
+			$(this).addClass("fa-plus-square");
+			$(this).parents(".left-menu-building").next(".left-menu-building-dropbox").css("display","none");
+		}else{
+			$(".L-CTRL-01").removeClass("fa-minus-square");
+			$(".L-CTRL-01").removeClass("fa-plus-square");
+			$(".L-CTRL-01").addClass("fa-plus-square");
+			$(this).removeClass("fa-plus-square");
+			$(this).addClass("fa-minus-square");
+			$(".left-menu-building-dropbox").css("display","none");
+			$(this).parents(".left-menu-building").next(".left-menu-building-dropbox").css("display","table");
+		}
+	});
+	// --楼层
+	$("body").on("click",".L-CTRL-02",function(){
+		if( $(this).hasClass("fa-minus-square") ){
+			$(this).removeClass("fa-minus-square");
+			$(this).addClass("fa-plus-square");
+			$(this).parents(".left-menu-level").next(".left-menu-room").css("display","none");
+		}else{
+			$(".L-CTRL-02").removeClass("fa-minus-square");
+			$(".L-CTRL-02").removeClass("fa-plus-square");
+			$(".L-CTRL-02").addClass("fa-plus-square");
+			$(this).removeClass("fa-plus-square");
+			$(this).addClass("fa-minus-square");
+			$(".left-menu-room").css("display","none");
+			$(this).parents(".left-menu-level").next(".left-menu-room").css("display","table");
+		}
+	});
+	// --全选
+  // ----全选楼栋
+	$("body").on("click",".check-building",function(){
+		if( $(this).parents(".left-menu-building").hasClass("building-unchecked") ){
+			$(this).parents(".left-menu-building").removeClass("building-unchecked");
+			$(this).parents(".left-menu-building").addClass("building-checked");
+			$(this).parents(".left-menu-building").next(".left-menu-building-dropbox").find("input[type='checkbox']").prop("checked",true);
+			$(this).parents(".left-menu-building").next(".left-menu-building-dropbox").find(".check-level").parents(".left-menu-level").removeClass("level-unchecked");
+			$(this).parents(".left-menu-building").next(".left-menu-building-dropbox").find(".check-level").parents(".left-menu-level").addClass("level-checked");
+		}else{
+			$(this).parents(".left-menu-building").removeClass("building-checked");
+			$(this).parents(".left-menu-building").addClass("building-unchecked");
+			$(this).parents(".left-menu-building").next(".left-menu-building-dropbox").find("input[type='checkbox']").prop("checked",false);
+			$(this).parents(".left-menu-building").next(".left-menu-building-dropbox").find(".check-level").parents(".left-menu-level").removeClass("level-checked");
+			$(this).parents(".left-menu-building").next(".left-menu-building-dropbox").find(".check-level").parents(".left-menu-level").addClass("level-unchecked");
+		}
+	});
+	// ----全选楼层
+	$("body").on("click",".check-level",function(){
+		if( $(this).parents(".left-menu-level").hasClass("level-unchecked") ){
+			$(this).parents(".left-menu-level").removeClass("level-unchecked");
+			$(this).parents(".left-menu-level").addClass("level-checked");
+			$(this).parents(".left-menu-level").next(".left-menu-room").find("input[type='checkbox']").prop("checked",true);
+			console.log("check done");
+		}else{
+			$(this).parents(".left-menu-level").removeClass("level-checked");
+			$(this).parents(".left-menu-level").addClass("level-unchecked");
+			$(this).parents(".left-menu-level").next(".left-menu-room").find("input[type='checkbox']").prop("checked",false);
+			console.log("check done");
+		}
+	});
+	//顶部导航链接初始化   top menu
+	$("body").on("click",".T-NAV",function(){
+		setTimeout(function(){
+			if( $(this).hasClass("T-NAV-00") ){
+				$("#sec_box").load("");
+			}else if( $(this).hasClass("T-NAV-01") ){
+				$("#sec_box").load("window/p-equipment/001.html");
+			}else if( $(this).hasClass("T-NAV-02") ){
+				$("#sec_box").load("window/pages/course.html");
+			}else if( $(this).hasClass("T-NAV-03") ){
+				$("#sec_box").load("window/pages/course.html");
+			}else if( $(this).hasClass("T-NAV-04") ){
+				$("#sec_box").load("window/pages/course.html");
+			}else if( $(this).hasClass("T-NAV-05") ){
+				$("#sec_box").load("window/pages/course.html");
+			}
+		},100);
+	});
+	//楼栋选择
+	$("body").on("click",".building_table td",function(){
+		if($(this).hasClass("active")){
+			$(this).removeClass("active");
+		}else{
+			$(this).addClass("active");
+		}
+	});
+	$("body").on("click",".building_table .level",function(){
+		if($(this).hasClass("active")){
+			$(this).removeClass("active");
+			$(this).closest("tr").children("td").removeClass("active");
+		}else{
+			$(this).addClass("active");
+			$(this).closest("tr").children("td").addClass("active");
+		}
+	});
+	$("body").on("click",".building_table .building",function(){
+		if($(this).hasClass("active")){
+			// $(this).removeClass("active");
+			$(this).closest("table").find("td").removeClass("active");
+			$(this).closest("table").find("th").removeClass("active");
+		}else{
+			// $(this).addClass("active");
+			$(this).closest("table").find("td").addClass("active");
+			$(this).closest("table").find("th").addClass("active");
+		}
+	});
+	$("body").on("click",".chose-font-color",function(){
+		$(this).closest("td").children(".chose-font-color").removeClass("active");
+		$(this).addClass("active");
+	});
+//新建策略设备激活
+// $("body").on("click",".j-forb",function(){
+// 	if( $(this).hasClass("active") ){
+// 		$(this).removeClass("active");
+// 		$(this).closest(".stat-card").find(".j-mask2").css("display","none");
+// 		$(this).closest(".stat-card").find(".j-ctrl-pannel").removeClass("forb-opc");
+// 		$(this).closest(".stat-card").find(".bg_status").removeClass("forb");
+// 		j-ctrl-pannel
+// 	}else{
+// 		$(this).addClass("active");
+// 		$(this).closest(".stat-card").find(".j-mask2").css("display","block");
+// 		$(this).closest(".stat-card").find(".j-ctrl-pannel").addClass("forb-opc")
+// 		$(this).closest(".stat-card").find(".bg_status").addClass("forb");
+// 	}
+//
+// });
 
+
+	// $("body").on("click",".J_AM",function(){
+	// 	if( $(this).find("input").prop("checked",false) ){
+	// 		$(this).find("input").prop("checked",true);
+	// 		// $(this).parents("table").children(".J-M").css("display","block");
+	// 		// console.log( $(this).parents("table").children(".J-M").attr("class") );
+	// 		// $(this).parents("table").children(".J-A").css("display","none");
+	// 	}else{
+	// 		// $(this).parents("table").children(".J-M").css("display","block");
+	// 		// $(this).parents("table").children(".J-A").css("display","none");
+	// 		$(this).find("input").prop("checked",false);
+	// 	}
+	//
+	// });
 		// if( $(this).children("input[type='checkbox']").prop("checked") ){
 		// 	$(this).parents("table").find("input[type='checkbox']").prop("checked");
 		// }else{

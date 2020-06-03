@@ -80,7 +80,30 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+        // Schedule for transfer request with row ids
+        public DataTable GetScheduleForTransfer(string name)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
 
+                    using (MySqlCommand cmd = new MySqlCommand("GetScheduleForTransfer", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@build", name);
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
         public DataTable GetCourseDetails(string[] name)
         {
             DataTable dt = new DataTable();
@@ -92,6 +115,35 @@ namespace CresijApp.DataAccess
                         " weekstart,weekend, dayno, section, teachingbuilding from schedule sc " +
                         "join classdetails cd on sc.classname =cd.classname "+                        
                         "where sc.classname = '" + name[0] + "' and sc.coursename = '" + name[1] + "' ";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return dt;
+
+        }
+
+        public DataTable GetCourseDetailsForTransfer(string[] name)
+        {
+            DataTable dt = new DataTable();
+            string query = "";
+            try
+            {
+                    query = "select teachername, coursename, sc.Classname," +
+                        " weekstart,weekend, dayno, section, teachingbuilding from schedule sc " +                        
+                        "where sc.id = " + name[0] ;
+                
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
@@ -409,6 +461,108 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+        public DataTable GetScheduleByBuildWeekSem(string building, string sem, string week)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("Sp_getScheduleByBuildWeekSem", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@build", building);
+                        cmd.Parameters.AddWithValue("@weekno", week);
+                        cmd.Parameters.AddWithValue("@sem", sem);
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
+        public DataTable GetScheduleByBuildSem(string building, string sem)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_getScheduleByBuildSem", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@build", building);
+                        
+                        cmd.Parameters.AddWithValue("@sem", sem);
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
+        public DataTable GetTransferScheduleByBuildSem(string building, string sem)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetTransferScheduleByBuildSem", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@build", building);
+
+                        cmd.Parameters.AddWithValue("@sem", sem);
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
+        public DataTable GetScheduleByBuild(string building)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetScheduleByBuild", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@build", building);
+                        
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
 
         public string GetWeekByDate(string date)
         {
@@ -561,6 +715,62 @@ namespace CresijApp.DataAccess
             }
             return num;
 
+        }
+
+        public DataTable GetTotalWeek()
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = "select max(totalweeks) from semesterinfo";
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
+        public DataTable GetScheduleByBuilding(string buildingname)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = "select max(totalweeks) from semesterinfo";
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
+        public DataTable CallScheduleFilterMethods(string[] data)
+        {
+            DataTable dt = new DataTable();
+            string building = data[0].Split(':')[1].Trim();
+            string sem = data[2].Split(':')[1].Trim();            
+            string date = data[1].Split(':')[1].Trim();
+
+            return dt;
         }
     }
 }

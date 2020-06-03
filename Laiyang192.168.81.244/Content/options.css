@@ -1,0 +1,156 @@
+﻿  
+
+.leftspace {
+    margin-right: 20px;
+    height: inherit;
+    margin-bottom: 20px;
+    width:70%;
+}
+
+.TabHeaderCSS {
+    font-family: 'Ruda', sans-serif;
+    cursor: pointer;
+    color: #2f323a;
+    /*font-size: 1em;*/
+}
+
+.fancy-green .ajax__tab_header {
+    cursor: pointer;
+}
+
+/*.fancy-green .ajax__tab_hover .ajax__tab_outer, .fancy-green .ajax__tab_active .ajax__tab_outer {
+}
+
+.fancy-green .ajax__tab_hover .ajax__tab_inner, .fancy-green .ajax__tab_active .ajax__tab_inner {
+}*/
+
+.fancy .ajax__tab_header {
+    
+    font-weight: bold;
+    color: #000;
+    font-size:11px!important;
+    cursor: pointer;
+    background-color: chocolate !important;
+    border: 1px solid aquamarine !important;
+    border-radius: 10px !important;
+    border-bottom: none !important;
+}
+
+    .fancy .ajax__tab_active .ajax__tab_outer, .fancy .ajax__tab_header .ajax__tab_outer, .fancy .ajax__tab_hover .ajax__tab_outer {
+        color: black;
+        /*background-color:blue !important;*/
+    }
+
+    .fancy .ajax__tab_active .ajax__tab_inner, .fancy .ajax__tab_header .ajax__tab_inner, .fancy .ajax__tab_hover .ajax__tab_inner {
+        color: black;
+        /*background-color:brown !important;*/
+        /*margin-left: 16px;*/ /* offset the width of the left image */
+    }
+
+    .fancy .ajax__tab_active .ajax__tab_tab, .fancy .ajax__tab_hover .ajax__tab_tab, .fancy .ajax__tab_header .ajax__tab_tab {
+        /*margin: 16px 16px 0px 0px;*/
+        color: black;
+        /*background-color: chocolate!important;*/
+    }
+
+.fancy .ajax__tab_hover .ajax__tab_tab, .fancy .ajax__tab_active .ajax__tab_tab {
+    color: cadetblue;
+    /*background-color:darkgreen !important;*/
+}
+
+.fancy .ajax__tab_body {
+    font-family: Arial;
+    font-size: 6pt !important;
+    border-top: 0;
+    border: 1px solid aquamarine !important;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #999 !important;
+    border-top: none !important;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: center; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow-y: auto; /*Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    max-height: 70%;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;   
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    position: center;
+    overflow-y: auto;
+    margin:auto;
+}
+    
+  
+      
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.space{
+    margin-top:-30px;
+}
+.margintop {
+    margin-top: -30px;
+}
+
+.labelpadding {
+    padding-top: 10px;
+}
+@media (max-width: 768px) {
+
+    .modal-content {
+        width: 600px;
+    }
+
+    .modal {
+        width: 100%
+    }
+    .leftspace {
+        width: 100%;
+        overflow-x: auto;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 100%;
+    }
+
+    .modal {
+        width: 100%
+    }
+    .leftspace {
+        width: 100%;
+        overflow-x: auto;
+    }
+}
+@media (max-width:320px){
+    .modal-content {
+        width: 100%;
+    }
+
+    .modal {
+        width: 100%
+    }
+    .leftspace {
+        width: 100%;
+        overflow-x:auto;
+    }
+}

@@ -755,6 +755,7 @@
     <Content Include="ScriptsLInks\modules\windbarb.js.map" />
     <Content Include="ScriptsLInks\modules\wordcloud.js.map" />
     <Content Include="ScriptsLInks\modules\xrange.js.map" />
+    <None Include="Properties\PublishProfiles\Laiyang192.168.81.244.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

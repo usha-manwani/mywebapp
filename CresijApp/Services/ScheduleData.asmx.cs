@@ -97,6 +97,33 @@ namespace CresijApp.Services
         }
 
         [WebMethod]
+        public List<object> GetCourseDetailsForTransfer(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable dt = schedule.GetCourseDetailsForTransfer(name);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            //idata.Add(dt.Rows);
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetScheduleForTransfer(string name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable dt = schedule.GetScheduleForTransfer(name);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            //idata.Add(dt.Rows);
+            return idata;
+        }
+        [WebMethod]
         public List<object> SaveTransferSchedule(string[] name)
         {
             Schedule schedule = new Schedule();
@@ -379,6 +406,70 @@ namespace CresijApp.Services
             int r = schedule.ChangeReserveStatus(name);
 
             return r;
+        }
+
+        [WebMethod]
+        public List<object> GetTotalWeek()
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetTotalWeek();
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            return idata;
+        }
+
+        
+        [WebMethod]
+        public List<object> GetScheduleByBuildWeekSem(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetScheduleByBuildWeekSem(name[0],name[1],name[2]);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetScheduleByBuildSem(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetScheduleByBuildSem(name[0], name[1]);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            return idata;
+        }
+        [WebMethod]
+        public List<object> GetTransferScheduleByBuildSem(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetTransferScheduleByBuildSem(name[0], name[1]);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            return idata;
+        }
+        [WebMethod]
+        public List<object> GetScheduleByBuild(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetScheduleByBuild(name[0]);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            return idata;
         }
 
     }

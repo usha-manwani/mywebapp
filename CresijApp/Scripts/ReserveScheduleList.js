@@ -2,7 +2,7 @@
 
 $ = jQuery.noConflict();
 $(function GetOrgData() {
-
+    
     $.ajax({
         type: "POST",
         url: "../Services/ScheduleData.asmx/GetReserveSchedule",

@@ -1,0 +1,76 @@
+<h3 class="h3tt float-left">
+  <i class="fa fa-cog"></i>
+  运维管理</h3>
+<div class="float-left ml-4 nav_page JCHANNAV" style="margin-top:33px;">
+  <div class="jbtn active jdropdown JCHANNAV">
+    <i class="fa fa-filter"></i>
+    故障管理
+    <i class=" jdown fa fa-caret-down"></i>
+    <div class="jnavdrop">
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/001-1.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-01.html" j-menu-box="#jpagetitle" j-sub-order="0">
+        <i class="fa fa-angle-right"></i>
+        总览</a>
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/001-2.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-01.html" j-menu-box="#jpagetitle" j-sub-order="1">
+        <i class="fa fa-angle-right"></i>
+        故障派工</a>
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/001-3.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-01.html" j-menu-box="#jpagetitle" j-sub-order="2">
+        <i class="fa fa-angle-right"></i>
+        工单管理</a>
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/001-4.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-01.html" j-menu-box="#jpagetitle" j-sub-order="3">
+        <i class="fa fa-angle-right"></i>
+        查询统计</a>
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/001-5.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-01.html" j-menu-box="#jpagetitle" j-sub-order="4">
+        <i class="fa fa-angle-right"></i>
+        我的任务</a>
+    </div>
+  </div>
+  <div class="jbtn JCHANMENU JURL TEST" j-page-href="window/p-operate/002-1.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-02.html" j-menu-box="#jpagetitle">
+    <i class="fa fa-wrench"></i>
+    维修管理
+    <i class=" jdown fa fa-caret-down"></i>
+  </div>
+  <div class="jbtn jdropdown JCHANNAV">
+    <i class="fa fa-repeat"></i>
+    巡检管理
+    <i class=" jdown fa fa-caret-down"></i>
+    <div class="jnavdrop">
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/003-1.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-03.html" j-menu-box="#jpagetitle" j-sub-order="0">
+        <i class="fa fa-angle-right"></i>
+        巡检计划</a>
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/003-2.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-03.html" j-menu-box="#jpagetitle" j-sub-order="1">
+        <i class="fa fa-angle-right"></i>
+        巡检结果</a>
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/003-3.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-03.html" j-menu-box="#jpagetitle" j-sub-order="2">
+        <i class="fa fa-angle-right"></i>
+        我的计划</a>
+    </div>
+  </div>
+  <div class="jbtn jdropdown JCHANNAV">
+    <i class="fa fa-paint-brush"></i>
+    维保管理
+    <i class=" jdown fa fa-caret-down"></i>
+    <div class="jnavdrop">
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/004-1.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-04.html" j-menu-box="#jpagetitle" j-sub-order="0">
+        <i class="fa fa-angle-right"></i>
+        维保计划</a>
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/004-2.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-04.html" j-menu-box="#jpagetitle" j-sub-order="1">
+        <i class="fa fa-angle-right"></i>
+        维保结果</a>
+      <a class="JCHANMENU JURL" j-page-href="window/p-operate/004-3.html" j-page-box="#sec_box" j-menu-href="window/menus/m-operate-04.html" j-menu-box="#jpagetitle" j-sub-order="2">
+        <i class="fa fa-angle-right"></i>
+        我的计划</a>
+    </div>
+  </div>
+</div>
+<div class="stat-card col-12 float-left">
+  <div class="bar01" id="jpagetitle"></div>
+  <!-- secondary box begin -->
+  <div class="sec_box" id="sec_box"></div>
+  <!-- secondary box end -->
+</div>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#sec_box").load("window/p-operate/001-1.html");
+    $("#jpagetitle").load("window/menus/m-operate-01.html");
+  });
+</script>

@@ -1,0 +1,934 @@
+<div class="col-12 py-4 bar01">
+  <a class="jbtn2 bg_blue white JURL show_jmodal" j-page-href="window/alert/operate/failure_audit.html" j-page-box="#jcontent">
+    <i class="fa fa-clone"></i>
+    批量处理</a>
+  <a class="jbtn2 bg_blue white JURL show_jmodal" j-page-href="window/alert/operate/add_failure.html" j-page-box="#jcontent">
+    <i class="fa fa-plus"></i>
+    添加故障</a>
+  <a class="jbtn2 bg_red white">
+    <i class="fa fa-trash"></i>
+    删除故障</a>
+
+  <div class="searchbox">
+    <div class="searchbox2">
+      <div class="name">按报障类型</div>
+      <div class="list">
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第一教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第二教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第三教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第四教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第五教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第6教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第7教学楼</label>
+        </div>
+      </div>
+    </div>
+    <div class="searchbox2">
+      <div class="name">按处理时限</div>
+      <div class="list">
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第一教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第二教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第三教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第四教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第五教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第6教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第7教学楼</label>
+        </div>
+      </div>
+    </div>
+    <div class="searchbox2">
+      <div class="name">按故障状态</div>
+      <div class="list">
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">
+            <i class="fa fa-circle red"></i>
+            未派单</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">
+            <i class="fa fa-circle orange"></i>
+            已接单</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">
+            <i class="fa fa-circle blue"></i>
+            已处理</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">
+            <i class="fa fa-circle blue"></i>
+            已返工</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">
+            <i class="fa fa-circle orange"></i>
+            待公司处理</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">
+            <i class="fa fa-circle green"></i>
+            已完工</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">
+            <i class="fa fa-circle purple"></i>
+            待返工</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">
+            <i class="fa fa-circle gray mr-2"></i>
+            故障关闭</label>
+        </div>
+      </div>
+    </div>
+    <div class="searchbox2">
+      <div class="name">按故障处理人</div>
+      <div class="list">
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">张三丰</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">洪七公</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">黄药师</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">张无忌</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">欧阳锋</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">张三丰</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">张三丰</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">张三丰</label>
+        </div>
+      </div>
+    </div>
+    <a class="jbtn_sm text-center">
+      <i class="fa fa-search" style="margin-top:10px;"></i>
+    </a>
+  </div>
+</div>
+
+<div class="col-12">
+  <table class="main_table table_list w-100 jtable-1">
+    <tr class="border-bottom">
+      <th class="">
+        <label>
+          <i class="fa fa-check jcheckbox check_all_table"></i>
+        </label>
+      </th>
+      <th class="text-left pl-3">序号</th>
+      <th class="text-left pl-3">教学楼栋</th>
+      <th class="pl-3 text-left">课室</th>
+      <th class="text-left pl-3">报障方式</th>
+      <th class="text-left pl-3">故障描述</th>
+      <th class="text-left pl-3">报障人</th>
+      <th class="text-left pl-3">电话</th>
+      <th class="text-left pl-3">报障时间</th>
+      <th class="text-left pl-3">处理时限</th>
+      <th class="text-left pl-3">故障进度</th>
+      <th class="text-left pl-3">处理方法</th>
+      <th class="text-left pl-3">处理人</th>
+      <th class="text-left pl-3">故障类型</th>
+      <th class="text-left pl-3">故障设备</th>
+      <th class="pl-3 text-left">故障视频</th>
+      <th class="pl-3 text-left">
+        操作
+        <span class="jf-12 font-weight-normal ml-1 gray d-inline-block" style="height:20px;">
+          <label jstatus="m" style="height:20px!important;">
+            <input class="J-AM" type="checkbox">
+            <span class="jswift swift_blue" style="width:80px; display:inline-block;">
+              <i class="jswift-btn"></i>
+              <i class="on">手动审核</i>
+              <i class="off">自动审核</i>
+            </span>
+          </label>
+        </span>
+      </th>
+    </tr>
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 green">已处理</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 green">已处理</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 green">已处理</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 orange">需公司处理</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 orange">需公司处理</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 orange">需公司处理</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 blue">人为故障</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 blue">人为故障</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 blue">人为故障</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 blue">人为故障</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 blue">人为故障</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 blue">人为故障</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/edit.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+      <td class="pl-3 hover_btn_td">
+        <a class="J-M jbtn_xs bg_blue hover_blue white JURL show_jmodal" j-page-href="window/alert/operate/order_examine.html" j-page-box="#jcontent">
+          <i class="fa fa-reply-all"></i>
+          审核</a>
+        <span class="J-A jbtn_xs bg_gray white d-none" style="opacity:0.3;border-radius:5px;">自动审核
+          <i class="fa fa-forward"></i>
+        </span>
+      </td>
+    </tr>
+  </table>
+  <div class="jpager">
+    <a j-page-href="" j-page-box="" class="fa fa-fast-backward FIRST CTRL"></a>
+    <a j-page-href="" j-page-box="" class="fa fa-play fa-flip-horizontal PREV CTRL"></a>
+    <span class="JPAGER_CTRL">
+      <a j-page-href="" j-page-box="" class="page JPAGE active">1</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">2</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">3</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">4</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">5</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">6</a>
+    </span>
+    <a j-page-href="" j-page-box="" class="fa fa-play NEXT CTRL"></a>
+    <a j-page-href="" j-page-box="" class="fa fa-fast-forward LAST CTRL"></a>
+  </div>
+</div>

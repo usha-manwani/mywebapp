@@ -118,6 +118,7 @@ function SaveAllData() {
     var semstartdate = $('input[name = "semstartDate"]').val();
     var totalweeks = $('input[name = "totalweek"]').val();
     var semno = $('input[name = "semester"]:checked').val();
+    var semname = $('#semname').text();
     var object = {
         "Schoolname": scname,
         "Schooleng": scengname,
@@ -134,7 +135,8 @@ function SaveAllData() {
         "Dayselected": days,
         "Semesterstart": semstartdate,
         "Weeks": totalweeks,
-        "Semestername": semno
+        "Semesterno": semno,
+        "Semestername" : semname
     };
 
     var jsonData = JSON.stringify({

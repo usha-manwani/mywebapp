@@ -1,0 +1,30 @@
+﻿
+.card {
+    margin-bottom: 1em;    
+    padding: 0;  
+    border: 0px solid transparent;
+    -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+}
+    .card .card-body {
+        border-radius: 5px;
+        float: left;
+        padding: 1em;
+        position: relative;
+        width: 100%;
+    }
+.mb-3 {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+}
+canvas {
+    max-width: 100%;
+}
+.content {
+    float: left;
+    padding: 1.875em;
+    width: 100%;  
+}
+.displaynone{
+    display:none;
+}

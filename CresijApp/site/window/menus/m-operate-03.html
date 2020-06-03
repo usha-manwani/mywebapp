@@ -1,0 +1,76 @@
+<h4 class="tt01">
+  <i class="fa fa-repeat mr-1"></i>
+  巡检管理</h4>
+<div class="nav2 JPAGENAV JPAGENAV-01">
+  <a j-page-href="window/p-operate/003-1.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">
+    <i class="fa fa-bars"></i>
+    巡检计划</a>
+  <a j-page-href="window/p-operate/003-2.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">
+    <i class="fa fa-flag"></i>
+    巡检结果</a>
+  <a j-page-href="window/p-operate/003-3.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">
+    <i class="fa fa-th"></i>
+    我的计划</a>
+  <a j-page-href="window/alert/operate/add_tour.html" j-page-box="#jcontent" class="show_jmodal jbtn2 bg_blue JURL ml-5">
+    <i class="fa fa-plus-circle"></i>
+    新建计划</a>
+  <a j-page-href="window/alert/confer_delete.html" j-page-box="#jcontent" class="show_jmodal jbtn2 bg_red JURL">
+    <i class="fa fa-th"></i>
+    批量删除</a>
+</div>
+<div class="searchbox">
+  <div class="searchbox2">
+    <div class="name">按开始时间</div>
+    <div class="list">
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">按开始时间</label>
+      </div>
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">按结束时间</label>
+      </div>
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">按巡检人</label>
+      </div>
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">按状态</label>
+      </div>
+    </div>
+  </div>
+  <div class="searchbox2">
+    <span class="input-group datetimepicker jdatetime" style="background-color:none; display:table;"><input type="text" name="" value="" class="input-group-addon" style="width:100px; background-color:none;">
+      <i class="fa fa-calendar"></i>
+    </span>
+  </div>
+  <div class="float-left">
+    <input type="text" name="" value="" class="inputgray">
+  </div>
+  <a class="jbtn_sm text-center">
+    <i class="fa fa-search" style="margin-top:10px;"></i>
+  </a>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $('.datetimepicker').datetimepicker({
+      format: 'YYYY-MM-DD',
+      locale: 'zh-cn',
+      defaultDate: new Date(),
+      icons: {
+        previous: "fa fa-arrow-circle-left green",
+        next: "fa fa-arrow-circle-right green"
+      }
+    });
+    $('.datetimepicker-clock').datetimepicker({
+      format: 'LT',
+      locale: 'zh-cn',
+      icons: {
+        up: "fa fa-chevron-up green",
+        down: "fa fa-chevron-down green"
+      }
+    });
+  });
+</script>

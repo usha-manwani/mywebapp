@@ -20,7 +20,7 @@ function OnErrorCall_(respo) {
 }
 
 function FillChangeSchedule(idata) {
-
+    $("#pendingSchedule tr:gt(0)").remove();
     var innerhtm = [];
     for (i = 0; i < idata.length; i++) {
         var j = i + 1;
@@ -55,7 +55,7 @@ function FillChangeSchedule(idata) {
             '<td>多媒体教室</td>' + '<td class="' + statusclass + '">' + data[7] + '</td><td style="display:none">' + data[8] + '</td>' +
             '<td style="display:none">' + data[9] + '</td>' + '<td style="display:none">' + data[10] + '</td>'+
             '<td><a name="viewdetails"'+
-                'class="jbtn_xs btn_blue vis taskmodal"><i class="fa fa-eye"></i> 查看</a></td></tr>';
+            'class="jbtn_xs btn_blue vis taskmodal"><i class="fa fa-eye"></i> 查看</a></td></tr>';
     }
 
     $("#pendingSchedule").find('tbody').append(innerhtm);

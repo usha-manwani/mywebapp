@@ -1,0 +1,721 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学校管理系统 - 首页</title>
+    <link rel="stylesheet" href="../css/Chart.min.css">
+    <link rel="stylesheet" href="../dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/sensor.css">
+    <link rel="stylesheet" href="../css/sensor2.min.css">
+    <link rel="stylesheet" href="../font/css/font-awesome.min.css">
+    <script src="../dist/js/Chart.min.js"></script>
+    <script src="../dist/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../dist/js/popper.min.js"></script>
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../dist/js/jquery.min.js"></script>
+    <!-- datapicker -->
+    <script type="text/javascript" src="../js/moment.min.js"></script>
+    <script type="text/javascript" src="../js/moment.zh-cn.js"></script>
+    <script src="../dist/js/bootstrap-datetimepicker.min.js"></script>
+    <link href="../dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- datapicker -->
+    <script src="../js/ip_input.js"></script>
+    <script src="../js/sensor.js"></script>
+  </head>
+
+  <body>
+    <div class="stat-card col-12">
+      <div class="bar01">
+        <h4 class="tt01">
+          <i class="fa fa-desktop mr-1 ml-3"></i>
+          <font class="green mr-2" style="font-size:26px!important;">
+            <strong>302#</strong>
+          </font>
+          <font class="jfont14 gray">（第一教学楼）</font>
+        </h4>
+      </div>
+
+      <!-- main -->
+      <div class="w-100 clearfix float-left" style="height: 30px;"></div>
+      <div class="col-12 row">
+        <div class="col-3 pt-2 pb-4 border-right">
+          <div class="jfont14 mt-3">主题：<font class="black">勾股定理</font>
+          </div>
+          <div class="jfont14 mt-3">主讲：<font class="black">张无忌 副教授</font>
+          </div>
+          <div class="jfont22 green mt-3">
+            <i class="fa fa-clock-o mr-2"></i>00:00:00</div>
+          <div class="jfont22 blue mt-3">
+            <i class="fa fa-folder mr-2"></i>234MB</div>
+          <div class="jfont14 mt-3">
+            <i class="fa fa-gear mr-2"></i>录制参数：<font class="black">1920×1080@30, 4Mbps</font>
+          </div>
+          <div class="jfont14 mt-3">
+            <i class="fa fa-pie-chart mr-2"></i>剩余空间：<font class="black">2344MB / 1.7TB</font>
+          </div>
+          <div class="j-process-bg mt-3">
+            <div class="j-process-perc" style="width:66%;"></div>
+          </div>
+          <div class="jfont14 mt-3">
+            <i class="fa fa-upload mr-2"></i>FTP上传：<font class="black">无任务</font>
+          </div>
+          <div class="jfont14 mt-3">
+            <i class="fa fa-microchip mr-2"></i>CPU温度：<font class="black">30℃</font>
+          </div>
+          <div class="col-12 mt-3 pl-0">
+            <a class="jbtn2 bg_green JURL">VGA校对</a>
+            <a class="jbtn2 bg_blue JURL">to RTMP</a>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="col-12 bg_gray2 position-relative j-video-box">
+            <div class="j-ctrl-bar row align-items-center py-3 w-100">
+              <i class="fa fa-step-backward mx-3 JURL j-ctrl-btn"></i>
+              <i class="fa fa-pause-circle fa-2x mr-3 JURL j-ctrl-btn j-ctrl-play"></i>
+              <i class="fa fa-step-forward mr-3 JURL j-ctrl-btn"></i>
+              <a class="jbtn_sm bg_red white">
+                <i class="fa fa-circle mr-1"></i>LIVE</a>
+              <div class="col-3 no-gutters ml-3">
+                <div class="col-12 align-items-center row" style="height:15px;">
+                  <div class="float-left jfont12 white" style="width:15px;">L</div>
+                  <div class="j-process-bg j-process-ctrl">
+                    <div class="j-process-perc float-right" style="width:10%"></div>
+                  </div>
+                </div>
+                <div class="col-12 align-items-center row" style="height:15px;">
+                  <div class="float-left jfont12 white" style="width:15px;">R</div>
+                  <div class="j-process-bg j-process-ctrl">
+                    <div class="j-process-perc float-right" style="width:40%"></div>
+                  </div>
+                </div>
+              </div>
+              <a class="jbtn_sm j-video-mode bg_blue white float-right ml-2 this">全自动</a>
+              <a class="jbtn_sm j-video-mode bg_blue white float-right ml-2">半自动</a>
+              <a class="jbtn_sm j-video-mode bg_blue white float-right ml-2">手动</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 border-left">
+          <div class="jtab jtab2 w-100 bbgray mt-3">
+            <div class="tabbox active">布局</div>
+            <div class="tabbox">特效</div>
+            <div class="tabbox">LOGO</div>
+            <div class="tabbox">字幕</div>
+            <div class="tabbox">变焦</div>
+            <div class="tabbox">音量</div>
+          </div>
+          <div class="jtab_box j-thumb-opt row pb-3" style="display:table;">
+
+            <div class="float-left ml-3 mt-3">
+              <svg class="j-thumb01 active">
+                <g id="图层_2" data-name="图层 2">
+                  <g id="图层_1-2" data-name="图层 1"><path d="M0,0V40H61V0ZM60,39H1V1H60Z"/><path d="M2,38H30V2H2ZM13.72,16.18a7.36,7.36,0,0,0,1.54-.63,6.37,6.37,0,0,0,1.26-.83H17V24H15.82V16.24a3.72,3.72,0,0,1-.91.6,5.52,5.52,0,0,1-1.19.47Z"/><path
+                    d="M59,38V2H31V38ZM42.18,23.55a3.71,3.71,0,0,1,.21-1.33,3.44,3.44,0,0,1,.71-1.07,10.71,10.71,0,0,1,1.53-1.25,6,6,0,0,0,1.46-1.31,2.23,2.23,0,0,0,.39-1.29A1.46,1.46,0,0,0,46,16.15a1.81,1.81,0,0,0-1.26-.42,2.54,2.54,0,0,0-1.14.29,3.69,3.69,0,0,0-1.07.82V15.73a2.94,2.94,0,0,1,1-.71,3.22,3.22,0,0,1,1.33-.25,2.89,2.89,0,0,1,2,.66,2.25,2.25,0,0,1,.75,1.78A3.27,3.27,0,0,1,47.16,19a5.47,5.47,0,0,1-1.58,1.5c-.75.52-1.26.9-1.52,1.12a2.4,2.4,0,0,0-.53.65,1.61,1.61,0,0,0-.16.76h4.52v1H42.18Z"/></g>
+                </g>
+              </svg>
+            </div>
+
+            <div class="float-left ml-3 mt-3">
+              <svg class="j-thumb01">
+                <g id="图层_2" data-name="图层 2">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M0,0V40H61V0ZM30,39H1V21H1V1H60V39Z"/><path class="cls-1" d="M2,2V20H30V2H2ZM17,16H15.82V8.24a3.72,3.72,0,0,1-.91.6,5.52,5.52,0,0,1-1.19.47V8.18a7.36,7.36,0,0,0,1.54-.63,6.37,6.37,0,0,0,1.26-.83H17Z"/><path class="cls-1" d="M45.16,23.2a1.51,1.51,0,0,0,1.22-.55,2.13,2.13,0,0,0,.47-1.42,2.18,2.18,0,0,0-.44-1.45,1.57,1.57,0,0,0-1.26-.53,1.61,1.61,0,0,0-1.25.53A1.76,1.76,0,0,0,43.41,21a2.45,2.45,0,0,0,.48,1.53A1.5,1.5,0,0,0,45.16,23.2Z"/><path
+                    class="cls-1"
+                    d="M31,21V38H59V2H31Zm12.21-4.81a3.2,3.2,0,0,1,2.72-1.42,3.71,3.71,0,0,1,1.52.26v1.06A3.27,3.27,0,0,0,46,15.73a2.21,2.21,0,0,0-1.89,1,4.89,4.89,0,0,0-.73,2.8h0a2.17,2.17,0,0,1,2.06-1.25,2.43,2.43,0,0,1,1.88.77,2.89,2.89,0,0,1,.7,2,3.06,3.06,0,0,1-.81,2.19,2.72,2.72,0,0,1-2.07.85A2.55,2.55,0,0,1,43,23.07,5.17,5.17,0,0,1,42.17,20,6.31,6.31,0,0,1,43.21,16.19Z"/></g>
+                </g>
+              </svg>
+            </div>
+
+            <div class="float-left ml-3 mt-3">
+              <svg class="j-thumb01">
+                <g id="图层_2" data-name="图层 2">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M0,0V40H61V0ZM60,39H1V1H60Z"/><path class="cls-1" d="M30,2H2V19H30ZM17,16H15.82V8.24a3.72,3.72,0,0,1-.91.6,5.52,5.52,0,0,1-1.19.47V8.18a7.36,7.36,0,0,0,1.54-.63,6.37,6.37,0,0,0,1.26-.83H17Z"/><path
+                    class="cls-1"
+                    d="M2,20V38H30V20ZM18.89,34H13.18v-.45a3.71,3.71,0,0,1,.21-1.33,3.44,3.44,0,0,1,.71-1.07,10.71,10.71,0,0,1,1.53-1.25,6,6,0,0,0,1.46-1.31,2.23,2.23,0,0,0,.39-1.29A1.46,1.46,0,0,0,17,26.15a1.81,1.81,0,0,0-1.26-.42,2.54,2.54,0,0,0-1.14.29,3.69,3.69,0,0,0-1.07.82V25.73a2.94,2.94,0,0,1,1-.71,3.22,3.22,0,0,1,1.33-.25,2.89,2.89,0,0,1,2,.66,2.25,2.25,0,0,1,.75,1.78A3.27,3.27,0,0,1,18.16,29a5.47,5.47,0,0,1-1.58,1.5c-.75.52-1.26.9-1.52,1.12a2.4,2.4,0,0,0-.53.65,1.61,1.61,0,0,0-.16.76h4.52Z"/><polygon class="cls-1" points="30 39 1 39 1 39 30 39 30 39 30 39"/><rect class="cls-1" x="2" y="20" width="28"/><path
+                    class="cls-1"
+                    d="M31,20V38H59V2H31V20Zm12.21-3.81a3.2,3.2,0,0,1,2.72-1.42,3.54,3.54,0,0,1,1.52.27v1.05A3.27,3.27,0,0,0,46,15.73a2.21,2.21,0,0,0-1.89,1,4.89,4.89,0,0,0-.73,2.8h0a2.17,2.17,0,0,1,2.06-1.25,2.43,2.43,0,0,1,1.88.77,2.89,2.89,0,0,1,.7,2,3.06,3.06,0,0,1-.81,2.19,2.72,2.72,0,0,1-2.07.85A2.55,2.55,0,0,1,43,23.07,5.17,5.17,0,0,1,42.17,20,6.31,6.31,0,0,1,43.21,16.19Z"/><path class="cls-1" d="M45.16,23.2a1.51,1.51,0,0,0,1.22-.55,2.11,2.11,0,0,0,.47-1.42,2.18,2.18,0,0,0-.44-1.45,1.57,1.57,0,0,0-1.26-.53,1.61,1.61,0,0,0-1.25.53A1.8,1.8,0,0,0,43.41,21a2.45,2.45,0,0,0,.48,1.53A1.5,1.5,0,0,0,45.16,23.2Z"/><polygon class="cls-1" points="60 39 31 39 31 39 60 39 60 1 60 1 60 39"/><polygon class="cls-1" points="31 19 31 19 31 19 31 2 31 2 31 19"/><polygon class="cls-1" points="31 39 30 39 30 39 31 39 31 39 31 39"/><rect class="cls-1" x="31" y="20" height="18"/><polygon class="cls-1" points="31 20 31 20 31 19 31 19 31 20 31 20"/></g>
+                </g>
+              </svg>
+            </div>
+
+            <div class="float-left ml-3 mt-3">
+              <svg class="j-thumb01">
+                <g id="图层_2" data-name="图层 2">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M0,0V40H61V0ZM1,1H60V39H1Z"/><path
+                    class="cls-1"
+                    d="M41,2H2V38H41ZM17.78,24.34a3.33,3.33,0,0,1-2.37.82,3.8,3.8,0,0,1-1.91-.38V23.61a3.46,3.46,0,0,0,1.88.59,2.2,2.2,0,0,0,1.53-.52,1.77,1.77,0,0,0,.58-1.39,1.61,1.61,0,0,0-.61-1.35,2.62,2.62,0,0,0-1.71-.49,14.22,14.22,0,0,0-1.54.08L14,15.92h4.25v1H14.93l-.19,2.57.83,0a3.31,3.31,0,0,1,2.26.72,2.52,2.52,0,0,1,.83,2A2.79,2.79,0,0,1,17.78,24.34Z"/><path
+                    class="cls-1"
+                    d="M59,38V2H42V38H59ZM49.86,6.09a3.24,3.24,0,0,0,.77-.32,2.74,2.74,0,0,0,.63-.41h.22V10h-.57V6.12a1.81,1.81,0,0,1-.46.3,2.46,2.46,0,0,1-.59.23Zm-.27,11.68a1.63,1.63,0,0,1,.11-.66,1.84,1.84,0,0,1,.35-.54,5,5,0,0,1,.77-.62,3,3,0,0,0,.72-.66,1.08,1.08,0,0,0,.2-.64.75.75,0,0,0-.23-.57.92.92,0,0,0-.63-.21,1.2,1.2,0,0,0-.57.14,2,2,0,0,0-.54.41v-.56a1.6,1.6,0,0,1,.51-.35,1.69,1.69,0,0,1,.66-.12,1.49,1.49,0,0,1,1,.32,1.16,1.16,0,0,1,.38.9,1.6,1.6,0,0,1-.23.86,2.73,2.73,0,0,1-.79.75c-.38.27-.63.45-.76.57a1.07,1.07,0,0,0-.27.32.89.89,0,0,0-.07.38h2.25V18H49.59Zm.9,6.12h-.37v-.47h.36c.73,0,1.09-.27,1.09-.81s-.28-.75-.83-.75a1.43,1.43,0,0,0-.9.33v-.55a2,2,0,0,1,1-.25,1.4,1.4,0,0,1,.93.3,1,1,0,0,1,.35.79,1.1,1.1,0,0,1-.91,1.14h0A1.23,1.23,0,0,1,52,24a1,1,0,0,1,.28.73,1.22,1.22,0,0,1-.44,1,1.73,1.73,0,0,1-1.17.38,2,2,0,0,1-1-.24v-.6a1.67,1.67,0,0,0,1.05.36,1.08,1.08,0,0,0,.74-.23.75.75,0,0,0,.28-.62C51.73,24.18,51.32,23.89,50.49,23.89Zm-1.2,8.6A15.68,15.68,0,0,0,50.43,31a13.74,13.74,0,0,0,.94-1.56H52v3h.68v.47H52V34h-.56V32.93H49.29Z"/><path class="cls-1" d="M51.41,30.3c-.2.36-.42.72-.65,1.06s-.51.71-.82,1.1h1.47Z"/></g>
+                </g>
+              </svg>
+            </div>
+
+            <div class="float-left ml-3 mt-3">
+              <svg class="j-thumb01">
+                <g id="图层_2" data-name="图层 2">
+                  <g id="图层_1-2" data-name="图层 1"><path
+                    class="cls-1"
+                    d="M0,0V40H61V0ZM60,16V39H1V1H38V2H2V38H59V16H38V1H60ZM17,21.15a1.81,1.81,0,0,0-1.26-.42,2.54,2.54,0,0,0-1.14.29,3.69,3.69,0,0,0-1.07.82V20.73a2.94,2.94,0,0,1,1-.71,3.19,3.19,0,0,1,1.33-.25,2.89,2.89,0,0,1,2,.66,2.27,2.27,0,0,1,.75,1.79A3.26,3.26,0,0,1,18.16,24a5.6,5.6,0,0,1-1.58,1.5c-.76.52-1.26.9-1.52,1.12a2.29,2.29,0,0,0-.53.66,1.54,1.54,0,0,0-.16.75h4.52v1H13.18v-.45a3.71,3.71,0,0,1,.21-1.33,3.27,3.27,0,0,1,.71-1.07,10.71,10.71,0,0,1,1.53-1.25,6,6,0,0,0,1.46-1.31,2.23,2.23,0,0,0,.39-1.29A1.5,1.5,0,0,0,17,21.15Z"/><path class="cls-1" d="M39,15H59V2H39Zm8.1-9.51A6.65,6.65,0,0,0,48.39,5a6.15,6.15,0,0,0,1-.69h.36V12h-.95V5.53a3,3,0,0,1-.76.5,3.9,3.9,0,0,1-1,.39Z"/></g>
+                </g>
+              </svg>
+            </div>
+
+            <div class="float-left ml-3 mt-3">
+              <svg class="j-thumb01">
+                <g id="图层_2" data-name="图层 2">
+                  <g id="图层_1-2" data-name="图层 1"><path
+                    class="cls-1"
+                    d="M0,0V40H61V0ZM60,16V39H1V1H38V2H2V38H59V16H38V1H60ZM14.37,24.55a2.17,2.17,0,0,1,2.06-1.25,2.43,2.43,0,0,1,1.88.77,2.89,2.89,0,0,1,.7,2,3.06,3.06,0,0,1-.81,2.19,2.72,2.72,0,0,1-2.07.85A2.55,2.55,0,0,1,14,28.07,5.1,5.1,0,0,1,13.17,25a6.31,6.31,0,0,1,1-3.81,3.2,3.2,0,0,1,2.72-1.42,3.54,3.54,0,0,1,1.52.27v1.05A3.27,3.27,0,0,0,17,20.73a2.21,2.21,0,0,0-1.89,1,4.89,4.89,0,0,0-.73,2.8Z"/><path class="cls-1" d="M16.16,28.2a1.51,1.51,0,0,0,1.22-.55,2.11,2.11,0,0,0,.47-1.42,2.18,2.18,0,0,0-.44-1.45,1.57,1.57,0,0,0-1.26-.53,1.65,1.65,0,0,0-1.26.53A1.8,1.8,0,0,0,14.41,26a2.45,2.45,0,0,0,.48,1.53A1.5,1.5,0,0,0,16.16,28.2Z"/><path class="cls-1" d="M39,15H59V2H39Zm8.1-9.51A6.65,6.65,0,0,0,48.39,5a6.15,6.15,0,0,0,1-.69h.36V12h-.95V5.53a3,3,0,0,1-.76.5,3.9,3.9,0,0,1-1,.39Z"/></g>
+                </g>
+              </svg>
+            </div>
+
+            <div class="float-left ml-3 mt-3">
+              <svg class="j-thumb01">
+                <g id="图层_2" data-name="图层 2">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M0,0V40H61V0ZM60,39H1V1H60V39Z"/><path class="cls-1" d="M45.16,19.2a1.51,1.51,0,0,0,1.22-.55,2.11,2.11,0,0,0,.47-1.42,2.18,2.18,0,0,0-.44-1.45,1.57,1.57,0,0,0-1.26-.53,1.61,1.61,0,0,0-1.25.53A1.8,1.8,0,0,0,43.41,17a2.45,2.45,0,0,0,.48,1.53A1.5,1.5,0,0,0,45.16,19.2Z"/><path
+                    class="cls-1"
+                    d="M2,24H23V39h0V38H59V2H2ZM43.21,12.19a3.2,3.2,0,0,1,2.72-1.42,3.54,3.54,0,0,1,1.52.27v1.05A3.27,3.27,0,0,0,46,11.73a2.21,2.21,0,0,0-1.89,1,4.89,4.89,0,0,0-.73,2.8h0a2.16,2.16,0,0,1,2.06-1.24,2.42,2.42,0,0,1,1.88.76,2.89,2.89,0,0,1,.7,2,3.06,3.06,0,0,1-.81,2.19,2.72,2.72,0,0,1-2.07.85A2.55,2.55,0,0,1,43,19.07,5.17,5.17,0,0,1,42.17,16,6.31,6.31,0,0,1,43.21,12.19Z"/><path class="cls-1" d="M2,38H22V25H2Zm8.1-9.51A6.65,6.65,0,0,0,11.39,28a6.15,6.15,0,0,0,1-.69h.36V35h-1V28.53a3,3,0,0,1-.76.5,3.9,3.9,0,0,1-1,.39Z"/></g>
+                </g>
+              </svg>
+            </div>
+            <div class="float-left ml-3 mt-3">
+              <div class="j-thumb01">自定-1</div>
+            </div>
+            <div class="float-left ml-3 mt-3">
+              <div class="j-thumb01">自定-2</div>
+            </div>
+            <div class="clearfix w-100"></div>
+          </div>
+          <div class="jtab_box j-thumb-opt row pb-3" style="display:none;">
+            <div class="d-table">
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01 active">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M38.22,15a16.71,16.71,0,0,1-1.08,1.38H40A11.28,11.28,0,0,0,41.11,15Z"/><path class="cls-1" d="M42,17.2H40.29v1.49a8,8,0,0,1-.18,1.82H42Z"/><path class="cls-1" d="M37.42,20.51h1.66a7.24,7.24,0,0,0,.19-1.84V17.2H37.42Z"/><path
+                    class="cls-1"
+                    d="M59.06,2H2.1V38h57ZM18.37,22.67a1.16,1.16,0,0,0,.62-1V17.83l-1.65.35-.18-.94L19,16.85V13.41h1v3.23l2.63-.56.18.94-2.81.6v4.22l2.73-1.15a5.51,5.51,0,0,0,.18.9c-3.32,1.5-3.77,1.75-4.05,2A3.23,3.23,0,0,0,18.37,22.67Zm11.45-8c-.2,7.11-.35,9.47-.91,10.2a1.35,1.35,0,0,1-1.08.6,18.46,18.46,0,0,1-2,0,2.42,2.42,0,0,0-.32-1.06c.81.07,1.56.07,1.87.07a.58.58,0,0,0,.56-.25c.44-.51.64-2.83.82-9.14H25.9c-.1,4.35-.41,8.41-4,10.55a2.69,2.69,0,0,0-.77-.81c3.48-1.92,3.7-5.72,3.78-9.74H22.62v-1h7.21S29.83,14.51,29.82,14.65Zm4.26,9.71c0,.57-.11.87-.46,1a3.5,3.5,0,0,1-1.62.21,6.61,6.61,0,0,0-.31-1c.52,0,1,0,1.15,0s.22-.06.22-.24V20.77c-.53.19-1.05.34-1.51.48l-.27-1c.49-.11,1.11-.31,1.78-.5V16.63H31.44v-1h1.62v-2.8h1v2.8h1.31v1H34.08v2.8L35.43,19l.14,1-1.49.48Zm9.49,1.25a8.23,8.23,0,0,1-4-3.66,8.39,8.39,0,0,1-4.24,3.71,3.54,3.54,0,0,0-.72-.73c2.41-1.06,3.59-2.31,4.14-3.51H35.41v-.91h1V17.08l-.26.23a3,3,0,0,0-.69-.72,10.34,10.34,0,0,0,2.79-3.76l1,.18a10.61,10.61,0,0,1-.53,1.07h3l.17-.06.7.48a14.12,14.12,0,0,1-1.42,1.86H43v4.15h1v.91H40.33a7.15,7.15,0,0,0,3.89,3.36A4.11,4.11,0,0,0,43.57,25.61Z"/><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_2" data-name="图层 2">
+                    <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M40.65,20.9H34.87a8.52,8.52,0,0,0,2.86,2.27A8.28,8.28,0,0,0,40.65,20.9Z"/><path
+                      class="cls-1"
+                      d="M59.06,2H2.1V38h57ZM31.76,14.42h5.73a9.85,9.85,0,0,0-.72-1.3l1-.25a12,12,0,0,1,.88,1.55h5.05v.93H39.83v4.22h-1V15.35H36.63v4.23h-1V15.35H31.76Zm11.81,4.22-.82.53a17.25,17.25,0,0,0-2.38-2.7l.79-.45A17.54,17.54,0,0,1,43.57,18.64Zm-8.76-2.45a9.24,9.24,0,0,1-2,3A4.66,4.66,0,0,0,32,18.6a7.17,7.17,0,0,0,1.87-2.66Zm-16.3-3a14.88,14.88,0,0,1,2.27,1.46l-.63.82a15.57,15.57,0,0,0-2.25-1.54Zm-.63,3.74a17.9,17.9,0,0,1,2.39,1.33l-.61.84a17.71,17.71,0,0,0-2.36-1.41Zm.63,8.73-.92-.56a42.72,42.72,0,0,0,1.93-4.44l.83.54C19.82,22.62,19.13,24.34,18.51,25.62Zm5.33.11H22.9v-3l-2.16.57-.24-1c.66-.12,1.49-.32,2.4-.54V19.9h-1a1.87,1.87,0,0,0-1,.2,4.81,4.81,0,0,0-.31-.87c.23-.07.39-.52.58-1.14.11-.35.37-1.31.6-2.46H20.73v-.94H22c.08-.55.16-1.11.21-1.67l.95.16c-.06.49-.14,1-.24,1.51H25.2v.94H22.67A27.18,27.18,0,0,1,21.75,19H22.9v-2.1h.94V19h1.3v.95h-1.3v1.67l1.4-.35.1.88-1.5.39Zm6.26-7.4H29v7.4h-.91v-7.4H26.64v.56c0,2.52-.18,4.84-1.39,6.92a3.39,3.39,0,0,0-.73-.6,12.6,12.6,0,0,0,1.21-6.33v-4.6a14.19,14.19,0,0,0,3.47-1.09l.63.87a15.11,15.11,0,0,1-3.19.95v2.41H30.1Zm13.37,7.5A18.48,18.48,0,0,1,37.7,24.2,22.4,22.4,0,0,1,32,25.83a4.25,4.25,0,0,0-.52-.93,21.86,21.86,0,0,0,5.17-1.26,9.56,9.56,0,0,1-2.91-2.74H32.61V20h8.76l.18,0,.67.47a9.22,9.22,0,0,1-3.43,3.27,19.87,19.87,0,0,0,5.27,1.26A3.16,3.16,0,0,0,43.47,25.83Z"/><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/></g>
+                  </g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M59.06,2H2.1V38h57ZM12.87,36.87H3.23V3h9.64Zm5.81-12.39V21.84H16.06V18.16h2.62V15.52L23.15,20Z"/><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_2" data-name="图层 2">
+                    <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M59.06,2H2.1V38h57Zm-14,19.79H42.5v2.63L38,19.94l4.48-4.47V18.1h2.61ZM57.94,36.93H48.31V3.07h9.63Z"/><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/></g>
+                  </g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M59.06,2H2.1V38h57ZM30.5,23,26,18.52h2.64V15.9h3.68v2.62H35ZM57.94,12.71H3.06V3.08H57.94Z"/><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M59.06,2H2.1V38h57ZM30.5,17.13,35,21.61H32.34v2.61H28.66V21.61H26ZM57.94,37.05H3.06V27.42H57.94Z"/><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/><path
+                    class="cls-1"
+                    d="M59.06,2H2.1V38h57ZM30.5,5.12,35,9.59H32.34v2.62H28.66V9.59H26ZM14.71,21.84H12.09v2.64L7.62,20l4.47-4.48v2.64h2.62Zm15.79,13L26,30.41h2.64V27.79h3.68v2.62H35ZM42.9,24.82H18.1V15.18H42.9Zm6-.34V21.84H46.29V18.16h2.62V15.52L53.38,20Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/><path
+                    class="cls-1"
+                    d="M59.06,2H2.1V38h57ZM28.66,7.73V5.12h3.68V7.73H35L30.5,12.21,26,7.73ZM10.23,24.48V21.84H7.62V18.16h2.61V15.52L14.71,20Zm22.11,7.79v2.61H28.66V32.27H26l4.48-4.48L35,32.27ZM42.9,24.82H18.1V15.18H42.9Zm10.48-3H50.77v2.64L46.29,20l4.48-4.48v2.64h2.61Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path
+                    class="cls-1"
+                    d="M59.06,2H2.1V38h57ZM30.5,5.12,35,9.59H32.34v2.62H28.66V9.59H26ZM14.71,21.84H12.09v2.64L7.62,20l4.47-4.48v2.64h2.62Zm15.79,13L26,30.41h2.64V27.79h3.68v2.62H35Zm0-9.79L19.73,20.31,30.5,15.54l10.77,4.77Zm18.41-.61V21.84H46.29V18.16h2.62V15.52L53.38,20Z"/><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/><path
+                    class="cls-1"
+                    d="M59.06,2H2.1V38h57ZM28.66,7.73V5.12h3.68V7.73H35L30.5,12.21,26,7.73ZM10.23,24.48V21.84H7.62V18.16h2.61V15.52L14.71,20Zm22.11,7.79v2.61H28.66V32.27H26l4.48-4.48L35,32.27Zm-1.84-7.5L19.73,20,30.5,15.23,41.27,20Zm22.88-2.93H50.77v2.64L46.29,20l4.48-4.48v2.64h2.61Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path
+                    class="cls-1"
+                    d="M59.06,2H2.1V38h57ZM30.5,5.12,35,9.59H32.34v2.62H28.66V9.59H26ZM14.71,21.84H12.09v2.64L7.62,20l4.47-4.48v2.64h2.62Zm15.79,13L26,30.41h2.64V27.79h3.68v2.62H35Zm0-9.81c-6.19,0-11.21-2.27-11.21-5.07s5-5.07,11.21-5.07S41.71,17.2,41.71,20,36.69,25.07,30.5,25.07Zm18.41-.59V21.84H46.29V18.16h2.62V15.52L53.38,20Z"/><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path
+                    class="cls-1"
+                    d="M59.06,2H2.1V38h57ZM28.66,7.73V5.12h3.68V7.73H35L30.5,12.21,26,7.73ZM10.23,24.48V21.84H7.62V18.16h2.61V15.52L14.71,20Zm22.11,7.79v2.61H28.66V32.27H26l4.48-4.48L35,32.27Zm-1.84-7.2c-6.19,0-11.21-2.27-11.21-5.07s5-5.07,11.21-5.07S41.71,17.2,41.71,20,36.69,25.07,30.5,25.07Zm22.88-3.23H50.77v2.64L46.29,20l4.48-4.48v2.64h2.61Z"/><path class="cls-1" d="M0,0V40H61V0ZM60.06,39H1.1V1h59Z"/></g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="jtab_box jfont12" style="display:none;">
+            <div class="d-table">
+              <div class="col-12 mt-3 d-table">
+                <label class="ml-2 mt-1 float-left"><input type="radio" name="show_logo" checked="checked">
+                  <span class="jradio">
+                    <i class="jradio-dot"></i>
+                  </span>
+                  显示
+                </label>
+                <label class="ml-2 mt-1 float-left"><input type="radio" name="show_logo">
+                  <span class="jradio">
+                    <i class="jradio-dot"></i>
+                  </span>
+                  隐藏
+                </label>
+                <input type="text" class="ml-3 float-left" style="width:160px;" placeholder="bmp格式，最大长宽比为3:2">
+                <a class="jbtn_xs bg_green white px-2 ml-1">浏览</a>
+              </div>
+              <table class="col-12 d-table mt-3">
+                <tr>
+                  <td style="width:100px; padding-left:25px;">LOGO位置</td>
+                  <td>
+                    <div style="width:160px; height:90px;" class="bg_gray2"></div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="jtab_box row jfont12" style="display:none;">
+            <div class="d-table">
+              <table class="col-12 mt-3 jfont12">
+                <tr>
+                  <td colspan="4">
+                    <input type="text" class="ml-3 float-left" style="width:260px;" placeholder="请在此处输入字幕">
+                    <a class="jbtn_xs bg_green white px-2 ml-1">输出</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4" class="pt-2 pl-2">
+                    <label class="ml-2 mt-1 float-left"><input type="radio" name="show_zimu" checked="checked">
+                      <span class="jradio">
+                        <i class="jradio-dot"></i>
+                      </span>
+                      显示
+                    </label>
+                    <label class="ml-2 mt-1 mr-2 float-left d-block"><input type="radio" name="show_zimu">
+                      <span class="jradio">
+                        <i class="jradio-dot"></i>
+                      </span>
+                      隐藏
+                    </label>
+                    <div class="float-left ml-1 pl-2 border-left">
+                      <label class="ml-2 mt-1 float-left"><input type="radio" name="show_dz" checked="checked">
+                        <span class="jradio">
+                          <i class="jradio-dot"></i>
+                        </span>
+                        滚动
+                      </label>
+                      <label class="ml-2 mt-1 mr-2 float-left"><input type="radio" name="show_dz">
+                        <span class="jradio">
+                          <i class="jradio-dot"></i>
+                        </span>
+                        停止
+                      </label>
+                    </div>
+                    <div class="float-left ml-1 pl-2 border-left">
+                      <label class="ml-2 mt-1 float-left"><input type="checkbox" checked="checked">
+                        <i class="fa fa-check jcheckbox"></i>
+                        PPT辅助</label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="pt-3" style="width:80px; padding-left:20px;">字体颜色</td>
+                  <td colspan="3" class="pt-3 pl-2">
+                    <div class="chose-font-color bg_black">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_white">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_red">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_green">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_blue">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_yellow">
+                      <i class="fa fa-check"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="pt-2" style="width:80px; padding-left:20px;">背景颜色</td>
+                  <td colspan="3" class="pt-2 pl-2">
+                    <div class="chose-font-color position-relative">
+                      <div style="padding:0px 0 0 0px;">
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                        <div class="bg_gray float-left d-block table-opc"></div>
+                        <div class="bg_gray2 float-left d-block table-opc"></div>
+                      </div>
+                      <i class="fa fa-check position-absolute" style="top:4px; left:7px;color:#000!important"></i>
+                    </div>
+                    <div class="chose-font-color bg_black">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_gray">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_white">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_red">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_green">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_blue">
+                      <i class="fa fa-check"></i>
+                    </div>
+                    <div class="chose-font-color bg_yellow">
+                      <i class="fa fa-check"></i>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="jtab_box j-thumb-opt" style="display:none;">
+            <div class="d-table">
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path
+                    class="cls-1"
+                    d="M59,2H2V38H59ZM40,6.7a3,3,0,1,1-3,3A3,3,0,0,1,40,6.7Zm-19,0a3,3,0,1,1-3,3A3,3,0,0,1,21,6.7Zm3.36,26.6H17.64A1.91,1.91,0,0,1,16,31.22c0-2.06.51-4.45,2.57-4.45a3.49,3.49,0,0,0,4.91,0c2.06,0,2.57,2.39,2.57,4.45A1.91,1.91,0,0,1,24.35,33.3Zm-6.37-9a3,3,0,1,1,3,3A3,3,0,0,1,18,24.26Zm6.37-5.5H17.64A1.91,1.91,0,0,1,16,16.68c0-2.07.51-4.46,2.57-4.46a3.49,3.49,0,0,0,4.91,0c2.06,0,2.57,2.39,2.57,4.46A1.91,1.91,0,0,1,24.35,18.76Zm19,14.54H36.65A1.91,1.91,0,0,1,35,31.22c0-2.06.51-4.45,2.57-4.45a3.49,3.49,0,0,0,4.91,0c2.06,0,2.57,2.39,2.57,4.45A1.91,1.91,0,0,1,43.36,33.3Zm-6.37-9a3,3,0,1,1,3,3A3,3,0,0,1,37,24.26Zm6.37-5.5H36.65A1.91,1.91,0,0,1,35,16.68c0-2.07.51-4.46,2.57-4.46a3.49,3.49,0,0,0,4.91,0c2.06,0,2.57,2.39,2.57,4.46A1.91,1.91,0,0,1,43.36,18.76Z"/><path class="cls-1" d="M0,0V40H61V0ZM60,39H1V1H60Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path
+                    class="cls-1"
+                    d="M59,2H2V38H59ZM40,6.7a3,3,0,1,1-3,3A3,3,0,0,1,40,6.7ZM30.5,21.24a3,3,0,1,1-3,3A3,3,0,0,1,30.5,21.24ZM21,6.7a3,3,0,1,1-3,3A3,3,0,0,1,21,6.7Zm3.36,12.06H17.64A1.91,1.91,0,0,1,16,16.68c0-2.07.51-4.46,2.57-4.46a3.49,3.49,0,0,0,4.91,0c2.06,0,2.57,2.39,2.57,4.46A1.91,1.91,0,0,1,24.35,18.76Zm9.5,14.54h-6.7a1.92,1.92,0,0,1-1.68-2.08c0-2.06.51-4.45,2.57-4.45a3.5,3.5,0,0,0,4.92,0c2.06,0,2.57,2.39,2.57,4.45A1.92,1.92,0,0,1,33.85,33.3Zm9.51-14.54H36.65A1.91,1.91,0,0,1,35,16.68c0-2.07.51-4.46,2.57-4.46a3.49,3.49,0,0,0,4.91,0c2.06,0,2.57,2.39,2.57,4.46A1.91,1.91,0,0,1,43.36,18.76Z"/><path class="cls-1" d="M0,0V40H61V0ZM60,39H1V1H60Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path
+                    class="cls-1"
+                    d="M59,2H2V38H59ZM39.36,10.88a4.56,4.56,0,1,1-4.56,4.56A4.56,4.56,0,0,1,39.36,10.88Zm-17.72,0a4.56,4.56,0,1,1-4.56,4.56A4.56,4.56,0,0,1,21.64,10.88Zm5.07,18.24H16.57C15.18,29.12,14,27.71,14,26c0-3.12.77-6.73,3.88-6.73a5.3,5.3,0,0,0,7.43,0c3.11,0,3.89,3.61,3.89,6.73C29.24,27.71,28.1,29.12,26.71,29.12Zm17.72,0H34.29c-1.39,0-2.53-1.41-2.53-3.15,0-3.12.78-6.73,3.89-6.73a5.3,5.3,0,0,0,7.43,0C46.19,19.24,47,22.85,47,26,47,27.71,45.82,29.12,44.43,29.12Z"/><path class="cls-1" d="M0,0V40H61V0ZM60,39H1V1H60Z"/></g>
+                </svg>
+              </div>
+
+              <div class="float-left ml-3 mt-3">
+                <svg class="j-thumb01">
+                  <g id="图层_1-2" data-name="图层 1"><path
+                    class="cls-1"
+                    d="M59,2H2V38H59ZM30.5,10.88a4.56,4.56,0,1,1-4.56,4.56A4.56,4.56,0,0,1,30.5,10.88Zm5.07,18.24H25.43C24,29.12,22.9,27.71,22.9,26c0-3.12.77-6.73,3.88-6.73a5.31,5.31,0,0,0,7.44,0c3.11,0,3.88,3.61,3.88,6.73C38.1,27.71,37,29.12,35.57,29.12Z"/><path class="cls-1" d="M0,0V40H61V0ZM60,39H1V1H60Z"/></g>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="jtab_box row pt-1" style="display:none;">
+            <div class="d-table">
+              <div class="col-6 float-left jfont12 mt-2">
+                <div class="w-100 mb-1">
+                  <span class="float-left ml-2">
+                    <i class="fa fa-sliders green fa-lg mr-2"></i>
+                    <b>
+                      <font class="green">
+                        MASTER
+                      </font>
+                    </b>
+                  </span>
+                  <label class="ml-2 float-left"><input type="checkbox" checked="checked">
+                    <i class="fa fa-check jcheckbox"></i>
+                    静音</label>
+                </div>
+                <input type="range" min="0" max="100" value="80" style="width:90%;" class="j-slider mt-2 ml-2" id="js11">
+              </div>
+
+              <div class="w-100" style="clear:both; height:10px; "></div>
+
+              <div class="col-6 float-left jfont12 mt-2">
+                <div class="w-100 mb-1">
+                  <span class="float-left ml-2">
+                    <i class="fa fa-volume-up green fa-lg mr-2"></i>
+                    <font class="black">LINEIN1</font>
+                  </span>
+                  <label class="ml-2 float-left"><input type="checkbox" checked="checked">
+                    <i class="fa fa-check jcheckbox"></i>
+                    静音</label>
+                </div>
+                <input type="range" min="0" max="100" value="80" style="width:90%;" class="j-slider mt-2 ml-2" id="js12">
+              </div>
+
+              <div class="col-6 float-left jfont12 mt-2">
+                <div class="w-100 mb-1">
+                  <span class="float-left ml-2">
+                    <i class="fa fa-volume-up green fa-lg mr-2"></i>
+                    <font class="black">LINEIN2</font>
+                  </span>
+                  <label class="ml-2 float-left"><input type="checkbox" checked="checked">
+                    <i class="fa fa-check jcheckbox"></i>
+                    静音</label>
+                </div>
+                <input type="range" min="0" max="100" value="80" style="width:90%;" class="j-slider mt-2 ml-2" id="js13">
+              </div>
+
+              <div class="col-6 float-left jfont12 mt-2">
+                <div class="w-100 mb-1">
+                  <span class="float-left ml-2">
+                    <i class="fa fa-microphone green fa-lg mr-2"></i>
+                    <font class="black">MICIN1</font>
+                  </span>
+                  <label class="ml-2 float-left"><input type="checkbox" checked="checked">
+                    <i class="fa fa-check jcheckbox"></i>
+                    静音</label>
+                </div>
+                <input type="range" min="0" max="100" value="80" style="width:90%;" class="j-slider mt-2 ml-2" id="js14">
+              </div>
+
+              <div class="col-6 float-left jfont12 mt-2">
+                <div class="w-100 mb-1">
+                  <span class="float-left ml-2">
+                    <i class="fa fa-microphone green fa-lg mr-2"></i>
+                    <font class="black">MICIN2</font>
+                  </span>
+                  <label class="ml-2 float-left"><input type="checkbox" checked="checked">
+                    <i class="fa fa-check jcheckbox"></i>
+                    静音</label>
+                </div>
+                <input type="range" min="0" max="100" value="80" style="width:90%;" class="j-slider mt-2 ml-2" id="js15">
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="j-position-radio j-position-blue row jfont12 align-items-center">
+            <div class="name gray ml-3 mr-2">预设位</div>
+            <div class="selection">1</div>
+            <div class="selection">2</div>
+            <div class="selection">3</div>
+            <div class="selection">4</div>
+            <div class="selection">5</div>
+            <div class="selection active">6</div>
+            <div class="selection">7</div>
+            <div class="selection">8</div>
+            <a class="jbtn_xs bg_green white">
+              <i class="fa fa-check mr-1"></i>保存</a>
+          </div>
+          <hr>
+          <div class="bar01 my-0 py-0" style="border:0;">
+            <div class="searchbox ml-0 jfont12 float-left">
+              <div class="searchbox2 float-left">
+                <div class="name">预设位-1</div>
+                <div class="list">
+                  <div class="option">
+                    <input type="radio" name="xuenian">
+                    <label for="">预设位-1</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="xuenian">
+                    <label for="">预设位-2</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="xuenian">
+                    <label for="">预设位-3</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="xuenian">
+                    <label for="">预设位-4</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="xuenian">
+                    <label for="">预设位-5</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="xuenian">
+                    <label for="">预设位-6</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="xuenian">
+                    <label for="">预设位-7</label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="xuenian">
+                    <label for="">预设位-8</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 row mt-3 mr-0 pr-0">
+            <div class="rounded-circle shadow-sm yuntai yuntai-circle">
+              <div class="yuntai-text rounded-circle jfont12 align-middle">云台</div>
+              <i class="fa fa-arrow-circle-up fa-lg yuntai-btn up align-middle text-center position-absolute"></i>
+              <i class="fa fa-arrow-circle-down fa-lg yuntai-btn down align-middle text-center position-absolute"></i>
+              <i class="fa fa-arrow-circle-left fa-lg yuntai-btn left align-middle text-center position-absolute"></i>
+              <i class="fa fa-arrow-circle-right fa-lg yuntai-btn right align-middle text-center position-absolute"></i>
+            </div>
+            <div class="rounded-lg shadow-sm yuntai-ctrl ml-4 yuntai jfont12 mt-2" style="height: 80px; width: 200px;">
+              <div class="border-bottom py-2 row align-items-center mt-1 ml-1 w-100">
+                <div class="mr-4" style="width:40px;">画面</div>
+                <div class="row align-items-center">
+                  <i class="fa fa-plus-circle fa-lg yuntai-btn ml-2"></i>
+                  <i class="fa fa-minus-circle fa-lg yuntai-btn ml-4"></i>
+                </div>
+              </div>
+              <div class="py-2 row align-items-center mt-1 ml-1 w-100">
+                <div class="mr-4" style="width:40px;">灵敏度</div>
+                <div class="row align-items-center">
+                  <input type="range" min="0" max="100" value="80" class="j-slider" id="js04">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 clearfix float-left border-bottom" style="height: 30px;"></div>
+        <div class="w-100 clearfix float-left" style="height: 30px;"></div>
+        <div class="col-12 row">
+          <div class="j-video-sm">
+            <div class="j-video-box2 bg_gray2"></div>
+            <div class="jfont14 text-center mt-2 gray">教师全景</div>
+          </div>
+          <div class="j-video-sm">
+            <div class="j-video-box2 bg_gray2"></div>
+            <div class="jfont14 text-center mt-2 gray">教师特写</div>
+          </div>
+          <div class="j-video-sm">
+            <div class="j-video-box2 bg_gray2"></div>
+            <div class="jfont14 text-center mt-2 gray">学生全景</div>
+          </div>
+          <div class="j-video-sm">
+            <div class="j-video-box2 bg_gray2"></div>
+            <div class="jfont14 text-center mt-2 gray">学生特写</div>
+          </div>
+          <div class="j-video-sm">
+            <div class="j-video-box2 bg_gray2"></div>
+            <div class="jfont14 text-center mt-2 gray">教师电脑桌面</div>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 clearfix float-left" style="height: 30px;"></div>
+    </div>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        //视频窗口高度控制
+        var videoHeight = $(".j-video-box").width() * 0.5556;
+        console.log(videoHeight);
+        $(".j-video-box").css("height", videoHeight);
+        //视频窗口高度控制
+        var videoHeight = $(".j-video-box2").width() * 0.5556;
+        console.log(videoHeight);
+        $(".j-video-box2").css("height", videoHeight);
+        //滑块webkit控制
+        if (navigator.userAgent.toLowerCase().match(/chrome\/([\d.]+)/)) {
+          $("#js04").css({background: "-webkit-linear-gradient(left, #66BA30 80%, #f0f0f0 80%)", height: "5px"});
+          $("#js04").on("mousemove", function () {
+            var percent = $("#js04").val();
+            $(this).css("background", "-webkit-linear-gradient(left, #66BA30 " + percent + "%, #f0f0f0 " + percent + "%)");
+          });
+
+          $("#js11").css({background: "-webkit-linear-gradient(left, #66BA30 80%, #f0f0f0 80%)", height: "5px"});
+          $("#js11").on("mousemove", function () {
+            var percent = $("#js11").val();
+            $(this).css("background", "-webkit-linear-gradient(left, #66BA30 " + percent + "%, #f0f0f0 " + percent + "%)");
+          });
+
+          $("#js12").css({background: "-webkit-linear-gradient(left, #66BA30 80%, #f0f0f0 80%)", height: "5px"});
+          $("#js12").on("mousemove", function () {
+            var percent = $("#js12").val();
+            $(this).css("background", "-webkit-linear-gradient(left, #66BA30 " + percent + "%, #f0f0f0 " + percent + "%)");
+          });
+
+          $("#js13").css({background: "-webkit-linear-gradient(left, #66BA30 80%, #f0f0f0 80%)", height: "5px"});
+          $("#js13").on("mousemove", function () {
+            var percent = $("#js13").val();
+            $(this).css("background", "-webkit-linear-gradient(left, #66BA30 " + percent + "%, #f0f0f0 " + percent + "%)");
+          });
+
+          $("#js14").css({background: "-webkit-linear-gradient(left, #66BA30 80%, #f0f0f0 80%)", height: "5px"});
+          $("#js14").on("mousemove", function () {
+            var percent = $("#js14").val();
+            $(this).css("background", "-webkit-linear-gradient(left, #66BA30 " + percent + "%, #f0f0f0 " + percent + "%)");
+          });
+
+          $("#js15").css({background: "-webkit-linear-gradient(left, #66BA30 80%, #f0f0f0 80%)", height: "5px"});
+          $("#js15").on("mousemove", function () {
+            var percent = $("#js15").val();
+            $(this).css("background", "-webkit-linear-gradient(left, #66BA30 " + percent + "%, #f0f0f0 " + percent + "%)");
+          });
+        }
+      });
+    </script>
+
+  </body>

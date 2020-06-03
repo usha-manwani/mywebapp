@@ -1,0 +1,58 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.Mobile.master.cs" Inherits="WebCresij.Site1_Mobile" %>
+<%@ Register Src="~/ViewSwitcher.ascx" TagPrefix="friendlyUrls" TagName="ViewSwitcher" %>
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta name="viewport" content="width=device-width" />
+    <title>莱阳卫校</title>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <style>
+        .positionCenter {
+            /*padding: 15px;*/
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+        } 
+        body{
+            background-color:#1e1e36!important;
+            color: #232140!important;
+            padding-top:5%;
+            padding-left:5%;
+        }
+        .container{
+            padding-left:0px !important
+        }
+
+    </style>
+    <asp:PlaceHolder runat="server">
+        <script type="text/javascript" src="../Scripts/jquery-3.4.1.min.js"></script>
+        <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+        <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
+        <link href="../Content/fontawesome-all.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="../Scripts/fontawesome/fontawesome.min.js"></script>
+
+    </asp:PlaceHolder>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server" ID="ScriptManager1" EnablePartialRendering="true"></asp:ScriptManager>
+        <div>            
+            <div class="container body-content width100" style="font-size: medium; color: white!important;">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+                </div>
+        </div>
+    </form>
+    <footer>
+        <a href="../Index.aspx?desktop=true"><i class="fa fa-desktop"></i>&nbsp;<%=Resources.Resource.DesktopVersion %></a>
+    </footer>
+</body>
+</html>

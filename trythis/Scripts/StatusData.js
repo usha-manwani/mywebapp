@@ -69,7 +69,7 @@ var defaultip = "";
        
         $(document).on("click", "#team-chart", function () {            
             var classvalue = $('#MainContent_masterchildBody_ddlClass').val();
-            if (classvalue.includes("Cla")) {
+            if (classvalue.indexOf("Cla") != -1) {
                 $.ajax({
                     type: "POST",
                     url: "Services/ChartData.asmx/GetTempChartDataAll",
@@ -82,7 +82,7 @@ var defaultip = "";
             }
             else {
                 var gradevalue = $('#MainContent_masterchildBody_ddlGrade').val();
-                if (gradevalue.includes("Gra")) {
+                if (gradevalue.indexOf("Gra") != -1) {
 
                 }
                 else {
@@ -1031,7 +1031,6 @@ function CreateAllChart(value) {
                             min: 0,
                             stepSize: 10,
                             fontSize: 9,
-
                         }
                     }]
                 },
@@ -1040,7 +1039,7 @@ function CreateAllChart(value) {
         });   
 
         var val = String(value);
-        if (val.includes("Ins") || val.includes("All")) {
+        if (val.indexOf("Ins") != -1 || val.indexOf("All") != -1) {
             for (i = 0; i < donutcharts.length; i++) {
                 if (donutcharts[i] == null) {
                     donutcharts[i] = 0;

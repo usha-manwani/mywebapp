@@ -1,0 +1,31 @@
+﻿<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <style>
+        #interface {
+            position: absolute;
+            top: 268px;
+            left: 190px;
+            width: 220px;
+            height: 50px;
+            background: rgba(0,0, 0, 0.75);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <object id="player" type="application/x-chimera-plugin" width="600" height="338">
+        <param name="mrl" value="rtsp://admin:admin123@192.168.1.94:554/live" />
+    </object>
+    <div id="interface"></div>
+
+    <script type="text/javascript">
+    var player = document.getElementById('player');
+    document.getElementById('interface').addEventListener('click', function() {
+        player.togglePause();
+    });
+    </script>
+
+</body>
+</html>

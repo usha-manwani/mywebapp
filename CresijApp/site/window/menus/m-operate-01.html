@@ -1,0 +1,84 @@
+<h4 class="tt01">
+  <i class="fa fa-filter mr-1"></i>故障管理</h4>
+<div class="nav2 JPAGENAV JPAGENAV-01">
+  <a j-page-href="window/p-operate/001-1.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">
+    <i class="fa fa-align-left"></i>
+    总览</a>
+  <a j-page-href="window/p-operate/001-2.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">
+    <i class="fa fa-retweet"></i>
+    故障派工</a>
+  <a j-page-href="window/p-operate/001-3.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">
+    <i class="fa fa-copy"></i>
+    工单管理</a>
+  <a j-page-href="window/p-operate/001-4.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">
+    <i class="fa fa-area-chart"></i>
+    查询统计</a>
+  <a j-page-href="window/p-operate/001-5.html" j-page-box="#sec_box" class="JPAGEMENU jbtn2 bg_gray JURL">
+    <i class="fa fa-area-chart"></i>
+    我的任务</a>
+</div>
+<div class="searchbox">
+  <div class="searchbox2">
+    <div class="name">教学楼</div>
+    <div class="list">
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">第一教学楼</label>
+      </div>
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">第二教学楼</label>
+      </div>
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">第三教学楼</label>
+      </div>
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">第四教学楼</label>
+      </div>
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">第五教学楼</label>
+      </div>
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">第6教学楼</label>
+      </div>
+      <div class="option">
+        <input type="radio" name="xuenian">
+        <label for="">第7教学楼</label>
+      </div>
+    </div>
+  </div>
+  <div class="searchbox2">
+    <span class="input-group datetimepicker jdatetime date-02" style="background-color:none; display:table;"><input type="text" name="" value="" class="input-group-addon" style="width:100px; background-color:none;">
+      <i class="fa fa-calendar"></i>
+    </span>
+  </div>
+  <a class="jbtn_sm text-center">
+    <i class="fa fa-search" style="margin-top:10px;"></i>
+  </a>
+</div>
+
+<script type="text/javascript">
+  $(function () {
+    $('.datetimepicker').datetimepicker({
+      format: 'YYYY-MM-DD',
+      locale: 'zh-cn',
+      defaultDate: new Date(),
+      icons: {
+        previous: "fa fa-arrow-circle-left green",
+        next: "fa fa-arrow-circle-right green"
+      }
+    });
+    $('.datetimepicker-clock').datetimepicker({
+      format: 'LT',
+      locale: 'zh-cn',
+      icons: {
+        up: "fa fa-chevron-up green",
+        down: "fa fa-chevron-down green"
+      }
+    });
+  });
+</script>

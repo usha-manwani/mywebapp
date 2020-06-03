@@ -1,0 +1,759 @@
+<div class="col-12">
+  <div class="row">
+    <div class="col-4 no-gutters">
+      <div class="col-12 row statu-box statu-box-blue m-1 mt-3">
+        <div class="col-4 text-center pt-3 pb-2 statu-bg-color white">
+          <i class="fa fa-bank fa-lg align-middle"></i><br>
+          <span class="jfont14 clearfix align-middle">教室总量</span>
+          <span class="jfont12 clearfix align-middle">TOTAL</span>
+        </div>
+        <div class="col-8 font-weight-light pl-3 statu-color" style="font-size:50px; height:90px; line-height:95px;">126</div>
+      </div>
+    </div>
+
+    <div class="col-4 no-gutters">
+      <div class="col-12 row statu-box statu-box-green  m-1 mt-3">
+        <div class="col-4 text-center pt-3 pb-2 statu-bg-color white">
+          <i class="fa fa-bank fa-lg align-middle"></i><br>
+          <span class="jfont14 clearfix align-middle">在线教室</span>
+          <span class="jfont12 clearfix align-middle">ONLINE</span>
+        </div>
+        <div class="col-8 font-weight-light pl-3 statu-color" style="font-size:50px; height:90px; line-height:95px;">126</div>
+      </div>
+    </div>
+
+    <div class="col-4 no-gutters">
+      <div class="col-12 row statu-box statu-box-red m-1 mt-3">
+        <div class="col-4 text-center pt-3 pb-2 statu-bg-color white">
+          <i class="fa fa-bank fa-lg align-middle"></i><br>
+          <span class="jfont14 clearfix align-middle">离线教室</span>
+          <span class="jfont12 clearfix align-middle">OFFLINE</span>
+        </div>
+        <div class="col-8 font-weight-light pl-3 statu-color" style="font-size:50px; height:90px; line-height:95px;">126</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<hr class="mt-3">
+
+<div class="w-100 py-4 bar01 align-center" style="border-bottom:none;">
+  <h4 class="mt-1 float-left">
+    <i class="fa fa-tasks"></i>
+    设备状态</h4>
+  <a class="jbtn2 bg_green white mt-1 JURL show_jmodal" j-page-href="window/alert/operate/add_tour.html" j-page-box="#jcontent">
+    <i class="fa fa-power-off"></i>
+    开启系统</a>
+  <a class="jbtn2 bg_red white mt-1 JURL show_jmodal" j-page-href="window/alert/operate/add_tour.html" j-page-box="#jcontent">
+    <i class="fa fa-power-off"></i>
+    关闭系统</a>
+  <div class="float-left">
+    <label class="jfont12 mt-2">
+      <i class="fa fa-check jcheckbox check_all_table ml-3 mr-2"></i>批量选择/反选</label>
+  </div>
+
+  <div class="searchbox">
+    <div class="searchbox2">
+      <div class="name">请选择楼栋</div>
+      <div class="list">
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">全部楼栋</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第一教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第二教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第三教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第四教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第五教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第6教学楼</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第7教学楼</label>
+        </div>
+      </div>
+    </div>
+    <div class="searchbox2">
+      <div class="name">请选择楼层</div>
+      <div class="list">
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">全部楼层</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第一层</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第二层</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第三层</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第四层</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第五层</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第6层</label>
+        </div>
+        <div class="option">
+          <input type="radio" name="xuenian">
+          <label for="">第7层</label>
+        </div>
+      </div>
+    </div>
+
+    <a class="jbtn_sm text-center">
+      <i class="fa fa-search" style="margin-top:10px;"></i>
+    </a>
+  </div>
+</div>
+
+<div class="col-12 row jfont12">
+  <div class="eqp-ctrl-pannel no-gutters row mb-4">
+    <div class="col-12 row stat-card no-gutters overflow-hidden border-white">
+      <div class="col-4 bg_gray2 pt-3 float-left" style="height:154px;">
+        <div class="ml-3 gray">
+          <label><input type="checkbox">
+            <i class="fa fa-check jcheckbox mr-2"></i>
+          </label>
+          <a class="JURL" j-page-href="window/p-equipment/002.html" j-page-box="#sec_box" j-menu-href="window/menus/m-equipment-02.html" j-menu-box="#jpagetitle" j-pannel-href="window/p-equipment/ctrl-pannels/assist.html" j-pannel-box="#ctrl_pannels">
+            第一教学楼
+            <div class="ml-3 pl-2 gray mb-2 float-left col-12 p-0 jfont22">302#</div>
+          </a>
+
+        </div>
+
+        <div class="mt-3 ml-3 row clearfix col-12 p-0">
+          <span class="j-status-light light-red mr-2" data-toggle="tooltip" data-placement="bottom" title="该教室有设备故障"></span>
+          <span class="jf-12 font-weight-normal gray">
+            <label><input type="checkbox" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on"></i>
+                <i class="off"></i></span></label>
+          </span>
+
+        </div>
+      </div>
+      <div class="col-8 row pt-3 float-left" style="padding-left:5%;">
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">投影</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-gray">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">电脑</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-orange">
+            <i class="fa fa-volume-up fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">音响</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-blue">
+            <i class="fa fa-columns fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">幕布</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-signal fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">信号源</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-red">
+            <i class="fa fa-unlock-alt fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">面板锁</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eqp-ctrl-pannel no-gutters row mb-4">
+    <div class="col-12 row stat-card no-gutters overflow-hidden border-white">
+      <div class="col-4 bg_gray2 pt-3 float-left" style="height:154px;">
+        <div class="ml-3 gray">
+          <label><input type="checkbox">
+            <i class="fa fa-check jcheckbox mr-2"></i>
+            <span>
+              第一教学楼
+              <div class="ml-3 pl-2 gray mb-2 float-left col-12 p-0 jfont22">302#</div>
+            </span>
+
+          </label>
+        </div>
+
+        <div class="mt-3 ml-3 row clearfix col-12 p-0">
+          <span class="j-status-light light-green mr-2" data-toggle="tooltip" data-placement="bottom" title="该教室有设备故障"></span>
+          <span class="jf-12 font-weight-normal gray">
+            <label><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on"></i>
+                <i class="off"></i></span></label>
+          </span>
+
+        </div>
+      </div>
+      <div class="col-8 row pt-3 float-left" style="padding-left:5%;">
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">投影</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">电脑</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-volume-up fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">音响</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-columns fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">幕布</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-signal fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">信号源</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-unlock-alt fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">面板锁</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eqp-ctrl-pannel no-gutters row mb-4">
+    <div class="col-12 row stat-card no-gutters overflow-hidden border-white">
+      <div class="col-4 bg_gray2 pt-3 float-left" style="height:154px;">
+        <div class="ml-3 gray">
+          <label><input type="checkbox">
+            <i class="fa fa-check jcheckbox mr-2"></i>
+            <span>
+              第一教学楼
+              <div class="ml-3 pl-2 gray mb-2 float-left col-12 p-0 jfont22">302#</div>
+            </span>
+
+          </label>
+        </div>
+
+        <div class="mt-3 ml-3 row clearfix col-12 p-0">
+          <span class="j-status-light light-orange mr-2" data-toggle="tooltip" data-placement="bottom" title="该教室有设备故障"></span>
+          <span class="jf-12 font-weight-normal gray">
+            <label><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on"></i>
+                <i class="off"></i></span></label>
+          </span>
+
+        </div>
+      </div>
+      <div class="col-8 row pt-3 float-left" style="padding-left:5%;">
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">投影</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">电脑</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-orange">
+            <i class="fa fa-volume-up fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">音响</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-columns fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">幕布</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-signal fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">信号源</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-unlock-alt fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">面板锁</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eqp-ctrl-pannel no-gutters row mb-4">
+    <div class="col-12 row stat-card no-gutters overflow-hidden border-white">
+      <div class="col-4 bg_gray2 pt-3 float-left" style="height:154px;">
+        <div class="ml-3 gray">
+          <label><input type="checkbox">
+            <i class="fa fa-check jcheckbox mr-2"></i>
+            <span>
+              第一教学楼
+              <div class="ml-3 pl-2 gray mb-2 float-left col-12 p-0 jfont22">302#</div>
+            </span>
+
+          </label>
+        </div>
+
+        <div class="mt-3 ml-3 row clearfix col-12 p-0">
+          <span class="j-status-light light-red mr-2" data-toggle="tooltip" data-placement="bottom" title="该教室有设备故障"></span>
+          <span class="jf-12 font-weight-normal gray">
+            <label><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on"></i>
+                <i class="off"></i></span></label>
+          </span>
+
+        </div>
+      </div>
+      <div class="col-8 row pt-3 float-left" style="padding-left:5%;">
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">投影</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">电脑</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-volume-up fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">音响</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-columns fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">幕布</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-signal fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">信号源</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-red">
+            <i class="fa fa-unlock-alt fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">面板锁</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eqp-ctrl-pannel no-gutters row mb-4">
+    <div class="col-12 row stat-card no-gutters overflow-hidden border-white">
+      <div class="col-4 bg_gray2 pt-3 float-left" style="height:154px;">
+        <div class="ml-3 gray">
+          <label><input type="checkbox">
+            <i class="fa fa-check jcheckbox mr-2"></i>
+            <span>
+              第一教学楼
+              <div class="ml-3 pl-2 gray mb-2 float-left col-12 p-0 jfont22">302#</div>
+            </span>
+
+          </label>
+        </div>
+
+        <div class="mt-3 ml-3 row clearfix col-12 p-0">
+          <span class="j-status-light light-red mr-2" data-toggle="tooltip" data-placement="bottom" title="该教室有设备故障"></span>
+          <span class="jf-12 font-weight-normal gray">
+            <label><input type="checkbox" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on"></i>
+                <i class="off"></i></span></label>
+          </span>
+
+        </div>
+      </div>
+      <div class="col-8 row pt-3 float-left" style="padding-left:5%;">
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">投影</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">电脑</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12">
+            <i class="fa fa-volume-up fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">音响</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12">
+            <i class="fa fa-columns fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">幕布</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12">
+            <i class="fa fa-signal fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">信号源</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12">
+            <i class="fa fa-unlock-alt fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">面板锁</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eqp-ctrl-pannel no-gutters row mb-4">
+    <div class="col-12 row stat-card no-gutters overflow-hidden border-white">
+      <div class="col-4 bg_gray2 pt-3 float-left" style="height:154px;">
+        <div class="ml-3 gray">
+          <label><input type="checkbox">
+            <i class="fa fa-check jcheckbox mr-2"></i>
+            <span>
+              第一教学楼
+              <div class="ml-3 pl-2 gray mb-2 float-left col-12 p-0 jfont22">302#</div>
+            </span>
+
+          </label>
+        </div>
+
+        <div class="mt-3 ml-3 row clearfix col-12 p-0">
+          <span class="j-status-light light-red mr-2" data-toggle="tooltip" data-placement="bottom" title="该教室有设备故障"></span>
+          <span class="jf-12 font-weight-normal gray">
+            <label><input type="checkbox" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on"></i>
+                <i class="off"></i></span></label>
+          </span>
+
+        </div>
+      </div>
+      <div class="col-8 row pt-3 float-left" style="padding-left:5%;">
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">投影</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-gray">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">电脑</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-volume-up fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">音响</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-columns fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">幕布</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-signal fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">信号源</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-unlock-alt fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">面板锁</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eqp-ctrl-pannel no-gutters row mb-4">
+    <div class="col-12 row stat-card no-gutters overflow-hidden border-white">
+      <div class="col-4 bg_gray2 pt-3 float-left" style="height:154px;">
+        <div class="ml-3 gray">
+          <label><input type="checkbox">
+            <i class="fa fa-check jcheckbox mr-2"></i>
+            <span>
+              第一教学楼
+              <div class="ml-3 pl-2 gray mb-2 float-left col-12 p-0 jfont22">302#</div>
+            </span>
+
+          </label>
+        </div>
+
+        <div class="mt-3 ml-3 row clearfix col-12 p-0">
+          <span class="j-status-light light-red mr-2" data-toggle="tooltip" data-placement="bottom" title="该教室有设备故障"></span>
+          <span class="jf-12 font-weight-normal gray">
+            <label><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on"></i>
+                <i class="off"></i></span></label>
+          </span>
+
+        </div>
+      </div>
+      <div class="col-8 row pt-3 float-left" style="padding-left:5%;">
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">投影</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">电脑</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-volume-up fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">音响</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-blue">
+            <i class="fa fa-columns fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">幕布</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-signal fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">信号源</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-unlock-alt fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">面板锁</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eqp-ctrl-pannel no-gutters row mb-4">
+    <div class="col-12 row stat-card no-gutters overflow-hidden border-white">
+      <div class="col-4 bg_gray2 pt-3 float-left" style="height:154px;">
+        <div class="ml-3 gray">
+          <label><input type="checkbox">
+            <i class="fa fa-check jcheckbox mr-2"></i>
+            <span>
+              第一教学楼
+              <div class="ml-3 pl-2 gray mb-2 float-left col-12 p-0 jfont22">302#</div>
+            </span>
+
+          </label>
+        </div>
+
+        <div class="mt-3 ml-3 row clearfix col-12 p-0">
+          <span class="j-status-light light-green mr-2" data-toggle="tooltip" data-placement="bottom" title="该教室有设备故障"></span>
+          <span class="jf-12 font-weight-normal gray">
+            <label><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on"></i>
+                <i class="off"></i></span></label>
+          </span>
+
+        </div>
+      </div>
+      <div class="col-8 row pt-3 float-left" style="padding-left:5%;">
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">投影</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">电脑</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-volume-up fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">音响</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-columns fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">幕布</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-signal fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">信号源</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-unlock-alt fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">面板锁</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eqp-ctrl-pannel no-gutters row mb-4">
+    <div class="col-12 row stat-card no-gutters overflow-hidden border-white">
+      <div class="col-4 bg_gray2 pt-3 float-left" style="height:154px;">
+        <div class="ml-3 gray">
+          <label><input type="checkbox">
+            <i class="fa fa-check jcheckbox mr-2"></i>
+            <span>
+              第一教学楼
+              <div class="ml-3 pl-2 gray mb-2 float-left col-12 p-0 jfont22">302#</div>
+            </span>
+
+          </label>
+        </div>
+
+        <div class="mt-3 ml-3 row clearfix col-12 p-0">
+          <span class="j-status-light light-green mr-2" data-toggle="tooltip" data-placement="bottom" title="该教室有设备故障"></span>
+          <span class="jf-12 font-weight-normal gray">
+            <label><input type="checkbox" checked="checked" class="j-single">
+              <span class="jswift" style="width:60px;">
+                <i class="jswift-btn"></i>
+                <i class="on"></i>
+                <i class="off"></i></span></label>
+          </span>
+
+        </div>
+      </div>
+      <div class="col-8 row pt-3 float-left" style="padding-left:5%;">
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">投影</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-desktop fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">电脑</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-volume-up fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">音响</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-columns fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">幕布</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-signal fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">信号源</div>
+          </div>
+        </div>
+        <div class="col-4 pb-3 text-center">
+          <div class="col-12 j-eqm-green">
+            <i class="fa fa-unlock-alt fa-lg gray align-middle my-2"></i>
+            <div class="align-middle mb-1">面板锁</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-12 ">
+
+  <div class="jpager">
+    <a j-page-href="" j-page-box="" class="fa fa-fast-backward FIRST CTRL"></a>
+    <a j-page-href="" j-page-box="" class="fa fa-play fa-flip-horizontal PREV CTRL"></a>
+    <span class="JPAGER_CTRL">
+      <a j-page-href="" j-page-box="" class="page JPAGE active">1</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">2</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">3</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">4</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">5</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">6</a>
+    </span>
+    <a j-page-href="" j-page-box="" class="fa fa-play NEXT CTRL"></a>
+    <a j-page-href="" j-page-box="" class="fa fa-fast-forward LAST CTRL"></a>
+  </div>
+</div>

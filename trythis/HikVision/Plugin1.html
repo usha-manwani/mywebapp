@@ -10,17 +10,18 @@
 
         </div>
         <span id="switch1" style="text-align:center; display:none; font-size:smaller; color:white; cursor:pointer"
-               onclick="clickonSwitch1(); return false;">Click to switch</span>
+              onclick="clickonSwitch1(); return false;">Click to switch</span>
     </div>
-   
-    <input type="hidden" id="hiddenplugin1" value=""  />
+
+    <input type="hidden" id="hiddenplugin1" value="" />
 </body>
 </html>
+<script src="../Scripts/jquery-3.4.1.min.js"></script>
 <script src="codebase/webVideoCtrl.js"></script>
 <script>
-   
+    $ = jQuery.noConflict();
     function GetPlugin1(ip, user, pass, port) {
-        
+
         WebVideoCtrl.I_InitPlugin("100%", "80px", {
             bWndFull: false,
             iPackageType: 2,
@@ -36,7 +37,7 @@
             }
 
         });
-        
+
         camLogin1(ip, user, pass, port)
 
     }
@@ -45,7 +46,7 @@
         var szIdentity = ip + "_" + port;
         var iret = WebVideoCtrl.I_Login(ip, 1, port, user, pass, {
             success: function (xmlDoc) {
-                
+
                 console.log(szIdentity);
                 document.getElementById('hiddenplugin1').value = ip;
                 console.log(szIdentity + " login success！");
@@ -77,7 +78,7 @@
             error: OnErrorCall_
         });
         function OnSuccess_(response) {
-            console.log("method called");            
+            console.log("method called");
             var channel = parseInt(response.d);
             WebVideoCtrl.I_StartRealPlay(szIdentity,
                 {
@@ -96,18 +97,18 @@
                         }
                         console.log(szIdentity + " " + szInfo);
                     }
-                });           
+                });
         }
         function OnErrorCall_(respo) {
             console.log("didnt get channel id ", + respo.d);
-        }       
+        }
     };
-    
+
     function getid() {
         return document.getElementById('hiddenplugin1').value;
     }
     function setid(ip) {
-        document.getElementById('hiddenplugin1').value =ip ;
+        document.getElementById('hiddenplugin1').value = ip;
     }
     function ChangePlay1(szIdentity) {
         var oWndInfo = WebVideoCtrl.I_GetWindowStatus(0);

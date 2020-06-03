@@ -3,11 +3,16 @@ $(function () {
     var v = $("#schid").val();
     console.log(v);
     var ar = v.split("&");
-    var classname = ar[0].replace("%20", ' ');
-    var coursename = ar[1].replace("%20", ' ');
-    console.log(classname);
-    console.log(coursename);
-    GetData(classname, coursename);
+    var id = ar[0].replace("%20", ' ');
+    var datatype = ar[1].replace("%20", ' ');
+    console.log(id);
+    console.log(datatype);
+    if (datatype == "reserve" || datatype == "transfer") {
+        alert("you are not allowed to transfer this");
+        $("#sec_box").load("window/p-course/002-1.html");
+    }
+    else
+    GetData(id,datatype);
 })
 
 function GetData(classn, course) {
@@ -19,7 +24,7 @@ function GetData(classn, course) {
     });
     $.ajax({
         type: "POST",
-        url: "../Services/ScheduleData.asmx/GetCourseDetails",
+        url: "../Services/ScheduleData.asmx/GetCourseDetailsForTransfer",
         data: jsonData,
         contentType: "application/json; charset=utf-8",
         dataType: "json",

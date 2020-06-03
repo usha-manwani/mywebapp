@@ -1,5 +1,5 @@
 ﻿function checkIframeLoaded() {
-    var iframe_content = $("#MainContent_masterchildBody_Iframe4").contents();
+    var iframe_content = $("#MainContent_masterchildBody_Iframe2").contents();
 
     if (iframe_content.length > 0) {
         clearInterval(checkIframeLoadedInterval);
@@ -79,7 +79,7 @@ function StartRealPlay(szIdentity, channel) {
 // Init plugin parameters and insert the plugin
 console.log("initializn plugin");
 $(function () {
-    
+    PluginSizeChange();
     var iRet = WebVideoCtrl.I_CheckPluginInstall();    
     if (-1 == iRet) {
         alert(" please download and install the plugin WebComponentsKit.exe!");
@@ -103,7 +103,18 @@ $(function () {
     });
 });
 
+$(window).on('load', PluginSizeChange);
+$(window).on('resize', PluginSizeChange);
+function PluginSizeChange() {
+    var wSize = $(window).width();
+    if (wSize < 1450) {
+        $('#pluginsize').removeClass('col-lg-9').addClass('col-lg-12');
 
+    }
+    else if (wSize >= 1450) {
+        $('#pluginsize').removeClass('col-lg-12').addClass('col-lg-9');
+    }
+}
 
 document.onclick = function (event) {
     if (event.target == modal) {
