@@ -11,22 +11,22 @@ namespace CresijApp.DataAccess
     {
         readonly string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["SchoolConnectionString"].ConnectionString;
-        public int SaveOrgData(string[] data)
+        public int SaveOrgDataBuilding(string[] data)
         {
             int result = -1;
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    using(MySqlCommand cmd = new MySqlCommand("sp_SaveOrganisationDeptData", con))
+                    using(MySqlCommand cmd = new MySqlCommand("sp_InsertBuildingDetails", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("deptname", data[0]);
                         cmd.Parameters.AddWithValue("buscode", data[1]);
-                        cmd.Parameters.AddWithValue("highoff", data[2]);
-                        cmd.Parameters.AddWithValue("que", data[3]);
-                        cmd.Parameters.AddWithValue("typeaccess", data[4]);
-                        cmd.Parameters.AddWithValue("notes", data[5]);
+                        
+                        cmd.Parameters.AddWithValue("que", data[2]);
+                        cmd.Parameters.AddWithValue("typeaccess", data[3]);
+                        cmd.Parameters.AddWithValue("notes", data[4]);
                         if(con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -43,6 +43,38 @@ namespace CresijApp.DataAccess
             return result;
         }
 
+        public int SaveOrgDataFloor(string[] data)
+        {
+            int result = -1;
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_InsertFloorDetails", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("flname", data[0]);
+                        cmd.Parameters.AddWithValue("buscode", data[1]);
+                        cmd.Parameters.AddWithValue("highoff", data[2]);
+                        cmd.Parameters.AddWithValue("que", data[3]);
+                        cmd.Parameters.AddWithValue("typeaccess", data[4]);
+                        cmd.Parameters.AddWithValue("notes", data[5]);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        result = cmd.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result = -2;
+            }
+            return result;
+        }
+
         public int UpdateOrgData(string[] data)
         {
             int result = -1;
@@ -50,12 +82,12 @@ namespace CresijApp.DataAccess
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_UPdateOrganisationDeptData", con))
+                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateBuildingData", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("deptname", data[0]);
                         cmd.Parameters.AddWithValue("buscode", data[1]);
-                        cmd.Parameters.AddWithValue("highoff", data[2]);
+                        
                         cmd.Parameters.AddWithValue("que", data[3]);
                         cmd.Parameters.AddWithValue("typeaccess", data[4]);
                         cmd.Parameters.AddWithValue("note", data[5]);
@@ -226,32 +258,22 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("tbuild", data[1]);
                         cmd.Parameters.AddWithValue("tfloor", data[2]);
                         cmd.Parameters.AddWithValue("tseat", data[3]);
-                        cmd.Parameters.AddWithValue("ccip", data[4]);
-                        cmd.Parameters.AddWithValue("cam1ip", data[5]);
-                        cmd.Parameters.AddWithValue("cam2ip", data[6]);
-                        cmd.Parameters.AddWithValue("deskip", data[7]);
-                        cmd.Parameters.AddWithValue("recip", data[8]);
-                        cmd.Parameters.AddWithValue("cmac", data[9]);
-                        cmd.Parameters.AddWithValue("cport", data[10]);
-                        cmd.Parameters.AddWithValue("cid", data[11]);
-                        cmd.Parameters.AddWithValue("cpass", data[12]);
-                        cmd.Parameters.AddWithValue("cam1mac", data[13]);
-                        cmd.Parameters.AddWithValue("cam1port", data[14]);
-                        cmd.Parameters.AddWithValue("cam1id", data[15]);
-                        cmd.Parameters.AddWithValue("cam1pass", data[16]);
-                        cmd.Parameters.AddWithValue("cam2mac", data[17]);
-                        cmd.Parameters.AddWithValue("cam2port", data[18]);
-                        cmd.Parameters.AddWithValue("cam2id", data[19]);
-                        cmd.Parameters.AddWithValue("cam2pass", data[20]);
-                        cmd.Parameters.AddWithValue("deskmac", data[21]);
-                        cmd.Parameters.AddWithValue("deskport", data[22]);
-                        cmd.Parameters.AddWithValue("deskid", data[23]);
-                        cmd.Parameters.AddWithValue("deskpass", data[24]);
-                        cmd.Parameters.AddWithValue("recmac", data[25]);
-                        cmd.Parameters.AddWithValue("recport", data[26]);
-                        cmd.Parameters.AddWithValue("recid", data[27]);
-                        cmd.Parameters.AddWithValue("recpass", data[28]);
-                        cmd.Parameters.AddWithValue("callhelp", data[29]);
+                        cmd.Parameters.AddWithValue("camipS", data[4]);
+                        cmd.Parameters.AddWithValue("camipT", data[5]);
+                        cmd.Parameters.AddWithValue("camSmac", data[6]);
+                        cmd.Parameters.AddWithValue("camTmac", data[7]);
+                        cmd.Parameters.AddWithValue("camport", data[8]);
+                        cmd.Parameters.AddWithValue("camid", data[9]);
+                        cmd.Parameters.AddWithValue("campass", data[10]);
+                        cmd.Parameters.AddWithValue("ccip", data[11]);
+                        cmd.Parameters.AddWithValue("ccmac", data[12]);
+                        cmd.Parameters.AddWithValue("deskip", data[13]);
+                        cmd.Parameters.AddWithValue("deskmac", data[14]);
+                        cmd.Parameters.AddWithValue("recip", data[15]);
+                        cmd.Parameters.AddWithValue("recmac", data[16]);
+                        cmd.Parameters.AddWithValue("callhelpip", data[17]);
+                        cmd.Parameters.AddWithValue("callhelpmac", data[18]);
+                        
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -277,37 +299,28 @@ namespace CresijApp.DataAccess
                     using (MySqlCommand cmd = new MySqlCommand("sp_UpdateClassData", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("clsid", data[30]);
+                        cmd.Parameters.AddWithValue("clsid", data[19]);
                         cmd.Parameters.AddWithValue("cname", data[0]);
                         cmd.Parameters.AddWithValue("tbuild", data[1]);
                         cmd.Parameters.AddWithValue("tfloor", data[2]);
                         cmd.Parameters.AddWithValue("tseat", data[3]);
-                        cmd.Parameters.AddWithValue("ccip", data[4]);
-                        cmd.Parameters.AddWithValue("cam1ip", data[5]);
-                        cmd.Parameters.AddWithValue("cam2ip", data[6]);
-                        cmd.Parameters.AddWithValue("deskip", data[7]);
-                        cmd.Parameters.AddWithValue("recip", data[8]);
-                        cmd.Parameters.AddWithValue("cmac", data[9]);
-                        cmd.Parameters.AddWithValue("cport", data[10]);
-                        cmd.Parameters.AddWithValue("cid", data[11]);
-                        cmd.Parameters.AddWithValue("cpass", data[12]);
-                        cmd.Parameters.AddWithValue("cam1mac", data[13]);
-                        cmd.Parameters.AddWithValue("cam1port", data[14]);
-                        cmd.Parameters.AddWithValue("cam1id", data[15]);
-                        cmd.Parameters.AddWithValue("cam1pass", data[16]);
-                        cmd.Parameters.AddWithValue("cam2mac", data[17]);
-                        cmd.Parameters.AddWithValue("cam2port", data[18]);
-                        cmd.Parameters.AddWithValue("cam2id", data[19]);
-                        cmd.Parameters.AddWithValue("cam2pass", data[20]);
-                        cmd.Parameters.AddWithValue("deskmac", data[21]);
-                        cmd.Parameters.AddWithValue("deskport", data[22]);
-                        cmd.Parameters.AddWithValue("deskid", data[23]);
-                        cmd.Parameters.AddWithValue("deskpass", data[24]);
-                        cmd.Parameters.AddWithValue("recmac", data[25]);
-                        cmd.Parameters.AddWithValue("recport", data[26]);
-                        cmd.Parameters.AddWithValue("recid", data[27]);
-                        cmd.Parameters.AddWithValue("recpass", data[28]);
-                        cmd.Parameters.AddWithValue("callhelp", data[29]);
+                        cmd.Parameters.AddWithValue("camsip", data[4]);
+                        cmd.Parameters.AddWithValue("camtip", data[5]);
+                        cmd.Parameters.AddWithValue("camsmac", data[6]);
+                        cmd.Parameters.AddWithValue("camtmac", data[7]);
+                        cmd.Parameters.AddWithValue("camport", data[8]);
+                        cmd.Parameters.AddWithValue("camid", data[9]);
+                        cmd.Parameters.AddWithValue("campass", data[10]);
+                        cmd.Parameters.AddWithValue("ccip", data[11]);
+                        cmd.Parameters.AddWithValue("cmac", data[12]);
+                        cmd.Parameters.AddWithValue("deskip", data[13]);
+                        cmd.Parameters.AddWithValue("deskmac", data[14]);
+                        cmd.Parameters.AddWithValue("recip", data[15]);
+                        cmd.Parameters.AddWithValue("recmac", data[16]);
+                        cmd.Parameters.AddWithValue("callhelpip", data[17]);
+                        cmd.Parameters.AddWithValue("callhelpmac", data[18]);
+                        
+                        
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();

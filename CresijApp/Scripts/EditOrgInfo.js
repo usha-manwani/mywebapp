@@ -16,15 +16,15 @@ $(document).ready(function () {
     });
 });
 function OnSuccess_(response) {
-    var idata = response.d;
-    
-    document.getElementById("tbdept").value = idata[0];
+    var data = response.d;
+    var idata = data[0];
+    document.getElementById("tbdept").value = idata[1];
     console.log(document.getElementById("tbdept"));
-    document.getElementById("tbbuscode").value = idata[1];
-    $("#tbhighoff").val(idata[2]);
-    document.getElementById("tbque").value= idata[3];
-    $("#tbtype").val(idata[4]);
-    document.getElementById("tbnotes").value = idata[5];
+    document.getElementById("tbbuscode").value = idata[2];
+    $("#tbhighoff").val(idata[3]);
+    document.getElementById("tbque").value= idata[4];
+    $("#tbtype option:selected").val(idata[5]);
+    document.getElementById("tbnotes").value = idata[6];
 
 }
 function OnErrorCall_(respo) {
@@ -33,6 +33,7 @@ function OnErrorCall_(respo) {
 
 function EditOrganisation() {
     var myarray = new Array();
+    console.log($("#tbhighoff option:selected").val());
     myarray[0] = document.getElementById("tbdept").value;
     myarray[1] = document.getElementById("tbbuscode").value;
     myarray[2] = $("#tbhighoff").val();
@@ -68,6 +69,7 @@ function OnSuccess(response) {
     console.log("saved successfully " + idata);
 
     $(".jmodal").fadeOut("fast");
+    $("#left_menu").load("components/left_menu.html");
     $("#sec_box").load("window/p-data/001.html");
 
 }

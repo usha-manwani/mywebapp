@@ -16,7 +16,7 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class SaveOrganisationData : WebService
     {
-
+        
         [WebMethod]
         public string HelloWorld()
         {
@@ -24,11 +24,19 @@ namespace CresijApp.Services
         }
 
         [WebMethod]
-        public string SaveOrgData(string[] org)
+        public string SaveOrgDataBuilding(string[] org)
         {            
             string result = "";
             SetOrgData orgData = new SetOrgData();
-            result = orgData.SaveOrgData(org).ToString();
+            result = orgData.SaveOrgDataBuilding(org).ToString();
+            return result;
+        }
+        [WebMethod]
+        public string SaveOrgDataFloor(string[] org)
+        {
+            string result = "";
+            SetOrgData orgData = new SetOrgData();
+            result = orgData.SaveOrgDataFloor(org).ToString();
             return result;
         }
 

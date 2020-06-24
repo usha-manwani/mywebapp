@@ -4,6 +4,7 @@ function OnSuccess_(response) {
     var idata = response.d;
     if (idata > 0) {
         $("#sec_box").load("window/p-data/001.html");
+        $("#left_menu").load("components/left_menu.html");
     }
 }
 function OnErrorCall_(respo) {

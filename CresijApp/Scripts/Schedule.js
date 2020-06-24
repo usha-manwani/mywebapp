@@ -230,7 +230,7 @@ function FillSchedule(data1) {
 function setcolor(data) {
     if (data.indexOf('reserve') != -1) {
         if (data.indexOf('Pending') != -1) {
-            colorclass = "state7";
+            colorclass = "state7"; //pink
         }
         else {
             colorclass = "state4";
@@ -238,7 +238,7 @@ function setcolor(data) {
     }
     else if (data.indexOf('transfer') != -1) {
         if (data.indexOf('pending') != -1) {
-            colorclass = "state9";
+            colorclass = "state9";//red
         }
         else {
             colorclass = "state2";
@@ -265,7 +265,7 @@ function brd() {
     alert($('[name="buildinglist"]:checked').val());
 }
 
-$('.searchfilter').off("click").on("click", function () {
+function SearchFilter() {
     var info = []
     var adata = [];
     adata[0] = $('#selectedbuilding').val();
@@ -463,7 +463,7 @@ $('.searchfilter').off("click").on("click", function () {
     //});
 
 
-});
+};
 
 function getSchedule(date, building) {
     var data = [];

@@ -1,6 +1,7 @@
 // JavaScript Document
-$(document).ready(function(){
-	console.log("1111111111");
+$(document).ready(function () {
+
+    console.log("1111111111");
 	//框架初始化
 	$("#left_menu").load("components/left_menu.html");
 	$("#top_menu").load("components/top_menu.html");
@@ -51,44 +52,130 @@ $(document).ready(function(){
 	});
 
 	//超链接动作
-	$("body").on("click",".JURL",function(){
-		var menuurl = $(this).attr("j-menu-href");
-		var menubox = $(this).attr("j-menu-box");
-		var pageurl = $(this).attr("j-page-href");
-		var pagebox = $(this).attr("j-page-box");
-		var pannelurl = $(this).attr("j-pannel-href");
-		var pannelbox = $(this).attr("j-pannel-box");
-		if( typeof menuurl == "string"){
-			$(menubox).load(menuurl);
-			console.log("菜单加载：" + menuurl + " => 目标:"+menubox);
-			setTimeout(function(){
-				$(pagebox).load(pageurl);
-				// console.log("页面加载：" + pageurl);
-			},30);
-		}else{
-		}
-		if( typeof pageurl == "string"){
-			$(pagebox).load(pageurl);
-			console.log("页面加载："+pageurl+" => 目标:"+pagebox);
-		}else{
-		}
-		if( typeof pannelurl == "string"){
-			$(pannelbox).load(pannelurl);
-			console.log("page:"+pannelurl+" => 目标:"+pannelbox);
-		}else{
-		}
+    $("body").on("click", ".JURL", function () {
+        var userid = sessionStorage.getItem("LoginId");
+        if (userid != null && userid != undefined && userid.length > 0  ) {
+            var menuurl = $(this).attr("j-menu-href");
+            var menubox = $(this).attr("j-menu-box");
+            var pageurl = $(this).attr("j-page-href");
+            var pagebox = $(this).attr("j-page-box");
+            var pannelurl = $(this).attr("j-pannel-href");
+            var pannelbox = $(this).attr("j-pannel-box");
+            if (typeof menuurl == "string") {
+                $(menubox).load(menuurl);
+                console.log("菜单加载：" + menuurl + " => 目标:" + menubox);
+                setTimeout(function () {
+                    $(pagebox).load(pageurl);
+                    // console.log("页面加载：" + pageurl);
+                }, 30);
+            } else {
+            }
+            if (typeof pageurl == "string") {
+                if (pageurl.includes("EditOrganisation.html")) {
+                    console.log(pageurl.substring(46));
+                    $("#orgsno").attr('value', pageurl.substring(46));
+                }
+                else if (pageurl.includes("Edit_Teacher.html")) {
+                    console.log(pageurl.substring(42));
+                    $("#teacherid").attr('value', pageurl.substring(42));
+                }
+                else if (pageurl.includes("Edit_Student.html")) {
+                    console.log(pageurl.substring(42));
+                    $("#studentid").attr('value', pageurl.substring(42));
+                }
+                else if (pageurl.includes("DeleteOrg.html")) {
+                    console.log(pageurl.substring(34));
+                    $("#orgsno").attr('value', pageurl.substring(34));
+                }
+                else if (pageurl.includes("DeleteTeacher.html")) {
+                    console.log("teache id " + pageurl.substring(38));
+                    $("#teacherid").attr('value', pageurl.substring(38));
+                }
+                else if (pageurl.includes("DeleteStudent.html")) {
+                    console.log("stu id " + pageurl.substring(38));
+                    $("#studentid").attr('value', pageurl.substring(38));
+                }
+                else if (pageurl.includes("Edit_Classroom.html")) {
+                    console.log("Class id " + pageurl.substring(44));
+                    $("#classid").attr('value', pageurl.substring(44));
+                }
+                else if (pageurl.includes("DeleteClassroom.html")) {
+                    console.log("Class id " + pageurl.substring(40));
+                    $("#classid").attr('value', pageurl.substring(40));
+                }
+                else if (pageurl.includes("Edit_UserInfo.html")) {
+
+                    $("#userId").attr('value', pageurl.substring(43));
+                    console.log($("#userId").val());
+                }
+                else if (pageurl.includes("Delete_User.html")) {
+                    console.log("user id " + pageurl.substring(36));
+                    $("#userId").attr('value', pageurl.substring(36));
+                }
+                else if (pageurl.includes("002-1-1.html")) {
+                    console.log("sch id " + pageurl.substring(35));
+                    $("#schid").attr('value', pageurl.substring(35));
+                }
+                else if (pageurl.includes("003-1-1.html")) {
+                    var d = pageurl.substring(37);
+                    var strng = d.split('&');
+                    var section = strng[0];
+                    var classname = strng[1].substring(6);
+
+                    $("#section").attr('value', section);
+                    $("#classroom").attr('value', classname);
+                }
+                else if (pageurl.includes("p-equipment/002.html")) {
+                    console.log("control ip " + pageurl.substring(31));
+                    var bytes = pageurl.substring(31);
+                    
+                    //var data = bytes.split('&');
+                    var controlip = bytes;
+                    //var classforip = data[1].split('=')[1];
+                    if (controlip.length > 0) {
+                        $("#controlip").attr('value', controlip);
+                        //$("#classforip").attr('value', classforip);
+                    }
+                    console.log($("#controlip").val());
+                    
+                }
+                
+                $(pagebox).load(pageurl);
+                console.log("页面加载：" + pageurl + " => 目标:" + pagebox);
+            } else {
+            }
+            if (typeof pannelurl == "string") {
+                var divpart;
+                if (pannelurl.includes("assist.html")) {
+                     divpart = pannelurl.substring(48);
+                    if (divpart.length > 0)
+                        $("#assistdivnumber").attr('value', divpart);
+                    console.log($("#assistdivnumber").val());
+                }
+                $(pannelbox).load(pannelurl);
+                
+                console.log("page:" + pannelurl + " => 目标:" + pannelbox);
+            } else {
+            }
+        }
+        else {
+            sessionStorage.setItem("LoginId", null);
+            sessionStorage.setItem("userName",null);
+            window.location.href = "login.html";
+        }
+		
 	});
 	//传递按钮状态至新加载页面
-	$("body").on("click",".JCHANMENU",function(){
-		$(this).parents(".JCHANNAV").children(".JCHANMENU").removeClass("active");
-		$(this).addClass("active");
-		var menuorder = $(this).attr("j-sub-order");
-		setTimeout(function(){
-				$(".JPAGENAV-01 a").removeClass("active");
-				$(".JPAGENAV-01 a").eq(menuorder).addClass("active");
+	//$("body").on("click",".JCHANMENU",function(){
+	//	$(this).parents(".JCHANNAV").children(".JCHANMENU").removeClass("active");
+	//	$(this).addClass("active");
+	//	var menuorder = $(this).attr("j-sub-order");
+	//	setTimeout(function(){
+	//			$(".JPAGENAV-01 a").removeClass("active");
+	//			$(".JPAGENAV-01 a").eq(menuorder).addClass("active");
 
-		},20);
-	});
+	//	},20);
+	//});
 	$("body").on("click",".JPAGEMENU",function(){
 		$(this).parents(".JPAGENAV").children(".JPAGEMENU").removeClass("active");
 		$(this).addClass("active");
@@ -197,13 +284,23 @@ $(document).ready(function(){
 	});
 	//选项卡
 	$("body").on("click",".tabbox",function(){
-		var tabno = $(this).index();
-		$(".tabbox").removeClass("active");
-		$(this).addClass("active");
-		$(".jtab_box").css("display","none");
-		$(".jtab_box").eq(tabno).css("display","block");
-		$(".jtab_box").eq(tabno).find("img").addClass("active");
-	});
+        var tabno = $(this).index();
+        $(".tabbox").removeClass("active");
+        $(this).addClass("active");
+        $(this).parents("div").find(".jtab_box").css("display", "none");
+        $(this).parents("div").find(".jtab_box").eq(tabno).css("display", "inherit");
+        $(this).parents("div").find(".jtab_box").eq(tabno).find("img").addClass("active");
+    });
+    //设备控制选项卡
+    $("body").on("click", ".tabbox-2", function () {
+        var tabno2 = $(this).attr("jtab-order");
+        console.log(tabno2);
+        $(this).parents(".jtab-comp").find(".tabbox-2").removeClass("active");
+        $(this).addClass("active");
+        $(this).parents(".jtab-comp").find(".jtab-box-2").css("display", "none");
+        $(this).parents(".jtab-comp").find(".jtab-box-2").eq(tabno2).css("display", "inherit");
+        $(this).parents(".jtab-comp").find(".jtab-box-2").eq(tabno2).find("img").addClass("active");
+    });
 	//常规下拉菜单
 	$("body").on("click",".jdropdown2",function(){
 		$(this).children(".jdropdown2-list").css("display","block");
@@ -220,13 +317,14 @@ $(document).ready(function(){
 	//全选-table
 	$("body").on("click",".check_all_table",function(){
 		$(this).addClass("check_all_table_active white bg_green");
-		$(this).removeClass("check_all_table");
-		$(this).parents("table").find("input[type='checkbox']").not(".j-single").prop("checked",true);
+        $(this).removeClass("check_all_table");
+        console.log("parent table " + $(this).parents(".sec_box").find("input[type='checkbox']").prop("checked"));
+        $(this).parents(".sec_box").find("input[type='checkbox']").not(".j-single").prop("checked",true);
 	});
 	$("body").on("click",".check_all_table_active",function(){
 		$(this).addClass("check_all_table");
 		$(this).removeClass("check_all_table_active white bg_green");
-		$(this).parents("table").find("input[type='checkbox']").not(".j-single").prop("checked",false);
+        $(this).parents(".sec_box").find("input[type='checkbox']").not(".j-single").prop("checked",false);
 	});
 	//全选-tr
 	$("body").on("click",".check_all_tr",function(){
@@ -505,7 +603,21 @@ $(document).ready(function(){
 	$("body").on("click",".chose-font-color",function(){
 		$(this).closest("td").children(".chose-font-color").removeClass("active");
 		$(this).addClass("active");
-	});
+    });
+    //设备控制按钮组
+    $("body").on("click", ".j-ctrl-btn", function () {
+        $(this).parents(".j-ctrl-btn-group").find(".j-ctrl-btn").removeClass("active");
+        $(this).addClass("active");
+    });
+    //静音
+    $("body").on("click", ".j-single-icon-btn", function () {
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+        } else {
+            $(this).addClass("active");
+        }
+    });
+   
 //新建策略设备激活
 // $("body").on("click",".j-forb",function(){
 // 	if( $(this).hasClass("active") ){
@@ -600,6 +712,5 @@ $(document).ready(function(){
 		// $(this).parents(".JPAGER_CTRL").children("a").removeClass("active");
 		// $(this).addClass("active");
 
-
-
+    
 });

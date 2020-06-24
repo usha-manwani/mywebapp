@@ -13,6 +13,7 @@ namespace CresijApp.DataAccess
             ConnectionStrings["CresijCamConnectionString"].ConnectionString;
         readonly string constring = System.Configuration.ConfigurationManager.
             ConnectionStrings["SchoolConnectionString"].ConnectionString;
+        
         //public DataTable GetSchedule()
         //{
         //    DataTable dt = new DataTable();
@@ -138,8 +139,8 @@ namespace CresijApp.DataAccess
             try
             {
                     query = "select teachername, coursename, sc.Classname," +
-                        " weekstart,weekend, dayno, section, teachingbuilding from schedule sc " +                        
-                        "where sc.id = " + name[0] ;
+                        " weekstart,weekend, dayno, section, cd.teachingbuilding, sm.startdate from schedule sc join classdetails cd on sc.ClassName = cd.classname " +
+                        " join semesterinfo sm on sc.sem = sm.semno where sc.id = " + name[0] ;
                 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -200,6 +201,7 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("buildingname",name[6]);
                         cmd.Parameters.AddWithValue("newcl",name[7]);
                         cmd.Parameters.AddWithValue("teacherid",name[8]);
+                        cmd.Parameters.AddWithValue("scid", name[10]);
                         if (con.State != ConnectionState.Open)
                             con.Open();
                        num= cmd.ExecuteNonQuery();
@@ -269,7 +271,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             try
             {
-                string query = "select distinct(teachingbuilding) as building from classdetails order by teachingbuilding";
+                string query = "select distinct(buildingname) as building from buildingdetails order by buildingname";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 
@@ -292,11 +294,11 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             try
             {
-                string query = "select sc.classname, count(section) as section "+
-                                "from schedule sc join classdetails cd on sc.classname = cd.classname "+
-                                "where weekStart <= "+week+" and weekend>= "+week+" and teachingbuilding = '"+building+"'"+
-                                "group by  sc.classname  union select classname, '0' as section from classdetails where " +
-                                "teachingbuilding ='"+ building + "' and classname not in(select classname from schedule) order by classname ";
+                string query = "select sc.classname, count(section) as section " +
+                                "from schedule sc join classdetails cd on sc.classname = cd.classname " +
+                                "where weekStart <= "+week+" and weekend>= "+week+" and cd.teachingbuilding = '"+building+"'"+
+                                "group by sc.classname  union select classname, '0' as section from classdetails cd where " +
+                                " cd.teachingbuilding ='" + building + "' and classname not in(select classname from schedule) order by classname ";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 

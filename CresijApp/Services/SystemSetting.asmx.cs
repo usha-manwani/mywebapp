@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
 using System.Web.Services;
+using CresijApp.DataAccess;
 
 namespace CresijApp.Services
 {
@@ -93,6 +95,8 @@ namespace CresijApp.Services
             }
             return (T)obj;
         }
+
+        
     }
 
     public class SectionList
@@ -102,4 +106,5 @@ namespace CresijApp.Services
         public string Stoptime { get; set; }
     }
 
+    
 }

@@ -1,314 +1,278 @@
 <div class="row col-12 no-gutters">
-  <div class="col-3">
-    <h6 class="black my-4">
-      <i class="fa fa-pie-chart mr-2"></i>维保总览</h6>
-    <div class="col-10 align-self-center">
-      <canvas id="myChart06" class="mt-3" style="width:100%;"></canvas>
-      <script>
-        var cHeight = $("#myChart06").width();
-        $("#myChart06").css("height", cHeight);
-        var ctx = document.getElementById('myChart06').getContext('2d');
-        var myChart = new Chart(ctx, {
-          type: 'doughnut',
-          data: {
-            labels: [
-              '登录',
-              '登出',
-              '开系统',
-              '关系统',
-              '开讲台窗帘',
-              '关讲台窗帘'
-            ],
-            datasets: [
-              {
-                data: [
-                  12,
-                  19,
-                  3,
-                  11,
-                  7,
-                  5
-                ],
-                backgroundColor: [
-                  'rgba(223, 107, 107, 1)',
-                  'rgba(255, 190, 61, 1)',
-                  'rgba(102, 186, 68, 1)',
-                  'rgba(58, 196, 243, 1)',
-                  'rgba(63, 188, 184, 1)',
-                  'rgba(150, 48, 186, 1)'
-                ],
-                hoverBackgroundColor: [
-                  'rgba(223, 107, 107, 0.6)',
-                  'rgba(255, 190, 61, 0.6)',
-                  'rgba(102, 186, 68, 0.6)',
-                  'rgba(58, 196, 243, 0.6)',
-                  'rgba(63, 188, 184, 0.6)',
-                  'rgba(150, 48, 186, 0.6)'
-                ],
-                borderWidth: 0
-              }
-            ]
-          },
-          options: {
-            legend: {
-              display: false
-            }
-          }
-        });
-      </script>
-      <table class="main_table jfont12 mt-5">
-        <tr>
-          <td class="black" style="width:70px;">登录
-          </td>
-          <td>
-            <div class="bg_green d-inline-block" style="height:10px; width:60%; background-color: #DF6B6B;"></div>
-            <span class="d-inline-block ml-2">22%</span></td>
-        </tr>
-        <tr>
-          <td class="black" style="width:70px;">登出
-          </td>
-          <td>
-            <div class="bg_red d-inline-block" style="height:10px; width:50%; background-color: #FFBE3D;"></div>
-            <span class="d-inline-block ml-2">22%</span></td>
-        </tr>
-        <tr>
-          <td class="black" style="width:70px;">开系统
-          </td>
-          <td>
-            <div class="bg_gray d-inline-block" style="height:10px; width:70%; background-color: #66BA30;"></div>
-            <span class="d-inline-block ml-2">22%</span></td>
-        </tr>
-        <tr>
-          <td class="black" style="width:70px;">关系统
-          </td>
-          <td>
-            <div class="bg_green d-inline-block" style="height:10px; width:60%; background-color: #3AC4F3;"></div>
-            <span class="d-inline-block ml-2">22%</span></td>
-        </tr>
-        <tr>
-          <td class="black" style="width:70px;">开讲台窗帘
-          </td>
-          <td>
-            <div class="bg_red d-inline-block" style="height:10px; width:50%; background-color: #3FBCB8;"></div>
-            <span class="d-inline-block ml-2">22%</span></td>
-        </tr>
-        <tr>
-          <td class="black" style="width:70px;">关讲台窗帘
-          </td>
-          <td>
-            <div class="bg_gray d-inline-block" style="height:10px; width:70%; background-color: #9630BA;"></div>
-            <span class="d-inline-block ml-2">22%</span></td>
-        </tr>
-      </table>
+    <div class="col-3">
+        <h6 class="black my-4">
+            <i class="fa fa-pie-chart mr-2"></i>维保总览
+        </h6>
+        <div class="col-10 align-self-center">
+            <canvas id="myChart06" class="mt-3" style="width:100%;"></canvas>
+            
+            <table class="main_table jfont12 mt-5">
+                <tr>
+                    <td class="black" style="width:70px;">
+                        登录
+                    </td>
+                    <td>
+                        <div class="bg_green d-inline-block" style="height:10px; width:60%; background-color: #DF6B6B;"></div>
+                        <span class="d-inline-block ml-2">22%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="black" style="width:70px;">
+                        登出
+                    </td>
+                    <td>
+                        <div class="bg_red d-inline-block" style="height:10px; width:50%; background-color: #FFBE3D;"></div>
+                        <span class="d-inline-block ml-2">22%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="black" style="width:70px;">
+                        开系统
+                    </td>
+                    <td>
+                        <div class="bg_gray d-inline-block" style="height:10px; width:70%; background-color: #66BA30;"></div>
+                        <span class="d-inline-block ml-2">22%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="black" style="width:70px;">
+                        关系统
+                    </td>
+                    <td>
+                        <div class="bg_green d-inline-block" style="height:10px; width:60%; background-color: #3AC4F3;"></div>
+                        <span class="d-inline-block ml-2">22%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="black" style="width:70px;">
+                        开讲台窗帘
+                    </td>
+                    <td>
+                        <div class="bg_red d-inline-block" style="height:10px; width:50%; background-color: #3FBCB8;"></div>
+                        <span class="d-inline-block ml-2">22%</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="black" style="width:70px;">
+                        关讲台窗帘
+                    </td>
+                    <td>
+                        <div class="bg_gray d-inline-block" style="height:10px; width:70%; background-color: #9630BA;"></div>
+                        <span class="d-inline-block ml-2">22%</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-  </div>
-  <div class="col-9">
-    <h6 class="black my-4">
-      <i class="fa fa-pie-chart mr-2"></i>维保明细</h6>
-    <table class="main_table table_list w-100 jtable-1">
-      <tr class="border-bottom">
-        <th class="text-left pl-3">序号</th>
-        <th class="text-left pl-3">用户ID</th>
-        <th class="pl-3 text-left">用户名</th>
-        <th class="text-left pl-3">动作</th>
-        <th class="text-left pl-3">教学楼栋</th>
-        <th class="text-left pl-3">课室</th>
-        <th class="text-left pl-3">时间</th>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-      <tr class="border-bottom hover_btn" style="padding:10px 0;">
-        <td class="pl-3">1</td>
-        <td class="pl-3">jyadmin</td>
-        <td class="text-left pl-3">教一管理员</td>
-        <td class="pl-3">登录</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">Null</td>
-        <td class="pl-3">2020年1月15日15：05：12</td>
-      </tr>
-    </table>
-    <div class="jpager">
-      <a j-page-href="" j-page-box="" class="fa fa-fast-backward FIRST CTRL"></a>
-      <a j-page-href="" j-page-box="" class="fa fa-play fa-flip-horizontal PREV CTRL"></a>
-      <span class="JPAGER_CTRL">
-        <a j-page-href="" j-page-box="" class="page JPAGE active">1</a>
-        <a j-page-href="" j-page-box="" class="page JPAGE">2</a>
-        <a j-page-href="" j-page-box="" class="page JPAGE">3</a>
-        <a j-page-href="" j-page-box="" class="page JPAGE">4</a>
-        <a j-page-href="" j-page-box="" class="page JPAGE">5</a>
-        <a j-page-href="" j-page-box="" class="page JPAGE">6</a>
-      </span>
-      <a j-page-href="" j-page-box="" class="fa fa-play NEXT CTRL"></a>
-      <a j-page-href="" j-page-box="" class="fa fa-fast-forward LAST CTRL"></a>
+    <div class="col-9">
+        <h6 class="black my-4">
+            <i class="fa fa-pie-chart mr-2"></i>维保明细
+        </h6>
+        <table class="main_table table_list w-100 jtable-1" id="userlogtable">
+            <tr class="border-bottom">
+                <th class="text-left pl-3">序号</th>
+                <th class="text-left pl-3">用户ID</th>
+                <th class="pl-3 text-left">用户名</th>
+                <th class="text-left pl-3">动作</th>
+                <th class="text-left pl-3">教学楼栋</th>
+                <th class="text-left pl-3">课室</th>
+                <th class="text-left pl-3">时间</th>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+            <tr class="border-bottom hover_btn" style="padding:10px 0;">
+                <td class="pl-3">1</td>
+                <td class="pl-3">jyadmin</td>
+                <td class="text-left pl-3">教一管理员</td>
+                <td class="pl-3">登录</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">Null</td>
+                <td class="pl-3">2020年1月15日15：05：12</td>
+            </tr>
+        </table>
+        <div class="jpager">
+            <a j-page-href="" j-page-box="" class="fa fa-fast-backward FIRST CTRL"></a>
+            <a j-page-href="" j-page-box="" class="fa fa-play fa-flip-horizontal PREV CTRL"></a>
+            <span class="JPAGER_CTRL">
+                <a j-page-href="" j-page-box="" class="page JPAGE active">1</a>
+                <a j-page-href="" j-page-box="" class="page JPAGE">2</a>
+                <a j-page-href="" j-page-box="" class="page JPAGE">3</a>
+                <a j-page-href="" j-page-box="" class="page JPAGE">4</a>
+                <a j-page-href="" j-page-box="" class="page JPAGE">5</a>
+                <a j-page-href="" j-page-box="" class="page JPAGE">6</a>
+            </span>
+            <a j-page-href="" j-page-box="" class="fa fa-play NEXT CTRL"></a>
+            <a j-page-href="" j-page-box="" class="fa fa-fast-forward LAST CTRL"></a>
+        </div>
     </div>
-  </div>
 </div>
+<script src="../../../Scripts/UserLogs.js"></script>

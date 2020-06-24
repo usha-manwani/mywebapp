@@ -17,7 +17,7 @@ namespace CresijApp.DataAccess
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = " Delete from organisationdetails where serialno = " + id;
+                    string query = " Delete from buildingdetails where id = " + id;
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         if(con.State != System.Data.ConnectionState.Open)

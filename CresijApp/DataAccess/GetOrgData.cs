@@ -43,7 +43,7 @@ namespace CresijApp.DataAccess
         }
 
 
-        public DataTable GetOrgInfo()
+        public DataTable GetOrgBuildingInfo()
         {
             DataTable dt = new DataTable();
             try
@@ -51,9 +51,8 @@ namespace CresijApp.DataAccess
                 
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = " SELECT org.SerialNo, org.deptcode, departmentName, BusinessCtrlCode, HigherOffice," +
-                             "QueueNumber, Public, notes FROM organisationdetails org join " +
-                             "departmentdetail dept on org.deptCode = dept.departmentCode ";
+                    string query = " SELECT id,  buildingName,  schoolname,buildingCode, " +
+                             "Queue, Public, remarks FROM buildingdetails join systemsettings";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -157,7 +156,7 @@ namespace CresijApp.DataAccess
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = "SELECT * from Classdetails";
+                    string query = "SELECT * from Classdetails order by classname";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -170,7 +169,27 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+        public DataTable GetClassData(string classid)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    string query = "SELECT * from Classdetails where classid=" +classid;
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
 
+            }
+            return dt;
+        }
         public DataTable GetDevicesInfo()
         {
             DataTable dt = new DataTable();
@@ -200,10 +219,9 @@ namespace CresijApp.DataAccess
             {
                 using(MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = "select departmentname, businessctrlcode, higheroffice, queuenumber, public, notes " +
-                        "from organisationdetails org join departmentdetail d on d.departmentcode " +
-                        " = org.deptcode where org.serialno = " + sn;
-                    using(MySqlCommand cmd = new MySqlCommand(query, con))
+                    string query = "SELECT id,  buildingName, buildingCode, schoolname, " +
+                             "Queue, Public, remarks FROM buildingdetails bd join systemsettings where bd.id ="+sn;
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                         if(con.State != ConnectionState.Open)
@@ -215,6 +233,98 @@ namespace CresijApp.DataAccess
                 }
             }
             catch(Exception ex) { }
+            return dt;
+        }
+
+        public DataTable GetIPClassByBuilding(string data)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetClassIPByBuilding", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@building", data);
+                        
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex) { }
+            return dt;
+        }
+
+        public DataTable GetFloorlist(string building)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    string query = "SELECT floor from floordetails where buildingname='" + building+"'";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
+        public DataTable GetSchoolName(string building)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    string query = "SELECT SchoolName from SystemSettings limit 1";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
+        public DataTable GetClassByIP(string ip)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    string query = "SELECT classname from classdetails where ccequipip ='"+ip +"' limit 1";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
             return dt;
         }
     }

@@ -25,40 +25,18 @@ namespace CresijApp.Services
         }
 
         [WebMethod]
-        public List<object> GetOrgData()
+        public List<object> GetOrgDataBuilding()
         {
             List<object> idata = new List<object>();
             GetOrgData gd = new GetOrgData();
             DataTable dt = new DataTable();
-            dt = gd.GetOrgInfo();
-            List<int> sno = new List<int>();
-            List<string> deptcode = new List<string>();
-            List<string> deptname = new List<string>();
-            List<string> bsctrlcode = new List<string>();
-            List<string> highoff = new List<string>();
-
-            List<int> quenum = new List<int>();
-            List<string> perm = new List<string>();
-            List<string> notes = new List<string>();
+            dt = gd.GetOrgBuildingInfo();
+           
             foreach (DataRow row in dt.Rows)
             {
-                sno.Add(Convert.ToInt32(row[0]));
-                deptcode.Add(row[1].ToString().PadLeft(3, '0'));
-                deptname.Add(row[2].ToString());
-                bsctrlcode.Add(row[3].ToString());
-                highoff.Add(row[4].ToString());
-                quenum.Add(Convert.ToInt32(row[5]));
-                perm.Add(row[6].ToString());
-                notes.Add(row[7].ToString());
+                idata.Add(row.ItemArray);
             }
-            idata.Add(sno);
-            idata.Add(deptcode);
-            idata.Add(deptname);
-            idata.Add(bsctrlcode);
-            idata.Add(highoff);
-            idata.Add(quenum);
-            idata.Add(perm);
-            idata.Add(notes);
+            
             return idata;
 
         }
@@ -228,48 +206,14 @@ namespace CresijApp.Services
         }
 
         [WebMethod]
-        public List<ClassDetails> GetClassData()
+        public List<object> GetClassData()
         {
-            List<ClassDetails> idata = new List<ClassDetails>();
+            List<object> idata = new List<object>();
             GetOrgData gd = new GetOrgData();
             DataTable dt = new DataTable();
             dt = gd.GetClassroomInfo();
-            idata = (from DataRow dr in dt.Rows
-                     select new ClassDetails()
-                     {
-                         Classid = dr[0].ToString(),
-                         Classname = dr[1].ToString(),
-                         Building = dr[2].ToString(),
-                         Floor = dr[3].ToString(),
-                         Seat = dr[4].ToString(),
-                         Ccip = dr[5].ToString(),
-                         CamipS = dr[6].ToString(),
-                         CamipN = dr[7].ToString(),
-                         DesktopIp = dr[8].ToString(),
-                         RecorderIp = dr[9].ToString(),
-                         CCmac = dr[10].ToString(),
-                         CCPort = dr[11].ToString(),
-                         CCuserid = dr[12].ToString(),
-                         CCpass = dr[13].ToString(),
-                         CamSmac = dr[14].ToString(),
-                         CamSPort = dr[15].ToString(),
-                         CamSuserid = dr[16].ToString(),
-                         CamSpass = dr[17].ToString(),
-                         CamNmac = dr[18].ToString(),
-                         CamNPort = dr[19].ToString(),
-                         CamNuserid = dr[20].ToString(),
-                         CamNpass = dr[21].ToString(),
-                         Deskmac = dr[22].ToString(),
-                         DeskPort = dr[23].ToString(),
-                         Deskuserid = dr[24].ToString(),
-                         Deskpass = dr[25].ToString(),
-                         Recordermac = dr[26].ToString(),
-                         RecorderPort = dr[27].ToString(),
-                         Recorderuserid = dr[28].ToString(),
-                         Recorderpass = dr[29].ToString(),
-                         CallHelp = dr[30].ToString()
-                     }).ToList();            
-
+            foreach (DataRow dr in dt.Rows)
+                idata.Add(dr.ItemArray);
             dt.Clear();
             //dt = gd.GetDevicesInfo();
            
@@ -342,12 +286,72 @@ namespace CresijApp.Services
             List<object> idata = new List<object>();
             GetOrgData gd = new GetOrgData();
             DataTable dt =gd.GetOrgDataonDemand(Convert.ToInt32(name));
-            idata.Add(dt.Rows[0][0].ToString());
-            idata.Add(dt.Rows[0][1].ToString());
-            idata.Add(dt.Rows[0][2].ToString());
-            idata.Add(dt.Rows[0][3].ToString());
-            idata.Add(dt.Rows[0][4].ToString());
-            idata.Add(dt.Rows[0][5].ToString());
+            idata.Add(dt.Rows[0].ItemArray);
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetIPClassByBuilding(string data)
+        {
+            List<object> idata = new List<object>();
+            GetOrgData gd = new GetOrgData();
+            DataTable dt = gd.GetIPClassByBuilding(data);
+            if(dt.Rows.Count>0)
+            foreach(DataRow dr in dt.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetClassDataOnId(string classData)
+        {
+            List<object> idata = new List<object>();
+            GetOrgData gd = new GetOrgData();
+            DataTable dt = gd.GetClassData(classData);
+            if (dt.Rows.Count > 0)
+                foreach (DataRow dr in dt.Rows)
+                {
+                    idata.Add(dr.ItemArray);
+                }
+            return idata;
+        }
+        [WebMethod]
+        public List<object> GetFloorlist(string building)
+        {
+            List<object> idata = new List<object>();
+            GetOrgData gd = new GetOrgData();
+            DataTable dt = gd.GetFloorlist(building);
+            if (dt.Rows.Count > 0)
+                foreach (DataRow dr in dt.Rows)
+                {
+                    idata.Add(dr.ItemArray);
+                }
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetSchoolName(string building)
+        {
+            List<object> idata = new List<object>();
+            GetOrgData gd = new GetOrgData();
+            DataTable dt = gd.GetSchoolName(building);
+            if (dt.Rows.Count > 0)
+                foreach (DataRow dr in dt.Rows)
+                {
+                    idata.Add(dr.ItemArray);
+                }
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetClassByIP(string data)
+        {
+            List<object> idata = new List<object>();
+            GetOrgData gd = new GetOrgData();
+            DataTable dt = gd.GetClassByIP(data);
+            idata.Add(dt.Rows[0].ItemArray);
             return idata;
         }
     }

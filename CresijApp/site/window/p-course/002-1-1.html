@@ -30,199 +30,200 @@
 <h5>
   <i class="fa fa-cog"></i>调课信息</h5>
 <table class="main_table table_list text-left">
-  <tr>
-    <th><input type="checkbox" name="tiaoke"></th>
-    <th class="text-left">项目</th>
-    <th class="text-left">调课前</th>
-    <th class="text-left">调课要求</th>
-  </tr>
-  <tr class="bbgray">
-    <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
-    <td>周次</td>
-    <td id="oldweek">1-16</td>
-    <td>
-      <div class="searchbox float-left">
-          <div class="searchbox2  float-left">
-              <div class="name" id="newweek">请选择周次</div>
-              <div class="list up" id="weeklist">
-                  <div class="option">
-                      <a>第1周</a>
-                  </div>
-                  <div class="option">
-                      <a>第2周</a>
-                  </div>
-                  <div class="option">
-                      <a>第3周</a>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </td>
-  </tr>
-  <tr class="bbgray">
-    <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
-    <td>节次</td>
-    <td id="oldsession">星期五 第6节</td>
-    <td>
-        <div class="searchbox float-left">
-            <select id="weekdays">
-                <option class="option">星期一</option>
-                <option class="option">星期二</option>
-                <option class="option">星期三</option>
-                <option class="option">星期四</option>
-                <option class="option">星期五</option>
-                <option class="option">星期六</option>
-                <option class="option">星期天</option>
-            </select>
-            <!--<div class="searchbox2  float-left">
-                <div class="name">星期几</div>
-                <div class="list up">
-                    <div class="option">
-                        <a>星期一</a>
+    <tr>
+        <th><input type="checkbox" name="tiaoke"></th>
+        <th class="text-left">项目</th>
+        <th class="text-left">调课前</th>
+        <th class="text-left">调课要求</th>
+    </tr>
+    <tr class="bbgray">
+        <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+        <td>周次</td>
+        <td id="oldweek">1-16</td>
+        <td>
+            <div class="searchbox float-left">
+                <div class="searchbox2  float-left">
+                    <div class="name" id="newweek">请选择周次</div>
+                    <div class="list up" id="weeklist">
+                        <div class="option">
+                            <a>第1周</a>
+                        </div>
+                        <div class="option">
+                            <a>第2周</a>
+                        </div>
+                        <div class="option">
+                            <a>第3周</a>
+                        </div>
                     </div>
-                    <div class="option">
-                        <a>星期二</a>
-                    </div>
-                    <div class="option">
-                        <a>星期三</a>
-                    </div>
-                    <div class="option">
-                        <a>星期四</a>
-                    </div>
-                    <div class="option">
-                        <a>星期五</a>
-                    </div>
-                    <div class="option">
-                        <a>星期六</a>
-                    </div>
-                    <div class="option">
-                        <a>星期天</a>
-                    </div>
-
                 </div>
-            </div>-->
-        </div>
-        <div class="searchbox2  float-left">
-            <div class="name" id="section">第几节</div>
-            <div class="list up" id="sectionlist">
-                <div class="option">
-                    <a>第1节</a>
-                </div>
-                <div class="option">
-                    <a>第2节</a>
-                </div>
-                <div class="option">
-                    <a>第3节</a>
-                </div>
-
             </div>
-        </div>
-    </td>
-  </tr>
-  <tr class="bbgray">
-    <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
-    <td>地点</td>
-    <td id="beforelocation">第一教学楼 3-304</td>
-    <td>
-      <div class="searchbox float-left">
-          <div class="searchbox2  float-left">
-              <select id="buildinglist"></select>
-              <!--<div class="name">几号楼</div>
-              <div class="list up">
-                  <div class="option">
-                      <a>第一教学楼</a>
-                  </div>
-                  <div class="option">
-                      <a>明德楼</a>
-                  </div>
-                  <div class="option">
-                      <a>第三教学楼</a>
-                  </div>
+        </td>
+    </tr>
+    <tr class="bbgray">
+        <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+        <td>地点</td>
+        <td id="beforelocation">第一教学楼 3-304</td>
+        <td>
+            <div class="searchbox float-left">
+                <div class="searchbox2  float-left">
+                    <select id="buildinglist"></select>
+                    <!--<div class="name">几号楼</div>
+                    <div class="list up">
+                        <div class="option">
+                            <a>第一教学楼</a>
+                        </div>
+                        <div class="option">
+                            <a>明德楼</a>
+                        </div>
+                        <div class="option">
+                            <a>第三教学楼</a>
+                        </div>
 
-              </div>-->
-          </div>
-          <div class="searchbox2  float-left">
-              <select id="classlist"></select>
-              <!--<div class="name">几号课室</div>
-              <div class="list up">
-                  <div class="level">
-                      <div class="leveltt">第一层</div>
-                      <div class="option">
-                          <a>101</a>
-                      </div>
-                      <div class="option">
-                          <a>102</a>
-                      </div>
-                      <div class="option">
-                          <a>103</a>
-                      </div>
-                      <div class="option">
-                          <a>104</a>
-                      </div>
-                      <div class="option">
-                          <a>105</a>
-                      </div>
-                      <div class="option">
-                          <a>106</a>
-                      </div>
-                      <div class="option">
-                          <a>107</a>
-                      </div>
-                  </div>
-                  <div class="level">
-                      <div class="leveltt">第二层</div>
-                      <div class="option">
-                          <a>201</a>
-                      </div>
-                      <div class="option">
-                          <a>202</a>
-                      </div>
-                      <div class="option">
-                          <a>203</a>
-                      </div>
-                      <div class="option">
-                          <a>204</a>
-                      </div>
-                      <div class="option">
-                          <a>205</a>
-                      </div>
-                      <div class="option">
-                          <a>206</a>
-                      </div>
-                      <div class="option">
-                          <a>207</a>
-                      </div>
-                  </div>
+                    </div>-->
+                </div>
+                <div class="searchbox2  float-left">
+                    <select id="classlist"></select>
+                    <!--<div class="name">几号课室</div>
+                    <div class="list up">
+                        <div class="level">
+                            <div class="leveltt">第一层</div>
+                            <div class="option">
+                                <a>101</a>
+                            </div>
+                            <div class="option">
+                                <a>102</a>
+                            </div>
+                            <div class="option">
+                                <a>103</a>
+                            </div>
+                            <div class="option">
+                                <a>104</a>
+                            </div>
+                            <div class="option">
+                                <a>105</a>
+                            </div>
+                            <div class="option">
+                                <a>106</a>
+                            </div>
+                            <div class="option">
+                                <a>107</a>
+                            </div>
+                        </div>
+                        <div class="level">
+                            <div class="leveltt">第二层</div>
+                            <div class="option">
+                                <a>201</a>
+                            </div>
+                            <div class="option">
+                                <a>202</a>
+                            </div>
+                            <div class="option">
+                                <a>203</a>
+                            </div>
+                            <div class="option">
+                                <a>204</a>
+                            </div>
+                            <div class="option">
+                                <a>205</a>
+                            </div>
+                            <div class="option">
+                                <a>206</a>
+                            </div>
+                            <div class="option">
+                                <a>207</a>
+                            </div>
+                        </div>
 
-              </div>-->
-          </div>
-      </div>
-    </td>
-  </tr>
-  <tr class="bbgray">
-    <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
-    <td>任课教师</td>
-    <td id="oldteacher">张三丰 教授</td>
-    <td>
-      <div class="searchbox float-left">
-          <div class="searchbox2  float-left">
-              <div class="name" id="newteacher">请选择周次</div>
-              <div class="list up" id="teacherlist">
-                  <div class="option">
-                      <a>刘彻</a>
-                  </div>
-                  <div class="option">
-                      <a>赵匡胤</a>
-                  </div>
-                  <div class="option">
-                      <a>嬴政</a>
-                  </div>
+                    </div>-->
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr class="bbgray">
+        <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+        <td>节次</td>
+        <td id="oldsession">星期五 第6节</td>
+        <td>
+            <div class="searchbox float-left">
+                <select id="weekdays">
+                    <!--<option class="option" value="1">星期一</option>
+                    <option class="option" value="2">星期二</option>
+                    <option class="option" value="3">星期三</option>
+                    <option class="option" value="4">星期四</option>
+                    <option class="option" value="5">星期五</option>
+                    <option class="option" value="6">星期六</option>
+                    <option class="option" value="7">星期天</option>-->
+                </select>
+                <!--<div class="searchbox2  float-left">
+                    <div class="name">星期几</div>
+                    <div class="list up">
+                        <div class="option">
+                            <a>星期一</a>
+                        </div>
+                        <div class="option">
+                            <a>星期二</a>
+                        </div>
+                        <div class="option">
+                            <a>星期三</a>
+                        </div>
+                        <div class="option">
+                            <a>星期四</a>
+                        </div>
+                        <div class="option">
+                            <a>星期五</a>
+                        </div>
+                        <div class="option">
+                            <a>星期六</a>
+                        </div>
+                        <div class="option">
+                            <a>星期天</a>
+                        </div>
 
-              </div>
-          </div>
-      </div>
-    </td>
-  </tr>
+                    </div>
+                </div>-->
+            </div>
+            <div class="searchbox2  float-left">
+                <div class="name" id="section">第几节</div>
+                <div class="list up" id="sectionlist">
+                    <div class="option">
+                        <a>第1节</a>
+                    </div>
+                    <div class="option">
+                        <a>第2节</a>
+                    </div>
+                    <div class="option">
+                        <a>第3节</a>
+                    </div>
+
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    <tr class="bbgray">
+        <td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>
+        <td>任课教师</td>
+        <td id="oldteacher">张三丰 教授</td>
+        <td>
+            <div class="searchbox float-left">
+                <div class="searchbox2  float-left">
+                    <div class="name" id="newteacher">请选择周次</div>
+                    <div class="list up" id="teacherlist">
+                        <div class="option">
+                            <a>刘彻</a>
+                        </div>
+                        <div class="option">
+                            <a>赵匡胤</a>
+                        </div>
+                        <div class="option">
+                            <a>嬴政</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
 </table>
 
 <div class="bar01">

@@ -1,4 +1,6 @@
-﻿var days = ["sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+﻿var days = ["sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+console.log("section " + $("#section").val());
+console.log("section " + $("#classroom").val());
 $(function () {
     console.log("loaded 3-1-1");    
     

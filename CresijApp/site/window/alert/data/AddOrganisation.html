@@ -1,0 +1,68 @@
+﻿<div class="tt border-bottom">
+    <i class="fa fa-plus-circle"></i>
+    <span> 新建教学楼栋数据</span>
+</div>
+<table class="main_table">
+    <!-- 课室信息 -->
+    <tr class="bbgray">
+        <td class="text-right">Select</td>
+        <td>
+            <input type="radio" name="buildflooroption" id="buildingselect" value="building" style="display:inline-block"><label for="buildingselect">Building Detail</label>
+            <input type="radio" name="buildflooroption" id="floorselect" value="floor" style="display:inline-block"><label for="floorselect"> Floor Detail</label>
+        </td>
+    </tr>
+    <tr class="bbgray">
+        <td class="text-right">部门名称</td>
+        <td><input type="text" id="tbdept" style="width:200px;" value=""></td>
+    </tr>
+    <tr>
+        <td class="text-right">业务对照码</td>
+        <td><input type="text" id="tbbuscode" style="width:200px;" value=""></td>
+    </tr>
+    <tr class="bbgray">
+        <td class="text-right">上级部门</td>
+        <td>
+            <select id="tbhighoff" style="width:200px;" disabled>
+                <!--<option value="北京大学" selected> 北京大学</option>
+                <option value="校办">校办</option>
+                <option value="机关党委">机关党委</option>
+                <option value="机关党委">机关党委</option>-->
+            </select>
+            <!--<div class="jdropdown2" style="width:200px;">
+                <div class="jdropdown2-box px-2">北京大学</div>
+                <div class="jdropdown2-arrow text-center gray"><i class="fa fa-caret-down"></i></div>
+                <div class="jdropdown2-list" style="display:none; width:200px;">
+                    <label><input type="radio" name="bm-1" value="h001">北京大学</label>
+                    <label><input type="radio" name="bm-1" value="h002">校办</label>
+                    <label><input type="radio" name="bm-1" value="h003">机关党委</label>
+                    <label><input type="radio" name="bm-1" value="=h004">机关党委</label>
+                </div>
+            </div>-->
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">排序号</td>
+        <td><input type="text" id="tbque" style="width:200px;" value=""></td>
+    </tr>
+    <tr class="bbgray">
+        <td class="text-right">是否公共区域</td>
+        <td>
+            <select id="tbtype" style="width:200px;">
+                <option value="yes" selected> yes</option>
+                <option value="no">No</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-right">备注</td>
+        <td><input type="text" id="tbnotes" style="width:200px;" value=""></td>
+    </tr>
+
+</table>
+<div class="btns btns_auto w-100">
+    <a class="bg_green alert_jmodal" id="savedetail"><i class="fa fa-check"></i> 确定</a>
+    <a class="bg_red close_jmodal"><i class="fa fa-close"></i> 取消</a>
+   
+
+</div>
+<script src="../../../../Scripts/AddEditOrganisation.js"></script>

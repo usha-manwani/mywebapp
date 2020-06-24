@@ -3,7 +3,7 @@ var ipAddress = "";
 $(function () {
     var chat = $.connection.myHub;
 
-    chat.client.broadcastMessage = function (name, message) {
+    chat.client.envMessage = function (name, message) {
         if (name == ipAddress) {
 
         }

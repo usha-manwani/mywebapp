@@ -3,7 +3,7 @@
 function OnSuccess_(response) {
     var idata = response.d;
     console.log("value of data " + idata);
-
+    $("#left_menu").load("components/left_menu.html");
     $("#sec_box").load("window/p-data/003.html");
 
 }

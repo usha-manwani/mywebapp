@@ -63,21 +63,27 @@ function FillChangeSchedule(idata) {
 
 $(document).off("click").on("click", ".taskmodal", function () {
     console.log("finish...");
+    
     var _this = this;
     
     let rowitem = $(_this).parents("tr");
-    console.log(rowitem.find("td:eq(2)").html());
-    console.log(rowitem.find("td:eq(3)").text());
-    $("#coursename").html(rowitem.find("td:eq(8)").html());
-    $("#class").html(rowitem.find("td:eq(2)").html());
-    $("#time").html(rowitem.find("td:eq(3)").html());
-    $("#teacher").html(rowitem.find("td:eq(4)").html());
-    $("#reason").html(rowitem.find("td:eq(7)").html());
-    $("#scheduleid").html(rowitem.find("td:eq(9)").html());
-   
-    //$(".taskmodal:visible tr:eq(1) td:eq(1)").html(">>" + rowitem.find("td:eq(1)").text());
+    if (rowitem.find("td:eq(6)").html() != "pending") {
+        $("#savesuccess").attr("onclick", "");
+        $("#rejectapplication").attr("onclick", "");
+    }
     
-    document.getElementById('taskmodal').style.display = 'block';    
+        $("#coursename").html(rowitem.find("td:eq(8)").html());
+        $("#class").html(rowitem.find("td:eq(2)").html());
+        $("#time").html(rowitem.find("td:eq(3)").html());
+        $("#teacher").html(rowitem.find("td:eq(4)").html());
+        $("#reason").html(rowitem.find("td:eq(7)").html());
+        $("#scheduleid").html(rowitem.find("td:eq(9)").html());
+
+        //$(".taskmodal:visible tr:eq(1) td:eq(1)").html(">>" + rowitem.find("td:eq(1)").text());
+
+        document.getElementById('taskmodal').style.display = 'block';    
+    
+    
 })
 
 function savenewstat() {

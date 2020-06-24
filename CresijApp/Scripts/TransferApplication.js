@@ -1,9 +1,10 @@
 ﻿$ = jQuery.noConflict();
+var id = '';
 $(function () {
     var v = $("#schid").val();
     console.log(v);
     var ar = v.split("&");
-    var id = ar[0].replace("%20", ' ');
+     id = ar[0].replace("%20", ' ');
     var datatype = ar[1].replace("%20", ' ');
     console.log(id);
     console.log(datatype);
@@ -54,7 +55,9 @@ function FillEditSchedule(data) {
     document.getElementById("oldsession").innerText = idata[5] + " , " + idata[6];
     document.getElementById("beforelocation").innerText = idata[7] + ", " + idata[2];
     document.getElementById("oldteacher").innerText = idata[0];
-    var startdate = new Date(2020, 03, 01);
+    var src = idata[8].replace(/[^0-9 +]/g, '');
+    var startdate = new Date(parseInt(src));
+    console.log(startdate);
     var today = new Date();
     var diff = Math.abs(startdate.getTime() - today.getTime());
     var DiffDays = Math.ceil(diff / (1000 * 3600 * 24));
@@ -116,7 +119,7 @@ function SaveTransfer() {
     var building = $('#buildinglist option:selected').text();
     var classroom = $('#classlist option:selected').text();
     var teacher = document.getElementById("newteacher").innerText;
-    SaveTransferApplication(classname, coursename, reason, week, day, section, building, classroom, teacher);
+    SaveTransferApplication(classname, coursename, reason, week, day, section, building, classroom, teacher,id);
 
    // $("#sec_box").load("window/p-course/002-1.html");
 
@@ -168,14 +171,14 @@ function GetFreeWeek(idata) {
     });
 }
 
-function SaveTransferApplication(classname, coursename, reason,week,day,section,building,classroom,teacher) {
+function SaveTransferApplication(classname, coursename, reason,week,day,section,building,classroom,teacher,id) {
     var adata = [];
     adata[0] = classname;
     adata[1] = coursename;
     adata[2] = reason;
     adata[3] = week;
     adata[4] = day; adata[5] = section; adata[6] = building;
-    adata[7] = classroom; adata[8] = teacher; adata[9] = "pending";
+    adata[7] = classroom; adata[8] = teacher; adata[9] = "pending"; adata[10] = id;
     var jsonData = JSON.stringify({
         name: adata
     });
@@ -234,6 +237,7 @@ function OnErrorCall1(respo) {
 function OnSuccessBuilding(response) {
     var data = response.d;
     var inner = [];
+    inner += '<option class="option" value="">--select--</option>';
     for (i = 0; i < data.length; i++) {
 
         inner += '<option class="option" value="'+data[i]+'">' + data[i] + '</option>';

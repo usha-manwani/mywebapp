@@ -12,9 +12,11 @@
     <link rel="stylesheet" href="font/css/font-awesome.min.css">
     <script src="dist/js/Chart.min.js"></script>
     <script src="dist/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="dist/js/popper.min.js"></script>
+    <script src="../Scripts/umd/popper.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
     <script src="dist/js/jquery.min.js"></script>
+    <!--<script src="../Scripts/fontawesome/all.min.js"></script>
+    <script src="../Scripts/fontawesome/fontawesome.min.js"></script>-->
     <!-- datapicker -->
     <script type="text/javascript" src="js/moment.min.js"></script>
     <script type="text/javascript" src="js/moment.zh-cn.js"></script>
@@ -22,10 +24,15 @@
     <link href="dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="../Content/bootstrap-datepicker.css" rel="stylesheet" />
     <script src="../Scripts/bootstrap-datepicker.min.js"></script>
-    <script src="https://unpkg.com/date-holidays/dist/umd.min.js" type="text/javascript" charset="utf-8"></script>
+
     <!-- datapicker -->
+    <script src="js/CheckUserSession.js"></script>
     <script src="js/ip_input.js"></script>
-    <script src="js/sensor.js"></script>
+    <script src="js/sensor.js?v=1"></script>
+    <script src="../Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="../signalr/hubs"></script>
+    <script src="https://unpkg.com/date-holidays/dist/umd.min.js" type="text/javascript" charset="utf-8"></script>
+    <!--<script src='<%: ResolveClientUrl("~/signalr/hubs") %>'></script>-->
 </head>
 
   <body>
@@ -38,11 +45,9 @@
         <ul class="nav small" id="top_menu"></ul>
         <!-- main box begin -->
         <div class="col-12 float-left" id="main_box"></div>
-
         <div class="w-100 clearfix float-left" style="height: 30px;"></div>
       </div>
       <!-- main box end -->
-
     </div>
     <!-- Modal Box-->
     <div class="jmodal">
@@ -50,5 +55,4 @@
         <div id="jcontent"></div>
       </div>
     </div>
-
   </body>

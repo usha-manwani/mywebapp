@@ -1,3 +1,6 @@
+html{
+  -webkit-text-size-adjust: none!important;
+}
 $green:#66BA30;
 $green2:#96D171;
 $green_s01:#F7FFF2;
@@ -21,7 +24,7 @@ $gray_s04:#b9b9b9;
 $white:#fff;
 $black:#000;
 .jfont12{
-  font-size: 12px;
+  font-size: 12px!important;
 }
 .jfont14{
   font-size: 14px;
@@ -1743,5 +1746,131 @@ div.j-thumb01{
   .stra-ctrl-pannel-2{
     width:48%;
     margin:1%;
+  }
+}
+.j-eqm-tabs{
+  position: relative;
+  .jtab-2{
+    position: absolute;
+    top:10px;
+    right:0;
+    z-index: 999;
+    .tabbox-2{
+      cursor: pointer;
+      line-height: 14px;
+      font-size: 12px;
+      width:25px;
+      height: auto;
+      text-align: center;
+      padding: 6px 0;
+      clear: both;
+      margin-bottom: 3px;
+      background-color: $gray_s03;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      &.active{
+        background-color: $white;
+        color: $gray;
+      }
+      &:hover{
+        color: $black;
+      }
+    }
+  }
+  .jtab-box-2{
+    width: 100%;
+    &.active{
+      width:100%;
+    }
+  }
+}
+.sintro{
+  position: absolute;
+  font-size: 12px;
+  transform: scale(0.8);
+  line-height: 16px;
+  height: 18px;
+  top:8px;
+  color:$white;
+  padding:0 4px;
+  background-color: $green;
+  border-radius: 3px;
+}
+.j-ctrl-btn-group{
+  .j-ctrl-btn{
+    &:hover .bg{
+      opacity: 0.8;
+    }
+    &:active .bg{
+      opacity: 0.8;
+      color: $green!important;
+      text-shadow: 0 0 20px rgba(102,186,48,1);
+    }
+    &.active .bg{
+      color: $green!important;
+    }
+  }
+}
+.j-status-light-sm{
+  margin-left: 0px;
+  margin-bottom: 5px;
+  width:10px;
+  height:10px;
+  border-radius: 10px;
+  display: inline-block;
+  &.light-red{
+    background-color: $red;
+    box-shadow: 0 0 10px $red;
+  }
+  &.light-green{
+    background-color: $green;
+    box-shadow: 0 0 10px $green;
+  }
+}
+.svg-1{
+  width:32px;
+  height:auto;
+
+}
+.svg-2{
+  width:15px;
+  height:auto;
+
+}
+.fill-white{
+  fill:$white;
+}
+.fill-gray{
+  fill:$gray;
+}
+.j-ban{
+  cursor: pointer;
+  & i{
+    color: $gray_s02;
+  }
+  &:hover{
+    opacity: 0.5;
+    i{
+      color: $red;
+    }
+  }
+  &.active{
+    i{
+      color: $red;
+    }
+  }
+}
+.j-input-icon{
+  position: relative;
+  i{
+    position: absolute;
+    top:2px;
+    left: 7px;
+  }
+  input[type=text]{
+    padding-left: 20px;
+    &:focus + i{
+      color:$green;
+    }
   }
 }

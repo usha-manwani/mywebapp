@@ -107,11 +107,11 @@ namespace CresijApp.HubsFile
                 updatecardstatus(sender, data);
                 // Clients.All.confirmRegister();
             }
-            else if (data.Contains("readerlog"))
-            {
-                updateCardLogs(sender, data);
-                Clients.All.SendControl(sender, "8B B9 00 04 01 0B C4 D4");
-            }
+            //else if (data.Contains("readerlog"))
+            //{
+            //    updateCardLogs(sender, data);
+            //    Clients.All.SendControl(sender, "8B B9 00 04 01 0B C4 D4");
+            //}
             else if (data.Contains("KeyValue"))
             {
                 // string query = "";
@@ -123,11 +123,12 @@ namespace CresijApp.HubsFile
                         break;
                 }
             }
-            else if (data.Contains("Heartbeat"))
+            else if (data.Contains("StatusData"))
             {
-                saveStatusinDatebase(sender, data);
+                //saveStatusinDatebase(sender, data);
             }
             Clients.All.broadcastMessage(sender, data);
+            Clients.All.envMessage(sender, data);
         }
 
         private void saveStatusinDatebase(string sender, string data)

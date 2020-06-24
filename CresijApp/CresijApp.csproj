@@ -154,6 +154,20 @@
     <Content Include="Content\bootstrap-datepicker3.min.css" />
     <Content Include="Content\bootstrap-datepicker3.standalone.css" />
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="Content\brands.css" />
+    <Content Include="Content\brands.min.css" />
+    <Content Include="Content\fontawesome-all.css" />
+    <Content Include="Content\fontawesome-all.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\regular.css" />
+    <Content Include="Content\regular.min.css" />
+    <Content Include="Content\solid.css" />
+    <Content Include="Content\solid.min.css" />
+    <Content Include="Content\svg-with-js.css" />
+    <Content Include="Content\svg-with-js.min.css" />
+    <Content Include="Content\v4-shims.css" />
+    <Content Include="Content\v4-shims.min.css" />
     <Content Include="CssContent\Chart.min.css" />
     <Content Include="CssContent\sensor.css" />
     <Content Include="Global.asax" />
@@ -208,6 +222,22 @@
     <Content Include="Scripts\EditTeacherInfo.js" />
     <Content Include="Scripts\Edit_UserInfo.js" />
     <Content Include="Scripts\EnvControl.js" />
+    <Content Include="Scripts\EquipControl002.js" />
+    <Content Include="Scripts\EquipmentMenu.js" />
+    <Content Include="Scripts\fontawesome\all.js" />
+    <Content Include="Scripts\fontawesome\all.min.js" />
+    <Content Include="Scripts\fontawesome\brands.js" />
+    <Content Include="Scripts\fontawesome\brands.min.js" />
+    <Content Include="Scripts\fontawesome\conflict-detection.js" />
+    <Content Include="Scripts\fontawesome\conflict-detection.min.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.min.js" />
+    <Content Include="Scripts\fontawesome\regular.js" />
+    <Content Include="Scripts\fontawesome\regular.min.js" />
+    <Content Include="Scripts\fontawesome\solid.js" />
+    <Content Include="Scripts\fontawesome\solid.min.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.min.js" />
     <Content Include="Scripts\font\css\font-awesome.css" />
     <Content Include="Scripts\font\css\font-awesome.min.css" />
     <Content Include="Scripts\font\fonts\fontawesome-webfont.svg" />
@@ -224,14 +254,17 @@
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\Test_1_webApp.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\GetOrgInfo.js" />
+    <Content Include="Scripts\GroupControlMachine.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.js" />
     <Content Include="Scripts\jquery.signalR-2.4.1.min.js" />
+    <Content Include="Scripts\LeftMenu.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker-en-CA.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar-tn.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar.min.js" />
@@ -314,6 +347,7 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="Scripts\LoginScript.js" />
     <Content Include="Scripts\ProjectorConfigJS.js" />
     <Content Include="Scripts\ReserveClassroom.js" />
     <Content Include="Scripts\ReserveScheduleList.js" />
@@ -321,6 +355,7 @@
     <Content Include="Scripts\ScheduleAppointment.js" />
     <Content Include="Scripts\sensor.js" />
     <Content Include="Scripts\StudentInfo.js" />
+    <Content Include="Scripts\SystemConfigJS.js" />
     <Content Include="Scripts\SystemSetting.js" />
     <Content Include="Scripts\TeacherInfo.js" />
     <Content Include="Scripts\TransferApplication.js" />
@@ -330,13 +365,17 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\uploadExcel.js" />
+    <Content Include="Scripts\UserLogs.js" />
     <Content Include="Scripts\WebPlugin.js" />
     <Content Include="Services\DeleteOrgData.asmx" />
+    <Content Include="Services\GetLeftMenu.asmx" />
     <Content Include="Services\GetOrganisationData.asmx" />
+    <Content Include="Services\GetSetSystemConfigInfo.asmx" />
     <Content Include="Services\GetSideMenu.asmx" />
     <Content Include="Services\SaveOrganisationData.asmx" />
     <Content Include="Services\ScheduleData.asmx" />
     <Content Include="Services\SystemSetting.asmx" />
+    <Content Include="Services\UserLogs.asmx" />
     <Content Include="site-new\check\003.html" />
     <Content Include="site-new\check\room.js" />
     <Content Include="site-new\components\left_menu.html" />
@@ -607,6 +646,7 @@
     <Content Include="site\images\ty.svg" />
     <Content Include="site\js\calendor.js" />
     <Content Include="site\js\Chart.bundle.min.js" />
+    <Content Include="site\js\CheckUserSession.js" />
     <Content Include="site\js\ip_input.js" />
     <Content Include="site\js\moment.min.js" />
     <Content Include="site\js\moment.zh-cn.js" />
@@ -617,6 +657,8 @@
     <Content Include="site\window\alert\coordinate.html" />
     <Content Include="site\window\alert\course-tiaokeshenpi.html" />
     <Content Include="site\window\alert\course-yuyueshenpi.html" />
+    <Content Include="site\window\alert\data\AddOrganisation.html" />
+    <Content Include="site\window\alert\data\AddUserData.html" />
     <Content Include="site\window\alert\data\add_org.html" />
     <Content Include="site\window\alert\data\add_room.html" />
     <Content Include="site\window\alert\data\add_student.html" />
@@ -625,15 +667,22 @@
     <Content Include="site\window\alert\data\auth.html" />
     <Content Include="site\window\alert\data\distribute.html" />
     <Content Include="site\window\alert\data\edit.html" />
+    <Content Include="site\window\alert\data\EditOrganisation.html" />
+    <Content Include="site\window\alert\data\Edit_Classroom.html" />
+    <Content Include="site\window\alert\data\Edit_Student.html" />
+    <Content Include="site\window\alert\data\Edit_Teacher.html" />
+    <Content Include="site\window\alert\data\Edit_UserInfo.html" />
     <Content Include="site\window\alert\data\setting.html" />
     <Content Include="site\window\alert\data\storage.html" />
     <Content Include="site\window\alert\data\synchro.html" />
     <Content Include="site\window\alert\data\transfer.html" />
+    <Content Include="site\window\alert\data\UploadFile.html" />
     <Content Include="site\window\alert\DeleteClassroom.html" />
     <Content Include="site\window\alert\DeleteOrg.html" />
     <Content Include="site\window\alert\DeleteStudent.html" />
     <Content Include="site\window\alert\DeleteTeacher.html" />
     <Content Include="site\window\alert\Delete_User.html" />
+    <Content Include="site\window\alert\importSchedule_xlsx.html" />
     <Content Include="site\window\alert\import_xls.html" />
     <Content Include="site\window\alert\interactive_settings.html" />
     <Content Include="site\window\alert\operate\add_failure.html" />
@@ -754,6 +803,8 @@
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\UserInfo.js" />
+    <Content Include="site\window\alert\UploadFile.aspx" />
+    <Content Include="site\window\alert\UploadScheduleFile.aspx" />
     <Content Include="Views\Control.aspx" />
     <Content Include="Views\EnvControl.aspx" />
     <Content Include="Views\Index.aspx" />
@@ -764,6 +815,21 @@
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="webfonts\fa-brands-400.svg" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.eot" />
+    <Content Include="webfonts\fa-regular-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.woff" />
+    <Content Include="webfonts\fa-regular-400.ttf" />
+    <Content Include="webfonts\fa-regular-400.eot" />
+    <Content Include="webfonts\fa-brands-400.woff2" />
+    <Content Include="webfonts\fa-brands-400.woff" />
+    <Content Include="webfonts\fa-brands-400.ttf" />
+    <Content Include="webfonts\fa-brands-400.eot" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_GlobalResources\Resource.Designer.cs">
@@ -788,6 +854,7 @@
     <Compile Include="DataAccess\SetOrgData.cs" />
     <Compile Include="DataAccess\SystemInfo.cs" />
     <Compile Include="DataAccess\Userdetails.cs" />
+    <Compile Include="DataAccess\UserLogsDataAccess.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -799,8 +866,16 @@
       <DependentUpon>DeleteOrgData.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Services\GetLeftMenu.asmx.cs">
+      <DependentUpon>GetLeftMenu.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Services\GetOrganisationData.asmx.cs">
       <DependentUpon>GetOrganisationData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\GetSetSystemConfigInfo.asmx.cs">
+      <DependentUpon>GetSetSystemConfigInfo.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\GetSideMenu.asmx.cs">
@@ -821,6 +896,24 @@
     <Compile Include="Services\SystemSetting.asmx.cs">
       <DependentUpon>SystemSetting.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\UserLogs.asmx.cs">
+      <DependentUpon>UserLogs.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\UploadFile.aspx.cs">
+      <DependentUpon>UploadFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\UploadFile.aspx.designer.cs">
+      <DependentUpon>UploadFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site\window\alert\UploadScheduleFile.aspx.cs">
+      <DependentUpon>UploadScheduleFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\UploadScheduleFile.aspx.designer.cs">
+      <DependentUpon>UploadScheduleFile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Control.aspx.cs">
       <DependentUpon>Control.aspx</DependentUpon>
@@ -905,7 +998,6 @@
     <Content Include="site\.vs\site%2820200509修改%29\v15\.suo" />
     <Content Include="site\.vs\slnx.sqlite" />
     <Content Include="site\.vs\VSWorkspaceState.json" />
-    <Content Include="site\css\sensor2.scss" />
     <Content Include="site\dist\css\bootstrap-grid.css.map" />
     <Content Include="site\dist\css\bootstrap-grid.min.css.map" />
     <Content Include="site\dist\css\bootstrap-reboot.css.map" />
@@ -949,6 +1041,7 @@
     <Content Include="site\font\scss\_screen-reader.scss" />
     <Content Include="site\font\scss\_stacked.scss" />
     <Content Include="site\font\scss\_variables.scss" />
+    <Content Include="site\css\sensor2.scss" />
     <Content Include="site-new\css\sensor2.scss" />
     <Content Include="site-new\dist\css\bootstrap-grid.css.map" />
     <Content Include="site-new\dist\css\bootstrap-grid.min.css.map" />
