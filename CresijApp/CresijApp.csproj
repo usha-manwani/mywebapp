@@ -170,6 +170,7 @@
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="CssContent\Chart.min.css" />
     <Content Include="CssContent\sensor.css" />
+    <Content Include="DataAccess\Dump20200624.sql" />
     <Content Include="Global.asax" />
     <Content Include="HikVision\codebase\jsPlugin-1.0.0.min.js" />
     <Content Include="HikVision\codebase\playctrl\AudioRenderer.js" />

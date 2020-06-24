@@ -114,7 +114,19 @@ function ConnectToHub() {
                     var pj = $(".projector1")[0];
                     $(pj).closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
                 }
-                    
+
+                if (data[8] == "Off") {
+                    $(".curtain1").find(".fa-arrow-down").parent().addClass("active");
+                    $(".curtain1").find(".fa-arrow-up").parent().removeClass("active");
+                    $(".curtain1").find(".fa-pause").parent().removeClass("active");
+                }
+
+                else {
+                    $(".curtain1").find(".fa-arrow-down").parent().removeClass("active");
+                    $(".curtain1").find(".fa-arrow-up").parent().addClass("active");
+                    $(".curtain1").find(".fa-pause").parent().removeClass("active");
+                }
+
                 if (data[9] == "Off") {
                     $(".screen1").find(".fa-arrow-down").parent().addClass("active");
                     $(".screen1").find(".fa-arrow-up").parent().removeClass("active");
@@ -273,6 +285,15 @@ function ConnectToHub() {
             }
         }
     };
+    chat.client.machineCounts = function (counts) {
+
+        console.log("machine counts func 1 "+counts);
+        var count = counts.split(',');
+        console.log("machine counts func " +count);
+        $("#onlinedevicescount").text(count[0]);
+        $("#offlinedevicecount").text(count[1]);
+        $("#totaldevicescount").text(count[2]);
+    }
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         var ip = $("#controlip").val();
         console.log("connection to signalR done ");
@@ -491,6 +512,24 @@ function ConnectToHub() {
             else if ($(this).hasClass('digitaldevice'))
                 chat.server.sendControlKeys(ip, "FF FE 48 01 03 FF FF FF FF A0 A1 A2 A3"); //digital device
         });
+
+        $('.batchbootup').on("click", function () {
+            var iplist = [];
+            $('input[name="classipAddress"]:checked').each(function () {
+               iplist.push($(this).val());
+            })
+            for (i = 0; i < iplist.length; i++)
+                chat.server.sendControlKeys(iplist[i], "FF FE 37 01 01 FF FF FF FF A0 A1 A2 A3");
+        });
+        $('.batchshutdown').on("click", function () {
+            var iplist = [];
+            $('input[name="classipAddress"]:checked').each(function () {
+                iplist.push($(this).val());
+            })
+            for (i = 0; i < iplist.length; i++)            
+                chat.server.sendControlKeys(iplist[i], "FF FE 37 01 00 FF FF FF FF A0 A1 A2 A3");
+
+        }); 
     });
     
     //$.connection.hub.start({ waitForPageLoad: false }).done(function () {
@@ -561,24 +600,7 @@ function ConnectToHub() {
     //    //        chat.server.sendControlKeys(ip, "FF FE 37 01 00 FF FF FF FF A0 A1 A2 A3");
             
     //    //});
-    //    //$('.batchbootup').on("click", function () {
-    //    //    var iplist = [];
-    //    //    $('input[name="classipAddress"]:checked').each(function () {
-    //    //       iplist.push($(this).val());
-    //    //    })
-    //    //    for (i = 0; i < iplist.length; i++)
-    //    //        chat.server.sendControlKeys(iplist[i], "FF FE 37 01 01 FF FF FF FF A0 A1 A2 A3");
-
-    //    //});
-    //    //$('.batchshutdown').on("click", function () {
-    //    //    var iplist = [];
-    //    //    $('input[name="classipAddress"]:checked').each(function () {
-    //    //        iplist.push($(this).val());
-    //    //    })
-    //    //    for (i = 0; i < iplist.length; i++)            
-    //    //        chat.server.sendControlKeys(ip, "FF FE 37 01 00 FF FF FF FF A0 A1 A2 A3");
-
-    //    //});
+        
 
     //});
 }
