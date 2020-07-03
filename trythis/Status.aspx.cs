@@ -30,8 +30,12 @@ namespace WebCresij
                     ddlins.DataBind();
                     string select = Resources.Resource.Select;
                     //ddlins.Items.Insert(0, new ListItem(select, "NA"));
-                    loadGrid(dt.Rows[0]["id"].ToString());
-                    FillGradeDDL();
+                    if (dt.Rows.Count > 0)
+                    {
+                        loadGrid(dt.Rows[0]["id"].ToString());
+                        FillGradeDDL();
+                    }
+                    
                    // GetMachineCount();
                 }
                 else

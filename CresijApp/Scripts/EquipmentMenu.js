@@ -84,7 +84,7 @@ function OnSuccessClass(response) {
 
                 '<div class="col-4 pb-3 text-center"><div class="col-12 j-eqm-gray volumeclass"><i class="fa fa-volume-up fa-lg gray align-middle my-2"></i><div class="align-middle mb-1">音响</div></div></div>' +
 
-                '<div class="col-4 pb-3 text-center"><div class="col-12 j-eqm-gray screenclass"><i class="fa fa-columns fa-lg gray align-middle my-2"></i><div class="align-middle mb-1">幕布</div></div></div>' +
+                '<div class="col-4 pb-3 text-center"><div class="col-12 j-eqm-gray curtainclassicon"><i class="fa fa-columns fa-lg gray align-middle my-2"></i><div class="align-middle mb-1">幕布</div></div></div>' +
 
                 '<div class="col-4 pb-3 text-center"><div class="col-12 j-eqm-gray signalclass"><i class="fa fa-signal fa-lg gray align-middle my-2"></i><div class="align-middle mb-1">信号源</div></div></div>' +
 

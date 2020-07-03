@@ -100,11 +100,11 @@
         <i class="fa fa-exclamation-circle red ml-2"></i>
       </div>
       <div class="ml-5 mb-2">
-        <i class="fa fa-angle-right mr-2"></i>
-        <strong class="black d-inline-block" style="width:60px;">电压</strong>220V</div>
+          <i class="fa fa-angle-right mr-2"></i>
+          <strong class="black d-inline-block" style="width:60px;">电压</strong><span id="voltage">220</span>V</div>
       <div class="ml-5 mb-2">
         <i class="fa fa-angle-right mr-2"></i>
-        <strong class="black d-inline-block" style="width:60px;">能耗</strong>122.33kW/h</div>
+        <strong class="black d-inline-block" style="width:60px;">能耗</strong><span id="powerwatt">122.33</span>kW</div>
     </div>
   </div>
 </div>
@@ -112,7 +112,9 @@
 <div class="w-100 clearfix float-left" style="height: 30px;"></div>
 
 <script type="text/javascript">
-  $(document).ready(function () {
+    $(document).ready(function () {
+        var today = new Date();
+        $("#equipdatetime").text(today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate());
     //视频窗口高度控制
     var videoHeight = $(".j-video-box").width() * 0.5556;
     console.log(videoHeight);

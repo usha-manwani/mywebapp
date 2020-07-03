@@ -880,13 +880,10 @@ function addclickeffect() {
 var modal = document.getElementById("RemoteControl");
 
 function DisplayModal() {
-    if (document.getElementById("devicestatus").innerHTML == "离线") {
-        $jq("#yellowbuttons").removeClass("imgclick");
-    }
-    else {
+    
         $jq("#yellowbuttons").removeClass("imgclick");
         document.getElementById('RemoteControl').style.display = "block";
-    }
+    
 };
 
 

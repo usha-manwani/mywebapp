@@ -134,7 +134,7 @@
                             <i class="fa fa-volume-up mr-2" style="width:15px;"></i>
                             <span class="d-inline-block" style="width:60px;">电脑音量</span>
                         </span>
-                        <span><input type="range" min="0" max="100" value="30" class="j-slider volume" id="js01"></span>
+                        <span><input type="range" min="0" max="100" value="0" class="j-slider volume" id="js01"></span>
                         <div class="j-single-icon-btn j-ban">
                             <i class="fa fa-lg fa-ban ml-2"></i>
                         </div>
@@ -144,7 +144,7 @@
                             <i class="fa fa-microphone mr-2" style="width:15px;"></i>
                             <span class="d-inline-block" style="width:60px;">有线麦</span>
                         </span>
-                        <span><input type="range" min="0" max="100" value="70" class="j-slider wiredmicvolume" id="js02"></span>
+                        <span><input type="range" min="0" max="100" value="0" class="j-slider wiredmicvolume" id="js02"></span>
                         <div class="j-single-icon-btn j-ban">
                             <i class="fa fa-lg fa-ban ml-2"></i>
                         </div>
@@ -154,7 +154,7 @@
                             <i class="fa fa-headphones mr-2" style="width:15px;"></i>
                             <span class="d-inline-block" style="width:60px;">无线麦</span>
                         </span>
-                        <span><input type="range" min="0" max="100" value="15" class="j-slider wirelessmicvolume" id="js03"></span>
+                        <span><input type="range" min="0" max="100" value="0" class="j-slider wirelessmicvolume" id="js03"></span>
                         <div class="j-single-icon-btn j-ban">
                             <i class="fa fa-lg fa-ban ml-2"></i>
                         </div>
@@ -197,25 +197,25 @@
                     </div>
 
                 </div>
-                <div class="col-8 row d-flex align-items-center mt-1 j-ctrl-btn-group">
+                <div class="col-8 row d-flex align-items-center mt-1 j-ctrl-btn-group" >
                     <span class="mr-1 ml-3 mt-1 gray jfont12">
                         <i class="fa fa-tv mr-2" style="width:15px;"></i>
                         <span class="d-inline-block" style="width:50px;">屏幕-2</span>
                     </span>
                     <span class="ml-2 mt-2">
-                        <span class="fa-stack j-ctrl-btn screen2">
+                        <span class="fa-stack screen2">
                             <i class="fa fa-circle fa-stack-2x gray bg"></i>
                             <i class="fa fa-stack-1x fa-arrow-up white"></i>
                         </span>
                     </span>
                     <div class="ml-3 mt-2">
-                        <span class="fa-stack j-ctrl-btn active screen2">
+                        <span class="fa-stack  screen2">
                             <i class="fa fa-circle fa-stack-2x gray bg"></i>
                             <i class="fa fa-stack-1x fa-pause white"></i>
                         </span>
                     </div>
                     <div class="ml-3 mt-2">
-                        <span class="fa-stack j-ctrl-btn screen2">
+                        <span class="fa-stack screen2">
                             <i class="fa fa-circle fa-stack-2x gray bg"></i>
                             <i class="fa fa-stack-1x fa-arrow-down white"></i>
                         </span>
@@ -256,7 +256,7 @@
                             </i>
                             <span class="d-inline-block" style="width:60px;">投影仪-1</span>
                         </span>
-                        <span class="jf-12 font-weight-normal gray">
+                        <span class="jf-12 font-weight-normal gray ">
                             <label>
                                 <input type="checkbox" class="projector1">
                                 <span class="jswift" style="width:60px;">
@@ -283,14 +283,14 @@
                         </span>
                         <span class="jf-12 font-weight-normal gray">
                             <label>
-                                <input type="checkbox"  class="projector2">
-                                <span class="jswift" style="width:60px;">
+                                <input type="checkbox"  class="projector2" disabled>
+                                <span class="jswift" style="width:60px; background-color:dimgray">
                                     <i class="jswift-btn"></i>
                                     <i class="on">关闭</i>
                                     <i class="off">开启</i>
                                 </span>
                             </label>
-                            <span class="j-status-light-sm light-red"></span>
+                            <span class="j-status-light-sm bg_gray"></span>
                         </span>
                     </div>
                 </div>
@@ -320,9 +320,9 @@
                             </i>
                             <span class="d-inline-block" style="width:;">投影</span>
                         </span>
-                        <span class="jf-12 font-weight-normal gray mr-3">
+                        <span class="jf-12 font-weight-normal gray mr-3 powerspan">
                             <label>
-                                <input type="checkbox"  class="powerprojector">
+                                <input type="checkbox"  class="powerprojector" name="powercheck" id="powerproj">
                                 <span class="jswift" style="width:60px;">
                                     <i class="jswift-btn"></i>
                                     <i class="on">关闭</i>
@@ -335,9 +335,9 @@
                             <i class="fa fa-desktop mr-2" style="width:15px;"></i>
                             <span class="d-inline-block" style="width:;">电脑</span>
                         </span>
-                        <span class="jf-12 font-weight-normal gray">
+                        <span class="jf-12 font-weight-normal gray powerspan">
                             <label>
-                                <input type="checkbox" class="powercomputer">
+                                <input type="checkbox" class="powercomputer" name="powercheck">
                                 <span class="jswift" style="width:60px;">
                                     <i class="jswift-btn"></i>
                                     <i class="on">关闭</i>
@@ -352,9 +352,9 @@
                             <i class="fa fa-volume-up mr-2" style="width:15px;"></i>
                             <span class="d-inline-block" style="width:;">扩音</span>
                         </span>
-                        <span class="jf-12 font-weight-normal gray mr-3">
+                        <span class="jf-12 font-weight-normal gray mr-3 powerspan">
                             <label>
-                                <input type="checkbox"  class="powervolume">
+                                <input type="checkbox"  class="powervolume" name="powercheck">
                                 <span class="jswift" style="width:60px;">
                                     <i class="jswift-btn"></i>
                                     <i class="on">关闭</i>
@@ -367,9 +367,9 @@
                             <i class="fa fa-ellipsis-h mr-2" style="width:15px;"></i>
                             <span class="d-inline-block" style="width:;">其它</span>
                         </span>
-                        <span class="jf-12 font-weight-normal gray">
+                        <span class="jf-12 font-weight-normal gray powerspan">
                             <label>
-                                <input type="checkbox" class="powerother">
+                                <input type="checkbox" class="powerother" name="powercheck">
                                 <span class="jswift" style="width:60px;">
                                     <i class="jswift-btn"></i>
                                     <i class="on">关闭</i>
@@ -484,19 +484,19 @@
                         </div>
                         <div class="j-ctrl-btn-group row">
                             <div class="ml-4 mt-2">
-                                <span class="fa-stack j-ctrl-btn curtain2">
+                                <span class="fa-stack curtain2">
                                     <i class="fa fa-circle fa-stack-2x gray bg"></i>
                                     <i class="fa fa-stack-1x fa-arrow-up white"></i>
                                 </span>
                             </div>
                             <div class="ml-3 mt-2">
-                                <span class="fa-stack j-ctrl-btn active curtain2">
+                                <span class="fa-stack active curtain2">
                                     <i class="fa fa-circle fa-stack-2x gray bg"></i>
                                     <i class="fa fa-stack-1x fa-pause white"></i>
                                 </span>
                             </div>
                             <div class="ml-3 mt-2">
-                                <span class="fa-stack j-ctrl-btn curtain2">
+                                <span class="fa-stack  curtain2">
                                     <i class="fa fa-circle fa-stack-2x gray bg"></i>
                                     <i class="fa fa-stack-1x fa-arrow-down white"></i>
                                 </span>
@@ -583,17 +583,17 @@
         console.log("done");
         //滑块webkit控制
         if (navigator.userAgent.toLowerCase().match(/chrome\/([\d.]+)/)) {
-            $("#js01").css({ background: "-webkit-linear-gradient(left, #66BA30 30%, #f0f0f0 30%)", height: "5px" });
+            $("#js01").css({ background: "-webkit-linear-gradient(left, #66BA30 0%, #f0f0f0 0%)", height: "5px" });
             $("#js01").on("mousemove", function () {
                 var percent = $("#js01").val();
                 $("#js01").css("background", "-webkit-linear-gradient(left, #66BA30 " + percent + "%, #f0f0f0 " + percent + "%)");
             });
-            $("#js02").css({ background: "-webkit-linear-gradient(left, #66BA30 70%, #f0f0f0 70%)", height: "5px" });
+            $("#js02").css({ background: "-webkit-linear-gradient(left, #66BA30 0%, #f0f0f0 0%)", height: "5px" });
             $("#js02").on("mousemove", function () {
                 var percent = $("#js02").val();
                 $("#js02").css("background", "-webkit-linear-gradient(left, #66BA30 " + percent + "%, #f0f0f0 " + percent + "%)");
             });
-            $("#js03").css({ background: "-webkit-linear-gradient(left, #66BA30 15%, #f0f0f0 15%)", height: "5px" });
+            $("#js03").css({ background: "-webkit-linear-gradient(left, #66BA30 0%, #f0f0f0 0%)", height: "5px" });
             $("#js03").on("mousemove", function () {
                 var percent = $("#js03").val();
                 $("#js03").css("background", "-webkit-linear-gradient(left, #66BA30 " + percent + "%, #f0f0f0 " + percent + "%)");

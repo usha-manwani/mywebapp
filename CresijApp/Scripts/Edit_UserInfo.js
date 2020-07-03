@@ -1,28 +1,60 @@
 ﻿$ = jQuery.noConflict();
 $(document).ready(function () {
-
+    console.log("Edit user data");
+    $.ajax({
+        type: "POST",
+        url: "../Services/ScheduleData.asmx/GetBuilding",
+        //data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccessBuilding,
+        error: OnErrorCall_
+    });
     console.log("User id" + $("#userId").val());
     document.getElementById("id").value = $("#userId").val();
-    //var jsonData = JSON.stringify({
-    //    name: $("#orgsno").val()
-    //});
-    //$.ajax({
-    //    type: "POST",
-    //    url: "../Services/getOrganisationData.asmx/GetOrgOnDemand",
-    //    data: jsonData,
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: OnSuccess_,
-    //    error: OnErrorCall_
-    //});
+    var jsonData = JSON.stringify({
+        name: $("#userId").val()
+    });
+    $.ajax({
+        type: "POST",
+        url: "../Services/getOrganisationData.asmx/GetUserOnDemand",
+        data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccessUser,
+        error: OnErrorCall_
+    });
 });
+function OnSuccessBuilding(respo) {
+    var data = respo.d;
+    var inner = [];
+    for (i = 0; i < data.length; i++) {
+        inner += '<option class="option" value="' + data[i] + '">' + data[i] + '</option>';
+    }
+    document.getElementById("selectedbuilding").innerHTML = inner;
 
+
+}
+function OnSuccessUser(response) {
+    var idata = response.d;
+    var data = idata[0];
+    document.getElementById("id").value = data[1];
+    document.getElementById("name").value = data[2];
+    document.getElementById("persontype").innerText = data[3];
+    //$('#selectedbuilding option:selected').text() = data[3];
+    //document.getElementById("status").innerText == data[5];
+    document.getElementById("phone").value= data[8];
+    document.getElementById("notes").value = data[6];
+    document.getElementById("pass").value = data[7];
+}
 function EditUser() {
     var myarray = new Array();
-    myarray[0] = document.getElementById("userId").value;
+    var myarray = new Array();
+    myarray[0] = document.getElementById("id").value;
     myarray[1] = document.getElementById("name").value;
-    myarray[2] = document.getElementById("persontype").value;
-    myarray[3] = document.getElementById("dept").value;   
+    myarray[2] = document.getElementById("persontype").innerText;
+    myarray[3] = $('#selectedbuilding option:selected').text();
+   // myarray[4] = document.getElementById("status").innerText;
     myarray[4] = document.getElementById("phone").value;
     myarray[5] = document.getElementById("notes").value;
     myarray[6] = document.getElementById("pass").value;

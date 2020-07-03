@@ -472,5 +472,18 @@ namespace CresijApp.Services
             return idata;
         }
 
+        [WebMethod]
+        public List<object> GetCalenderDates(string name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetCalenderDates(name);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            return idata;
+        }
+
     }
 }

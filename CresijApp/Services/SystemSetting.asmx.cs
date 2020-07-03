@@ -51,6 +51,7 @@ namespace CresijApp.Services
                 string semno = data["Semesterno"].ToString();
                 string semweeks = data["Weeks"].ToString();
                 string semstartdate = data["Semesterstart"].ToString();
+                string autoholiday = data["Autoholiday"].ToString();
                 List<string> days = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
                 Dictionary<string,string> allowedDays = new Dictionary<string, string>();
                 foreach(string s in days)
@@ -62,7 +63,7 @@ namespace CresijApp.Services
                     else { allowedDays.Add(s, "No"); }
                 }
                 DataAccess.SystemInfo cc = new DataAccess.SystemInfo();
-                result= cc.SaveSystemInfo(schoolname, schooleng, logourl,semname,semweeks, semstartdate, allowedDays,semno);
+                result= cc.SaveSystemInfo(schoolname, schooleng, logourl,semname,semweeks, semstartdate, allowedDays,semno,autoholiday);
                 if (result > 0)
                 {
                   result=  cc.SaveReserveAndTransferInfo("Reserve", data["Resnonwork"].ToString(), data["Resauto"].ToString(), data["Resstartdate"].ToString(),

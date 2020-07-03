@@ -376,7 +376,6 @@
             </div>
             <div class="row marginTop" style="margin-left: -50px;">
                 <div class="col-xl-3 col-lg-5 col-md-6 col-sm-12">
-
                     <div class="row marginBottom ">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;系统&nbsp;</legend>
@@ -391,11 +390,9 @@
                                 class="imgclick imgsize" />
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-4">
-
                             <img src="Images/greyed/lock1.png" id="lock"
                                 class="imgclick imgsize" />
                         </div>
-
                     </div>
 
                     <div class="row  marginTop" style="display:none">

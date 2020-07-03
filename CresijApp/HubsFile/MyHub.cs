@@ -184,6 +184,11 @@ namespace CresijApp.HubsFile
         {
             Clients.All.Counts(1);
         }
+        public void CountMachinesAll(int i)
+        {
+            Clients.All.CountsMachines(1);
+        }
+
         public void SaveTempData(int d)
         {
             if (keyValues.Count > 0)

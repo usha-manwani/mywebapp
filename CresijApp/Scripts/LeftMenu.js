@@ -57,10 +57,10 @@ function OnSuccessClass(respo) {
         innerrow += '<div class="left-menu-level level-unchecked">' +
             '<i class="fa fa-plus-square mr-1 L-CTRL-02"></i><label class="check-level"><input type="checkbox" name="yuyue">' +
             '<i class="fa fa-check jcheckbox mr-1 check-level"></i><b>' + floor + '</b></label></div>' + classrow ;
-        console.log(innerrow);
+        
         
     }
     innerrow += '</div></div>';
-    console.log(innerrow);
+    
     $("#leftmenudata").append($(innerrow));
 }

@@ -144,9 +144,10 @@ namespace CresijApp.Services
                 loginid.Add(row[1].ToString());
                 username.Add(row[2].ToString());
                 persontype.Add(row[3].ToString());
-                telephone.Add(row[4].ToString());
-                deptname.Add(row[5].ToString());
-                personalstatus.Add(row[6].ToString());
+               
+                deptname.Add(row[4].ToString());
+                personalstatus.Add(row[5].ToString());
+                telephone.Add(row[6].ToString());
                 notes.Add(row[7].ToString());
 
             }
@@ -154,15 +155,26 @@ namespace CresijApp.Services
             idata.Add(loginid);
             idata.Add(username);
             idata.Add(persontype);
-            idata.Add(telephone);
+           
             idata.Add(deptname);
             idata.Add(personalstatus);
+            idata.Add(telephone);
             idata.Add(notes);
 
             return idata;
 
         }
 
+        [WebMethod]
+        public List<object> GetUserOnDemand(string name)
+        {
+            List<object> idata = new List<object>();
+            GetOrgData gd = new GetOrgData();
+            DataTable dt = gd.GetUserDataonDemand(name);
+            idata.Add(dt.Rows[0].ItemArray);
+            return idata;
+
+        }
         public class ClassDetails{
             public string Classid { get; set; }
             public string Classname { get; set; }

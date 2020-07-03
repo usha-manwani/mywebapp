@@ -74,9 +74,9 @@ namespace CresijApp.DataAccess
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = " SELECT usd.SerialNo, LoginID, Username, PersonType, departmentName, PersonnelStatus " +
-                        " , telephone, notes FROM userdetails usd join departmentdetail" +
-                        " dept on usd.deptCode = dept.departmentCode";
+                    string query = " SELECT usd.SerialNo, LoginID, Username, PersonType,  buildingname, PersonnelStatus " +
+                        " ,phone,  notes FROM userdetails usd join buildingdetails" +
+                        " dept on usd.deptCode = dept.id";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -233,6 +233,29 @@ namespace CresijApp.DataAccess
                 }
             }
             catch(Exception ex) { }
+            return dt;
+        }
+
+        public DataTable GetUserDataonDemand(string sn)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    string query = "SELECT * from userdetails where loginid ='" + sn+"'";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex) { }
             return dt;
         }
 

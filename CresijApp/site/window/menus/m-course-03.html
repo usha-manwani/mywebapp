@@ -66,14 +66,51 @@
         //        down: "fa fa-chevron-down green"
         //    }
         //});
-        var hd = new Holidays('CN');
-        var holidaysdata = hd.getHolidays(2020);
 
-        var dates = [];
-        for (i = 0; i < holidaysdata.length; i++) {
-            var d = holidaysdata[i];
-            dates.push(d["date"].split(' ')[0]);
+        var jsonData = JSON.stringify({
+            name: 'Reserve'
+        });
+        $.ajax({
+            type: "POST",
+            url: "../Services/ScheduleData.asmx/GetCalenderDates",
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessCalender,
+            error: OnErrorCallCalender
+        });  
+    });
+
+    function OnSuccessCalender(response) {
+        var idata = response.d;
+        console.log(idata);
+        calender(idata[0]);
+    }
+    function OnErrorCallCalender(respo) {
+        console.log(respo);
+    }
+
+    function calender(data) {
+        
+        var sdate = '';
+        var edate = '';
+        var d1, d2;
+
+        if (data.length > 0) {            
+            d1 = new Date(parseInt(data[1].substr(6)));
+            d2 = new Date(parseInt(data[2].substr(6))) ;
+            sdate = moment(d1).format('YYYY-MM-DD');
+            edate = moment(d2).format('YYYY-MM-DD');
         }
+        var dates = [];
+        if (data[0] == 'No') {
+            var hd = new Holidays('CN');
+            var holidaysdata = hd.getHolidays(2020);
+            for (i = 0; i < holidaysdata.length; i++) {
+                var d = holidaysdata[i];
+                dates.push(d["date"].split(' ')[0]);
+            }
+        }       
 
         $('.datetimepicker').datepicker({
             daysOfWeekDisabled: [0, 6],
@@ -81,10 +118,12 @@
             datesDisabled: dates,
             locale: 'zh-cn',
             autoclose: true,
-            orientation: "bottom right"
+            orientation: "bottom right",
+            startDate: sdate,
+            endDate: edate
         });
         var date = new Date();
-        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        var today = moment(date).format('YYYY-MM-DD');
         $('.datetimepicker').datepicker('setDate', today);
-    });
+    }
 </script>

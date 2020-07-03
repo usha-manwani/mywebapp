@@ -774,5 +774,31 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
+
+        public DataTable GetCalenderDates(string name)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                string query = "select autoholiday, starttime, endtime from reserveandtransfer rt join semesterinfo sm " +
+                    " on sm.semestername = rt.SemesterName where type='" + name+"' and "+ 
+                                 "rt.semestername > (select SemesterName from semesterinfo where startdate < now() order by startdate desc limit 1) limit 1";
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
     }
 }

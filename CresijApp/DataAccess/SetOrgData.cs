@@ -384,6 +384,7 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("uname", data[1]);
                         cmd.Parameters.AddWithValue("ptype", data[2]);
                         cmd.Parameters.AddWithValue("deptname", data[3]);
+                        
                         cmd.Parameters.AddWithValue("phone", data[4]);
                         cmd.Parameters.AddWithValue("note", data[5]);
                         cmd.Parameters.AddWithValue("pass", data[6]);

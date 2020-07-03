@@ -17,7 +17,10 @@ reload_js('../../../Scripts/GroupControlMachine.js');
 
 $(document).ready(function () {
 
-
+    var div = document.getElementsByName("envdiv")[0];
+    div.style.display = "none";
+    var div1 = document.getElementsByName("assistdiv")[0];
+    div1.style.display = "block";
     var adata;
     adata = $("#controlip").val();
     //adata[1] = $('#floorlist option:selected').text();

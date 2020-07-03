@@ -115,6 +115,9 @@ function SaveAllData() {
         return day;
     })();
 
+    if ($("#holidaycheckbox").checked)
+        var autoholiday = "Yes";
+    else autoholiday = "No";
     var semstartdate = $('input[name = "semstartDate"]').val();
     var totalweeks = $('input[name = "totalweek"]').val();
     var semno = $('input[name = "semester"]:checked').val();
@@ -136,7 +139,8 @@ function SaveAllData() {
         "Semesterstart": semstartdate,
         "Weeks": totalweeks,
         "Semesterno": semno,
-        "Semestername" : semname
+        "Semestername": semname,
+        "Autoholiday": autoholiday
     };
 
     var jsonData = JSON.stringify({
