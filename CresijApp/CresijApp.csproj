@@ -195,6 +195,7 @@
     <Content Include="Scripts\Add_UserInfo.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\BuildingClassForSettings.js" />
     <Content Include="Scripts\CapitalInfoJS.js" />
     <Content Include="Scripts\Chart.bundle.min.js" />
     <Content Include="Scripts\ClassroomInfo.js" />
@@ -349,6 +350,7 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\LoginScript.js" />
+    <Content Include="Scripts\MachineControl.js" />
     <Content Include="Scripts\ProjectorConfigJS.js" />
     <Content Include="Scripts\ReserveClassroom.js" />
     <Content Include="Scripts\ReserveScheduleList.js" />
@@ -366,6 +368,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\uploadExcel.js" />
+    <Content Include="Scripts\UserAuthentication.js" />
     <Content Include="Scripts\UserLogs.js" />
     <Content Include="Scripts\WebPlugin.js" />
     <Content Include="Services\DeleteOrgData.asmx" />
@@ -376,6 +379,7 @@
     <Content Include="Services\SaveOrganisationData.asmx" />
     <Content Include="Services\ScheduleData.asmx" />
     <Content Include="Services\SystemSetting.asmx" />
+    <Content Include="Services\UserAuthorisation.asmx" />
     <Content Include="Services\UserLogs.asmx" />
     <Content Include="site-new\check\003.html" />
     <Content Include="site-new\check\room.js" />
@@ -673,7 +677,7 @@
     <Content Include="site\window\alert\data\Edit_Student.html" />
     <Content Include="site\window\alert\data\Edit_Teacher.html" />
     <Content Include="site\window\alert\data\Edit_UserInfo.html" />
-    <Content Include="site\window\alert\data\setting.html" />
+    <Content Include="site\window\alert\data\UserAuthSetting.html" />
     <Content Include="site\window\alert\data\storage.html" />
     <Content Include="site\window\alert\data\synchro.html" />
     <Content Include="site\window\alert\data\transfer.html" />
@@ -896,6 +900,10 @@
     </Compile>
     <Compile Include="Services\SystemSetting.asmx.cs">
       <DependentUpon>SystemSetting.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\UserAuthorisation.asmx.cs">
+      <DependentUpon>UserAuthorisation.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\UserLogs.asmx.cs">

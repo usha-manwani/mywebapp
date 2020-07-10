@@ -66,28 +66,28 @@ function ConnectToHub() {
                             $(this).closest('.eqp-ctrl-pannel').find(".lightclass1").removeClass(".j-eqm-*").addClass("j-eqm-red");
 
                         if (data[11] == "laptop") {
-                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-blue");
+                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                             var icon = $(this).closest('.eqp-ctrl-pannel').find(".signalclass");
                             $(icon).find(".fa").removeClass(".fa-*").addClass("fa-laptop fa-lg");
                             $(icon).find(".mb-1").text("VGA");
                         }
 
                         else if (data[11] == "desktop") {
-                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-blue");
+                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                             var icon = $(this).closest('.eqp-ctrl-pannel').find(".signalclass");
                             $(icon).find(".fa").removeClass(".fa-*").addClass("fa-desktop fa-lg");
                             $(icon).find(".mb-1").text("电脑");
                         }
 
                         else if (data[11] == "hdmi") {
-                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-blue");
+                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                             var icon = $(this).closest('.eqp-ctrl-pannel').find(".signalclass");
                             $(icon).find(".fa").removeClass(".fa-*").addClass("fa-laptop fa-lg");
                             $(icon).find(".mb-1").text("HDMI");
                         }
 
                         else {
-                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-blue");
+                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                             var icon = $(this).closest('.eqp-ctrl-pannel').find(".signalclass");
                             $(icon).find(".fa").removeClass(".fa-*").addClass("fa-signal fa-lg");
                             $(icon).find(".mb-1").text("信号源");

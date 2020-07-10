@@ -285,6 +285,28 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
+        public DataTable GetIPClassByBuildingFloor(string building,string floor)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    string query = "SELECT ClassName,CCEquipIP from classdetails where teachingbuilding='" + building + "' and floor ='"+floor+"'";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+
         public DataTable GetFloorlist(string building)
         {
             DataTable dt = new DataTable();

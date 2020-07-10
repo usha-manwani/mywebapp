@@ -3,15 +3,15 @@ var oldvol = 0, micoldvol = 0, wirelessoldvol = 0;
 console.log(new Date());
 
 function ConnectToHub() {
-    
- chat = $.connection.myHub;
-    
+
+    chat = $.connection.myHub;
+
     chat.client.broadcastMessage = function (name, message) {
         console.log(message);
         var checkboxlist = $('.ipaddressclassname');
         if (checkboxlist.length > 0) {
             var data = message.split(',');
-            if (data[0] == "offline") {
+            if (data[2] == "离线" || data[2] =="Offline") {
                 $(checkboxlist).each(function () {
                     if ($(this).prop("value") == name) {
                         Offlinemachines($(this).closest("'.eqp-ctrl-pannel'"));
@@ -19,86 +19,77 @@ function ConnectToHub() {
                 })
             }
 
-            if (data.indexOf("StatusData") != -1) {
+            else if (data.indexOf("Heartbeat") != -1) {
                 $(checkboxlist).each(function () {
                     if ($(this).prop("value") == name) {
 
-                        if (data[2] == "Online") {
+                        if (data[3] == "运行中") {
                             $(this).closest('.eqp-ctrl-pannel').find(".status-dot").prop("background-color", "green");
-
-                        }
-
-                        else {
-                            $(this).closest('.eqp-ctrl-pannel').find(".status-dot").prop("background-color", "orange");
-
-                        }
-
-                        if (data[3] == "Open") {
-
-
                             this.checked = true;
                         }
 
                         else {
-
+                            $(this).closest('.eqp-ctrl-pannel').find(".status-dot").prop("background-color", "orange");
                             this.checked = false;
-                        }
 
-                        if (data[5] == "On")
+                        }
+                        
+
+                        if (data[5] == "已开机")
                             $(this).closest('.eqp-ctrl-pannel').find(".computerclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                         else
                             $(this).closest('.eqp-ctrl-pannel').find(".computerclass").removeClass(".j-eqm-*").addClass("j-eqm-red");
-                        if (data[6] == "On")
+                        if (data[6] == "已开机")
                             $(this).closest('.eqp-ctrl-pannel').find(".projectorclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                         else
                             $(this).closest('.eqp-ctrl-pannel').find(".projectorclass").removeClass(".j-eqm-*").addClass("j-eqm-red");
-                        if (data[8] == "Up")
-                            $(this).closest('.eqp-ctrl-pannel').find(".curtainclassicon").removeClass(".j-eqm-*").addClass("j-eqm-red");
-                        else
+                        if (data[8] == "开")
                             $(this).closest('.eqp-ctrl-pannel').find(".curtainclassicon").removeClass(".j-eqm-*").addClass("j-eqm-green");
+                        else
+                            $(this).closest('.eqp-ctrl-pannel').find(".curtainclassicon").removeClass(".j-eqm-*").addClass("j-eqm-red");
                         //if (data[9] == "Up")
                         //    $(this).closest('.eqp-ctrl-pannel').find(".screenclass").removeClass(".j-eqm-*").addClass("j-eqm-red");
                         //else
                         //    $(this).closest('.eqp-ctrl-pannel').find(".screenclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
-                        if (data[10] == "On")
+                        if (data[10] == "开")
                             $(this).closest('.eqp-ctrl-pannel').find(".lightclass1").removeClass(".j-eqm-*").addClass("j-eqm-green");
                         else
                             $(this).closest('.eqp-ctrl-pannel').find(".lightclass1").removeClass(".j-eqm-*").addClass("j-eqm-red");
 
-                        if (data[11] == "laptop") {
-                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-blue");
+                        if (data[11] == "手提电脑") {
+                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                             var icon = $(this).closest('.eqp-ctrl-pannel').find(".signalclass");
                             $(icon).find(".fa").removeClass(".fa-*").addClass("fa-laptop fa-lg");
                             $(icon).find(".mb-1").text("VGA");
                         }
 
-                        else if (data[11] == "desktop") {
-                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-blue");
+                        else if (data[11] == "台式电脑") {
+                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                             var icon = $(this).closest('.eqp-ctrl-pannel').find(".signalclass");
                             $(icon).find(".fa").removeClass(".fa-*").addClass("fa-desktop fa-lg");
                             $(icon).find(".mb-1").text("电脑");
                         }
 
-                        else if (data[11] == "hdmi") {
-                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-blue");
+                        else if (data[11] == "数码设备") {
+                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                             var icon = $(this).closest('.eqp-ctrl-pannel').find(".signalclass");
                             $(icon).find(".fa").removeClass(".fa-*").addClass("fa-laptop fa-lg");
                             $(icon).find(".mb-1").text("HDMI");
                         }
 
                         else {
-                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-blue");
+                            $(this).closest('.eqp-ctrl-pannel').find(".signalclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                             var icon = $(this).closest('.eqp-ctrl-pannel').find(".signalclass");
                             $(icon).find(".fa").removeClass(".fa-*").addClass("fa-signal fa-lg");
                             $(icon).find(".mb-1").text("信号源");
                         }
 
 
-                        if (data[15] == "On")
-                            $(this).closest('.eqp-ctrl-pannel').find(".podiumlightclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
-                        else
-                            $(this).closest('.eqp-ctrl-pannel').find(".podiumlightclass").removeClass(".j-eqm-*").addClass("j-eqm-red");
-                        if (data[12] == "Unlock")
+                        //if (data[15] == "On")
+                        //    $(this).closest('.eqp-ctrl-pannel').find(".podiumlightclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
+                        //else
+                        //    $(this).closest('.eqp-ctrl-pannel').find(".podiumlightclass").removeClass(".j-eqm-*").addClass("j-eqm-red");
+                        if (data[12] == "解锁")
                             $(this).closest('.eqp-ctrl-pannel').find(".systemlockclass").removeClass(".j-eqm-*").addClass("j-eqm-green");
                         else
                             $(this).closest('.eqp-ctrl-pannel').find(".systemlockclass").removeClass(".j-eqm-*").addClass("j-eqm-red");
@@ -110,11 +101,11 @@ function ConnectToHub() {
 
     };
 
-    
+
     chat.client.envMessage = function (name, message) {
         var ip = $("#controlip").val();
-        
-        
+
+
         if (name == ip) {
             $("#spanmachinestat").text("Online");
             var data = message.split(',');
@@ -122,18 +113,18 @@ function ConnectToHub() {
                 OfflineSpecificmachine();
             }
             if (data.indexOf("StatusData") != -1) {
-                
+
                 if (data[3] == "Open") {
-                    
+
                     var th = $(".systemonoff")[0];
-                    
+
                     th.checked = true;
                     $(th).closest('.jf-12').find(".j-status-light-sm").removeClass('light-red').addClass('light-green');
                 }
                 else {
-                    
+
                     var th = $(".systemonoff")[0];
-                    
+
                     th.checked = false;
                     $(th).closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
                 }
@@ -150,7 +141,7 @@ function ConnectToHub() {
                     var cm = $(".computeronoff")[0];
                     $(cm).closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
                 }
-                    
+
 
                 if (data[6] == "On") {
                     var pj = document.getElementsByClassName("projector1")[0];
@@ -199,7 +190,7 @@ function ConnectToHub() {
                     var lgt1 = $(".lightcontrol1")[0];
                     $(lgt1).closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
                 }
-                    
+
                 if (data[15] == "On") {
                     $(".lightcontrol2")[0].checked = true;
                     var lgt2 = $(".lightcontrol2")[0];
@@ -211,7 +202,7 @@ function ConnectToHub() {
                     var lgt1 = $(".lightcontrol2")[0];
                     $(lgt1).closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
                 }
-                    
+
                 if (data[12] == "Unlock") {
                     $(".panellockunlock")[0].checked = true;
                     var pnlock = $(".panellockunlock")[0];
@@ -223,39 +214,39 @@ function ConnectToHub() {
                     var pnlock = $(".panellockunlock")[0];
                     $(pnlock).closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
                 }
-                    
+
 
                 if (data[11] == "laptop")
-                    $('input[name="c001-2"]').closest('.digitaldevicesgroup').find(".notebookvga").prop("checked","checked") ;
+                    $('input[name="c001-2"]').closest('.digitaldevicesgroup').find(".notebookvga").prop("checked", "checked");
                 else if (data[11] == "desktop") {
-                    
-                    $('input[name="c001-2"]').closest('.digitaldevicesgroup').find(".computersignal").prop("checked", "checked") ;
+
+                    $('input[name="c001-2"]').closest('.digitaldevicesgroup').find(".computersignal").prop("checked", "checked");
                 }
-                    
+
                 else if (data[11] == "hdmi")
-                    $('input[name="c001-2"]').closest('.digitaldevicesgroup').find(".notebookhdmi").prop("checked", "checked") ;
+                    $('input[name="c001-2"]').closest('.digitaldevicesgroup').find(".notebookhdmi").prop("checked", "checked");
                 else
                     $('input[name="c001-2"]').closest('.digitaldevicesgroup').find(".digitaldevice").prop("checked", "checked");
 
                 $('#voltage').text(data[18]);
-                $('#powerwatt').text(data[19]+" ");
+                $('#powerwatt').text(data[19] + " ");
 
             }
 
             else {
                 if (data[0] == "projectoron") {
-                   // var pj = document.getElementsByClassName("projector1")[0];
+                    // var pj = document.getElementsByClassName("projector1")[0];
                     $(".projector1")[0].checked = true;
                     var pj = $(".projector1")[0];
-                    
+
                     $(pj).closest('.jf-12').find(".j-status-light-sm").removeClass('light-red').addClass('light-green');
-                   
+
                 }
-                else if (data[0] == "projectoroff"){
+                else if (data[0] == "projectoroff") {
                     var pj = $(".projector1")[0];
                     $(".projector1")[0].checked = false;
                     $(pj).closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
-                    
+
                 }
 
                 if (data[0] == "computeron") {
@@ -279,87 +270,87 @@ function ConnectToHub() {
                     if (data[0] == "wiredmic") {
                         if (data[1] == "increase") {
                             console.log("current vol: " + $(".wiredmicvolume").val());
-                            var vv = parseInt( $(".wiredmicvolume").val() );
+                            var vv = parseInt($(".wiredmicvolume").val());
                             $(".wiredmicvolume").val(vv);
                             micoldvol = vv;
-                            console.log("wired volP: "+"vv: "+ vv+" "+$(".wiredmicvolume").val());
+                            console.log("wired volP: " + "vv: " + vv + " " + $(".wiredmicvolume").val());
                         }
                         else {
-                            $(".wiredmicvolume").val(parseInt($(".wiredmicvolume").val()) );
-                            micoldvol = parseInt($(".wiredmicvolume").val()) ;
+                            $(".wiredmicvolume").val(parseInt($(".wiredmicvolume").val()));
+                            micoldvol = parseInt($(".wiredmicvolume").val());
                         }
-                            
+
                     }
                     if (data[0] == "wirelessmic") {
                         if (data[1] == "increase") {
-                            $(".wirelessmicvolume").val(parseInt($(".wirelessmicvolume").val()) );
-                            wirelessoldvol = parseInt($(".wirelessmicvolume").val()) ;
+                            $(".wirelessmicvolume").val(parseInt($(".wirelessmicvolume").val()));
+                            wirelessoldvol = parseInt($(".wirelessmicvolume").val());
                         }
                         else {
-                            $(".wirelessmicvolume").val(parseInt($(".wirelessmicvolume").val()) );
-                            wirelessoldvol = parseInt($(".wirelessmicvolume").val()) ;
+                            $(".wirelessmicvolume").val(parseInt($(".wirelessmicvolume").val()));
+                            wirelessoldvol = parseInt($(".wirelessmicvolume").val());
                         }
-                           
+
                     }
                     if (data[0] == "volume") {
                         if (data[1] == "increase") {
                             $(".volume").val(parseInt($(".volume").val()));
-                            oldvol = parseInt($(".volume").val()) ;
+                            oldvol = parseInt($(".volume").val());
                         }
                         else {
                             $(".volume").val(parseInt($(".volume").val()));
-                            oldvol = parseInt($(".volume").val()) ;
+                            oldvol = parseInt($(".volume").val());
                         }
-                           
+
                     }
-                    
+
                 }
                 if (data[0] == "screen1fall") {
                     $(".screen1").find(".fa-arrow-down").parent().addClass("active");
                     $(".screen1").find(".fa-arrow-up").parent().removeClass("active");
                     $(".screen1").find(".fa-pause").parent().removeClass("active");
-                    
+
                 }
-                else if(data[0] == "screen1rise"){
+                else if (data[0] == "screen1rise") {
                     $(".screen1").find(".fa-arrow-down").parent().removeClass("active");
                     $(".screen1").find(".fa-arrow-up").parent().addClass("active");
                     $(".screen1").find(".fa-pause").parent().removeClass("active");
-                    
+
                 }
 
                 if (data[0] == "curtain1fall") {
                     $(".curtain1").find(".fa-arrow-down").parent().addClass("active");
                     $(".curtain1").find(".fa-arrow-up").parent().removeClass("active");
                     $(".curtain1").find(".fa-pause").parent().removeClass("active");
-                    
+
                 }
-                else if (data[0] == "curtain1rise"){
+                else if (data[0] == "curtain1rise") {
                     $(".curtain1").find(".fa-arrow-down").parent().removeClass("active");
                     $(".curtain1").find(".fa-arrow-up").parent().addClass("active");
                     $(".curtain1").find(".fa-pause").parent().removeClass("active");
-                    
+
                 }
 
                 if (data[0] == "frontlighton") {
                     $(".lightcontrol1").checked = true;
                     $(".lightcontrol1").closest('.jf-12').find(".j-status-light-sm").removeClass('light-red').addClass('light-green');
                 }
-                   
+
                 else if (data[0] == "frontlightoff") {
                     $(".lightcontrol1").checked = false;
                     $(".lightcontrol1").closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
                 }
-                    
+
                 else if (data[0] == "rearlighton") {
                     $(".lightcontrol2").checked = true;
                     $(".lightcontrol2").closest('.jf-12').find(".j-status-light-sm").removeClass('light-red').addClass('light-green');
                 }
-                   
+
                 else if (data[0] == "rearlightoff") {
                     $(".lightcontrol2").checked = false;
                     $(".lightcontrol2").closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
                 }
-                    
+
 
                 if (data[0] == "signalsourcelaptop")
                     $('input[name="c001-2"]').closest('.digitaldevicesgroup').find(".notebookvga").checked = true;
@@ -374,13 +365,13 @@ function ConnectToHub() {
                     $(".panellockunlock")[0].checked = false;
                     var pnlock = $(".panellockunlock")[0];
                     $(pnlock).closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
-                    
+
                 }
                 else if (data[0] == "panelUnlocked") {
                     $(".panellockunlock")[0].checked = true;
                     var pnlock = $(".panellockunlock")[0];
                     $(pnlock).closest('.jf-12').find(".j-status-light-sm").removeClass('light-red').addClass('light-green');
-                    
+
                 }
                 if (data[0] == "PowerSupply") {
                     if (data[1] == "projectorpower") {
@@ -421,7 +412,7 @@ function ConnectToHub() {
                             $(powersound).checked = true;
                         }
 
-                            
+
                     }
                     else if (data[1] == "otherpower") {
                         if (data[2] == "otherpoweroff") {
@@ -436,7 +427,7 @@ function ConnectToHub() {
                             $(otherpower).closest('.jf-12').find(".j-status-light-sm").removeClass('light-red').addClass('light-green');
                         }
 
-                            
+
                     }
                     else if (data[1] == "fullpower") {
                         if (data[2] == "fullpoweroff") {
@@ -444,26 +435,26 @@ function ConnectToHub() {
                                 $(this).checked = false;
                                 $(this).closest('.jf-12').find(".j-status-light-sm").removeClass('light-green').addClass('light-red');
                             })
-                            
+
                         }
                         else {
                             $('input[name="powercheck"]').each(function () {
                                 $(this).checked = true;
                                 $(this).closest('.jf-12').find(".j-status-light-sm").removeClass('light-red').addClass('light-green');
                             })
-                        } 
+                        }
                     }
                 }
-                
-                
+
+
             }
         }
     };
     chat.client.machineCounts = function (counts) {
 
-        
+
         var count = counts.split(',');
-       
+
         $("#onlinedevicescount").text(count[0]);
         $("#offlinedevicecount").text(count[1]);
         $("#totaldevicescount").text(count[2]);
@@ -478,7 +469,7 @@ function ConnectToHub() {
         var ip = $("#controlip").val();
         console.log("connection to signalR done ");
         //system control
-       
+
         chat.server.sendControlKeys(ip, "FF FE 09 00 FF FF FF FF A0 A1 A2 A3");
         $(".systemonoff").on("click", function () {
             if ($(this).is(':checked'))
@@ -514,7 +505,7 @@ function ConnectToHub() {
 
         });
         $(".wiredmicvolume").on("change", function () {
-            
+
             var newvol = $(this).val();
             if (micoldvol > newvol) {
                 micoldvol = newvol;
@@ -591,9 +582,9 @@ function ConnectToHub() {
         });
         $(".projector2").on("click", function () { //not done
             //if ($(this).is(':checked'))
-               // chat.server.sendControlKeys(ip, "FF FE 39 01 01 FF FF FF FF A0 A1 A2 A3");//projector2 on
+            // chat.server.sendControlKeys(ip, "FF FE 39 01 01 FF FF FF FF A0 A1 A2 A3");//projector2 on
             //else
-               // chat.server.sendControlKeys(ip, "FF FE 39 01 02 FF FF FF FF A0 A1 A2 A3");//projector2 off
+            // chat.server.sendControlKeys(ip, "FF FE 39 01 02 FF FF FF FF A0 A1 A2 A3");//projector2 off
 
         });
 
@@ -696,7 +687,7 @@ function ConnectToHub() {
         $('.batchbootup').on("click", function () {
             var iplist = [];
             $('input[name="classipAddress"]:checked').each(function () {
-               iplist.push($(this).val());
+                iplist.push($(this).val());
             })
             for (i = 0; i < iplist.length; i++)
                 chat.server.sendControlKeys(iplist[i], "FF FE 37 01 01 FF FF FF FF A0 A1 A2 A3");
@@ -706,12 +697,12 @@ function ConnectToHub() {
             $('input[name="classipAddress"]:checked').each(function () {
                 iplist.push($(this).val());
             })
-            for (i = 0; i < iplist.length; i++)            
+            for (i = 0; i < iplist.length; i++)
                 chat.server.sendControlKeys(iplist[i], "FF FE 37 01 00 FF FF FF FF A0 A1 A2 A3");
 
-        }); 
+        });
     });
-    
+
     //$.connection.hub.start({ waitForPageLoad: false }).done(function () {
     //    console.log("connection doen ");
     //    //$(".projectorclass").on("click", function () {
@@ -721,7 +712,7 @@ function ConnectToHub() {
     //    //    else //if ($(this).hasClass("j-eqm-red"))
     //    //        chat.server.sendControlKeys(ip, "FF FE 34 01 01 FF FF FF FF A0 A1 A2 A3");
     //    //})
-       
+
     //    //$(".computerclass").on("click", function () {
     //    //    var ip = $(this).closest('.eqp-ctrl-pannel').find('input[name="classipAddress"]').prop('value');
     //    //    if ($(this).hasClass("j-eqm-green"))
@@ -778,29 +769,29 @@ function ConnectToHub() {
     //    //        chat.server.sendControlKeys(ip, "FF FE 37 01 01 FF FF FF FF A0 A1 A2 A3");
     //    //    else //if ($(this).hasClass("j-eqm-red"))
     //    //        chat.server.sendControlKeys(ip, "FF FE 37 01 00 FF FF FF FF A0 A1 A2 A3");
-            
+
     //    //});
-        
+
 
     //});
 }
 ConnectToHub();
 
 function ClickHtml1() {
-    
-     console.log("assishtml 1");
-     console.log(document.getElementsByClassName("assistdivclass")[0]);
+
+    console.log("assishtml 1");
+    console.log(document.getElementsByClassName("assistdivclass")[0]);
     var div2 = document.getElementsByClassName("envdivclass")[0];
-     
+
     div2.style.display = "none";
-     var div1 = document.getElementsByClassName("assistdivclass")[0];
+    var div1 = document.getElementsByClassName("assistdivclass")[0];
     div1.style.display = "block";
-     
+
 
 }
 
 function ClickHtml2() {
-    
+
     console.log("assishtml 2");
     console.log(document.getElementsByClassName("envdivclass")[0])
     var div2 = document.getElementsByClassName("envdivclass")[0];
@@ -812,10 +803,10 @@ function ClickHtml2() {
 }
 function GetStatus() {
 
-    
+
 }
 
-function Offlinemachines(item){
+function Offlinemachines(item) {
 
     $(item).find(".status-dot").prop("background-color", "red");
     $(item).find(".ipaddressclassname").checked = false;
@@ -862,5 +853,5 @@ function OfflineSpecificmachine(item) {
     $(".curtain1").find(".fa-pause").parent().addClass("active");
     $(".volume").val(0);
     $(".wirelessmicvolume").val(0);
-    $(".wiredmicvolume").val(0) ;
+    $(".wiredmicvolume").val(0);
 }

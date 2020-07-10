@@ -50,7 +50,7 @@ function FillReserveData(idata) {
             disabledclass = "";
         }
         else disabledclass = "disabled";
-        rowshtml += '<tr class="bbwhite tr_bg_alert">' +
+        rowshtml += '<tr class="bbwhite ' + c +'">' +
             '<td style="width:50px; text-align:center;"><input type="checkbox" name="tiaoke"></td>' +
             '<td>' + j + '</td><td>' + col[0] + '教室预约</td>' +
             '<td>' + col[1] + '</td><td>' + col[2] + '</td>' +

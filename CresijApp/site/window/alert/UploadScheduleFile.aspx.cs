@@ -48,15 +48,13 @@ namespace CresijApp.site.window
                             objbulk.Columns.Add("sem");
                             objbulk.Columns.Add("teacherid");
                             objbulk.Columns.Add("teachername");
-                            objbulk.Columns.Add("courseid");
-                            objbulk.Columns.Add("price");
+                            objbulk.Columns.Add("courseid");                            
                             objbulk.Columns.Add("classname");
                             objbulk.Columns.Add("coursename");
                             objbulk.Columns.Add("weekstart");
                             objbulk.Columns.Add("weekend");
                             objbulk.Columns.Add("dayno");
-                            objbulk.Columns.Add("section");
-                            
+                            objbulk.Columns.Add("section");                            
                             objbulk.Load();
                         }
                     }

@@ -65,7 +65,7 @@ function FillOrgData(idata) {
         column9.classList = "pl-3 hover_btn_td";
         column9.innerHTML = '<a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/Edit_UserInfo.html?Index='+col2[i]+'" j-page-box="#jcontent"><i class="fa fa-pencil"></i></a>' +
             '<a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/data/synchro.html" j-page-box="#jcontent"><i class="fa fa-refresh"></i></a>' +
-            '<a class="JURL jbtn_xs hover_orange show_jmodal" j-page-href="window/alert/data/setting.html" j-page-box="#jcontent"><i class="fa fa-cog"></i></a>' +
+            '<a class="JURL jbtn_xs hover_orange show_jmodal" j-page-href="window/alert/data/userAuthSetting.html" j-page-box="#jcontent"><i class="fa fa-cog"></i></a>' +
             '<a class="JURL jbtn_xs hover_red show_jmodal" j-page-href="window/alert/Delete_User.html?Index=' + col2[i] +'" j-page-box="#jcontent"><i class="fa fa-trash"></i></a>';
         
         $("#usertable").find('tbody').append($(row1));

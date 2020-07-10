@@ -317,6 +317,20 @@ namespace CresijApp.Services
         }
 
         [WebMethod]
+        public List<object> GetIPClassByBuildingFloor(string[] data)
+        {
+            List<object> idata = new List<object>();
+            GetOrgData gd = new GetOrgData();
+            DataTable dt = gd.GetIPClassByBuildingFloor(data[0],data[1]);
+            if (dt.Rows.Count > 0)
+                foreach (DataRow dr in dt.Rows)
+                {
+                    idata.Add(dr.ItemArray);
+                }
+            return idata;
+        }
+
+        [WebMethod]
         public List<object> GetClassDataOnId(string classData)
         {
             List<object> idata = new List<object>();

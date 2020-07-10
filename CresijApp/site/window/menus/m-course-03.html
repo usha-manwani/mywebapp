@@ -124,6 +124,12 @@
         });
         var date = new Date();
         var today = moment(date).format('YYYY-MM-DD');
+        if (today > edate) {
+            today = edate;
+        }
+        else if (today < sdate) {
+            today = sdate;
+        }
         $('.datetimepicker').datepicker('setDate', today);
     }
 </script>

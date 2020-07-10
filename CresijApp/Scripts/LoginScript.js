@@ -28,10 +28,16 @@ function Login() {
 
 function OnSuccessLogin(response) {
     var data = response.d;
+    if (data.length > 0) {
     var dd = data[0];
-    sessionStorage.setItem("LoginId", dd[0]);
-    sessionStorage.setItem("userName", dd[1]);
-    window.location.href = "home.html";
+    
+        sessionStorage.setItem("LoginId", dd[0]);
+        sessionStorage.setItem("userName", dd[1]);
+        window.location.href = "home.html";
+    }
+    else {
+        alert("LoginID or password incorrect");
+    }
 
 }
 function OnErrorCall_(response) {

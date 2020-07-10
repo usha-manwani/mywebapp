@@ -1,15 +1,15 @@
 ﻿var chat;
 $(function () {
     console.log("system setting config page");
-    $.ajax({
-        type: "POST",
-        url: "../Services/ScheduleData.asmx/GetBuilding",
-        //data: jsonData,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: OnSuccessBuilding,
-        error: OnErrorCall_
-    });
+    //$.ajax({
+    //    type: "POST",
+    //    url: "../Services/ScheduleData.asmx/GetBuilding",
+    //    //data: jsonData,
+    //    contentType: "application/json; charset=utf-8",
+    //    dataType: "json",
+    //    success: OnSuccessBuilding,
+    //    error: OnErrorCall_
+    //});
     chat = $.connection.myHub;
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         
