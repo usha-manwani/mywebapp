@@ -23,10 +23,12 @@
     });
 }
 
-$("#AddStudentDetail").off('click').on('click', function () {
-    console.log("clicked on save button");
-    AddNewStudent();
-});
+$(document).ready(function () {
+    ("#AddStudentDetail").on('click', function () {
+        console.log("clicked on save button");
+        AddNewStudent();
+    });
+})
 
 function OnSuccess_(response) {
     var idata = response.d;

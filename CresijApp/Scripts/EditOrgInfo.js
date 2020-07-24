@@ -14,6 +14,10 @@ $(document).ready(function () {
         success: OnSuccess_,
         error: OnErrorCall_
     });
+    $("#updateorgdetail").on('click', function () {
+        console.log("clicked on save button");
+        EditOrganisation();
+    });
 });
 function OnSuccess_(response) {
     var data = response.d;
@@ -59,10 +63,7 @@ function EditOrganisation() {
 //$(document).on("click", "#savedetail", function () {
 
 //});
-$("#updateorgdetail").off('click').on('click', function () {
-    console.log("clicked on save button");
-    EditOrganisation();
-});
+
 
 function OnSuccess(response) {
     var idata = response.d;

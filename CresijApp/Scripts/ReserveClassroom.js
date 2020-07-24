@@ -1,7 +1,7 @@
 ﻿var days = ["sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 console.log("section " + $("#section").val());
 console.log("section " + $("#classroom").val());
-$(function () {
+$(document).ready(function () {
     console.log("loaded 3-1-1");    
     
     var date = $('input[name = "appointmentDate"]').val();
@@ -17,6 +17,10 @@ $(function () {
         dataType: "json",
         success: OnSuccess_,
         error: OnErrorCall_
+    });
+    $("#btnReserveClass").on('click', function () {
+        console.log("clicked on save button");
+        SaveReserveApplication();
     });
 })
 
@@ -41,10 +45,7 @@ function OnErrorCall_(response) {
     alert("some error occures. Please try again");
 }
 
-$("#btnReserveClass").off('click').on('click', function () {
-    console.log("clicked on save button");
-    SaveReserveApplication();
-});
+
 
 function SaveReserveApplication() {
 

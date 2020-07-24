@@ -347,7 +347,7 @@ namespace CresijApp.DataAccess
                     using (MySqlCommand cmd = new MySqlCommand("sp_SaveUserData", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("id", data[0]);
+                        cmd.Parameters.AddWithValue("logid", data[0]);
                         cmd.Parameters.AddWithValue("uname", data[1]);
                         cmd.Parameters.AddWithValue("ptype", data[2]);
                         cmd.Parameters.AddWithValue("deptname", data[3]);
@@ -355,6 +355,8 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("phone", data[5]);
                         cmd.Parameters.AddWithValue("note", data[6]);
                         cmd.Parameters.AddWithValue("pass", data[7]);
+                        cmd.Parameters.AddWithValue("expiredate", data[8]);
+                        cmd.Parameters.AddWithValue("timeexp", data[9]);
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -380,7 +382,7 @@ namespace CresijApp.DataAccess
                     using (MySqlCommand cmd = new MySqlCommand("sp_UpdateUserData", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("id", data[0]);
+                        cmd.Parameters.AddWithValue("logid", data[0]);
                         cmd.Parameters.AddWithValue("uname", data[1]);
                         cmd.Parameters.AddWithValue("ptype", data[2]);
                         cmd.Parameters.AddWithValue("deptname", data[3]);
@@ -388,6 +390,8 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("phone", data[4]);
                         cmd.Parameters.AddWithValue("note", data[5]);
                         cmd.Parameters.AddWithValue("pass", data[6]);
+                        cmd.Parameters.AddWithValue("expiredate", data[7]);
+                        cmd.Parameters.AddWithValue("time1", data[8]);
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();

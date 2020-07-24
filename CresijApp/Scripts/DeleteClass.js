@@ -10,18 +10,20 @@ function OnSuccess_(response) {
 function OnErrorCall_(respo) {
     console.log(respo);
 }
-$("#deleteClass").off('click').on('click', function () {
-    console.log("class id: " + $("#classid").val());
-    var jsonData = JSON.stringify({
-        id: $("#classid").val()
+$(document).ready(function () {
+    ("#deleteClass").on('click', function () {
+        console.log("class id: " + $("#classid").val());
+        var jsonData = JSON.stringify({
+            id: $("#classid").val()
+        });
+        $.ajax({
+            type: "POST",
+            url: "../Services/DeleteOrgData.asmx/DeleteClass",
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccess_,
+            error: OnErrorCall_
+        });
     });
-    $.ajax({
-        type: "POST",
-        url: "../Services/DeleteOrgData.asmx/DeleteClass",
-        data: jsonData,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: OnSuccess_,
-        error: OnErrorCall_
-    });
-});
+})

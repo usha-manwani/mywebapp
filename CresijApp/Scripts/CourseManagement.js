@@ -1,6 +1,6 @@
 ﻿$ = jQuery.noConflict();
 console.log("course management ");
-$(function () {
+$(document).ready(function () {
     var jsonData = JSON.stringify({
         name: ""
     });
@@ -13,17 +13,121 @@ $(function () {
         success: OnSuccessBuilding,
         error: OnErrorCall_
     });
-    //$.ajax({
-    //    type: "POST",
-    //    url: "../Services/ScheduleData.asmx/GetScheduleForTransfer",
-    //    data: jsonData,
-    //    contentType: "application/json; charset=utf-8",
-    //    dataType: "json",
-    //    success: OnSuccess_,
-    //    error: OnErrorCall_
-    //});
-});
+    $.ajax({
+        type: "POST",
+        url: "../Services/ScheduleData.asmx/GetTotalWeek",
+        //data: jsonData,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: OnSuccessWeekNum,
+        error: OnErrorCall_
+    });
+    $('.searchfilter').off("click").on("click", function () {
+        var userid = sessionStorage.getItem("LoginId");
+        var adata = [];
+        adata[0] = $('input[name = "ScheduleDate"]').val();
+        if (isNaN(Date.parse(adata[0]))) {
+            adata[0] = $('#selectedbuilding').val();
+            adata[1] = $('#semesterlist').val();
+            adata[2] = $('#weeklist').val();
+            adata[3] = $('#dayslist').val();
+            adata[4] = userid;
+            if (!(adata[0] == null || adata[0] == undefined || adata[0].length == 0) &&
+                !(adata[1] == null || adata[1] == undefined || adata[1].length == 0) &&
+                !(adata[2] == null || adata[2] == undefined || adata[2].length == 0) &&
+                !(adata[2] == null || adata[2] == undefined || adata[2].length == 0)) {
+                var info = [];
+                info.push(adata[0]);
+                info.push(adata[1]);
+                info.push(adata[2]);
+                info.push(adata[3]);
+                info.push(userid);
+                var jsonData = JSON.stringify({
+                    name: info
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "../Services/ScheduleData.asmx/GetTransferScheduleByBuildSem", // Get schedule for selected building and sem.
+                    data: jsonData,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: OnSuccess_,
+                    error: OnErrorCall_
+                });
+            }
+            else {
+                alert("please select proper options to get the information");
+            }
+        }
+        else {
+            adata[0] = $('#selectedbuilding').val();
+            adata[1] = $('input[name = "ScheduleDate"]').val();
+            if (!(adata[0] == null || adata[0] == undefined || adata[0].length == 0) &&
+                !(adata[1] == null || adata[1] == undefined || adata[1].length == 0)) {
+                if (!isNaN(Date.parse(adata[1])) && adata[1].length == 10) {
+                    var info = [];
+                    info.push(adata[0]);
+                    info.push(adata[1]);
+                    info.push(userid);
+                    var jsonData = JSON.stringify({
+                        name: info
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "../Services/ScheduleData.asmx/GetScheduleForTransfer",
+                        data: jsonData,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: OnSuccess_,
+                        error: OnErrorCall_
+                    });
 
+                    var date = new Date(adata[1]);
+                    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                    $('.datetimepicker').datepicker('setDate', today);
+                }
+
+            }
+
+            else {
+                alert("please select proper options to get the information");
+            }
+
+        }
+        $("#selectdatediv").attr("style", "pointer-events:auto");
+
+        $("#weeklist").attr("style", "pointer-events:auto");
+        $("#dayslist").attr("style", "pointer-events:auto");
+        $("#semdiv").attr("style", "pointer-events:auto");
+        console.log("search button clicked");
+       
+    });
+
+    $('#weeklist').on("change", function () {
+        console.log("week change event");
+
+        $("#selectdatediv").attr("style", "pointer-events:none");
+        $('.datetimepicker').datepicker('setDate', "");
+    });
+
+    $('#selectdatediv').on("click", function () {
+        console.log("date change event");
+
+        $("#weeklist").attr("style", "pointer-events:none");
+        $("#dayslist").attr("style", "pointer-events:none");
+        $("#semdiv").attr("style", "pointer-events:none");
+
+    })
+
+});
+function OnSuccessWeekNum(respo) {
+    var data = respo.d;
+    var inner = [];
+    for (i = 1; i <= data[0]; i++) {
+        inner += '<option class="option" value="' + i + '">' + i + '</option>';
+    }
+    document.getElementById("weeklist").innerHTML = inner;
+}
 function OnSuccessBuilding(response) {
     var data = response.d;
     var inner = [];
@@ -38,9 +142,13 @@ function OnSuccessBuilding(response) {
    
 }
 function getSchedule(building) {
-    
+    var info = [];
+    info.push(building);
+    info.push($('input[name = "ScheduleDate"]').val());
+    var userid = sessionStorage.getItem("LoginId");
+    info.push(userid);
     var jsonData = JSON.stringify({
-        name: building
+        name: info
     });
     $.ajax({
         type: "POST",
@@ -296,25 +404,4 @@ function FillSchedule(data1) {
         }
     }
 }
-
-$('.searchfilter').off("click").on("click", function () {
-    console.log("search button clicked");
-    var adata = [];
-    adata[0] = $('#selectedbuilding option:selected').text();
-    adata[1] = $('#semesterlist option:selected').val();
-    console.log($('#semesterlist option:selected').val());
-    var course = "";
-    var jsonData = JSON.stringify({
-        name: adata
-    });
-    $.ajax({
-        type: "POST",
-        url: "../Services/ScheduleData.asmx/GetTransferScheduleByBuildSem", // Get schedule for selected building and sem.
-        data: jsonData,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: OnSuccess_,
-        error: OnErrorCall_
-    });
-});
 

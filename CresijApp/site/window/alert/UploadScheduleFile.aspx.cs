@@ -42,7 +42,7 @@ namespace CresijApp.site.window
                                 FieldTerminator = ",",
                                 LineTerminator = "\r\n",
                                 FileName = filename,
-                                NumberOfLinesToSkip = 3 // adjust this depending on CSV file headers
+                              //  NumberOfLinesToSkip = 3 // adjust this depending on CSV file headers
                             };
                             objbulk.Columns.Add("year");
                             objbulk.Columns.Add("sem");

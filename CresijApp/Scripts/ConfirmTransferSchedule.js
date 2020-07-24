@@ -1,5 +1,5 @@
 ﻿$ = jQuery.noConflict();
-$(function () {
+$(document).ready(function () {
     $.ajax({
         type: "POST",
         url: "../Services/ScheduleData.asmx/GetTransferedSchedule",
@@ -9,6 +9,30 @@ $(function () {
         success: OnSuccess_,
         error: OnErrorCall_
     });
+    $(document).off("click").on("click", ".taskmodal", function () {
+        console.log("finish...");
+
+        var _this = this;
+
+        let rowitem = $(_this).parents("tr");
+        if (rowitem.find("td:eq(6)").html() != "pending") {
+            $("#savesuccess").attr("onclick", "");
+            $("#rejectapplication").attr("onclick", "");
+        }
+
+        $("#coursename").html(rowitem.find("td:eq(8)").html());
+        $("#class").html(rowitem.find("td:eq(2)").html());
+        $("#time").html(rowitem.find("td:eq(3)").html());
+        $("#teacher").html(rowitem.find("td:eq(4)").html());
+        $("#reason").html(rowitem.find("td:eq(7)").html());
+        $("#scheduleid").html(rowitem.find("td:eq(9)").html());
+
+        //$(".taskmodal:visible tr:eq(1) td:eq(1)").html(">>" + rowitem.find("td:eq(1)").text());
+
+        document.getElementById('taskmodal').style.display = 'block';
+
+
+    })
 });
 function OnSuccess_(response) {
         var idata = response.d;
@@ -61,30 +85,7 @@ function FillChangeSchedule(idata) {
     $("#pendingSchedule").find('tbody').append(innerhtm);
 }
 
-$(document).off("click").on("click", ".taskmodal", function () {
-    console.log("finish...");
-    
-    var _this = this;
-    
-    let rowitem = $(_this).parents("tr");
-    if (rowitem.find("td:eq(6)").html() != "pending") {
-        $("#savesuccess").attr("onclick", "");
-        $("#rejectapplication").attr("onclick", "");
-    }
-    
-        $("#coursename").html(rowitem.find("td:eq(8)").html());
-        $("#class").html(rowitem.find("td:eq(2)").html());
-        $("#time").html(rowitem.find("td:eq(3)").html());
-        $("#teacher").html(rowitem.find("td:eq(4)").html());
-        $("#reason").html(rowitem.find("td:eq(7)").html());
-        $("#scheduleid").html(rowitem.find("td:eq(9)").html());
 
-        //$(".taskmodal:visible tr:eq(1) td:eq(1)").html(">>" + rowitem.find("td:eq(1)").text());
-
-        document.getElementById('taskmodal').style.display = 'block';    
-    
-    
-})
 
 function savenewstat() {
 

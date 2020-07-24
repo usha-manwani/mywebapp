@@ -1,9 +1,11 @@
 ﻿console.log("page loaded");
-$('#submitButton').off('click').on('click', function SubmitInfo() {
-    uploadlogo();
-    console.log("submit button clicked");
-   
-});
+$(document).ready(function () {
+    ('#submitButton').on('click', function SubmitInfo() {
+        uploadlogo();
+        console.log("submit button clicked");
+
+    });
+})
 
 //$('#SchoolLogo').on('change',
 

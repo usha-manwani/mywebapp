@@ -193,6 +193,7 @@
     <Content Include="Scripts\AddStudent.js" />
     <Content Include="Scripts\AddTeacher.js" />
     <Content Include="Scripts\Add_UserInfo.js" />
+    <Content Include="Scripts\BasicDataSubMenu.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\BuildingClassForSettings.js" />
@@ -202,6 +203,7 @@
     <Content Include="Scripts\ConfirmTransferSchedule.js" />
     <Content Include="Scripts\ControlClick.js" />
     <Content Include="Scripts\CourseManagement.js" />
+    <Content Include="Scripts\CourseSubMenu.js" />
     <Content Include="Scripts\DeleteClass.js" />
     <Content Include="Scripts\DeleteOrganisation.js" />
     <Content Include="Scripts\DeleteStudent.js" />
@@ -259,6 +261,7 @@
     <None Include="Properties\PublishProfiles\Test_1_webApp.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\GetOrgInfo.js" />
+    <Content Include="Scripts\GetTopMenu.js" />
     <Content Include="Scripts\GroupControlMachine.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -351,15 +354,19 @@
     <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Scripts\LoginScript.js" />
     <Content Include="Scripts\MachineControl.js" />
+    <Content Include="Scripts\OperationmgmtMenu.js" />
     <Content Include="Scripts\ProjectorConfigJS.js" />
     <Content Include="Scripts\ReserveClassroom.js" />
     <Content Include="Scripts\ReserveScheduleList.js" />
     <Content Include="Scripts\Schedule.js" />
     <Content Include="Scripts\ScheduleAppointment.js" />
     <Content Include="Scripts\sensor.js" />
+    <Content Include="Scripts\ShowUserAccess.js" />
+    <Content Include="Scripts\StrategySubMenu.js" />
     <Content Include="Scripts\StudentInfo.js" />
     <Content Include="Scripts\SystemConfigJS.js" />
     <Content Include="Scripts\SystemSetting.js" />
+    <Content Include="Scripts\SystemSettingsSubMenu.js" />
     <Content Include="Scripts\TeacherInfo.js" />
     <Content Include="Scripts\TransferApplication.js" />
     <Content Include="Scripts\Treeview.js" />
@@ -727,6 +734,11 @@
     <Content Include="site\window\alert\tongbu-month.html" />
     <Content Include="site\window\alert\tongbu-week.html" />
     <Content Include="site\window\alert\tongbu.html" />
+    <Content Include="site\window\alert\DownloadCSVTempelate.aspx" />
+    <Content Include="site\window\alert\UploadClass.aspx" />
+    <Content Include="site\window\alert\UploadStudent.aspx" />
+    <Content Include="site\window\alert\UploadTeacher.aspx" />
+    <Content Include="site\window\alert\UploadUser.aspx" />
     <Content Include="site\window\menus\m-course-01.html" />
     <Content Include="site\window\menus\m-course-02.html" />
     <Content Include="site\window\menus\m-course-03.html" />
@@ -791,6 +803,7 @@
     <Content Include="site\window\p-settings\002-4.html" />
     <Content Include="site\window\p-settings\003-1.html" />
     <Content Include="site\window\p-settings\003-2.html" />
+    <Content Include="site\window\p-settings\Blank.html" />
     <Content Include="site\window\p-strategy\001-1.html" />
     <Content Include="site\window\p-strategy\001-2-edit.html" />
     <Content Include="site\window\p-strategy\001-2.html" />
@@ -858,6 +871,7 @@
     <Compile Include="DataAccess\Schedule.cs" />
     <Compile Include="DataAccess\SetOrgData.cs" />
     <Compile Include="DataAccess\SystemInfo.cs" />
+    <Compile Include="DataAccess\UserAuth.cs" />
     <Compile Include="DataAccess\Userdetails.cs" />
     <Compile Include="DataAccess\UserLogsDataAccess.cs" />
     <Compile Include="Global.asax.cs">
@@ -910,6 +924,13 @@
       <DependentUpon>UserLogs.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="site\window\alert\UploadClass.aspx.cs">
+      <DependentUpon>UploadClass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\UploadClass.aspx.designer.cs">
+      <DependentUpon>UploadClass.aspx</DependentUpon>
+    </Compile>
     <Compile Include="site\window\alert\UploadFile.aspx.cs">
       <DependentUpon>UploadFile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -923,6 +944,34 @@
     </Compile>
     <Compile Include="site\window\alert\UploadScheduleFile.aspx.designer.cs">
       <DependentUpon>UploadScheduleFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadCSVTempelate.aspx.cs">
+      <DependentUpon>DownloadCSVTempelate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadCSVTempelate.aspx.designer.cs">
+      <DependentUpon>DownloadCSVTempelate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site\window\alert\UploadStudent.aspx.cs">
+      <DependentUpon>UploadStudent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\UploadStudent.aspx.designer.cs">
+      <DependentUpon>UploadStudent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site\window\alert\UploadTeacher.aspx.cs">
+      <DependentUpon>UploadTeacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\UploadTeacher.aspx.designer.cs">
+      <DependentUpon>UploadTeacher.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site\window\alert\UploadUser.aspx.cs">
+      <DependentUpon>UploadUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\UploadUser.aspx.designer.cs">
+      <DependentUpon>UploadUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Control.aspx.cs">
       <DependentUpon>Control.aspx</DependentUpon>

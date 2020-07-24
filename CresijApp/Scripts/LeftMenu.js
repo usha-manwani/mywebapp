@@ -1,4 +1,4 @@
-﻿$(function () {
+﻿$(document).ready(function () {
     $.ajax({
         type: "POST",
         url: "../Services/ScheduleData.asmx/GetBuilding",

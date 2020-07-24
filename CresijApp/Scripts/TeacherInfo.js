@@ -1,5 +1,5 @@
 ﻿$ = jQuery.noConflict();
-$(function GetOrgData() {
+$(document).ready(function GetOrgData() {
     var jsonData = JSON.stringify({
         name: ""
     });

@@ -1,7 +1,9 @@
-﻿$("#EditTeacherDetail").off('click').on('click', function () {
-    console.log("clicked on save button");
-    EditTeacherData();
-});
+﻿$(document).ready(function () {
+    ("#EditTeacherDetail").on('click', function () {
+        console.log("clicked on save button");
+        EditTeacherData();
+    });
+})
 
 function OnSuccess(response) {
     var idata = response.d;

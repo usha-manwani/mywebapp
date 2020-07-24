@@ -1,5 +1,5 @@
 ﻿console.log("userlogs.js");
-$(function () {
+$(document).ready(function () {
     $.ajax({
         type: "POST",
         url: "../Services/UserLogs.asmx/GetLogGraphData",

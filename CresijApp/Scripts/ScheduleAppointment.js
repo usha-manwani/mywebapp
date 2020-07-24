@@ -64,9 +64,9 @@ function FillSchedule(data1) {
             }
             else {
                 column1.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=1,2&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
                 column2.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=1,2&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
             }
             
             var column3 = row.insertCell(3);
@@ -88,9 +88,9 @@ function FillSchedule(data1) {
             }
             else {
                 column3.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=3,4&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
                 column4.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=3,4&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
             }
             
             var column5 = row.insertCell(5);
@@ -112,9 +112,9 @@ function FillSchedule(data1) {
             }
             else {
                 column5.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=5,6&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
                 column6.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=5,6&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
             }
             
             var column7 = row.insertCell(7);
@@ -136,9 +136,9 @@ function FillSchedule(data1) {
             }
             else {
                 column7.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=7,8&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
                 column8.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=7,8&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
             }
             
            
@@ -161,9 +161,9 @@ function FillSchedule(data1) {
             }
             else {
                 column9.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=9,10&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
                 column10.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=9,10&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
             }
             
             
@@ -186,9 +186,9 @@ function FillSchedule(data1) {
             }
             else {
                 column11.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=11,12&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
                 column12.innerHTML = '<div class="coursebox state3 JURL" j-page-href="window/p-course/003-1-1.html?section=11,12&class=' + data[0] + '" j-page-box="#sec_box">' +
-                    '宋青书<span class="intro">可预约</span></div >';
+                    '<span class="intro">可预约</span></div >';
             }
             
             $("#scheduletable").find('tbody').append($(row));
@@ -219,7 +219,7 @@ function setcolor(data) {
     return colorclass;
 
 }
-$(function () {
+$(document).ready(function () {
     
     $.ajax({
         type: "POST",
@@ -229,6 +229,16 @@ $(function () {
         dataType: "json",
         success: OnSuccessBuilding,
         error: OnErrorCall
+    });
+    $('.searchfilter').off("click").on("click", function () {
+        var adata = [];
+        adata[1] = $('#selectedbuilding option:selected').text();
+        adata[0] = $('input[name = "appointmentDate"]').val();
+        if (isNaN(Date.parse(adata[0]))) {
+            alert("please select date");
+        }
+        else
+            getSchedule(adata[0], adata[1]);
     });
 })
 
@@ -260,16 +270,7 @@ function OnSuccessBuilding(respo) {
 
 //});
 
-$('.searchfilter').off("click").on("click", function () {
-    var adata = [];
-    adata[1] = $('#selectedbuilding option:selected').text();
-    adata[0] = $('input[name = "appointmentDate"]').val();
-    if (isNaN(Date.parse(adata[0]))) {
-        alert("please select date");
-    }
-    else
-    getSchedule(adata[0], adata[1]);
-});
+
 
 function OnSuccessClass(response) {
     var idata = response.d;
@@ -285,6 +286,8 @@ function getSchedule(date,building) {
     var data = [];
     data[0] = date;
     data[1] = building;
+    var userid = sessionStorage.getItem("LoginId");
+    data[2] = userid;
     var jsonData = JSON.stringify({
         name:data
     });

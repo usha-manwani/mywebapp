@@ -1,7 +1,4 @@
-﻿$("#btnAddClass").off('click').on('click', function () {
-    console.log("clicked on save button");
-    AddNewClass();
-});
+﻿
 
 function AddNewClass() {
     var myarray = new Array();
@@ -49,7 +46,7 @@ function OnErrorCall_(respo) {
     console.log(respo);
 }
 
-$(function () {
+$(document).ready(function () {
     console.log("building fot");
     $.ajax({
         type: "POST",
@@ -60,7 +57,15 @@ $(function () {
         success: OnSuccessBuilding,
         error: OnErrorCall_
     });
-
+    $("#btnAddClass").on('click', function () {
+        console.log("clicked on save button");
+        AddNewClass();
+    });
+    $("#buildinglist").on('click', function () {
+        var building = $("input[name='building']:checked").val();
+        console.log("building name : " + building);
+        GetFloorList(building);
+    });
 })
 
 function OnSuccessBuilding(response) {
@@ -73,11 +78,7 @@ function OnSuccessBuilding(response) {
     $("#buildinglist").append(optionlist);
 }
 
-$("#buildinglist").on('click', function () {
-    var building = $("input[name='building']:checked").val();
-    console.log("building name : " + building);
-    GetFloorList(building);
-});
+
 function GetFloorList(building) {
     var jsonData = JSON.stringify({
         building: building

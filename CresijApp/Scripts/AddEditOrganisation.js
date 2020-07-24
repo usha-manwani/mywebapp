@@ -50,17 +50,7 @@
     
 //});
 
-$("input[name='buildflooroption']").off('click').on('click', function () {
-    if ($(this).val() == "floor") {
-        $("#tbhighoff").prop("disabled", false);
-        GetBuildingList();
-    }
-    else if ($(this).val() == "building") GetSchoolname();
-});
-$("#savedetail").off('click').on('click', function () {
-    console.log("clicked on save button");
-    AddNewOrganisation();
-});
+
 
 function OnSuccess_(response) {
     var idata = response.d;
@@ -74,10 +64,20 @@ function OnErrorCall_(respo) {
     console.log(respo);
 }
 
-$(function () {
+$(document).ready(function () {
     console.log("add/edit org page");
     GetBuildingList();
-    
+    $("input[name='buildflooroption']").on('click', function () {
+        if ($(this).val() == "floor") {
+            $("#tbhighoff").prop("disabled", false);
+            GetBuildingList();
+        }
+        else if ($(this).val() == "building") GetSchoolname();
+    });
+    $("#savedetail").on('click', function () {
+        console.log("clicked on save button");
+        AddNewOrganisation();
+    });
 
 })
 

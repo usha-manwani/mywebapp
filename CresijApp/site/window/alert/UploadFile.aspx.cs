@@ -30,8 +30,9 @@ namespace CresijApp.site.window.alert
                 {
                     if (Path.GetExtension(Upload.FileName).Equals(".txt") || Path.GetExtension(Upload.FileName).Equals(".csv"))
                     {
-                        Upload.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + Upload.FileName + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second);
-                        filename = Server.MapPath("~/Uploads/") + Upload.FileName + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
+                        var fname = Upload.FileName + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
+                        Upload.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fname);
+                        filename = Server.MapPath("~/Uploads/") + fname;
 
                         using (var conn = new MySqlConnection(constr))
                         {
@@ -43,7 +44,7 @@ namespace CresijApp.site.window.alert
                                 FieldTerminator = ",",
                                 LineTerminator = "\r\n",
                                 FileName = filename,
-                                NumberOfLinesToSkip = 3 // adjust this depending on CSV file headers
+                                //NumberOfLinesToSkip = 1 // adjust this depending on CSV file headers
                             };
                             objbulk.Columns.Add("devicename");
                             objbulk.Columns.Add("assetno");
@@ -65,7 +66,6 @@ namespace CresijApp.site.window.alert
             }
             catch (Exception ex)
             {
-
             }
             finally
             {
@@ -73,11 +73,8 @@ namespace CresijApp.site.window.alert
                 {
                     File.Delete(filename);
                 }
-
             }
         }
-
-       
     }
 
     public static class ExcelPackageExtensions

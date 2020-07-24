@@ -292,10 +292,15 @@ $(function () {
     $.connection.hub.start({ waitForPageLoad: false }).done(function () {
         $(document).on('click', '#readConfig', function () {
             // uncheckall();
-            var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+            var checkboxlist = document.getElementById("ddlClass");
+            var checkbox = checkboxlist.getElementsByTagName("input");
             for (i = 0; i < checkbox.length; i++) {
-                if (checkbox.checked) {
-                    var ip= checkbox.value;
+                var this1 = checkbox[i];
+                var checked = false;
+                checked = this1.checked;
+                console.log($(this1).val());
+                if (checked) {
+                    var ip = $(this1).val();
                     chat.server.sendControlKeys(ip, "8B B9 00 03 03 02 08");
                     break;
                 }
@@ -650,9 +655,14 @@ $(function () {
             chksum = chksum & 255;
             var checksum = chksum.toString(16);
             data = data1 + data + checksum;
-            var checkbox = document.getElementById("MainContent_masterchildBody_masterSideBody_ddlClass");
+            var checkboxlist = document.getElementById("ddlClass");
+            var checkbox = checkboxlist.getElementsByTagName("input");
             for (i = 0; i < checkbox.length; i++) {
-                if (checkbox.checked) {
+                var this1 = checkbox[i];
+                var checked = false;
+                checked = this1.checked;
+                console.log($(this1).val());
+                if (checked) {
                     var ip = checkbox.value;
                     chat.server.sendControlKeys(ip, data);
                     

@@ -82,7 +82,7 @@ namespace CresijApp.DataAccess
             return dt;
         }
         // Schedule for transfer request with row ids
-        public DataTable GetScheduleForTransfer(string name)
+        public DataTable GetScheduleForTransfer(string name,string date,string userid)
         {
             DataTable dt = new DataTable();
             try
@@ -93,7 +93,9 @@ namespace CresijApp.DataAccess
                     using (MySqlCommand cmd = new MySqlCommand("GetScheduleForTransfer", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@build", name);
+                        cmd.Parameters.AddWithValue("@building", name);
+                        cmd.Parameters.AddWithValue("@userid", userid);
+                        cmd.Parameters.AddWithValue("@customdate", date);
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
                     }
@@ -139,7 +141,7 @@ namespace CresijApp.DataAccess
             try
             {
                     query = "select teachername, coursename, sc.Classname," +
-                        " weekstart,weekend, dayno, section, cd.teachingbuilding, sm.startdate from schedule sc join classdetails cd on sc.ClassName = cd.classname " +
+                        " weekstart,weekend, dayno, section, cd.teachingbuilding, sm.startdate, sem,totalweeks from schedule sc join classdetails cd on sc.ClassName = cd.classname " +
                         " join semesterinfo sm on sc.sem = sm.semno where sc.id = " + name[0] ;
                 
                 using (MySqlConnection con = new MySqlConnection(constring))
@@ -289,16 +291,25 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetAvailClasses(string week , string building)
+        public DataTable GetAvailClasses(string week , string building,string userid,string sem)
         {
             DataTable dt = new DataTable();
             try
             {
-                string query = "select sc.classname, count(section) as section " +
-                                "from schedule sc join classdetails cd on sc.classname = cd.classname " +
-                                "where weekStart <= "+week+" and weekend>= "+week+" and cd.teachingbuilding = '"+building+"'"+
-                                "group by sc.classname  union select classname, '0' as section from classdetails cd where " +
-                                " cd.teachingbuilding ='" + building + "' and classname not in(select classname from schedule) order by classname ";
+                string query = "select distinct(sc.classname), count(section) as section "+
+                                "from schedule sc join classdetails cd on sc.classname = cd.classname "+
+                                "where weekStart <= "+week+ " and weekend>= " + week + " and cd.teachingbuilding = '"
+                                +building+"' and sem = "+sem+ " and sc.classname in (select classid from userlocationaccess where "+
+                                " userserialnum = (select serialno from userdetails where loginid = '"+userid+"')) "+
+                                " group by sc.classname union "+
+                                "select distinct(classname), '0' as section from classdetails cd where " +
+                                 "cd.teachingbuilding = '" + building + "' and classname not in (select distinct(sc.classname) " +
+                                "from schedule sc join classdetails cd on sc.classname = cd.classname "+
+                                "where weekStart <= " + week + " and weekend>= " + week + " and cd.teachingbuilding = '"
+                                + building + "' and sem = " + sem + " and sc.classname in "+
+                                "(select classid from userlocationaccess where userserialnum = (select serialno from userdetails where loginid = '"+userid+"'))) "+ 
+                                " and classname in(select classid from userlocationaccess where userserialnum = "+
+                                " (select serialno from userdetails where loginid = '"+userid+"'))";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 
@@ -417,7 +428,7 @@ namespace CresijApp.DataAccess
 
         }
 
-        public DataTable GetScheduleForDate(string date)
+        public DataTable GetScheduleForDate(string date,string userid)
         {
             DataTable dt = new DataTable();
             try
@@ -428,6 +439,7 @@ namespace CresijApp.DataAccess
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@customdate", date);
+                        cmd.Parameters.AddWithValue("@userid", userid);
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
                     }
@@ -439,7 +451,7 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetClassesByDateAndBuilding(string date, string building)
+        public DataTable GetClassesByDateAndBuilding(string date, string building,string userid)
         {
             DataTable dt = new DataTable();
             try
@@ -452,6 +464,7 @@ namespace CresijApp.DataAccess
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@customdate", date);
                         cmd.Parameters.AddWithValue("@building", building);
+                        cmd.Parameters.AddWithValue("@userid", userid);
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
                     }
@@ -463,7 +476,7 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
-        public DataTable GetScheduleByBuildWeekSem(string building, string sem, string week)
+        public DataTable GetScheduleByBuildWeekSem(string building, string sem, string week,string userid)
         {
             DataTable dt = new DataTable();
             try
@@ -477,6 +490,7 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("@build", building);
                         cmd.Parameters.AddWithValue("@weekno", week);
                         cmd.Parameters.AddWithValue("@sem", sem);
+                        cmd.Parameters.AddWithValue("@userid", userid);
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
                     }
@@ -489,7 +503,7 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetScheduleByBuildSem(string building, string sem)
+        public DataTable GetScheduleByBuildSem(string building, string sem,string userid)
         {
             DataTable dt = new DataTable();
             try
@@ -501,7 +515,7 @@ namespace CresijApp.DataAccess
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@build", building);
-                        
+                        cmd.Parameters.AddWithValue("@userid", userid);
                         cmd.Parameters.AddWithValue("@sem", sem);
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
@@ -515,7 +529,7 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetTransferScheduleByBuildSem(string building, string sem)
+        public DataTable GetTransferScheduleByBuildSem(string building, string sem, string week, string day,string userid)
         {
             DataTable dt = new DataTable();
             try
@@ -527,7 +541,9 @@ namespace CresijApp.DataAccess
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@build", building);
-
+                        cmd.Parameters.AddWithValue("@weekno", week);
+                        cmd.Parameters.AddWithValue("@daynum", day);
+                        cmd.Parameters.AddWithValue("@userid", userid);
                         cmd.Parameters.AddWithValue("@sem", sem);
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
@@ -541,7 +557,7 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetScheduleByBuild(string building)
+        public DataTable GetScheduleByBuild(string building,string userid)
         {
             DataTable dt = new DataTable();
             try
@@ -553,7 +569,34 @@ namespace CresijApp.DataAccess
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@build", building);
-                        
+                        cmd.Parameters.AddWithValue("@userid", userid);
+                        MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                        dataAdapter.Fill(dt);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dt;
+        }
+        public DataTable GetScheduleByBuildWeekSemDay(string building, string sem, string week, string day, string userid)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+
+                using (MySqlConnection con = new MySqlConnection(constring))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("Sp_getScheduleByBuildWeekSemDay", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@build", building);
+                        cmd.Parameters.AddWithValue("@weekno", week);
+                        cmd.Parameters.AddWithValue("@sem", sem);
+                        cmd.Parameters.AddWithValue("@daynum", day);
+                        cmd.Parameters.AddWithValue("@userid", userid);
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                         dataAdapter.Fill(dt);
                     }

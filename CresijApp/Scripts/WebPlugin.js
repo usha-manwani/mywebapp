@@ -75,7 +75,7 @@ function StartPlay(szIdentity) {
 
 // Init plugin parameters and insert the plugin
 
-$(function () {
+$(document).ready(function () {
     var iRet = WebVideoCtrl.I_CheckPluginInstall();    
     if (-1 == iRet) {
         alert(" please download and install the plugin WebComponentsKit.exe!");

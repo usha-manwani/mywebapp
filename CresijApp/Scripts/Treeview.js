@@ -1,5 +1,5 @@
 ﻿
-$(function () {
+$(document).ready(function () {
     var jsonData = JSON.stringify({
         name: ""
     });

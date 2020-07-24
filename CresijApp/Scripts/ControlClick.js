@@ -1,7 +1,7 @@
 ﻿$ = jQuery.noConflict();
 var ipAddress = "";
 var chat ;
-$(function () {
+$(document).ready(function () {
     disableAll();
     chat = $.connection.myHub;
     chat.client.broadcastMessage = function (name, message) {
@@ -372,6 +372,36 @@ $(function () {
             }
         });
     });
+
+    $(document).on('click', "#btncontrol", function () {
+        //$('#control').prop('style', 'display:block');
+        //$("#envcontrol").prop('style', 'display:none');
+        document.getElementById('control').style.display = 'block';
+        document.getElementById('envcontrol').style.display = 'none';
+        $(this).addClass('active btn-primary')
+        $(this).removeClass('btn-secondary');
+        $("#btnenvcontrol").removeClass('active btn-primary')
+        $("#btnenvcontrol").addClass('btn-secondary');
+    });
+
+    $(document).on('click', "#btnenvcontrol", function () {
+        //$("#envcontrol").prop('style', 'display:block');
+        //$("#control").prop('style', 'display:none');
+        document.getElementById('control').style.display = 'none';
+        document.getElementById('envcontrol').style.display = 'block';
+        $(this).addClass('active btn-primary')
+        $(this).removeClass('btn-secondary');
+        $("#btncontrol").removeClass('active btn-primary')
+        $("#btncontrol").addClass(' btn-secondary');
+    });
+
+    $(document).on("click", '.getclassid', function () {
+        var id = $(this).prop('id');
+        var name = $(this).prop('innerText');
+        $('#LocationName').prop('innerText', name);
+        $('#headClass').prop('innerText', name);
+        GetIpOnLocation(id);
+    });
 });
 
 function disableAll() {
@@ -403,35 +433,7 @@ function enableAll() {
     $('#projector2').prop('disabled', false);
 }
 
-$(document).on('click', "#btncontrol", function () {
-    //$('#control').prop('style', 'display:block');
-    //$("#envcontrol").prop('style', 'display:none');
-    document.getElementById('control').style.display = 'block';
-    document.getElementById('envcontrol').style.display = 'none';
-    $(this).addClass('active btn-primary')
-    $(this).removeClass('btn-secondary');    
-    $("#btnenvcontrol").removeClass('active btn-primary')
-    $("#btnenvcontrol").addClass('btn-secondary');
-});
 
-$(document).on('click', "#btnenvcontrol", function () {
-    //$("#envcontrol").prop('style', 'display:block');
-    //$("#control").prop('style', 'display:none');
-    document.getElementById('control').style.display = 'none';
-    document.getElementById('envcontrol').style.display = 'block';
-    $(this).addClass('active btn-primary')
-    $(this).removeClass('btn-secondary');
-    $("#btncontrol").removeClass('active btn-primary')
-    $("#btncontrol").addClass(' btn-secondary');
-});
-
-$(document).on("click", '.getclassid', function () {
-    var id = $(this).prop('id');
-    var name = $(this).prop('innerText');
-    $('#LocationName').prop('innerText', name);
-    $('#headClass').prop('innerText', name);  
-    GetIpOnLocation(id);
-});
 
 function getfirstclass() {
     disableAll();

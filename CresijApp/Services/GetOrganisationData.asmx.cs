@@ -137,7 +137,7 @@ namespace CresijApp.Services
             List<string> personalstatus = new List<string>();
             List<string> telephone = new List<string>();
             List<string> notes = new List<string>();
-
+            List<string> validity = new List<string>();
             foreach (DataRow row in dt.Rows)
             {
                 sno.Add(Convert.ToInt32(row[0]));
@@ -149,6 +149,7 @@ namespace CresijApp.Services
                 personalstatus.Add(row[5].ToString());
                 telephone.Add(row[6].ToString());
                 notes.Add(row[7].ToString());
+                validity.Add(row[8].ToString());
 
             }
             idata.Add(sno);
@@ -160,6 +161,7 @@ namespace CresijApp.Services
             idata.Add(personalstatus);
             idata.Add(telephone);
             idata.Add(notes);
+            idata.Add(validity);
 
             return idata;
 
@@ -303,11 +305,11 @@ namespace CresijApp.Services
         }
 
         [WebMethod]
-        public List<object> GetIPClassByBuilding(string data)
+        public List<object> GetIPClassByBuilding(string[] data)
         {
             List<object> idata = new List<object>();
             GetOrgData gd = new GetOrgData();
-            DataTable dt = gd.GetIPClassByBuilding(data);
+            DataTable dt = gd.GetIPClassByBuilding(data[0],data[1]);
             if(dt.Rows.Count>0)
             foreach(DataRow dr in dt.Rows)
             {
@@ -321,7 +323,7 @@ namespace CresijApp.Services
         {
             List<object> idata = new List<object>();
             GetOrgData gd = new GetOrgData();
-            DataTable dt = gd.GetIPClassByBuildingFloor(data[0],data[1]);
+            DataTable dt = gd.GetIPClassByBuildingFloor(data[0],data[1],data[2]);
             if (dt.Rows.Count > 0)
                 foreach (DataRow dr in dt.Rows)
                 {

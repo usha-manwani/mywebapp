@@ -1,7 +1,5 @@
-﻿
-
-$ = jQuery.noConflict();
-$(function GetOrgData() {
+﻿$ = jQuery.noConflict();
+$(document).ready(function GetOrgData() {
     
     $.ajax({
         type: "POST",
@@ -11,6 +9,43 @@ $(function GetOrgData() {
         dataType: "json",
         success: OnSuccess_,
         error: OnErrorCall_
+    });
+    $(document).off("click").on("click", ".taskmodal", function (e) {
+        console.log("finish...");
+
+
+
+        var _this = this;
+
+        let rowitem = $(_this).parents("tr");
+        console.log(rowitem.find("td:eq(8)").text());
+        if (rowitem.find("td:eq(8)").text() != "Pending") {
+            $("#savesuccess").attr("onclick", "");
+            $("#rejectapplication").attr("onclick", "");
+        }
+        console.log(rowitem.find("td:eq(2)").html());
+        console.log(rowitem.find("td:eq(3)").text());
+        $("#schoolyeardisc").html(rowitem.find("td:eq(10)").html());
+        $("#semesterdisc").html(rowitem.find("td:eq(11)").html());
+        $("#daydisc").html(rowitem.find("td:eq(3)").html());
+        $("#sectiondisc").html(rowitem.find("td:eq(6)").html());
+        $("#weekdisc").html(rowitem.find("td:eq(12)").html());
+        $("#datedisc").html(rowitem.find("td:eq(3)").html());
+        $("#classdisc").html(rowitem.find("td:eq(5)").html());
+        $("#unitdisc").html(rowitem.find("td:eq(13)").html());
+        $("#phonedisc").html(rowitem.find("td:eq(14)").html());
+        $("#namedisc").html(rowitem.find("td:eq(4)").html());
+        $("#personiddisc").html(rowitem.find("td:eq(18)").html());
+        $("#mobiledisc").html(rowitem.find("td:eq(15)").html());
+        $("#purposedisc").html(rowitem.find("td:eq(7)").html());
+        $("#reasondisc").html(rowitem.find("td:eq(16)").html());
+        $("#equipdisc").html(rowitem.find("td:eq(17)").html());
+        $("#iddisc").html(rowitem.find("td:eq(9)").html());
+
+        //$(".taskmodal:visible tr:eq(1) td:eq(1)").html(">>" + rowitem.find("td:eq(1)").text());
+
+        document.getElementById('taskmodal').style.display = 'block';
+
     });
 });
 function OnSuccess_(response) {
@@ -72,43 +107,7 @@ function FillReserveData(idata) {
     $("#table_reserveList").find('tbody').append(rowshtml);
 }
 
-$(document).off("click").on("click", ".taskmodal", function (e) {
-    console.log("finish...");
 
-    
-   
-        var _this = this;
-
-    let rowitem = $(_this).parents("tr");
-    console.log(rowitem.find("td:eq(8)").text());
-    if (rowitem.find("td:eq(8)").text() != "Pending") {
-        $("#savesuccess").attr("onclick", "");
-        $("#rejectapplication").attr("onclick", "");
-    }
-        console.log(rowitem.find("td:eq(2)").html());
-        console.log(rowitem.find("td:eq(3)").text());
-        $("#schoolyeardisc").html(rowitem.find("td:eq(10)").html());
-        $("#semesterdisc").html(rowitem.find("td:eq(11)").html());
-        $("#daydisc").html(rowitem.find("td:eq(3)").html());
-        $("#sectiondisc").html(rowitem.find("td:eq(6)").html());
-        $("#weekdisc").html(rowitem.find("td:eq(12)").html());
-        $("#datedisc").html(rowitem.find("td:eq(3)").html());
-        $("#classdisc").html(rowitem.find("td:eq(5)").html());
-        $("#unitdisc").html(rowitem.find("td:eq(13)").html());
-        $("#phonedisc").html(rowitem.find("td:eq(14)").html());
-        $("#namedisc").html(rowitem.find("td:eq(4)").html());
-        $("#personiddisc").html(rowitem.find("td:eq(18)").html());
-        $("#mobiledisc").html(rowitem.find("td:eq(15)").html());
-        $("#purposedisc").html(rowitem.find("td:eq(7)").html());
-        $("#reasondisc").html(rowitem.find("td:eq(16)").html());
-        $("#equipdisc").html(rowitem.find("td:eq(17)").html());
-        $("#iddisc").html(rowitem.find("td:eq(9)").html());
-
-        //$(".taskmodal:visible tr:eq(1) td:eq(1)").html(">>" + rowitem.find("td:eq(1)").text());
-
-        document.getElementById('taskmodal').style.display = 'block';
-    
-})
 
 function savenewstat() {
 

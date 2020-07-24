@@ -1,6 +1,8 @@
 ﻿$ = jQuery.noConflict();
-var id = '';
-$(function () {
+var id = ''; var usedweek;
+var useddays;
+var dayslist = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+$(document).ready(function () {
     var v = $("#schid").val();
     console.log(v);
     var ar = v.split("&");
@@ -13,7 +15,65 @@ $(function () {
         $("#sec_box").load("window/p-course/002-1.html");
     }
     else
-    GetData(id,datatype);
+        GetData(id, datatype);
+
+    $("#btnSaveTransfer").on('click', function () {
+        console.log("clicked on save button");
+        SaveTransfer();
+    });
+    $("#buildinglist1").off("change").on("change", function () {
+        var adata = [];
+        console.log($('#buildinglist1 option:selected').text());
+        adata[1] = $('#buildinglist1 option:selected').text();
+        adata[0] = $('#weeklist1').val();
+        var userid = sessionStorage.getItem("LoginId");
+        adata[2] = userid;
+        adata[3] = $('#semno').val();
+        var jsonData = JSON.stringify({
+            name: adata
+        });
+        $.ajax({
+            type: "POST",
+            url: "../Services/ScheduleData.asmx/GetAvailClasses",
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessClass,
+            error: OnErrorCallClass
+        });
+
+    });
+    $("#classlist").off("change").on("change", function () {
+        var adata = [];
+
+        adata[1] = $('#classlist option:selected').text();
+        adata[0] = $("#weeklist1").val();
+        var jsonData = JSON.stringify({
+            name: adata
+        });
+        $.ajax({
+            type: "POST",
+            url: "../Services/ScheduleData.asmx/GetAvailDay",
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccessDay,
+            error: OnErrorCallDay
+        });
+
+    });
+
+    $("#weekdays").off("change").on("change", function () {
+
+        console.log(document.getElementById("weekdays").innerText);
+        var day = $('#weekdays option:selected').val();
+        var inner = [];
+        var currentsec = sections[parseInt(day) - 1];
+        for (i = 0; i < currentsec.length; i++) {
+            inner += '<div class="option sectionlist"><a>' + currentsec[i] + '</a></div>';
+        }
+        document.getElementById("sectionlist").innerHTML = inner;
+    });
 })
 
 function GetData(classn, course) {
@@ -41,10 +101,8 @@ function OnSuccess_(response) {
 function OnErrorCall_(respo) {
     console.log(respo);
 }
-var usedweek;
-var useddays;
-var dayslist = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
-var weeklist = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
+
+
 function FillEditSchedule(data) {
     var idata = data[0];
     document.getElementById("coursename").innerText = idata[1];
@@ -55,26 +113,32 @@ function FillEditSchedule(data) {
     document.getElementById("oldsession").innerText = idata[5] + " , " + idata[6];
     document.getElementById("beforelocation").innerText = idata[7] + ", " + idata[2];
     document.getElementById("oldteacher").innerText = idata[0];
+    document.getElementById("semno").value = idata[9];
     var src = idata[8].replace(/[^0-9 +]/g, '');
     var startdate = new Date(parseInt(src));
+    var totalweeks = idata[10];
     console.log(startdate);
     var today = new Date();
     var diff = Math.abs(startdate.getTime() - today.getTime());
     var DiffDays = Math.ceil(diff / (1000 * 3600 * 24));
-     usedweek = Math.round(DiffDays / 7);
+    usedweek = Math.round(DiffDays / 7);
+    var startday = startdate.getDay();
+    if (startday != 1) {
+        usedweek = usedweek + 1;
+    }
      useddays = Math.round(DiffDays % 7);
    
     var inner = [];
-    for (i = usedweek; i < weeklist.length; i++) {
+    for (i = usedweek; i <= totalweeks; i++) {
         
-        inner += '<div class="option"><a>' + weeklist[i] + '</a></div>';
+        inner += '<option class="option" value="' + i + '">' + i + '</option>';
     }
-    document.getElementById("weeklist").innerHTML = inner;
+    document.getElementById("weeklist1").innerHTML = inner;
     //var innerdays = [];
     //for (j = useddays; j < dayslist.length; j++) {
-    //    innerdays += '<div class="option"><a>' + dayslist[j] + '</a></div>';
+    //    innerdays += '<option class="option" value = "' +  + '">' + dayname + '</option>';
     //}
-    //document.getElementById("daylist").innerHTML = innerdays;
+    //document.getElementById("weekdays").innerHTML =  innerdays;
     $.ajax({
         type: "POST",
         url: "../Services/ScheduleData.asmx/GetBuilding",
@@ -94,10 +158,7 @@ function FillEditSchedule(data) {
 //});
 
 
-$("#btnSaveTransfer").off('click').on('click', function () {
-    console.log("clicked on save button");
-    SaveTransfer();
-});
+
 
 function OnSuccess(response) {
     var idata = response.d;
@@ -113,12 +174,13 @@ function SaveTransfer() {
     var classname = c[1];
     var coursename = document.getElementById("coursename").innerText;
     var reason = document.getElementById("txtreason").innerText;
-    var week = document.getElementById("newweek").innerText;
+    var week = $('#weeklist1').val();
     var day = $('#weekdays option:selected').val();
     var section = document.getElementById("section").innerText;
-    var building = $('#buildinglist option:selected').text();
+    var building = $('#buildinglist1 option:selected').text();
     var classroom = $('#classlist option:selected').text();
     var teacher = document.getElementById("newteacher").innerText;
+    
     SaveTransferApplication(classname, coursename, reason, week, day, section, building, classroom, teacher,id);
 
    // $("#sec_box").load("window/p-course/002-1.html");
@@ -129,7 +191,7 @@ function GetFreeWeek(idata) {
     if (idata.length > 0) {
         var tabledata = [];
         var classlist = [];
-        var endweeklist = [];
+        var endweeklist1 = [];
         var startweek = [];
         var maxweek = 22;  var minweek = 1;
         for (i = 0; i < idata.length; i++) {
@@ -178,7 +240,8 @@ function SaveTransferApplication(classname, coursename, reason,week,day,section,
     adata[2] = reason;
     adata[3] = week;
     adata[4] = day; adata[5] = section; adata[6] = building;
-    adata[7] = classroom; adata[8] = teacher; adata[9] = "pending"; adata[10] = id;
+    adata[7] = classroom; adata[8] = teacher; adata[9] = "pending"; 
+    adata[10] = id;
     var jsonData = JSON.stringify({
         name: adata
     });
@@ -242,38 +305,20 @@ function OnSuccessBuilding(response) {
 
         inner += '<option class="option" value="'+data[i]+'">' + data[i] + '</option>';
     }
-    document.getElementById("buildinglist").innerHTML = inner;
+    document.getElementById("buildinglist1").innerHTML = inner;
     
 }
 function OnErrorCallBuilding(respo) {
     console.log(respo);
 }
 
-$("#buildinglist").off("change").on("change",  function () {
-    var adata = [];
-    console.log($('#buildinglist option:selected').text());
-    adata[1] = $('#buildinglist option:selected').text();
-    adata[0] = document.getElementById("newweek").innerText;
-    var jsonData = JSON.stringify({
-        name: adata
-    });
-    $.ajax({
-        type: "POST",
-        url: "../Services/ScheduleData.asmx/GetAvailClasses",
-        data: jsonData,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: OnSuccessClass,
-        error: OnErrorCallClass
-    });
 
-});
 
 function OnSuccessClass(response) {
     var data = response.d;
     var inner = [];
     for (i = 0; i < data.length; i++) {
-        inner += '<option class="option" value="'+data[i]+'">' + data[i] + '</option>';
+        inner += '<option class="option" value="'+data[i]+'" selected>' + data[i] + '</option>';
     }
     document.getElementById("classlist").innerHTML = inner;
 }
@@ -281,25 +326,7 @@ function OnErrorCallClass(respo) {
     console.log(respo);
 }
 
-$("#classlist").off("change").on("change", function () {
-    var adata = [];
-    
-    adata[1] = $('#classlist option:selected').text();
-    adata[0] = document.getElementById("newweek").innerText;
-    var jsonData = JSON.stringify({
-        name: adata
-    });
-    $.ajax({
-        type: "POST",
-        url: "../Services/ScheduleData.asmx/GetAvailDay",
-        data: jsonData,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: OnSuccessDay,
-        error: OnErrorCallDay
-    });
 
-});
 
 var sections = [];
 function OnSuccessDay(response) {
@@ -343,17 +370,7 @@ function OnErrorCallDay(respo) {
     console.log(respo);
 }
 
-$("#weekdays").off("change").on("change", function () {
-    
-    console.log(document.getElementById("weekdays").innerText);
-    var day = $('#weekdays option:selected').val();
-    var inner = [];
-    var currentsec = sections[parseInt(day) - 1];
-    for (i = 0; i < currentsec.length; i++) {
-        inner += '<div class="option sectionlist"><a>' + currentsec[i] + '</a></div>';
-    }
-    document.getElementById("sectionlist").innerHTML = inner;
-});
+
 
 
 function GetTeacher(coursename) {

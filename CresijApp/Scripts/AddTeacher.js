@@ -28,10 +28,12 @@
 //$(document).on("click", "#savedetail", function () {
 
 //});
-$("#AddTeacherDetail").off('click').on('click', function () {
-    console.log("clicked on save button");
-    AddNewTeacher();
-});
+$(document).ready(function(){
+    ("#AddTeacherDetail").on('click', function () {
+        console.log("clicked on save button");
+        AddNewTeacher();
+    });
+})
 
 function OnSuccess_(response) {
     var idata = response.d;

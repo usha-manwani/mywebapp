@@ -1,4 +1,4 @@
-﻿$(function () {
+﻿$(document).ready(function () {
     $.ajax({
         type: "POST",
         url: "../Services/ScheduleData.asmx/GetBuilding",
@@ -7,6 +7,10 @@
         dataType: "json",
         success: OnSuccessBuilding,
         error: OnErrorCall_
+    });
+    $("#buildinglist").off("change").on("change", function () {
+
+        GetClassList();
     });
 });
 function OnSuccessBuilding(response) {
@@ -21,16 +25,15 @@ function OnSuccessBuilding(response) {
 function OnErrorCall_(respo) {
     console.log(respo);
 }
-$("#buildinglist").off("change").on("change", function () {  
-    
-    GetClassList();
-});
+
 
 function GetClassList() {
     console.log($('#buildinglist option:selected').text());
-    var adata ;
-    adata= $('#buildinglist option:selected').text();
+    var adata=[] ;
+    adata[0]= $('#buildinglist option:selected').text();
     //adata[1] = $('#floorlist option:selected').text();
+    var userid = sessionStorage.getItem("LoginId");
+    adata[1] = userid;
     document.getElementById("equipcontrol").innerHTML = "";
     var jsonData = JSON.stringify({
         data: adata
@@ -126,6 +129,8 @@ function GetIPList() {
     var adata=[];
     adata[0] = $('#buildinglist option:selected').text();
     adata[1] = $('#floorlist option:selected').text();
+    var userid = sessionStorage.getItem("LoginId");
+    adata[2] = userid;
     document.getElementById("equipcontrol").innerHTML = "";
     var jsonData = JSON.stringify({
         data: adata

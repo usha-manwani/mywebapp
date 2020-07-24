@@ -1,6 +1,6 @@
 ﻿$ = jQuery.noConflict();
 var ipAddress = "";
-$(function () {
+$(document).ready(function () {
     var chat = $.connection.myHub;
 
     chat.client.envMessage = function (name, message) {

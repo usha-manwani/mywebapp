@@ -59,12 +59,13 @@ namespace WebCresij
                 ddlClass.DataSource = null;
                 ddlClass.DataBind();
                 string gradeID = ddlGrade.SelectedValue;
-                string query = "select ClassID, ClassName from Class_Details  " +
-                " where GradeID in(select id from Grade_details where grade_id ='" + gradeID + "')";
+                string query = "select classname, ccip from cresijdatabase.centralcontrol cc join"+
+                    " cresijdatabase.class_details cd on cc.location = cd.id  where cd.GradeID in "+"" +
+                    "(select id from Grade_details where grade_id ='" + gradeID + "')";
                 DataTable dt = PopulateTree.ExecuteCommand(query);
                 ddlClass.DataSource = dt;
-                ddlClass.DataTextField = "ClassName";
-                ddlClass.DataValueField = "ClassID";
+                ddlClass.DataTextField = "classname";
+                ddlClass.DataValueField = "ccip";
                 ddlClass.DataBind();
             }
             catch

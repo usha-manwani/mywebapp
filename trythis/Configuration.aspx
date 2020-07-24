@@ -318,7 +318,7 @@
                                 <div class="row">
                                     <div class="col" style="text-align: center">
                                         <button class="btn-info customButton" id="readConfig"
-                                            value="Read Configuration">
+                                            value="Read Configuration" type="button">
                                             <span><%=Resources.Resource.ReadConfig%></span></button>
                                     </div>
                                     <div class="col" style="text-align: center">
@@ -1165,7 +1165,7 @@
         <ContentTemplate>
             <div class="row " id="classchk" style="background-color: #4ecdc4; margin-left: -30px; margin-top: -20px;">
                 <span><%=Resources.Resource.SelectClassConfig%></span> - &nbsp;
-                <asp:CheckBoxList runat="server" ID="ddlClass"></asp:CheckBoxList>
+                <asp:CheckBoxList runat="server" ID="ddlClass" name="classlistcheckboxes" ClientIDMode="Static"></asp:CheckBoxList>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>

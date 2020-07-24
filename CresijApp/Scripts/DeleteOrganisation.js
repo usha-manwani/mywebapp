@@ -10,18 +10,20 @@ function OnSuccess_(response) {
 function OnErrorCall_(respo) {
     console.log(respo);
 }
-$("#deleteorglink").off('click').on('click', function () {
-    console.log("org id: " + $("#orgsno").val());
-    var jsonData = JSON.stringify({
-        sno: $("#orgsno").val()
+$(document).ready(function () {
+    ("#deleteorglink").on('click', function () {
+        console.log("org id: " + $("#orgsno").val());
+        var jsonData = JSON.stringify({
+            sno: $("#orgsno").val()
+        });
+        $.ajax({
+            type: "POST",
+            url: "../Services/DeleteOrgData.asmx/DeleteOrg",
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccess_,
+            error: OnErrorCall_
+        });
     });
-    $.ajax({
-        type: "POST",
-        url: "../Services/DeleteOrgData.asmx/DeleteOrg",
-        data: jsonData,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: OnSuccess_,
-        error: OnErrorCall_
-    });
-});
+})

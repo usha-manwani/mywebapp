@@ -221,5 +221,39 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+
+        public DataTable GetFloorClassByBuildingUserAccess(string building,string userid)
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                try
+                {
+                    string query = "select  floor ,group_concat(distinct(classname)) as class from classdetails " +
+                        " where teachingbuilding='" + building + "' group by floor and classname in " +
+                        "(select classid from userlocationaccess where userserialnum =(select serialno from userdetails" +
+                        " where loginid ='"+userid+"')) ";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
+                        mySqlDataAdapter.Fill(dt);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    con.Close();
+                }
+            }
+            return dt;
+        }
     }
 }

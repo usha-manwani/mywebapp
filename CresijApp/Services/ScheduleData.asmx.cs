@@ -111,10 +111,10 @@ namespace CresijApp.Services
         }
 
         [WebMethod]
-        public List<object> GetScheduleForTransfer(string name)
+        public List<object> GetScheduleForTransfer(string[] name)
         {
             Schedule schedule = new Schedule();
-            DataTable dt = schedule.GetScheduleForTransfer(name);
+            DataTable dt = schedule.GetScheduleForTransfer(name[0],name[1],name[2]);
             List<object> idata = new List<object>();
             foreach (DataRow dr in dt.Rows)
             {
@@ -245,7 +245,7 @@ namespace CresijApp.Services
         public List<object> GetAvailClasses(string[] name)
         {
             Schedule schedule = new Schedule();
-            DataTable r = schedule.GetAvailClasses(name[0],name[1]);
+            DataTable r = schedule.GetAvailClasses(name[0],name[1],name[2],name[3]);
             List<object> idata = new List<object>();
             foreach (DataRow dr in r.Rows)
             {
@@ -338,11 +338,11 @@ namespace CresijApp.Services
         }
 
         [WebMethod]
-        public List<object> GetScheduleForDate(string date)
+        public List<object> GetScheduleForDate(string[] name)
         {
             Schedule schedule = new Schedule();
             //string dd = DateTime.Now.ToString("yyyy-MM-dd");
-            DataTable r = schedule.GetScheduleForDate(date);
+            DataTable r = schedule.GetScheduleForDate(name[0],name[1]);
             List<object> data = new List<object>();
             foreach(DataRow dr in r.Rows)
             {
@@ -355,7 +355,7 @@ namespace CresijApp.Services
         public List<object> GetClassesByDateAndBuilding(string[] name)
         {
             Schedule schedule = new Schedule();
-            DataTable r = schedule.GetClassesByDateAndBuilding(name[0], name[1]);
+            DataTable r = schedule.GetClassesByDateAndBuilding(name[0], name[1],name[2]);
             List<object> idata = new List<object>();
             foreach (DataRow dr in r.Rows)
             {
@@ -426,7 +426,7 @@ namespace CresijApp.Services
         public List<object> GetScheduleByBuildWeekSem(string[] name)
         {
             Schedule schedule = new Schedule();
-            DataTable r = schedule.GetScheduleByBuildWeekSem(name[0],name[1],name[2]);
+            DataTable r = schedule.GetScheduleByBuildWeekSem(name[0],name[1],name[2],name[3]);
             List<object> idata = new List<object>();
             foreach (DataRow dr in r.Rows)
             {
@@ -439,7 +439,7 @@ namespace CresijApp.Services
         public List<object> GetScheduleByBuildSem(string[] name)
         {
             Schedule schedule = new Schedule();
-            DataTable r = schedule.GetScheduleByBuildSem(name[0], name[1]);
+            DataTable r = schedule.GetScheduleByBuildSem(name[0], name[1],name[2]);
             List<object> idata = new List<object>();
             foreach (DataRow dr in r.Rows)
             {
@@ -451,7 +451,7 @@ namespace CresijApp.Services
         public List<object> GetTransferScheduleByBuildSem(string[] name)
         {
             Schedule schedule = new Schedule();
-            DataTable r = schedule.GetTransferScheduleByBuildSem(name[0], name[1]);
+            DataTable r = schedule.GetTransferScheduleByBuildSem(name[0], name[1],name[2],name[3],name[4]);
             List<object> idata = new List<object>();
             foreach (DataRow dr in r.Rows)
             {
@@ -463,7 +463,7 @@ namespace CresijApp.Services
         public List<object> GetScheduleByBuild(string[] name)
         {
             Schedule schedule = new Schedule();
-            DataTable r = schedule.GetScheduleByBuild(name[0]);
+            DataTable r = schedule.GetScheduleByBuild(name[0],name[1]);
             List<object> idata = new List<object>();
             foreach (DataRow dr in r.Rows)
             {
@@ -477,6 +477,19 @@ namespace CresijApp.Services
         {
             Schedule schedule = new Schedule();
             DataTable r = schedule.GetCalenderDates(name);
+            List<object> idata = new List<object>();
+            foreach (DataRow dr in r.Rows)
+            {
+                idata.Add(dr.ItemArray);
+            }
+            return idata;
+        }
+
+        [WebMethod]
+        public List<object> GetScheduleByBuildWeekSemDay(string[] name)
+        {
+            Schedule schedule = new Schedule();
+            DataTable r = schedule.GetScheduleByBuildWeekSemDay(name[0], name[1], name[2], name[3],name[4]);
             List<object> idata = new List<object>();
             foreach (DataRow dr in r.Rows)
             {

@@ -8,8 +8,10 @@
     myarray[5] = document.getElementById("phone").value;
     myarray[6] = document.getElementById("notes").value;
     myarray[7] = document.getElementById("pass").value;
-    myarray[8] = document.getElementById("confirmpass").value;
-    if (myarray[8] != myarray[7]) {
+    myarray[8] = document.getElementById("userdate").value;
+    myarray[9] = document.getElementById("confirmpass").value;
+    myarray[10] = document.getElementById("validtime").value;
+    if (myarray[10] != myarray[7]) {
         alert("password doesnt match!!");
     }
     else {
@@ -30,10 +32,7 @@
     }
 }
 
-$("#AddUser").off('click').on('click', function () {
-    console.log("clicked on save button");
-    AddNewUser();
-});
+
 
 function OnSuccess_(response) {
     var idata = response.d;
@@ -44,7 +43,7 @@ function OnSuccess_(response) {
 function OnErrorCall_(respo) {
     console.log(respo);
 }
-$(function () {
+$(document).ready(function () {
     console.log("add user data");
     $.ajax({
         type: "POST",
@@ -54,6 +53,35 @@ $(function () {
         dataType: "json",
         success: OnSuccessBuilding,
         error: OnErrorCall_
+    });
+    $("#AddUser").on('click', function () {
+        console.log("clicked on save button");
+        AddNewUser();
+    });
+    $("input[name='usertype']").on("change", function () {
+        if ($(this).val() == "temporary") {
+            $("#daterow").attr("style", "display:table-row");
+            $('.datetimepicker').datetimepicker({
+                format: 'YYYY-MM-DD',
+                locale: 'zh-cn',
+                defaultDate: new Date(),
+                icons: {
+                    previous: "fa fa-arrow-circle-left green",
+                    next: "fa fa-arrow-circle-right green",
+                }
+            });
+            $('.datetimepicker-clock').datetimepicker({
+                format: 'LT',
+                locale: 'zh-cn',
+                icons: {
+                    up: "fa fa-chevron-up green",
+                    down: "fa fa-chevron-down green",
+                }
+            });
+        }
+        else {
+            $("#daterow").attr("style", "display:none");
+        }
     });
 });
 
@@ -70,3 +98,5 @@ function OnSuccessBuilding(respo) {
 function OnErrorCall_(respo) {
     console.log(respo);
 }
+
+

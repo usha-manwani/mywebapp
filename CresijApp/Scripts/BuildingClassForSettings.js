@@ -1,5 +1,7 @@
-﻿$(function () {
-    console.log("system setting config page");
+﻿$(document).ready(function () {
+     
+    
+   // console.log("system setting config page");
     $.ajax({
         type: "POST",
         url: "../Services/ScheduleData.asmx/GetBuilding",
@@ -20,14 +22,18 @@ function OnSuccessBuilding(response) {
     var data = response.d;
     $("#buildingtable tr:gt(0)").remove();
     for (i = 0; i < data.length; i++) {
-        var dd = data[i];
-        console.log(dd);
+        var dd = [];
+        dd[0]=data[i][0];
+        var userid = sessionStorage.getItem("LoginId");
+        dd[1] = userid;
         var jsonData = JSON.stringify({
-            building: dd[0]
+            building: dd
         });
+       // console.log(dd);
+        
         $.ajax({
             type: "POST",
-            url: "../Services/GetSetSystemConfigInfo.asmx/GetFloorClassByBuilding",
+            url: "../Services/GetSetSystemConfigInfo.asmx/GetFloorClassByBuildingUserAccess",
             data: jsonData,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -47,7 +53,7 @@ function OnSuccessFloorClassroom(response) {
             var classnames = data1[1].split(',');
             html += '<tr><td class="th-2"><b><i class="fa fa-check jcheckbox check_all_td"></i> ' + data1[0] + '</b></td><td>';
             for (j = 0; j < classnames.length; j++) {
-                html += '<span><label><input type="checkbox" name="classlist"><i class="fa fa-check jcheckbox"></i> ' + classnames[j] + '</label></span>';
+                html += '<span><label><input type="checkbox" name="classlist" value="' + classnames[j] + '"><i class="fa fa-check jcheckbox"></i> ' + classnames[j] + '</label></span>';
             }
             html += '</td></tr>';
         }

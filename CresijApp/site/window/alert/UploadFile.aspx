@@ -6,6 +6,10 @@
 <html>
     <body>
         <form runat="server">
+            <h4>To download the template for the file 
+                <a href="DownloadCSVTempelate.aspx">click here</a>
+
+            </h4>
             <div>
                
             <asp:FileUpload runat="server" ID="Upload" />

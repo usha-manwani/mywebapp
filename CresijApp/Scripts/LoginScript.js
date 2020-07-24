@@ -30,10 +30,33 @@ function OnSuccessLogin(response) {
     var data = response.d;
     if (data.length > 0) {
     var dd = data[0];
-    
-        sessionStorage.setItem("LoginId", dd[0]);
-        sessionStorage.setItem("userName", dd[1]);
-        window.location.href = "home.html";
+        var ptype = dd[2];
+        if (ptype == 'longterm') {
+            sessionStorage.setItem("LoginId", dd[0]);
+            sessionStorage.setItem("userName", dd[1]);
+            window.location.href = "home.html";
+        }
+        else if (ptype == "temporary") {
+            var len = moment(dd[3]).toDate();
+            var time1 = dd[4];
+            var dates = moment(len).format('YYYY-MM-DD');
+            var comparedate = moment(new Date()).format('YYYY-MM-DD');
+            if (dates >= comparedate) {
+                var today = new Date();
+                var time2 = today.getHours() + ":" + today.getMinutes();
+                if (time1 > time2) {
+                    sessionStorage.setItem("LoginId", dd[0]);
+                    sessionStorage.setItem("userName", dd[1]);
+                    window.location.href = "home.html";
+                }
+                else
+                    alert("Your Account has Expired!!");
+            }
+            else {
+                alert("Your Account has Expired!!");
+            }
+        }
+        
     }
     else {
         alert("LoginID or password incorrect");

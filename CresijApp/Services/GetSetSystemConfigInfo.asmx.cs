@@ -33,6 +33,23 @@ namespace CresijApp.Services
                 }
                 return idata;
             }
+
+        [WebMethod]
+        public List<object> GetFloorClassByBuildingUserAccess(string[] building)
+        {
+            List<object> idata = new List<object>();
+            idata.Add(building[0]);
+            SystemInfo systemInfo = new SystemInfo();
+            DataTable dt = systemInfo.GetFloorClassByBuildingUserAccess(building[0],building[1]);
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    idata.Add(dr.ItemArray);
+                }
+            }
+            return idata;
+        }
         [WebMethod]
         public List<object> GetIpByClass(string classlist)
         {

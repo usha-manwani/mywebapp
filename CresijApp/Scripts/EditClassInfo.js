@@ -1,7 +1,4 @@
-﻿$("#EditClassDetail").off('click').on('click', function () {
-    console.log("clicked on save button");
-    EditClassData();
-});
+﻿
 
 function OnSuccess(response) {
     var idata = response.d;
@@ -55,7 +52,7 @@ function EditClassData() {
 
 }
 
-$(function () {
+$(document).ready(function () {
     $.ajax({
         type: "POST",
         url: "../Services/ScheduleData.asmx/GetBuilding",
@@ -65,7 +62,15 @@ $(function () {
         success: OnSuccessBuilding,
         error: OnErrorCall_
     });
-   
+    $("#buildinglist").on('click', function () {
+        var building = $("input[name='building']:checked").val();
+
+        GetFloorList(building);
+    });
+    $("#EditClassDetail").on('click', function () {
+        console.log("clicked on save button");
+        EditClassData();
+    });
 })
 
 function OnSuccessClass(response) {
@@ -142,11 +147,7 @@ function OnSuccessBuilding(response) {
     
 }
 
-$("#buildinglist").off('click').on('click', function () {
-    var building = $("input[name='building']:checked").val();
 
-    GetFloorList(building);
-});
 
 function GetFloorList(building) {
     var jsonData = JSON.stringify({

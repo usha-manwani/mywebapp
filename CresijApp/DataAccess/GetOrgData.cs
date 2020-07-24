@@ -75,7 +75,7 @@ namespace CresijApp.DataAccess
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     string query = " SELECT usd.SerialNo, LoginID, Username, PersonType,  buildingname, PersonnelStatus " +
-                        " ,phone,  notes FROM userdetails usd join buildingdetails" +
+                        " ,phone,  notes, validtill FROM userdetails usd join buildingdetails" +
                         " dept on usd.deptCode = dept.id";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
@@ -259,7 +259,7 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetIPClassByBuilding(string data)
+        public DataTable GetIPClassByBuilding(string data,string userid)
         {
             DataTable dt = new DataTable();
             try
@@ -271,7 +271,7 @@ namespace CresijApp.DataAccess
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@building", data);
-                        
+                        cmd.Parameters.AddWithValue("@userid", userid);
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                         if (con.State != ConnectionState.Open)
                         {
@@ -285,14 +285,16 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetIPClassByBuildingFloor(string building,string floor)
+        public DataTable GetIPClassByBuildingFloor(string building,string floor,string userid)
         {
             DataTable dt = new DataTable();
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = "SELECT ClassName,CCEquipIP from classdetails where teachingbuilding='" + building + "' and floor ='"+floor+"'";
+                    string query = "SELECT ClassName,CCEquipIP from classdetails where teachingbuilding='" + building + "' and floor ='"+floor+"' " +
+                        " and classname in (select classid from userlocationaccess where userserialnum = " +
+                        " (select serialno from userdetails where loginid= '"+userid+"' COLLATE utf8mb4_unicode_ci))";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
