@@ -24,7 +24,7 @@
 }
 
 $(document).ready(function () {
-    ("#AddStudentDetail").on('click', function () {
+    $("#AddStudentDetail").on('click', function () {
         console.log("clicked on save button");
         AddNewStudent();
     });

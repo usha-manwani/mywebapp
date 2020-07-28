@@ -30,15 +30,12 @@ namespace CresijApp.Services
             List<object> idata = new List<object>();
             GetOrgData gd = new GetOrgData();
             DataTable dt = new DataTable();
-            dt = gd.GetOrgBuildingInfo();
-           
+            dt = gd.GetOrgBuildingInfo();           
             foreach (DataRow row in dt.Rows)
             {
                 idata.Add(row.ItemArray);
-            }
-            
+            }            
             return idata;
-
         }
 
         [WebMethod]
@@ -48,7 +45,6 @@ namespace CresijApp.Services
             GetOrgData gd = new GetOrgData();
             DataTable dt = new DataTable();
             dt = gd.GetStudentInfo();
-
             List<string> studentid = new List<string>();
             List<string> studentname = new List<string>();
             List<string> gender = new List<string>();
@@ -69,7 +65,6 @@ namespace CresijApp.Services
                 idcard.Add(row[6].ToString());
                 onecard.Add(row[7].ToString());
             }
-
             idata.Add(studentid);
             idata.Add(studentname);
             idata.Add(gender);
@@ -79,7 +74,6 @@ namespace CresijApp.Services
             idata.Add(idcard);
             idata.Add(onecard);
             return idata;
-
         }
 
         [WebMethod]
@@ -89,7 +83,6 @@ namespace CresijApp.Services
             GetOrgData gd = new GetOrgData();
             DataTable dt = new DataTable();
             dt = gd.GetTeacherInfo();
-
             List<string> teacherid = new List<string>();
             List<string> teachername = new List<string>();
             List<string> gender = new List<string>();
@@ -100,7 +93,6 @@ namespace CresijApp.Services
             List<string> onecard = new List<string>();
             foreach (DataRow row in dt.Rows)
             {
-
                 teacherid.Add(row[0].ToString());
                 teachername.Add(row[1].ToString());
                 gender.Add(row[2].ToString());
@@ -110,7 +102,6 @@ namespace CresijApp.Services
                 idcard.Add(row[6].ToString());
                 onecard.Add(row[7].ToString());
             }
-
             idata.Add(teacherid);
             idata.Add(teachername);
             idata.Add(gender);
@@ -120,7 +111,6 @@ namespace CresijApp.Services
             idata.Add(idcard);
             idata.Add(onecard);
             return idata;
-
         }
         [WebMethod]
         public List<object> GetUserData()
@@ -143,28 +133,23 @@ namespace CresijApp.Services
                 sno.Add(Convert.ToInt32(row[0]));
                 loginid.Add(row[1].ToString());
                 username.Add(row[2].ToString());
-                persontype.Add(row[3].ToString());
-               
+                persontype.Add(row[3].ToString());               
                 deptname.Add(row[4].ToString());
                 personalstatus.Add(row[5].ToString());
                 telephone.Add(row[6].ToString());
                 notes.Add(row[7].ToString());
                 validity.Add(row[8].ToString());
-
             }
             idata.Add(sno);
             idata.Add(loginid);
             idata.Add(username);
-            idata.Add(persontype);
-           
+            idata.Add(persontype);           
             idata.Add(deptname);
             idata.Add(personalstatus);
             idata.Add(telephone);
             idata.Add(notes);
             idata.Add(validity);
-
             return idata;
-
         }
 
         [WebMethod]
@@ -175,7 +160,6 @@ namespace CresijApp.Services
             DataTable dt = gd.GetUserDataonDemand(name);
             idata.Add(dt.Rows[0].ItemArray);
             return idata;
-
         }
         public class ClassDetails{
             public string Classid { get; set; }
@@ -228,22 +212,7 @@ namespace CresijApp.Services
             dt = gd.GetClassroomInfo();
             foreach (DataRow dr in dt.Rows)
                 idata.Add(dr.ItemArray);
-            dt.Clear();
-            //dt = gd.GetDevicesInfo();
-           
-            //List<string> pass = new List<string>();
-            //List<DeviceDetails> devicedata = new List<DeviceDetails>();
-            //devicedata = (from DataRow dr in dt.Rows
-            //              select new DeviceDetails() {
-            //                  Ip = dr[0].ToString(),
-            //                  Mac = dr[1].ToString(),
-            //                  Port = dr[2].ToString(),
-            //                  Userid =dr[3].ToString(),
-            //                  Pass = dr[4].ToString()
-            //              }).ToList();           
-            
-
-            
+            dt.Clear();                             
             return idata;
         }
 

@@ -29,7 +29,7 @@
 
 //});
 $(document).ready(function(){
-    ("#AddTeacherDetail").on('click', function () {
+    $("#AddTeacherDetail").on('click', function () {
         console.log("clicked on save button");
         AddNewTeacher();
     });

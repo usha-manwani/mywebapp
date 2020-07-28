@@ -11,7 +11,7 @@ function OnErrorCall_(respo) {
     console.log(respo);
 }
 $(document).ready(function () {
-    ("#deleteorglink").on('click', function () {
+    $("#deleteorglink").on('click', function () {
         console.log("org id: " + $("#orgsno").val());
         var jsonData = JSON.stringify({
             sno: $("#orgsno").val()

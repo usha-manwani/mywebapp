@@ -694,7 +694,12 @@
     <Content Include="site\window\alert\DeleteStudent.html" />
     <Content Include="site\window\alert\DeleteTeacher.html" />
     <Content Include="site\window\alert\Delete_User.html" />
+    <Content Include="site\window\alert\DownloadUserDataTemplate.aspx" />
+    <Content Include="site\window\alert\ImportClassData.html" />
     <Content Include="site\window\alert\importSchedule_xlsx.html" />
+    <Content Include="site\window\alert\ImportStudentData.html" />
+    <Content Include="site\window\alert\ImportTeacherData.html" />
+    <Content Include="site\window\alert\importUserdata.html" />
     <Content Include="site\window\alert\import_xls.html" />
     <Content Include="site\window\alert\interactive_settings.html" />
     <Content Include="site\window\alert\operate\add_failure.html" />
@@ -923,6 +928,13 @@
     <Compile Include="Services\UserLogs.asmx.cs">
       <DependentUpon>UserLogs.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadUserDataTemplate.aspx.cs">
+      <DependentUpon>DownloadUserDataTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadUserDataTemplate.aspx.designer.cs">
+      <DependentUpon>DownloadUserDataTemplate.aspx</DependentUpon>
     </Compile>
     <Compile Include="site\window\alert\UploadClass.aspx.cs">
       <DependentUpon>UploadClass.aspx</DependentUpon>

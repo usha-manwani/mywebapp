@@ -11,7 +11,7 @@ function OnErrorCall_(respo) {
     console.log(respo);
 }
 $(document).ready(function () {
-    ("#deleteStudent").on('click', function () {
+    $("#deleteStudent").on('click', function () {
         console.log("student id: " + $("#studentid").val());
         var jsonData = JSON.stringify({
             id: $("#studentid").val()

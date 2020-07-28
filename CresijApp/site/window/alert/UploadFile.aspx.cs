@@ -23,43 +23,54 @@ namespace CresijApp.site.window.alert
         }
         protected void BtnUpload_Click1(object sender, EventArgs e)
         {
-            string filename = "";
-            try
+            string filename = ""; int numofrows = 0;
+            try 
             {
                 if (IsPostBack && Upload.HasFile)
                 {
                     if (Path.GetExtension(Upload.FileName).Equals(".txt") || Path.GetExtension(Upload.FileName).Equals(".csv"))
                     {
-                        var fname = Upload.FileName + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
-                        Upload.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fname);
-                        filename = Server.MapPath("~/Uploads/") + fname;
+                        var fname = Path.GetFileNameWithoutExtension(Upload.FileName) + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
+                        Upload.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fname + Path.GetExtension(Upload.FileName));
+                        filename = Server.MapPath("~/Uploads/") + fname + Path.GetExtension(Upload.FileName);
 
                         using (var conn = new MySqlConnection(constr))
                         {
-                            // creating bulk loader instance
-                            MySqlBulkLoader objbulk = new MySqlBulkLoader(conn)
-                            {
-                                TableName = "operationmgmt",
-                                Timeout = 600, // set command timeout
-                                FieldTerminator = ",",
-                                LineTerminator = "\r\n",
-                                FileName = filename,
-                                //NumberOfLinesToSkip = 1 // adjust this depending on CSV file headers
-                            };
-                            objbulk.Columns.Add("devicename");
-                            objbulk.Columns.Add("assetno");
-                            objbulk.Columns.Add("model");
-                            objbulk.Columns.Add("specification");
-                            objbulk.Columns.Add("devicetype");
-                            objbulk.Columns.Add("price");
-                            objbulk.Columns.Add("factory");
-                            objbulk.Columns.Add("dateofmanufacture");
-                            objbulk.Columns.Add("dateofpurchase");
-                            objbulk.Columns.Add("dateofdelivery");
-                            objbulk.Columns.Add("warrantytime");
-                            objbulk.Columns.Add("locationType");
-                            objbulk.Columns.Add("equipmentstatus");
-                            objbulk.Load();
+                            string filename1 = filename.Replace("\\", "/");
+                            var query = "load data infile '" + filename1 + "' ignore into table organisationdatabase.operationmgmt fields " +
+                                "terminated by ',' enclosed by '\"' lines terminated by '\n' IGNORE 1 LINES(`devicename`,`assetno`,`model`," +
+                                "`specification`,`devicetype`,`price`,`factory`,`dateofmanufacture`,`dateofpurchase`,`dateofdelivery`," +
+                                "`warrantytime`,`locationType`,`equipmentstatus`)";
+                            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                            if (conn.State != ConnectionState.Open)
+                                conn.Open();
+                            cmd.CommandTimeout = 5000000;
+                            numofrows = cmd.ExecuteNonQuery();
+                            //// creating bulk loader instance
+                            //MySqlBulkLoader objbulk = new MySqlBulkLoader(conn)
+                            //{
+                            //    TableName = "operationmgmt",
+                            //    Timeout = 600, // set command timeout
+                            //    FieldTerminator = ",",
+                            //    LineTerminator = "\r\n",
+                            //    FileName = filename,
+                            //    //NumberOfLinesToSkip = 1 // adjust this depending on CSV file headers
+                            //};
+                            //objbulk.Columns.Add("devicename");
+                            //objbulk.Columns.Add("assetno");
+                            //objbulk.Columns.Add("model");
+                            //objbulk.Columns.Add("specification");
+                            //objbulk.Columns.Add("devicetype");
+                            //objbulk.Columns.Add("price");
+                            //objbulk.Columns.Add("factory");
+                            //objbulk.Columns.Add("dateofmanufacture");
+                            //objbulk.Columns.Add("dateofpurchase");
+                            //objbulk.Columns.Add("dateofdelivery");
+                            //objbulk.Columns.Add("warrantytime");
+                            //objbulk.Columns.Add("locationType");
+                            //objbulk.Columns.Add("equipmentstatus");
+                            //objbulk.Load();
                         }
                     }
                 }

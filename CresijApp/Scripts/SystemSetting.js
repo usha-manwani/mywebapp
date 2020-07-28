@@ -1,6 +1,6 @@
 ﻿console.log("page loaded");
 $(document).ready(function () {
-    ('#submitButton').on('click', function SubmitInfo() {
+    $('#submitButton').on('click', function SubmitInfo() {
         uploadlogo();
         console.log("submit button clicked");
 

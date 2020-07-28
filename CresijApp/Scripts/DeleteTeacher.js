@@ -10,7 +10,7 @@ function OnErrorCall_(respo) {
     console.log(respo);
 }
 $(document).ready(function () {
-    ("#deleteTeacher").on('click', function () {
+    $("#deleteTeacher").on('click', function () {
         console.log("org id: " + $("#teacherid").val());
         var jsonData = JSON.stringify({
             id: $("#teacherid").val()

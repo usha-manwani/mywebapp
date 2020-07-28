@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    ("#EditStudentDetail").on('click', function () {
+    $("#EditStudentDetail").on('click', function () {
         console.log("clicked on save button");
         EditStudentData();
     });

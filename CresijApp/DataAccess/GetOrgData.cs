@@ -76,7 +76,7 @@ namespace CresijApp.DataAccess
                 {
                     string query = " SELECT usd.SerialNo, LoginID, Username, PersonType,  buildingname, PersonnelStatus " +
                         " ,phone,  notes, validtill FROM userdetails usd join buildingdetails" +
-                        " dept on usd.deptCode = dept.id";
+                        " dept on usd.deptCode = dept.buildingname";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);

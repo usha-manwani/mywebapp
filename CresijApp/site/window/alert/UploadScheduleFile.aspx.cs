@@ -21,41 +21,51 @@ namespace CresijApp.site.window
         }
         protected void BtnUpload_Click1(object sender, EventArgs e)
         {
-            string filename = "";
+            string filename = ""; int numofrows = 0;
             try
             {
                 if (IsPostBack && Upload.HasFile)
                 {
                     if (Path.GetExtension(Upload.FileName).Equals(".txt") || Path.GetExtension(Upload.FileName).Equals(".csv"))
                     {
-                        var fname = Upload.FileName + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
-                        Upload.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fname);
-                        filename = Server.MapPath("~/Uploads/") + fname;
+                        var fname = Path.GetFileNameWithoutExtension(Upload.FileName) + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
+                        Upload.PostedFile.SaveAs(Server.MapPath("~/Uploads/") + fname + Path.GetExtension(Upload.FileName));
+                        filename = Server.MapPath("~/Uploads/") + fname + Path.GetExtension(Upload.FileName);
 
                         using (var conn = new MySqlConnection(constr))
                         {
+                            string filename1 = filename.Replace("\\", "/");
+                            var query = "load data infile '" + filename1 + "' ignore into table organisationdatabase.schedule fields " +
+                                "terminated by ',' enclosed by '\"' lines terminated by '\n' IGNORE 1 LINES(`year`,`sem`,`teacherid`," +
+                                "`teachername`,`courseid`,`classname`,`coursename`,`weekstart`,`weekend`,`dayno`,`section`)";
+                            MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                            if (conn.State != ConnectionState.Open)
+                                conn.Open();
+                            cmd.CommandTimeout = 5000000;
+                            numofrows = cmd.ExecuteNonQuery();
                             // creating bulk loader instance
-                            MySqlBulkLoader objbulk = new MySqlBulkLoader(conn)
-                            {
-                                TableName = "scheduleoriginal",
-                                Timeout = 600, // set command timeout
-                                FieldTerminator = ",",
-                                LineTerminator = "\r\n",
-                                FileName = filename,
-                              //  NumberOfLinesToSkip = 3 // adjust this depending on CSV file headers
-                            };
-                            objbulk.Columns.Add("year");
-                            objbulk.Columns.Add("sem");
-                            objbulk.Columns.Add("teacherid");
-                            objbulk.Columns.Add("teachername");
-                            objbulk.Columns.Add("courseid");                            
-                            objbulk.Columns.Add("classname");
-                            objbulk.Columns.Add("coursename");
-                            objbulk.Columns.Add("weekstart");
-                            objbulk.Columns.Add("weekend");
-                            objbulk.Columns.Add("dayno");
-                            objbulk.Columns.Add("section");                            
-                            objbulk.Load();
+                            //MySqlBulkLoader objbulk = new MySqlBulkLoader(conn)
+                            //{
+                            //    TableName = "scheduleoriginal",
+                            //    Timeout = 600, // set command timeout 
+                            //    FieldTerminator = ",",
+                            //    LineTerminator = "\r\n",
+                            //    FileName = filename,
+                            //  //  NumberOfLinesToSkip = 3 // adjust this depending on CSV file headers
+                            //};
+                            //objbulk.Columns.Add("year");
+                            //objbulk.Columns.Add("sem");
+                            //objbulk.Columns.Add("teacherid");
+                            //objbulk.Columns.Add("teachername");
+                            //objbulk.Columns.Add("courseid");                            
+                            //objbulk.Columns.Add("classname");
+                            //objbulk.Columns.Add("coursename");
+                            //objbulk.Columns.Add("weekstart");
+                            //objbulk.Columns.Add("weekend");
+                            //objbulk.Columns.Add("dayno");
+                            //objbulk.Columns.Add("section");                            
+                            //objbulk.Load();
                         }
                     }
                 }
