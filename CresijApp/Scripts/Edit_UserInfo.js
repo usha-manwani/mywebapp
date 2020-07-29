@@ -31,7 +31,6 @@ $(document).ready(function () {
     $("input[name='usertype']").on("change", function () {
         if ($(this).val() == "temporary") {
             $("#daterow").attr("style", "display:table-row");
-
         }
         else {
             $("#daterow").attr("style", "display:none");
@@ -48,9 +47,14 @@ function OnSuccessBuilding(respo) {
 
 
 }
+
 function OnSuccessUser(response) {
     var idata = response.d;
     var data = idata[0];
+    var userid = sessionStorage.getItem("LoginId");
+    if (userid != data[1]) {
+        $("#pass").prop("disabled", "disabled");
+    }
     document.getElementById("id").value = data[1];
     document.getElementById("name").value = data[2];
     document.getElementById("persontype").innerText = data[3];
@@ -93,6 +97,7 @@ function OnSuccessUser(response) {
         }
     });
 }
+
 function EditUser() {
     var myarray = new Array();
     var myarray = new Array();
@@ -119,8 +124,6 @@ function EditUser() {
         error: OnErrorCall_
     });
 }
-
-
 
 function OnSuccess_(response) {
     var idata = response.d;

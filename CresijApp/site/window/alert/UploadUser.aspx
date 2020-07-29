@@ -8,6 +8,9 @@
 </head>
 <body>
     <form id="form2" runat="server">
+        <h4>To download the template for the file
+            <asp:HyperLink runat="server" NavigateUrl="~/site/window/alert/DownloadUserDataTemplate.aspx" Text="click here!"></asp:HyperLink>
+        </h4>
         <div>
             <asp:FileUpload runat="server" ID="Upload" />
             <asp:Button runat="server" ID="btnUpload" CausesValidation="false"

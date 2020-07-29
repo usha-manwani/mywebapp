@@ -694,6 +694,10 @@
     <Content Include="site\window\alert\DeleteStudent.html" />
     <Content Include="site\window\alert\DeleteTeacher.html" />
     <Content Include="site\window\alert\Delete_User.html" />
+    <Content Include="site\window\alert\DownloadClassCSVTemplate.aspx" />
+    <Content Include="site\window\alert\DownloadScheduleTempelate.aspx" />
+    <Content Include="site\window\alert\DownloadStudentTempelate.aspx" />
+    <Content Include="site\window\alert\DownloadteacherTemplate.aspx" />
     <Content Include="site\window\alert\DownloadUserDataTemplate.aspx" />
     <Content Include="site\window\alert\ImportClassData.html" />
     <Content Include="site\window\alert\importSchedule_xlsx.html" />
@@ -928,6 +932,34 @@
     <Compile Include="Services\UserLogs.asmx.cs">
       <DependentUpon>UserLogs.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadClassCSVTemplate.aspx.cs">
+      <DependentUpon>DownloadClassCSVTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadClassCSVTemplate.aspx.designer.cs">
+      <DependentUpon>DownloadClassCSVTemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadScheduleTempelate.aspx.cs">
+      <DependentUpon>DownloadScheduleTempelate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadScheduleTempelate.aspx.designer.cs">
+      <DependentUpon>DownloadScheduleTempelate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadStudentTempelate.aspx.cs">
+      <DependentUpon>DownloadStudentTempelate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadStudentTempelate.aspx.designer.cs">
+      <DependentUpon>DownloadStudentTempelate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadteacherTemplate.aspx.cs">
+      <DependentUpon>DownloadteacherTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site\window\alert\DownloadteacherTemplate.aspx.designer.cs">
+      <DependentUpon>DownloadteacherTemplate.aspx</DependentUpon>
     </Compile>
     <Compile Include="site\window\alert\DownloadUserDataTemplate.aspx.cs">
       <DependentUpon>DownloadUserDataTemplate.aspx</DependentUpon>

@@ -8,11 +8,11 @@ using System.Web.UI.WebControls;
 
 namespace CresijApp.site.window.alert
 {
-    public partial class DownloadUserDataTemplate : System.Web.UI.Page
+    public partial class DownloadStudentTempelate : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string filePath = Server.MapPath("~/Uploads/") + "ImportUserCSVTemplate.csv";
+            string filePath = Server.MapPath("~/Uploads/") + "ImportStudentCSVTemplate.csv";
             try
             {
                 if (!string.IsNullOrEmpty(filePath))

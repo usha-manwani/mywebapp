@@ -8,6 +8,10 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <h4>To download the template for the file 
+                <a href="DownloadScheduleTempelate.aspx">click here</a>
+
+            </h4>
         <div>
                
             <asp:FileUpload runat="server" ID="Upload" />
