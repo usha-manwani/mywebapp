@@ -53,7 +53,10 @@ function OnSuccessUser(response) {
     var data = idata[0];
     var userid = sessionStorage.getItem("LoginId");
     if (userid != data[1]) {
-        $("#pass").prop("disabled", "disabled");
+        $("#pass").prop("disabled", "disabled");        
+    }
+    else {
+        $("#pass").prop("disabled", "");        
     }
     document.getElementById("id").value = data[1];
     document.getElementById("name").value = data[2];

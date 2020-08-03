@@ -210,7 +210,7 @@ $(document).ready(function () {
 	//搜索框下拉菜单for bar01
 	$("body").on("click",".searchbox2 .name",function(){
 		$(this).next(".list").fadeIn("fast");
-		$(this).addClass("jactive");
+        $(this).addClass("jactive");
 	});
 	$("body").on("mouseleave",".searchbox2",function(){
 		$(this).find(".list").fadeOut("fast");
@@ -222,7 +222,8 @@ $(document).ready(function () {
 		$(this).parent(".list").fadeOut("fast");
 		var name = $(this).text();
 		var dropTarget = $(this).attr("drop-target");
-		$(this).parents(".searchbox2").find(".name").text(name);
+        $(this).parents(".searchbox2").find(".name").text(name);
+        $(this).parents(".searchbox2").find(".name").trigger("list-change", name);
 		$(this).parents(".searchbox2").next(".searchbox2").find(".drop_statu").css("display","none");
 		$(this).parents(".searchbox2").next(".searchbox2").find("." + dropTarget).css("display","block");
 	});
@@ -240,7 +241,10 @@ $(document).ready(function () {
 			$(this).parents(".jpager").children(".CTRL").removeClass("disable");
 			$(this).parents(".jpager").children(".LAST").addClass("disable");
 			$(this).parents(".jpager").children(".NEXT").addClass("disable");
-		}else{ return false;}
+        }
+
+
+        $(this).parents(".jpager").trigger("page-change", $(this).index());
 	});
 	$("body").on("click",".FIRST",function(){
 		$(this).parents(".jpager").children(".CTRL").removeClass("disable");

@@ -8,18 +8,25 @@
         success: OnSuccessBuilding,
         error: OnErrorCall_
     });
-    $("#buildinglist").off("change").on("change", function () {
-
+    $("#buildinglist .name").off("list-change").on("list-change", function (evt,item){
+        console.log("chage", item)
         GetClassList();
-    });
+    })
+
+    // listen page change
+    $(".jpager").on("page-change", function (evt, num) {
+        console.log("thispage ", num)
+    })
 });
 function OnSuccessBuilding(response) {
     var data = response.d;
-    var inner = [];
+    var inner = '';
     for (i = 0; i < data.length; i++) {
-        inner += '<option class="option" value="' + data[i] + '">' + data[i] + '</option>';
+        //inner += '<option class="option" value="' + data[i] + '">' + data[i] + '</option>';
+        inner += '<div class="option"> <input type="radio" name="buildinglist" value="' + data[i] + '"><label for="">' + data[i] + '</label></div>'
     }
-    document.getElementById("buildinglist").innerHTML = inner;
+    $("#buildinglist .list").html(inner)
+    $("#buildinglist .name").text(data[0]||"--")
     GetClassList();
 }
 function OnErrorCall_(respo) {
@@ -30,7 +37,7 @@ function OnErrorCall_(respo) {
 function GetClassList() {
     console.log($('#buildinglist option:selected').text());
     var adata=[] ;
-    adata[0]= $('#buildinglist option:selected').text();
+    adata[0] = $("#buildinglist .name").text().trim();
     //adata[1] = $('#floorlist option:selected').text();
     var userid = sessionStorage.getItem("LoginId");
     adata[1] = userid;
@@ -85,7 +92,7 @@ function OnSuccessClass(response) {
                 '<div class="jtab-2"><div jtab-order="0" class="tabbox-2 active">教<br>辅</div><div jtab-order="1" class="tabbox-2">环<br>境</div></div>'+
                 '</div>' +
                 '<div class="col-8 row pt-3 float-left">' +
-                '<div class="row jtab-box-2" style="margin-left:5%; display:inherit;">' +
+                '<div class="row jtab-box-2" style="margin-left:5%; display:flex;width:100%;">' +
                 '<div class="col-4 pb-3 text-center"><div class="col-12 j-eqm-gray projectorclass"><i class="fa fa-desktop fa-lg gray align-middle my-2 "></i><div class="align-middle mb-1">投影</div></div></div>' +
 
                 '<div class="col-4 pb-3 text-center"><div class="col-12 j-eqm-gray computerclass"><i class="fa fa-desktop fa-lg gray align-middle my-2"></i><div class="align-middle mb-1">电脑</div></div></div>' +

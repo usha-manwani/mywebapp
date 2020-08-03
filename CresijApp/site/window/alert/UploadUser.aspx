@@ -16,6 +16,12 @@
             <asp:Button runat="server" ID="btnUpload" CausesValidation="false"
                 OnClick="btnUpload_Click" CssClass="btns btns_auto" Text="upload" />
         </div>
+        <div class="btns btns_auto">
+    <!--<a class="bg_green alert_jmodal" j-page-href="window/alert/state_fail.html" j-page-box="#jcontent"><i class="fa fa-check"></i> 确定导入数据</a>-->
+    <a class="bg_red close_jmodal"><i class="fa fa-close"></i> 取消</a>
+    </div>
     </form>
 </body>
 </html>
+<script src="../../js/sensor.js"></script>
+

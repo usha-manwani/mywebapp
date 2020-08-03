@@ -55,11 +55,13 @@ function OnSuccessWeekNum(respo) {
 }
 function OnSuccessBuilding(respo) {
     var data = respo.d;
-    var inner = [];
+    var inner = '';
     for (i = 0; i < data.length; i++) {
-        inner += '<option class="option" value="' + data[i] + '">' + data[i] + '</option>';
+        //inner += '<option class="option" value="' + data[i] + '">' + data[i] + '</option>';
+        inner += '<div class="option"> <input type="radio" name="semesterlist" value="' + data[i] + '"><label for="">' + data[i] + '</label></div>'
     }
-    document.getElementById("selectedbuilding").innerHTML = inner;
+    $("#selectedbuilding .list").html(inner)
+    // document.getElementById("selectedbuilding").innerHTML = inner;
 
     var building = $('#selectedbuilding option:selected').text();
     var dd = $('input[name = "ScheduleDate"]').val();
