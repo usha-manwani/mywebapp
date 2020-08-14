@@ -130,7 +130,7 @@ function SaveCurrentStatus(stat, id) {
     });
     $.ajax({
         type: "POST",
-        url: "../Services/ScheduleData.asmx/ChangeReserveStatus",
+        url: "../Services/ScheduleData.asmx/ChangeReserveScheduleStatus",
         data: jsonData,
         contentType: "application/json; charset=utf-8",
         dataType: "json",

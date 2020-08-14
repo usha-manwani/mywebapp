@@ -17,9 +17,11 @@ namespace CresijApp.DataAccess
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = " Delete from buildingdetails where id = " + id;
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                   
+                    using (MySqlCommand cmd = new MySqlCommand("sp_DeleteBuilding", con))
                     {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("sno", id);
                         if(con.State != System.Data.ConnectionState.Open)
                         {
                             con.Open();
@@ -117,9 +119,11 @@ namespace CresijApp.DataAccess
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = " Delete from userdetails where LoginID = '" + id+"'";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    
+                    using (MySqlCommand cmd = new MySqlCommand("sp_DeleteUser", con))
                     {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("userid", id);
                         if (con.State != System.Data.ConnectionState.Open)
                         {
                             con.Open();

@@ -24,12 +24,12 @@ $(document).ready(function () {
         error: OnErrorCall_
     });
 
-    $('input[name = "buildinglist"]').off("change").on("change", function () {
-        var adata = [];
-        adata[1] = $('#buildingname').text();
-        adata[0] = $('input[name = "appointmentDate"]').val();
-        getSchedule(adata[0], adata[1]);
-    });
+    //$('input[name = "buildinglist"]').off("change").on("change", function () {
+    //    var adata = [];
+    //    adata[1] = $('#buildingname').text();
+    //    adata[0] = $('input[name = "appointmentDate"]').val();
+    //    getSchedule(adata[0], adata[1]);
+    //});
 
     $('#weeklist').on("change", function () {
         console.log("week change event");
@@ -58,19 +58,19 @@ function OnSuccessBuilding(respo) {
     var inner = '';
     for (i = 0; i < data.length; i++) {
         //inner += '<option class="option" value="' + data[i] + '">' + data[i] + '</option>';
-        inner += '<div class="option"> <input type="radio" name="semesterlist" value="' + data[i] + '"><label for="">' + data[i] + '</label></div>'
+        inner += '<div class="option"> <input type="radio" name="buildinglist" value="' + data[i] + '"><label for="">' + data[i] + '</label></div>'
     }
     $("#selectedbuilding .list").html(inner)
     // document.getElementById("selectedbuilding").innerHTML = inner;
 
-    var building = $('#selectedbuilding option:selected').text();
+    var building = $('#selectedbuilding .name').text();
     var dd = $('input[name = "ScheduleDate"]').val();
     getSchedule(dd, building);
 }
 
 function OnSuccess_(response) {
     var idata = response.d;
-    console.log("success schedule");
+    console.log("Schedule data: "+idata);
     FillSchedule(idata);
 }
 function OnErrorCall_(respo) {
@@ -261,9 +261,9 @@ function brd() {
 function SearchFilter() {
     var userid = sessionStorage.getItem("LoginId");
     var adata = [];
-    adata[0] = $('input[name = "ScheduleDate"]').val();
-    if (isNaN(Date.parse(adata[0]))) {
-        adata[0] = $('#selectedbuilding').val();
+    var dateTemp = $('input[name = "ScheduleDate"]').val();
+    if (isNaN(Date.parse(dateTemp))) {
+        adata[0] = $('#selectedbuilding .name').text();
         adata[1] = $('input[name = "semesterlist"]:checked').val();
         adata[2] = $('#weeklist').val();
         adata[3] = $('#dayslist').val();
@@ -272,14 +272,18 @@ function SearchFilter() {
             !(adata[1] == null || adata[1] == undefined || adata[1].length == 0) &&
             !(adata[2] == null || adata[2] == undefined || adata[2].length == 0) &&
             !(adata[2] == null || adata[2] == undefined || adata[2].length == 0)) {
-            var info = [];
-            info.push(adata[0]);
-            info.push(adata[1]);
-            info.push(adata[2]);
-            info.push(adata[3]);
-            info.push(userid);
+            
+            dataArr = [];
+            dataArr.push(new Object());
+            dataArr[0]["building"] = adata[0];
+            dataArr[0]["semesterNum"] = adata[1];
+            dataArr[0]["weekNum"] = adata[2];
+            dataArr[0]["dayNum"] = adata[3];
+            dataArr[0]["userID"] = userid;  
+            dataArr[0]["pageIndex"] = 1;
+            dataArr[0]["pageSize"] = 10;  
             var jsonData = JSON.stringify({
-                name: info
+                data: dataArr
             });
             $.ajax({
                 type: "POST",
@@ -296,21 +300,25 @@ function SearchFilter() {
         }
     }
     else {
-        adata[0] = $('#selectedbuilding').val();
+        adata[0] = $('#selectedbuilding .name').text();
         adata[1] = $('input[name = "ScheduleDate"]').val();
         if (!(adata[0] == null || adata[0] == undefined || adata[0].length == 0) &&
             !(adata[1] == null || adata[1] == undefined || adata[1].length == 0)) {
             if (!isNaN(Date.parse(adata[1])) && adata[1].length == 10) {
-                var info = [];
-                info.push(adata[1]);
-                info.push(adata[0]);
-                info.push(userid);
+                
+                dataArr = [];
+                dataArr.push(new Object()); 
+                dataArr[0]["building"] = adata[0];
+                dataArr[0]["date"] = adata[1];
+                dataArr[0]["userID"] = userid;  
+                dataArr[0]["pageIndex"] = 1;
+                dataArr[0]["pageSize"] = 10;  
                 var jsonData = JSON.stringify({
-                    name: info
+                    data: dataArr
                 });
                 $.ajax({
                     type: "POST",
-                    url: "../Services/ScheduleData.asmx/GetClassesByDateAndBuilding",//userid done // Get schedule for selected building with date and sem.
+                    url: "../Services/ScheduleData.asmx/GetScheduleByDateAndBuilding",//userid done // Get schedule for selected building with date and sem.
                     data: jsonData,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -339,16 +347,19 @@ function SearchFilter() {
 
 function getSchedule(date, building) {
     var data = [];
-    data[0] = date;
-    data[1] = building;
+    data[0] = building;
+    data[1] = date;
+    
     var userid = sessionStorage.getItem("LoginId");
     data[2] = userid;
+    data[3] = 1;//pagenum
+    data[4] = 10;//pagesize
     var jsonData = JSON.stringify({
         name: data
     });
     $.ajax({
         type: "POST",
-        url: "../Services/ScheduleData.asmx/GetClassesByDateAndBuilding",
+        url: "../Services/ScheduleData.asmx/GetScheduleByDateAndBuilding",
         data: jsonData,
         contentType: "application/json; charset=utf-8",
         dataType: "json",

@@ -151,20 +151,15 @@ function FillEditSchedule(data) {
     GetTeacher(idata[1]);
 }
 
-
 //$("#weekday").off('DOMSubtreeModified').on('DOMSubtreeModified', function () {
 //    console.log("clicked on day changed button");
 //    //AddNewStudent();
 //});
 
-
-
-
 function OnSuccess(response) {
     var idata = response.d;
     console.log(idata);
-    $("#sec_box").load("window/p-course/002-1.html");
-    
+    $("#sec_box").load("window/p-course/002-1.html");    
 }
 function OnErrorCall(respo) {
     console.log(respo);
@@ -179,12 +174,9 @@ function SaveTransfer() {
     var section = document.getElementById("section").innerText;
     var building = $('#buildinglist1 option:selected').text();
     var classroom = $('#classlist option:selected').text();
-    var teacher = document.getElementById("newteacher").innerText;
-    
+    var teacher = document.getElementById("newteacher").innerText;    
     SaveTransferApplication(classname, coursename, reason, week, day, section, building, classroom, teacher,id);
-
    // $("#sec_box").load("window/p-course/002-1.html");
-
 }
 
 function GetFreeWeek(idata) {
@@ -312,8 +304,6 @@ function OnErrorCallBuilding(respo) {
     console.log(respo);
 }
 
-
-
 function OnSuccessClass(response) {
     var data = response.d;
     var inner = [];
@@ -325,8 +315,6 @@ function OnSuccessClass(response) {
 function OnErrorCallClass(respo) {
     console.log(respo);
 }
-
-
 
 var sections = [];
 function OnSuccessDay(response) {
@@ -369,9 +357,6 @@ function OnSuccessDay(response) {
 function OnErrorCallDay(respo) {
     console.log(respo);
 }
-
-
-
 
 function GetTeacher(coursename) {
     

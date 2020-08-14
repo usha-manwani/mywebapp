@@ -1,7 +1,6 @@
 ﻿function AddNewOrganisation() {
     var myarray = new Array();
-    console.log($("input[name = 'buildflooroption']:checked").val());
-    
+    console.log($("input[name = 'buildflooroption']:checked").val());   
     if ($("input[name='buildflooroption']:checked").val() == 'floor') {
         myarray[0] = document.getElementById("tbdept").value;
         myarray[1] = document.getElementById("tbbuscode").value;

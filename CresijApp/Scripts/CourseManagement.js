@@ -47,7 +47,7 @@ $(document).ready(function () {
                 });
                 $.ajax({
                     type: "POST",
-                    url: "../Services/ScheduleData.asmx/GetTransferScheduleByBuildSem", // Get schedule for selected building and sem.
+                    url: "../Services/ScheduleData.asmx/GetTransferScheduleByBuildSemDay", // Get schedule for selected building and sem.
                     data: jsonData,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -74,7 +74,7 @@ $(document).ready(function () {
                     });
                     $.ajax({
                         type: "POST",
-                        url: "../Services/ScheduleData.asmx/GetScheduleForTransfer",
+                        url: "../Services/ScheduleData.asmx/GetScheduleForTransferByDate",
                         data: jsonData,
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",

@@ -164,10 +164,10 @@ namespace CresijApp.DataAccess
             {
                 try
                 {
-                    string query = "select  floor ,group_concat(distinct(classname)) as class from classdetails " +
-                        " where teachingbuilding='" + building + "' group by floor "+
+                    string query = "select  floor ,group_concat(distinct(classname)) as className from classdetails " +
+                        " where teachingbuilding='" + building + "' group by floor " +
                         " union select floor,'' from floordetails where buildingname='"+building+"' and floor " +
-                        " not in(select floor from classdetails where teachingbuilding ='" + building + "')";
+                        " not in(select floor from classdetails where teachingbuilding ='" + building + "') group by floor";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         
@@ -229,10 +229,10 @@ namespace CresijApp.DataAccess
             {
                 try
                 {
-                    string query = "select  floor ,group_concat(distinct(classname)) as class from classdetails " +
-                        " where teachingbuilding='" + building + "' group by floor and classname in " +
+                    string query = "select  floor ,group_concat(distinct(classname)) as className from classdetails " +
+                        " where teachingbuilding='" + building + "' and classname in " +
                         "(select classid from userlocationaccess where userserialnum =(select serialno from userdetails" +
-                        " where loginid ='"+userid+"')) ";
+                        " where loginid ='"+userid+ "')) group by floor ";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
 

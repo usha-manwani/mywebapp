@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Services;
 using CresijApp.DataAccess;
@@ -16,108 +17,275 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class SaveOrganisationData : WebService
     {
-        
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
-
-        [WebMethod]
-        public string SaveOrgDataBuilding(string[] org)
+        public Dictionary<string, string> SaveBuildingData(Dictionary<string,string> data)
         {            
             string result = "";
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
             SetOrgData orgData = new SetOrgData();
-            result = orgData.SaveOrgDataBuilding(org).ToString();
-            return result;
+            try
+            {
+                result = orgData.SaveOrgDataBuilding(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("InsertedRows", result);
+                }
+            }
+            catch(Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
         }
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string SaveOrgDataFloor(string[] org)
+        public Dictionary<string, string> SaveFloorData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
-            result = orgData.SaveOrgDataFloor(org).ToString();
-            return result;
-        }
-
-        [WebMethod]
-        public string UpdateOrgData(string[] org)
-        {
-            string result = "";
-            SetOrgData orgData = new SetOrgData();
-            result = orgData.UpdateOrgData(org).ToString();
-            return result;
-        }
-
-        [WebMethod]
-        public string SaveTeacherData(string[] teacher)
-        {
-            string result = "";
-            SetOrgData orgData = new SetOrgData();
-            result = orgData.SaveTeacherData(teacher).ToString();
-            return result;
-        }
-
-        [WebMethod]
-        public string UpdateTeacherData(string[] teacher)
-        {
-            string result = "";
-            SetOrgData orgData = new SetOrgData();
-            result = orgData.UpdateTeacherData(teacher).ToString();
-            return result;
-        }
-
-        [WebMethod]
-        public string SaveStudentData(string[] student)
-        {
-            string result = "";
-            SetOrgData orgData = new SetOrgData();
-            result = orgData.SaveStudentData(student).ToString();
-            return result;
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.SaveOrgDataFloor(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("InsertedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+           
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string UpdateStudentData(string[] student)
+        public Dictionary<string, string> UpdateBuildingData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
-            result = orgData.UpdateStudentData(student).ToString();
-            return result;
-        }
-        [WebMethod]
-        public string SaveClassData(string[] classdata)
-        {
-            string result = "";
-            SetOrgData orgData = new SetOrgData();
-            result = orgData.SaveClassData(classdata).ToString();
-            return result;
-        }
-
-        [WebMethod]
-        public string UpdateClassData(string[] classdata)
-        {
-            string result = "";
-            SetOrgData orgData = new SetOrgData();
-            result = orgData.UpdateClassData(classdata).ToString();
-            return result;
-        }
-
-        [WebMethod]
-        public string AddUserData(string[] userdata)
-        {
-            string result = "";
-            SetOrgData orgData = new SetOrgData();
-            result = orgData.SaveUserData(userdata).ToString();
-            return result;
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.UpdateOrgData(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("UpdatedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string UpdateUserData(string[] userdata)
+        public Dictionary<string, string> SaveTeacherData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
-            result = orgData.UpdateUserData(userdata).ToString();
-            return result;
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.SaveTeacherData(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("InsertedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string, string> UpdateTeacherData(Dictionary<string, string> data)
+        {
+            string result = "";
+            SetOrgData orgData = new SetOrgData();
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.UpdateTeacherData(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("UpdatedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+           
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string, string> SaveStudentData(Dictionary<string, string> data)
+        {
+            string result = "";
+            SetOrgData orgData = new SetOrgData();
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.SaveStudentData(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("InsertedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string, string> UpdateStudentData(Dictionary<string, string> data)
+        {
+            string result = "";
+            SetOrgData orgData = new SetOrgData();
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.UpdateStudentData(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("UpdatedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
+        }
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string, string> SaveClassData(Dictionary<string, string> data)
+        {
+            string result = "";
+            SetOrgData orgData = new SetOrgData();
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.SaveClassData(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("InsertedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string, string> UpdateClassData(Dictionary<string, string> data)
+        {
+            string result = "";
+            SetOrgData orgData = new SetOrgData();
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.UpdateClassData(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("UpdatedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string, string> AddUserData(Dictionary<string, string> data)
+        {
+            string result = "";
+            SetOrgData orgData = new SetOrgData();
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.SaveUserData(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("InsertedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+           
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string, string> UpdateUserData(Dictionary<string, string> data)
+        {
+            string result = "";
+            SetOrgData orgData = new SetOrgData();
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.UpdateUserData(data).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("InsertedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
         }
     }
 }

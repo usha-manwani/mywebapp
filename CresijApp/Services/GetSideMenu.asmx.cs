@@ -26,6 +26,7 @@ namespace CresijApp.Services
             return "Hello World";
         }
 
+        
         [WebMethod]       
         public List<object> GetInstitute(string name)
         {

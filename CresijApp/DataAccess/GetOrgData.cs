@@ -42,138 +42,184 @@ namespace CresijApp.DataAccess
             return result;
         }
 
-
-        public DataTable GetOrgBuildingInfo()
+        public List<object> GetOrgBuildingInfo(string pageIndex, string pageSize)
         {
             DataTable dt = new DataTable();
-            try
+            var total = 0;
+            List<object> result = new List<object>();
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
                 
-                using (MySqlConnection con = new MySqlConnection(constr))
+                using (MySqlCommand cmd = new MySqlCommand("sp_GetBuildingDetailsInfo", con))
                 {
-                    string query = " SELECT id,  buildingName,  schoolname,buildingCode, " +
-                             "Queue, Public, remarks FROM buildingdetails join systemsettings";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                    }
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@_PageIndex", pageIndex);
+                    cmd.Parameters.AddWithValue("@_PageSize", pageSize);
+                    cmd.Parameters.Add("@_RecordCount", MySqlDbType.Int32, 4);
+                    cmd.Parameters["@_RecordCount"].Direction = ParameterDirection.Output;
+                    if (con.State != ConnectionState.Open)
+                        con.Open();
+                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    dataAdapter.Fill(dt);
+                    total = Convert.ToInt32(cmd.Parameters["@_RecordCount"].Value);
                 }
+                result.Add(total);
+                result.Add(dt);
             }
-            catch(Exception ex)
-            {
-
-            }
-            return dt;
+            return result;
         }
 
-        public DataTable GetuserInfo()
+        public List<object> GetuserInfo(string pageIndex, string pageSize)
         {
             DataTable dt = new DataTable();
+            var total = 0;
+            List<object> result = new List<object>();
+
+            using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                using (MySqlCommand cmd = new MySqlCommand("sp_GetAllUserDetails", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@_PageIndex", pageIndex);
+                    cmd.Parameters.AddWithValue("@_PageSize", pageSize);
+                    cmd.Parameters.Add("@_RecordCount", MySqlDbType.Int32, 4);
+                    cmd.Parameters["@_RecordCount"].Direction = ParameterDirection.Output;
+                    if (con.State != ConnectionState.Open)
+                        con.Open();
+                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    dataAdapter.Fill(dt);
+                    total = Convert.ToInt32(cmd.Parameters["@_RecordCount"].Value);
+                }
+                result.Add(total);
+                result.Add(dt);
+            }
+            return result;
+        }
+
+        public List<object> GetTeacherInfo(string pageindex, string pagesize)
+        {
+            List<object> data = new List<object>();
+            DataTable dt = new DataTable();
+            var total = 0;
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("sp_GetTeacherData", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
+                    cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                    cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
+                    cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                    total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
+                    data.Add(total);
+                    data.Add(dt);
+                }
+            }
+            return data;
+        }
+
+        public List<object> GetStudentInfo(string pageindex, string pagesize)
+        {
+            List<object> data = new List<object>();
+            DataTable dt = new DataTable();
+            var total = 0;
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = " SELECT usd.SerialNo, LoginID, Username, PersonType,  buildingname, PersonnelStatus " +
-                        " ,phone,  notes, validtill FROM userdetails usd join buildingdetails" +
-                        " dept on usd.deptCode = dept.buildingname";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetStudentData", con))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
+                        cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                        cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
+                        cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                         adapter.Fill(dt);
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-
-            }
-            return dt;
-        }
-
-        public DataTable GetTeacherInfo()
-        {
-            DataTable dt = new DataTable();
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    string query = " SELECT TeacherID,TeacherName,gender,age,faculty,phone,idcard,onecard FROM teacherdata";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                    }
-                }
-            }
-            catch (Exception ex) { }
-
-            return dt;
-        }
-
-        public DataTable GetStudentInfo()
-        {
-            DataTable dt = new DataTable();
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    string query = "SELECT studentid,studentname,gender,age,deptcode,phone,idcard,onecard FROM studentdata";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        adapter.Fill(dt);
+                        total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
+                        data.Add(total);
+                        data.Add(dt);
                     }
                 }
             }
             catch(Exception ex) { }
-            return dt;
+            return data;
         }
 
-        public DataTable GetCapitalInfo()
+        public List<object> GetCapitalInfo( string pageindex, string pagesize)
         {
+            List<object> data = new List<object>();
             DataTable dt = new DataTable();
+            var total = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "SELECT `operationmgmt`.`serialno`,`operationmgmt`.`devicename`,`operationmgmt`.`assetno`, "+
-                        "`operationmgmt`.`model`,`operationmgmt`.`specification`,`operationmgmt`.`devicetype`, "+
-                        "`operationmgmt`.`price`,`operationmgmt`.`factory`,`operationmgmt`.`dateofmanufacture`, "+
-                        "`operationmgmt`.`dateofpurchase`,`operationmgmt`.`dateofdelivery`,`operationmgmt`.`warrantytime`, "+
-                        "`operationmgmt`.`locationType`,`operationmgmt`.`equipmentstatus` FROM operationmgmt";
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                
+                using (MySqlCommand cmd = new MySqlCommand("sp_GetOperationMgmtData", con))
                 {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
+                    cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                    cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
+                    cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     adapter.Fill(dt);
+                    total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
+                    data.Add(total);
+                    data.Add(dt);
                 }
             }
-            return dt;
+            return data;
         }
 
-        public DataTable GetClassroomInfo()
+        public List<object> GetClassroomInfo(string pageindex, string pagesize)
         {
+            List<object> data = new List<object>();
             DataTable dt = new DataTable();
-            try
-            {
+            var total = 0;
+            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = "SELECT * from Classdetails order by classname";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetAllClassDetails", con))
                     {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
+                        cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                        cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
+                        cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                         adapter.Fill(dt);
+                        total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
+                        data.Add(total);
+                        data.Add(dt);
                     }
                 }
-            }
-            catch (Exception ex) {
-
-            }
-            return dt;
+            
+            return data;
         }
         public DataTable GetClassData(string classid)
         {
             DataTable dt = new DataTable();
-            try
-            {
+            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     string query = "SELECT * from Classdetails where classid=" +classid;
@@ -183,11 +229,7 @@ namespace CresijApp.DataAccess
                         adapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
+            
             return dt;
         }
         public DataTable GetDevicesInfo()
@@ -259,74 +301,82 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetIPClassByBuilding(string data,string userid)
+        public List<object> GetIPClassByBuilding(string pageindex, string pagesize,string data,string userid)
         {
             DataTable dt = new DataTable();
-            try
+            var total = 0;
+            List<object> list = new List<object>();
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
+
+                using (MySqlCommand cmd = new MySqlCommand("sp_GetClassIPByBuilding", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@building", data);
+                    cmd.Parameters.AddWithValue("@userid", userid);
+                    cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
+                    cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                    cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
+                    cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    adapter.Fill(dt);
+                    total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
+                    list.Add(total);
+                    list.Add(dt);
+                }
+            }
+            return list;
+        }
+
+        public List<object> GetIPClassByBuildingFloor(string building,string floor,string userid,string pageindex,int pagesize)
+        {
+            DataTable dt = new DataTable();
+            var total = 0;
+            List<object> list = new List<object>();
+           
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    
-                    using (MySqlCommand cmd = new MySqlCommand("sp_GetClassIPByBuilding", con))
+
+                    using (MySqlCommand cmd = new MySqlCommand("sp_GetIPClassByBuildingFloor", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@building", data);
+                        cmd.Parameters.AddWithValue("@building", building);
                         cmd.Parameters.AddWithValue("@userid", userid);
+                        cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
+                        cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                        cmd.Parameters.AddWithValue("@floornum", floor);
+                        cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
+                        cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
                         }
                         adapter.Fill(dt);
+                        total =Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
+                        list.Add(total);
+                        list.Add(dt);
                     }
                 }
-            }
-            catch (Exception ex) { }
-            return dt;
-        }
-
-        public DataTable GetIPClassByBuildingFloor(string building,string floor,string userid)
-        {
-            DataTable dt = new DataTable();
-            try
-            {
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    string query = "SELECT ClassName,CCEquipIP from classdetails where teachingbuilding='" + building + "' and floor ='"+floor+"' " +
-                        " and classname in (select classid from userlocationaccess where userserialnum = " +
-                        " (select serialno from userdetails where loginid= '"+userid+"' COLLATE utf8mb4_unicode_ci))";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return dt;
+          
+            return list;
         }
 
         public DataTable GetFloorlist(string building)
         {
             DataTable dt = new DataTable();
-            try
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlConnection con = new MySqlConnection(constr))
+                string query = "SELECT floor from floordetails where buildingname='" + building + "'";
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
-                    string query = "SELECT floor from floordetails where buildingname='" + building+"'";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                    }
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(dt);
                 }
-            }
-            catch (Exception ex)
-            {
-
             }
             return dt;
         }
@@ -334,8 +384,7 @@ namespace CresijApp.DataAccess
         public DataTable GetSchoolName(string building)
         {
             DataTable dt = new DataTable();
-            try
-            {
+            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     string query = "SELECT SchoolName from SystemSettings limit 1";
@@ -345,32 +394,22 @@ namespace CresijApp.DataAccess
                         adapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
+            
+           
             return dt;
         }
 
         public DataTable GetClassByIP(string ip)
         {
             DataTable dt = new DataTable();
-            try
+            using (MySqlConnection con = new MySqlConnection(constr))
             {
-                using (MySqlConnection con = new MySqlConnection(constr))
+                string query = "SELECT classname from classdetails where ccequipip ='" + ip + "' limit 1";
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
-                    string query = "SELECT classname from classdetails where ccequipip ='"+ip +"' limit 1";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                    }
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(dt);
                 }
-            }
-            catch (Exception ex)
-            {
-
             }
             return dt;
         }

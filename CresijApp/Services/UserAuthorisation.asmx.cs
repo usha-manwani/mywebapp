@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Services;
 
@@ -24,6 +25,7 @@ namespace CresijApp.Services
             return "Hello World";
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
         public List<object> GetUserAuthentications()
         {
@@ -31,90 +33,147 @@ namespace CresijApp.Services
             return idata;
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public int SaveUserAuthentications(string[] name)
+        public Dictionary<string, string> SaveUserAuthentications(Dictionary<string, object> data)
         {
-            string[] authmenu = name[0].Split(',');
-            string[] authloc = name[1].Split(',');
-            var adminid = name[2];
-            var userid = name[3];
-            DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-            userAuth.DeleteUserPermissions(userid);
-           int result = userAuth.SaveAuthMenu(authmenu, userid,adminid, authloc);
+            Dictionary<string, string> idata = new Dictionary<string, string>();
+            try
+            {
+                string[] authmenu = data["AuthMenu"].ToString().Split(',');
+                string[] authloc = data["classnames"].ToString().Split(',');
+                var adminid = data["adminId"].ToString();
+                var userid = data["personid"].ToString();
+                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                userAuth.DeleteUserPermissions(userid);
+                int result = userAuth.SaveAuthMenu(authmenu, userid, adminid, authloc);
+                idata.Add("status", "success");
+            }
+            catch(Exception ex)
+            {
+                idata.Add("status", "fail");
+                idata.Add("error", ex.Message);
+            }
 
+            return idata;
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string,object> GetUserTopMenu(string userid)
+        {
+            List<string> idata = new List<string>();
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            try
+            {
+                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                DataTable dt = new DataTable();
+                dt = userAuth.GetUserTopMenu(userid);
+                if (dt.Rows.Count > 0)
+                {
+                    result.Add("status", "sucess");
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        idata.Add(dr["rolenames"].ToString());
+                    }                    
+                }
+                result.Add("TopMenu", idata);
+            }
+            catch(Exception ex)
+            {
+                result.Add("status", "fail");
+                result.Add("error", ex.Message);
+            }
             return result;
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public List<object> GetUserTopMenu(string userid)
+        public Dictionary<string, object> GetUserSubMenu(Dictionary<string, object> data)
         {
             List<object> idata = new List<object>();
-
-            DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-            DataTable dt =new DataTable();
-            dt= userAuth.GetUserTopMenu(userid);
-            if (dt.Rows.Count > 0)
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            try
             {
-                foreach(DataRow dr in dt.Rows)
+                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                DataTable dt = new DataTable();
+                dt = userAuth.GetUserSubMenu(data);
+                if (dt.Rows.Count > 0)
                 {
-                    idata.Add(dr.ItemArray);
+                    result.Add("status", "sucess");
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        idata.Add(dr["rolenames"].ToString());
+                    }
                 }
+                result.Add("SubMenu", idata);
             }
-            return idata;
+            catch (Exception ex)
+            {
+                result.Add("status", "fail");
+                result.Add("error", ex.Message);
+            }
+            return result;            
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public List<object> GetUserSubMenu(string[] data)
+        public Dictionary<string, object> GetUserAllSubMenu(string userid)
         {
             List<object> idata = new List<object>();
-
-            DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-            DataTable dt = new DataTable();
-            dt = userAuth.GetUserSubMenu(data);
-            if (dt.Rows.Count > 0)
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            try
             {
-                foreach (DataRow dr in dt.Rows)
+                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                DataTable dt = new DataTable();
+                dt = userAuth.GetUserAllSubMenu(userid);
+                if (dt.Rows.Count > 0)
                 {
-                    idata.Add(dr.ItemArray);
+                    result.Add("status", "sucess");
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        idata.Add(dr["roleid"].ToString());
+                    }
                 }
+                result.Add("SubMenuId", idata);
             }
-            return idata;
+            catch (Exception ex)
+            {
+                result.Add("status", "fail");
+                result.Add("error", ex.Message);
+            }
+            return result;
+           
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public List<object> GetUserAllSubMenu(string data)
+        public Dictionary<string, object> GetUserAllLocationAccess(string userid)
         {
             List<object> idata = new List<object>();
-
-            DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-            DataTable dt = new DataTable();
-            dt = userAuth.GetUserAllSubMenu(data);
-            if (dt.Rows.Count > 0)
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            try
             {
-                foreach (DataRow dr in dt.Rows)
+                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                DataTable dt = new DataTable();
+                dt = userAuth.GetUserAllLocationAccess(userid);
+                if (dt.Rows.Count > 0)
                 {
-                    idata.Add(dr.ItemArray);
+                    result.Add("status", "sucess");
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        idata.Add(dr["className"].ToString());
+                    }
                 }
+                result.Add("ClassNameList", idata);
             }
-            return idata;
-        }
-
-        [WebMethod]
-        public List<object> GetUserAllLocationAccess(string data)
-        {
-            List<object> idata = new List<object>();
-
-            DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-            DataTable dt = new DataTable();
-            dt = userAuth.GetUserAllLocationAccess(data);
-            if (dt.Rows.Count > 0)
+            catch (Exception ex)
             {
-                foreach (DataRow dr in dt.Rows)
-                {
-                    idata.Add(dr.ItemArray);
-                }
+                result.Add("status", "fail");
+                result.Add("error", ex.Message);
             }
-            return idata;
+            return result;
+            
         }
 
     }

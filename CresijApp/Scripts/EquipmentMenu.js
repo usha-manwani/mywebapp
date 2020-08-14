@@ -10,37 +10,38 @@
     });
     $("#buildinglist .name").off("list-change").on("list-change", function (evt,item){
         console.log("chage", item)
-        GetClassList();
+        GetClassList(1);
     })
-
     // listen page change
     $(".jpager").on("page-change", function (evt, num) {
         console.log("thispage ", num)
+        GetClassList(num);
     })
 });
 function OnSuccessBuilding(response) {
     var data = response.d;
     var inner = '';
     for (i = 0; i < data.length; i++) {
-        //inner += '<option class="option" value="' + data[i] + '">' + data[i] + '</option>';
+        
         inner += '<div class="option"> <input type="radio" name="buildinglist" value="' + data[i] + '"><label for="">' + data[i] + '</label></div>'
     }
     $("#buildinglist .list").html(inner)
     $("#buildinglist .name").text(data[0]||"--")
-    GetClassList();
+    GetClassList(1);
 }
 function OnErrorCall_(respo) {
     console.log(respo);
 }
 
-
-function GetClassList() {
-    console.log($('#buildinglist option:selected').text());
+function GetClassList(pagenum) {
+    console.log($("#buildinglist .name").text());
     var adata=[] ;
     adata[0] = $("#buildinglist .name").text().trim();
     //adata[1] = $('#floorlist option:selected').text();
     var userid = sessionStorage.getItem("LoginId");
     adata[1] = userid;
+    adata[2] = pagenum;
+    adata[3] = 10;//pagesize
     document.getElementById("equipcontrol").innerHTML = "";
     var jsonData = JSON.stringify({
         data: adata
@@ -57,27 +58,32 @@ function GetClassList() {
 }
 
 function OnSuccessClass(response) {
-    document.getElementById("floorlist").innerHTML = '<option class="option">--select--</option>';
+
     var data = response.d;
+    console.log(data);
     if (data.length > 0) {
         var inner = [];
         var val = [];
-        for (i = 0; i < data.length; i++) {
+        for (i = 1; i < data.length; i++) {
             var dd = data[i];
             val.push(dd[1]);
         }
         var unique = val.filter(function (itm, k, val) {
             return k == val.indexOf(itm);
         });
-        inner += '<option class="option">--select--</option>';
-         
-        for (j = 0; j < unique.length; j++) {
-            inner += '<option class="option" value="' + unique[j] + '">' + unique[j] + '</option>';
+
+        for (j = 1; j < unique.length; j++) {
+            inner += '<div class="option"><input type="radio" name="xuenian" value="' + unique[j] + '"><label for="">' + unique[j] + '</label></div>';    
         }
-        document.getElementById("floorlist").innerHTML = inner;
-       
+        $("#floorlist .list").html(inner);
+        var totalpages = Math.ceil(data.length / 10);
+        var inner = "";
+        for (l = 1; l <= totalpages; l++) {
+            inner += '<a j-page-href="" j-page-box="" class="page JPAGE">' + l + '</a>';
+        }
+        $(".JPAGER_CTRL").html(inner);
         var eprows = [];
-        for (i = 0; i < data.length; i++) {
+        for (i = 1; i < data.length; i++) {
             var dd = data[i];
             eprows += '<div class="eqp-ctrl-pannel no-gutters row mb-4">' + '<div class="col-12 row stat-card no-gutters overflow-hidden border-white jtab-comp">' +
                 '<div class="col-4 bg_gray2 pt-3 float-left j-eqm-tabs" style="height:154px;">' + '<div class="ml-3 gray"><label><input type="checkbox" name="classipAddress" value="' +
@@ -128,17 +134,19 @@ function OnSuccessClass(response) {
                 '</div></div>';
         }
         document.getElementById("equipcontrol").innerHTML = eprows;
-        
     }
 }
 
 function GetIPList() {
     var adata=[];
-    adata[0] = $('#buildinglist option:selected').text();
-    adata[1] = $('#floorlist option:selected').text();
+    adata[0] = $('#buildinglist .name').text();
+    adata[1] = $('#floorlist .name').text();
     var userid = sessionStorage.getItem("LoginId");
     adata[2] = userid;
+    adata[3] = 1; //pageindex
+    adata[4] = 10; //pagesize
     document.getElementById("equipcontrol").innerHTML = "";
+   
     var jsonData = JSON.stringify({
         data: adata
     });
@@ -151,13 +159,21 @@ function GetIPList() {
         success: OnSuccessClassIp,
         error: OnErrorCall_
     });
+
 }
 
-function OnSuccessClassIp(idata) {
-    
+function OnSuccessClassIp(idata) {    
     var data = idata.d;
+    console.log(data);
     var eprows = [];
-    for (i = 0; i < data.length; i++) {
+    var totalrows = data[0];
+    var totalpages = Math.ceil(totalrows / 10);
+    var inner = "";
+    for (j = 1; j <= totalpages; j++) {
+       inner += '<a j-page-href="" j-page-box="" class="page JPAGE">'+j+'</a>';
+    }
+    $(".JPAGER_CTRL").html(inner);
+    for (i = 1; i < data.length; i++) {
         var dd = data[i];
         eprows += '<div class="eqp-ctrl-pannel no-gutters row mb-4">' + '<div class="col-12 row stat-card no-gutters overflow-hidden border-white jtab-comp">' +
             '<div class="col-4 bg_gray2 pt-3 float-left j-eqm-tabs" style="height:154px;">' + '<div class="ml-3 gray"><label><input type="checkbox" name="classipAddress" value="' +

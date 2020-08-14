@@ -98,7 +98,7 @@ namespace CresijApp.DataAccess
             {
                 try
                 {
-                    string query = "select rolename from roledetails where id in (select roleid from userpermissions where " +
+                    string query = "select rolename as rolenames from roledetails where id in (select roleid from userpermissions where " +
                         "userserialnum in(select serialno from userdetails where loginid='" + userid + "'))";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
@@ -121,16 +121,16 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
-        public DataTable GetUserSubMenu(string[] data)
+        public DataTable GetUserSubMenu(Dictionary<string,object> data)
         {
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 try
                 {
-                    string query = "select distinct(rolename) from roledetails where rolename like '%"+data[1]+"%' and "+
+                    string query = "select distinct(rolename) as rolenames from roledetails where rolename like '%"+data["subMenuType"]+"%' and "+
                         " id in (select roleid from userpermissions where userserialnum = " +
-                        "(select serialno from userdetails where loginid = '"+data[0]+"'))";
+                        "(select serialno from userdetails where loginid = '"+data["userId"]+"'))";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         if (con.State != ConnectionState.Open)
@@ -191,7 +191,7 @@ namespace CresijApp.DataAccess
             {
                 try
                 {
-                    string query = "select distinct(roleid) from userpermissions where userserialnum = " +
+                    string query = "select distinct(roleid) as roleid from userpermissions where userserialnum = " +
                         "(select serialno from userdetails where loginid = '" + data + "')";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {

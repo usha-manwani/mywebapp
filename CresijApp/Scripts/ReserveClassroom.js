@@ -45,8 +45,6 @@ function OnErrorCall_(response) {
     alert("some error occures. Please try again");
 }
 
-
-
 function SaveReserveApplication() {
 
     var data = [];

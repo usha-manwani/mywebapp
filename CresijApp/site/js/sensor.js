@@ -220,7 +220,7 @@ $(document).ready(function () {
 		$(this).addClass("selected");
 		$(this).children("input").attr("checked","true");
 		$(this).parent(".list").fadeOut("fast");
-		var name = $(this).text();
+		var name = $(this).text().trim();
 		var dropTarget = $(this).attr("drop-target");
         $(this).parents(".searchbox2").find(".name").text(name);
         $(this).parents(".searchbox2").find(".name").trigger("list-change", name);
@@ -242,9 +242,7 @@ $(document).ready(function () {
 			$(this).parents(".jpager").children(".LAST").addClass("disable");
 			$(this).parents(".jpager").children(".NEXT").addClass("disable");
         }
-
-
-        $(this).parents(".jpager").trigger("page-change", $(this).index());
+        $(this).parents(".jpager").trigger("page-change", $(this).index()+1);
 	});
 	$("body").on("click",".FIRST",function(){
 		$(this).parents(".jpager").children(".CTRL").removeClass("disable");

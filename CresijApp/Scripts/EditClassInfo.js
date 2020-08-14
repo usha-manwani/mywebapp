@@ -155,7 +155,8 @@ function GetFloorList(building) {
     });
     $.ajax({
         type: "POST",
-        url: "../Services/GetOrganisationData.asmx/GetFloorlist",
+        url: "../Services/GetOrganisationData.asmx/GetFloorlist
+        ",
         data: jsonData,
         contentType: "application/json; charset=utf-8",
         dataType: "json",

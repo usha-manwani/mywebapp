@@ -59,6 +59,7 @@ $(document).ready(function () {
 function OnSuccessClassIp(response) {
     var data = response.d;
     var classname = data[0];
+    console.log(classname);
     $("#classforip").val(classname);
     var classforip = $("#classforip").val();
     $("#classnameequipmenu02").text(classforip);

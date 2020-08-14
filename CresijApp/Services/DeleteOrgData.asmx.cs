@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Services;
 using CresijApp.DataAccess;
@@ -16,55 +17,134 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class DeleteOrgData : WebService
     {
-
+        
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
-
-        [WebMethod]
-        public string DeleteOrg(string sno)
+        public Dictionary<string, string> DeleteBuilding(string sno)
         {
             string result = "";
-            DeleteOrgDetails del = new DeleteOrgDetails();
-            result = del.DeleteOrg(Convert.ToInt32(sno)).ToString();
-            return result;
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            
+            try
+            {
+                DeleteOrgDetails del = new DeleteOrgDetails();
+                result = del.DeleteOrg(Convert.ToInt32(sno)).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("DeletedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string DeleteTeacher(string id)
+        public Dictionary<string, string> DeleteTeacher(string id)
         {
             string result = "";
-            DeleteOrgDetails del = new DeleteOrgDetails();
-            result = del.DeleteTeacher(id).ToString();
-            return result;
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+
+            try
+            {
+                DeleteOrgDetails del = new DeleteOrgDetails();
+                result = del.DeleteTeacher(id).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("DeletedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+           
         }
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string DeleteStudent(string id)
+        public Dictionary<string, string> DeleteStudent(string id)
         {
             string result = "";
-            DeleteOrgDetails del = new DeleteOrgDetails();
-            result = del.DeleteStudent(id).ToString();
-            return result;
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+
+            try
+            {
+                DeleteOrgDetails del = new DeleteOrgDetails();
+                result = del.DeleteStudent(id).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("DeletedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string DeleteClass(string id)
+        public Dictionary<string, string> DeleteClass(string id)
         {
             string result = "";
-            DeleteOrgDetails del = new DeleteOrgDetails();
-            result = del.DeleteClass(id).ToString();
-            return result;
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+
+            try
+            {
+                DeleteOrgDetails del = new DeleteOrgDetails();
+                result = del.DeleteClass(id).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("DeletedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
         }
 
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string DeleteUser(string id)
+        public Dictionary<string, string> DeleteUser(string id)
         {
             string result = "";
-            DeleteOrgDetails del = new DeleteOrgDetails();
-            result = del.DeleteUser(id).ToString();
-            return result;
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+
+            try
+            {
+                DeleteOrgDetails del = new DeleteOrgDetails();
+                result = del.DeleteUser(id).ToString();
+                if (Convert.ToInt32(result) > 0)
+                {
+                    keyValue.Add("status", "success");
+                    keyValue.Add("DeletedRows", result);
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+            
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Script.Services;
@@ -22,15 +22,18 @@ namespace CresijApp.Services
      [ScriptService]
     public class SystemSetting : WebService
     {
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
         public string HelloWorld()
         {
             return "Hello World";
         }
+        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public string SaveSystemInfo(Dictionary<string,object> data)
+        public Dictionary<string, string> SaveSystemInfo(Dictionary<string,object> data)
         {
             int result = 0;
+            Dictionary<string, string> idata = new Dictionary<string, string>();
             try
             {
                 var sec = data["Sectionselected"];
@@ -75,16 +78,17 @@ namespace CresijApp.Services
                     foreach(SectionList s in sectionlist)
                     {
                         cc.SaveSectionsInfo(semname, s.Section, s.Starttime, s.Stoptime);
-                    }                    
+                    }
+                    idata.Add("status", "success");
                 }
             }
            catch(Exception ex)
             {
-
+                idata.Add("status", "fail");
+                idata.Add("error", ex.Message);
             }
-            return result.ToString();
+            return idata;
         }
-
         T GetObject<T>(Dictionary<string, object> dict)
         {
             Type type = typeof(T);
@@ -95,9 +99,7 @@ namespace CresijApp.Services
                 type.GetProperty(kv.Key).SetValue(obj, kv.Value);
             }
             return (T)obj;
-        }
-
-        
+        }   
     }
 
     public class SectionList
