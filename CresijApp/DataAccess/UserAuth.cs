@@ -27,54 +27,64 @@ namespace CresijApp.DataAccess
                         MySqlDataAdapter mySqlData = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         mySqlData.Fill(dt);
-                        if (dt.Rows[0][1].ToString() == adminid)
+                        if (dt.Rows.Count == 2)
                         {
-                            adminserial = Convert.ToInt32(dt.Rows[0][0]);
-                            userserial = Convert.ToInt32(dt.Rows[1][0]);
+                            if (dt.Rows[0][1].ToString() == adminid)
+                            {
+                                adminserial = Convert.ToInt32(dt.Rows[0][0]);
+                                userserial = Convert.ToInt32(dt.Rows[1][0]);
+                            }
+                            else
+                            {
+                                userserial = Convert.ToInt32(dt.Rows[0][0]);
+                                adminserial = Convert.ToInt32(dt.Rows[1][0]);
+                            }
+
+                            if (userserial != 0)
+                            {
+                                var query = "insert into userpermissions(`userserialnum`,`roleid`,`AuthenticatedBy`) values ";
+                                StringBuilder d = new StringBuilder();
+                                foreach (string s in data)
+                                {
+                                    d.Append("(" + userserial + ", " + s + "," + adminserial + "),");
+                                }
+                                d.Remove(d.Length - 1, 1);
+                                query = query + d.ToString();
+                                using (MySqlCommand cmd1 = new MySqlCommand(query, con))
+                                {
+                                    if (con.State != ConnectionState.Open)
+                                        con.Open();
+                                    result = cmd1.ExecuteNonQuery();
+                                }
+                                if (classnames.Length > 0)
+                                {
+                                    var query1 = "insert into userlocationaccess(`userserialnum`,`classid`,`AuthenticatedBy`) values ";
+                                    StringBuilder d1 = new StringBuilder();
+                                    foreach (string s in classnames)
+                                    {
+                                        d1.Append("(" + userserial + ", '" + s + "'," + adminserial + "),");
+                                    }
+                                    d1.Remove(d1.Length - 1, 1);
+                                    query1 = query1 + d1.ToString();
+                                    using (MySqlCommand cmd2 = new MySqlCommand(query1, con))
+                                    {
+                                        if (con.State != ConnectionState.Open)
+                                            con.Open();
+                                        result = cmd2.ExecuteNonQuery();
+                                    }
+                                }
+                                
+                            }
                         }
                         else
                         {
-                            userserial = Convert.ToInt32(dt.Rows[0][0]);
-                            adminserial = Convert.ToInt32(dt.Rows[1][0]);
+                            result = -1;
                         }
-
-
-                        if (userserial != 0)
-                        {
-                            var query = "insert into userpermissions(`userserialnum`,`roleid`,`AuthenticatedBy`) values ";
-                            StringBuilder d = new StringBuilder();
-                            foreach (string s in data)
-                            {
-                                d.Append("(" + userserial + ", " + s + "," + adminserial + "),");
-                            }
-                            d.Remove(d.Length - 1, 1);
-                            query = query + d.ToString();
-                            using (MySqlCommand cmd1 = new MySqlCommand(query, con))
-                            {
-                                if (con.State != ConnectionState.Open)
-                                    con.Open();
-                                result = cmd1.ExecuteNonQuery();
-                            }
-
-                            var query1 = "insert into userlocationaccess(`userserialnum`,`classid`,`AuthenticatedBy`) values ";
-                            StringBuilder d1 = new StringBuilder();
-                            foreach (string s in classnames)
-                            {
-                                d1.Append("(" + userserial + ", '" + s + "'," + adminserial + "),");
-                            }
-                            d1.Remove(d1.Length - 1, 1);
-                            query1 = query1 + d1.ToString();
-                            using (MySqlCommand cmd2 = new MySqlCommand(query1, con))
-                            {
-                                if (con.State != ConnectionState.Open)
-                                    con.Open();
-                                result = cmd2.ExecuteNonQuery();
-                            }
-                        }
-
                     }
 #pragma warning disable CS0168 // The variable 'ex' is declared but never used
-                    catch (Exception ex) { }
+                    catch (Exception ex) {
+                        result = -2;
+                    }
 #pragma warning restore CS0168 // The variable 'ex' is declared but never used
 
                     finally
@@ -83,10 +93,6 @@ namespace CresijApp.DataAccess
                     }
                 }
             }
-
-
-
-
             return result;
 
         }
@@ -121,16 +127,16 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
-        public DataTable GetUserSubMenu(Dictionary<string,object> data)
+        public DataTable GetUserSubMenu(string subMenuType, string userid)
         {
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 try
                 {
-                    string query = "select distinct(rolename) as rolenames from roledetails where rolename like '%"+data["subMenuType"]+"%' and "+
+                    string query = "select distinct(rolename) as rolenames from roledetails where rolename like '%"+subMenuType+"%' and "+
                         " id in (select roleid from userpermissions where userserialnum = " +
-                        "(select serialno from userdetails where loginid = '"+data["userId"]+"'))";
+                        "(select serialno from userdetails where loginid = '"+userid+"'))";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         if (con.State != ConnectionState.Open)
@@ -168,7 +174,7 @@ namespace CresijApp.DataAccess
                     {
                         if (con.State != ConnectionState.Open)
                             con.Open();
-                        cmd.ExecuteNonQuery();
+                        result =cmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)

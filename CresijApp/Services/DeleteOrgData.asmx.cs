@@ -29,10 +29,10 @@ namespace CresijApp.Services
             {
                 DeleteOrgDetails del = new DeleteOrgDetails();
                 result = del.DeleteOrg(Convert.ToInt32(sno)).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
-                    keyValue.Add("DeletedRows", result);
+                    
                 }
             }
             catch (Exception ex)
@@ -55,10 +55,10 @@ namespace CresijApp.Services
             {
                 DeleteOrgDetails del = new DeleteOrgDetails();
                 result = del.DeleteTeacher(id).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
-                    keyValue.Add("DeletedRows", result);
+                   
                 }
             }
             catch (Exception ex)
@@ -80,10 +80,10 @@ namespace CresijApp.Services
             {
                 DeleteOrgDetails del = new DeleteOrgDetails();
                 result = del.DeleteStudent(id).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
-                    keyValue.Add("DeletedRows", result);
+                    
                 }
             }
             catch (Exception ex)
@@ -106,10 +106,10 @@ namespace CresijApp.Services
             {
                 DeleteOrgDetails del = new DeleteOrgDetails();
                 result = del.DeleteClass(id).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
-                    keyValue.Add("DeletedRows", result);
+                    
                 }
             }
             catch (Exception ex)
@@ -132,10 +132,10 @@ namespace CresijApp.Services
             {
                 DeleteOrgDetails del = new DeleteOrgDetails();
                 result = del.DeleteUser(id).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
-                    keyValue.Add("DeletedRows", result);
+                    
                 }
             }
             catch (Exception ex)
@@ -145,6 +145,31 @@ namespace CresijApp.Services
             }
             return keyValue;
             
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string, string> DeleteFloor(string id)
+        {
+            string result = "";
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                DeleteOrgDetails del = new DeleteOrgDetails();
+                result = del.DeleteOrg(Convert.ToInt32(id)).ToString();
+                if (Convert.ToInt32(result) >= 0)
+                {
+                    keyValue.Add("status", "success");
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+
         }
     }
 }

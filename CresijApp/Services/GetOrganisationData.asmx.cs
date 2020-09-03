@@ -250,7 +250,7 @@ namespace CresijApp.Services
                 idata.Add("status", "success");
                 if (dt.Rows.Count > 0)
                 {
-                    list.Add("SerialNo", dt.Rows[0]["SerailNo"].ToString());
+                    list.Add("SerialNo", dt.Rows[0]["SerialNo"].ToString());
                     list.Add("LoginID", dt.Rows[0]["LoginID"].ToString());
                     list.Add("UserName", dt.Rows[0]["UserName"].ToString());
                     list.Add("PersonType", dt.Rows[0]["PersonType"].ToString());
@@ -669,6 +669,55 @@ namespace CresijApp.Services
                 idata.Add("value", dt.Rows[0]["classname"].ToString());
             }
             catch (Exception ex)
+            {
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", ex.Message);
+            }
+            return idata;
+        }
+
+        private class FloorDataStructure
+        {
+            public string ID { get; set; }
+            public string BuildingName { get; set; }
+            public string Floor{ get; set; }
+            public string BuildingCode { get; set; }
+            public string Queue { get; set; }
+            public string Type { get; set; }
+            public string Remarks { get; set; }
+        }
+        
+        [WebMethod]
+        public Dictionary<string,object> GetFloorDetails(string building)
+        {
+            var idata = new Dictionary<string, object>();
+            try
+            {
+                GetOrgData gd = new GetOrgData();
+                DataTable dt = gd.GetFloorDetails(building);
+                List<FloorDataStructure> fd = new List<FloorDataStructure>();
+                idata.Add("status", "success");
+                if (dt.Rows.Count > 0)
+                {                    
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        FloorDataStructure st = new FloorDataStructure()
+                        {
+                            ID = row["id"].ToString(),
+                            BuildingName = row["BuildingName"].ToString(),
+                            Floor = row["floor"].ToString(),
+                            BuildingCode = row["buildingcode"].ToString(),
+                            Queue = row["Queue"].ToString(),
+                            Type = row["Public"].ToString(),
+                            Remarks = row["Remarks"].ToString()
+                        };
+                        fd.Add(st);
+                    }
+                }
+                idata.Add("value", fd);
+
+            }
+            catch(Exception ex)
             {
                 idata.Add("status", "fail");
                 idata.Add("errorMessage", ex.Message);

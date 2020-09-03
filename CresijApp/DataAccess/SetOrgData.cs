@@ -14,8 +14,7 @@ namespace CresijApp.DataAccess
         public int SaveOrgDataBuilding(Dictionary<string,string> data)
         {
             int result = -1;
-            try
-            {
+           
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using(MySqlCommand cmd = new MySqlCommand("sp_InsertBuildingDetails", con))
@@ -34,20 +33,13 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
-
-            }
-            catch(Exception ex)
-            {
-                result = -2;
-            }
             return result;
         }
 
         public int SaveOrgDataFloor(Dictionary<string,string> data)
         {
             int result = -1;
-            try
-            {
+           
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_InsertFloorDetails", con))
@@ -66,12 +58,6 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
-
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
             return result;
         }
 
@@ -111,8 +97,7 @@ namespace CresijApp.DataAccess
         public int SaveTeacherData(Dictionary<string, string> data)
         {
             int result = -1;
-            try
-            {
+           
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_SaveTeacherData", con))
@@ -133,12 +118,6 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
-
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
             return result;
         }
 
@@ -180,14 +159,13 @@ namespace CresijApp.DataAccess
         public int UpdateTeacherData(Dictionary<string, string> data)
         {
             int result = -1;
-            try
-            {
+           
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_UpdateTeacherData", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("id", data["teacherID"]);
+                        cmd.Parameters.AddWithValue("id", data["teacherId"]);
                         cmd.Parameters.AddWithValue("tname", data["teacherName"]);
                         cmd.Parameters.AddWithValue("gend", data["gender"]);
                         cmd.Parameters.AddWithValue("ag", data["age"]);
@@ -203,25 +181,20 @@ namespace CresijApp.DataAccess
                     }
                 }
 
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
+            
             return result;
         }
 
         public int UpdateStudentData(Dictionary<string, string> data)
         {
             int result = -1;
-            try
-            {
+            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_UpdateStudentData", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("id", data["studentID"]);
+                        cmd.Parameters.AddWithValue("id", data["studentId"]);
                         cmd.Parameters.AddWithValue("tname", data["studentName"]);
                         cmd.Parameters.AddWithValue("gend", data["gender"]);
                         cmd.Parameters.AddWithValue("ag", data["age"]);
@@ -237,19 +210,13 @@ namespace CresijApp.DataAccess
                     }
                 }
 
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
             return result;
         }
 
         public int SaveClassData(Dictionary<string, string> data)
         {
             int result = -1;
-            try
-            {
+           
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_SaveClassData", con))
@@ -283,18 +250,13 @@ namespace CresijApp.DataAccess
                     }
                 }
 
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
+            
             return result;
         }
         public int UpdateClassData(Dictionary<string, string> data)
         {
             int result = -1;
-            try
-            {
+            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_UpdateClassData", con))
@@ -320,8 +282,6 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("recmac", data["recorderMac"]);
                         cmd.Parameters.AddWithValue("callhelpip", data["callHelpIp"]);
                         cmd.Parameters.AddWithValue("callhelpmac", data["callHelpMac"]);
-
-
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -330,19 +290,20 @@ namespace CresijApp.DataAccess
                     }
                 }
 
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
             return result;
         }
 
         public int SaveUserData(Dictionary<string, string> data)
         {
+           
+           
             int result = -1;
-            try
-            {
+           
+                if (data["personType"].ToString() == "longterm")
+                {
+                    data["expireDate"] = DateTime.Now.ToString("yyyy-MM-dd");
+                    data["expireTime"] = DateTime.Now.ToString("hh:mm");
+                }
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_SaveUserData", con))
@@ -365,19 +326,13 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
-
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
+            
             return result;
         }
         public int UpdateUserData(Dictionary<string, string> data)
         {
             int result = -1;
-            try
-            {
+            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_UpdateUserData", con))
@@ -400,12 +355,35 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
+            return result;
+        }
 
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
+        public int UpdateFloorData(Dictionary<string, string> data)
+        {
+            int result = -1;
+            
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateFloorData", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("buildname", data["buildingName"]);
+                        cmd.Parameters.AddWithValue("buscode", data["buildingCode"]);
+                        cmd.Parameters.AddWithValue("floorname", data["floorName"]);
+                        cmd.Parameters.AddWithValue("que", data["queue"]);
+                        cmd.Parameters.AddWithValue("typeaccess", data["accessType"]);
+                        cmd.Parameters.AddWithValue("note", data["notes"]);
+                        cmd.Parameters.AddWithValue("sn", data["id"]);
+                        if (con.State != ConnectionState.Open)
+                        {
+                            con.Open();
+                        }
+                        result = cmd.ExecuteNonQuery();
+                    }
+                }
+
+            
+            
             return result;
         }
     }

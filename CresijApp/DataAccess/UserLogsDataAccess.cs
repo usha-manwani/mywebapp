@@ -82,7 +82,7 @@ namespace CresijApp.DataAccess
             {
                 try
                 {
-                    string query = "select distinct(action), count(action) from userlogs";
+                    string query = "select distinct(action) as action, count(action) as total from userlogs";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         if (con.State != ConnectionState.Open)

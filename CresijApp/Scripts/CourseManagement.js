@@ -223,9 +223,9 @@ function FillSchedule(data1) {
                 }
                 column1.innerHTML = '<div class="coursebox ' + classcolor + ' tk">' + course + '<span class="intro">课</span>' +
                     '<a class="action JURL" j-page-href="window/p-course/002-1-1.html?index='
-                    + d + '&' + datatype +'" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div>';
+                    + d + '&' + datatype +' " j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div>';
                 column2.innerHTML = '<div class="coursebox ' + classcolor + ' tk">' + course + '<span class="intro">课</span>' +
-                    '<a class="action JURL " j-page-href="window/p-course/002-1-1.html?index=' + d + '&' + datatype +
+                    '<a class="action JURL " j-page-href="window/p-course/002-1-1.html?index=' + d + '&' + datatype  +
                     '" j-page-box="#sec_box"><i class="fa fa-exchange"></i> 调课</a></div >';
             }
             else {

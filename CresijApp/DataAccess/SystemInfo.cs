@@ -164,8 +164,9 @@ namespace CresijApp.DataAccess
             {
                 try
                 {
-                    string query = "select  floor ,group_concat(distinct(classname)) as className from classdetails " +
-                        " where teachingbuilding='" + building + "' group by floor " +
+                    string query = "select  floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className from classdetails " +
+                        " where teachingbuilding='" + building + "' and floor in(select floor from floordetails where " +
+                        "buildingName='"+building+"')  group by floor " +
                         " union select floor,'' from floordetails where buildingname='"+building+"' and floor " +
                         " not in(select floor from classdetails where teachingbuilding ='" + building + "') group by floor";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -230,12 +231,12 @@ namespace CresijApp.DataAccess
                 try
                 {
                     string query = "select  floor ,group_concat(distinct(classname)) as className from classdetails " +
-                        " where teachingbuilding='" + building + "' and classname in " +
+                        " where teachingbuilding='" + building + "' and floor in(select floor from floordetails where " +
+                        "buildingName='" + building + "') and classname in " +
                         "(select classid from userlocationaccess where userserialnum =(select serialno from userdetails" +
                         " where loginid ='"+userid+ "')) group by floor ";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();

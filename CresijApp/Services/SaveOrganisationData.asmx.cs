@@ -75,7 +75,7 @@ namespace CresijApp.Services
             try
             {
                 result = orgData.UpdateOrgData(data).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
                     keyValue.Add("UpdatedRows", result);
@@ -125,7 +125,7 @@ namespace CresijApp.Services
             try
             {
                 result = orgData.UpdateTeacherData(data).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
                     keyValue.Add("UpdatedRows", result);
@@ -136,8 +136,7 @@ namespace CresijApp.Services
                 keyValue.Add("status", "fail");
                 keyValue.Add("exception", ex.Message);
             }
-            return keyValue;
-           
+            return keyValue;           
         }
 
         [PrincipalPermission(SecurityAction.Demand)]
@@ -174,7 +173,7 @@ namespace CresijApp.Services
             try
             {
                 result = orgData.UpdateStudentData(data).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
                     keyValue.Add("UpdatedRows", result);
@@ -223,10 +222,10 @@ namespace CresijApp.Services
             try
             {
                 result = orgData.UpdateClassData(data).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
-                    keyValue.Add("UpdatedRows", result);
+                    
                 }
             }
             catch (Exception ex)
@@ -248,7 +247,7 @@ namespace CresijApp.Services
             try
             {
                 result = orgData.SaveUserData(data).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
                     keyValue.Add("InsertedRows", result);
@@ -273,7 +272,7 @@ namespace CresijApp.Services
             try
             {
                 result = orgData.UpdateUserData(data).ToString();
-                if (Convert.ToInt32(result) > 0)
+                if (Convert.ToInt32(result) >= 0)
                 {
                     keyValue.Add("status", "success");
                     keyValue.Add("InsertedRows", result);
@@ -286,6 +285,30 @@ namespace CresijApp.Services
             }
             return keyValue;
             
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod]
+        public Dictionary<string, string> UpdateFloorData(Dictionary<string, string> data)
+        {
+            string result = "";
+            SetOrgData orgData = new SetOrgData();
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            try
+            {
+                result = orgData.UpdateFloorData(data).ToString();
+                if (Convert.ToInt32(result) >= 0)
+                {
+                    keyValue.Add("status", "success");                    
+                }
+            }
+            catch (Exception ex)
+            {
+                keyValue.Add("status", "fail");
+                keyValue.Add("exception", ex.Message);
+            }
+            return keyValue;
+
         }
     }
 }

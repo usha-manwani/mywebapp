@@ -52,16 +52,14 @@ namespace CresijApp.Services
 
         [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public Dictionary<string, object> GetTeacherDetail(Dictionary<string, object> data)
+        public Dictionary<string, object> GetTeacherDetail(string courseName)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
             DataTable r = new DataTable();
             try
             {
-
-                var coursename = data["courseName"].ToString();
-                r = schedule.GetTeacherDetail(coursename);
+                r = schedule.GetTeacherDetail(courseName);
 
                 idata.Add("status", "success");
                 List<object> dat = new List<object>();
@@ -85,13 +83,13 @@ namespace CresijApp.Services
 
         [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public Dictionary<string, object> GetCalenderDates(Dictionary<string, object> data)
+        public Dictionary<string, object> GetCalenderDates(string type)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
             try
             {
-                DataTable r = schedule.GetCalenderDates(data["Type"].ToString());
+                DataTable r = schedule.GetCalenderDates(type);
                 Dictionary<string, string> list = new Dictionary<string, string>();
                 if (r.Rows.Count > 0)
                 {
@@ -123,53 +121,64 @@ namespace CresijApp.Services
         /// <param name="data"></param>
         /// <returns></returns>
         [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTransferScheduleByDay(Dictionary<string, object> data)
         {
+            string userid = "";
             Dictionary<string, object> idata = new Dictionary<string, object>();
             Schedule schedule = new Schedule();
             List<object> dat = new List<object>();
             try
             {
-                var building = data["building"].ToString();
-                var sem = Convert.ToInt32(data["semesterNum"]);
-                var week = Convert.ToInt32(data["weekNum"]);
-                var day = Convert.ToInt32(data["dayNum"]);
-                var userid = data["userID"].ToString();
-                var pgindex = Convert.ToInt32(data["pageIndex"]);
-                var pgsize = Convert.ToInt32(data["pageSize"]);
-                dat = schedule.GetTransferScheduleByDay(building, sem, week, day, userid, pgindex, pgsize);
-
-                idata.Add("status", "success");
-                int total = Convert.ToInt32(dat[0]);
-                KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                idata.Add("totalRows", total);
-                DataTable dt = dat[1] as DataTable;
-                List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
-                if (dt.Rows.Count >= 1)
+                if (Session["UserLoggedIn"].ToString() != null)
                 {
-                    foreach (DataRow dr in dt.Rows)
+
+                    userid = Session["UserLoggedIn"].ToString();
+                    var building = data["building"].ToString();
+                    var sem = Convert.ToInt32(data["semesterNum"]);
+                    var week = Convert.ToInt32(data["weekNum"]);
+                    var day = Convert.ToInt32(data["dayNum"]);
+                   
+                    var pgindex = Convert.ToInt32(data["pageIndex"]);
+                    var pgsize = Convert.ToInt32(data["pageSize"]);
+                    dat = schedule.GetTransferScheduleByDay(building, sem, week, day, userid, pgindex, pgsize);
+
+                    idata.Add("status", "success");
+                    int total = Convert.ToInt32(dat[0]);
+                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                    idata.Add("totalRows", total);
+                    DataTable dt = dat[1] as DataTable;
+                    List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
+                    if (dt.Rows.Count >= 1)
                     {
-                        ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
+                        foreach (DataRow dr in dt.Rows)
                         {
-                            RowNum = Convert.ToInt32(dr[0]),
-                            Classname = dr[1].ToString(),
-                            Section1 = dr[2].ToString(),
-                            Section2 = dr[2].ToString(),
-                            Section3 = dr[4].ToString(),
-                            Section4 = dr[4].ToString(),
-                            Section5 = dr[6].ToString(),
-                            Section6 = dr[6].ToString(),
-                            Section7 = dr[8].ToString(),
-                            Section8 = dr[8].ToString(),
-                            Section9 = dr[10].ToString(),
-                            Section10 = dr[10].ToString(),
-                            Section11 = dr[12].ToString(),
-                            Section12 = dr[12].ToString()
-                        };
-                        schedules.Add(scheduleDataStructure);
+                            ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
+                            {
+                                RowNum = Convert.ToInt32(dr[0]),
+                                Classname = dr[1].ToString(),
+                                Section1 = dr[2].ToString(),
+                                Section2 = dr[2].ToString(),
+                                Section3 = dr[4].ToString(),
+                                Section4 = dr[4].ToString(),
+                                Section5 = dr[6].ToString(),
+                                Section6 = dr[6].ToString(),
+                                Section7 = dr[8].ToString(),
+                                Section8 = dr[8].ToString(),
+                                Section9 = dr[10].ToString(),
+                                Section10 = dr[10].ToString(),
+                                Section11 = dr[12].ToString(),
+                                Section12 = dr[12].ToString()
+                            };
+                            schedules.Add(scheduleDataStructure);
+                        }
+                        idata.Add("value", schedules);
                     }
-                    idata.Add("value", schedules);
+                }
+                else
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", "No valid userid found");
                 }
             }
             catch (Exception ex)
@@ -181,25 +190,26 @@ namespace CresijApp.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTransferScheduleByDate(Dictionary<string, object> data)
         {
+            string userid = "";
             Dictionary<string, object> idata = new Dictionary<string, object>();
             List<object> dat = new List<object>();
             try
             {
-
-                var building = data["building"].ToString();
-                var date = data["date"].ToString();
-                var userid = data["userID"].ToString();
-                var pgindex = data["pageIndex"].ToString();
-                var pgsize = data["pageSize"].ToString();
-                Schedule schedule = new Schedule();
-                dat = schedule.GetScheduleForTransfer(building, date, userid, pgindex, pgsize);
-
-                idata.Add("status", "success");
-                int total = Convert.ToInt32(dat[0]);
-                KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                if (Session["UserLoggedIn"].ToString() != null)
+                {
+                    userid = Session["UserLoggedIn"].ToString();
+                    var building = data["building"].ToString();
+                    var date = data["date"].ToString();                    
+                    var pgindex = data["pageIndex"].ToString();
+                    var pgsize = data["pageSize"].ToString();
+                    Schedule schedule = new Schedule();
+                    dat = schedule.GetScheduleForTransfer(building, date, userid, pgindex, pgsize);
+                    idata.Add("status", "success");
+                    int total = Convert.ToInt32(dat[0]);
+                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
 
                 DataTable dt = dat[1] as DataTable;
                 List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
@@ -232,6 +242,12 @@ namespace CresijApp.Services
                 }
                 else
                     idata.Add("value", "");
+                }
+                else
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", "No valid userid found");
+                }
             }
             catch (Exception ex)
             {
@@ -327,9 +343,7 @@ namespace CresijApp.Services
             Dictionary<string, object> idata = new Dictionary<string, object>();
             Schedule schedule = new Schedule();
             try
-            {
-
-                
+            { 
                 DataTable dt = schedule.GetCourseDetailsForTransfer(id);
                 idata.Add("status", "success");
                 if (dt.Rows.Count > 0)
@@ -434,34 +448,40 @@ namespace CresijApp.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetAvailClasses(Dictionary<string, object> data)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
             try
             {
-                DataTable r = new DataTable();
-                List<object> dat = new List<object>();
-
-                var building = data["building"].ToString();
-                var week = data["weekNum"].ToString();
-                var userid = data["userID"].ToString();
-                var semno = data["semNum"].ToString();
-                r = schedule.GetAvailClasses(week, building, userid, semno);
-
-                idata.Add("status", "success");
-                if (r.Rows.Count > 0)
+                if (Session["UserLoggedIn"].ToString() != null)
                 {
-                    int total = r.Rows.Count;
-                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                    idata.Add("totalRows", total);
-                    foreach (DataRow dr in r.Rows)
+                    string userid = Session["UserLoggedIn"].ToString();
+                    DataTable r = new DataTable();
+                    List<object> dat = new List<object>();
+                    var building = data["building"].ToString();
+                    var week = data["weekNum"].ToString();
+                    var semno = data["semNum"].ToString();
+                    r = schedule.GetAvailClasses(week, building, userid, semno);
+                    idata.Add("status", "success");
+                    if (r.Rows.Count > 0)
                     {
-                        if (Convert.ToInt32(dr[1]) < 42)
-                            dat.Add(dr[0].ToString());
+                        int total = r.Rows.Count;
+                        KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                        idata.Add("totalRows", total);
+                        foreach (DataRow dr in r.Rows)
+                        {
+                            if (Convert.ToInt32(dr[1]) < 42)
+                                dat.Add(dr[0].ToString());
+                        }
+                        idata.Add("ClassNames", dat);
                     }
-                    idata.Add("ClassNames", dat);
+                }
+                else
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", "No valid userid found");
                 }
             }
             catch (Exception ex)
@@ -596,124 +616,157 @@ namespace CresijApp.Services
             public string Section12 { get; set; }
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetScheduleByDay(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            Schedule schedule = new Schedule();
-            List<object> dat = new List<object>();
-            try
-            {
-
-                var building = data["building"].ToString();
-                var sem = Convert.ToInt32(data["semNum"]);
-                var week = Convert.ToInt32(data["weekNum"]);
-                var day = Convert.ToInt32(data["dayNum"]);
-                var userid = data["userID"].ToString();
-                var pgindex = Convert.ToInt32(data["pageIndex"]);
-                var pgsize = Convert.ToInt32(data["pageSize"]);
-
-                dat = schedule.GetScheduleByDay(building, sem, week, day, userid, pgindex, pgsize);
-
-                idata.Add("status", "success");
-                int total = Convert.ToInt32(dat[0]);
-                KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                idata.Add("totalRows", total);
-                DataTable dt = dat[1] as DataTable;
-                List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
-                if (dt.Rows.Count >= 1)
-                {
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
-                        {
-                            RowNum = Convert.ToInt32(dr[0]),
-                            Classname = dr[1].ToString(),
-                            Section1 = dr[2].ToString(),
-                            Section2 = dr[2].ToString(),
-                            Section3 = dr[4].ToString(),
-                            Section4 = dr[4].ToString(),
-                            Section5 = dr[6].ToString(),
-                            Section6 = dr[6].ToString(),
-                            Section7 = dr[8].ToString(),
-                            Section8 = dr[8].ToString(),
-                            Section9 = dr[10].ToString(),
-                            Section10 = dr[10].ToString(),
-                            Section11 = dr[12].ToString(),
-                            Section12 = dr[12].ToString()
-                        };
-                        schedules.Add(scheduleDataStructure);
-                    }
-                    idata.Add("value", schedules);
-                }
-            }
-            catch (Exception ex)
+            var cc = HttpContext.Current.Session;
+            if (cc.Count == 0)
             {
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+            }
+            else
+            {
+                Schedule schedule = new Schedule();
+                List<object> dat = new List<object>();
+                try
+                {
+                    if (Session["UserLoggedIn"].ToString() != null)
+                    {
+                        var userid = Session["UserLoggedIn"].ToString();
+                        var building = data["building"].ToString();
+                        var sem = Convert.ToInt32(data["semNum"]);
+                        var week = Convert.ToInt32(data["weekNum"]);
+                        var day = Convert.ToInt32(data["dayNum"]);
+
+                        var pgindex = Convert.ToInt32(data["pageIndex"]);
+                        var pgsize = Convert.ToInt32(data["pageSize"]);
+
+                        dat = schedule.GetScheduleByDay(building, sem, week, day, userid, pgindex, pgsize);
+
+                        idata.Add("status", "success");
+                        int total = Convert.ToInt32(dat[0]);
+                        KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                        idata.Add("totalRows", total);
+                        DataTable dt = dat[1] as DataTable;
+                        List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
+                        if (dt.Rows.Count >= 1)
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
+                                {
+                                    RowNum = Convert.ToInt32(dr[0]),
+                                    Classname = dr[1].ToString(),
+                                    Section1 = dr[2].ToString(),
+                                    Section2 = dr[2].ToString(),
+                                    Section3 = dr[4].ToString(),
+                                    Section4 = dr[4].ToString(),
+                                    Section5 = dr[6].ToString(),
+                                    Section6 = dr[6].ToString(),
+                                    Section7 = dr[8].ToString(),
+                                    Section8 = dr[8].ToString(),
+                                    Section9 = dr[10].ToString(),
+                                    Section10 = dr[10].ToString(),
+                                    Section11 = dr[12].ToString(),
+                                    Section12 = dr[12].ToString()
+                                };
+                                schedules.Add(scheduleDataStructure);
+                            }
+                            idata.Add("value", schedules);
+                        }
+                    }
+                    else
+                    {
+                        idata.Add("status", "fail");
+                        idata.Add("errorMessage", "No valid userid found");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetScheduleByDate(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-
-
-            try
-            {
-                List<object> dat = new List<object>();
-
-                var building = data["building"].ToString();
-                var date = data["date"].ToString();
-                var userid = data["userID"].ToString();
-                var pgindex = data["pageIndex"].ToString();
-                var pgsize = data["pageSize"].ToString();
-                Schedule schedule = new Schedule();
-                dat = schedule.GetScheduleByDate(building, date, userid, pgindex, pgsize);
-
-                idata.Add("status", "success");
-                int total = Convert.ToInt32(dat[0]);
-                KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                idata.Add("totalRows", total);
-                DataTable dt = dat[1] as DataTable;
-                List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
-                if (dt.Rows.Count >= 1)
-                {
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
-                        {
-                            RowNum = Convert.ToInt32(dr[0]),
-                            Classname = dr[1].ToString(),
-                            Section1 = dr[2].ToString(),
-                            Section2 = dr[2].ToString(),
-                            Section3 = dr[4].ToString(),
-                            Section4 = dr[4].ToString(),
-                            Section5 = dr[6].ToString(),
-                            Section6 = dr[6].ToString(),
-                            Section7 = dr[8].ToString(),
-                            Section8 = dr[8].ToString(),
-                            Section9 = dr[10].ToString(),
-                            Section10 = dr[10].ToString(),
-                            Section11 = dr[12].ToString(),
-                            Section12 = dr[12].ToString()
-                        };
-                        schedules.Add(scheduleDataStructure);
-                    }
-                    idata.Add("value", schedules);
-                }
-            }
-            catch (Exception ex)
+            var cc = HttpContext.Current.Session;
+            if (cc.Count == 0)
             {
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");                
+            }
+            else
+            {
+                try
+                {
+                    if (HttpContext.Current.Session["UserLoggedIn"].ToString() != null)
+                    {
+                        var userid = HttpContext.Current.Session["UserLoggedIn"].ToString();
+                        List<object> dat = new List<object>();
+
+                        var building = data["building"].ToString();
+                        var date = data["date"].ToString();
+
+                        var pgindex = data["pageIndex"].ToString();
+                        var pgsize = data["pageSize"].ToString();
+                        Schedule schedule = new Schedule();
+                        dat = schedule.GetScheduleByDate(building, date, userid, pgindex, pgsize);
+
+                        idata.Add("status", "success");
+                        int total = Convert.ToInt32(dat[0]);
+                        KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                        idata.Add("totalRows", total);
+                        DataTable dt = dat[1] as DataTable;
+                        List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
+                        if (dt.Rows.Count >= 1)
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
+                                {
+                                    RowNum = Convert.ToInt32(dr[0]),
+                                    Classname = dr[1].ToString(),
+                                    Section1 = dr[2].ToString(),
+                                    Section2 = dr[2].ToString(),
+                                    Section3 = dr[4].ToString(),
+                                    Section4 = dr[4].ToString(),
+                                    Section5 = dr[6].ToString(),
+                                    Section6 = dr[6].ToString(),
+                                    Section7 = dr[8].ToString(),
+                                    Section8 = dr[8].ToString(),
+                                    Section9 = dr[10].ToString(),
+                                    Section10 = dr[10].ToString(),
+                                    Section11 = dr[12].ToString(),
+                                    Section12 = dr[12].ToString()
+                                };
+                                schedules.Add(scheduleDataStructure);
+                            }
+                            idata.Add("value", schedules);
+                        }
+                    }
+                    else
+                    {
+                        idata.Add("status", "fail");
+                        idata.Add("errorMessage", "No valid userid found");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
+                
             }
             return idata;
-
         }
         /// <summary>
         /// specific methods for Reserve Schedule
@@ -723,15 +776,11 @@ namespace CresijApp.Services
        
         [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public Dictionary<string, object> GetWeekYearSemester(Dictionary<string, object> data)
+        public Dictionary<string, object> GetWeekYearSemester(string date)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             try
             {
-                var date = "";
-
-                date = data["date"].ToString();
-
                 Schedule sc = new Schedule();
                 string week = sc.GetWeekByDate(date);
                 string[] dat = sc.GetYearAndSemester(date);
@@ -756,27 +805,32 @@ namespace CresijApp.Services
             Dictionary<string, object> idata = new Dictionary<string, object>();
             try
             {
-                List<string> name = new List<string>();
-                name.Add(data["schoolYear"].ToString());
-                name.Add(data["semNum"].ToString());
-                name.Add(data["week"].ToString());
-                name.Add(data["date"].ToString());
-                name.Add(data["section"].ToString());
-                name.Add(data["className"].ToString());
-                name.Add(data["borrowingUnit"].ToString());
-                name.Add(data["phoneNum"].ToString());
-                name.Add(data["personName"].ToString());
-                name.Add(data["personID"].ToString());
-                name.Add(data["contactNum"].ToString());
-                name.Add(data["purpose"].ToString());
-                name.Add(data["reservationPurpose"].ToString());
-                name.Add(data["equipment"].ToString());
-                int r = -1;
-                r = schedule.SaveReserveSchedule(name.ToArray());
-                if (r > 0)
-                    idata.Add("status", "success");
-                else
-                    idata.Add("status", "fail");
+                
+                    List<string> name = new List<string>();
+                    name.Add(data["schoolYear"].ToString());
+                    name.Add(data["semNum"].ToString());
+                    name.Add(data["week"].ToString());
+                    name.Add(data["date"].ToString());
+                    name.Add(data["section"].ToString());
+                    name.Add(data["className"].ToString());
+                    name.Add(data["borrowingUnit"].ToString());
+                    name.Add(data["phoneNum"].ToString());
+                    name.Add(data["personName"].ToString());
+                    name.Add(Session["personID"].ToString());
+                    name.Add(data["contactNum"].ToString());
+                    name.Add(data["purpose"].ToString());
+                    name.Add(data["reservationPurpose"].ToString());
+                    name.Add(data["equipment"].ToString());
+                    int r = -1;
+                    r = schedule.SaveReserveSchedule(name.ToArray());
+                    if (r > 0)
+                    {
+                        idata.Add("status", "success");
+                        idata.Add("totalRows", r);
+                    }
+                    else
+                        idata.Add("status", "fail");
+                
             }
             catch(Exception ex)
             {

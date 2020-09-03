@@ -413,5 +413,19 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+        public DataTable GetFloorDetails(string building)
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                string query = "SELECT * from Floordetails where BuildingName ='" + building+ "'";
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                }
+            }
+            return dt;
+        }
     }
 }

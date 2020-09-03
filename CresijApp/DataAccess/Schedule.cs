@@ -9,34 +9,10 @@ namespace CresijApp.DataAccess
 {
     public class Schedule
     {
-        readonly string constr = System.Configuration.ConfigurationManager.
-            ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        
         readonly string constring = System.Configuration.ConfigurationManager.
             ConnectionStrings["SchoolConnectionString"].ConnectionString;
-        
-        //public DataTable GetSchedule()
-        //{
-        //    DataTable dt = new DataTable();
-        //    try
-        //    {
-        //        using (MySqlConnection con = new MySqlConnection(constr))
-        //        {
-        //            string query = "select concat_ws(', ',teacherName, Coursename, classname, weekstart, weekEnd, dayno, section)" +
-        //                           " as details , dayno, classname from scheduletable";
-        //            using (MySqlCommand cmd = new MySqlCommand(query, con))
-        //            {
-        //                MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-        //                dataAdapter.Fill(dt);
-        //            }
-        //        }
-        //    }
-        //    catch(Exception ex)
-        //    {
 
-        //    }
-
-        //    return dt;
-        //}
         public DataTable GetCourse()
         {
             DataTable dt = new DataTable();
@@ -44,7 +20,7 @@ namespace CresijApp.DataAccess
             {
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
-                    string query = "select  section,className, coursename, id from schedule";
+                    string query = "select section,className, coursename, id from schedule";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
@@ -348,7 +324,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             try
             {
-                string query = "select dayno, group_concat( section) as section from schedule "+
+                string query = "select dayno, group_concat(section) as section from schedule "+
                                 "where weekStart<= "+week+ " and weekend>= " + week + " and classname = '"+classname+"'" +
                                 " and sem="+semno+" group by dayno ";
                 using (MySqlConnection con = new MySqlConnection(constring))
@@ -372,7 +348,8 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             try
             {
-                string query = "select distinct(teachername) as teachername from schedule where coursename='"+coursename+"'";
+                string query = "select distinct(teachername) as teachername from schedule where coursename='"+coursename+"'" +
+                    " and teacherid in(select teacherid from teacherdata)";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -744,7 +721,7 @@ namespace CresijApp.DataAccess
                     string query = "INSERT INTO `organisationdatabase`.`schedulereserve` "+
                     "(`SchoolYear`,`Semester`,`week`,`Date`,`Section`,`Classroom`,`BorrowingUnit`,`Workphone`,`PersonName`, " +
                     "`PersonID`,`ContactNo`,`Purpose`,`Reason`,`ReservationDevices`,`Status`) "+
-                    "VALUES('"+stat[0]+"','"+stat[1] + "','" + stat[4] + "','" + stat[2] + "','" + stat[3] 
+                    "VALUES('"+stat[0]+"','"+stat[1] + "','" + stat[2] + "','" + stat[3] + "','" + stat[4] 
                     +"','" + stat[5] + "','" + stat[6] + "','" + stat[7] + "','" + stat[8] + "','" + stat[9] + "','" + stat[10]
                     + "','" + stat[11] + "','" + stat[12] + "','" + stat[13] + "','Pending')";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -820,7 +797,6 @@ namespace CresijApp.DataAccess
                 }
             }
             return num;
-
         }
 
         public DataTable GetTotalWeek(string semnum)

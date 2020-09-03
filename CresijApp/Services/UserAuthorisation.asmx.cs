@@ -34,21 +34,35 @@ namespace CresijApp.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveUserAuthentications(Dictionary<string, object> data)
         {
+            string adminid = "";
             Dictionary<string, string> idata = new Dictionary<string, string>();
             try
             {
-                string[] authmenu = data["AuthMenu"].ToString().Split(',');
-                string[] authloc = data["classnames"].ToString().Split(',');
-                var adminid = data["adminId"].ToString();
-                var userid = data["personid"].ToString();
-                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-                userAuth.DeleteUserPermissions(userid);
-                int result = userAuth.SaveAuthMenu(authmenu, userid, adminid, authloc);
-                idata.Add("status", "success");
-            }
+                if (Session["UserLoggedIn"].ToString() != null)
+                {
+
+                    adminid = Session["UserLoggedIn"].ToString();
+                    string[] authmenu = data["AuthMenu"].ToString().Split(',');
+                    string[] authloc = data["classNames"].ToString().Split(',');
+                    
+                    var userid = data["personId"].ToString();
+                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                    int r = userAuth.DeleteUserPermissions(userid);
+                    int result = userAuth.SaveAuthMenu(authmenu, userid, adminid, authloc);
+                    if (result < 0)
+                        idata.Add("status", "fail");
+                    else
+                        idata.Add("status", "success");
+                }
+                else
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", "No valid userid found");
+                }
+                }
             catch(Exception ex)
             {
                 idata.Add("status", "fail");
@@ -59,14 +73,19 @@ namespace CresijApp.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public Dictionary<string,object> GetUserTopMenu(string userid)
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string,object> GetUserTopMenu()
         {
+            string userid = "";
             List<string> idata = new List<string>();
             Dictionary<string, object> result = new Dictionary<string, object>();
             try
             {
-                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                if (Session["UserLoggedIn"].ToString() != null)
+                {
+
+                    userid = Session["UserLoggedIn"].ToString();
+                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
                 DataTable dt = new DataTable();
                 dt = userAuth.GetUserTopMenu(userid);
                 if (dt.Rows.Count > 0)
@@ -78,6 +97,12 @@ namespace CresijApp.Services
                     }                    
                 }
                 result.Add("TopMenu", idata);
+                }
+                else
+                {
+                    result.Add("status", "fail");
+                    result.Add("errorMessage", "No valid userid found");
+                }
             }
             catch(Exception ex)
             {
@@ -88,25 +113,34 @@ namespace CresijApp.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public Dictionary<string, object> GetUserSubMenu(Dictionary<string, object> data)
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetUserSubMenu(string subMenuType)
         {
             List<object> idata = new List<object>();
             Dictionary<string, object> result = new Dictionary<string, object>();
             try
             {
-                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-                DataTable dt = new DataTable();
-                dt = userAuth.GetUserSubMenu(data);
-                if (dt.Rows.Count > 0)
+                if (Session["UserLoggedIn"].ToString() != null)
                 {
-                    result.Add("status", "sucess");
-                    foreach (DataRow dr in dt.Rows)
+                    string userid = Session["UserLoggedIn"].ToString();
+                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                    DataTable dt = new DataTable();
+                    dt = userAuth.GetUserSubMenu(subMenuType,userid);
+                    if (dt.Rows.Count > 0)
                     {
-                        idata.Add(dr["rolenames"].ToString());
+                        result.Add("status", "sucess");
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            idata.Add(dr["rolenames"].ToString());
+                        }
                     }
+                    result.Add("SubMenu", idata);
                 }
-                result.Add("SubMenu", idata);
+                else
+                {
+                    result.Add("status", "fail");
+                    result.Add("errorMessage", "No valid userid found");
+                }
             }
             catch (Exception ex)
             {
@@ -117,25 +151,75 @@ namespace CresijApp.Services
         }
 
         [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public Dictionary<string, object> GetUserAllSubMenu(string userid)
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetUserAllSubMenu()
+        {
+            string userid = "";
+            List<object> idata = new List<object>();
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            try
+            {
+                if (Session["UserLoggedIn"].ToString()!=null)
+                {
+                    userid = Session["UserLoggedIn"].ToString();
+                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                    DataTable dt = new DataTable();
+                    dt = userAuth.GetUserAllSubMenu(userid);
+                    if (dt.Rows.Count > 0)
+                    {
+                        result.Add("status", "sucess");
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            idata.Add(dr["roleid"].ToString());
+                        }
+                    }
+                    result.Add("SubMenuId", idata);
+                }
+                else
+                {
+                    result.Add("status", "fail");
+                    result.Add("errorMessage", "No valid userid found");
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                result.Add("status", "fail");
+                result.Add("error", ex.Message);
+            }
+            return result;           
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetUserAllLocationAccess()
         {
             List<object> idata = new List<object>();
             Dictionary<string, object> result = new Dictionary<string, object>();
             try
             {
-                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-                DataTable dt = new DataTable();
-                dt = userAuth.GetUserAllSubMenu(userid);
-                if (dt.Rows.Count > 0)
+                if (Session["UserLoggedIn"].ToString() != null)
                 {
-                    result.Add("status", "sucess");
-                    foreach (DataRow dr in dt.Rows)
+
+                    string userid = Session["UserLoggedIn"].ToString();
+                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                    DataTable dt = new DataTable();
+                    dt = userAuth.GetUserAllLocationAccess(userid);
+                    if (dt.Rows.Count > 0)
                     {
-                        idata.Add(dr["roleid"].ToString());
+                        result.Add("status", "sucess");
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            idata.Add(dr["className"].ToString());
+                        }
                     }
+                    result.Add("ClassNameList", idata);
                 }
-                result.Add("SubMenuId", idata);
+                else
+                {
+                    result.Add("status", "fail");
+                    result.Add("errorMessage", "No valid userid found");
+                }
             }
             catch (Exception ex)
             {
@@ -143,12 +227,41 @@ namespace CresijApp.Services
                 result.Add("error", ex.Message);
             }
             return result;
-           
+            
+        }
+
+        [PrincipalPermission(SecurityAction.Demand)]
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetUserPermissions(string userid)
+        {
+            List<object> idata = new List<object>();
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            try
+            {
+                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                    DataTable dt = new DataTable();
+                    dt = userAuth.GetUserAllSubMenu(userid);
+                    if (dt.Rows.Count > 0)
+                    {
+                        result.Add("status", "sucess");
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            idata.Add(dr["roleid"].ToString());
+                        }
+                    }
+                    result.Add("SubMenuId", idata);
+            }
+            catch (Exception ex)
+            {
+                result.Add("status", "fail");
+                result.Add("error", ex.Message);
+            }
+            return result;
         }
 
         [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
-        public Dictionary<string, object> GetUserAllLocationAccess(string userid)
+        public Dictionary<string, object> GetUserLocationPermissions(string userid)
         {
             List<object> idata = new List<object>();
             Dictionary<string, object> result = new Dictionary<string, object>();
@@ -173,8 +286,7 @@ namespace CresijApp.Services
                 result.Add("error", ex.Message);
             }
             return result;
-            
-        }
 
+        }
     }
 }

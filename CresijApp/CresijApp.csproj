@@ -405,9 +405,9 @@
     <Content Include="Services\GetLeftMenu.asmx" />
     <Content Include="Services\GetOrganisationData.asmx" />
     <Content Include="Services\GetSetSystemConfigInfo.asmx" />
-    <Content Include="Services\GetSideMenu.asmx" />
     <Content Include="Services\SaveOrganisationData.asmx" />
     <Content Include="Services\ScheduleData.asmx" />
+    <Content Include="Services\StrategyManagement.asmx" />
     <Content Include="Services\SystemSetting.asmx" />
     <Content Include="Services\UserAuthorisation.asmx" />
     <Content Include="Services\UserLogs.asmx" />
@@ -627,6 +627,7 @@
     <Content Include="site\css\sensor.css" />
     <Content Include="site\css\sensor2.css" />
     <Content Include="site\css\sensor2.min.css" />
+    <Content Include="CustomError.aspx" />
     <Content Include="site\dist\css\bootstrap-datetimepicker.min.css" />
     <Content Include="site\dist\css\bootstrap-grid.css" />
     <Content Include="site\dist\css\bootstrap-grid.min.css" />
@@ -894,9 +895,11 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="DataAccess\CentralControl.cs" />
     <Compile Include="DataAccess\Chart.cs" />
+    <Compile Include="DataAccess\CreateCSV.cs" />
     <Compile Include="DataAccess\DeleteOrgDetails.cs" />
     <Compile Include="DataAccess\GetMenuDataHelper.cs" />
     <Compile Include="DataAccess\GetOrgData.cs" />
@@ -904,6 +907,7 @@
     <Compile Include="DataAccess\Schedule.cs" />
     <Compile Include="DataAccess\SessionManagement.cs" />
     <Compile Include="DataAccess\SetOrgData.cs" />
+    <Compile Include="DataAccess\StrategyMgmt.cs" />
     <Compile Include="DataAccess\SystemInfo.cs" />
     <Compile Include="DataAccess\UserAuth.cs" />
     <Compile Include="DataAccess\Userdetails.cs" />
@@ -935,10 +939,6 @@
       <DependentUpon>GetSetSystemConfigInfo.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Services\GetSideMenu.asmx.cs">
-      <DependentUpon>GetSideMenu.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Services\Handler.ashx.cs">
       <DependentUpon>Handler.ashx</DependentUpon>
     </Compile>
@@ -948,6 +948,10 @@
     </Compile>
     <Compile Include="Services\ScheduleData.asmx.cs">
       <DependentUpon>ScheduleData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Services\StrategyManagement.asmx.cs">
+      <DependentUpon>StrategyManagement.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\SystemSetting.asmx.cs">
@@ -961,6 +965,13 @@
     <Compile Include="Services\UserLogs.asmx.cs">
       <DependentUpon>UserLogs.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomError.aspx.cs">
+      <DependentUpon>CustomError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomError.aspx.designer.cs">
+      <DependentUpon>CustomError.aspx</DependentUpon>
     </Compile>
     <Compile Include="site\window\alert\DownloadClassCSVTemplate.aspx.cs">
       <DependentUpon>DownloadClassCSVTemplate.aspx</DependentUpon>
@@ -1232,6 +1243,7 @@
     <Folder Include="NewFolder1\" />
     <Folder Include="Templates\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
