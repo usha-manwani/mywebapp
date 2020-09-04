@@ -20,8 +20,7 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class UserLogs : System.Web.Services.WebService
     {
-
-        [WebMethod(EnableSession = true)]
+        [WebMethod(EnableSession = true)]   
         public Dictionary<string,object> Login(Dictionary<string, object> data)
         {            
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -107,8 +106,7 @@ namespace CresijApp.Services
                     result.Add("status", "fail");                    
                     result.Add("errorMessage", ex.Message);
                 }
-            }
-           
+            }           
             return result;
         }
 

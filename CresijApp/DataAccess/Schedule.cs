@@ -178,11 +178,10 @@ namespace CresijApp.DataAccess
         }
         public int SaveTransferSchedule(string[] name)
         {
-            int num = 0;
+            int num = -1;
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                try
-                {                
+                               
                     using (MySqlCommand cmd = new MySqlCommand("sp_InsertChangeSchedule", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -198,19 +197,9 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("scid", name[10]);
                         if (con.State != ConnectionState.Open)
                             con.Open();
-                       num= cmd.ExecuteNonQuery();
-                        
+                       num= cmd.ExecuteNonQuery();                        
                     }
-                }
                 
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    con.Close();
-                }
             }
             return num;
         }
@@ -288,14 +277,19 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             try
             {
-                string query = "select distinct(sc.classname), count(section) as section "+
+                string query = "select distinct(sc.classname), count(section) as section ,cd.classid " +
                                 "from schedule sc join classdetails cd on sc.classname = cd.classname "+
                                 "where weekStart <= "+week+ " and weekend>= " + week + " and cd.teachingbuilding = '"
-                                +building+"' and sem = "+sem+ " and sc.classname in (select classid from userlocationaccess where "+
+                                +building+ "' and floor in(select floor from floordetails where buildingname in" +
+                                "(select buildingname from buildingdetails where BuildingName='"+building+"')) and sem = " + sem+ 
+                                " and sc.classname in (select classid from userlocationaccess where "+
                                 " userserialnum = (select serialno from userdetails where loginid = '"+userid+"')) "+
                                 " group by sc.classname union "+
-                                "select distinct(classname), '0' as section from classdetails cd where " +
-                                 "cd.teachingbuilding = '" + building + "' and classname not in (select distinct(sc.classname) " +
+                                "select distinct(classname), '0' as section,cd.classid from classdetails cd where " +
+                                 "cd.teachingbuilding = '" + building + "' and floor in"+
+                                 "(select floor from floordetails where buildingname in "+
+                                 "(select buildingname from buildingdetails where BuildingName = '"+building+"'))" +
+                                 " and classname not in (select distinct(sc.classname) " +
                                 "from schedule sc join classdetails cd on sc.classname = cd.classname "+
                                 "where weekStart <= " + week + " and weekend>= " + week + " and cd.teachingbuilding = '"
                                 + building + "' and sem = " + sem + " and sc.classname in "+
@@ -319,14 +313,14 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetAvailDay(string week, string classname, string semno)
+        public DataTable GetAvailDay(string week, string classid, string semno)
         {
             DataTable dt = new DataTable();
             try
             {
                 string query = "select dayno, group_concat(section) as section from schedule "+
-                                "where weekStart<= "+week+ " and weekend>= " + week + " and classname = '"+classname+"'" +
-                                " and sem="+semno+" group by dayno ";
+                                "where weekStart<= "+week+ " and weekend>= " + week + " and classname in" +
+                                "(select classname from classdetails where classid="+classid+") and sem="+semno+" group by dayno ";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 
@@ -348,7 +342,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             try
             {
-                string query = "select distinct(teachername) as teachername from schedule where coursename='"+coursename+"'" +
+                string query = "select distinct(teachername) as teachername,teacherid from schedule where coursename='"+coursename+"'" +
                     " and teacherid in(select teacherid from teacherdata)";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -371,10 +365,12 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             try
             {
-                string query = "select sc.classname as oldclass, newclass, concat(sc.weekstart, ',', sc.dayno ,',', sc.section) as oldtime, "+
+                string query = "select sc.classname as oldclass, cd.classname as newclass, concat(sc.weekstart, ',', sc.dayno ,',', sc.section) as oldtime, " +
                             "concat(scd.newweek, ',', scd.newday, ',', scd.newsection) as newtime, sc.teacherName as oldteacher, "+
-                            "scd.NewTeacherid as newteacher, 'multimedia' as classtype , currentstatus, reason, sc.coursename , scd.id as id " +
-                                "from scheduletransfer scd join schedule sc on sc.id = scd.idref ";
+                            "td.teachername as newteacher, 'multimedia' as classtype , currentstatus, reason, sc.coursename , scd.id as id " +
+                                "from scheduletransfer scd join schedule sc on sc.id = scd.idref " +
+                                "join teacherdata td on scd.newteacherid = td.teacherid join classdetails cd on cd.classid = scd.newclass " +
+                                "where sc.teacherid in(select teacherid from teacherdata)";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(query, con))

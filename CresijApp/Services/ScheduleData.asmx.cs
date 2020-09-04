@@ -50,6 +50,11 @@ namespace CresijApp.Services
             return val;
         }
 
+        class TeacherDetails
+        {
+            public string TeacherName { get; set; }
+            public string TeacherId { get; set; }
+        }
         [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
         public Dictionary<string, object> GetTeacherDetail(string courseName)
@@ -62,16 +67,21 @@ namespace CresijApp.Services
                 r = schedule.GetTeacherDetail(courseName);
 
                 idata.Add("status", "success");
-                List<object> dat = new List<object>();
+                List<TeacherDetails> dat = new List<TeacherDetails>();
                 if (r.Rows.Count > 0)
                 {
                     idata.Add("totalRows", r.Rows.Count);
                     foreach (DataRow dr in r.Rows)
                     {
-                        dat.Add(dr["teachername"]);
+                        TeacherDetails td = new TeacherDetails()
+                        {
+                            TeacherName = dr["TeacherName"].ToString(),
+                            TeacherId = dr["teacherid"].ToString()
+                        };
+                        dat.Add(td);
                     }
                 }
-                idata.Add("TeacherNames", dat);
+                idata.Add("value", dat);
             }
             catch (Exception ex)
             {
@@ -188,7 +198,7 @@ namespace CresijApp.Services
             }
             return idata;
         }
-
+                                                        
         [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTransferScheduleByDate(Dictionary<string, object> data)
@@ -246,7 +256,8 @@ namespace CresijApp.Services
                 else
                 {
                     idata.Add("status", "fail");
-                    idata.Add("errorMessage", "No valid userid found");
+                    idata.Add("errorMessage", "Session Expired");
+                    idata.Add("customErrorCode", "440");
                 }
             }
             catch (Exception ex)
@@ -327,6 +338,7 @@ namespace CresijApp.Services
             public string TeacherName { get; set; }
             public string CourseName { get; set; }
             public string ClassName { get; set; }
+            public string ClassId { get; set; }
             public string WeekStart { get; set; }
             public string Weekend { get; set; }
             public string DayNum { get; set; }
@@ -355,6 +367,7 @@ namespace CresijApp.Services
                             TeacherName = dr["Teachername"].ToString(),
                             CourseName = dr["coursename"].ToString(),
                             ClassName = dr["classname"].ToString(),
+                            ClassId =dr["classId"].ToString(),
                             WeekStart = dr["Weekstart"].ToString(),
                             Weekend = dr["Weekend"].ToString(),
                             DayNum = dr["dayno"].ToString(),
@@ -390,18 +403,18 @@ namespace CresijApp.Services
             List<string> d = new List<string>();
             try
             {
-                d.Add(data["currentClassName"].ToString());
+                d.Add(data["currentClassId"].ToString());
                 d.Add(data["courseName"].ToString());
                 d.Add(data["reason"].ToString());
                 d.Add(data["newWeek"].ToString());
                 d.Add(data["newday"].ToString());
                 d.Add(data["newSection"].ToString());
                 d.Add(data["newBuilding"].ToString());
-                d.Add(data["newClassName"].ToString());
+                d.Add(data["newClassId"].ToString());
                 d.Add(data["newTeacherID"].ToString());
                 d.Add(data["currentRefrenceID"].ToString());
                 int r = schedule.SaveTransferSchedule(d.ToArray());
-                if (r > 0)
+                if (r >= 0)
                 {
                     idata.Add("status", "success");
                 }
@@ -447,6 +460,11 @@ namespace CresijApp.Services
             
         }
 
+        class AvailClasses
+        {
+            public string ClassName { get; set; }
+            public string ClassId { get; set; }
+        }
         [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetAvailClasses(Dictionary<string, object> data)
@@ -455,7 +473,7 @@ namespace CresijApp.Services
             Dictionary<string, object> idata = new Dictionary<string, object>();
             try
             {
-                if (Session["UserLoggedIn"].ToString() != null)
+                if (HttpContext.Current.Session["UserLoggedIn"].ToString() != null)
                 {
                     string userid = Session["UserLoggedIn"].ToString();
                     DataTable r = new DataTable();
@@ -472,10 +490,18 @@ namespace CresijApp.Services
                         idata.Add("totalRows", total);
                         foreach (DataRow dr in r.Rows)
                         {
-                            if (Convert.ToInt32(dr[1]) < 42)
-                                dat.Add(dr[0].ToString());
+                            if (Convert.ToInt32(dr["section"]) < 42)
+                            {
+                                AvailClasses ad = new AvailClasses()
+                                {
+                                    ClassId = dr["classid"].ToString(),
+                                    ClassName = dr["classname"].ToString()
+                                };
+                                dat.Add(ad);
+                            }
+                                
                         }
-                        idata.Add("ClassNames", dat);
+                        idata.Add("value", dat);
                     }
                 }
                 else
@@ -503,10 +529,10 @@ namespace CresijApp.Services
             {
                 List<object> dat = new List<object>();
 
-                var classname = data["className"].ToString();
+                var classid = data["classId"].ToString();
                 var week = data["weekNum"].ToString();
                 var semno = data["semNum"].ToString();
-                r = schedule.GetAvailDay(week, classname, semno);
+                r = schedule.GetAvailDay(week, classid, semno);
 
                 List<DaysAndSection> listofclass = new List<DaysAndSection>();
                 if (r.Rows.Count > 0)
@@ -567,6 +593,7 @@ namespace CresijApp.Services
             }
         }
 
+        
         [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
         public Dictionary<string, object> GetTotalWeek(string semNum)
