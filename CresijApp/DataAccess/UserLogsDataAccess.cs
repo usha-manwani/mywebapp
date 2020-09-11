@@ -17,8 +17,7 @@ namespace CresijApp.DataAccess
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 try
-                {
-                    
+                {                    
                     using (MySqlCommand cmd = new MySqlCommand("sp_LoginUser", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;

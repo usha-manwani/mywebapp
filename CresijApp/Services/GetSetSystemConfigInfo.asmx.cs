@@ -22,16 +22,16 @@ namespace CresijApp.Services
     public class GetSetSystemConfigInfo : WebService
     {
         [WebMethod(EnableSession = true)]
-        public Dictionary<string,object> GetFloorClassByBuilding(string buildingName)
+        public Dictionary<string,object> GetFloorClassByBuilding(string building)
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
             List<object> idata = new List<object>();
             var cc = HttpContext.Current.Session;
-            if (HttpContext.Current.Session["UserId"]== null || HttpContext.Current.Session.Count==0)
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count==0)
             {
                 HttpContext.Current.Session.Abandon();
                 result.Add("status", "fail");
-                result.Add("buildingName", buildingName);
+                result.Add("building", building);
                 result.Add("errorMessage", "Session Expired");
                 result.Add("customErrorCode", "440");
             }
@@ -39,9 +39,9 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    result.Add("buildingName", buildingName);
+                    result.Add("building", building);
                     SystemInfo systemInfo = new SystemInfo();
-                    DataTable dt = systemInfo.GetFloorClassByBuilding(buildingName);
+                    DataTable dt = systemInfo.GetFloorClassByBuilding(building);
                     result.Add("status", "success");
                     if (dt.Rows.Count > 0)
                     {
@@ -61,7 +61,7 @@ namespace CresijApp.Services
                 catch (Exception ex)
                 {
                     result.Add("status", "fail");
-                    result.Add("buildingName", buildingName);
+                    result.Add("building", building);
                     result.Add("errorMessage", ex.Message);
                 }
             }            
@@ -80,15 +80,16 @@ namespace CresijApp.Services
         }
         
         [WebMethod(EnableSession =true)]
-        public Dictionary<string, object> GetFloorClassByBuildingForUserAccess(string buildingName)
+        public Dictionary<string, object> GetFloorClassByBuildingForUserAccess(string building)
         {
             string userid = "";
             List<object> idata = new List<object>();
             Dictionary<string, object> result = new Dictionary<string, object>();
-            if (HttpContext.Current.Session["LoggedInUser"] == null || HttpContext.Current.Session.Count == 0)
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
                 result.Add("status", "fail");
+                result.Add("building", building);
                 result.Add("errorMessage", "Session Expired");
                 result.Add("customErrorCode", "440");
             }
@@ -96,23 +97,25 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    if (Session["LoggedInUser"].ToString() != null)
+                    if (Session["UserLoggedIn"].ToString() != null)
                     {
 
-                        userid = Session["LoggedInUser"].ToString();
-                        result.Add("buildingName", buildingName);
+                        userid = Session["UserLoggedIn"].ToString();
+                        result.Add("building", building);
                         SystemInfo systemInfo = new SystemInfo();
-                        DataTable dt = systemInfo.GetFloorClassByBuildingUserAccess(buildingName, userid);
+                        DataTable dt = systemInfo.GetFloorClassByBuildingUserAccess(building, userid);
                         result.Add("status", "success");
                         if (dt.Rows.Count > 0)
                         {
-
                             foreach (DataRow dr in dt.Rows)
                             {
-                                Dictionary<string, string> values = new Dictionary<string, string>();
-                                values.Add("floor", dr["floor"].ToString());
-                                values.Add("classNames", dr["className"].ToString());
-                                idata.Add(values);
+                                List<ClassNamesList> cl = JsonConvert.DeserializeObject<List<ClassNamesList>>(dr["className"].ToString());
+                                ClassFloorStructure fc = new ClassFloorStructure()
+                                {
+                                    Floor = dr["floor"].ToString(),
+                                    ClassNames = cl
+                                };
+                                idata.Add(fc);
                             }
                             result.Add("value", idata);
                         }
@@ -121,6 +124,7 @@ namespace CresijApp.Services
                     {
                         HttpContext.Current.Session.Abandon();
                         result.Add("status", "fail");
+                        result.Add("building", building);
                         result.Add("errorMessage", "Session Expired");
                         result.Add("customErrorCode", "440");
                     }
@@ -128,7 +132,7 @@ namespace CresijApp.Services
                 catch (Exception ex)
                 {
                     result.Add("status", "fail");
-                    result.Add("buildingName", buildingName);
+                    result.Add("building", building);
                     result.Add("errorMessage", ex.Message);
                 }
             }           
@@ -138,9 +142,9 @@ namespace CresijApp.Services
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetIpByClass(string classlist)
         {
-            List<string> idata = new List<string>();
+            List<CcipStructure> idata = new List<CcipStructure>();
             Dictionary<string, object> result = new Dictionary<string, object>();
-            if (HttpContext.Current.Session["LoggedInUser"] == null || HttpContext.Current.Session.Count == 0)
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
                 result.Add("status", "fail");               
@@ -158,7 +162,8 @@ namespace CresijApp.Services
                     {
                         foreach (DataRow dr in dt.Rows)
                         {
-                            idata.Add(dr["CCEquipIP"].ToString());
+                            CcipStructure cl =JsonConvert.DeserializeObject<CcipStructure>(dr["ccip"].ToString());
+                            idata.Add(cl);
                         }
                         result.Add("value", idata);
                     }
@@ -170,6 +175,13 @@ namespace CresijApp.Services
                 }
             }            
             return result;
+        }
+
+        class CcipStructure
+        {
+            public string Name { get; set; }
+            public string Id { get; set; }
+            public string CCIP { get; set; }
         }
     }
 }

@@ -16,8 +16,7 @@ namespace CresijApp.DataAccess
         public DataTable GetCourse()
         {
             DataTable dt = new DataTable();
-            try
-            {
+
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     string query = "select section,className, coursename, id from schedule";
@@ -27,19 +26,13 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
 
             return dt;
         }
         public DataTable GetSchedule()
         {
             DataTable dt = new DataTable();
-            try
-            {
+           
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 
@@ -50,11 +43,7 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
+            
             return dt;
         }
         // Schedule for transfer request with row ids
@@ -63,9 +52,6 @@ namespace CresijApp.DataAccess
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
             var total = 0;
-
-            try
-            {
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 
@@ -87,11 +73,7 @@ namespace CresijApp.DataAccess
                         
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             data.Add(total);
             data.Add(dt);
 
@@ -101,8 +83,6 @@ namespace CresijApp.DataAccess
         public DataTable GetCourseDetails(string[] name)
         {
             DataTable dt = new DataTable();
-            try
-            {
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     string query = "select teachername, coursename, sc.Classname," +
@@ -115,12 +95,6 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
-
             return dt;
 
         }
@@ -129,12 +103,11 @@ namespace CresijApp.DataAccess
         {
             DataTable dt = new DataTable();
             string query = "";
-            try
-            {
-                    query = "select teachername, coursename, sc.Classname as classname," +
-                        " weekstart,weekend, dayno, section, cd.teachingbuilding as building, sm.startdate as Startdate, " +
+                    query = "select teachername, coursename, cd.Classname as classname, cd.classid as classid," +
+                        " weekstart,weekend, dayno, section, bd.buildingname as building, sm.startdate as Startdate, " +
                         "sem as semNum,totalweeks from schedule sc join classdetails cd on sc.ClassName = cd.classname " +
-                        " join semesterinfo sm on sc.sem = sm.semno where sc.id = " + id ;
+                        " join semesterinfo sm on sc.sem = sm.semno join buildingdetails bd on" +
+                        " bd.buildingname =sc.teachingbuilding where sc.id = " + id ;
                 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -145,11 +118,7 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
 
             return dt;
 
@@ -158,8 +127,7 @@ namespace CresijApp.DataAccess
         public DataTable GetFreeWeek()
         {
             DataTable dt = new DataTable();
-            try
-            {
+
                 string query = "select classname, weekstart, weekend from schedule";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -169,11 +137,7 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             return dt;
         }
         public int SaveTransferSchedule(string[] name)
@@ -207,8 +171,6 @@ namespace CresijApp.DataAccess
         public DataTable GetFreeDay(int weeknum)
         {
             DataTable dt = new DataTable();
-            try
-            {
                 string query = "select  dayno as day, group_concat(section) as lecture from schedule where weekstart <="+weeknum+"  group by day";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -219,18 +181,12 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             return dt;
         }
         public DataTable GetScheduleFree()
         {
             DataTable dt = new DataTable();
-            try
-            {
                 string query = "select classname, weekstart, weekend, dayno, section from schedule";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -241,20 +197,14 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             return dt;
         }
 
         public DataTable GetBuilding()
         {
             DataTable dt = new DataTable();
-            try
-            {
-                string query = "select distinct(buildingname) as building from buildingdetails order by buildingname";
+                string query = "select distinct(buildingname) as building, id from buildingdetails order by buildingname";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 
@@ -264,38 +214,30 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             return dt;
         }
 
         public DataTable GetAvailClasses(string week , string building,string userid,string sem)
         {
             DataTable dt = new DataTable();
-            try
-            {
                 string query = "select distinct(sc.classname), count(section) as section ,cd.classid " +
                                 "from schedule sc join classdetails cd on sc.classname = cd.classname "+
                                 "where weekStart <= "+week+ " and weekend>= " + week + " and cd.teachingbuilding = '"
-                                +building+ "' and floor in(select floor from floordetails where buildingname in" +
-                                "(select buildingname from buildingdetails where BuildingName='"+building+"')) and sem = " + sem+ 
-                                " and sc.classname in (select classid from userlocationaccess where "+
-                                " userserialnum = (select serialno from userdetails where loginid = '"+userid+"')) "+
+                                +building+ "' and cd.floor in(select id from floordetails where buildingname " +
+                                "='"+building+"') and sem = " + sem+ 
+                                " and sc.classname in (select classname from classdetails where classid in " +
+                                "(select classid from userlocationaccess where "+
+                                " userserialnum = (select serialno from userdetails where loginid = '"+userid+"'))) "+
                                 " group by sc.classname union "+
                                 "select distinct(classname), '0' as section,cd.classid from classdetails cd where " +
                                  "cd.teachingbuilding = '" + building + "' and floor in"+
-                                 "(select floor from floordetails where buildingname in "+
-                                 "(select buildingname from buildingdetails where BuildingName = '"+building+"'))" +
+                                 "(select id from floordetails where buildingname ='"+building+"')" +
                                  " and classname not in (select distinct(sc.classname) " +
                                 "from schedule sc join classdetails cd on sc.classname = cd.classname "+
                                 "where weekStart <= " + week + " and weekend>= " + week + " and cd.teachingbuilding = '"
-                                + building + "' and sem = " + sem + " and sc.classname in "+
-                                "(select classid from userlocationaccess where userserialnum = (select serialno from userdetails where loginid = '"+userid+"'))) "+ 
-                                " and classname in(select classid from userlocationaccess where userserialnum = "+
-                                " (select serialno from userdetails where loginid = '"+userid+"'))";
+                                + building + "' and sem = " + sem + " and sc.classname in (select classname from classdetails where classid in " +
+                                "(select classid from userlocationaccess where userserialnum = (select serialno from userdetails where loginid = '"+userid+"')))) ";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 
@@ -305,19 +247,13 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             return dt;
         }
 
         public DataTable GetAvailDay(string week, string classid, string semno)
         {
             DataTable dt = new DataTable();
-            try
-            {
                 string query = "select dayno, group_concat(section) as section from schedule "+
                                 "where weekStart<= "+week+ " and weekend>= " + week + " and classname in" +
                                 "(select classname from classdetails where classid="+classid+") and sem="+semno+" group by dayno ";
@@ -330,18 +266,13 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             return dt;
         }
         public DataTable GetTeacherDetail(string coursename)
         {
             DataTable dt = new DataTable();
-            try
-            {
+
                 string query = "select distinct(teachername) as teachername,teacherid from schedule where coursename='"+coursename+"'" +
                     " and teacherid in(select teacherid from teacherdata)";
                 using (MySqlConnection con = new MySqlConnection(constring))
@@ -352,19 +283,13 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             return dt;
         }
 
         public DataTable GetTransferSchedule()
         {
             DataTable dt = new DataTable();
-            try
-            {
                 string query = "select sc.classname as oldclass, cd.classname as newclass, concat(sc.weekstart, ',', sc.dayno ,',', sc.section) as oldtime, " +
                             "concat(scd.newweek, ',', scd.newday, ',', scd.newsection) as newtime, sc.teacherName as oldteacher, "+
                             "td.teachername as newteacher, 'multimedia' as classtype , currentstatus, reason, sc.coursename , scd.id as id " +
@@ -379,11 +304,7 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             return dt;
         }
 
@@ -392,8 +313,6 @@ namespace CresijApp.DataAccess
             int num = 0;
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                try
-                {
                     string query = "update Scheduletransfer set currentstatus ='" + stat+"' where id="+ id;
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
@@ -403,16 +322,6 @@ namespace CresijApp.DataAccess
                         num = cmd.ExecuteNonQuery();
 
                     }
-                }
-
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    con.Close();
-                }
             }
             return num;
 
@@ -420,9 +329,7 @@ namespace CresijApp.DataAccess
 
         public DataTable GetScheduleForDate(string date,string userid)
         {
-            DataTable dt = new DataTable();
-            try
-            {                
+            DataTable dt = new DataTable();              
                 using (MySqlConnection con = new MySqlConnection( constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_GetScheduleforDate", con))
@@ -434,10 +341,6 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-            }
             return dt;
         }
 
@@ -477,9 +380,6 @@ namespace CresijApp.DataAccess
         public DataTable GetScheduleByBuildWeekSem(string building, string sem, string week,string userid)
         {
             DataTable dt = new DataTable();
-            try
-            {
-
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("Sp_getScheduleByBuildWeekSem", con))
@@ -493,20 +393,12 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
             return dt;
         }
 
         public DataTable GetScheduleByBuildSem(string building, string sem,string userid)
         {
             DataTable dt = new DataTable();
-            try
-            {
-
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_getScheduleByBuildSem", con))
@@ -519,11 +411,6 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
             return dt;
         }
 
@@ -533,8 +420,6 @@ namespace CresijApp.DataAccess
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
             var total = 0;
-            try
-            {
 
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -564,21 +449,14 @@ namespace CresijApp.DataAccess
 
                 data.Add(total);
                 data.Add(dt);
-            }
-            catch (Exception ex)
-            {
 
-            }
 
             return data;
         }
 
         public DataTable GetScheduleByBuild(string building,string userid)
         {
-            DataTable dt = new DataTable();
-            try
-            {
-
+            DataTable dt = new DataTable();           
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_GetScheduleByBuild", con))
@@ -590,11 +468,7 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
 
-            }
             return dt;
         }
 
@@ -604,8 +478,6 @@ namespace CresijApp.DataAccess
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
             var total = 0;
-            try
-            {
                 using(MySqlConnection conn = new MySqlConnection(constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("Sp_GetScheduleByDay", conn))
@@ -634,11 +506,7 @@ namespace CresijApp.DataAccess
                 
                 data.Add(total);
                 data.Add(dt);
-            }
-            catch (Exception ex)
-            {
 
-            }
             
             return data;
         }
@@ -649,8 +517,6 @@ namespace CresijApp.DataAccess
             string week = "";
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                try
-                {
                     using (MySqlCommand cmd = new MySqlCommand("sp_GetWeekByDate", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -662,14 +528,6 @@ namespace CresijApp.DataAccess
                         cmd.ExecuteNonQuery();
                         week = cmd.Parameters["@weekno"].Value.ToString();
                     }
-                }
-                catch (Exception ex)
-                {
-                }
-                finally
-                {
-                    con.Close();
-                }
             }
             return week;
         }
@@ -679,8 +537,6 @@ namespace CresijApp.DataAccess
             string[] data = new string[2];
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                try
-                {
                     using (MySqlCommand cmd = new MySqlCommand("sp_GetYearAndSemester", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -695,14 +551,6 @@ namespace CresijApp.DataAccess
                         data[0] = cmd.Parameters["@semname"].Value.ToString();
                         data[1] = cmd.Parameters["@schoolyear"].Value.ToString();
                     }
-                }
-                catch (Exception ex)
-                {
-                }
-                finally
-                {
-                    con.Close();
-                }
             }
             return data;
         }
@@ -712,8 +560,7 @@ namespace CresijApp.DataAccess
             int num = 0;
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                try
-                {
+               
                     string query = "INSERT INTO `organisationdatabase`.`schedulereserve` "+
                     "(`SchoolYear`,`Semester`,`week`,`Date`,`Section`,`Classroom`,`BorrowingUnit`,`Workphone`,`PersonName`, " +
                     "`PersonID`,`ContactNo`,`Purpose`,`Reason`,`ReservationDevices`,`Status`) "+
@@ -728,16 +575,6 @@ namespace CresijApp.DataAccess
                         num = cmd.ExecuteNonQuery();
 
                     }
-                }
-
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    con.Close();
-                }
             }
             return num;
 
@@ -746,9 +583,10 @@ namespace CresijApp.DataAccess
         public DataTable GetReserveSchedule()
         {
             DataTable dt = new DataTable();
-            try
-            {
-                string query = "select * from schedulereserve";
+            
+                string query = "select schoolyear,semestername,week,date,section, cd.classname, borrowingunit,workphone "+
+                    ",personname,personid,contactno,purpose,reason,reservationdevices,status,id from schedulereserve src "+
+                    " join classdetails cd on src.classroom = cd.classid join semesterinfo smc on smc.SemNo = src.Semester";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -757,11 +595,7 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
+            
             return dt;
         }
 
@@ -770,8 +604,7 @@ namespace CresijApp.DataAccess
             int num = 0;
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-                try
-                {
+                
                     string query = "UPDATE `organisationdatabase`.`schedulereserve` SET `Status` = '"+stat+"' WHERE `id` =" + id;
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
@@ -781,16 +614,8 @@ namespace CresijApp.DataAccess
                         num = cmd.ExecuteNonQuery();
 
                     }
-                }
+                
 
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    con.Close();
-                }
             }
             return num;
         }
@@ -798,8 +623,7 @@ namespace CresijApp.DataAccess
         public DataTable GetTotalWeek(string semnum)
         {
             DataTable dt = new DataTable();
-            try
-            {
+           
                 string query = "select totalweeks as totalweeks from semesterinfo where SemNo=" + semnum;
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -810,19 +634,14 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
+            
             return dt;
         }
 
         public DataTable GetScheduleByBuilding(string buildingname)
         {
             DataTable dt = new DataTable();
-            try
-            {
+            
                 string query = "select max(totalweeks) from semesterinfo";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
@@ -833,11 +652,7 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
+            
             return dt;
         }
 
@@ -854,11 +669,10 @@ namespace CresijApp.DataAccess
         public DataTable GetCalenderDates(string name)
         {
             DataTable dt = new DataTable();
-            try
-            {
-                string query = "select Autoreview, NonWorkingDays, starttime, endtime,rt.semestername from reserveandtransfer rt join semesterinfo sm " +
-                    " on sm.semestername = rt.SemesterName where type='" + name+"' and "+ 
-                                 "rt.semestername > (select SemesterName from semesterinfo where startdate < now() order by startdate desc limit 1) limit 1";
+           
+                string query = "select Autoreview, NonWorkingDays, starttime, endtime,rt.semesterno from reserveandtransfer rt join " +
+                    " semesterinfo sm  on sm.semno = rt.Semesterno where type='"+name+"' and rt.semesterno >= " +
+                    "(select Semno from semesterinfo where startdate < now() order by startdate desc limit 1) limit 1;";
                 using (MySqlConnection con = new MySqlConnection(constring))
                 {
 
@@ -868,11 +682,7 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
+            
             return dt;
         }
 
@@ -882,8 +692,7 @@ namespace CresijApp.DataAccess
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
             var total = 0;
-            try
-            {
+
                 using (MySqlConnection conn = new MySqlConnection(constring))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("GetScheduleTest", conn))
@@ -901,13 +710,6 @@ namespace CresijApp.DataAccess
                         dataAdapter.Fill(dt);
                     }
                 }
-
-                
-            }
-            catch (Exception ex)
-            {
-
-            }
 
             return data;
         }

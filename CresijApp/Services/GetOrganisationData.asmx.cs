@@ -28,47 +28,57 @@ namespace CresijApp.Services
             public string Type { get; set; }
             public string Remarks { get; set; }
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetBuildingsDetails(Dictionary<string,object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             List<BuildingDataStructure> buildings = new List<BuildingDataStructure>();
             GetOrgData gd = new GetOrgData();
             DataTable dt = new DataTable();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                var pageIndex = data["pageIndex"].ToString();
-                var pageSize = data["pageSize"].ToString();
-                var result = gd.GetOrgBuildingInfo(pageIndex,pageSize);
-                idata.Add("status", "success");
-                int total = Convert.ToInt32(result[0]);
-                KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                idata.Add("totalRows", total);
-                dt = result[1] as DataTable;
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        BuildingDataStructure st = new BuildingDataStructure()
-                        {
-                            ID = row["id"].ToString(),
-                            BuildingName = row["BuildingName"].ToString(),
-                            SchoolName = row["schoolName"].ToString(),
-                            BuildingCode = row["buildingcode"].ToString(),
-                            Queue = row["Queue"].ToString(),
-                            Type = row["Public"].ToString(),
-                            Remarks = row["Remarks"].ToString()
-                        };
-                        buildings.Add(st);
-                    }
-                }               
-                idata.Add("value", buildings);
-            }
-            catch(Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    var pageIndex = data["pageIndex"].ToString();
+                    var pageSize = data["pageSize"].ToString();
+                    var result = gd.GetOrgBuildingInfo(pageIndex, pageSize);
+                    idata.Add("status", "success");
+                    int total = Convert.ToInt32(result[0]);
+                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                    idata.Add("totalRows", total);
+                    dt = result[1] as DataTable;
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            BuildingDataStructure st = new BuildingDataStructure()
+                            {
+                                ID = row["id"].ToString(),
+                                BuildingName = row["BuildingName"].ToString(),
+                                SchoolName = row["schoolName"].ToString(),
+                                BuildingCode = row["buildingcode"].ToString(),
+                                Queue = row["Queue"].ToString(),
+                                Type = row["Public"].ToString(),
+                                Remarks = row["Remarks"].ToString()
+                            };
+                            buildings.Add(st);
+                        }
+                    }
+                    idata.Add("value", buildings);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
@@ -85,42 +95,51 @@ namespace CresijApp.Services
             public string OneCard { get; set; }
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetStudentData(Dictionary<string, object> data)
         {
             Dictionary<string,object> idata = new Dictionary<string, object>();
             GetOrgData gd = new GetOrgData();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                List<object> dat = gd.GetStudentInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
-                idata.Add("status", "success");
-                int total = Convert.ToInt32(dat[0]);
-                KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                idata.Add("totalRows", total);
-                List<StudentDataStructure> students = new List<StudentDataStructure>();
-                DataTable dt = dat[1] as DataTable;
-                foreach (DataRow row in dt.Rows)
-                {
-                    StudentDataStructure studentData = new StudentDataStructure()
-                    {
-                        StudentID = row["studentid"].ToString(),
-                        StudentName = row["studentName"].ToString(),
-                        Gender = row["gender"].ToString(),
-                        Age = Convert.ToInt32(row["age"]),
-                        DeptName = row["deptcode"].ToString(),
-                        Phone = row["phone"].ToString(),
-                        IdCard = row["idcard"].ToString(),
-                        OneCard = row["onecard"].ToString()
-                    };
-                    students.Add(studentData);
-                }
-                idata.Add("value", students);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    List<object> dat = gd.GetStudentInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    idata.Add("status", "success");
+                    int total = Convert.ToInt32(dat[0]);
+                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                    idata.Add("totalRows", total);
+                    List<StudentDataStructure> students = new List<StudentDataStructure>();
+                    DataTable dt = dat[1] as DataTable;
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        StudentDataStructure studentData = new StudentDataStructure()
+                        {
+                            StudentID = row["studentid"].ToString(),
+                            StudentName = row["studentName"].ToString(),
+                            Gender = row["gender"].ToString(),
+                            Age = Convert.ToInt32(row["age"]),
+                            DeptName = row["deptcode"].ToString(),
+                            Phone = row["phone"].ToString(),
+                            IdCard = row["idcard"].ToString(),
+                            OneCard = row["onecard"].ToString()
+                        };
+                        students.Add(studentData);
+                    }
+                    idata.Add("value", students);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
@@ -136,44 +155,53 @@ namespace CresijApp.Services
             public string IdCard { get; set; }
             public string OneCard { get; set; }
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTeacherData(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             GetOrgData gd = new GetOrgData();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                List<object> dat = gd.GetTeacherInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
-                idata.Add("status", "success");
-                int total = Convert.ToInt32(dat[0]);
-                KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                idata.Add("totalRows", total);
-                List<TeacherDataStructure> students = new List<TeacherDataStructure>();
-                DataTable dt = dat[1] as DataTable;
-                foreach (DataRow row in dt.Rows)
-                {
-                    TeacherDataStructure studentData = new TeacherDataStructure()
-                    {
-                        TeacherID = row["teacherID"].ToString(),
-                        TeacherName = row["teacherName"].ToString(),
-                        Gender = row["gender"].ToString(),
-                        Age = Convert.ToInt32(row["age"]),
-                        DeptName = row["faculty"].ToString(),
-                        Phone = row["phone"].ToString(),
-                        IdCard = row["idcard"].ToString(),
-                        OneCard = row["onecard"].ToString()
-                    };
-                    students.Add(studentData);
-                }
-                idata.Add("value", students);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
             }
-
+            else
+            {
+                try
+                {
+                    List<object> dat = gd.GetTeacherInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    idata.Add("status", "success");
+                    int total = Convert.ToInt32(dat[0]);
+                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                    idata.Add("totalRows", total);
+                    List<TeacherDataStructure> students = new List<TeacherDataStructure>();
+                    DataTable dt = dat[1] as DataTable;
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        TeacherDataStructure studentData = new TeacherDataStructure()
+                        {
+                            TeacherID = row["teacherID"].ToString(),
+                            TeacherName = row["teacherName"].ToString(),
+                            Gender = row["gender"].ToString(),
+                            Age = Convert.ToInt32(row["age"]),
+                            DeptName = row["faculty"].ToString(),
+                            Phone = row["phone"].ToString(),
+                            IdCard = row["idcard"].ToString(),
+                            OneCard = row["onecard"].ToString()
+                        };
+                        students.Add(studentData);
+                    }
+                    idata.Add("value", students);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
+            }
 
             return idata;
         }
@@ -187,87 +215,105 @@ namespace CresijApp.Services
             public string BuildingName { get; set; }
             public string PersonnelStatus { get; set; }
             public string Phone { get; set; }
-            public string Password { get; set; }
+            
             public string Notes { get; set; }
-            public string ValidityDate { get; set; }
-            public string ExpireTime { get; set; }
+            public string StartDate { get; set; }
+            public string ExpireDate { get; set; }
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserData(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             GetOrgData gd = new GetOrgData();
             DataTable dt = new DataTable();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                List<object> result = new List<object>();
-                result = gd.GetuserInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
-                idata.Add("status", "success");
-                idata.Add("totalRows", result[0].ToString());
-                dt = result[1] as DataTable;
-                List<UserDataStructure> list = new List<UserDataStructure>();
-                if (dt.Rows.Count > 0)
-                {
-                    list = (from DataRow dr in dt.Rows
-                               select new UserDataStructure()
-                               {
-                                   SerialNo = dr["SerialNo"].ToString(),
-                                   LoginID = dr["LoginID"].ToString(),
-                                   UserName = dr["UserName"].ToString(),
-                                   PersonType = dr["PersonType"].ToString(),
-                                   BuildingName = dr["buildingName"].ToString(),
-                                   PersonnelStatus = dr["PersonnelStatus"].ToString(),
-                                   Phone = dr["phone"].ToString(),
-                                   Notes = dr["Notes"].ToString(),
-                                   Password = dr["Password"].ToString(),
-                                   ValidityDate = dr["validtill"].ToString(),
-                                   ExpireTime = dr["expiretime"].ToString(),
-                                   
-                               }).ToList();
-                }
-                idata.Add("value", list);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
             }
+            else
+            {
+                try
+                {
+                    List<object> result = new List<object>();
+                    result = gd.GetuserInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    idata.Add("status", "success");
+                    idata.Add("totalRows", result[0].ToString());
+                    dt = result[1] as DataTable;
+                    List<UserDataStructure> list = new List<UserDataStructure>();
+                    if (dt.Rows.Count > 0)
+                    {
+                        list = (from DataRow dr in dt.Rows
+                                select new UserDataStructure()
+                                {
+                                    SerialNo = dr["SerialNo"].ToString(),
+                                    LoginID = dr["LoginID"].ToString(),
+                                    UserName = dr["UserName"].ToString(),
+                                    PersonType = dr["PersonType"].ToString(),
+                                    BuildingName = dr["buildingName"].ToString(),
+                                    PersonnelStatus = dr["PersonnelStatus"].ToString(),
+                                    Phone = dr["phone"].ToString(),
+                                    Notes = dr["Notes"].ToString(),
+                                    
+                                    StartDate = dr["startdate"].ToString(),
+                                    ExpireDate = dr["expiredate"].ToString(),
 
+                                }).ToList();
+                    }
+                    idata.Add("value", list);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
+            }
             return idata;
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+       
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserByID(string id)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             Dictionary<string, string> list = new Dictionary<string, string>();
             GetOrgData gd = new GetOrgData();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                DataTable dt = gd.GetUserDataonDemand(id);
-                idata.Add("status", "success");
-                if (dt.Rows.Count > 0)
-                {
-                    list.Add("SerialNo", dt.Rows[0]["SerialNo"].ToString());
-                    list.Add("LoginID", dt.Rows[0]["LoginID"].ToString());
-                    list.Add("UserName", dt.Rows[0]["UserName"].ToString());
-                    list.Add("PersonType", dt.Rows[0]["PersonType"].ToString());
-                    list.Add("buildingName", dt.Rows[0]["DeptCode"].ToString());
-                    list.Add("PersonnelStatus", dt.Rows[0]["PersonnelStatus"].ToString());
-                    list.Add("Notes", dt.Rows[0]["Notes"].ToString());
-                    list.Add("Password", dt.Rows[0]["Password"].ToString());
-                    list.Add("phone", dt.Rows[0]["phone"].ToString());
-                    list.Add("validityDate", dt.Rows[0]["validtill"].ToString());
-                    list.Add("expiretime", dt.Rows[0]["expiretime"].ToString());
-                }
-                idata.Add("value", list);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    DataTable dt = gd.GetUserDataonDemand(id);
+                    idata.Add("status", "success");
+                    if (dt.Rows.Count > 0)
+                    {
+                        list.Add("SerialNo", dt.Rows[0]["SerialNo"].ToString());
+                        list.Add("LoginID", dt.Rows[0]["LoginID"].ToString());
+                        list.Add("UserName", dt.Rows[0]["UserName"].ToString());
+                        list.Add("PersonType", dt.Rows[0]["PersonType"].ToString());
+                        list.Add("buildingName", dt.Rows[0]["DeptCode"].ToString());
+                        list.Add("PersonnelStatus", dt.Rows[0]["PersonnelStatus"].ToString());
+                        list.Add("Notes", dt.Rows[0]["Notes"].ToString());
+                        list.Add("Password", dt.Rows[0]["Password"].ToString());
+                        list.Add("phone", dt.Rows[0]["phone"].ToString());
+                        list.Add("expireDate", dt.Rows[0]["expiredate"].ToString());
+                        list.Add("startDate", dt.Rows[0]["startdate"].ToString());
+                    }
+                    idata.Add("value", list);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
@@ -314,101 +360,119 @@ namespace CresijApp.Services
             public string Pass { get; set; }
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetClassData(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                GetOrgData gd = new GetOrgData();
-                DataTable dt = new DataTable();
-                List<ClassDetails> cdList = new List<ClassDetails>();
-                List<object> d = new List<object>();
-                d = gd.GetClassroomInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
-                idata.Add("status", "success");
-                idata.Add("totalRow", d[0].ToString());
-                dt = d[1] as DataTable;
-                if (dt.Rows.Count > 0)
-                {
-                    
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        ClassDetails cd = new ClassDetails()
-                        {
-                            Classid = dr["classID"].ToString(),
-                            Classname = dr["className"].ToString(),
-                            Building = dr["teachingBuilding"].ToString(),
-                            Floor = dr["floor"].ToString(),
-                            Seat = dr["seats"].ToString(),
-                            CamipS = dr["camipS"].ToString(),
-                            CamipT = dr["camipT"].ToString(),
-                            CamSmac = dr["camSmac"].ToString(),
-                            CamTmac = dr["camTmac"].ToString(),
-                            CamPort = dr["camPort"].ToString(),
-                            Campass = dr["camPass"].ToString(),
-                            Camuserid = dr["camuserid"].ToString(),
-                            Ccip = dr["ccequipIP"].ToString(),
-                            CCmac = dr["ccmac"].ToString(),
-                            DesktopIp = dr["desktopIP"].ToString(),
-                            Desktopmac = dr["deskmac"].ToString(),
-                            RecorderIp = dr["recordingEquip"].ToString(),
-                            Recordermac = dr["Recordermac"].ToString(),
-                            CallHelpIP = dr["callhelpip"].ToString(),
-                            CallHelpmac = dr["callhelpmac"].ToString()
-                        };
-                        cdList.Add(cd);
-                    }
-                }
-                idata.Add("value", cdList);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    GetOrgData gd = new GetOrgData();
+                    DataTable dt = new DataTable();
+                    List<ClassDetails> cdList = new List<ClassDetails>();
+                    List<object> d = new List<object>();
+                    d = gd.GetClassroomInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    idata.Add("status", "success");
+                    idata.Add("totalRow", d[0].ToString());
+                    dt = d[1] as DataTable;
+                    if (dt.Rows.Count > 0)
+                    {
+
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            ClassDetails cd = new ClassDetails()
+                            {
+                                Classid = dr["classID"].ToString(),
+                                Classname = dr["className"].ToString(),
+                                Building = dr["buildingname"].ToString(),
+                                Floor = dr["floor"].ToString(),
+                                Seat = dr["seats"].ToString(),
+                                CamipS = dr["camipS"].ToString(),
+                                CamipT = dr["camipT"].ToString(),
+                                CamSmac = dr["camSmac"].ToString(),
+                                CamTmac = dr["camTmac"].ToString(),
+                                CamPort = dr["camPort"].ToString(),
+                                Campass = dr["camPass"].ToString(),
+                                Camuserid = dr["camuserid"].ToString(),
+                                Ccip = dr["ccequipIP"].ToString(),
+                                CCmac = dr["ccmac"].ToString(),
+                                DesktopIp = dr["desktopIP"].ToString(),
+                                Desktopmac = dr["deskmac"].ToString(),
+                                RecorderIp = dr["recordingEquip"].ToString(),
+                                Recordermac = dr["Recordermac"].ToString(),
+                                CallHelpIP = dr["callhelpip"].ToString(),
+                                CallHelpmac = dr["callhelpmac"].ToString()
+                            };
+                            cdList.Add(cd);
+                        }
+                    }
+                    idata.Add("value", cdList);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetOpedata(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                GetOrgData gd = new GetOrgData();
-                DataTable dt = new DataTable();
-                List<object> dd = new List<object>();
-                dd = gd.GetCapitalInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
-                idata.Add("status", "success");
-                idata.Add("totalRows", dd[0].ToString());
-                dt = dd[1] as DataTable;
-                List<Opedata> opeList = new List<Opedata>();
-                opeList = (from DataRow dr in dt.Rows
-                           select new Opedata()
-                           {
-                               Sno = Convert.ToInt32(dr["serialno"]),
-                               Devicename = dr["devicename"].ToString(),
-                               Assetno = dr["assetno"].ToString(),
-                               Model = dr["model"].ToString(),
-                               Spec = dr["specification"].ToString(),
-                               Devicetype = dr["devicetype"].ToString(),
-                               Price = dr["price"].ToString(),
-                               Factory = dr["factory"].ToString(),
-                               Mfd = dr["dateofmanufacture"].ToString(),
-                               Dopurchase = dr["dateofpurchase"].ToString(),
-                               Dod = dr["dateofdelivery"].ToString(),
-                               Warrantytime = dr["warrantytime"].ToString(),
-                               Locationtype = dr["locationType"].ToString(),
-                               EquipStat = dr["equipmentstatus"].ToString()
-                           }).ToList();
-                idata.Add("value", opeList);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    GetOrgData gd = new GetOrgData();
+                    DataTable dt = new DataTable();
+                    List<object> dd = new List<object>();
+                    dd = gd.GetCapitalInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    idata.Add("status", "success");
+                    idata.Add("totalRows", dd[0].ToString());
+                    dt = dd[1] as DataTable;
+                    List<Opedata> opeList = new List<Opedata>();
+                    opeList = (from DataRow dr in dt.Rows
+                               select new Opedata()
+                               {
+                                   Sno = Convert.ToInt32(dr["serialno"]),
+                                   Devicename = dr["devicename"].ToString(),
+                                   Assetno = dr["assetno"].ToString(),
+                                   Model = dr["model"].ToString(),
+                                   Spec = dr["specification"].ToString(),
+                                   Devicetype = dr["devicetype"].ToString(),
+                                   Price = dr["price"].ToString(),
+                                   Factory = dr["factory"].ToString(),
+                                   Mfd = dr["dateofmanufacture"].ToString(),
+                                   Dopurchase = dr["dateofpurchase"].ToString(),
+                                   Dod = dr["dateofdelivery"].ToString(),
+                                   Warrantytime = dr["warrantytime"].ToString(),
+                                   Locationtype = dr["locationType"].ToString(),
+                                   EquipStat = dr["equipmentstatus"].ToString()
+                               }).ToList();
+                    idata.Add("value", opeList);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
@@ -431,30 +495,39 @@ namespace CresijApp.Services
             public string EquipStat { get; set; }
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetBuildingByID(string id)
         {
             Dictionary<string, object> d = new Dictionary<string, object>();
             Dictionary<string, string> idata = new Dictionary<string, string>();
             GetOrgData gd = new GetOrgData();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                DataTable dt = gd.GetOrgDataonDemand(Convert.ToInt32(id));
-                d.Add("status", "success");
-                idata.Add("id", dt.Rows[0]["id"].ToString());
-                idata.Add("buildingName", dt.Rows[0]["buildingName"].ToString());
-                idata.Add("buildingCode", dt.Rows[0]["buildingCode"].ToString());
-                idata.Add("schoolName", dt.Rows[0]["schoolname"].ToString());
-                idata.Add("queue", dt.Rows[0]["Queue"].ToString());
-                idata.Add("public", dt.Rows[0]["Public"].ToString());
-                idata.Add("remarks", dt.Rows[0]["remarks"].ToString());
-                d.Add("value", idata);
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
             }
-            catch (Exception ex)
+            else
             {
-                d.Add("status", "fail");
-                d.Add("errorMessage", ex.Message);
+                try
+                {
+                    DataTable dt = gd.GetOrgDataonDemand(Convert.ToInt32(id));
+                    d.Add("status", "success");
+                    idata.Add("id", dt.Rows[0]["id"].ToString());
+                    idata.Add("buildingName", dt.Rows[0]["buildingName"].ToString());
+                    idata.Add("buildingCode", dt.Rows[0]["buildingCode"].ToString());
+                    idata.Add("schoolName", dt.Rows[0]["schoolname"].ToString());
+                    idata.Add("queue", dt.Rows[0]["Queue"].ToString());
+                    idata.Add("public", dt.Rows[0]["Public"].ToString());
+                    idata.Add("remarks", dt.Rows[0]["remarks"].ToString());
+                    d.Add("value", idata);
+                }
+                catch (Exception ex)
+                {
+                    d.Add("status", "fail");
+                    d.Add("errorMessage", ex.Message);
+                }
             }
             return d;
         }
@@ -463,44 +536,55 @@ namespace CresijApp.Services
             public int RowNum { get; set; }
             public string ClassName { get; set; }
             public string Floor { get; set; }
+            public string ClassId { get; set; }
             public string CCEquipIP { get; set; }
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetIPClassByBuilding(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                GetOrgData gd = new GetOrgData();
-                List<object> dat = gd.GetIPClassByBuilding(data["pageIndex"].ToString(), data["pageSize"].ToString(),
-                    data["buildingName"].ToString(), data["userID"].ToString());
-                DataTable dt = dat[1] as DataTable;
-                int total = Convert.ToInt32(dat[0]);
-                KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                idata.Add("totalRows", total);
-                List<IPClassByBuildingStructure> iPClassByBuildings = new List<IPClassByBuildingStructure>();
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        IPClassByBuildingStructure iPClass = new IPClassByBuildingStructure()
-                        {
-                            RowNum = Convert.ToInt32(dr["rownumber"]),
-                            ClassName = dr["classname"].ToString(),
-                            Floor = dr["floor"].ToString(),
-                            CCEquipIP = dr["ccequipip"].ToString()
-
-                        };
-                        iPClassByBuildings.Add(iPClass);
-                    }
-                }
-                idata.Add("value", iPClassByBuildings);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    GetOrgData gd = new GetOrgData();
+                    List<object> dat = gd.GetIPClassByBuilding(data["pageIndex"].ToString(), data["pageSize"].ToString(),
+                        data["building"].ToString(), HttpContext.Current.Session["UserLoggedIn"].ToString());
+                    DataTable dt = dat[1] as DataTable;
+                    int total = Convert.ToInt32(dat[0]);
+                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                    idata.Add("totalRows", total);
+                    List<IPClassByBuildingStructure> iPClassByBuildings = new List<IPClassByBuildingStructure>();
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            IPClassByBuildingStructure iPClass = new IPClassByBuildingStructure()
+                            {
+                                RowNum = Convert.ToInt32(dr["rownumber"]),
+                                ClassName = dr["classname"].ToString(),
+                                Floor = dr["floor"].ToString(),
+                                ClassId =dr["classid"].ToString(),
+                                CCEquipIP = dr["ccequipip"].ToString()
+                            };
+                            iPClassByBuildings.Add(iPClass);
+                        }
+                    }
+                    idata.Add("value", iPClassByBuildings);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
@@ -511,167 +595,234 @@ namespace CresijApp.Services
             public string ClassName { get; set; }
             public string Floor { get; set; }
             public string CCEquipIP { get; set; }
+            public string ClassId { get; set; }
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetIPClassByBuildingFloor(Dictionary<string, object> data)
-        {
-            // idata is new KeyValuePair<string, object> i am not good for c#
+        {            
             Dictionary<string,object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                GetOrgData gd = new GetOrgData();
-                List<object> dat = gd.GetIPClassByBuildingFloor(data["buildingName"].ToString(), data["floor"].ToString(),
-                    data["userID"].ToString(), data["pageIndex"].ToString(), Convert.ToInt32(data["pageSize"].ToString()));
-                DataTable dt = dat[1] as DataTable;
-                int total = Convert.ToInt32(dat[0]);
-                KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                idata.Add("totalRows", total);
-                List<IPClassByBuildingFloorStructure> iPClassByBuildings = new List<IPClassByBuildingFloorStructure>();
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        IPClassByBuildingFloorStructure iPClass = new IPClassByBuildingFloorStructure()
-                        {
-                            RowNum = Convert.ToInt32(dr["rownumber"]),
-                            ClassName = dr["classname"].ToString(),
-                            Floor = dr["floor"].ToString(),
-                            CCEquipIP = dr["ccequipip"].ToString()
-                        };
-                        iPClassByBuildings.Add(iPClass);
-                    }
-                }
-
-                idata.Add("value", iPClassByBuildings);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    GetOrgData gd = new GetOrgData();
+                    List<object> dat = gd.GetIPClassByBuildingFloor(data["building"].ToString(), data["floor"].ToString(),
+                        HttpContext.Current.Session["UserLoggedIn"].ToString(), data["pageIndex"].ToString(), Convert.ToInt32(data["pageSize"].ToString()));
+                    DataTable dt = dat[1] as DataTable;
+                    int total = Convert.ToInt32(dat[0]);
+                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                    idata.Add("totalRows", total);
+                    List<IPClassByBuildingFloorStructure> iPClassByBuildings = new List<IPClassByBuildingFloorStructure>();
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            IPClassByBuildingFloorStructure iPClass = new IPClassByBuildingFloorStructure()
+                            {
+                                RowNum = Convert.ToInt32(dr["rownumber"]),
+                                ClassName = dr["classname"].ToString(),
+                                ClassId =dr["classid"].ToString(),
+                                Floor = dr["floor"].ToString(),
+                                CCEquipIP = dr["ccequipip"].ToString()
+                            };
+                            iPClassByBuildings.Add(iPClass);
+                        }
+                    }
+                    idata.Add("value", iPClassByBuildings);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetClassDataById(string id)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             GetOrgData gd = new GetOrgData();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                DataTable dt = gd.GetClassData(id);
-                if (dt.Rows.Count > 0)
-                {
-                    idata.Add("status", "success");
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        ClassDetails cd = new ClassDetails()
-                        {
-                            Classid = dr["classID"].ToString(),
-                            Classname = dr["className"].ToString(),
-                            Building = dr["teachingBuilding"].ToString(),
-                            Floor = dr["floor"].ToString(),
-                            Seat = dr["seats"].ToString(),
-                            CamipS = dr["camipS"].ToString(),
-                            CamipT = dr["camipT"].ToString(),
-                            CamSmac = dr["camSmac"].ToString(),
-                            CamTmac = dr["camTmac"].ToString(),
-                            CamPort = dr["camPort"].ToString(),
-                            Campass = dr["camPass"].ToString(),
-                            Camuserid = dr["camuserid"].ToString(),
-                            Ccip = dr["ccequipIP"].ToString(),
-                            CCmac = dr["ccmac"].ToString(),
-                            DesktopIp = dr["desktopIP"].ToString(),
-                            Desktopmac = dr["deskmac"].ToString(),
-                            RecorderIp = dr["recordingEquip"].ToString(),
-                            Recordermac = dr["Recordermac"].ToString(),
-                            CallHelpIP = dr["callhelpip"].ToString(),
-                            CallHelpmac = dr["callhelpmac"].ToString()
-                        };
-                        idata.Add("value", cd);
-                    }
-                    
-                }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    DataTable dt = gd.GetClassData(id);
+                    if (dt.Rows.Count > 0)
+                    {
+                        idata.Add("status", "success");
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            ClassDetails cd = new ClassDetails()
+                            {
+                                Classid = dr["classID"].ToString(),
+                                Classname = dr["className"].ToString(),
+                                Building = dr["buildingname"].ToString(),
+                                Floor = dr["floor"].ToString(),
+                                Seat = dr["seats"].ToString(),
+                                CamipS = dr["camipS"].ToString(),
+                                CamipT = dr["camipT"].ToString(),
+                                CamSmac = dr["camSmac"].ToString(),
+                                CamTmac = dr["camTmac"].ToString(),
+                                CamPort = dr["camPort"].ToString(),
+                                Campass = dr["camPass"].ToString(),
+                                Camuserid = dr["camuserid"].ToString(),
+                                Ccip = dr["ccequipIP"].ToString(),
+                                CCmac = dr["ccmac"].ToString(),
+                                DesktopIp = dr["desktopIP"].ToString(),
+                                Desktopmac = dr["deskmac"].ToString(),
+                                RecorderIp = dr["recordingEquip"].ToString(),
+                                Recordermac = dr["Recordermac"].ToString(),
+                                CallHelpIP = dr["callhelpip"].ToString(),
+                                CallHelpmac = dr["callhelpmac"].ToString()
+                            };
+                            idata.Add("value", cd);
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
 
             return idata;
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+
+        class FloorList
+        {
+            public string FloorName { get; set; }
+            public string FloorId { get; set; }
+        }
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetFloorlist(string building)
         {
             Dictionary<string, object> val = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                List<object> idata = new List<object>();
-                GetOrgData gd = new GetOrgData();
-                DataTable dt = gd.GetFloorlist(building);
-                if (dt.Rows.Count > 0)
-                {
-                    val.Add("totalRows", dt.Rows.Count);
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        idata.Add(dr["floor"].ToString());
-                    }
-
-                }
-                val.Add("value", idata);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 val.Add("status", "fail");
-                val.Add("errorMessage", ex.Message);
+                val.Add("errorMessage", "Session Expired");
+                val.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    List<FloorList> idata = new List<FloorList>();
+                    
+                    GetOrgData gd = new GetOrgData();
+                    DataTable dt = gd.GetFloorlist(building);
+                    if (dt.Rows.Count > 0)
+                    {
+                        val.Add("totalRows", dt.Rows.Count);
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            FloorList fl = new FloorList()
+                            {
+                                FloorId = dr["id"].ToString(),
+                                FloorName = dr["floor"].ToString()
+                            };
+
+                            idata.Add(fl);
+                        }
+
+                    }
+                    val.Add("value", idata);
+                }
+                catch (Exception ex)
+                {
+                    val.Add("status", "fail");
+                    val.Add("errorMessage", ex.Message);
+                }
             }
             return val;
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetSchoolName(string building)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                GetOrgData gd = new GetOrgData();
-                DataTable dt = gd.GetSchoolName(building);
-                if (dt.Rows.Count > 0)
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        idata.Add("status", "success");
-                        idata.Add("value", dt.Rows[0]["schoolName"].ToString());
-                    }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    GetOrgData gd = new GetOrgData();
+                    DataTable dt = gd.GetSchoolName(building);
+                    if (dt.Rows.Count > 0)
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            idata.Add("status", "success");
+                            idata.Add("value", dt.Rows[0]["schoolName"].ToString());
+                        }
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetClassByIP(string ip)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                GetOrgData gd = new GetOrgData();
-                DataTable dt = gd.GetClassByIP(ip);
-                idata.Add("status", "success");
-                idata.Add("value", dt.Rows[0]["classname"].ToString());
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    GetOrgData gd = new GetOrgData();
+                    DataTable dt = gd.GetClassByIP(ip);
+                    Dictionary<string, string> val = new Dictionary<string, string>();
+                    if (dt.Rows.Count > 0)
+                    {
+                        idata.Add("status", "success");
+                        
+                        val.Add("ClassName", dt.Rows[0]["classname"].ToString());
+                        val.Add("ClassId", dt.Rows[0]["classid"].ToString());
+                    }
+                    
+                    idata.Add("value", val);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
@@ -687,40 +838,50 @@ namespace CresijApp.Services
             public string Remarks { get; set; }
         }
         
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetFloorDetails(string building)
         {
             var idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                GetOrgData gd = new GetOrgData();
-                DataTable dt = gd.GetFloorDetails(building);
-                List<FloorDataStructure> fd = new List<FloorDataStructure>();
-                idata.Add("status", "success");
-                if (dt.Rows.Count > 0)
-                {                    
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        FloorDataStructure st = new FloorDataStructure()
-                        {
-                            ID = row["id"].ToString(),
-                            BuildingName = row["BuildingName"].ToString(),
-                            Floor = row["floor"].ToString(),
-                            BuildingCode = row["buildingcode"].ToString(),
-                            Queue = row["Queue"].ToString(),
-                            Type = row["Public"].ToString(),
-                            Remarks = row["Remarks"].ToString()
-                        };
-                        fd.Add(st);
-                    }
-                }
-                idata.Add("value", fd);
-
-            }
-            catch(Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    GetOrgData gd = new GetOrgData();
+                    DataTable dt = gd.GetFloorDetails(building);
+                    List<FloorDataStructure> fd = new List<FloorDataStructure>();
+                    idata.Add("status", "success");
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            FloorDataStructure st = new FloorDataStructure()
+                            {
+                                ID = row["id"].ToString(),
+                                BuildingName = row["BuildingName"].ToString(),
+                                Floor = row["floor"].ToString(),
+                                BuildingCode = row["buildingcode"].ToString(),
+                                Queue = row["Queue"].ToString(),
+                                Type = row["Public"].ToString(),
+                                Remarks = row["Remarks"].ToString()
+                            };
+                            fd.Add(st);
+                        }
+                    }
+                    idata.Add("value", fd);
+
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }

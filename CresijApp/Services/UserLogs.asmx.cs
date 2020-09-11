@@ -38,8 +38,8 @@ namespace CresijApp.Services
                     idata1.Add("loginID", dt.Rows[0]["loginid"]);
                     idata1.Add("userName", dt.Rows[0]["username"]);
                     idata1.Add("personType", dt.Rows[0]["persontype"]);
-                    idata1.Add("validTill", dt.Rows[0]["validtill"].ToString());
-                    idata1.Add("expireTime", dt.Rows[0]["expiretime"]);
+                    idata1.Add("startDate", dt.Rows[0]["startdate"].ToString());
+                    idata1.Add("expireDate", dt.Rows[0]["expiredate"].ToString());
                     HttpContext.Current.Session["UserLoggedIn"] = loginid;
                     FormsAuthentication.SetAuthCookie(loginid, false);
                     string ticket = FormsAuthentication.Encrypt(
@@ -68,8 +68,9 @@ namespace CresijApp.Services
         public Dictionary<string,object> GetUserLogDetails()
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
-            if (HttpContext.Current.Session["LoggedInUser"] == null || HttpContext.Current.Session.Count == 0)
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
+                
                 HttpContext.Current.Session.Abandon();
                 result.Add("status", "fail");
                 result.Add("errorMessage", "Session Expired");
@@ -137,14 +138,22 @@ namespace CresijApp.Services
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> Logout()
         {
-            Dictionary<string, string> idata = new Dictionary<string, string>();           
-            if (HttpContext.Current.Session["AuthToken"].ToString().Equals(HttpContext.Current.Response.Cookies["AuthCookie"].Value))
+            Dictionary<string, string> idata = new Dictionary<string, string>();
+            try
             {
-                idata.Add("mess", "cookie and session matched");
+                if (HttpContext.Current.Session["AuthToken"].ToString().Equals(HttpContext.Current.Response.Cookies["AuthCookie"].Value))
+                {
+                    idata.Add("mess", "cookie and session matched");
+                }                
             }
-            HttpContext.Current.Session.Abandon();
-            HttpContext.Current.Session["UserLoggedIn"] = null;
-            HttpContext.Current.Session["AuthToken"] = null;            
+            finally
+            {
+                HttpContext.Current.Session.Abandon();
+                HttpContext.Current.Session.Remove("UserLoggedIn");
+                HttpContext.Current.Session.Remove("AuthToken");
+                idata.Add("status", "success");
+                idata.Add("message", "Successfully Logout");
+            }             
             return idata;
         }
 

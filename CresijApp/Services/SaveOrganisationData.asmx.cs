@@ -17,295 +17,391 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class SaveOrganisationData : WebService
     {
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveBuildingData(Dictionary<string,string> data)
         {            
             string result = "";
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             SetOrgData orgData = new SetOrgData();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.SaveOrgDataBuilding(data).ToString();
-                if (Convert.ToInt32(result) > 0)
-                {
-                    keyValue.Add("status", "success");
-                    keyValue.Add("InsertedRows", result);
-                }
+                HttpContext.Current.Session.Abandon();
+                keyValue.Add("status", "fail");                
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
             }
-            catch(Exception ex)
+            else
             {
-                keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                try
+                {
+                    result = orgData.SaveOrgDataBuilding(data).ToString();
+                   
+                        keyValue.Add("status", "success");
+                        keyValue.Add("InsertedRows", result);
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveFloorData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.SaveOrgDataFloor(data).ToString();
-                if (Convert.ToInt32(result) > 0)
-                {
-                    keyValue.Add("status", "success");
-                    keyValue.Add("InsertedRows", result);
-                }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    result = orgData.SaveOrgDataFloor(data).ToString();
+                    
+                        keyValue.Add("status", "success");
+                        keyValue.Add("InsertedRows", result);
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;
            
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> UpdateBuildingData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.UpdateOrgData(data).ToString();
-                if (Convert.ToInt32(result) >= 0)
-                {
-                    keyValue.Add("status", "success");
-                    keyValue.Add("UpdatedRows", result);
-                }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    result = orgData.UpdateOrgData(data).ToString();
+                    
+                        keyValue.Add("status", "success");
+                        keyValue.Add("UpdatedRows", result);
+                   
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;
             
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveTeacherData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.SaveTeacherData(data).ToString();
-                if (Convert.ToInt32(result) > 0)
+                HttpContext.Current.Session.Abandon();
+                keyValue.Add("status", "fail");
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-                    keyValue.Add("status", "success");
-                    keyValue.Add("InsertedRows", result);
+                    result = orgData.SaveTeacherData(data).ToString();
+                    
+                        keyValue.Add("status", "success");
+                        keyValue.Add("InsertedRows", result);
+                    
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
-            }
             return keyValue;
-            
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+       
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> UpdateTeacherData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.UpdateTeacherData(data).ToString();
-                if (Convert.ToInt32(result) >= 0)
+                HttpContext.Current.Session.Abandon();
+                keyValue.Add("status", "fail");
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
+                    result = orgData.UpdateTeacherData(data).ToString();
+
                     keyValue.Add("status", "success");
                     keyValue.Add("UpdatedRows", result);
+
                 }
-            }
-            catch (Exception ex)
-            {
-                keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;           
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveStudentData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.SaveStudentData(data).ToString();
-                if (Convert.ToInt32(result) > 0)
-                {
-                    keyValue.Add("status", "success");
-                    keyValue.Add("InsertedRows", result);
-                }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    result = orgData.SaveStudentData(data).ToString();
+                    
+                        keyValue.Add("status", "success");
+                        keyValue.Add("InsertedRows", result);
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> UpdateStudentData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.UpdateStudentData(data).ToString();
-                if (Convert.ToInt32(result) >= 0)
+                HttpContext.Current.Session.Abandon();
+                keyValue.Add("status", "fail");
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
+                    result = orgData.UpdateStudentData(data).ToString();
+
                     keyValue.Add("status", "success");
                     keyValue.Add("UpdatedRows", result);
+
                 }
-            }
-            catch (Exception ex)
-            {
-                keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;
             
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveClassData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.SaveClassData(data).ToString();
-                if (Convert.ToInt32(result) > 0)
+                HttpContext.Current.Session.Abandon();
+                keyValue.Add("status", "fail");
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
+                    result = orgData.SaveClassData(data).ToString();
+
                     keyValue.Add("status", "success");
                     keyValue.Add("InsertedRows", result);
+
                 }
-            }
-            catch (Exception ex)
-            {
-                keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;
             
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+ 
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> UpdateClassData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.UpdateClassData(data).ToString();
-                if (Convert.ToInt32(result) >= 0)
+                HttpContext.Current.Session.Abandon();
+                keyValue.Add("status", "fail");
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
+                    result = orgData.UpdateClassData(data).ToString();
+
                     keyValue.Add("status", "success");
-                    
+                    keyValue.Add("UpdatedRows", result);
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
-            }
-            return keyValue;
-            
+            return keyValue;            
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> AddUserData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.SaveUserData(data).ToString();
-                if (Convert.ToInt32(result) >= 0)
-                {
-                    keyValue.Add("status", "success");
-                    keyValue.Add("InsertedRows", result);
-                }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    result = orgData.SaveUserData(data).ToString();                    
+                        keyValue.Add("status", "success");
+                        keyValue.Add("InsertedRows", result);
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;
            
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> UpdateUserData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.UpdateUserData(data).ToString();
-                if (Convert.ToInt32(result) >= 0)
-                {
-                    keyValue.Add("status", "success");
-                    keyValue.Add("InsertedRows", result);
-                }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    result = orgData.UpdateUserData(data).ToString();
+                   
+                        keyValue.Add("status", "success");
+                        keyValue.Add("UpdatedRows", result);
+                    
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;
             
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, string> UpdateFloorData(Dictionary<string, string> data)
         {
             string result = "";
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                result = orgData.UpdateFloorData(data).ToString();
-                if (Convert.ToInt32(result) >= 0)
-                {
-                    keyValue.Add("status", "success");                    
-                }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 keyValue.Add("status", "fail");
-                keyValue.Add("exception", ex.Message);
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    result = orgData.UpdateFloorData(data).ToString();
+                    keyValue.Add("status", "success");
+                    keyValue.Add("UpdatedRows", result);
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("exception", ex.Message);
+                }
             }
             return keyValue;
 

@@ -33,135 +33,279 @@ namespace CresijApp.Services
             return idata;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
+        
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveUserAuthentications(Dictionary<string, object> data)
         {
             string adminid = "";
             Dictionary<string, string> idata = new Dictionary<string, string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                if (Session["UserLoggedIn"].ToString() != null)
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
+                    if (Session["UserLoggedIn"].ToString() != null)
+                    {
 
-                    adminid = Session["UserLoggedIn"].ToString();
-                    string[] authmenu = data["AuthMenu"].ToString().Split(',');
-                    string[] authloc = data["classNames"].ToString().Split(',');
-                    
-                    var userid = data["personId"].ToString();
-                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-                    int r = userAuth.DeleteUserPermissions(userid);
-                    int result = userAuth.SaveAuthMenu(authmenu, userid, adminid, authloc);
-                    if (result < 0)
-                        idata.Add("status", "fail");
+                        adminid = Session["UserLoggedIn"].ToString();
+                        string[] authmenu = data["AuthMenu"].ToString().Split(',');
+                        string[] authloc = data["classNames"].ToString().Split(',');
+
+                        var userid = data["personId"].ToString();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        int r = userAuth.DeleteUserPermissions(userid);
+                        int result = userAuth.SaveAuthMenu(authmenu, userid, adminid, authloc);
+                        if (result < 0)
+                            idata.Add("status", "fail");
+                        else
+                            idata.Add("status", "success");
+                    }
                     else
-                        idata.Add("status", "success");
+                    {
+                        HttpContext.Current.Session.Abandon();
+                        idata.Add("status", "fail");
+                        idata.Add("errorMessage", "Session Expired");
+                        idata.Add("customErrorCode", "440");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
                     idata.Add("status", "fail");
-                    idata.Add("errorMessage", "No valid userid found");
+                    idata.Add("error", ex.Message);
                 }
-                }
-            catch(Exception ex)
-            {
-                idata.Add("status", "fail");
-                idata.Add("error", ex.Message);
             }
-
             return idata;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
+        
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetUserTopMenu()
         {
             string userid = "";
             List<string> idata = new List<string>();
             Dictionary<string, object> result = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                if (Session["UserLoggedIn"].ToString() != null)
+                HttpContext.Current.Session.Abandon();
+                result.Add("status", "fail");
+                result.Add("errorMessage", "Session Expired");
+                result.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-
-                    userid = Session["UserLoggedIn"].ToString();
-                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-                DataTable dt = new DataTable();
-                dt = userAuth.GetUserTopMenu(userid);
-                if (dt.Rows.Count > 0)
-                {
-                    result.Add("status", "sucess");
-                    foreach (DataRow dr in dt.Rows)
+                    if (Session["UserLoggedIn"].ToString() != null)
                     {
-                        idata.Add(dr["rolenames"].ToString());
-                    }                    
+
+                        userid = Session["UserLoggedIn"].ToString();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        DataTable dt = new DataTable();
+                        dt = userAuth.GetUserTopMenu(userid);
+                        if (dt.Rows.Count > 0)
+                        {
+                            result.Add("status", "sucess");
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                idata.Add(dr["rolenames"].ToString());
+                            }
+                        }
+                        result.Add("TopMenu", idata);
+                    }
+                    else
+                    {
+                        HttpContext.Current.Session.Abandon();
+                        result.Add("status", "fail");
+                        result.Add("errorMessage", "Session Expired");
+                        result.Add("customErrorCode", "440");
+                    }
                 }
-                result.Add("TopMenu", idata);
-                }
-                else
+                catch (Exception ex)
                 {
                     result.Add("status", "fail");
-                    result.Add("errorMessage", "No valid userid found");
+                    result.Add("error", ex.Message);
                 }
-            }
-            catch(Exception ex)
-            {
-                result.Add("status", "fail");
-                result.Add("error", ex.Message);
             }
             return result;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
+        
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserSubMenu(string subMenuType)
         {
             List<object> idata = new List<object>();
             Dictionary<string, object> result = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                if (Session["UserLoggedIn"].ToString() != null)
+                HttpContext.Current.Session.Abandon();
+                result.Add("status", "fail");
+                result.Add("errorMessage", "Session Expired");
+                result.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-                    string userid = Session["UserLoggedIn"].ToString();
-                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-                    DataTable dt = new DataTable();
-                    dt = userAuth.GetUserSubMenu(subMenuType,userid);
-                    if (dt.Rows.Count > 0)
+                    if (Session["UserLoggedIn"].ToString() != null)
                     {
-                        result.Add("status", "sucess");
-                        foreach (DataRow dr in dt.Rows)
+                        string userid = Session["UserLoggedIn"].ToString();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        DataTable dt = new DataTable();
+                        dt = userAuth.GetUserSubMenu(subMenuType, userid);
+                        if (dt.Rows.Count > 0)
                         {
-                            idata.Add(dr["rolenames"].ToString());
+                            result.Add("status", "sucess");
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                idata.Add(dr["rolenames"].ToString());
+                            }
                         }
+                        result.Add("SubMenu", idata);
                     }
-                    result.Add("SubMenu", idata);
+                    else
+                    {
+                        HttpContext.Current.Session.Abandon();
+                        result.Add("status", "fail");
+                        result.Add("errorMessage", "Session Expired");
+                        result.Add("customErrorCode", "440");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
                     result.Add("status", "fail");
-                    result.Add("errorMessage", "No valid userid found");
+                    result.Add("error", ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                result.Add("status", "fail");
-                result.Add("error", ex.Message);
             }
             return result;            
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
+       
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserAllSubMenu()
         {
             string userid = "";
             List<object> idata = new List<object>();
             Dictionary<string, object> result = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                if (Session["UserLoggedIn"].ToString()!=null)
+                HttpContext.Current.Session.Abandon();
+                result.Add("status", "fail");
+                result.Add("errorMessage", "Session Expired");
+                result.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-                    userid = Session["UserLoggedIn"].ToString();
+                    if (Session["UserLoggedIn"].ToString() != null)
+                    {
+                        userid = Session["UserLoggedIn"].ToString();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        DataTable dt = new DataTable();
+                        dt = userAuth.GetUserAllSubMenu(userid);
+                        if (dt.Rows.Count > 0)
+                        {
+                            result.Add("status", "sucess");
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                idata.Add(dr["roleid"].ToString());
+                            }
+                        }
+                        result.Add("SubMenuId", idata);
+                    }
+                    else
+                    {
+                        HttpContext.Current.Session.Abandon();
+                        result.Add("status", "fail");
+                        result.Add("errorMessage", "Session Expired");
+                        result.Add("customErrorCode", "440");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    result.Add("status", "fail");
+                    result.Add("error", ex.Message);
+                }
+            }
+            return result;           
+        }
+
+        
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetUserAllLocationAccess()
+        {
+            List<object> idata = new List<object>();
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
+            {
+                HttpContext.Current.Session.Abandon();
+                result.Add("status", "fail");
+                result.Add("errorMessage", "Session Expired");
+                result.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    if (Session["UserLoggedIn"].ToString() != null)
+                    {
+
+                        string userid = Session["UserLoggedIn"].ToString();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        DataTable dt = new DataTable();
+                        dt = userAuth.GetUserAllLocationAccess(userid);
+                        if (dt.Rows.Count > 0)
+                        {
+                            result.Add("status", "sucess");
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                idata.Add(dr["className"].ToString());
+                            }
+                        }
+                        result.Add("ClassNameList", idata);
+                    }
+                    else
+                    {
+                        HttpContext.Current.Session.Abandon();
+                        result.Add("status", "fail");
+                        result.Add("errorMessage", "Session Expired");
+                        result.Add("customErrorCode", "440");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.Add("status", "fail");
+                    result.Add("error", ex.Message);
+                }
+            }
+            return result;
+            
+        }
+
+        
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetUserPermissions(string userid)
+        {
+            List<object> idata = new List<object>();
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
+            {
+                HttpContext.Current.Session.Abandon();
+                result.Add("status", "fail");
+                result.Add("errorMessage", "Session Expired");
+                result.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
                     DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
                     DataTable dt = new DataTable();
                     dt = userAuth.GetUserAllSubMenu(userid);
@@ -175,33 +319,32 @@ namespace CresijApp.Services
                     }
                     result.Add("SubMenuId", idata);
                 }
-                else
+                catch (Exception ex)
                 {
                     result.Add("status", "fail");
-                    result.Add("errorMessage", "No valid userid found");
+                    result.Add("error", ex.Message);
                 }
-               
             }
-            catch (Exception ex)
-            {
-                result.Add("status", "fail");
-                result.Add("error", ex.Message);
-            }
-            return result;           
+            return result;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
+       
         [WebMethod(EnableSession = true)]
-        public Dictionary<string, object> GetUserAllLocationAccess()
+        public Dictionary<string, object> GetUserLocationPermissions(string userid)
         {
             List<object> idata = new List<object>();
             Dictionary<string, object> result = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                if (Session["UserLoggedIn"].ToString() != null)
+                HttpContext.Current.Session.Abandon();
+                result.Add("status", "fail");
+                result.Add("errorMessage", "Session Expired");
+                result.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-
-                    string userid = Session["UserLoggedIn"].ToString();
                     DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
                     DataTable dt = new DataTable();
                     dt = userAuth.GetUserAllLocationAccess(userid);
@@ -215,75 +358,11 @@ namespace CresijApp.Services
                     }
                     result.Add("ClassNameList", idata);
                 }
-                else
+                catch (Exception ex)
                 {
                     result.Add("status", "fail");
-                    result.Add("errorMessage", "No valid userid found");
+                    result.Add("error", ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                result.Add("status", "fail");
-                result.Add("error", ex.Message);
-            }
-            return result;
-            
-        }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, object> GetUserPermissions(string userid)
-        {
-            List<object> idata = new List<object>();
-            Dictionary<string, object> result = new Dictionary<string, object>();
-            try
-            {
-                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-                    DataTable dt = new DataTable();
-                    dt = userAuth.GetUserAllSubMenu(userid);
-                    if (dt.Rows.Count > 0)
-                    {
-                        result.Add("status", "sucess");
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            idata.Add(dr["roleid"].ToString());
-                        }
-                    }
-                    result.Add("SubMenuId", idata);
-            }
-            catch (Exception ex)
-            {
-                result.Add("status", "fail");
-                result.Add("error", ex.Message);
-            }
-            return result;
-        }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public Dictionary<string, object> GetUserLocationPermissions(string userid)
-        {
-            List<object> idata = new List<object>();
-            Dictionary<string, object> result = new Dictionary<string, object>();
-            try
-            {
-                DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
-                DataTable dt = new DataTable();
-                dt = userAuth.GetUserAllLocationAccess(userid);
-                if (dt.Rows.Count > 0)
-                {
-                    result.Add("status", "sucess");
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        idata.Add(dr["className"].ToString());
-                    }
-                }
-                result.Add("ClassNameList", idata);
-            }
-            catch (Exception ex)
-            {
-                result.Add("status", "fail");
-                result.Add("error", ex.Message);
             }
             return result;
 

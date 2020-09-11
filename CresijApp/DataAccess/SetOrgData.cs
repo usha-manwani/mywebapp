@@ -47,7 +47,7 @@ namespace CresijApp.DataAccess
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("flname", data["floorName"]);
                         cmd.Parameters.AddWithValue("buscode", data["buildingCode"]);
-                        cmd.Parameters.AddWithValue("highoff", data["buildingName"]);
+                        cmd.Parameters.AddWithValue("highoff", data["building"]);
                         cmd.Parameters.AddWithValue("que", data["queue"]);
                         cmd.Parameters.AddWithValue("typeaccess", data["accessType"]);
                         cmd.Parameters.AddWithValue("notes", data["notes"]);
@@ -66,18 +66,14 @@ namespace CresijApp.DataAccess
             int result = -1;
             try
             {
+                string query = "update buildingdetails set buildingcode = '"+ data["buildingCode"] + "' ," +
+                    " buildingname ='" + data["buildingName"] + "', queue = '" + data["queue"] + "'," +
+                    " Public = '" + data["accessType"] + "' ," +
+                    " remarks = '" + data["notes"] + "' where id =" + data["id"];
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateBuildingData", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("deptname", data["buildingName"]);
-                        cmd.Parameters.AddWithValue("buscode", data["buildingCode"]);
-                        
-                        cmd.Parameters.AddWithValue("que", data["queue"]);
-                        cmd.Parameters.AddWithValue("typeaccess", data["accessType"]);
-                        cmd.Parameters.AddWithValue("note", data["notes"]);
-                        cmd.Parameters.AddWithValue("sn", data["id"]);
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {                        
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -97,20 +93,13 @@ namespace CresijApp.DataAccess
         public int SaveTeacherData(Dictionary<string, string> data)
         {
             int result = -1;
-           
+            string query = "insert into teacherdata values ('"+data["teacherId"]+"','"+ data["teacherName"]+"','"+ data["gender"]+
+                "','"+data["age"]+"','"+ data["faculty"]+"','"+ data["phone"]+"','"+ data["idCard"]+"','"+ data["oneCard"]+"')";
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_SaveTeacherData", con))
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("id", data["teacherId"]);
-                        cmd.Parameters.AddWithValue("tname", data["teacherName"]);
-                        cmd.Parameters.AddWithValue("gend", data["gender"]);
-                        cmd.Parameters.AddWithValue("age", data["age"]);
-                        cmd.Parameters.AddWithValue("fac", data["faculty"]);
-                        cmd.Parameters.AddWithValue("ph", data["phone"]);
-                        cmd.Parameters.AddWithValue("idcrd", data["idCard"]);
-                        cmd.Parameters.AddWithValue("onecrd", data["oneCard"]);
+                        
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -124,22 +113,14 @@ namespace CresijApp.DataAccess
         public int SaveStudentData(Dictionary<string, string> data)
         {
             int result = -1;
-            try
-            {
+            
+                string query = "insert into studentdata values ('" + data["studentId"] + "','" + data["studentName"] + "','" + data["gender"] +
+                "','" + data["age"] + "','" + data["faculty"] + "','" + data["phone"] + "','" + data["idCard"] + "','" + data["oneCard"] + "')";
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_SaveStudentData", con))
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("id", data["studentId"]);
-                        cmd.Parameters.AddWithValue("tname", data["studentName"]);
-                        cmd.Parameters.AddWithValue("gend", data["gender"]);
-                        cmd.Parameters.AddWithValue("age", data["age"]);
-                        cmd.Parameters.AddWithValue("fac", data["faculty"]);
-                        cmd.Parameters.AddWithValue("ph", data["phone"]);
-                        cmd.Parameters.AddWithValue("idcrd", data["idCard"]);
-                        cmd.Parameters.AddWithValue("onecrd", data["oneCard"]);
+                       
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -148,31 +129,22 @@ namespace CresijApp.DataAccess
                     }
                 }
 
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
+            
             return result;
         }
 
         public int UpdateTeacherData(Dictionary<string, string> data)
         {
             int result = -1;
-           
-                using (MySqlConnection con = new MySqlConnection(constr))
+            string query = "update teacherdata set teachername='" + data["teacherName"] +
+                "',gender='" + data["gender"] +"', age='" + data["age"] + "', faculty='" + data["faculty"] +
+                "', phone='" + data["phone"] + "',idcard='" + data["idCard"] + 
+                "',onecard='" + data["oneCard"] + "' where teacherid ='" + data["teacherId"] + "'";
+            using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateTeacherData", con))
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("id", data["teacherId"]);
-                        cmd.Parameters.AddWithValue("tname", data["teacherName"]);
-                        cmd.Parameters.AddWithValue("gend", data["gender"]);
-                        cmd.Parameters.AddWithValue("ag", data["age"]);
-                        cmd.Parameters.AddWithValue("fac", data["faculty"]);
-                        cmd.Parameters.AddWithValue("ph", data["phone"]);
-                        cmd.Parameters.AddWithValue("idcrd", data["idCard"]);
-                        cmd.Parameters.AddWithValue("onecrd", data["oneCard"]);
+                        
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -188,20 +160,15 @@ namespace CresijApp.DataAccess
         public int UpdateStudentData(Dictionary<string, string> data)
         {
             int result = -1;
-            
-                using (MySqlConnection con = new MySqlConnection(constr))
+            string query = "update studentdata set studentname='" + data["studentName"] +
+                "',gender='" + data["gender"] + "', age='" + data["age"] + "', deptcode='" + data["faculty"] +
+                "', phone='" + data["phone"] + "',idcard='" + data["idCard"] +
+                "',onecard='" + data["oneCard"] + "' where studentid ='" + data["studentId"] + "'";
+            using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateStudentData", con))
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("id", data["studentId"]);
-                        cmd.Parameters.AddWithValue("tname", data["studentName"]);
-                        cmd.Parameters.AddWithValue("gend", data["gender"]);
-                        cmd.Parameters.AddWithValue("ag", data["age"]);
-                        cmd.Parameters.AddWithValue("fac", data["faculty"]);
-                        cmd.Parameters.AddWithValue("ph", data["phone"]);
-                        cmd.Parameters.AddWithValue("idcrd", data["idCard"]);
-                        cmd.Parameters.AddWithValue("onecrd", data["oneCard"]);
+                        
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -223,7 +190,7 @@ namespace CresijApp.DataAccess
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("cname", data["className"]);
-                        cmd.Parameters.AddWithValue("tbuild", data["buildingName"]);
+                        cmd.Parameters.AddWithValue("tbuild", data["building"]);
                         cmd.Parameters.AddWithValue("tfloor", data["floor"]);
                         cmd.Parameters.AddWithValue("tseat", data["seat"]);
                         cmd.Parameters.AddWithValue("camipS", data["camIpS"]);
@@ -249,8 +216,6 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
-
-            
             return result;
         }
         public int UpdateClassData(Dictionary<string, string> data)
@@ -264,7 +229,7 @@ namespace CresijApp.DataAccess
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("clsid", data["classID"]);
                         cmd.Parameters.AddWithValue("cname", data["className"]);
-                        cmd.Parameters.AddWithValue("tbuild", data["buildingName"]);
+                        cmd.Parameters.AddWithValue("tbuild", data["building"]);
                         cmd.Parameters.AddWithValue("tfloor", data["floor"]);
                         cmd.Parameters.AddWithValue("tseat", data["seat"]);
                         cmd.Parameters.AddWithValue("camsip", data["camIpS"]);
@@ -295,14 +260,11 @@ namespace CresijApp.DataAccess
 
         public int SaveUserData(Dictionary<string, string> data)
         {
-           
-           
-            int result = -1;
-           
+            int result = -1;           
                 if (data["personType"].ToString() == "longterm")
                 {
-                    data["expireDate"] = DateTime.Now.ToString("yyyy-MM-dd");
-                    data["expireTime"] = DateTime.Now.ToString("hh:mm");
+                    data["expireDate"] = DateTime.Now.ToString("yyyy-MM-dd hh:mm");
+                    data["startDate"] = DateTime.Now.ToString("yyyy-MM-dd hh:mm");
                 }
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
@@ -318,7 +280,7 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("note", data["notes"]);
                         cmd.Parameters.AddWithValue("pass", data["password"]);
                         cmd.Parameters.AddWithValue("expiredate", data["expireDate"]);
-                        cmd.Parameters.AddWithValue("timeexp", data["expireTime"]);
+                        cmd.Parameters.AddWithValue("startdate", data["startDate"]);
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -347,7 +309,7 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("note", data["notes"]);
                         cmd.Parameters.AddWithValue("pass", data["password"]);
                         cmd.Parameters.AddWithValue("expiredate", data["expireDate"]);
-                        cmd.Parameters.AddWithValue("time1", data["expireTime"]);
+                        cmd.Parameters.AddWithValue("startdate", data["startDate"]);
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
@@ -367,7 +329,7 @@ namespace CresijApp.DataAccess
                     using (MySqlCommand cmd = new MySqlCommand("sp_UpdateFloorData", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("buildname", data["buildingName"]);
+                        cmd.Parameters.AddWithValue("buildname", data["building"]);
                         cmd.Parameters.AddWithValue("buscode", data["buildingCode"]);
                         cmd.Parameters.AddWithValue("floorname", data["floorName"]);
                         cmd.Parameters.AddWithValue("que", data["queue"]);

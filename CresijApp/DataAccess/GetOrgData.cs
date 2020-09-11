@@ -222,7 +222,11 @@ namespace CresijApp.DataAccess
             
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = "SELECT * from Classdetails where classid=" +classid;
+                    string query = "SELECT classID, ClassName, bd.buildingname, fd.floor,Seats,`camipS`,`camipT`, `camSmac`, " +
+                    "`camTmac`,`camport`,`camuserid`,`campass`,`CCEquipIP`,`ccmac`, `desktopip`,`deskmac`, " +
+                    "`recordingEquip`,`recordermac`,`callhelpip`,`callhelpmac` FROM `organisationdatabase`.`classdetails` cd " +
+                    "join buildingdetails bd on bd.id = cd.teachingbuilding join floordetails fd on fd.id = cd.floor" +
+                    " where classid=" + classid;
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -371,7 +375,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "SELECT floor from floordetails where buildingname='" + building + "'";
+                string query = "SELECT floor, id from floordetails where buildingname='" + building + "'";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -404,7 +408,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "SELECT classname from classdetails where ccequipip ='" + ip + "' limit 1";
+                string query = "SELECT classname, classid from classdetails where ccequipip ='" + ip + "' limit 1";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);

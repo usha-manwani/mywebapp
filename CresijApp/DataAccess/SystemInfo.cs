@@ -17,8 +17,7 @@ namespace CresijApp.DataAccess
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {
+                
                     using (MySqlCommand cmd = new MySqlCommand("sp_insertSystemInfo", con)) // sp_SaveTempData
                     {
                        
@@ -44,15 +43,7 @@ namespace CresijApp.DataAccess
                         }
                         result=cmd.ExecuteNonQuery();
                     }
-                }
-                catch(Exception ex)
-                {
-                    result = -1;
-                }
-                finally
-                {
-                    con.Close();
-                }
+               
             }
             return result;
         }
@@ -62,8 +53,7 @@ namespace CresijApp.DataAccess
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {
+                
                     using (MySqlCommand cmd = new MySqlCommand("sp_insertUpdateSection", con)) 
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -79,15 +69,7 @@ namespace CresijApp.DataAccess
                         }
                         result = cmd.ExecuteNonQuery();
                     }
-                }
-                catch (Exception ex)
-                {
-                    result = -1;
-                }
-                finally
-                {
-                    con.Close();
-                }
+                
             }
             return result;
         }
@@ -96,8 +78,7 @@ namespace CresijApp.DataAccess
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {
+                
                     using (MySqlCommand cmd = new MySqlCommand("sp_InsertUpdateReserverTransfer", con)) 
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -114,15 +95,7 @@ namespace CresijApp.DataAccess
                         }
                         result = cmd.ExecuteNonQuery();
                     }
-                }
-                catch (Exception ex)
-                {
-                    result = -1;
-                }
-                finally
-                {
-                    con.Close();
-                }
+                
             }
             return result;
         }
@@ -132,8 +105,7 @@ namespace CresijApp.DataAccess
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {
+                
                     using (MySqlCommand cmd = new MySqlCommand("sp_deleteSection", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -144,15 +116,7 @@ namespace CresijApp.DataAccess
                         }
                         result = cmd.ExecuteNonQuery();
                     }
-                }
-                catch (Exception ex)
-                {
-                    result = -1;
-                }
-                finally
-                {
-                    con.Close();
-                }
+                
             }
             return result;
         }
@@ -162,32 +126,22 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
+                
+                    string query = "select  fd.floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className from " +
+                        " classdetails  cd join floordetails fd on cd.floor = fd.id " +
+                        " where teachingbuilding="+building+ " and cd.floor in(select id from floordetails where buildingName=" + building + ") " +
+                        " group by cd.floor  union select floor,'' from floordetails where buildingname=" + building + " and " +
+                        "  id not in(select floor from classdetails where teachingbuilding =" + building + ") group by floor order by floor";
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
-                    string query = "select  floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className from classdetails " +
-                        " where teachingbuilding='" + building + "' and floor in(select floor from floordetails where " +
-                        "buildingName='"+building+"')  group by floor " +
-                        " union select floor,'' from floordetails where buildingname='"+building+"' and floor " +
-                        " not in(select floor from classdetails where teachingbuilding ='" + building + "') group by floor";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    if (con.State != ConnectionState.Open)
                     {
-                        
-                        if (con.State != ConnectionState.Open)
-                        {
-                            con.Open();
-                        }
-                        MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
-                        mySqlDataAdapter.Fill(dt);
+                        con.Open();
                     }
+                    MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
+                    mySqlDataAdapter.Fill(dt);
                 }
-                catch (Exception ex)
-                {
-                    
-                }
-                finally
-                {
-                    con.Close();
-                }
+                
             }
             return dt;
         }
@@ -196,9 +150,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {
-                    
+                  
                     using (MySqlCommand cmd = new MySqlCommand("sp_GetipByClass", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -210,15 +162,7 @@ namespace CresijApp.DataAccess
                         MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
                         mySqlDataAdapter.Fill(dt);
                     }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    con.Close();
-                }
+                
             }
             return dt;
         }
@@ -228,13 +172,12 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {
-                    string query = "select  floor ,group_concat(distinct(classname)) as className from classdetails " +
-                        " where teachingbuilding='" + building + "' and floor in(select floor from floordetails where " +
-                        "buildingName='" + building + "') and classname in " +
+                    string query = "select  fd.floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className" +
+                        " from classdetails cd join floordetails fd on cd.floor =fd.id " +
+                        " where teachingbuilding='" + building + "' and cd.floor in(select id from floordetails where " +
+                        " buildingName='" + building + "') and classid in " +
                         "(select classid from userlocationaccess where userserialnum =(select serialno from userdetails" +
-                        " where loginid ='"+userid+ "')) group by floor ";
+                        " where loginid ='"+userid+ "')) group by cd.floor ";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         if (con.State != ConnectionState.Open)
@@ -244,15 +187,7 @@ namespace CresijApp.DataAccess
                         MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
                         mySqlDataAdapter.Fill(dt);
                     }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    con.Close();
-                }
+                
             }
             return dt;
         }

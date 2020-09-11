@@ -21,32 +21,54 @@ namespace CresijApp.Services
     {
 
         #region Common Web methods for Schedule
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        class BuildingIDName
+        {
+            public string BuildingName { get; set; }
+            public string BuildingId { get; set; }
+        }
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetBuilding()
         {
             Dictionary<string, object> val = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                Schedule schedule = new Schedule();
-                DataTable r = schedule.GetBuilding();
-                List<object> idata = new List<object>();
-                val.Add("status", "success");
-                if (r.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in r.Rows)
-                    {
-                        idata.Add(dr["building"].ToString());
-                    }
-                }
-                val.Add("total", r.Rows.Count);
-                val.Add("value", idata);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 val.Add("status", "fail");
-                val.Add("errorMessage", ex.Message);
+                val.Add("errorMessage", "Session Expired");
+                val.Add("customErrorCode", "440");
             }
+            else
+            {
+                try
+                {
+                    Schedule schedule = new Schedule();
+                    DataTable r = schedule.GetBuilding();
+                    List<object> idata = new List<object>();
+                    val.Add("status", "success");
+                    List<BuildingIDName> buildings = new List<BuildingIDName>();
+                    if (r.Rows.Count > 0)
+                    {
+
+                        foreach (DataRow dr in r.Rows)
+                        {
+                            BuildingIDName bd = new BuildingIDName()
+                            {
+                                BuildingId = dr["id"].ToString(),
+                                BuildingName=dr["building"].ToString()
+                            };
+                            buildings.Add(bd);
+                        }
+                    }
+                    val.Add("total", r.Rows.Count);
+                    val.Add("value", buildings);
+                }
+                catch (Exception ex)
+                {
+                    val.Add("status", "fail");
+                    val.Add("errorMessage", ex.Message);
+                }
+            }            
             return val;
         }
 
@@ -55,82 +77,100 @@ namespace CresijApp.Services
             public string TeacherName { get; set; }
             public string TeacherId { get; set; }
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTeacherDetail(string courseName)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
             DataTable r = new DataTable();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                r = schedule.GetTeacherDetail(courseName);
-
-                idata.Add("status", "success");
-                List<TeacherDetails> dat = new List<TeacherDetails>();
-                if (r.Rows.Count > 0)
-                {
-                    idata.Add("totalRows", r.Rows.Count);
-                    foreach (DataRow dr in r.Rows)
-                    {
-                        TeacherDetails td = new TeacherDetails()
-                        {
-                            TeacherName = dr["TeacherName"].ToString(),
-                            TeacherId = dr["teacherid"].ToString()
-                        };
-                        dat.Add(td);
-                    }
-                }
-                idata.Add("value", dat);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    r = schedule.GetTeacherDetail(courseName);
+
+                    idata.Add("status", "success");
+                    List<TeacherDetails> dat = new List<TeacherDetails>();
+                    if (r.Rows.Count > 0)
+                    {
+                        idata.Add("totalRows", r.Rows.Count);
+                        foreach (DataRow dr in r.Rows)
+                        {
+                            TeacherDetails td = new TeacherDetails()
+                            {
+                                TeacherName = dr["TeacherName"].ToString(),
+                                TeacherId = dr["teacherid"].ToString()
+                            };
+                            dat.Add(td);
+                        }
+                    }
+                    idata.Add("value", dat);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCalenderDates(string type)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                DataTable r = schedule.GetCalenderDates(type);
-                Dictionary<string, string> list = new Dictionary<string, string>();
-                if (r.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in r.Rows)
-                    {
-                        list.Add("autoReviewOfRequest", dr["AutoReview"].ToString());
-                        list.Add("nonWorkingDaysRequest", dr["NonWorkingDays"].ToString());
-                        list.Add("startDate", dr["starttime"].ToString());
-                        list.Add("endDate", dr["endtime"].ToString());
-                    }
-                }
-                idata.Add("status", "success");
-                idata.Add("value", list);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
             }
-
+            else
+            {
+                try
+                {
+                    DataTable r = schedule.GetCalenderDates(type);
+                    Dictionary<string, string> list = new Dictionary<string, string>();
+                    if (r.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in r.Rows)
+                        {
+                            list.Add("autoReviewOfRequest", dr["AutoReview"].ToString());
+                            list.Add("nonWorkingDaysRequest", dr["NonWorkingDays"].ToString());
+                            list.Add("startDate", dr["starttime"].ToString());
+                            list.Add("endDate", dr["endtime"].ToString());
+                            list.Add("SemesterNo", dr["semesterno"].ToString());
+                        }
+                    }
+                    idata.Add("status", "success");
+                    idata.Add("value", list);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
+            }
             return idata;
         }
         #endregion
-
         #region Transfer Schedule
         /// <summary>
         /// Web Methods For Transfer Schedules
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        [PrincipalPermission(SecurityAction.Demand)]
+        
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTransferScheduleByDay(Dictionary<string, object> data)
         {
@@ -138,132 +178,156 @@ namespace CresijApp.Services
             Dictionary<string, object> idata = new Dictionary<string, object>();
             Schedule schedule = new Schedule();
             List<object> dat = new List<object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                if (Session["UserLoggedIn"].ToString() != null)
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-
-                    userid = Session["UserLoggedIn"].ToString();
-                    var building = data["building"].ToString();
-                    var sem = Convert.ToInt32(data["semesterNum"]);
-                    var week = Convert.ToInt32(data["weekNum"]);
-                    var day = Convert.ToInt32(data["dayNum"]);
-                   
-                    var pgindex = Convert.ToInt32(data["pageIndex"]);
-                    var pgsize = Convert.ToInt32(data["pageSize"]);
-                    dat = schedule.GetTransferScheduleByDay(building, sem, week, day, userid, pgindex, pgsize);
-
-                    idata.Add("status", "success");
-                    int total = Convert.ToInt32(dat[0]);
-                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                    idata.Add("totalRows", total);
-                    DataTable dt = dat[1] as DataTable;
-                    List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
-                    if (dt.Rows.Count >= 1)
+                    if (Session["UserLoggedIn"].ToString() != null || HttpContext.Current.Session.Count == 0)
                     {
-                        foreach (DataRow dr in dt.Rows)
+
+                        userid = Session["UserLoggedIn"].ToString();
+                        var building = data["building"].ToString();
+                        var sem = Convert.ToInt32(data["semNum"]);
+                        var week = Convert.ToInt32(data["weekNum"]);
+                        var day = Convert.ToInt32(data["dayNum"]);
+
+                        var pgindex = Convert.ToInt32(data["pageIndex"]);
+                        var pgsize = Convert.ToInt32(data["pageSize"]);
+                        dat = schedule.GetTransferScheduleByDay(building, sem, week, day, userid, pgindex, pgsize);
+
+                        idata.Add("status", "success");
+                        int total = Convert.ToInt32(dat[0]);
+                        KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                        idata.Add("totalRows", total);
+                        DataTable dt = dat[1] as DataTable;
+                        List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
+                        if (dt.Rows.Count >= 1)
                         {
-                            ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
+                            foreach (DataRow dr in dt.Rows)
                             {
-                                RowNum = Convert.ToInt32(dr[0]),
-                                Classname = dr[1].ToString(),
-                                Section1 = dr[2].ToString(),
-                                Section2 = dr[2].ToString(),
-                                Section3 = dr[4].ToString(),
-                                Section4 = dr[4].ToString(),
-                                Section5 = dr[6].ToString(),
-                                Section6 = dr[6].ToString(),
-                                Section7 = dr[8].ToString(),
-                                Section8 = dr[8].ToString(),
-                                Section9 = dr[10].ToString(),
-                                Section10 = dr[10].ToString(),
-                                Section11 = dr[12].ToString(),
-                                Section12 = dr[12].ToString()
-                            };
-                            schedules.Add(scheduleDataStructure);
+                                ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
+                                {
+                                    RowNum = Convert.ToInt32(dr["RowNumber"]),
+                                    ClassId = dr["classid"].ToString(),
+                                    Classname = dr["ClassName"].ToString(),
+                                    Section1 = dr["Section1"].ToString(),
+                                    Section2 = dr["Section2"].ToString(),
+                                    Section3 = dr["Section3"].ToString(),
+                                    Section4 = dr["Section4"].ToString(),
+                                    Section5 = dr["Section5"].ToString(),
+                                    Section6 = dr["Section6"].ToString(),
+                                    Section7 = dr["Section7"].ToString(),
+                                    Section8 = dr["Section8"].ToString(),
+                                    Section9 = dr["Section9"].ToString(),
+                                    Section10 = dr["Section10"].ToString(),
+                                    Section11 = dr["Section11"].ToString(),
+                                    Section12 = dr["Section12"].ToString()
+                                };
+                                schedules.Add(scheduleDataStructure);
+                            }
+                            idata.Add("value", schedules);
                         }
-                        idata.Add("value", schedules);
+                    }
+                    else
+                    {
+                        HttpContext.Current.Session.Abandon();
+                        idata.Add("status", "fail");
+                        idata.Add("errorMessage", "Session Expired");
+                        idata.Add("customErrorCode", "440");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
                     idata.Add("status", "fail");
-                    idata.Add("errorMessage", "No valid userid found");
+                    idata.Add("errorMessage", ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
-            }
             return idata;
-        }
-                                                        
-        [PrincipalPermission(SecurityAction.Demand)]
+        }                                                        
+        
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTransferScheduleByDate(Dictionary<string, object> data)
         {
             string userid = "";
             Dictionary<string, object> idata = new Dictionary<string, object>();
             List<object> dat = new List<object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                if (Session["UserLoggedIn"].ToString() != null)
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-                    userid = Session["UserLoggedIn"].ToString();
-                    var building = data["building"].ToString();
-                    var date = data["date"].ToString();                    
-                    var pgindex = data["pageIndex"].ToString();
-                    var pgsize = data["pageSize"].ToString();
-                    Schedule schedule = new Schedule();
-                    dat = schedule.GetScheduleForTransfer(building, date, userid, pgindex, pgsize);
-                    idata.Add("status", "success");
-                    int total = Convert.ToInt32(dat[0]);
-                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-
-                DataTable dt = dat[1] as DataTable;
-                List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
-                idata.Add("totalRows", total);
-                if (dt.Rows.Count >= 1)
-                {
-
-                    foreach (DataRow dr in dt.Rows)
+                    if (Session["UserLoggedIn"].ToString() != null)
                     {
-                        ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
+                        userid = Session["UserLoggedIn"].ToString();
+                        var building = data["building"].ToString();
+                        var date = data["date"].ToString();
+                        var pgindex = data["pageIndex"].ToString();
+                        var pgsize = data["pageSize"].ToString();
+                        Schedule schedule = new Schedule();
+                        dat = schedule.GetScheduleForTransfer(building, date, userid, pgindex, pgsize);
+                        idata.Add("status", "success");
+                        int total = Convert.ToInt32(dat[0]);
+                        KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+
+                        DataTable dt = dat[1] as DataTable;
+                        List<ScheduleDataStructureByBuildingWeek> schedules = new List<ScheduleDataStructureByBuildingWeek>();
+                        idata.Add("totalRows", total);
+                        if (dt.Rows.Count >= 1)
                         {
-                            RowNum = Convert.ToInt32(dr[0]),
-                            Classname = dr[1].ToString(),
-                            Section1 = dr[2].ToString(),
-                            Section2 = dr[2].ToString(),
-                            Section3 = dr[4].ToString(),
-                            Section4 = dr[4].ToString(),
-                            Section5 = dr[6].ToString(),
-                            Section6 = dr[6].ToString(),
-                            Section7 = dr[8].ToString(),
-                            Section8 = dr[8].ToString(),
-                            Section9 = dr[10].ToString(),
-                            Section10 = dr[10].ToString(),
-                            Section11 = dr[12].ToString(),
-                            Section12 = dr[12].ToString()
-                        };
-                        schedules.Add(scheduleDataStructure);
+
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
+                                {
+                                    RowNum = Convert.ToInt32(dr["RowNumber"]),
+                                    ClassId=dr["classid"].ToString(),
+                                    Classname = dr["ClassName"].ToString(),
+                                    Section1 = dr["Section1"].ToString(),
+                                    Section2 = dr["Section2"].ToString(),
+                                    Section3 = dr["Section3"].ToString(),
+                                    Section4 = dr["Section4"].ToString(),
+                                    Section5 = dr["Section5"].ToString(),
+                                    Section6 = dr["Section6"].ToString(),
+                                    Section7 = dr["Section7"].ToString(),
+                                    Section8 = dr["Section8"].ToString(),
+                                    Section9 = dr["Section9"].ToString(),
+                                    Section10 = dr["Section10"].ToString(),
+                                    Section11 = dr["Section11"].ToString(),
+                                    Section12 = dr["Section12"].ToString()
+                                };
+                                schedules.Add(scheduleDataStructure);
+                            }
+                            idata.Add("value", schedules);
+                        }
+                        else
+                            idata.Add("value", "");
                     }
-                    idata.Add("value", schedules);
+                    else
+                    {
+                        HttpContext.Current.Session.Abandon();
+                        idata.Add("status", "fail");
+                        idata.Add("errorMessage", "Session Expired");
+                        idata.Add("customErrorCode", "440");
+                    }
                 }
-                else
-                    idata.Add("value", "");
-                }
-                else
+                catch (Exception ex)
                 {
                     idata.Add("status", "fail");
-                    idata.Add("errorMessage", "Session Expired");
-                    idata.Add("customErrorCode", "440");
+                    idata.Add("errorMessage", ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
             }
             return idata;
 
@@ -284,50 +348,61 @@ namespace CresijApp.Services
             public string ID { get; set; }
             
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetTransferScheduleList()
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             Schedule schedule = new Schedule();
             List<TransferScheduleListStructure> list = new List<TransferScheduleListStructure>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                DataTable r = schedule.GetTransferSchedule();
-                idata.Add("status", "success");
-                
-                if (r.Rows.Count > 0)
-                {
-                    idata.Add("totalRows", r.Rows.Count);
-                    foreach (DataRow dr in r.Rows)
-                    {
-                        TransferScheduleListStructure transfer = new TransferScheduleListStructure()
-                        {
-                            OldClassName = dr["oldclass"].ToString(),
-                            NewClassName = dr["newClass"].ToString(),
-                            OldTime = dr["oldTime"].ToString(),
-                            NewTime = dr["newTime"].ToString(),
-                            OldTeacherName = dr["oldteacher"].ToString(),
-                            NewTeacherName = dr["newteacher"].ToString(),
-                            ClassType = dr["classtype"].ToString(),
-                            CurrentStatus = dr["currentStatus"].ToString(),
-                            Reason = dr["reason"].ToString(),
-                            CourseName = dr["coursename"].ToString(),
-                            ID = dr["id"].ToString()
-                        };
-                        list.Add(transfer);
-                    }
-                    idata.Add("value", list);
-                }
-                else {
-                    idata.Add("totalRows", 0);
-                    idata.Add("value", "");
-                }
-                
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
             }
-            catch (Exception ex)
+            else
             {
-                idata.Add("status", "fail");idata.Add("errorMessage", ex.Message);
+                try
+                {
+                    DataTable r = schedule.GetTransferSchedule();
+                    idata.Add("status", "success");
+
+                    if (r.Rows.Count > 0)
+                    {
+                        idata.Add("totalRows", r.Rows.Count);
+                        foreach (DataRow dr in r.Rows)
+                        {
+                            TransferScheduleListStructure transfer = new TransferScheduleListStructure()
+                            {
+                                OldClassName = dr["oldclass"].ToString(),
+                                NewClassName = dr["newClass"].ToString(),
+                                OldTime = dr["oldTime"].ToString(),
+                                NewTime = dr["newTime"].ToString(),
+                                OldTeacherName = dr["oldteacher"].ToString(),
+                                NewTeacherName = dr["newteacher"].ToString(),
+                                ClassType = dr["classtype"].ToString(),
+                                CurrentStatus = dr["currentStatus"].ToString(),
+                                Reason = dr["reason"].ToString(),
+                                CourseName = dr["coursename"].ToString(),
+                                ID = dr["id"].ToString()
+                            };
+                            list.Add(transfer);
+                        }
+                        idata.Add("value", list);
+                    }
+                    else
+                    {
+                        idata.Add("totalRows", 0);
+                        idata.Add("value", "");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail"); idata.Add("errorMessage", ex.Message);
+                }
             }
 
             return idata;
@@ -348,114 +423,139 @@ namespace CresijApp.Services
             public string SemNum { get; set; }
             public string TotalWeeks { get; set; }
         }
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCourseDetailsForTransferID(string id)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             Schedule schedule = new Schedule();
-            try
-            { 
-                DataTable dt = schedule.GetCourseDetailsForTransfer(id);
-                idata.Add("status", "success");
-                if (dt.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in dt.Rows)
-                    {
-                        TransferCourseDetailStructure transfer = new TransferCourseDetailStructure()
-                        {
-                            TeacherName = dr["Teachername"].ToString(),
-                            CourseName = dr["coursename"].ToString(),
-                            ClassName = dr["classname"].ToString(),
-                            ClassId =dr["classId"].ToString(),
-                            WeekStart = dr["Weekstart"].ToString(),
-                            Weekend = dr["Weekend"].ToString(),
-                            DayNum = dr["dayno"].ToString(),
-                            Section = dr["section"].ToString(),
-                            Building = dr["building"].ToString(),
-                            StartDate = dr["Startdate"].ToString(),
-                            SemNum = dr["semNum"].ToString(),
-                            TotalWeeks = dr["TotalWeeks"].ToString()
-                        };
-                        idata.Add("value", transfer);
-                    }
-                }
-                else
-                    idata.Add("value", "");
-
-            }
-            catch (Exception ex)
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
             }
+            else
+            {
+                try
+                {
+                    DataTable dt = schedule.GetCourseDetailsForTransfer(id);
+                    idata.Add("status", "success");
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            TransferCourseDetailStructure transfer = new TransferCourseDetailStructure()
+                            {
+                                TeacherName = dr["Teachername"].ToString(),
+                                CourseName = dr["coursename"].ToString(),
+                                ClassName = dr["classname"].ToString(),
+                                ClassId = dr["classId"].ToString(),
+                                WeekStart = dr["Weekstart"].ToString(),
+                                Weekend = dr["Weekend"].ToString(),
+                                DayNum = dr["dayno"].ToString(),
+                                Section = dr["section"].ToString(),
+                                Building = dr["building"].ToString(),
+                                StartDate = dr["Startdate"].ToString(),
+                                SemNum = dr["semNum"].ToString(),
+                                TotalWeeks = dr["TotalWeeks"].ToString()
+                            };
+                            idata.Add("value", transfer);
+                        }
+                    }
+                    else
+                        idata.Add("value", "");
 
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
+            }
 
             return idata;
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> AddTransferSchedule(Dictionary<string, object> data)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
             List<string> d = new List<string>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                d.Add(data["currentClassId"].ToString());
-                d.Add(data["courseName"].ToString());
-                d.Add(data["reason"].ToString());
-                d.Add(data["newWeek"].ToString());
-                d.Add(data["newday"].ToString());
-                d.Add(data["newSection"].ToString());
-                d.Add(data["newBuilding"].ToString());
-                d.Add(data["newClassId"].ToString());
-                d.Add(data["newTeacherID"].ToString());
-                d.Add(data["currentRefrenceID"].ToString());
-                int r = schedule.SaveTransferSchedule(d.ToArray());
-                if (r >= 0)
-                {
-                    idata.Add("status", "success");
-                }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    d.Add(data["currentClassId"].ToString());
+                    d.Add(data["courseName"].ToString());
+                    d.Add(data["reason"].ToString());
+                    d.Add(data["newWeek"].ToString());
+                    d.Add(data["newday"].ToString());
+                    d.Add(data["newSection"].ToString());
+                    d.Add(data["newBuilding"].ToString());
+                    d.Add(data["newClassId"].ToString());
+                    d.Add(data["newTeacherID"].ToString());
+                    d.Add(data["currentRefrenceID"].ToString());
+                    int r = schedule.SaveTransferSchedule(d.ToArray());
+                    if (r >= 0)
+                    {
+                        idata.Add("status", "success");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> UpdateTransferScheduleStatus(Dictionary<string, object>  data)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
             int r = 0;
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-
-                var status = data["status"].ToString();
-                var id = data["id"].ToString();
-                r = schedule.SaveTransferScheduleStat(status, id);
-
-                if (r > 0)
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-                    idata.Add("status", "success");
+                    var status = data["status"].ToString();
+                    var id = data["id"].ToString();
+                    r = schedule.SaveTransferScheduleStat(status, id);
+
+                    if (r > 0)
+                    {
+                        idata.Add("status", "success");
+                    }
+                    else
+                    {
+                        idata.Add("status", "fail");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
                     idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
-            }
-
             return idata;
             
         }
@@ -465,120 +565,139 @@ namespace CresijApp.Services
             public string ClassName { get; set; }
             public string ClassId { get; set; }
         }
-        [PrincipalPermission(SecurityAction.Demand)]
+        
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetAvailClasses(Dictionary<string, object> data)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                if (HttpContext.Current.Session["UserLoggedIn"].ToString() != null)
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-                    string userid = Session["UserLoggedIn"].ToString();
-                    DataTable r = new DataTable();
-                    List<object> dat = new List<object>();
-                    var building = data["building"].ToString();
-                    var week = data["weekNum"].ToString();
-                    var semno = data["semNum"].ToString();
-                    r = schedule.GetAvailClasses(week, building, userid, semno);
-                    idata.Add("status", "success");
-                    if (r.Rows.Count > 0)
+                    if (HttpContext.Current.Session["UserLoggedIn"].ToString() != null)
                     {
-                        int total = r.Rows.Count;
-                        KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                        idata.Add("totalRows", total);
-                        foreach (DataRow dr in r.Rows)
+                        string userid = Session["UserLoggedIn"].ToString();
+                        DataTable r = new DataTable();
+                        List<object> dat = new List<object>();
+                        var building = data["building"].ToString();
+                        var week = data["weekNum"].ToString();
+                        var semno = data["semNum"].ToString();
+                        r = schedule.GetAvailClasses(week, building, userid, semno);
+                        idata.Add("status", "success");
+                        if (r.Rows.Count > 0)
                         {
-                            if (Convert.ToInt32(dr["section"]) < 42)
+                            int total = r.Rows.Count;
+                            KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                            idata.Add("totalRows", total);
+                            foreach (DataRow dr in r.Rows)
                             {
-                                AvailClasses ad = new AvailClasses()
+                                if (Convert.ToInt32(dr["section"]) < 42)
                                 {
-                                    ClassId = dr["classid"].ToString(),
-                                    ClassName = dr["classname"].ToString()
-                                };
-                                dat.Add(ad);
+                                    AvailClasses ad = new AvailClasses()
+                                    {
+                                        ClassId = dr["classid"].ToString(),
+                                        ClassName = dr["classname"].ToString()
+                                    };
+                                    dat.Add(ad);
+                                }
+
                             }
-                                
+                            idata.Add("value", dat);
                         }
-                        idata.Add("value", dat);
+                    }
+                    else
+                    {
+                        HttpContext.Current.Session.Abandon();
+                        idata.Add("status", "fail");
+                        idata.Add("errorMessage", "Session Expired");
+                        idata.Add("customErrorCode", "440");
                     }
                 }
-                else
+                catch (Exception ex)
                 {
                     idata.Add("status", "fail");
-                    idata.Add("errorMessage", "No valid userid found");
+                    idata.Add("errorMessage", ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
             }
             return idata;
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetAvailDay(Dictionary<string, object> data)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
             DataTable r = new DataTable();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                List<object> dat = new List<object>();
-
-                var classid = data["classId"].ToString();
-                var week = data["weekNum"].ToString();
-                var semno = data["semNum"].ToString();
-                r = schedule.GetAvailDay(week, classid, semno);
-
-                List<DaysAndSection> listofclass = new List<DaysAndSection>();
-                if (r.Rows.Count > 0)
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-                    int total = r.Rows.Count;
-                    KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
-                    idata.Add("totalRows", total);
-                    for (int i = 1; i <= 7; i++)
+                    List<object> dat = new List<object>();
+                    var classid = data["classId"].ToString();
+                    var week = data["weekNum"].ToString();
+                    var semno = data["semNum"].ToString();
+                    r = schedule.GetAvailDay(week, classid, semno);
+                    List<DaysAndSection> listofclass = new List<DaysAndSection>();
+                    if (r.Rows.Count > 0)
                     {
-                        DaysAndSection section = new DaysAndSection();
-                        section.Day = i;
-                        if (r.Rows.Count > 0)
+                        int total = r.Rows.Count;
+                        KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
+                        idata.Add("totalRows", total);
+                        for (int i = 1; i <= 7; i++)
                         {
-                            foreach (DataRow dr in r.Rows)
+                            DaysAndSection section = new DaysAndSection();
+                            section.Day = i;
+                            if (r.Rows.Count > 0)
                             {
-
-                                string[] sec = dr[1].ToString().Split(',');
-                                if (Convert.ToInt32(dr[0]) == section.Day)
+                                foreach (DataRow dr in r.Rows)
                                 {
 
-                                    for (int k = 0; k < sec.Length; k++)
+                                    string[] sec = dr[1].ToString().Split(',');
+                                    if (Convert.ToInt32(dr[0]) == section.Day)
                                     {
-                                        section.Section.Remove(Convert.ToInt32(sec[k]));
-                                    }
 
-                                    break;
+                                        for (int k = 0; k < sec.Length; k++)
+                                        {
+                                            section.Section.Remove(Convert.ToInt32(sec[k]));
+                                        }
+
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        if (section.Section.Count > 0)
-                            listofclass.Add(section);
+                            if (section.Section.Count > 0)
+                                listofclass.Add(section);
+                        }
+                        idata.Add("value", listofclass);
                     }
-                    idata.Add("value", listofclass);
+                    else
+                    {
+                        idata.Add("status", "success");
+                        idata.Add("totalRows", 0);
+                        idata.Add("value", "");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    idata.Add("status", "success");
-                    idata.Add("totalRows", 0);
-                    idata.Add("value", "");
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
             }
             return idata;
         }
@@ -592,30 +711,38 @@ namespace CresijApp.Services
                 Section = new List<int>() { 1, 3, 5, 7, 9, 11 };
             }
         }
-
-        
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+               
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTotalWeek(string semNum)
         {
             Dictionary<string, object> val = new Dictionary<string, object>();
             Schedule schedule = new Schedule();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                DataTable r = schedule.GetTotalWeek(semNum);
-                val.Add("status", "success");
-                if (r.Rows.Count > 0)
-                {
-                    foreach (DataRow dr in r.Rows)
-                    {
-                        val.Add("value",dr["totalweeks"].ToString());
-                    }
-                }  
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 val.Add("status", "fail");
-                val.Add("ErrorMessage", ex.Message);
+                val.Add("errorMessage", "Session Expired");
+                val.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    DataTable r = schedule.GetTotalWeek(semNum);
+                    val.Add("status", "success");
+                    if (r.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in r.Rows)
+                        {
+                            val.Add("value", dr["totalweeks"].ToString());
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    val.Add("status", "fail");
+                    val.Add("ErrorMessage", ex.Message);
+                }
             }
             return val;
         }
@@ -628,6 +755,7 @@ namespace CresijApp.Services
         private class ScheduleDataStructureByBuildingWeek
         {
             public int RowNum { get; set; }
+            public string ClassId{get;set;}
             public string Classname { get; set; }
             public string Section1 { get; set; }
             public string Section2 { get; set; }
@@ -642,18 +770,18 @@ namespace CresijApp.Services
             public string Section11 { get; set; }
             public string Section12 { get; set; }
         }
-
         
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetScheduleByDay(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            var cc = HttpContext.Current.Session;
-            if (cc.Count == 0)
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
                 idata.Add("errorMessage", "Session Expired");
-            }
+                idata.Add("customErrorCode", "440");
+            }            
             else
             {
                 Schedule schedule = new Schedule();
@@ -685,20 +813,21 @@ namespace CresijApp.Services
                             {
                                 ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
                                 {
-                                    RowNum = Convert.ToInt32(dr[0]),
-                                    Classname = dr[1].ToString(),
-                                    Section1 = dr[2].ToString(),
-                                    Section2 = dr[2].ToString(),
-                                    Section3 = dr[4].ToString(),
-                                    Section4 = dr[4].ToString(),
-                                    Section5 = dr[6].ToString(),
-                                    Section6 = dr[6].ToString(),
-                                    Section7 = dr[8].ToString(),
-                                    Section8 = dr[8].ToString(),
-                                    Section9 = dr[10].ToString(),
-                                    Section10 = dr[10].ToString(),
-                                    Section11 = dr[12].ToString(),
-                                    Section12 = dr[12].ToString()
+                                    RowNum = Convert.ToInt32(dr["RowNumber"]),
+                                    ClassId = dr["classid"].ToString(),
+                                    Classname = dr["ClassName"].ToString(),
+                                    Section1 = dr["Section1"].ToString(),
+                                    Section2 = dr["Section2"].ToString(),
+                                    Section3 = dr["Section3"].ToString(),
+                                    Section4 = dr["Section4"].ToString(),
+                                    Section5 = dr["Section5"].ToString(),
+                                    Section6 = dr["Section6"].ToString(),
+                                    Section7 = dr["Section7"].ToString(),
+                                    Section8 = dr["Section8"].ToString(),
+                                    Section9 = dr["Section9"].ToString(),
+                                    Section10 = dr["Section10"].ToString(),
+                                    Section11 = dr["Section11"].ToString(),
+                                    Section12 = dr["Section12"].ToString()
                                 };
                                 schedules.Add(scheduleDataStructure);
                             }
@@ -707,8 +836,10 @@ namespace CresijApp.Services
                     }
                     else
                     {
+                        HttpContext.Current.Session.Abandon();
                         idata.Add("status", "fail");
-                        idata.Add("errorMessage", "No valid userid found");
+                        idata.Add("errorMessage", "Session Expired");
+                        idata.Add("customErrorCode", "440");
                     }
                 }
                 catch (Exception ex)
@@ -719,17 +850,18 @@ namespace CresijApp.Services
             }
             return idata;
         }
-
         
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetScheduleByDate(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             var cc = HttpContext.Current.Session;
-            if (cc.Count == 0)
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", "Session Expired");                
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
             }
             else
             {
@@ -760,20 +892,21 @@ namespace CresijApp.Services
                             {
                                 ScheduleDataStructureByBuildingWeek scheduleDataStructure = new ScheduleDataStructureByBuildingWeek()
                                 {
-                                    RowNum = Convert.ToInt32(dr[0]),
-                                    Classname = dr[1].ToString(),
-                                    Section1 = dr[2].ToString(),
-                                    Section2 = dr[2].ToString(),
-                                    Section3 = dr[4].ToString(),
-                                    Section4 = dr[4].ToString(),
-                                    Section5 = dr[6].ToString(),
-                                    Section6 = dr[6].ToString(),
-                                    Section7 = dr[8].ToString(),
-                                    Section8 = dr[8].ToString(),
-                                    Section9 = dr[10].ToString(),
-                                    Section10 = dr[10].ToString(),
-                                    Section11 = dr[12].ToString(),
-                                    Section12 = dr[12].ToString()
+                                    RowNum = Convert.ToInt32(dr["RowNumber"]),
+                                    ClassId = dr["classid"].ToString(),
+                                    Classname = dr["ClassName"].ToString(),
+                                    Section1 = dr["Section1"].ToString(),
+                                    Section2 = dr["Section2"].ToString(),
+                                    Section3 = dr["Section3"].ToString(),
+                                    Section4 = dr["Section4"].ToString(),
+                                    Section5 = dr["Section5"].ToString(),
+                                    Section6 = dr["Section6"].ToString(),
+                                    Section7 = dr["Section7"].ToString(),
+                                    Section8 = dr["Section8"].ToString(),
+                                    Section9 = dr["Section9"].ToString(),
+                                    Section10 = dr["Section10"].ToString(),
+                                    Section11 = dr["Section11"].ToString(),
+                                    Section12 = dr["Section12"].ToString()
                                 };
                                 schedules.Add(scheduleDataStructure);
                             }
@@ -782,16 +915,21 @@ namespace CresijApp.Services
                     }
                     else
                     {
+                        HttpContext.Current.Session.Abandon();
                         idata.Add("status", "fail");
-                        idata.Add("errorMessage", "No valid userid found");
+                        idata.Add("errorMessage", "Session Expired");
+                        idata.Add("customErrorCode", "440");
                     }
                 }
                 catch (Exception ex)
                 {
                     idata.Add("status", "fail");
                     idata.Add("errorMessage", ex.Message);
-                }
-                
+                    if(ex.Data["Server Error Code"].ToString() == "1292")
+                    {
+                        idata.Add("customMessage", "No data found");
+                    }
+                }                
             }
             return idata;
         }
@@ -800,46 +938,63 @@ namespace CresijApp.Services
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-       
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+               
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetWeekYearSemester(string date)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                Schedule sc = new Schedule();
-                string week = sc.GetWeekByDate(date);
-                string[] dat = sc.GetYearAndSemester(date);
-                idata.Add("status", "success");
-                idata.Add("weekNum", week);
-                idata.Add("semNum", dat[0]);
-                idata.Add("yearNum", dat[1]);
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+
+            else
+            {
+                try
+                {
+                    Schedule sc = new Schedule();
+                    string week = sc.GetWeekByDate(date);
+                    string[] dat = sc.GetYearAndSemester(date);
+                    idata.Add("status", "success");
+                    idata.Add("weekNum", week);
+                    idata.Add("semNum", dat[0]);
+                    idata.Add("yearNum", dat[1]);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string,object> AddReserveSchedule(Dictionary<string, object> data)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
                     List<string> name = new List<string>();
                     name.Add(data["schoolYear"].ToString());
                     name.Add(data["semNum"].ToString());
                     name.Add(data["week"].ToString());
                     name.Add(data["date"].ToString());
                     name.Add(data["section"].ToString());
-                    name.Add(data["className"].ToString());
+                    name.Add(data["classId"].ToString());
                     name.Add(data["borrowingUnit"].ToString());
                     name.Add(data["phoneNum"].ToString());
                     name.Add(data["personName"].ToString());
@@ -857,13 +1012,13 @@ namespace CresijApp.Services
                     }
                     else
                         idata.Add("status", "fail");
-                
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
-            catch(Exception ex)
-            {
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
-            }            
             return idata;
         }
 
@@ -886,90 +1041,106 @@ namespace CresijApp.Services
             public string Equipments { get; set; }
             public string Status { get; set; }
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetReserveScheduleList()
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             List<ReserveScheduleListDataStructure> reserveScheduleLists = new List<ReserveScheduleListDataStructure>();
             Schedule schedule = new Schedule();
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                DataTable r = schedule.GetReserveSchedule();
-                idata.Add("status", "Success");                
-                if (r.Rows.Count > 0)
-                {
-                    idata.Add("totalRows", r.Rows.Count);
-                    foreach (DataRow dr in r.Rows)
-                    {
-                        ReserveScheduleListDataStructure reserve = new ReserveScheduleListDataStructure()
-                        {
-                            ID = Convert.ToInt32(dr["id"]),
-                            SchoolYear = dr["SchoolYear"].ToString(),
-                            Semester = dr["semester"].ToString(),
-                            Week = dr["Week"].ToString(),
-                            Date = dr["date"].ToString(),
-                            Section = dr["Section"].ToString(),
-                            Classroom = dr["ClassRoom"].ToString(),
-                            BorrowingUnit = dr["BorrowingUnit"].ToString(),
-                            WorkPhone = dr["WorkPhone"].ToString(),
-                            PersonName = dr["PersonName"].ToString(),
-                            PersonID = dr["personID"].ToString(),
-                            ContactNum = dr["ContactNo"].ToString(),
-                            Purpose = dr["purpose"].ToString(),
-                            ReservationPurpose = dr["Reason"].ToString(),
-                            Equipments = dr["ReservationDevices"].ToString(),
-                            Status = dr["Status"].ToString()
-
-                        };
-                        reserveScheduleLists.Add(reserve);
-                    }
-                    idata.Add("value", reserveScheduleLists);
-                }
-                else
-                {
-                    idata.Add("totalRows", 0);
-                    idata.Add("value", "");
-                }
-            }
-            catch (Exception ex)
-            {
+                HttpContext.Current.Session.Abandon();
                 idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    DataTable r = schedule.GetReserveSchedule();
+                    idata.Add("status", "Success");
+                    if (r.Rows.Count > 0)
+                    {
+                        idata.Add("totalRows", r.Rows.Count);
+                        foreach (DataRow dr in r.Rows)
+                        {
+                            ReserveScheduleListDataStructure reserve = new ReserveScheduleListDataStructure()
+                            {
+                                ID = Convert.ToInt32(dr["id"]),
+                                SchoolYear = dr["SchoolYear"].ToString(),
+                                Semester = dr["semestername"].ToString(),
+                                Week = dr["Week"].ToString(),
+                                Date = dr["date"].ToString(),
+                                Section = dr["Section"].ToString(),
+                                Classroom = dr["Classname"].ToString(),
+                                BorrowingUnit = dr["BorrowingUnit"].ToString(),
+                                WorkPhone = dr["WorkPhone"].ToString(),
+                                PersonName = dr["PersonName"].ToString(),
+                                PersonID = dr["personID"].ToString(),
+                                ContactNum = dr["ContactNo"].ToString(),
+                                Purpose = dr["purpose"].ToString(),
+                                ReservationPurpose = dr["Reason"].ToString(),
+                                Equipments = dr["ReservationDevices"].ToString(),
+                                Status = dr["Status"].ToString()
+
+                            };
+                            reserveScheduleLists.Add(reserve);
+                        }
+                        idata.Add("value", reserveScheduleLists);
+                    }
+                    else
+                    {
+                        idata.Add("totalRows", 0);
+                        idata.Add("value", "");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
             }
             return idata;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
+        [WebMethod(EnableSession = true)]
         public Dictionary<string, object> UpdateReserveScheduleStatus(Dictionary<string, object> data)
         {
             Schedule schedule = new Schedule();
             Dictionary<string, object> idata = new Dictionary<string, object>();
             int r = 0;
-            try
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-                
-                    var status= data["status"].ToString();
-                    var id= data["id"].ToString();
-                    r = schedule.ChangeReserveStatus(status,id);
-                
-                if (r > 0)
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
                 {
-                    idata.Add("status", "success");
+                    var status = data["status"].ToString();
+                    var id = data["id"].ToString();
+                    r = schedule.ChangeReserveStatus(status, id);
+
+                    if (r > 0)
+                    {
+                        idata.Add("status", "success");
+                    }
+                    else
+                    {
+                        idata.Add("status", "fail");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
                     idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", ex.Message);
-            }
-
             return idata;
         }
         #endregion
