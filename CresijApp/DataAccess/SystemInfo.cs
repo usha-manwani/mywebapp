@@ -105,18 +105,16 @@ namespace CresijApp.DataAccess
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                
-                    using (MySqlCommand cmd = new MySqlCommand("sp_deleteSection", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_deleteSection", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@semname", semname);
+                    if (con.State != ConnectionState.Open)
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@semname", semname);                        
-                        if (con.State != ConnectionState.Open)
-                        {
-                            con.Open();
-                        }
-                        result = cmd.ExecuteNonQuery();
+                        con.Open();
                     }
-                
+                    result = cmd.ExecuteNonQuery();
+                }
             }
             return result;
         }
@@ -126,12 +124,11 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                
-                    string query = "select  fd.floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className from " +
+                string query = "select fd.floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className from " +
                         " classdetails  cd join floordetails fd on cd.floor = fd.id " +
                         " where teachingbuilding="+building+ " and cd.floor in(select id from floordetails where buildingName=" + building + ") " +
                         " group by cd.floor  union select floor,'' from floordetails where buildingname=" + building + " and " +
-                        "  id not in(select floor from classdetails where teachingbuilding =" + building + ") group by floor order by floor";
+                        " id not in(select floor from classdetails where teachingbuilding =" + building + ") group by floor order by floor";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     if (con.State != ConnectionState.Open)
@@ -141,7 +138,6 @@ namespace CresijApp.DataAccess
                     MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
                     mySqlDataAdapter.Fill(dt);
                 }
-                
             }
             return dt;
         }
@@ -172,22 +168,21 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                    string query = "select  fd.floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className" +
-                        " from classdetails cd join floordetails fd on cd.floor =fd.id " +
-                        " where teachingbuilding='" + building + "' and cd.floor in(select id from floordetails where " +
-                        " buildingName='" + building + "') and classid in " +
-                        "(select classid from userlocationaccess where userserialnum =(select serialno from userdetails" +
-                        " where loginid ='"+userid+ "')) group by cd.floor ";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                string query = "select  fd.floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className" +
+                    " from classdetails cd join floordetails fd on cd.floor =fd.id " +
+                    " where teachingbuilding='" + building + "' and cd.floor in(select id from floordetails where " +
+                    " buildingName='" + building + "') and classid in " +
+                    "(select classid from userlocationaccess where userserialnum =(select serialno from userdetails" +
+                    " where loginid ='" + userid + "')) group by cd.floor ";
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
+                {
+                    if (con.State != ConnectionState.Open)
                     {
-                        if (con.State != ConnectionState.Open)
-                        {
-                            con.Open();
-                        }
-                        MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
-                        mySqlDataAdapter.Fill(dt);
+                        con.Open();
                     }
-                
+                    MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
+                    mySqlDataAdapter.Fill(dt);
+                }
             }
             return dt;
         }

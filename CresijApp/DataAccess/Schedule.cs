@@ -158,7 +158,7 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("buildingname",name[6]);
                         cmd.Parameters.AddWithValue("newcl",name[7]);
                         cmd.Parameters.AddWithValue("teacherid",name[8]);
-                        cmd.Parameters.AddWithValue("scid", name[10]);
+                        cmd.Parameters.AddWithValue("scid", name[9]);
                         if (con.State != ConnectionState.Open)
                             con.Open();
                        num= cmd.ExecuteNonQuery();                        

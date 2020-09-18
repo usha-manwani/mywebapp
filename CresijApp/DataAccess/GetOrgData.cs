@@ -45,7 +45,8 @@ namespace CresijApp.DataAccess
         public List<object> GetOrgBuildingInfo(string pageIndex, string pageSize)
         {
             DataTable dt = new DataTable();
-            var total = 0;
+            var total=0;
+            
             List<object> result = new List<object>();
             using (MySqlConnection con = new MySqlConnection(constr))
             {

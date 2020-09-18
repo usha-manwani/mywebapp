@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="22ea5cd5aac64a82a9a49ae6c016e1b6" Name="Diagram1">
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.buildingdetail" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.classdetail" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.course" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.current_loggeduser" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.departmentdetail" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.floordetail" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.operationmgmt" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.reserveandtransfer" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.roledetail" Width="1.5" PointX="8.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.schedule" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.scheduleoriginal" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.schedulereserve" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.scheduletransfer" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.sectionsinfo" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.semesterinfo" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.strategyservicesandfeature" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.studentdata" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.systemsetting" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.teacheraidequipment" Width="1.5" PointX="11.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.teacherdata" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.temp_centralcontrol" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.userdetail" Width="1.5" PointX="8.25" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.userlocationaccess" Width="1.5" PointX="10.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.userlog" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.userpermission" Width="1.5" PointX="10.5" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.userregistration" Width="1.5" PointX="13.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.doc_info" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.resultday" Width="1.5" PointX="14.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.resultschedule" Width="1.5" PointX="14.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.resultschedulefrtransfer" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.resulttransferschedule" Width="1.5" PointX="16.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_getscheduletransfer" Width="1.5" PointX="16.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_resultschedule" Width="1.5" PointX="16.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_resultschedule1" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_resultscheduledayweek" Width="1.5" PointX="0.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_resultscheduledayweeksem" Width="1.5" PointX="2.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_resultscheduledayweeksem1" Width="1.5" PointX="4.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_resultscheduletransfer" Width="1.5" PointX="18.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_resultscheduletransfer1" Width="1.5" PointX="18.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_resulttestschedule" Width="1.5" PointX="18.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.view_scheduletemporarytable" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_classbuildingId" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_floorbuildingID" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_transferBuildingid" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_classfloorId" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_locationaccessclassid" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_reserveClassID" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_transferClassID" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_ResSemNo" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_userPermissionroleid" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_locationaccessauthenticatedby" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_locationaccessuserid" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_userPermissionAdminId" ManuallyRouted="false" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_UserPermissionUsernum" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

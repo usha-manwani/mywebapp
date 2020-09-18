@@ -64,8 +64,7 @@ namespace CresijApp.DataAccess
         public int UpdateOrgData(Dictionary<string, string> data)
         {
             int result = -1;
-            try
-            {
+            
                 string query = "update buildingdetails set buildingcode = '"+ data["buildingCode"] + "' ," +
                     " buildingname ='" + data["buildingName"] + "', queue = '" + data["queue"] + "'," +
                     " Public = '" + data["accessType"] + "' ," +
@@ -81,12 +80,7 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
-
-            }
-            catch (Exception ex)
-            {
-                result = -2;
-            }
+            
             return result;
         }
 
@@ -127,9 +121,7 @@ namespace CresijApp.DataAccess
                         }
                         result = cmd.ExecuteNonQuery();
                     }
-                }
-
-            
+                }            
             return result;
         }
 
@@ -176,7 +168,6 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
-
             return result;
         }
 
@@ -293,8 +284,7 @@ namespace CresijApp.DataAccess
         }
         public int UpdateUserData(Dictionary<string, string> data)
         {
-            int result = -1;
-            
+            int result = -1;            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand("sp_UpdateUserData", con))
@@ -343,9 +333,6 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
-
-            
-            
             return result;
         }
     }
