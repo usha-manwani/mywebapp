@@ -8,7 +8,7 @@
   "author": "usha phulwani",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.4.1"
   },
   "main": "app://host/HomePage.aspx",
   "chromium-args": "--load-plugin=plugins\\npWebChimera.dll",
