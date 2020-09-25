@@ -12,14 +12,17 @@ namespace CresijApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class resultday
+    public partial class strategydescription
     {
-        public int monday { get; set; }
-        public int tuesday { get; set; }
-        public int wednesday { get; set; }
-        public int thursday { get; set; }
-        public int friday { get; set; }
-        public int saturday { get; set; }
-        public int sunday { get; set; }
+        public int id { get; set; }
+        public int StrategyRefId { get; set; }
+        public int Equipmentid { get; set; }
+        public string Config { get; set; }
+        public string Location { get; set; }
+        public string StrategyTimeFrame { get; set; }
+        public System.TimeSpan strategyTime { get; set; }
+    
+        public virtual strategyequipment strategyequipment { get; set; }
+        public virtual strategymanagement strategymanagement { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OrganisationdatabaseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OrganisationdatabaseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="buildingdetails">
           <Key>
             <PropertyRef Name="id" />
@@ -63,20 +63,6 @@
           <Property Name="departmentName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="departmentCode" Type="uint" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.doc_info' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="doc_info">
-          <Key>
-            <PropertyRef Name="userid" />
-            <PropertyRef Name="doc_info" />
-            <PropertyRef Name="timeofupload" />
-            <PropertyRef Name="type" />
-          </Key>
-          <Property Name="userid" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="doc_info" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="timeofupload" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="type" Type="varchar" MaxLength="10" Nullable="false" />
-        </EntityType>
         <EntityType Name="floordetails">
           <Key>
             <PropertyRef Name="id" />
@@ -132,7 +118,7 @@ warning 6002: The table/view 'def.organisationdatabase.doc_info' does not have a
             <PropertyRef Name="id" />
           </Key>
           <Property Name="year" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="sem" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sem" Type="int" Nullable="false" />
           <Property Name="teacherid" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="teachername" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="courseid" Type="varchar" MaxLength="45" Nullable="false" />
@@ -151,7 +137,7 @@ warning 6002: The table/view 'def.organisationdatabase.doc_info' does not have a
             <PropertyRef Name="id" />
           </Key>
           <Property Name="year" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="sem" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="sem" Type="int" Nullable="false" />
           <Property Name="teacherid" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="teachername" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="courseid" Type="varchar" MaxLength="45" Nullable="false" />
@@ -168,9 +154,9 @@ warning 6002: The table/view 'def.organisationdatabase.doc_info' does not have a
             <PropertyRef Name="id" />
           </Key>
           <Property Name="SchoolYear" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Semester" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="week" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="Date" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="Semester" Type="int" Nullable="false" />
+          <Property Name="week" Type="int" Nullable="false" />
+          <Property Name="ReserveDate" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="Section" Type="int" Nullable="false" />
           <Property Name="Classroom" Type="int" Nullable="false" />
           <Property Name="BorrowingUnit" Type="varchar" MaxLength="45" Nullable="false" />
@@ -228,30 +214,35 @@ warning 6002: The table/view 'def.organisationdatabase.doc_info' does not have a
           <Property Name="SemNo" Type="int" Nullable="false" />
           <Property Name="AutoHoliday" Type="varchar" MaxLength="10" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'ClassLights' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'podiumLights' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'PodiumCurtainLights' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'ClassroomCurtainLights' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'ExhaustFan' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'FreshAirSystem' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'AC1' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'AC2' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'AC3' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.
-warning 6005: The data type 'json' is currently not supported for the target Entity Framework version; the column 'AC4' in the table 'def.organisationdatabase.strategyservicesandfeature' was excluded.-->
-        <EntityType Name="strategyservicesandfeature">
+        <EntityType Name="strategydescription">
           <Key>
-            <PropertyRef Name="StrategyId" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="StrategyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StrategyName" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="StrategyDescription" Type="text" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StrategyRefId" Type="int" Nullable="false" />
+          <Property Name="Equipmentid" Type="int" Nullable="false" />
+          <Property Name="Config" Type="text" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StrategyTimeFrame" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="strategyTime" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="strategyequipments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EquipmentsNames" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="strategymanagement">
+          <Key>
+            <PropertyRef Name="strategyId" />
+          </Key>
+          <Property Name="strategyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strategyname" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="StrategyDesc" Type="text" Nullable="false" />
           <Property Name="CreationDate" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="Timeframe" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="teacherAidEquipments" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Location" Type="text" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="StrategyType" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="CurrentStatus" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="strategyType" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="studentdata">
           <Key>
@@ -260,7 +251,7 @@ warning 6005: The data type 'json' is currently not supported for the target Ent
           <Property Name="studentid" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="studentname" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="gender" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="age" Type="int" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" />
           <Property Name="deptcode" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="idcard" Type="varchar" MaxLength="30" Nullable="false" />
@@ -274,13 +265,6 @@ warning 6005: The data type 'json' is currently not supported for the target Ent
           <Property Name="SchoolEngName" Type="varchar" MaxLength="200" />
           <Property Name="LogoLocation" Type="varchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="teacheraidequipments">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EquipmentsNames" Type="varchar" MaxLength="45" Nullable="false" />
-        </EntityType>
         <EntityType Name="teacherdata">
           <Key>
             <PropertyRef Name="TeacherID" />
@@ -288,7 +272,7 @@ warning 6005: The data type 'json' is currently not supported for the target Ent
           <Property Name="TeacherID" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="TeacherName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="gender" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="age" Type="int" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" />
           <Property Name="faculty" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="idcard" Type="varchar" MaxLength="30" Nullable="false" />
@@ -327,7 +311,7 @@ warning 6005: The data type 'json' is currently not supported for the target Ent
           <Property Name="LoginID" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PersonType" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="DeptCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeptCode" Type="int" />
           <Property Name="PersonnelStatus" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="Notes" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
@@ -349,10 +333,9 @@ warning 6005: The data type 'json' is currently not supported for the target Ent
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Userid" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Userid" Type="int" Nullable="false" />
           <Property Name="action" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="classroom" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="time" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="ActionTime" Type="datetime" Precision="0" Nullable="false" />
         </EntityType>
         <EntityType Name="userpermissions">
           <Key>
@@ -374,418 +357,6 @@ warning 6005: The data type 'json' is currently not supported for the target Ent
           <Property Name="Remarks" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="UserType" Type="varchar" MaxLength="20" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.resultday' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="resultday">
-          <Key>
-            <PropertyRef Name="monday" />
-            <PropertyRef Name="tuesday" />
-            <PropertyRef Name="wednesday" />
-            <PropertyRef Name="thursday" />
-            <PropertyRef Name="friday" />
-            <PropertyRef Name="saturday" />
-            <PropertyRef Name="sunday" />
-          </Key>
-          <Property Name="monday" Type="int" Nullable="false" />
-          <Property Name="tuesday" Type="int" Nullable="false" />
-          <Property Name="wednesday" Type="int" Nullable="false" />
-          <Property Name="thursday" Type="int" Nullable="false" />
-          <Property Name="friday" Type="int" Nullable="false" />
-          <Property Name="saturday" Type="int" Nullable="false" />
-          <Property Name="sunday" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.resultschedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="resultschedule">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="int" Nullable="false" />
-          <Property Name="section11" Type="int" Nullable="false" />
-          <Property Name="section5" Type="int" Nullable="false" />
-          <Property Name="section6" Type="int" Nullable="false" />
-          <Property Name="section7" Type="int" Nullable="false" />
-          <Property Name="section9" Type="int" Nullable="false" />
-          <Property Name="section1" Type="int" Nullable="false" />
-          <Property Name="section2" Type="int" Nullable="false" />
-          <Property Name="section3" Type="int" Nullable="false" />
-          <Property Name="section4" Type="int" Nullable="false" />
-          <Property Name="section8" Type="int" Nullable="false" />
-          <Property Name="section10" Type="int" Nullable="false" />
-          <Property Name="section12" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.resultschedulefrtransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="resultschedulefrtransfer">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="int" Nullable="false" />
-          <Property Name="section11" Type="int" Nullable="false" />
-          <Property Name="section5" Type="int" Nullable="false" />
-          <Property Name="section6" Type="int" Nullable="false" />
-          <Property Name="section7" Type="int" Nullable="false" />
-          <Property Name="section9" Type="int" Nullable="false" />
-          <Property Name="section1" Type="int" Nullable="false" />
-          <Property Name="section2" Type="int" Nullable="false" />
-          <Property Name="section3" Type="int" Nullable="false" />
-          <Property Name="section4" Type="int" Nullable="false" />
-          <Property Name="section8" Type="int" Nullable="false" />
-          <Property Name="section10" Type="int" Nullable="false" />
-          <Property Name="section12" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.resulttransferschedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="resulttransferschedule">
-          <Key>
-            <PropertyRef Name="classroom" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classroom" Type="int" Nullable="false" />
-          <Property Name="section11" Type="int" Nullable="false" />
-          <Property Name="section5" Type="int" Nullable="false" />
-          <Property Name="section6" Type="int" Nullable="false" />
-          <Property Name="section7" Type="int" Nullable="false" />
-          <Property Name="section9" Type="int" Nullable="false" />
-          <Property Name="section1" Type="int" Nullable="false" />
-          <Property Name="section2" Type="int" Nullable="false" />
-          <Property Name="section3" Type="int" Nullable="false" />
-          <Property Name="section4" Type="int" Nullable="false" />
-          <Property Name="section8" Type="int" Nullable="false" />
-          <Property Name="section10" Type="int" Nullable="false" />
-          <Property Name="section12" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_getscheduletransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_getscheduletransfer">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section" />
-          </Key>
-          <Property Name="classname" Type="int" Nullable="false" />
-          <Property Name="section" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_resultschedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_resultschedule">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="int" Nullable="false" />
-          <Property Name="section11" Type="int" Nullable="false" />
-          <Property Name="section5" Type="int" Nullable="false" />
-          <Property Name="section6" Type="int" Nullable="false" />
-          <Property Name="section7" Type="int" Nullable="false" />
-          <Property Name="section9" Type="int" Nullable="false" />
-          <Property Name="section1" Type="int" Nullable="false" />
-          <Property Name="section2" Type="int" Nullable="false" />
-          <Property Name="section3" Type="int" Nullable="false" />
-          <Property Name="section4" Type="int" Nullable="false" />
-          <Property Name="section8" Type="int" Nullable="false" />
-          <Property Name="section10" Type="int" Nullable="false" />
-          <Property Name="section12" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_resultschedule1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_resultschedule1">
-          <Key>
-            <PropertyRef Name="classid" />
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classid" Type="int" Nullable="false" />
-          <Property Name="classname" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="section11" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section5" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section6" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section7" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section9" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section1" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section2" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section3" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section4" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section8" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section10" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section12" Type="varchar" MaxLength="220" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_resultscheduledayweek' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_resultscheduledayweek">
-          <Key>
-            <PropertyRef Name="classid" />
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classid" Type="int" Nullable="false" />
-          <Property Name="classname" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="section11" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section5" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section6" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section7" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section9" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section1" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section2" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section3" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section4" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section8" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section10" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section12" Type="varchar" MaxLength="220" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_resultscheduledayweeksem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_resultscheduledayweeksem">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="section11" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section5" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section6" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section7" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section9" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section1" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section2" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section3" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section4" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section8" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section10" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section12" Type="varchar" MaxLength="200" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_resultscheduledayweeksem1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_resultscheduledayweeksem1">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="section11" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section5" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section6" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section7" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section9" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section1" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section2" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section3" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section4" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section8" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section10" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="section12" Type="varchar" MaxLength="200" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_resultscheduletransfer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_resultscheduletransfer">
-          <Key>
-            <PropertyRef Name="classid" />
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classid" Type="int" Nullable="false" />
-          <Property Name="classname" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="section11" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section5" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section6" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section7" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section9" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section1" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section2" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section3" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section4" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section8" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section10" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section12" Type="varchar" MaxLength="220" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_resultscheduletransfer1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_resultscheduletransfer1">
-          <Key>
-            <PropertyRef Name="classid" />
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classid" Type="int" Nullable="false" />
-          <Property Name="classname" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="section11" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section5" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section6" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section7" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section9" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section1" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section2" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section3" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section4" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section8" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section10" Type="varchar" MaxLength="220" Nullable="false" />
-          <Property Name="section12" Type="varchar" MaxLength="220" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_resulttestschedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_resulttestschedule">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="int" Nullable="false" />
-          <Property Name="section1" Type="int" Nullable="false" />
-          <Property Name="section2" Type="int" Nullable="false" />
-          <Property Name="section3" Type="int" Nullable="false" />
-          <Property Name="section4" Type="int" Nullable="false" />
-          <Property Name="section5" Type="int" Nullable="false" />
-          <Property Name="section6" Type="int" Nullable="false" />
-          <Property Name="section7" Type="int" Nullable="false" />
-          <Property Name="section8" Type="int" Nullable="false" />
-          <Property Name="section9" Type="int" Nullable="false" />
-          <Property Name="section10" Type="int" Nullable="false" />
-          <Property Name="section11" Type="int" Nullable="false" />
-          <Property Name="section12" Type="int" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="view_scheduletemporarytable">
-          <Key>
-            <PropertyRef Name="RowNumber" />
-            <PropertyRef Name="classname" />
-          </Key>
-          <Property Name="RowNumber" Type="ubigint" Nullable="false" />
-          <Property Name="classname" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="section1" Type="varchar" MaxLength="220" />
-          <Property Name="section2" Type="varchar" MaxLength="220" />
-          <Property Name="section3" Type="varchar" MaxLength="220" />
-          <Property Name="section4" Type="varchar" MaxLength="220" />
-          <Property Name="section5" Type="varchar" MaxLength="220" />
-          <Property Name="section6" Type="varchar" MaxLength="220" />
-          <Property Name="section7" Type="varchar" MaxLength="220" />
-          <Property Name="section8" Type="varchar" MaxLength="220" />
-          <Property Name="section9" Type="varchar" MaxLength="220" />
-          <Property Name="section10" Type="varchar" MaxLength="220" />
-          <Property Name="section11" Type="varchar" MaxLength="220" />
-          <Property Name="section12" Type="varchar" MaxLength="220" />
         </EntityType>
         <Association Name="fk_classbuildingId">
           <End Role="buildingdetails" Type="Self.buildingdetails" Multiplicity="1" />
@@ -859,6 +430,18 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_LogsUserid">
+          <End Role="userdetails" Type="Self.userdetails" Multiplicity="1" />
+          <End Role="userlogs" Type="Self.userlogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userdetails">
+              <PropertyRef Name="SerialNo" />
+            </Principal>
+            <Dependent Role="userlogs">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_reserveClassID">
           <End Role="classdetails" Type="Self.classdetails" Multiplicity="1" />
           <End Role="schedulereserve" Type="Self.schedulereserve" Multiplicity="*" />
@@ -871,6 +454,18 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_reserveSemno">
+          <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
+          <End Role="schedulereserve" Type="Self.schedulereserve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesterinfo">
+              <PropertyRef Name="SemNo" />
+            </Principal>
+            <Dependent Role="schedulereserve">
+              <PropertyRef Name="Semester" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_ResSemNo">
           <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
           <End Role="reserveandtransfer" Type="Self.reserveandtransfer" Multiplicity="*" />
@@ -880,6 +475,66 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
             </Principal>
             <Dependent Role="reserveandtransfer">
               <PropertyRef Name="SemesterNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ScheduleOrgSemno">
+          <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
+          <End Role="scheduleoriginal" Type="Self.scheduleoriginal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesterinfo">
+              <PropertyRef Name="SemNo" />
+            </Principal>
+            <Dependent Role="scheduleoriginal">
+              <PropertyRef Name="sem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_schedulesemno">
+          <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesterinfo">
+              <PropertyRef Name="SemNo" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="sem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SectionSemno">
+          <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
+          <End Role="sectionsinfo" Type="Self.sectionsinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesterinfo">
+              <PropertyRef Name="SemNo" />
+            </Principal>
+            <Dependent Role="sectionsinfo">
+              <PropertyRef Name="SemesterNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_strategyEquipmentRef">
+          <End Role="strategyequipments" Type="Self.strategyequipments" Multiplicity="1" />
+          <End Role="strategydescription" Type="Self.strategydescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="strategyequipments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="strategydescription">
+              <PropertyRef Name="Equipmentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_strategyIdRef">
+          <End Role="strategymanagement" Type="Self.strategymanagement" Multiplicity="1" />
+          <End Role="strategydescription" Type="Self.strategydescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="strategymanagement">
+              <PropertyRef Name="strategyId" />
+            </Principal>
+            <Dependent Role="strategydescription">
+              <PropertyRef Name="StrategyRefId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -904,6 +559,30 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
             </Principal>
             <Dependent Role="scheduletransfer">
               <PropertyRef Name="newclass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_transferIdref">
+          <End Role="schedule" Type="Self.schedule" Multiplicity="1" />
+          <End Role="scheduletransfer" Type="Self.scheduletransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scheduletransfer">
+              <PropertyRef Name="idref" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_userdetailsdeptcode">
+          <End Role="buildingdetails" Type="Self.buildingdetails" Multiplicity="0..1" />
+          <End Role="userdetails" Type="Self.userdetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buildingdetails">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userdetails">
+              <PropertyRef Name="DeptCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -945,6 +624,9 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
         </Association>
         <Function Name="sp_DeleteBuilding" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
           <Parameter Name="sno" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_DeleteClass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
+          <Parameter Name="idno" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_DeleteFloor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
           <Parameter Name="floorid" Type="int" Mode="In" />
@@ -993,22 +675,6 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <Parameter Name="p_PageSize" Type="int" Mode="In" />
           <Parameter Name="p_RecordCount" Type="int" Mode="Out" />
         </Function>
-        <Function Name="sp_GetSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase" />
-        <Function Name="sp_GetScheduleByBuild" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
-          <Parameter Name="build" Type="varchar" Mode="In" />
-          <Parameter Name="userid" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="sp_getScheduleByBuildSem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
-          <Parameter Name="build" Type="varchar" Mode="In" />
-          <Parameter Name="sem" Type="int" Mode="In" />
-          <Parameter Name="userid" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="Sp_getScheduleByBuildWeekSem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
-          <Parameter Name="build" Type="varchar" Mode="In" />
-          <Parameter Name="weekno" Type="int" Mode="In" />
-          <Parameter Name="sem" Type="int" Mode="In" />
-          <Parameter Name="userid" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="sp_GetScheduleByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
           <Parameter Name="customdate" Type="date" Mode="In" />
           <Parameter Name="building" Type="int" Mode="In" />
@@ -1027,10 +693,6 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <Parameter Name="p_PageSize" Type="int" Mode="In" />
           <Parameter Name="p_RecordCount" Type="int" Mode="Out" />
         </Function>
-        <Function Name="sp_GetScheduleforDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
-          <Parameter Name="customdate" Type="date" Mode="In" />
-          <Parameter Name="userid" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="sp_GetStudentData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
           <Parameter Name="p_PageIndex" Type="int" Mode="In" />
           <Parameter Name="p_PageSize" Type="int" Mode="In" />
@@ -1040,13 +702,6 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <Parameter Name="p_PageIndex" Type="int" Mode="In" />
           <Parameter Name="p_PageSize" Type="int" Mode="In" />
           <Parameter Name="p_RecordCount" Type="int" Mode="Out" />
-        </Function>
-        <Function Name="sp_GetTransferScheduleByBuildSem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
-          <Parameter Name="build" Type="varchar" Mode="In" />
-          <Parameter Name="sem" Type="int" Mode="In" />
-          <Parameter Name="weekno" Type="int" Mode="In" />
-          <Parameter Name="daynum" Type="int" Mode="In" />
-          <Parameter Name="userid" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_GetTransferScheduleByDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
           <Parameter Name="building" Type="varchar" Mode="In" />
@@ -1079,7 +734,7 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
         <Function Name="sp_InsertBuildingDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
           <Parameter Name="deptname" Type="varchar" Mode="In" />
           <Parameter Name="buscode" Type="varchar" Mode="In" />
-          <Parameter Name="que" Type="int" Mode="In" />
+          <Parameter Name="que" Type="varchar" Mode="In" />
           <Parameter Name="typeaccess" Type="varchar" Mode="In" />
           <Parameter Name="notes" Type="varchar" Mode="In" />
         </Function>
@@ -1091,7 +746,7 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <Parameter Name="teacherid" Type="varchar" Mode="In" />
           <Parameter Name="sec" Type="int" Mode="In" />
           <Parameter Name="daynum" Type="int" Mode="In" />
-          <Parameter Name="buildingname" Type="varchar" Mode="In" />
+          <Parameter Name="buildingname" Type="int" Mode="In" />
           <Parameter Name="reason" Type="varchar" Mode="In" />
           <Parameter Name="scid" Type="int" Mode="In" />
         </Function>
@@ -1180,7 +835,7 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <Parameter Name="id" Type="varchar" Mode="In" />
           <Parameter Name="tname" Type="varchar" Mode="In" />
           <Parameter Name="gend" Type="varchar" Mode="In" />
-          <Parameter Name="age" Type="int" Mode="In" />
+          <Parameter Name="bdate" Type="date" Mode="In" />
           <Parameter Name="fac" Type="varchar" Mode="In" />
           <Parameter Name="ph" Type="varchar" Mode="In" />
           <Parameter Name="idcrd" Type="varchar" Mode="In" />
@@ -1190,7 +845,7 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <Parameter Name="id" Type="varchar" Mode="In" />
           <Parameter Name="tname" Type="varchar" Mode="In" />
           <Parameter Name="gend" Type="varchar" Mode="In" />
-          <Parameter Name="age" Type="int" Mode="In" />
+          <Parameter Name="bdate" Type="date" Mode="In" />
           <Parameter Name="fac" Type="varchar" Mode="In" />
           <Parameter Name="ph" Type="varchar" Mode="In" />
           <Parameter Name="idcrd" Type="varchar" Mode="In" />
@@ -1200,7 +855,7 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <Parameter Name="logid" Type="varchar" Mode="In" />
           <Parameter Name="uname" Type="varchar" Mode="In" />
           <Parameter Name="ptype" Type="varchar" Mode="In" />
-          <Parameter Name="deptname" Type="varchar" Mode="In" />
+          <Parameter Name="deptname" Type="int" Mode="In" />
           <Parameter Name="stats" Type="varchar" Mode="In" />
           <Parameter Name="phone" Type="varchar" Mode="In" />
           <Parameter Name="note" Type="varchar" Mode="In" />
@@ -1216,7 +871,7 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
         <Function Name="sp_UpdateBuildingData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
           <Parameter Name="deptname" Type="varchar" Mode="In" />
           <Parameter Name="buscode" Type="varchar" Mode="In" />
-          <Parameter Name="que" Type="int" Mode="In" />
+          <Parameter Name="que" Type="varchar" Mode="In" />
           <Parameter Name="typeaccess" Type="varchar" Mode="In" />
           <Parameter Name="note" Type="varchar" Mode="In" />
           <Parameter Name="sn" Type="int" Mode="In" />
@@ -1224,8 +879,8 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
         <Function Name="sp_UpdateClassData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="organisationdatabase">
           <Parameter Name="clsid" Type="int" Mode="In" />
           <Parameter Name="cname" Type="varchar" Mode="In" />
-          <Parameter Name="tbuild" Type="varchar" Mode="In" />
-          <Parameter Name="tfloor" Type="varchar" Mode="In" />
+          <Parameter Name="tbuild" Type="int" Mode="In" />
+          <Parameter Name="tfloor" Type="int" Mode="In" />
           <Parameter Name="tseat" Type="int" Mode="In" />
           <Parameter Name="ccip" Type="varchar" Mode="In" />
           <Parameter Name="camsip" Type="varchar" Mode="In" />
@@ -1265,7 +920,7 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <Parameter Name="id" Type="varchar" Mode="In" />
           <Parameter Name="tname" Type="varchar" Mode="In" />
           <Parameter Name="gend" Type="varchar" Mode="In" />
-          <Parameter Name="ag" Type="int" Mode="In" />
+          <Parameter Name="bdate" Type="date" Mode="In" />
           <Parameter Name="fac" Type="varchar" Mode="In" />
           <Parameter Name="ph" Type="varchar" Mode="In" />
           <Parameter Name="idcrd" Type="varchar" Mode="In" />
@@ -1285,7 +940,7 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <Parameter Name="logid" Type="varchar" Mode="In" />
           <Parameter Name="uname" Type="varchar" Mode="In" />
           <Parameter Name="ptype" Type="varchar" Mode="In" />
-          <Parameter Name="deptname" Type="varchar" Mode="In" />
+          <Parameter Name="deptname" Type="int" Mode="In" />
           <Parameter Name="phone" Type="varchar" Mode="In" />
           <Parameter Name="note" Type="varchar" Mode="In" />
           <Parameter Name="pass" Type="varchar" Mode="In" />
@@ -1308,10 +963,11 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <EntitySet Name="scheduletransfer" EntityType="Self.scheduletransfer" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="sectionsinfo" EntityType="Self.sectionsinfo" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="semesterinfo" EntityType="Self.semesterinfo" Schema="organisationdatabase" store:Type="Tables" />
-          <EntitySet Name="strategyservicesandfeature" EntityType="Self.strategyservicesandfeature" Schema="organisationdatabase" store:Type="Tables" />
+          <EntitySet Name="strategydescription" EntityType="Self.strategydescription" Schema="organisationdatabase" store:Type="Tables" />
+          <EntitySet Name="strategyequipments" EntityType="Self.strategyequipments" Schema="organisationdatabase" store:Type="Tables" />
+          <EntitySet Name="strategymanagement" EntityType="Self.strategymanagement" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="studentdata" EntityType="Self.studentdata" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="systemsettings" EntityType="Self.systemsettings" Schema="organisationdatabase" store:Type="Tables" />
-          <EntitySet Name="teacheraidequipments" EntityType="Self.teacheraidequipments" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="teacherdata" EntityType="Self.teacherdata" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="temp_centralcontrol" EntityType="Self.temp_centralcontrol" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="userdetails" EntityType="Self.userdetails" Schema="organisationdatabase" store:Type="Tables" />
@@ -1319,240 +975,6 @@ warning 6002: The table/view 'def.organisationdatabase.view_scheduletemporarytab
           <EntitySet Name="userlogs" EntityType="Self.userlogs" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="userpermissions" EntityType="Self.userpermissions" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="userregistration" EntityType="Self.userregistration" Schema="organisationdatabase" store:Type="Tables" />
-          <EntitySet Name="doc_info" EntityType="Self.doc_info" store:Type="Tables" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`doc_info`.`userid`, 
-`doc_info`.`doc_info`, 
-`doc_info`.`timeofupload`, 
-`doc_info`.`type`
-FROM `doc_info` AS `doc_info`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="resultday" EntityType="Self.resultday" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`resultday`.`monday`, 
-`resultday`.`tuesday`, 
-`resultday`.`wednesday`, 
-`resultday`.`thursday`, 
-`resultday`.`friday`, 
-`resultday`.`saturday`, 
-`resultday`.`sunday`
-FROM `resultday` AS `resultday`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="resultschedule" EntityType="Self.resultschedule" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`resultschedule`.`classname`, 
-`resultschedule`.`section11`, 
-`resultschedule`.`section5`, 
-`resultschedule`.`section6`, 
-`resultschedule`.`section7`, 
-`resultschedule`.`section9`, 
-`resultschedule`.`section1`, 
-`resultschedule`.`section2`, 
-`resultschedule`.`section3`, 
-`resultschedule`.`section4`, 
-`resultschedule`.`section8`, 
-`resultschedule`.`section10`, 
-`resultschedule`.`section12`
-FROM `resultschedule` AS `resultschedule`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="resultschedulefrtransfer" EntityType="Self.resultschedulefrtransfer" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`resultschedulefrtransfer`.`classname`, 
-`resultschedulefrtransfer`.`section11`, 
-`resultschedulefrtransfer`.`section5`, 
-`resultschedulefrtransfer`.`section6`, 
-`resultschedulefrtransfer`.`section7`, 
-`resultschedulefrtransfer`.`section9`, 
-`resultschedulefrtransfer`.`section1`, 
-`resultschedulefrtransfer`.`section2`, 
-`resultschedulefrtransfer`.`section3`, 
-`resultschedulefrtransfer`.`section4`, 
-`resultschedulefrtransfer`.`section8`, 
-`resultschedulefrtransfer`.`section10`, 
-`resultschedulefrtransfer`.`section12`
-FROM `resultschedulefrtransfer` AS `resultschedulefrtransfer`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="resulttransferschedule" EntityType="Self.resulttransferschedule" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`resulttransferschedule`.`classroom`, 
-`resulttransferschedule`.`section11`, 
-`resulttransferschedule`.`section5`, 
-`resulttransferschedule`.`section6`, 
-`resulttransferschedule`.`section7`, 
-`resulttransferschedule`.`section9`, 
-`resulttransferschedule`.`section1`, 
-`resulttransferschedule`.`section2`, 
-`resulttransferschedule`.`section3`, 
-`resulttransferschedule`.`section4`, 
-`resulttransferschedule`.`section8`, 
-`resulttransferschedule`.`section10`, 
-`resulttransferschedule`.`section12`
-FROM `resulttransferschedule` AS `resulttransferschedule`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_getscheduletransfer" EntityType="Self.view_getscheduletransfer" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_getscheduletransfer`.`classname`, 
-`view_getscheduletransfer`.`section`
-FROM `view_getscheduletransfer` AS `view_getscheduletransfer`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_resultschedule" EntityType="Self.view_resultschedule" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_resultschedule`.`classname`, 
-`view_resultschedule`.`section11`, 
-`view_resultschedule`.`section5`, 
-`view_resultschedule`.`section6`, 
-`view_resultschedule`.`section7`, 
-`view_resultschedule`.`section9`, 
-`view_resultschedule`.`section1`, 
-`view_resultschedule`.`section2`, 
-`view_resultschedule`.`section3`, 
-`view_resultschedule`.`section4`, 
-`view_resultschedule`.`section8`, 
-`view_resultschedule`.`section10`, 
-`view_resultschedule`.`section12`
-FROM `view_resultschedule` AS `view_resultschedule`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_resultschedule1" EntityType="Self.view_resultschedule1" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_resultschedule1`.`classid`, 
-`view_resultschedule1`.`classname`, 
-`view_resultschedule1`.`section11`, 
-`view_resultschedule1`.`section5`, 
-`view_resultschedule1`.`section6`, 
-`view_resultschedule1`.`section7`, 
-`view_resultschedule1`.`section9`, 
-`view_resultschedule1`.`section1`, 
-`view_resultschedule1`.`section2`, 
-`view_resultschedule1`.`section3`, 
-`view_resultschedule1`.`section4`, 
-`view_resultschedule1`.`section8`, 
-`view_resultschedule1`.`section10`, 
-`view_resultschedule1`.`section12`
-FROM `view_resultschedule1` AS `view_resultschedule1`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_resultscheduledayweek" EntityType="Self.view_resultscheduledayweek" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_resultscheduledayweek`.`classid`, 
-`view_resultscheduledayweek`.`classname`, 
-`view_resultscheduledayweek`.`section11`, 
-`view_resultscheduledayweek`.`section5`, 
-`view_resultscheduledayweek`.`section6`, 
-`view_resultscheduledayweek`.`section7`, 
-`view_resultscheduledayweek`.`section9`, 
-`view_resultscheduledayweek`.`section1`, 
-`view_resultscheduledayweek`.`section2`, 
-`view_resultscheduledayweek`.`section3`, 
-`view_resultscheduledayweek`.`section4`, 
-`view_resultscheduledayweek`.`section8`, 
-`view_resultscheduledayweek`.`section10`, 
-`view_resultscheduledayweek`.`section12`
-FROM `view_resultscheduledayweek` AS `view_resultscheduledayweek`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_resultscheduledayweeksem" EntityType="Self.view_resultscheduledayweeksem" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_resultscheduledayweeksem`.`classname`, 
-`view_resultscheduledayweeksem`.`section11`, 
-`view_resultscheduledayweeksem`.`section5`, 
-`view_resultscheduledayweeksem`.`section6`, 
-`view_resultscheduledayweeksem`.`section7`, 
-`view_resultscheduledayweeksem`.`section9`, 
-`view_resultscheduledayweeksem`.`section1`, 
-`view_resultscheduledayweeksem`.`section2`, 
-`view_resultscheduledayweeksem`.`section3`, 
-`view_resultscheduledayweeksem`.`section4`, 
-`view_resultscheduledayweeksem`.`section8`, 
-`view_resultscheduledayweeksem`.`section10`, 
-`view_resultscheduledayweeksem`.`section12`
-FROM `view_resultscheduledayweeksem` AS `view_resultscheduledayweeksem`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_resultscheduledayweeksem1" EntityType="Self.view_resultscheduledayweeksem1" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_resultscheduledayweeksem1`.`classname`, 
-`view_resultscheduledayweeksem1`.`section11`, 
-`view_resultscheduledayweeksem1`.`section5`, 
-`view_resultscheduledayweeksem1`.`section6`, 
-`view_resultscheduledayweeksem1`.`section7`, 
-`view_resultscheduledayweeksem1`.`section9`, 
-`view_resultscheduledayweeksem1`.`section1`, 
-`view_resultscheduledayweeksem1`.`section2`, 
-`view_resultscheduledayweeksem1`.`section3`, 
-`view_resultscheduledayweeksem1`.`section4`, 
-`view_resultscheduledayweeksem1`.`section8`, 
-`view_resultscheduledayweeksem1`.`section10`, 
-`view_resultscheduledayweeksem1`.`section12`
-FROM `view_resultscheduledayweeksem1` AS `view_resultscheduledayweeksem1`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_resultscheduletransfer" EntityType="Self.view_resultscheduletransfer" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_resultscheduletransfer`.`classid`, 
-`view_resultscheduletransfer`.`classname`, 
-`view_resultscheduletransfer`.`section11`, 
-`view_resultscheduletransfer`.`section5`, 
-`view_resultscheduletransfer`.`section6`, 
-`view_resultscheduletransfer`.`section7`, 
-`view_resultscheduletransfer`.`section9`, 
-`view_resultscheduletransfer`.`section1`, 
-`view_resultscheduletransfer`.`section2`, 
-`view_resultscheduletransfer`.`section3`, 
-`view_resultscheduletransfer`.`section4`, 
-`view_resultscheduletransfer`.`section8`, 
-`view_resultscheduletransfer`.`section10`, 
-`view_resultscheduletransfer`.`section12`
-FROM `view_resultscheduletransfer` AS `view_resultscheduletransfer`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_resultscheduletransfer1" EntityType="Self.view_resultscheduletransfer1" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_resultscheduletransfer1`.`classid`, 
-`view_resultscheduletransfer1`.`classname`, 
-`view_resultscheduletransfer1`.`section11`, 
-`view_resultscheduletransfer1`.`section5`, 
-`view_resultscheduletransfer1`.`section6`, 
-`view_resultscheduletransfer1`.`section7`, 
-`view_resultscheduletransfer1`.`section9`, 
-`view_resultscheduletransfer1`.`section1`, 
-`view_resultscheduletransfer1`.`section2`, 
-`view_resultscheduletransfer1`.`section3`, 
-`view_resultscheduletransfer1`.`section4`, 
-`view_resultscheduletransfer1`.`section8`, 
-`view_resultscheduletransfer1`.`section10`, 
-`view_resultscheduletransfer1`.`section12`
-FROM `view_resultscheduletransfer1` AS `view_resultscheduletransfer1`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_resulttestschedule" EntityType="Self.view_resulttestschedule" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_resulttestschedule`.`classname`, 
-`view_resulttestschedule`.`section1`, 
-`view_resulttestschedule`.`section2`, 
-`view_resulttestschedule`.`section3`, 
-`view_resulttestschedule`.`section4`, 
-`view_resulttestschedule`.`section5`, 
-`view_resulttestschedule`.`section6`, 
-`view_resulttestschedule`.`section7`, 
-`view_resulttestschedule`.`section8`, 
-`view_resulttestschedule`.`section9`, 
-`view_resulttestschedule`.`section10`, 
-`view_resulttestschedule`.`section11`, 
-`view_resulttestschedule`.`section12`
-FROM `view_resulttestschedule` AS `view_resulttestschedule`</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="view_scheduletemporarytable" EntityType="Self.view_scheduletemporarytable" store:Type="Views" store:Schema="organisationdatabase">
-            <DefiningQuery>SELECT
-`view_scheduletemporarytable`.`RowNumber`, 
-`view_scheduletemporarytable`.`classname`, 
-`view_scheduletemporarytable`.`section1`, 
-`view_scheduletemporarytable`.`section2`, 
-`view_scheduletemporarytable`.`section3`, 
-`view_scheduletemporarytable`.`section4`, 
-`view_scheduletemporarytable`.`section5`, 
-`view_scheduletemporarytable`.`section6`, 
-`view_scheduletemporarytable`.`section7`, 
-`view_scheduletemporarytable`.`section8`, 
-`view_scheduletemporarytable`.`section9`, 
-`view_scheduletemporarytable`.`section10`, 
-`view_scheduletemporarytable`.`section11`, 
-`view_scheduletemporarytable`.`section12`
-FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="fk_classbuildingId" Association="Self.fk_classbuildingId">
             <End Role="buildingdetails" EntitySet="buildingdetails" />
             <End Role="classdetails" EntitySet="classdetails" />
@@ -1577,13 +999,41 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <End Role="userdetails" EntitySet="userdetails" />
             <End Role="userlocationaccess" EntitySet="userlocationaccess" />
           </AssociationSet>
+          <AssociationSet Name="fk_LogsUserid" Association="Self.fk_LogsUserid">
+            <End Role="userdetails" EntitySet="userdetails" />
+            <End Role="userlogs" EntitySet="userlogs" />
+          </AssociationSet>
           <AssociationSet Name="fk_reserveClassID" Association="Self.fk_reserveClassID">
             <End Role="classdetails" EntitySet="classdetails" />
+            <End Role="schedulereserve" EntitySet="schedulereserve" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reserveSemno" Association="Self.fk_reserveSemno">
+            <End Role="semesterinfo" EntitySet="semesterinfo" />
             <End Role="schedulereserve" EntitySet="schedulereserve" />
           </AssociationSet>
           <AssociationSet Name="fk_ResSemNo" Association="Self.fk_ResSemNo">
             <End Role="semesterinfo" EntitySet="semesterinfo" />
             <End Role="reserveandtransfer" EntitySet="reserveandtransfer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ScheduleOrgSemno" Association="Self.fk_ScheduleOrgSemno">
+            <End Role="semesterinfo" EntitySet="semesterinfo" />
+            <End Role="scheduleoriginal" EntitySet="scheduleoriginal" />
+          </AssociationSet>
+          <AssociationSet Name="fk_schedulesemno" Association="Self.fk_schedulesemno">
+            <End Role="semesterinfo" EntitySet="semesterinfo" />
+            <End Role="schedule" EntitySet="schedule" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SectionSemno" Association="Self.fk_SectionSemno">
+            <End Role="semesterinfo" EntitySet="semesterinfo" />
+            <End Role="sectionsinfo" EntitySet="sectionsinfo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_strategyEquipmentRef" Association="Self.fk_strategyEquipmentRef">
+            <End Role="strategyequipments" EntitySet="strategyequipments" />
+            <End Role="strategydescription" EntitySet="strategydescription" />
+          </AssociationSet>
+          <AssociationSet Name="fk_strategyIdRef" Association="Self.fk_strategyIdRef">
+            <End Role="strategymanagement" EntitySet="strategymanagement" />
+            <End Role="strategydescription" EntitySet="strategydescription" />
           </AssociationSet>
           <AssociationSet Name="fk_transferBuildingid" Association="Self.fk_transferBuildingid">
             <End Role="buildingdetails" EntitySet="buildingdetails" />
@@ -1592,6 +1042,14 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <AssociationSet Name="fk_transferClassID" Association="Self.fk_transferClassID">
             <End Role="classdetails" EntitySet="classdetails" />
             <End Role="scheduletransfer" EntitySet="scheduletransfer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_transferIdref" Association="Self.fk_transferIdref">
+            <End Role="schedule" EntitySet="schedule" />
+            <End Role="scheduletransfer" EntitySet="scheduletransfer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_userdetailsdeptcode" Association="Self.fk_userdetailsdeptcode">
+            <End Role="buildingdetails" EntitySet="buildingdetails" />
+            <End Role="userdetails" EntitySet="userdetails" />
           </AssociationSet>
           <AssociationSet Name="fk_userPermissionAdminId" Association="Self.fk_userPermissionAdminId">
             <End Role="userdetails" EntitySet="userdetails" />
@@ -1606,8 +1064,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <End Role="userpermissions" EntitySet="userpermissions" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OrganisationdatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1624,6 +1081,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <NavigationProperty Name="classdetails" Relationship="Self.fk_classbuildingId" FromRole="buildingdetails" ToRole="classdetails" />
           <NavigationProperty Name="floordetails" Relationship="Self.fk_floorbuildingID" FromRole="buildingdetails" ToRole="floordetails" />
           <NavigationProperty Name="scheduletransfers" Relationship="Self.fk_transferBuildingid" FromRole="buildingdetails" ToRole="scheduletransfer" />
+          <NavigationProperty Name="userdetails" Relationship="Self.fk_userdetailsdeptcode" FromRole="buildingdetails" ToRole="userdetails" />
         </EntityType>
         <EntityType Name="classdetail">
           <Key>
@@ -1736,7 +1194,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <PropertyRef Name="id" />
           </Key>
           <Property Name="year" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="sem" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sem" Type="Int32" Nullable="false" />
           <Property Name="teacherid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="teachername" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="courseid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1749,13 +1207,15 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="teachingbuilding" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="floor" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="semesterinfo" Relationship="Self.fk_schedulesemno" FromRole="schedule" ToRole="semesterinfo" />
+          <NavigationProperty Name="scheduletransfers" Relationship="Self.fk_transferIdref" FromRole="schedule" ToRole="scheduletransfer" />
         </EntityType>
         <EntityType Name="scheduleoriginal">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="year" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="sem" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sem" Type="Int32" Nullable="false" />
           <Property Name="teacherid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="teachername" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="courseid" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1766,15 +1226,16 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="dayno" Type="Int32" Nullable="false" />
           <Property Name="section" Type="Int32" Nullable="false" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="semesterinfo" Relationship="Self.fk_ScheduleOrgSemno" FromRole="scheduleoriginal" ToRole="semesterinfo" />
         </EntityType>
         <EntityType Name="schedulereserve">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="SchoolYear" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Semester" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="week" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Date" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Semester" Type="Int32" Nullable="false" />
+          <Property Name="week" Type="Int32" Nullable="false" />
+          <Property Name="ReserveDate" Type="DateTime" Nullable="false" />
           <Property Name="Section" Type="Int32" Nullable="false" />
           <Property Name="Classroom" Type="Int32" Nullable="false" />
           <Property Name="BorrowingUnit" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1788,6 +1249,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="Status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="classdetail" Relationship="Self.fk_reserveClassID" FromRole="schedulereserve" ToRole="classdetails" />
+          <NavigationProperty Name="semesterinfo" Relationship="Self.fk_reserveSemno" FromRole="schedulereserve" ToRole="semesterinfo" />
         </EntityType>
         <EntityType Name="scheduletransfer">
           <Key>
@@ -1807,6 +1269,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="buildingdetail" Relationship="Self.fk_transferBuildingid" FromRole="scheduletransfer" ToRole="buildingdetails" />
           <NavigationProperty Name="classdetail" Relationship="Self.fk_transferClassID" FromRole="scheduletransfer" ToRole="classdetails" />
+          <NavigationProperty Name="schedule" Relationship="Self.fk_transferIdref" FromRole="scheduletransfer" ToRole="schedule" />
         </EntityType>
         <EntityType Name="sectionsinfo">
           <Key>
@@ -1817,6 +1280,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="StartTime" Type="Time" Nullable="false" />
           <Property Name="StopTime" Type="Time" Nullable="false" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="semesterinfo" Relationship="Self.fk_SectionSemno" FromRole="sectionsinfo" ToRole="semesterinfo" />
         </EntityType>
         <EntityType Name="semesterinfo">
           <Key>
@@ -1835,20 +1299,44 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="SemNo" Type="Int32" Nullable="false" />
           <Property Name="AutoHoliday" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="reserveandtransfers" Relationship="Self.fk_ResSemNo" FromRole="semesterinfo" ToRole="reserveandtransfer" />
+          <NavigationProperty Name="schedules" Relationship="Self.fk_schedulesemno" FromRole="semesterinfo" ToRole="schedule" />
+          <NavigationProperty Name="scheduleoriginals" Relationship="Self.fk_ScheduleOrgSemno" FromRole="semesterinfo" ToRole="scheduleoriginal" />
+          <NavigationProperty Name="schedulereserves" Relationship="Self.fk_reserveSemno" FromRole="semesterinfo" ToRole="schedulereserve" />
+          <NavigationProperty Name="sectionsinfoes" Relationship="Self.fk_SectionSemno" FromRole="semesterinfo" ToRole="sectionsinfo" />
         </EntityType>
-        <EntityType Name="strategyservicesandfeature">
+        <EntityType Name="strategydescription">
           <Key>
-            <PropertyRef Name="StrategyId" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="StrategyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StrategyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="StrategyDescription" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StrategyRefId" Type="Int32" Nullable="false" />
+          <Property Name="Equipmentid" Type="Int32" Nullable="false" />
+          <Property Name="Config" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StrategyTimeFrame" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strategyTime" Type="Time" Nullable="false" />
+          <NavigationProperty Name="strategyequipment" Relationship="Self.fk_strategyEquipmentRef" FromRole="strategydescription" ToRole="strategyequipments" />
+          <NavigationProperty Name="strategymanagement" Relationship="Self.fk_strategyIdRef" FromRole="strategydescription" ToRole="strategymanagement" />
+        </EntityType>
+        <EntityType Name="strategyequipment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentsNames" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="strategydescriptions" Relationship="Self.fk_strategyEquipmentRef" FromRole="strategyequipments" ToRole="strategydescription" />
+        </EntityType>
+        <EntityType Name="strategymanagement">
+          <Key>
+            <PropertyRef Name="strategyId" />
+          </Key>
+          <Property Name="strategyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strategyname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StrategyDesc" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" />
-          <Property Name="Timeframe" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="teacherAidEquipments" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Location" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="StrategyType" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CurrentStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="strategyType" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="strategydescriptions" Relationship="Self.fk_strategyIdRef" FromRole="strategymanagement" ToRole="strategydescription" />
         </EntityType>
         <EntityType Name="studentdata">
           <Key>
@@ -1857,7 +1345,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="studentid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="studentname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="age" Type="Int32" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" />
           <Property Name="deptcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idcard" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1871,13 +1359,6 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="SchoolEngName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="LogoLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="teacheraidequipment">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EquipmentsNames" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="teacherdata">
           <Key>
             <PropertyRef Name="TeacherID" />
@@ -1885,7 +1366,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="TeacherID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TeacherName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="age" Type="Int32" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" />
           <Property Name="faculty" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="idcard" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1924,15 +1405,17 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="LoginID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PersonType" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DeptCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DeptCode" Type="Int32" />
           <Property Name="PersonnelStatus" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Notes" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="startDate" Type="DateTime" Nullable="false" />
           <Property Name="expireDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="buildingdetail" Relationship="Self.fk_userdetailsdeptcode" FromRole="userdetails" ToRole="buildingdetails" />
           <NavigationProperty Name="userlocationaccesses" Relationship="Self.fk_locationaccessauthenticatedby" FromRole="userdetails" ToRole="userlocationaccess" />
           <NavigationProperty Name="userlocationaccesses1" Relationship="Self.fk_locationaccessuserid" FromRole="userdetails" ToRole="userlocationaccess" />
+          <NavigationProperty Name="userlogs" Relationship="Self.fk_LogsUserid" FromRole="userdetails" ToRole="userlogs" />
           <NavigationProperty Name="userpermissions" Relationship="Self.fk_userPermissionAdminId" FromRole="userdetails" ToRole="userpermissions" />
           <NavigationProperty Name="userpermissions1" Relationship="Self.fk_UserPermissionUsernum" FromRole="userdetails" ToRole="userpermissions" />
         </EntityType>
@@ -1953,10 +1436,10 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Userid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Userid" Type="Int32" Nullable="false" />
           <Property Name="action" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="classroom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="time" Type="DateTime" Nullable="false" />
+          <Property Name="ActionTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="userdetail" Relationship="Self.fk_LogsUserid" FromRole="userlogs" ToRole="userdetails" />
         </EntityType>
         <EntityType Name="userpermission">
           <Key>
@@ -1981,402 +1464,6 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="doc_info">
-          <Key>
-            <PropertyRef Name="userid" />
-            <PropertyRef Name="doc_info1" />
-            <PropertyRef Name="timeofupload" />
-            <PropertyRef Name="type" />
-          </Key>
-          <Property Name="userid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="doc_info1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="timeofupload" Type="DateTime" Nullable="false" />
-          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="resultday">
-          <Key>
-            <PropertyRef Name="monday" />
-            <PropertyRef Name="tuesday" />
-            <PropertyRef Name="wednesday" />
-            <PropertyRef Name="thursday" />
-            <PropertyRef Name="friday" />
-            <PropertyRef Name="saturday" />
-            <PropertyRef Name="sunday" />
-          </Key>
-          <Property Name="monday" Type="Int32" Nullable="false" />
-          <Property Name="tuesday" Type="Int32" Nullable="false" />
-          <Property Name="wednesday" Type="Int32" Nullable="false" />
-          <Property Name="thursday" Type="Int32" Nullable="false" />
-          <Property Name="friday" Type="Int32" Nullable="false" />
-          <Property Name="saturday" Type="Int32" Nullable="false" />
-          <Property Name="sunday" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="resultschedule">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="Int32" Nullable="false" />
-          <Property Name="section11" Type="Int32" Nullable="false" />
-          <Property Name="section5" Type="Int32" Nullable="false" />
-          <Property Name="section6" Type="Int32" Nullable="false" />
-          <Property Name="section7" Type="Int32" Nullable="false" />
-          <Property Name="section9" Type="Int32" Nullable="false" />
-          <Property Name="section1" Type="Int32" Nullable="false" />
-          <Property Name="section2" Type="Int32" Nullable="false" />
-          <Property Name="section3" Type="Int32" Nullable="false" />
-          <Property Name="section4" Type="Int32" Nullable="false" />
-          <Property Name="section8" Type="Int32" Nullable="false" />
-          <Property Name="section10" Type="Int32" Nullable="false" />
-          <Property Name="section12" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="resultschedulefrtransfer">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="Int32" Nullable="false" />
-          <Property Name="section11" Type="Int32" Nullable="false" />
-          <Property Name="section5" Type="Int32" Nullable="false" />
-          <Property Name="section6" Type="Int32" Nullable="false" />
-          <Property Name="section7" Type="Int32" Nullable="false" />
-          <Property Name="section9" Type="Int32" Nullable="false" />
-          <Property Name="section1" Type="Int32" Nullable="false" />
-          <Property Name="section2" Type="Int32" Nullable="false" />
-          <Property Name="section3" Type="Int32" Nullable="false" />
-          <Property Name="section4" Type="Int32" Nullable="false" />
-          <Property Name="section8" Type="Int32" Nullable="false" />
-          <Property Name="section10" Type="Int32" Nullable="false" />
-          <Property Name="section12" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="resulttransferschedule">
-          <Key>
-            <PropertyRef Name="classroom" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classroom" Type="Int32" Nullable="false" />
-          <Property Name="section11" Type="Int32" Nullable="false" />
-          <Property Name="section5" Type="Int32" Nullable="false" />
-          <Property Name="section6" Type="Int32" Nullable="false" />
-          <Property Name="section7" Type="Int32" Nullable="false" />
-          <Property Name="section9" Type="Int32" Nullable="false" />
-          <Property Name="section1" Type="Int32" Nullable="false" />
-          <Property Name="section2" Type="Int32" Nullable="false" />
-          <Property Name="section3" Type="Int32" Nullable="false" />
-          <Property Name="section4" Type="Int32" Nullable="false" />
-          <Property Name="section8" Type="Int32" Nullable="false" />
-          <Property Name="section10" Type="Int32" Nullable="false" />
-          <Property Name="section12" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_getscheduletransfer">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section" />
-          </Key>
-          <Property Name="classname" Type="Int32" Nullable="false" />
-          <Property Name="section" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_resultschedule">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="Int32" Nullable="false" />
-          <Property Name="section11" Type="Int32" Nullable="false" />
-          <Property Name="section5" Type="Int32" Nullable="false" />
-          <Property Name="section6" Type="Int32" Nullable="false" />
-          <Property Name="section7" Type="Int32" Nullable="false" />
-          <Property Name="section9" Type="Int32" Nullable="false" />
-          <Property Name="section1" Type="Int32" Nullable="false" />
-          <Property Name="section2" Type="Int32" Nullable="false" />
-          <Property Name="section3" Type="Int32" Nullable="false" />
-          <Property Name="section4" Type="Int32" Nullable="false" />
-          <Property Name="section8" Type="Int32" Nullable="false" />
-          <Property Name="section10" Type="Int32" Nullable="false" />
-          <Property Name="section12" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_resultschedule1">
-          <Key>
-            <PropertyRef Name="classid" />
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classid" Type="Int32" Nullable="false" />
-          <Property Name="classname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section11" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section5" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section6" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section7" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section9" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section1" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section2" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section3" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section4" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section8" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section10" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section12" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_resultscheduledayweek">
-          <Key>
-            <PropertyRef Name="classid" />
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classid" Type="Int32" Nullable="false" />
-          <Property Name="classname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section11" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section5" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section6" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section7" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section9" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section1" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section2" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section3" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section4" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section8" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section10" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section12" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_resultscheduledayweeksem">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section11" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section5" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section6" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section7" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section9" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section4" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section8" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section10" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section12" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_resultscheduledayweeksem1">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section11" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section5" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section6" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section7" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section9" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section3" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section4" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section8" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section10" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section12" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_resultscheduletransfer">
-          <Key>
-            <PropertyRef Name="classid" />
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classid" Type="Int32" Nullable="false" />
-          <Property Name="classname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section11" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section5" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section6" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section7" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section9" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section1" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section2" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section3" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section4" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section8" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section10" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section12" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_resultscheduletransfer1">
-          <Key>
-            <PropertyRef Name="classid" />
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classid" Type="Int32" Nullable="false" />
-          <Property Name="classname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section11" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section5" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section6" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section7" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section9" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section1" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section2" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section3" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section4" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section8" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section10" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section12" Type="String" MaxLength="220" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_resulttestschedule">
-          <Key>
-            <PropertyRef Name="classname" />
-            <PropertyRef Name="section1" />
-            <PropertyRef Name="section2" />
-            <PropertyRef Name="section3" />
-            <PropertyRef Name="section4" />
-            <PropertyRef Name="section5" />
-            <PropertyRef Name="section6" />
-            <PropertyRef Name="section7" />
-            <PropertyRef Name="section8" />
-            <PropertyRef Name="section9" />
-            <PropertyRef Name="section10" />
-            <PropertyRef Name="section11" />
-            <PropertyRef Name="section12" />
-          </Key>
-          <Property Name="classname" Type="Int32" Nullable="false" />
-          <Property Name="section1" Type="Int32" Nullable="false" />
-          <Property Name="section2" Type="Int32" Nullable="false" />
-          <Property Name="section3" Type="Int32" Nullable="false" />
-          <Property Name="section4" Type="Int32" Nullable="false" />
-          <Property Name="section5" Type="Int32" Nullable="false" />
-          <Property Name="section6" Type="Int32" Nullable="false" />
-          <Property Name="section7" Type="Int32" Nullable="false" />
-          <Property Name="section8" Type="Int32" Nullable="false" />
-          <Property Name="section9" Type="Int32" Nullable="false" />
-          <Property Name="section10" Type="Int32" Nullable="false" />
-          <Property Name="section11" Type="Int32" Nullable="false" />
-          <Property Name="section12" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="view_scheduletemporarytable">
-          <Key>
-            <PropertyRef Name="RowNumber" />
-            <PropertyRef Name="classname" />
-          </Key>
-          <Property Name="RowNumber" Type="Decimal" Nullable="false" />
-          <Property Name="classname" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="section1" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section2" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section3" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section4" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section5" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section6" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section7" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section8" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section9" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section10" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section11" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
-          <Property Name="section12" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_classbuildingId">
           <End Role="buildingdetails" Type="Self.buildingdetail" Multiplicity="1" />
@@ -2411,6 +1498,18 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             </Principal>
             <Dependent Role="scheduletransfer">
               <PropertyRef Name="newbuilding" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_userdetailsdeptcode">
+          <End Role="buildingdetails" Type="Self.buildingdetail" Multiplicity="0..1" />
+          <End Role="userdetails" Type="Self.userdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="buildingdetails">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="userdetails">
+              <PropertyRef Name="DeptCode" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2486,6 +1585,90 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_schedulesemno">
+          <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
+          <End Role="schedule" Type="Self.schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesterinfo">
+              <PropertyRef Name="SemNo" />
+            </Principal>
+            <Dependent Role="schedule">
+              <PropertyRef Name="sem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_transferIdref">
+          <End Role="schedule" Type="Self.schedule" Multiplicity="1" />
+          <End Role="scheduletransfer" Type="Self.scheduletransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schedule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="scheduletransfer">
+              <PropertyRef Name="idref" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ScheduleOrgSemno">
+          <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
+          <End Role="scheduleoriginal" Type="Self.scheduleoriginal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesterinfo">
+              <PropertyRef Name="SemNo" />
+            </Principal>
+            <Dependent Role="scheduleoriginal">
+              <PropertyRef Name="sem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reserveSemno">
+          <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
+          <End Role="schedulereserve" Type="Self.schedulereserve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesterinfo">
+              <PropertyRef Name="SemNo" />
+            </Principal>
+            <Dependent Role="schedulereserve">
+              <PropertyRef Name="Semester" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_SectionSemno">
+          <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
+          <End Role="sectionsinfo" Type="Self.sectionsinfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="semesterinfo">
+              <PropertyRef Name="SemNo" />
+            </Principal>
+            <Dependent Role="sectionsinfo">
+              <PropertyRef Name="SemesterNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_strategyEquipmentRef">
+          <End Role="strategyequipments" Type="Self.strategyequipment" Multiplicity="1" />
+          <End Role="strategydescription" Type="Self.strategydescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="strategyequipments">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="strategydescription">
+              <PropertyRef Name="Equipmentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_strategyIdRef">
+          <End Role="strategymanagement" Type="Self.strategymanagement" Multiplicity="1" />
+          <End Role="strategydescription" Type="Self.strategydescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="strategymanagement">
+              <PropertyRef Name="strategyId" />
+            </Principal>
+            <Dependent Role="strategydescription">
+              <PropertyRef Name="StrategyRefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_locationaccessauthenticatedby">
           <End Role="userdetails" Type="Self.userdetail" Multiplicity="1" />
           <End Role="userlocationaccess" Type="Self.userlocationaccess" Multiplicity="*" />
@@ -2507,6 +1690,18 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             </Principal>
             <Dependent Role="userlocationaccess">
               <PropertyRef Name="userserialnum" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_LogsUserid">
+          <End Role="userdetails" Type="Self.userdetail" Multiplicity="1" />
+          <End Role="userlogs" Type="Self.userlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userdetails">
+              <PropertyRef Name="SerialNo" />
+            </Principal>
+            <Dependent Role="userlogs">
+              <PropertyRef Name="Userid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2550,10 +1745,11 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <EntitySet Name="scheduletransfers" EntityType="Self.scheduletransfer" />
           <EntitySet Name="sectionsinfoes" EntityType="Self.sectionsinfo" />
           <EntitySet Name="semesterinfoes" EntityType="Self.semesterinfo" />
-          <EntitySet Name="strategyservicesandfeatures" EntityType="Self.strategyservicesandfeature" />
+          <EntitySet Name="strategydescriptions" EntityType="Self.strategydescription" />
+          <EntitySet Name="strategyequipments" EntityType="Self.strategyequipment" />
+          <EntitySet Name="strategymanagements" EntityType="Self.strategymanagement" />
           <EntitySet Name="studentdatas" EntityType="Self.studentdata" />
           <EntitySet Name="systemsettings" EntityType="Self.systemsetting" />
-          <EntitySet Name="teacheraidequipments" EntityType="Self.teacheraidequipment" />
           <EntitySet Name="teacherdatas" EntityType="Self.teacherdata" />
           <EntitySet Name="temp_centralcontrol" EntityType="Self.temp_centralcontrol" />
           <EntitySet Name="userdetails" EntityType="Self.userdetail" />
@@ -2561,21 +1757,6 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <EntitySet Name="userlogs" EntityType="Self.userlog" />
           <EntitySet Name="userpermissions" EntityType="Self.userpermission" />
           <EntitySet Name="userregistrations" EntityType="Self.userregistration" />
-          <EntitySet Name="doc_info" EntityType="Self.doc_info" />
-          <EntitySet Name="resultdays" EntityType="Self.resultday" />
-          <EntitySet Name="resultschedules" EntityType="Self.resultschedule" />
-          <EntitySet Name="resultschedulefrtransfers" EntityType="Self.resultschedulefrtransfer" />
-          <EntitySet Name="resulttransferschedules" EntityType="Self.resulttransferschedule" />
-          <EntitySet Name="view_getscheduletransfer" EntityType="Self.view_getscheduletransfer" />
-          <EntitySet Name="view_resultschedule" EntityType="Self.view_resultschedule" />
-          <EntitySet Name="view_resultschedule1" EntityType="Self.view_resultschedule1" />
-          <EntitySet Name="view_resultscheduledayweek" EntityType="Self.view_resultscheduledayweek" />
-          <EntitySet Name="view_resultscheduledayweeksem" EntityType="Self.view_resultscheduledayweeksem" />
-          <EntitySet Name="view_resultscheduledayweeksem1" EntityType="Self.view_resultscheduledayweeksem1" />
-          <EntitySet Name="view_resultscheduletransfer" EntityType="Self.view_resultscheduletransfer" />
-          <EntitySet Name="view_resultscheduletransfer1" EntityType="Self.view_resultscheduletransfer1" />
-          <EntitySet Name="view_resulttestschedule" EntityType="Self.view_resulttestschedule" />
-          <EntitySet Name="view_scheduletemporarytable" EntityType="Self.view_scheduletemporarytable" />
           <AssociationSet Name="fk_classbuildingId" Association="Self.fk_classbuildingId">
             <End Role="buildingdetails" EntitySet="buildingdetails" />
             <End Role="classdetails" EntitySet="classdetails" />
@@ -2587,6 +1768,10 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <AssociationSet Name="fk_transferBuildingid" Association="Self.fk_transferBuildingid">
             <End Role="buildingdetails" EntitySet="buildingdetails" />
             <End Role="scheduletransfer" EntitySet="scheduletransfers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_userdetailsdeptcode" Association="Self.fk_userdetailsdeptcode">
+            <End Role="buildingdetails" EntitySet="buildingdetails" />
+            <End Role="userdetails" EntitySet="userdetails" />
           </AssociationSet>
           <AssociationSet Name="fk_classfloorId" Association="Self.fk_classfloorId">
             <End Role="floordetails" EntitySet="floordetails" />
@@ -2612,6 +1797,34 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <End Role="roledetails" EntitySet="roledetails" />
             <End Role="userpermissions" EntitySet="userpermissions" />
           </AssociationSet>
+          <AssociationSet Name="fk_schedulesemno" Association="Self.fk_schedulesemno">
+            <End Role="semesterinfo" EntitySet="semesterinfoes" />
+            <End Role="schedule" EntitySet="schedules" />
+          </AssociationSet>
+          <AssociationSet Name="fk_transferIdref" Association="Self.fk_transferIdref">
+            <End Role="schedule" EntitySet="schedules" />
+            <End Role="scheduletransfer" EntitySet="scheduletransfers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ScheduleOrgSemno" Association="Self.fk_ScheduleOrgSemno">
+            <End Role="semesterinfo" EntitySet="semesterinfoes" />
+            <End Role="scheduleoriginal" EntitySet="scheduleoriginals" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reserveSemno" Association="Self.fk_reserveSemno">
+            <End Role="semesterinfo" EntitySet="semesterinfoes" />
+            <End Role="schedulereserve" EntitySet="schedulereserves" />
+          </AssociationSet>
+          <AssociationSet Name="fk_SectionSemno" Association="Self.fk_SectionSemno">
+            <End Role="semesterinfo" EntitySet="semesterinfoes" />
+            <End Role="sectionsinfo" EntitySet="sectionsinfoes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_strategyEquipmentRef" Association="Self.fk_strategyEquipmentRef">
+            <End Role="strategyequipments" EntitySet="strategyequipments" />
+            <End Role="strategydescription" EntitySet="strategydescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_strategyIdRef" Association="Self.fk_strategyIdRef">
+            <End Role="strategymanagement" EntitySet="strategymanagements" />
+            <End Role="strategydescription" EntitySet="strategydescriptions" />
+          </AssociationSet>
           <AssociationSet Name="fk_locationaccessauthenticatedby" Association="Self.fk_locationaccessauthenticatedby">
             <End Role="userdetails" EntitySet="userdetails" />
             <End Role="userlocationaccess" EntitySet="userlocationaccesses" />
@@ -2619,6 +1832,10 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <AssociationSet Name="fk_locationaccessuserid" Association="Self.fk_locationaccessuserid">
             <End Role="userdetails" EntitySet="userdetails" />
             <End Role="userlocationaccess" EntitySet="userlocationaccesses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_LogsUserid" Association="Self.fk_LogsUserid">
+            <End Role="userdetails" EntitySet="userdetails" />
+            <End Role="userlogs" EntitySet="userlogs" />
           </AssociationSet>
           <AssociationSet Name="fk_userPermissionAdminId" Association="Self.fk_userPermissionAdminId">
             <End Role="userdetails" EntitySet="userdetails" />
@@ -2630,6 +1847,9 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           </AssociationSet>
           <FunctionImport Name="sp_DeleteBuilding">
             <Parameter Name="sno" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DeleteClass">
+            <Parameter Name="idno" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_DeleteFloor">
             <Parameter Name="floorid" Mode="In" Type="Int32" />
@@ -2675,22 +1895,6 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="p_PageSize" Mode="In" Type="Int32" />
             <Parameter Name="p_RecordCount" Mode="Out" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_GetSchedule" ReturnType="Collection(OrganisationdatabaseModel.sp_GetSchedule_Result)" />
-          <FunctionImport Name="sp_GetScheduleByBuild" ReturnType="Collection(OrganisationdatabaseModel.sp_GetScheduleByBuild_Result)">
-            <Parameter Name="build" Mode="In" Type="String" />
-            <Parameter Name="userid" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_getScheduleByBuildSem" ReturnType="Collection(OrganisationdatabaseModel.sp_getScheduleByBuildSem_Result)">
-            <Parameter Name="build" Mode="In" Type="String" />
-            <Parameter Name="sem" Mode="In" Type="Int32" />
-            <Parameter Name="userid" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_getScheduleByBuildWeekSem" ReturnType="Collection(OrganisationdatabaseModel.Sp_getScheduleByBuildWeekSem_Result)">
-            <Parameter Name="build" Mode="In" Type="String" />
-            <Parameter Name="weekno" Mode="In" Type="Int32" />
-            <Parameter Name="sem" Mode="In" Type="Int32" />
-            <Parameter Name="userid" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="sp_GetScheduleByDate">
             <Parameter Name="customdate" Mode="In" Type="DateTime" />
             <Parameter Name="building" Mode="In" Type="Int32" />
@@ -2709,10 +1913,6 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="p_PageSize" Mode="In" Type="Int32" />
             <Parameter Name="p_RecordCount" Mode="Out" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_GetScheduleforDate">
-            <Parameter Name="customdate" Mode="In" Type="DateTime" />
-            <Parameter Name="userid" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="sp_GetStudentData" ReturnType="Collection(OrganisationdatabaseModel.sp_GetStudentData_Result)">
             <Parameter Name="p_PageIndex" Mode="In" Type="Int32" />
             <Parameter Name="p_PageSize" Mode="In" Type="Int32" />
@@ -2722,13 +1922,6 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="p_PageIndex" Mode="In" Type="Int32" />
             <Parameter Name="p_PageSize" Mode="In" Type="Int32" />
             <Parameter Name="p_RecordCount" Mode="Out" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_GetTransferScheduleByBuildSem" ReturnType="Collection(OrganisationdatabaseModel.sp_GetTransferScheduleByBuildSem_Result)">
-            <Parameter Name="build" Mode="In" Type="String" />
-            <Parameter Name="sem" Mode="In" Type="Int32" />
-            <Parameter Name="weekno" Mode="In" Type="Int32" />
-            <Parameter Name="daynum" Mode="In" Type="Int32" />
-            <Parameter Name="userid" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_GetTransferScheduleByDate">
             <Parameter Name="building" Mode="In" Type="String" />
@@ -2748,7 +1941,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="p_PageSize" Mode="In" Type="Int32" />
             <Parameter Name="p_RecordCount" Mode="Out" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_GetUserLogs" ReturnType="Collection(OrganisationdatabaseModel.sp_GetUserLogs_Result)" />
+          <FunctionImport Name="sp_GetUserLogs" />
           <FunctionImport Name="sp_GetWeekByDate">
             <Parameter Name="customdate" Mode="In" Type="DateTime" />
             <Parameter Name="weekno" Mode="Out" Type="String" />
@@ -2761,7 +1954,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <FunctionImport Name="sp_InsertBuildingDetails">
             <Parameter Name="deptname" Mode="In" Type="String" />
             <Parameter Name="buscode" Mode="In" Type="String" />
-            <Parameter Name="que" Mode="In" Type="Int32" />
+            <Parameter Name="que" Mode="In" Type="String" />
             <Parameter Name="typeaccess" Mode="In" Type="String" />
             <Parameter Name="notes" Mode="In" Type="String" />
           </FunctionImport>
@@ -2773,7 +1966,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="teacherid" Mode="In" Type="String" />
             <Parameter Name="sec" Mode="In" Type="Int32" />
             <Parameter Name="daynum" Mode="In" Type="Int32" />
-            <Parameter Name="buildingname" Mode="In" Type="String" />
+            <Parameter Name="buildingname" Mode="In" Type="Int32" />
             <Parameter Name="reason" Mode="In" Type="String" />
             <Parameter Name="scid" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2862,7 +2055,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="id" Mode="In" Type="String" />
             <Parameter Name="tname" Mode="In" Type="String" />
             <Parameter Name="gend" Mode="In" Type="String" />
-            <Parameter Name="age" Mode="In" Type="Int32" />
+            <Parameter Name="bdate" Mode="In" Type="DateTime" />
             <Parameter Name="fac" Mode="In" Type="String" />
             <Parameter Name="ph" Mode="In" Type="String" />
             <Parameter Name="idcrd" Mode="In" Type="String" />
@@ -2872,7 +2065,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="id" Mode="In" Type="String" />
             <Parameter Name="tname" Mode="In" Type="String" />
             <Parameter Name="gend" Mode="In" Type="String" />
-            <Parameter Name="age" Mode="In" Type="Int32" />
+            <Parameter Name="bdate" Mode="In" Type="DateTime" />
             <Parameter Name="fac" Mode="In" Type="String" />
             <Parameter Name="ph" Mode="In" Type="String" />
             <Parameter Name="idcrd" Mode="In" Type="String" />
@@ -2882,7 +2075,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="logid" Mode="In" Type="String" />
             <Parameter Name="uname" Mode="In" Type="String" />
             <Parameter Name="ptype" Mode="In" Type="String" />
-            <Parameter Name="deptname" Mode="In" Type="String" />
+            <Parameter Name="deptname" Mode="In" Type="Int32" />
             <Parameter Name="stats" Mode="In" Type="String" />
             <Parameter Name="phone" Mode="In" Type="String" />
             <Parameter Name="note" Mode="In" Type="String" />
@@ -2898,7 +2091,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <FunctionImport Name="sp_UpdateBuildingData">
             <Parameter Name="deptname" Mode="In" Type="String" />
             <Parameter Name="buscode" Mode="In" Type="String" />
-            <Parameter Name="que" Mode="In" Type="Int32" />
+            <Parameter Name="que" Mode="In" Type="String" />
             <Parameter Name="typeaccess" Mode="In" Type="String" />
             <Parameter Name="note" Mode="In" Type="String" />
             <Parameter Name="sn" Mode="In" Type="Int32" />
@@ -2906,8 +2099,8 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
           <FunctionImport Name="sp_UpdateClassData">
             <Parameter Name="clsid" Mode="In" Type="Int32" />
             <Parameter Name="cname" Mode="In" Type="String" />
-            <Parameter Name="tbuild" Mode="In" Type="String" />
-            <Parameter Name="tfloor" Mode="In" Type="String" />
+            <Parameter Name="tbuild" Mode="In" Type="Int32" />
+            <Parameter Name="tfloor" Mode="In" Type="Int32" />
             <Parameter Name="tseat" Mode="In" Type="Int32" />
             <Parameter Name="ccip" Mode="In" Type="String" />
             <Parameter Name="camsip" Mode="In" Type="String" />
@@ -2947,7 +2140,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="id" Mode="In" Type="String" />
             <Parameter Name="tname" Mode="In" Type="String" />
             <Parameter Name="gend" Mode="In" Type="String" />
-            <Parameter Name="ag" Mode="In" Type="Int32" />
+            <Parameter Name="bdate" Mode="In" Type="DateTime" />
             <Parameter Name="fac" Mode="In" Type="String" />
             <Parameter Name="ph" Mode="In" Type="String" />
             <Parameter Name="idcrd" Mode="In" Type="String" />
@@ -2967,7 +2160,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
             <Parameter Name="logid" Mode="In" Type="String" />
             <Parameter Name="uname" Mode="In" Type="String" />
             <Parameter Name="ptype" Mode="In" Type="String" />
-            <Parameter Name="deptname" Mode="In" Type="String" />
+            <Parameter Name="deptname" Mode="In" Type="Int32" />
             <Parameter Name="phone" Mode="In" Type="String" />
             <Parameter Name="note" Mode="In" Type="String" />
             <Parameter Name="pass" Mode="In" Type="String" />
@@ -2981,16 +2174,10 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
         <ComplexType Name="sp_GetClassIPByBuilding_Result" />
         <ComplexType Name="sp_GetIPClassByBuildingFloor_Result" />
         <ComplexType Name="sp_GetOperationMgmtData_Result" />
-        <ComplexType Name="sp_GetSchedule_Result" />
-        <ComplexType Name="sp_GetScheduleByBuild_Result" />
-        <ComplexType Name="sp_getScheduleByBuildSem_Result" />
-        <ComplexType Name="Sp_getScheduleByBuildWeekSem_Result" />
         <ComplexType Name="Sp_GetScheduleByDay_Result" />
         <ComplexType Name="sp_GetStudentData_Result" />
         <ComplexType Name="sp_GetTeacherData_Result" />
-        <ComplexType Name="sp_GetTransferScheduleByBuildSem_Result" />
         <ComplexType Name="sp_GetTransferScheduleByDay_Result" />
-        <ComplexType Name="sp_GetUserLogs_Result" />
         <ComplexType Name="sp_GetYearAndSemester_Result" />
       </Schema>
     </edmx:ConceptualModels>
@@ -3159,7 +2346,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
                 <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
                 <ScalarProperty Name="week" ColumnName="week" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ReserveDate" ColumnName="ReserveDate" />
                 <ScalarProperty Name="Section" ColumnName="Section" />
                 <ScalarProperty Name="Classroom" ColumnName="Classroom" />
                 <ScalarProperty Name="BorrowingUnit" ColumnName="BorrowingUnit" />
@@ -3222,18 +2409,36 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="strategyservicesandfeatures">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.strategyservicesandfeature">
-              <MappingFragment StoreEntitySet="strategyservicesandfeature">
-                <ScalarProperty Name="StrategyId" ColumnName="StrategyId" />
-                <ScalarProperty Name="StrategyName" ColumnName="StrategyName" />
-                <ScalarProperty Name="StrategyDescription" ColumnName="StrategyDescription" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="Timeframe" ColumnName="Timeframe" />
-                <ScalarProperty Name="teacherAidEquipments" ColumnName="teacherAidEquipments" />
+          <EntitySetMapping Name="strategydescriptions">
+            <EntityTypeMapping TypeName="OrganisationdatabaseModel.strategydescription">
+              <MappingFragment StoreEntitySet="strategydescription">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="StrategyRefId" ColumnName="StrategyRefId" />
+                <ScalarProperty Name="Equipmentid" ColumnName="Equipmentid" />
+                <ScalarProperty Name="Config" ColumnName="Config" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="StrategyType" ColumnName="StrategyType" />
+                <ScalarProperty Name="StrategyTimeFrame" ColumnName="StrategyTimeFrame" />
+                <ScalarProperty Name="strategyTime" ColumnName="strategyTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="strategyequipments">
+            <EntityTypeMapping TypeName="OrganisationdatabaseModel.strategyequipment">
+              <MappingFragment StoreEntitySet="strategyequipments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="EquipmentsNames" ColumnName="EquipmentsNames" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="strategymanagements">
+            <EntityTypeMapping TypeName="OrganisationdatabaseModel.strategymanagement">
+              <MappingFragment StoreEntitySet="strategymanagement">
+                <ScalarProperty Name="strategyId" ColumnName="strategyId" />
+                <ScalarProperty Name="strategyname" ColumnName="strategyname" />
+                <ScalarProperty Name="StrategyDesc" ColumnName="StrategyDesc" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CurrentStatus" ColumnName="CurrentStatus" />
+                <ScalarProperty Name="strategyType" ColumnName="strategyType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3243,7 +2448,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
                 <ScalarProperty Name="studentid" ColumnName="studentid" />
                 <ScalarProperty Name="studentname" ColumnName="studentname" />
                 <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="deptcode" ColumnName="deptcode" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="idcard" ColumnName="idcard" />
@@ -3260,21 +2465,13 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="teacheraidequipments">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.teacheraidequipment">
-              <MappingFragment StoreEntitySet="teacheraidequipments">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="EquipmentsNames" ColumnName="EquipmentsNames" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="teacherdatas">
             <EntityTypeMapping TypeName="OrganisationdatabaseModel.teacherdata">
               <MappingFragment StoreEntitySet="teacherdata">
                 <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
                 <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
                 <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="faculty" ColumnName="faculty" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="idcard" ColumnName="idcard" />
@@ -3340,8 +2537,7 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Userid" ColumnName="Userid" />
                 <ScalarProperty Name="action" ColumnName="action" />
-                <ScalarProperty Name="classroom" ColumnName="classroom" />
-                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="ActionTime" ColumnName="ActionTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3368,271 +2564,8 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="doc_info">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.doc_info">
-              <MappingFragment StoreEntitySet="doc_info">
-                <ScalarProperty Name="userid" ColumnName="userid" />
-                <ScalarProperty Name="doc_info1" ColumnName="doc_info" />
-                <ScalarProperty Name="timeofupload" ColumnName="timeofupload" />
-                <ScalarProperty Name="type" ColumnName="type" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="resultdays">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.resultday">
-              <MappingFragment StoreEntitySet="resultday">
-                <ScalarProperty Name="monday" ColumnName="monday" />
-                <ScalarProperty Name="tuesday" ColumnName="tuesday" />
-                <ScalarProperty Name="wednesday" ColumnName="wednesday" />
-                <ScalarProperty Name="thursday" ColumnName="thursday" />
-                <ScalarProperty Name="friday" ColumnName="friday" />
-                <ScalarProperty Name="saturday" ColumnName="saturday" />
-                <ScalarProperty Name="sunday" ColumnName="sunday" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="resultschedules">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.resultschedule">
-              <MappingFragment StoreEntitySet="resultschedule">
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="resultschedulefrtransfers">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.resultschedulefrtransfer">
-              <MappingFragment StoreEntitySet="resultschedulefrtransfer">
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="resulttransferschedules">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.resulttransferschedule">
-              <MappingFragment StoreEntitySet="resulttransferschedule">
-                <ScalarProperty Name="classroom" ColumnName="classroom" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_getscheduletransfer">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_getscheduletransfer">
-              <MappingFragment StoreEntitySet="view_getscheduletransfer">
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section" ColumnName="section" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_resultschedule">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_resultschedule">
-              <MappingFragment StoreEntitySet="view_resultschedule">
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_resultschedule1">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_resultschedule1">
-              <MappingFragment StoreEntitySet="view_resultschedule1">
-                <ScalarProperty Name="classid" ColumnName="classid" />
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_resultscheduledayweek">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_resultscheduledayweek">
-              <MappingFragment StoreEntitySet="view_resultscheduledayweek">
-                <ScalarProperty Name="classid" ColumnName="classid" />
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_resultscheduledayweeksem">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_resultscheduledayweeksem">
-              <MappingFragment StoreEntitySet="view_resultscheduledayweeksem">
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_resultscheduledayweeksem1">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_resultscheduledayweeksem1">
-              <MappingFragment StoreEntitySet="view_resultscheduledayweeksem1">
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_resultscheduletransfer">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_resultscheduletransfer">
-              <MappingFragment StoreEntitySet="view_resultscheduletransfer">
-                <ScalarProperty Name="classid" ColumnName="classid" />
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_resultscheduletransfer1">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_resultscheduletransfer1">
-              <MappingFragment StoreEntitySet="view_resultscheduletransfer1">
-                <ScalarProperty Name="classid" ColumnName="classid" />
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_resulttestschedule">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_resulttestschedule">
-              <MappingFragment StoreEntitySet="view_resulttestschedule">
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="view_scheduletemporarytable">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.view_scheduletemporarytable">
-              <MappingFragment StoreEntitySet="view_scheduletemporarytable">
-                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
-                <ScalarProperty Name="classname" ColumnName="classname" />
-                <ScalarProperty Name="section1" ColumnName="section1" />
-                <ScalarProperty Name="section2" ColumnName="section2" />
-                <ScalarProperty Name="section3" ColumnName="section3" />
-                <ScalarProperty Name="section4" ColumnName="section4" />
-                <ScalarProperty Name="section5" ColumnName="section5" />
-                <ScalarProperty Name="section6" ColumnName="section6" />
-                <ScalarProperty Name="section7" ColumnName="section7" />
-                <ScalarProperty Name="section8" ColumnName="section8" />
-                <ScalarProperty Name="section9" ColumnName="section9" />
-                <ScalarProperty Name="section10" ColumnName="section10" />
-                <ScalarProperty Name="section11" ColumnName="section11" />
-                <ScalarProperty Name="section12" ColumnName="section12" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_DeleteBuilding" FunctionName="OrganisationdatabaseModel.Store.sp_DeleteBuilding" />
+          <FunctionImportMapping FunctionImportName="sp_DeleteClass" FunctionName="OrganisationdatabaseModel.Store.sp_DeleteClass" />
           <FunctionImportMapping FunctionImportName="sp_DeleteFloor" FunctionName="OrganisationdatabaseModel.Store.sp_DeleteFloor" />
           <FunctionImportMapping FunctionImportName="sp_deleteSection" FunctionName="OrganisationdatabaseModel.Store.sp_deleteSection" />
           <FunctionImportMapping FunctionImportName="sp_DeleteUser" FunctionName="OrganisationdatabaseModel.Store.sp_DeleteUser" />
@@ -3666,33 +2599,12 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
               <ComplexTypeMapping TypeName="OrganisationdatabaseModel.sp_GetOperationMgmtData_Result" />
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetSchedule" FunctionName="OrganisationdatabaseModel.Store.sp_GetSchedule">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="OrganisationdatabaseModel.sp_GetSchedule_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetScheduleByBuild" FunctionName="OrganisationdatabaseModel.Store.sp_GetScheduleByBuild">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="OrganisationdatabaseModel.sp_GetScheduleByBuild_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_getScheduleByBuildSem" FunctionName="OrganisationdatabaseModel.Store.sp_getScheduleByBuildSem">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="OrganisationdatabaseModel.sp_getScheduleByBuildSem_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_getScheduleByBuildWeekSem" FunctionName="OrganisationdatabaseModel.Store.Sp_getScheduleByBuildWeekSem">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="OrganisationdatabaseModel.Sp_getScheduleByBuildWeekSem_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_GetScheduleByDate" FunctionName="OrganisationdatabaseModel.Store.sp_GetScheduleByDate" />
           <FunctionImportMapping FunctionImportName="Sp_GetScheduleByDay" FunctionName="OrganisationdatabaseModel.Store.Sp_GetScheduleByDay">
             <ResultMapping>
               <ComplexTypeMapping TypeName="OrganisationdatabaseModel.Sp_GetScheduleByDay_Result" />
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetScheduleforDate" FunctionName="OrganisationdatabaseModel.Store.sp_GetScheduleforDate" />
           <FunctionImportMapping FunctionImportName="sp_GetStudentData" FunctionName="OrganisationdatabaseModel.Store.sp_GetStudentData">
             <ResultMapping>
               <ComplexTypeMapping TypeName="OrganisationdatabaseModel.sp_GetStudentData_Result" />
@@ -3703,22 +2615,13 @@ FROM `view_scheduletemporarytable` AS `view_scheduletemporarytable`</DefiningQue
               <ComplexTypeMapping TypeName="OrganisationdatabaseModel.sp_GetTeacherData_Result" />
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetTransferScheduleByBuildSem" FunctionName="OrganisationdatabaseModel.Store.sp_GetTransferScheduleByBuildSem">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="OrganisationdatabaseModel.sp_GetTransferScheduleByBuildSem_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_GetTransferScheduleByDate" FunctionName="OrganisationdatabaseModel.Store.sp_GetTransferScheduleByDate" />
           <FunctionImportMapping FunctionImportName="sp_GetTransferScheduleByDay" FunctionName="OrganisationdatabaseModel.Store.sp_GetTransferScheduleByDay">
             <ResultMapping>
               <ComplexTypeMapping TypeName="OrganisationdatabaseModel.sp_GetTransferScheduleByDay_Result" />
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_GetUserLogs" FunctionName="OrganisationdatabaseModel.Store.sp_GetUserLogs">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="OrganisationdatabaseModel.sp_GetUserLogs_Result" />
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetUserLogs" FunctionName="OrganisationdatabaseModel.Store.sp_GetUserLogs" />
           <FunctionImportMapping FunctionImportName="sp_GetWeekByDate" FunctionName="OrganisationdatabaseModel.Store.sp_GetWeekByDate" />
           <FunctionImportMapping FunctionImportName="sp_GetYearAndSemester" FunctionName="OrganisationdatabaseModel.Store.sp_GetYearAndSemester">
             <ResultMapping>

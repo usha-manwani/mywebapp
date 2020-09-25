@@ -14,8 +14,14 @@ namespace CresijApp.Models
     
     public partial class schedule
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public schedule()
+        {
+            this.scheduletransfers = new HashSet<scheduletransfer>();
+        }
+    
         public string year { get; set; }
-        public string sem { get; set; }
+        public int sem { get; set; }
         public string teacherid { get; set; }
         public string teachername { get; set; }
         public string courseid { get; set; }
@@ -28,5 +34,9 @@ namespace CresijApp.Models
         public int id { get; set; }
         public string teachingbuilding { get; set; }
         public string floor { get; set; }
+    
+        public virtual semesterinfo semesterinfo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<scheduletransfer> scheduletransfers { get; set; }
     }
 }

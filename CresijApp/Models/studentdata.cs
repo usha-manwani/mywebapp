@@ -17,7 +17,7 @@ namespace CresijApp.Models
         public string studentid { get; set; }
         public string studentname { get; set; }
         public string gender { get; set; }
-        public int age { get; set; }
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
         public string deptcode { get; set; }
         public string phone { get; set; }
         public string idcard { get; set; }

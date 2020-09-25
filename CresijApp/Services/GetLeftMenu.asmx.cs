@@ -16,14 +16,10 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class GetLeftMenu : System.Web.Services.WebService
     {
-
         [WebMethod]
         public string HelloWorld()
         {
             return "Hello World";
-        }
-
-        
-        
+        } 
     }
 }

@@ -15,9 +15,9 @@ namespace CresijApp.Models
     public partial class schedulereserve
     {
         public string SchoolYear { get; set; }
-        public string Semester { get; set; }
-        public string week { get; set; }
-        public string Date { get; set; }
+        public int Semester { get; set; }
+        public int week { get; set; }
+        public System.DateTime ReserveDate { get; set; }
         public int Section { get; set; }
         public int Classroom { get; set; }
         public string BorrowingUnit { get; set; }
@@ -32,5 +32,6 @@ namespace CresijApp.Models
         public int id { get; set; }
     
         public virtual classdetail classdetail { get; set; }
+        public virtual semesterinfo semesterinfo { get; set; }
     }
 }

@@ -29,5 +29,6 @@ namespace CresijApp.Models
     
         public virtual buildingdetail buildingdetail { get; set; }
         public virtual classdetail classdetail { get; set; }
+        public virtual schedule schedule { get; set; }
     }
 }

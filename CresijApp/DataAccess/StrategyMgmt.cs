@@ -173,8 +173,7 @@ namespace CresijApp.DataAccess
         public string DeleteStrategyById(string Id)
         {
             string result = "";
-            try
-            {
+            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     string query = "Delete FROM organisationdatabase.strategyservicesandfeature where strategyId =" + Id;
@@ -188,9 +187,36 @@ namespace CresijApp.DataAccess
                         result =cmd.ExecuteNonQuery().ToString();
                     }
                 }
-            }
-            catch (Exception ex) { }
+           
             return result;
+        }
+
+        public DataTable GetStrategy()
+        {
+            DataTable dt = new DataTable();
+           
+                using (MySqlConnection con = new MySqlConnection(constr))
+                {
+                    string query = "select strategyid, strategyname,strategydesc, creationdate, "+
+                    "currentstatus,strategytype,"+
+                    "group_concat('{\"EquipmentId\":\"',equipmentid,'\", \"EquipmentName\":\"'," +
+                    "equipmentsNames,'\", \"config\":{',config,'}, \"location\":\"',location,'\"}') as config," +
+                    " strategytimeframe, strategytime from " +
+                    "strategymanagement stgm join strategydescription stgd on "+
+                    " stgm.strategyId = stgd.StrategyRefId join strategyequipments stgq "+
+                    "on stgq.id = stgd.Equipmentid group by strategyid";
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
+                    {
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(dt);  
+                    }
+                }
+           
+            return dt;
         }
     }
 }

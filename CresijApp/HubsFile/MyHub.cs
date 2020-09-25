@@ -104,7 +104,7 @@ namespace CresijApp.HubsFile
             }
             if (data.Contains("registered"))
             {
-                updatecardstatus(sender, data);
+               // updatecardstatus(sender, data);
                 // Clients.All.confirmRegister();
             }
             //else if (data.Contains("readerlog"))
@@ -134,8 +134,8 @@ namespace CresijApp.HubsFile
         private void saveStatusinDatebase(string sender, string data)
         {
             
-            CentralControl cc = new CentralControl();
-            cc.SaveDatainDatabase(sender, data);
+            //CentralControl cc = new CentralControl();
+            //cc.SaveDatainDatabase(sender, data);
         }
 
         ///send to server to get status of all machines
@@ -160,22 +160,22 @@ namespace CresijApp.HubsFile
             Clients.All.broadcastMessage(sender, statusRec);
         }
         ///card status
-        public void updatecardstatus(string ip, string data)
-        {
-            string[] msg = data.Split(',');
-            string cardID = msg[2];
-            PopulateTree tree = new PopulateTree();
-            tree.updateStatus(ip, cardID);
-        }
+        //public void updatecardstatus(string ip, string data)
+        //{
+        //    string[] msg = data.Split(',');
+        //    string cardID = msg[2];
+        //    PopulateTree tree = new PopulateTree();
+        //    tree.updateStatus(ip, cardID);
+        //}
         ///card logs
-        public void updateCardLogs(string ip, string data)
-        {
-            string[] msg = data.Split(',');
-            string cardID = msg[2];
-            string newdata = PopulateTree.insertCardLogs(ip, cardID);
-            if (!string.IsNullOrEmpty(newdata))
-                Clients.All.logs(newdata);
-        }
+        //public void updateCardLogs(string ip, string data)
+        //{
+        //    string[] msg = data.Split(',');
+        //    string cardID = msg[2];
+        //    string newdata = PopulateTree.insertCardLogs(ip, cardID);
+        //    if (!string.IsNullOrEmpty(newdata))
+        //        Clients.All.logs(newdata);
+        //}
         public void CountMachines(int count)
         {
             Clients.All.TotalCount(count);
@@ -216,15 +216,15 @@ namespace CresijApp.HubsFile
 
         public void RemoveOneTimeUser(string[] userid)
         {
-            Userdetails ud = new Userdetails();
-            foreach (string s in userid)
-            {
-                int r = ud.RejectOneTimeUser(s);
-                if (r == 1)
-                {
-                    Clients.All.logoutTempUsers(s);
-                }
-            }
+            //Userdetails ud = new Userdetails();
+            //foreach (string s in userid)
+            //{
+            //    int r = ud.RejectOneTimeUser(s);
+            //    if (r == 1)
+            //    {
+            //        Clients.All.logoutTempUsers(s);
+            //    }
+            //}
         }
     }
     public class HexEncoding

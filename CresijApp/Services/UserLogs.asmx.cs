@@ -92,9 +92,9 @@ namespace CresijApp.Services
                                 UserId = dr["userid"].ToString(),
                                 UserName = dr["Username"].ToString(),
                                 Action = dr["action"].ToString(),
-                                BuildingName = dr["building"].ToString(),
-                                ClassName = dr["classroom"].ToString(),
-                                Time = dr["time"].ToString()
+                                BuildingName = dr["buildingname"].ToString(),
+                                ClassName = dr["classname"].ToString(),
+                                ActionTime = dr["Actiontime"].ToString()
                             };
                             idata.Add(logsList);
                         }
@@ -118,7 +118,7 @@ namespace CresijApp.Services
             public string Action { get; set; }
             public string BuildingName { get; set; }
             public string ClassName { get; set; }
-            public string Time { get; set; }
+            public string ActionTime { get; set; }
         }
         
         [WebMethod(EnableSession = true)]

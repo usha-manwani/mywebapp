@@ -18,6 +18,10 @@ namespace CresijApp.Models
         public semesterinfo()
         {
             this.reserveandtransfers = new HashSet<reserveandtransfer>();
+            this.schedules = new HashSet<schedule>();
+            this.scheduleoriginals = new HashSet<scheduleoriginal>();
+            this.schedulereserves = new HashSet<schedulereserve>();
+            this.sectionsinfoes = new HashSet<sectionsinfo>();
         }
     
         public string SemesterName { get; set; }
@@ -35,5 +39,13 @@ namespace CresijApp.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reserveandtransfer> reserveandtransfers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<schedule> schedules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<scheduleoriginal> scheduleoriginals { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<schedulereserve> schedulereserves { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<sectionsinfo> sectionsinfoes { get; set; }
     }
 }

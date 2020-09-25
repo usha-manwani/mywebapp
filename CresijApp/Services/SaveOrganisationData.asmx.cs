@@ -281,7 +281,7 @@ namespace CresijApp.Services
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> UpdateClassData(Dictionary<string, string> data)
         {
-            string result = "";
+            int result = 0 ;
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -295,10 +295,13 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    result = orgData.UpdateClassData(data).ToString();
-
-                    keyValue.Add("status", "success");
-                    keyValue.Add("UpdatedRows", result);
+                    result = orgData.UpdateClassData(data);
+                    if (result > 0)
+                    {
+                        keyValue.Add("status", "success");
+                        keyValue.Add("UpdatedRows", result.ToString());
+                    }
+                    
                 }
                 catch (Exception ex)
                 {

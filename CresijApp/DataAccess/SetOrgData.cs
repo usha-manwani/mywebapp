@@ -79,8 +79,7 @@ namespace CresijApp.DataAccess
                         }
                         result = cmd.ExecuteNonQuery();
                     }
-                }
-            
+                }            
             return result;
         }
 
@@ -88,7 +87,7 @@ namespace CresijApp.DataAccess
         {
             int result = -1;
             string query = "insert into teacherdata values ('"+data["teacherId"]+"','"+ data["teacherName"]+"','"+ data["gender"]+
-                "','"+data["age"]+"','"+ data["faculty"]+"','"+ data["phone"]+"','"+ data["idCard"]+"','"+ data["oneCard"]+"')";
+                "','"+data["dob"]+"','"+ data["faculty"]+"','"+ data["phone"]+"','"+ data["idCard"]+"','"+ data["oneCard"]+"')";
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -109,7 +108,7 @@ namespace CresijApp.DataAccess
             int result = -1;
             
                 string query = "insert into studentdata values ('" + data["studentId"] + "','" + data["studentName"] + "','" + data["gender"] +
-                "','" + data["age"] + "','" + data["faculty"] + "','" + data["phone"] + "','" + data["idCard"] + "','" + data["oneCard"] + "')";
+                "','" + data["dob"] + "','" + data["faculty"] + "','" + data["phone"] + "','" + data["idCard"] + "','" + data["oneCard"] + "')";
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -129,7 +128,7 @@ namespace CresijApp.DataAccess
         {
             int result = -1;
             string query = "update teacherdata set teachername='" + data["teacherName"] +
-                "',gender='" + data["gender"] +"', age='" + data["age"] + "', faculty='" + data["faculty"] +
+                "',gender='" + data["gender"] +"', DateOfBirth='" + data["dob"] + "', faculty='" + data["faculty"] +
                 "', phone='" + data["phone"] + "',idcard='" + data["idCard"] + 
                 "',onecard='" + data["oneCard"] + "' where teacherid ='" + data["teacherId"] + "'";
             using (MySqlConnection con = new MySqlConnection(constr))
@@ -153,7 +152,7 @@ namespace CresijApp.DataAccess
         {
             int result = -1;
             string query = "update studentdata set studentname='" + data["studentName"] +
-                "',gender='" + data["gender"] + "', age='" + data["age"] + "', deptcode='" + data["faculty"] +
+                "',gender='" + data["gender"] + "', DateOfBirth='" + data["dob"] + "', deptcode='" + data["faculty"] +
                 "', phone='" + data["phone"] + "',idcard='" + data["idCard"] +
                 "',onecard='" + data["oneCard"] + "' where studentid ='" + data["studentId"] + "'";
             using (MySqlConnection con = new MySqlConnection(constr))
@@ -284,29 +283,34 @@ namespace CresijApp.DataAccess
         }
         public int UpdateUserData(Dictionary<string, string> data)
         {
-            int result = -1;            
-                using (MySqlConnection con = new MySqlConnection(constr))
+            int result = -1;
+            if (data["personType"].ToString() == "longterm")
+            {
+                data["expireDate"] = DateTime.Now.ToString("yyyy-MM-dd hh:mm");
+                data["startDate"] = DateTime.Now.ToString("yyyy-MM-dd hh:mm");
+            }
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand("sp_UpdateUserData", con))
                 {
-                    using (MySqlCommand cmd = new MySqlCommand("sp_UpdateUserData", con))
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("logid", data["loginId"]);
+                    cmd.Parameters.AddWithValue("uname", data["userName"]);
+                    cmd.Parameters.AddWithValue("ptype", data["personType"]);
+                    cmd.Parameters.AddWithValue("deptname", data["departmentId"]);
+                    cmd.Parameters.AddWithValue("stats", data["personnelStatus"]);
+                    cmd.Parameters.AddWithValue("phone", data["phone"]);
+                    cmd.Parameters.AddWithValue("note", data["notes"]);
+                    cmd.Parameters.AddWithValue("pass", data["password"]);
+                    cmd.Parameters.AddWithValue("expiredate", data["expireDate"]);
+                    cmd.Parameters.AddWithValue("startdate", data["startDate"]);
+                    if (con.State != ConnectionState.Open)
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("logid", data["loginId"]);
-                        cmd.Parameters.AddWithValue("uname", data["userName"]);
-                        cmd.Parameters.AddWithValue("ptype", data["personType"]);
-                        cmd.Parameters.AddWithValue("deptname", data["departmentName"]);
-                        cmd.Parameters.AddWithValue("stats", data["personnelStatus"]);
-                        cmd.Parameters.AddWithValue("phone", data["phone"]);
-                        cmd.Parameters.AddWithValue("note", data["notes"]);
-                        cmd.Parameters.AddWithValue("pass", data["password"]);
-                        cmd.Parameters.AddWithValue("expiredate", data["expireDate"]);
-                        cmd.Parameters.AddWithValue("startdate", data["startDate"]);
-                        if (con.State != ConnectionState.Open)
-                        {
-                            con.Open();
-                        }
-                        result = cmd.ExecuteNonQuery();
+                        con.Open();
                     }
+                    result = cmd.ExecuteNonQuery();
                 }
+            }
             return result;
         }
 

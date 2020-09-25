@@ -15,7 +15,7 @@ namespace CresijApp.Models
     public partial class scheduleoriginal
     {
         public string year { get; set; }
-        public string sem { get; set; }
+        public int sem { get; set; }
         public string teacherid { get; set; }
         public string teachername { get; set; }
         public string courseid { get; set; }
@@ -26,5 +26,7 @@ namespace CresijApp.Models
         public int dayno { get; set; }
         public int section { get; set; }
         public int id { get; set; }
+    
+        public virtual semesterinfo semesterinfo { get; set; }
     }
 }

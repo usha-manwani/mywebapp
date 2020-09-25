@@ -14,7 +14,7 @@ namespace CresijApp.Models
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    [DbConfigurationType(typeof(MySql.Data.EntityFramework.MySqlEFConfiguration))]
     public partial class OrganisationdatabaseEntities : DbContext
     {
         public OrganisationdatabaseEntities()
@@ -42,10 +42,11 @@ namespace CresijApp.Models
         public virtual DbSet<scheduletransfer> scheduletransfers { get; set; }
         public virtual DbSet<sectionsinfo> sectionsinfoes { get; set; }
         public virtual DbSet<semesterinfo> semesterinfoes { get; set; }
-        public virtual DbSet<strategyservicesandfeature> strategyservicesandfeatures { get; set; }
+        public virtual DbSet<strategydescription> strategydescriptions { get; set; }
+        public virtual DbSet<strategyequipment> strategyequipments { get; set; }
+        public virtual DbSet<strategymanagement> strategymanagements { get; set; }
         public virtual DbSet<studentdata> studentdatas { get; set; }
         public virtual DbSet<systemsetting> systemsettings { get; set; }
-        public virtual DbSet<teacheraidequipment> teacheraidequipments { get; set; }
         public virtual DbSet<teacherdata> teacherdatas { get; set; }
         public virtual DbSet<temp_centralcontrol> temp_centralcontrol { get; set; }
         public virtual DbSet<userdetail> userdetails { get; set; }
@@ -53,21 +54,6 @@ namespace CresijApp.Models
         public virtual DbSet<userlog> userlogs { get; set; }
         public virtual DbSet<userpermission> userpermissions { get; set; }
         public virtual DbSet<userregistration> userregistrations { get; set; }
-        public virtual DbSet<doc_info> doc_info { get; set; }
-        public virtual DbSet<resultday> resultdays { get; set; }
-        public virtual DbSet<resultschedule> resultschedules { get; set; }
-        public virtual DbSet<resultschedulefrtransfer> resultschedulefrtransfers { get; set; }
-        public virtual DbSet<resulttransferschedule> resulttransferschedules { get; set; }
-        public virtual DbSet<view_getscheduletransfer> view_getscheduletransfer { get; set; }
-        public virtual DbSet<view_resultschedule> view_resultschedule { get; set; }
-        public virtual DbSet<view_resultschedule1> view_resultschedule1 { get; set; }
-        public virtual DbSet<view_resultscheduledayweek> view_resultscheduledayweek { get; set; }
-        public virtual DbSet<view_resultscheduledayweeksem> view_resultscheduledayweeksem { get; set; }
-        public virtual DbSet<view_resultscheduledayweeksem1> view_resultscheduledayweeksem1 { get; set; }
-        public virtual DbSet<view_resultscheduletransfer> view_resultscheduletransfer { get; set; }
-        public virtual DbSet<view_resultscheduletransfer1> view_resultscheduletransfer1 { get; set; }
-        public virtual DbSet<view_resulttestschedule> view_resulttestschedule { get; set; }
-        public virtual DbSet<view_scheduletemporarytable> view_scheduletemporarytable { get; set; }
     
         public virtual int sp_DeleteBuilding(Nullable<int> sno)
         {
@@ -76,6 +62,15 @@ namespace CresijApp.Models
                 new ObjectParameter("sno", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteBuilding", snoParameter);
+        }
+    
+        public virtual int sp_DeleteClass(Nullable<int> idno)
+        {
+            var idnoParameter = idno.HasValue ?
+                new ObjectParameter("idno", idno) :
+                new ObjectParameter("idno", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_DeleteClass", idnoParameter);
         }
     
         public virtual int sp_DeleteFloor(Nullable<int> floorid)
@@ -203,62 +198,6 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetOperationMgmtData_Result>("sp_GetOperationMgmtData", p_PageIndexParameter, p_PageSizeParameter, p_RecordCount);
         }
     
-        public virtual ObjectResult<sp_GetSchedule_Result> sp_GetSchedule()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetSchedule_Result>("sp_GetSchedule");
-        }
-    
-        public virtual ObjectResult<sp_GetScheduleByBuild_Result> sp_GetScheduleByBuild(string build, string userid)
-        {
-            var buildParameter = build != null ?
-                new ObjectParameter("build", build) :
-                new ObjectParameter("build", typeof(string));
-    
-            var useridParameter = userid != null ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetScheduleByBuild_Result>("sp_GetScheduleByBuild", buildParameter, useridParameter);
-        }
-    
-        public virtual ObjectResult<sp_getScheduleByBuildSem_Result> sp_getScheduleByBuildSem(string build, Nullable<int> sem, string userid)
-        {
-            var buildParameter = build != null ?
-                new ObjectParameter("build", build) :
-                new ObjectParameter("build", typeof(string));
-    
-            var semParameter = sem.HasValue ?
-                new ObjectParameter("sem", sem) :
-                new ObjectParameter("sem", typeof(int));
-    
-            var useridParameter = userid != null ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getScheduleByBuildSem_Result>("sp_getScheduleByBuildSem", buildParameter, semParameter, useridParameter);
-        }
-    
-        public virtual ObjectResult<Sp_getScheduleByBuildWeekSem_Result> Sp_getScheduleByBuildWeekSem(string build, Nullable<int> weekno, Nullable<int> sem, string userid)
-        {
-            var buildParameter = build != null ?
-                new ObjectParameter("build", build) :
-                new ObjectParameter("build", typeof(string));
-    
-            var weeknoParameter = weekno.HasValue ?
-                new ObjectParameter("weekno", weekno) :
-                new ObjectParameter("weekno", typeof(int));
-    
-            var semParameter = sem.HasValue ?
-                new ObjectParameter("sem", sem) :
-                new ObjectParameter("sem", typeof(int));
-    
-            var useridParameter = userid != null ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_getScheduleByBuildWeekSem_Result>("Sp_getScheduleByBuildWeekSem", buildParameter, weeknoParameter, semParameter, useridParameter);
-        }
-    
         public virtual int sp_GetScheduleByDate(Nullable<System.DateTime> customdate, Nullable<int> building, string userid, Nullable<int> p_PageIndex, Nullable<int> p_PageSize, ObjectParameter p_RecordCount)
         {
             var customdateParameter = customdate.HasValue ?
@@ -317,19 +256,6 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_GetScheduleByDay_Result>("Sp_GetScheduleByDay", buildParameter, weeknoParameter, semParameter, daynumParameter, useridParameter, p_PageIndexParameter, p_PageSizeParameter, p_RecordCount);
         }
     
-        public virtual int sp_GetScheduleforDate(Nullable<System.DateTime> customdate, string userid)
-        {
-            var customdateParameter = customdate.HasValue ?
-                new ObjectParameter("customdate", customdate) :
-                new ObjectParameter("customdate", typeof(System.DateTime));
-    
-            var useridParameter = userid != null ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_GetScheduleforDate", customdateParameter, useridParameter);
-        }
-    
         public virtual ObjectResult<sp_GetStudentData_Result> sp_GetStudentData(Nullable<int> p_PageIndex, Nullable<int> p_PageSize, ObjectParameter p_RecordCount)
         {
             var p_PageIndexParameter = p_PageIndex.HasValue ?
@@ -354,31 +280,6 @@ namespace CresijApp.Models
                 new ObjectParameter("p_PageSize", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetTeacherData_Result>("sp_GetTeacherData", p_PageIndexParameter, p_PageSizeParameter, p_RecordCount);
-        }
-    
-        public virtual ObjectResult<sp_GetTransferScheduleByBuildSem_Result> sp_GetTransferScheduleByBuildSem(string build, Nullable<int> sem, Nullable<int> weekno, Nullable<int> daynum, string userid)
-        {
-            var buildParameter = build != null ?
-                new ObjectParameter("build", build) :
-                new ObjectParameter("build", typeof(string));
-    
-            var semParameter = sem.HasValue ?
-                new ObjectParameter("sem", sem) :
-                new ObjectParameter("sem", typeof(int));
-    
-            var weeknoParameter = weekno.HasValue ?
-                new ObjectParameter("weekno", weekno) :
-                new ObjectParameter("weekno", typeof(int));
-    
-            var daynumParameter = daynum.HasValue ?
-                new ObjectParameter("daynum", daynum) :
-                new ObjectParameter("daynum", typeof(int));
-    
-            var useridParameter = userid != null ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetTransferScheduleByBuildSem_Result>("sp_GetTransferScheduleByBuildSem", buildParameter, semParameter, weeknoParameter, daynumParameter, useridParameter);
         }
     
         public virtual int sp_GetTransferScheduleByDate(string building, Nullable<System.DateTime> customdate, string userid, Nullable<int> p_PageIndex, Nullable<int> p_PageSize, ObjectParameter p_RecordCount)
@@ -439,9 +340,9 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetTransferScheduleByDay_Result>("sp_GetTransferScheduleByDay", buildParameter, weeknoParameter, semParameter, daynumParameter, useridParameter, p_PageIndexParameter, p_PageSizeParameter, p_RecordCount);
         }
     
-        public virtual ObjectResult<sp_GetUserLogs_Result> sp_GetUserLogs()
+        public virtual int sp_GetUserLogs()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetUserLogs_Result>("sp_GetUserLogs");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_GetUserLogs");
         }
     
         public virtual int sp_GetWeekByDate(Nullable<System.DateTime> customdate, ObjectParameter weekno)
@@ -462,7 +363,7 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetYearAndSemester_Result>("sp_GetYearAndSemester", customdateParameter, semname, schoolyear);
         }
     
-        public virtual int sp_InsertBuildingDetails(string deptname, string buscode, Nullable<int> que, string typeaccess, string notes)
+        public virtual int sp_InsertBuildingDetails(string deptname, string buscode, string que, string typeaccess, string notes)
         {
             var deptnameParameter = deptname != null ?
                 new ObjectParameter("deptname", deptname) :
@@ -472,9 +373,9 @@ namespace CresijApp.Models
                 new ObjectParameter("buscode", buscode) :
                 new ObjectParameter("buscode", typeof(string));
     
-            var queParameter = que.HasValue ?
+            var queParameter = que != null ?
                 new ObjectParameter("que", que) :
-                new ObjectParameter("que", typeof(int));
+                new ObjectParameter("que", typeof(string));
     
             var typeaccessParameter = typeaccess != null ?
                 new ObjectParameter("typeaccess", typeaccess) :
@@ -487,7 +388,7 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertBuildingDetails", deptnameParameter, buscodeParameter, queParameter, typeaccessParameter, notesParameter);
         }
     
-        public virtual int sp_InsertChangeSchedule(string oldclass, string course, string newcl, string weeknum, string teacherid, Nullable<int> sec, Nullable<int> daynum, string buildingname, string reason, Nullable<int> scid)
+        public virtual int sp_InsertChangeSchedule(string oldclass, string course, string newcl, string weeknum, string teacherid, Nullable<int> sec, Nullable<int> daynum, Nullable<int> buildingname, string reason, Nullable<int> scid)
         {
             var oldclassParameter = oldclass != null ?
                 new ObjectParameter("oldclass", oldclass) :
@@ -517,9 +418,9 @@ namespace CresijApp.Models
                 new ObjectParameter("daynum", daynum) :
                 new ObjectParameter("daynum", typeof(int));
     
-            var buildingnameParameter = buildingname != null ?
+            var buildingnameParameter = buildingname.HasValue ?
                 new ObjectParameter("buildingname", buildingname) :
-                new ObjectParameter("buildingname", typeof(string));
+                new ObjectParameter("buildingname", typeof(int));
     
             var reasonParameter = reason != null ?
                 new ObjectParameter("reason", reason) :
@@ -825,7 +726,7 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SaveOrganisationDeptData", deptnameParameter, buscodeParameter, highoffParameter, queParameter, typeaccessParameter, notesParameter);
         }
     
-        public virtual int sp_SaveStudentData(string id, string tname, string gend, Nullable<int> age, string fac, string ph, string idcrd, string onecrd)
+        public virtual int sp_SaveStudentData(string id, string tname, string gend, Nullable<System.DateTime> bdate, string fac, string ph, string idcrd, string onecrd)
         {
             var idParameter = id != null ?
                 new ObjectParameter("id", id) :
@@ -839,9 +740,9 @@ namespace CresijApp.Models
                 new ObjectParameter("gend", gend) :
                 new ObjectParameter("gend", typeof(string));
     
-            var ageParameter = age.HasValue ?
-                new ObjectParameter("age", age) :
-                new ObjectParameter("age", typeof(int));
+            var bdateParameter = bdate.HasValue ?
+                new ObjectParameter("bdate", bdate) :
+                new ObjectParameter("bdate", typeof(System.DateTime));
     
             var facParameter = fac != null ?
                 new ObjectParameter("fac", fac) :
@@ -859,10 +760,10 @@ namespace CresijApp.Models
                 new ObjectParameter("onecrd", onecrd) :
                 new ObjectParameter("onecrd", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SaveStudentData", idParameter, tnameParameter, gendParameter, ageParameter, facParameter, phParameter, idcrdParameter, onecrdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SaveStudentData", idParameter, tnameParameter, gendParameter, bdateParameter, facParameter, phParameter, idcrdParameter, onecrdParameter);
         }
     
-        public virtual int sp_SaveTeacherData(string id, string tname, string gend, Nullable<int> age, string fac, string ph, string idcrd, string onecrd)
+        public virtual int sp_SaveTeacherData(string id, string tname, string gend, Nullable<System.DateTime> bdate, string fac, string ph, string idcrd, string onecrd)
         {
             var idParameter = id != null ?
                 new ObjectParameter("id", id) :
@@ -876,9 +777,9 @@ namespace CresijApp.Models
                 new ObjectParameter("gend", gend) :
                 new ObjectParameter("gend", typeof(string));
     
-            var ageParameter = age.HasValue ?
-                new ObjectParameter("age", age) :
-                new ObjectParameter("age", typeof(int));
+            var bdateParameter = bdate.HasValue ?
+                new ObjectParameter("bdate", bdate) :
+                new ObjectParameter("bdate", typeof(System.DateTime));
     
             var facParameter = fac != null ?
                 new ObjectParameter("fac", fac) :
@@ -896,10 +797,10 @@ namespace CresijApp.Models
                 new ObjectParameter("onecrd", onecrd) :
                 new ObjectParameter("onecrd", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SaveTeacherData", idParameter, tnameParameter, gendParameter, ageParameter, facParameter, phParameter, idcrdParameter, onecrdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SaveTeacherData", idParameter, tnameParameter, gendParameter, bdateParameter, facParameter, phParameter, idcrdParameter, onecrdParameter);
         }
     
-        public virtual int sp_SaveUserData(string logid, string uname, string ptype, string deptname, string stats, string phone, string note, string pass, Nullable<System.DateTime> expiredate, Nullable<System.DateTime> startdate)
+        public virtual int sp_SaveUserData(string logid, string uname, string ptype, Nullable<int> deptname, string stats, string phone, string note, string pass, Nullable<System.DateTime> expiredate, Nullable<System.DateTime> startdate)
         {
             var logidParameter = logid != null ?
                 new ObjectParameter("logid", logid) :
@@ -913,9 +814,9 @@ namespace CresijApp.Models
                 new ObjectParameter("ptype", ptype) :
                 new ObjectParameter("ptype", typeof(string));
     
-            var deptnameParameter = deptname != null ?
+            var deptnameParameter = deptname.HasValue ?
                 new ObjectParameter("deptname", deptname) :
-                new ObjectParameter("deptname", typeof(string));
+                new ObjectParameter("deptname", typeof(int));
     
             var statsParameter = stats != null ?
                 new ObjectParameter("stats", stats) :
@@ -961,7 +862,7 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ScheduleByBuildingAndDate", customdateParameter, buildingParameter, useridParameter);
         }
     
-        public virtual int sp_UpdateBuildingData(string deptname, string buscode, Nullable<int> que, string typeaccess, string note, Nullable<int> sn)
+        public virtual int sp_UpdateBuildingData(string deptname, string buscode, string que, string typeaccess, string note, Nullable<int> sn)
         {
             var deptnameParameter = deptname != null ?
                 new ObjectParameter("deptname", deptname) :
@@ -971,9 +872,9 @@ namespace CresijApp.Models
                 new ObjectParameter("buscode", buscode) :
                 new ObjectParameter("buscode", typeof(string));
     
-            var queParameter = que.HasValue ?
+            var queParameter = que != null ?
                 new ObjectParameter("que", que) :
-                new ObjectParameter("que", typeof(int));
+                new ObjectParameter("que", typeof(string));
     
             var typeaccessParameter = typeaccess != null ?
                 new ObjectParameter("typeaccess", typeaccess) :
@@ -990,7 +891,7 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateBuildingData", deptnameParameter, buscodeParameter, queParameter, typeaccessParameter, noteParameter, snParameter);
         }
     
-        public virtual int sp_UpdateClassData(Nullable<int> clsid, string cname, string tbuild, string tfloor, Nullable<int> tseat, string ccip, string camsip, string camtip, string deskip, string recip, string ccmac, string camsmac, Nullable<int> camport, string camid, string campass, string camtmac, string deskmac, string recmac, string callhelpip, string callhelpmac)
+        public virtual int sp_UpdateClassData(Nullable<int> clsid, string cname, Nullable<int> tbuild, Nullable<int> tfloor, Nullable<int> tseat, string ccip, string camsip, string camtip, string deskip, string recip, string ccmac, string camsmac, Nullable<int> camport, string camid, string campass, string camtmac, string deskmac, string recmac, string callhelpip, string callhelpmac)
         {
             var clsidParameter = clsid.HasValue ?
                 new ObjectParameter("clsid", clsid) :
@@ -1000,13 +901,13 @@ namespace CresijApp.Models
                 new ObjectParameter("cname", cname) :
                 new ObjectParameter("cname", typeof(string));
     
-            var tbuildParameter = tbuild != null ?
+            var tbuildParameter = tbuild.HasValue ?
                 new ObjectParameter("tbuild", tbuild) :
-                new ObjectParameter("tbuild", typeof(string));
+                new ObjectParameter("tbuild", typeof(int));
     
-            var tfloorParameter = tfloor != null ?
+            var tfloorParameter = tfloor.HasValue ?
                 new ObjectParameter("tfloor", tfloor) :
-                new ObjectParameter("tfloor", typeof(string));
+                new ObjectParameter("tfloor", typeof(int));
     
             var tseatParameter = tseat.HasValue ?
                 new ObjectParameter("tseat", tseat) :
@@ -1141,7 +1042,7 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UPdateOrganisationDeptData", deptnameParameter, buscodeParameter, highoffParameter, queParameter, typeaccessParameter, noteParameter, snParameter);
         }
     
-        public virtual int sp_UpdateStudentData(string id, string tname, string gend, Nullable<int> ag, string fac, string ph, string idcrd, string onecrd)
+        public virtual int sp_UpdateStudentData(string id, string tname, string gend, Nullable<System.DateTime> bdate, string fac, string ph, string idcrd, string onecrd)
         {
             var idParameter = id != null ?
                 new ObjectParameter("id", id) :
@@ -1155,9 +1056,9 @@ namespace CresijApp.Models
                 new ObjectParameter("gend", gend) :
                 new ObjectParameter("gend", typeof(string));
     
-            var agParameter = ag.HasValue ?
-                new ObjectParameter("ag", ag) :
-                new ObjectParameter("ag", typeof(int));
+            var bdateParameter = bdate.HasValue ?
+                new ObjectParameter("bdate", bdate) :
+                new ObjectParameter("bdate", typeof(System.DateTime));
     
             var facParameter = fac != null ?
                 new ObjectParameter("fac", fac) :
@@ -1175,7 +1076,7 @@ namespace CresijApp.Models
                 new ObjectParameter("onecrd", onecrd) :
                 new ObjectParameter("onecrd", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateStudentData", idParameter, tnameParameter, gendParameter, agParameter, facParameter, phParameter, idcrdParameter, onecrdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateStudentData", idParameter, tnameParameter, gendParameter, bdateParameter, facParameter, phParameter, idcrdParameter, onecrdParameter);
         }
     
         public virtual int sp_UpdateTeacherData(string id, string tname, string gend, Nullable<int> ag, string fac, string ph, string idcrd, string onecrd)
@@ -1215,7 +1116,7 @@ namespace CresijApp.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_UpdateTeacherData", idParameter, tnameParameter, gendParameter, agParameter, facParameter, phParameter, idcrdParameter, onecrdParameter);
         }
     
-        public virtual int sp_UpdateUserData(string logid, string uname, string ptype, string deptname, string phone, string note, string pass, Nullable<System.DateTime> expiredate, Nullable<System.DateTime> startdate)
+        public virtual int sp_UpdateUserData(string logid, string uname, string ptype, Nullable<int> deptname, string phone, string note, string pass, Nullable<System.DateTime> expiredate, Nullable<System.DateTime> startdate)
         {
             var logidParameter = logid != null ?
                 new ObjectParameter("logid", logid) :
@@ -1229,9 +1130,9 @@ namespace CresijApp.Models
                 new ObjectParameter("ptype", ptype) :
                 new ObjectParameter("ptype", typeof(string));
     
-            var deptnameParameter = deptname != null ?
+            var deptnameParameter = deptname.HasValue ?
                 new ObjectParameter("deptname", deptname) :
-                new ObjectParameter("deptname", typeof(string));
+                new ObjectParameter("deptname", typeof(int));
     
             var phoneParameter = phone != null ?
                 new ObjectParameter("phone", phone) :

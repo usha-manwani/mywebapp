@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
-
+using CresijApp.DataAccess;
 namespace CresijApp.Services
 {
     /// <summary>
@@ -217,6 +217,61 @@ namespace CresijApp.Services
                 idata.Add("ErroMessage", ex.Message);
             }
 
+            return idata;
+        }
+
+        public class StrategyStructure
+        {
+            public int Id { get; set; }
+            public string StrategyName { get; set; }
+            public string StrategyDesc { get; set; }
+            public string CreationDate { get; set; }
+            public string CurrentStatus { get; set; }
+            public string StrategyType { get; set; }
+            public dynamic Configuration { get; set; }
+            //public string Location { get; set; }
+            public string StrategyTimeFrame { get; set; }
+            public string StrategyTime { get; set; }
+
+        }
+        [WebMethod]
+        public Dictionary<string,object> GetStrategy()
+        {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            try
+            {
+                List<StrategyStructure> strategies = new List<StrategyStructure>();
+                StrategyMgmt strategyMgmt = new StrategyMgmt();
+                DataTable dt = strategyMgmt.GetStrategy();
+                if (dt.Rows.Count > 0)
+                {
+                    foreach(DataRow dr in dt.Rows)
+                    {
+                        StrategyStructure st = new StrategyStructure()
+                        {
+                            Id = Convert.ToInt32(dr["strategyid"]),
+                            StrategyName =dr["strategyname"].ToString(),
+                            StrategyDesc =dr["strategydesc"].ToString(),
+                            CreationDate = DateTime.Parse(dr["creationdate"].ToString()).ToString("yyyy-MM-dd H:mm:ss"),
+                            CurrentStatus =dr["currentstatus"].ToString(),
+                            StrategyType =dr["strategytype"].ToString(),
+                            
+                            StrategyTimeFrame=dr["strategytimeframe"].ToString(),
+                            StrategyTime =dr["strategytime"].ToString(),
+                            Configuration = JsonConvert.DeserializeObject<Dictionary<dynamic,dynamic>>(dr["config"].ToString())
+                        };
+                        strategies.Add(st);
+                    }
+                }
+
+                idata.Add("status", "success");
+                idata.Add("value", strategies);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
             return idata;
         }
     }

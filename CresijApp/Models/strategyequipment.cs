@@ -12,9 +12,18 @@ namespace CresijApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class teacheraidequipment
+    public partial class strategyequipment
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public strategyequipment()
+        {
+            this.strategydescriptions = new HashSet<strategydescription>();
+        }
+    
         public int id { get; set; }
         public string EquipmentsNames { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<strategydescription> strategydescriptions { get; set; }
     }
 }

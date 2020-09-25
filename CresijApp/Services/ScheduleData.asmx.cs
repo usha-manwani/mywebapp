@@ -992,7 +992,7 @@ namespace CresijApp.Services
                     name.Add(data["schoolYear"].ToString());
                     name.Add(data["semNum"].ToString());
                     name.Add(data["week"].ToString());
-                    name.Add(data["date"].ToString());
+                    name.Add(data["reservedate"].ToString());
                     name.Add(data["section"].ToString());
                     name.Add(data["classId"].ToString());
                     name.Add(data["borrowingUnit"].ToString());
@@ -1072,7 +1072,7 @@ namespace CresijApp.Services
                                 SchoolYear = dr["SchoolYear"].ToString(),
                                 Semester = dr["semestername"].ToString(),
                                 Week = dr["Week"].ToString(),
-                                Date = dr["date"].ToString(),
+                                Date = dr["reservedate"].ToString(),
                                 Section = dr["Section"].ToString(),
                                 Classroom = dr["Classname"].ToString(),
                                 BorrowingUnit = dr["BorrowingUnit"].ToString(),

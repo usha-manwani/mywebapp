@@ -16,28 +16,14 @@ namespace CresijApp.DataAccess
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "Insert into departmentdetail (departmentName , departmentCode)" +
-                    " values ('" + deptcode+"','"+deptname +"')";
-                try
-                {
-                    using(MySqlCommand cmd = new MySqlCommand(query, con))
+                string query = "insert into organisationdetails (deptCode,BusinessCtrlCode," +
+                                "HigherOffice,QueueNumber,Public,Notes) values ('" + deptcode + "','" + bCtrlCode + "','"
+                                + highoff + "'," + queno + ",'" + permission + "','" + notes + "')";
+                using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
-                        int num =  cmd.ExecuteNonQuery();
-                        if (num > 0)
-                        {
-                            query = "insert into organisationdetails (deptCode,BusinessCtrlCode," +
-                                "HigherOffice,QueueNumber,Public,Notes) values ('"+deptcode+"','"+bCtrlCode+"','"
-                                +highoff+"',"+queno+",'"+permission+"','"+notes+"')";
                             MySqlCommand cmd1 = new MySqlCommand(query, con);
-                            cmd.ExecuteNonQuery();
-                            result = 1;
-                        }
-                    }
-                }
-                catch(Exception ex)
-                {
-                    result = -1;
-                }
+                           result= cmd.ExecuteNonQuery();
+                    }                
             }
             return result;
         }
@@ -111,11 +97,12 @@ namespace CresijApp.DataAccess
                     cmd.Parameters.AddWithValue("@_PageSize", pagesize);
                     cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
                     cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
                     if (con.State != ConnectionState.Open)
                     {
                         con.Open();
                     }
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                   
                     adapter.Fill(dt);
                     total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
                     data.Add(total);
@@ -130,8 +117,7 @@ namespace CresijApp.DataAccess
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
             var total = 0;
-            try
-            {
+            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     
@@ -153,8 +139,7 @@ namespace CresijApp.DataAccess
                         data.Add(dt);
                     }
                 }
-            }
-            catch(Exception ex) { }
+            
             return data;
         }
 
@@ -240,8 +225,7 @@ namespace CresijApp.DataAccess
         public DataTable GetDevicesInfo()
         {
             DataTable dt = new DataTable();
-            try
-            {
+            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     string query = "SELECT * from devicesdetails";
@@ -251,19 +235,14 @@ namespace CresijApp.DataAccess
                         adapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-
-            }
+            
             return dt;
         }
 
         public DataTable GetOrgDataonDemand(int sn)
         {
             DataTable dt = new DataTable();
-            try
-            {
+            
                 using(MySqlConnection con = new MySqlConnection(constr))
                 {
                     string query = "SELECT id,  buildingName, buildingCode, schoolname, " +
@@ -278,19 +257,20 @@ namespace CresijApp.DataAccess
                         adapter.Fill(dt);
                     }
                 }
-            }
-            catch(Exception ex) { }
+            
             return dt;
         }
 
         public DataTable GetUserDataonDemand(string sn)
         {
             DataTable dt = new DataTable();
-            try
-            {
+           
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = "SELECT * from userdetails where loginid ='" + sn+"'";
+                    string query = "SELECT usd.serialNo, loginID, userName, PersonType, bd.buildingName," +
+                        " PersonnelStatus, Notes, password, phone,startdate,expiredate," +
+                        "bd.id as deptid from userdetails usd join buildingdetails bd" +
+                        " on usd.deptcode = bd.id where loginid ='" + sn + "'";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -301,8 +281,7 @@ namespace CresijApp.DataAccess
                         adapter.Fill(dt);
                     }
                 }
-            }
-            catch (Exception ex) { }
+            
             return dt;
         }
 

@@ -43,9 +43,9 @@ namespace CresijApp.Controllers
         }
 
         [HttpPost]
-        public Dictionary<string,string> UploadFiles()
+        public Dictionary<string,object> UploadFiles()
         {
-           var idata= new Dictionary<string, string>();
+           var idata= new Dictionary<string, object>();
            var request = HttpContext.Current.Request;
             string filename = "";
             // Checking no of files injected in Request object  
@@ -81,17 +81,8 @@ namespace CresijApp.Controllers
                         if (Path.GetExtension(postedFile.FileName).Equals(".txt") || Path.GetExtension(postedFile.FileName).Equals(".csv"))
                         {
                             string folderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                            string numofrows = UploadStudentData(postedFile, folderPath);
-                            if (Convert.ToInt32(numofrows) > 0)
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
-                            else
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
+                            idata = UploadStudentData(postedFile, folderPath);
+                            idata.Add("status", "success");
                         }
                         else
                         {
@@ -109,17 +100,8 @@ namespace CresijApp.Controllers
                         if (Path.GetExtension(postedFile.FileName).Equals(".txt") || Path.GetExtension(postedFile.FileName).Equals(".csv"))
                         {
                             string folderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                            string numofrows = UploadTeacherData(postedFile, folderPath);
-                            if (Convert.ToInt32(numofrows) > 0)
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
-                            else
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
+                            idata = UploadTeacherData(postedFile, folderPath);
+                            idata.Add("status", "success");
                         }
                         else
                         {
@@ -137,17 +119,8 @@ namespace CresijApp.Controllers
                         if (Path.GetExtension(postedFile.FileName).Equals(".txt") || Path.GetExtension(postedFile.FileName).Equals(".csv"))
                         {
                             string folderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                            string numofrows = UploadScheduleData(postedFile, folderPath);
-                            if (Convert.ToInt32(numofrows) > 0)
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
-                            else
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
+                            idata = UploadScheduleData(postedFile, folderPath);
+                            idata.Add("status", "success");
                         }
                         else
                         {
@@ -165,17 +138,8 @@ namespace CresijApp.Controllers
                         if (Path.GetExtension(postedFile.FileName).Equals(".txt") || Path.GetExtension(postedFile.FileName).Equals(".csv"))
                         {
                             string folderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                            string numofrows = UploadUserData(postedFile, folderPath);
-                            if (Convert.ToInt32(numofrows) > 0)
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
-                            else
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
+                            idata = UploadUserData(postedFile, folderPath);
+                            idata.Add("status", "success");
                         }
                         else
                         {
@@ -193,17 +157,8 @@ namespace CresijApp.Controllers
                         if (Path.GetExtension(postedFile.FileName).Equals(".txt") || Path.GetExtension(postedFile.FileName).Equals(".csv"))
                         {
                             string folderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                            string numofrows = UploadClassData(postedFile, folderPath);
-                            if (Convert.ToInt32(numofrows) > 0)
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
-                            else
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
+                            idata = UploadClassData(postedFile, folderPath);
+                            idata.Add("status", "success");
                         }
                         else
                         {
@@ -221,17 +176,43 @@ namespace CresijApp.Controllers
                         if (Path.GetExtension(postedFile.FileName).Equals(".txt") || Path.GetExtension(postedFile.FileName).Equals(".csv"))
                         {
                             string folderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
-                            string numofrows = UploadCapitalData(postedFile, folderPath);
-                            if (Convert.ToInt32(numofrows) > 0)
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
-                            else
-                            {
-                                idata.Add("status", "success");
-                                idata.Add("totalRowsAffected", numofrows);
-                            }
+                            idata= UploadCapitalData(postedFile, folderPath);
+                            idata.Add("status", "success");
+                        }
+                        else
+                        {
+                            idata.Add("status", "fail");
+                            idata.Add("message", "file was in incorrect format!");
+                        }
+                    }
+
+                    else if (request["Type"] == "UploadBuildingData")
+                    {
+                        //Fetch the Uploaded File.
+                        HttpPostedFile postedFile = request.Files[0];
+                        //Set the Folder Path.
+                        if (Path.GetExtension(postedFile.FileName).Equals(".txt") || Path.GetExtension(postedFile.FileName).Equals(".csv"))
+                        {
+                            string folderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
+                            idata = UploadBuildingData(postedFile, folderPath);
+                            idata.Add("status", "success");
+                        }
+                        else
+                        {
+                            idata.Add("status", "fail");
+                            idata.Add("message", "file was in incorrect format!");
+                        }
+                    }
+                    else if (request["Type"] == "UploadFloorData")
+                    {
+                        //Fetch the Uploaded File.
+                        HttpPostedFile postedFile = request.Files[0];
+                        //Set the Folder Path.
+                        if (Path.GetExtension(postedFile.FileName).Equals(".txt") || Path.GetExtension(postedFile.FileName).Equals(".csv"))
+                        {
+                            string folderPath = HttpContext.Current.Server.MapPath("~/Uploads/");
+                            idata = UploadBuildingData(postedFile, folderPath);
+                            idata.Add("status", "success");
                         }
                         else
                         {
@@ -262,13 +243,15 @@ namespace CresijApp.Controllers
             return fileName;
         }
 
-        private string UploadStudentData(HttpPostedFile file, string path)
+        private Dictionary<string, object> UploadStudentData(HttpPostedFile file, string path)
         {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            List<string> messages = new List<string>();
             string filename = "";
             int numofrows = 0;
             if (Path.GetExtension(file.FileName).Equals(".txt") || Path.GetExtension(file.FileName).Equals(".csv"))
             {
-                var fname = "UploadTeacherData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
+                var fname = "UploadStudentData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
                 filename = Path.Combine(path + fname + Path.GetExtension(file.FileName));
                 if (File.Exists(filename))
                     File.Delete(filename);
@@ -281,18 +264,28 @@ namespace CresijApp.Controllers
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     if (conn.State != System.Data.ConnectionState.Open)
                         conn.Open();
+                    conn.InfoMessage += delegate (object sender, MySqlInfoMessageEventArgs e)
+                    {
+                        foreach (MySqlError err in e.errors)
+                        {
+                            messages.Add(err.Message);
+                        }
+                    };
                     cmd.CommandTimeout = 5000000;
                     numofrows = cmd.ExecuteNonQuery();
                 }
                 if (File.Exists(filename))
                     File.Delete(filename);
-                return numofrows.ToString();
+                idata.Add("Rows Inserted", numofrows);
+                idata.Add("Import warnings", messages);
             }
-            return 0.ToString();
+            return idata;
         }
 
-        private string UploadTeacherData(HttpPostedFile file, string path)
+        private Dictionary<string, object> UploadTeacherData(HttpPostedFile file, string path)
         {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            List<string> messages = new List<string>();
             string filename = "";
             int numofrows = 0;
             if (Path.GetExtension(file.FileName).Equals(".txt") || Path.GetExtension(file.FileName).Equals(".csv"))
@@ -311,18 +304,28 @@ namespace CresijApp.Controllers
 
                     if (conn.State != System.Data.ConnectionState.Open)
                         conn.Open();
+                    conn.InfoMessage += delegate (object sender, MySqlInfoMessageEventArgs e)
+                    {
+                        foreach (MySqlError err in e.errors)
+                        {
+                            messages.Add(err.Message);
+                        }
+                    };
                     cmd.CommandTimeout = 5000000;
                     numofrows = cmd.ExecuteNonQuery(); 
                 }
                 if (File.Exists(filename))
                     File.Delete(filename);
-                return numofrows.ToString();
+                idata.Add("Rows Inserted", numofrows);
+                idata.Add("Import warnings", messages);
             }
-            return 0.ToString();
+            return idata;
         }
 
-        private string UploadScheduleData(HttpPostedFile file, string path)
+        private Dictionary<string, object> UploadScheduleData(HttpPostedFile file, string path)
         {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            List<string> messages = new List<string>();
             string filename = "";
             int numofrows = 0;
             if (Path.GetExtension(file.FileName).Equals(".txt") || Path.GetExtension(file.FileName).Equals(".csv"))
@@ -337,23 +340,33 @@ namespace CresijApp.Controllers
                     string filename1 = filename.Replace("\\", "/");
                     var query = "load data infile '" + filename1 + "' Replace into table organisationdatabase.schedule fields " +
                                "terminated by ',' enclosed by '\"' lines terminated by '\n' IGNORE 1 LINES(`year`,`sem`,`teacherid`," +
-                               "`teachername`,`courseid`,`classname`,`coursename`,`weekstart`,`weekend`,`dayno`,`section`)";
+                               "`teachername`,`courseid`,`classname`,`coursename`,`weekstart`,`weekend`,`dayno`,`section`,`teachingbuilding`,`floor`)";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
 
                     if (conn.State != System.Data.ConnectionState.Open)
                         conn.Open();
+                    conn.InfoMessage += delegate (object sender, MySqlInfoMessageEventArgs e)
+                    {
+                        foreach (MySqlError err in e.errors)
+                        {
+                            messages.Add(err.Message);
+                        }
+                    };
                     cmd.CommandTimeout = 5000000;
                     numofrows = cmd.ExecuteNonQuery();
                 }
                 if (File.Exists(filename))
                     File.Delete(filename);
-                return numofrows.ToString();
+                idata.Add("Rows Inserted", numofrows);
+                idata.Add("Import warnings", messages);
             }
-            return 0.ToString();
+            return idata;
         }
 
-        private string UploadUserData(HttpPostedFile file, string path)
+        private Dictionary<string,object> UploadUserData(HttpPostedFile file, string path)
         {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            List<string> messages = new List<string>();
             string filename = "";
             int numofrows = 0;
             if (Path.GetExtension(file.FileName).Equals(".txt") || Path.GetExtension(file.FileName).Equals(".csv"))
@@ -365,26 +378,37 @@ namespace CresijApp.Controllers
                 file.SaveAs(filename);
                 using (var conn = new MySqlConnection(constr))
                 {
+                    
                     string filename1 = filename.Replace("\\", "/");
-                    var query = "load data infile '" + filename1 + "' Replace into table organisationdatabase.userdetails fields " +
+                    var query = "load data infile '" + filename1 + "' ignore into table organisationdatabase.userdetails fields " +
                                  "terminated by ',' enclosed by '\"' lines terminated by '\n' IGNORE 1 LINES(`loginID`,`UserName`,`PersonType`," +
-                                 "`Deptcode`,`PersonnelStatus`,`Notes`,`Password`,`phone`,`validtill`,`expiretime`)";
+                                 "`Deptcode`,`PersonnelStatus`,`Notes`,`Password`,`phone`,`startdate`,`expiredate`)";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
 
                     if (conn.State != System.Data.ConnectionState.Open)
                         conn.Open();
+                    conn.InfoMessage += delegate (object sender, MySqlInfoMessageEventArgs e)
+                    {
+                        foreach (MySqlError err in e.errors)
+                        {
+                            messages.Add(err.Message);
+                        }
+                    };
                     cmd.CommandTimeout = 5000000;
                     numofrows = cmd.ExecuteNonQuery();
                 }
                 if (File.Exists(filename))
                     File.Delete(filename);
-                return numofrows.ToString();
+                idata.Add("Rows Inserted", numofrows);
+                idata.Add("Import warnings", messages);
             }
-            return 0.ToString();
+            return idata;
         }
 
-        private string UploadClassData(HttpPostedFile file, string path)
+        private Dictionary<string, object> UploadClassData(HttpPostedFile file, string path)
         {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            List<string> messages = new List<string>();
             string filename = "";
             int numofrows = 0;
             if (Path.GetExtension(file.FileName).Equals(".txt") || Path.GetExtension(file.FileName).Equals(".csv"))
@@ -405,18 +429,28 @@ namespace CresijApp.Controllers
 
                     if (conn.State != System.Data.ConnectionState.Open)
                         conn.Open();
+                    conn.InfoMessage += delegate (object sender, MySqlInfoMessageEventArgs e)
+                    {
+                        foreach (MySqlError err in e.errors)
+                        {
+                            messages.Add(err.Message);
+                        }
+                    };
                     cmd.CommandTimeout = 5000000;
                     numofrows = cmd.ExecuteNonQuery();
                 }
                 if (File.Exists(filename))
                     File.Delete(filename);
-                return numofrows.ToString();
+                idata.Add("Rows Inserted", numofrows);
+                idata.Add("Import warnings", messages);
             }
-            return 0.ToString();
+            return idata;
         }
 
-        private string UploadCapitalData(HttpPostedFile file, string path)
+        private Dictionary<string, object> UploadCapitalData(HttpPostedFile file, string path)
         {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            List<string> messages = new List<string>();
             string filename = "";
             int numofrows = 0;
             if (Path.GetExtension(file.FileName).Equals(".txt") || Path.GetExtension(file.FileName).Equals(".csv"))
@@ -437,14 +471,104 @@ namespace CresijApp.Controllers
 
                     if (conn.State != System.Data.ConnectionState.Open)
                         conn.Open();
+                    conn.InfoMessage += delegate (object sender, MySqlInfoMessageEventArgs e)
+                    {
+                        foreach (MySqlError err in e.errors)
+                        {
+                            messages.Add(err.Message);
+                        }
+                    };
                     cmd.CommandTimeout = 5000000;
                     numofrows = cmd.ExecuteNonQuery();
                 }
                 if (File.Exists(filename))
                     File.Delete(filename);
-                return numofrows.ToString();
+                idata.Add("Rows Inserted", numofrows);
+                idata.Add("Import warnings", messages);
             }
-            return 0.ToString();
+            return idata;
+        }
+
+        private Dictionary<string, object> UploadBuildingData(HttpPostedFile file, string path)
+        {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            List<string> messages = new List<string>();
+            string filename = "";
+            int numofrows = 0;
+            if (Path.GetExtension(file.FileName).Equals(".txt") || Path.GetExtension(file.FileName).Equals(".csv"))
+            {
+                var fname = "UploadBuildingData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
+                filename = Path.Combine(path + fname + Path.GetExtension(file.FileName));
+                if (File.Exists(filename))
+                    File.Delete(filename);
+                file.SaveAs(filename);
+                using (var conn = new MySqlConnection(constr))
+                {
+                    string filename1 = filename.Replace("\\", "/");
+                    var query = "load data infile '" + filename1 + "' ignore into table organisationdatabase.buildingdetails fields " +
+                                 "terminated by ',' enclosed by '\"' lines terminated by '\n' IGNORE 1 LINES(`BuildingName`,`Buildingcode`," +
+                                 "`Queue`,`Public`,`remarks`)";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                    if (conn.State != System.Data.ConnectionState.Open)
+                        conn.Open();
+                    conn.InfoMessage += delegate (object sender, MySqlInfoMessageEventArgs e)
+                    {
+                        foreach (MySqlError err in e.errors)
+                        {
+                            messages.Add(err.Message);
+                        }
+                    };
+                    cmd.CommandTimeout = 5000000;
+                    numofrows = cmd.ExecuteNonQuery();
+                }
+                if (File.Exists(filename))
+                    File.Delete(filename);
+                idata.Add("Rows Inserted", numofrows);
+                idata.Add("Import warnings", messages);
+            }
+            return idata;
+        }
+
+        private Dictionary<string, object> UploadFloorData(HttpPostedFile file, string path)
+        {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            List<string> messages = new List<string>();
+            string filename = "";
+            int numofrows = 0;
+            if (Path.GetExtension(file.FileName).Equals(".txt") || Path.GetExtension(file.FileName).Equals(".csv"))
+            {
+                var fname = "UploadFloorData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
+                filename = Path.Combine(path + fname + Path.GetExtension(file.FileName));
+                if (File.Exists(filename))
+                    File.Delete(filename);
+                file.SaveAs(filename);
+                using (var conn = new MySqlConnection(constr))
+                {
+                    string filename1 = filename.Replace("\\", "/");
+                    var query = "load data infile '" + filename1 + "' ignore into table organisationdatabase.floordetails fields " +
+                                 "terminated by ',' enclosed by '\"' lines terminated by '\n' IGNORE 1 LINES(`floor`,`BuildingName`,`Buildingcode`," +
+                                 "`Queue`,`Public`,`remarks`)";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                    if (conn.State != System.Data.ConnectionState.Open)
+                        conn.Open();
+                    conn.InfoMessage += delegate (object sender, MySqlInfoMessageEventArgs e)
+                    {
+                        foreach (MySqlError err in e.errors)
+                        {
+                            messages.Add(err.Message);
+                        }
+                    };
+                    cmd.CommandTimeout = 5000000;
+                    numofrows = cmd.ExecuteNonQuery();
+                }
+                if (File.Exists(filename))
+                    File.Delete(filename);
+                idata.Add("Rows Inserted", numofrows);
+                idata.Add("Import warnings", messages);
+            }
+            return idata;
         }
     }
 }

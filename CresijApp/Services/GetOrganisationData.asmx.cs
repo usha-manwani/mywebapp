@@ -90,9 +90,10 @@ namespace CresijApp.Services
             public string Gender { get; set; }
             public string DeptName { get; set; }
             public string Phone { get; set; }
-            public int Age { get; set; }
+            public string Age { get; set; }
             public string IdCard { get; set; }
             public string OneCard { get; set; }
+            public string DateOfBirth { get; set; } 
         }
 
         [WebMethod(EnableSession = true)]
@@ -125,11 +126,12 @@ namespace CresijApp.Services
                             StudentID = row["studentid"].ToString(),
                             StudentName = row["studentName"].ToString(),
                             Gender = row["gender"].ToString(),
-                            Age = Convert.ToInt32(row["age"]),
+                            Age = row["age"].ToString(),
                             DeptName = row["deptcode"].ToString(),
                             Phone = row["phone"].ToString(),
                             IdCard = row["idcard"].ToString(),
-                            OneCard = row["onecard"].ToString()
+                            OneCard = row["onecard"].ToString(),
+                            DateOfBirth=row["dateofbirth"].ToString()
                         };
                         students.Add(studentData);
                     }
@@ -151,9 +153,10 @@ namespace CresijApp.Services
             public string Gender { get; set; }
             public string DeptName { get; set; }
             public string Phone { get; set; }
-            public int Age { get; set; }
+            public string Age { get; set; }
             public string IdCard { get; set; }
             public string OneCard { get; set; }
+            public string DateOfBirth { get; set; }
         }
 
         [WebMethod(EnableSession = true)]
@@ -186,11 +189,12 @@ namespace CresijApp.Services
                             TeacherID = row["teacherID"].ToString(),
                             TeacherName = row["teacherName"].ToString(),
                             Gender = row["gender"].ToString(),
-                            Age = Convert.ToInt32(row["age"]),
+                            Age = row["age"].ToString(),
                             DeptName = row["faculty"].ToString(),
                             Phone = row["phone"].ToString(),
                             IdCard = row["idcard"].ToString(),
-                            OneCard = row["onecard"].ToString()
+                            OneCard = row["onecard"].ToString(),
+                            DateOfBirth = row["dateofbirth"].ToString()
                         };
                         students.Add(studentData);
                     }
@@ -215,7 +219,7 @@ namespace CresijApp.Services
             public string BuildingName { get; set; }
             public string PersonnelStatus { get; set; }
             public string Phone { get; set; }
-            
+            public string DepartmentId { get; set; }
             public string Notes { get; set; }
             public string StartDate { get; set; }
             public string ExpireDate { get; set; }
@@ -257,7 +261,7 @@ namespace CresijApp.Services
                                     PersonnelStatus = dr["PersonnelStatus"].ToString(),
                                     Phone = dr["phone"].ToString(),
                                     Notes = dr["Notes"].ToString(),
-                                    
+                                    DepartmentId =dr["deptid"].ToString(),
                                     StartDate = dr["startdate"].ToString(),
                                     ExpireDate = dr["expiredate"].ToString(),
 
@@ -300,6 +304,7 @@ namespace CresijApp.Services
                         list.Add("UserName", dt.Rows[0]["UserName"].ToString());
                         list.Add("PersonType", dt.Rows[0]["PersonType"].ToString());
                         list.Add("buildingName", dt.Rows[0]["DeptCode"].ToString());
+						list.Add("DepartmentId", dt.Rows[0]["deptid"].ToString());														  
                         list.Add("PersonnelStatus", dt.Rows[0]["PersonnelStatus"].ToString());
                         list.Add("Notes", dt.Rows[0]["Notes"].ToString());
                         list.Add("Password", dt.Rows[0]["Password"].ToString());

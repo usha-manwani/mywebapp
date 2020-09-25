@@ -19,6 +19,7 @@ namespace CresijApp.Models
         {
             this.userlocationaccesses = new HashSet<userlocationaccess>();
             this.userlocationaccesses1 = new HashSet<userlocationaccess>();
+            this.userlogs = new HashSet<userlog>();
             this.userpermissions = new HashSet<userpermission>();
             this.userpermissions1 = new HashSet<userpermission>();
         }
@@ -27,7 +28,7 @@ namespace CresijApp.Models
         public string LoginID { get; set; }
         public string UserName { get; set; }
         public string PersonType { get; set; }
-        public string DeptCode { get; set; }
+        public Nullable<int> DeptCode { get; set; }
         public string PersonnelStatus { get; set; }
         public string Notes { get; set; }
         public string Password { get; set; }
@@ -35,10 +36,13 @@ namespace CresijApp.Models
         public System.DateTime startDate { get; set; }
         public System.DateTime expireDate { get; set; }
     
+        public virtual buildingdetail buildingdetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<userlocationaccess> userlocationaccesses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<userlocationaccess> userlocationaccesses1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<userlog> userlogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<userpermission> userpermissions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

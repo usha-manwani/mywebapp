@@ -562,7 +562,7 @@ namespace CresijApp.DataAccess
             {
                
                     string query = "INSERT INTO `organisationdatabase`.`schedulereserve` "+
-                    "(`SchoolYear`,`Semester`,`week`,`Date`,`Section`,`Classroom`,`BorrowingUnit`,`Workphone`,`PersonName`, " +
+                    "(`SchoolYear`,`Semester`,`week`,`ReserveDate`,`Section`,`Classroom`,`BorrowingUnit`,`Workphone`,`PersonName`, " +
                     "`PersonID`,`ContactNo`,`Purpose`,`Reason`,`ReservationDevices`,`Status`) "+
                     "VALUES('"+stat[0]+"','"+stat[1] + "','" + stat[2] + "','" + stat[3] + "','" + stat[4] 
                     +"','" + stat[5] + "','" + stat[6] + "','" + stat[7] + "','" + stat[8] + "','" + stat[9] + "','" + stat[10]
