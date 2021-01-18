@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Data;
 using MySql.Data.MySqlClient;
+using CresijApp.Models;
+using System.Threading.Tasks;
 
 namespace CresijApp.HubsFile
 {
@@ -65,6 +67,13 @@ namespace CresijApp.HubsFile
                     else
                         break;
                 }
+            }
+        }
+        public static async Task SessionIDTask()
+        {
+            using(var context = new OrganisationdatabaseEntities())
+            {
+                await context.buildingdetails.FindAsync();
             }
         }
     }

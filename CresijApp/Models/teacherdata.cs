@@ -14,13 +14,22 @@ namespace CresijApp.Models
     
     public partial class teacherdata
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public teacherdata()
+        {
+            this.scheduletransfers = new HashSet<scheduletransfer>();
+        }
+    
         public string TeacherID { get; set; }
         public string TeacherName { get; set; }
         public string gender { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public Nullable<System.DateTime> dateofbirth { get; set; }
         public string faculty { get; set; }
         public string phone { get; set; }
         public string idcard { get; set; }
         public string onecard { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<scheduletransfer> scheduletransfers { get; set; }
     }
 }

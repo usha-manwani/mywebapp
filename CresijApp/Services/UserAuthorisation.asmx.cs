@@ -24,16 +24,6 @@ namespace CresijApp.Services
         {
             return "Hello World";
         }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public List<object> GetUserAuthentications()
-        {
-            List<object> idata = new List<object>();
-            return idata;
-        }
-
-        
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveUserAuthentications(Dictionary<string, object> data)
         {
@@ -52,11 +42,10 @@ namespace CresijApp.Services
                 {
                     if (Session["UserLoggedIn"].ToString() != null)
                     {
-
                         adminid = Session["UserLoggedIn"].ToString();
                         string[] authmenu = data["AuthMenu"].ToString().Split(',');
                         string[] authloc = data["classNames"].ToString().Split(',');
-
+                       
                         var userid = data["personId"].ToString();
                         DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
                         int r = userAuth.DeleteUserPermissions(userid);

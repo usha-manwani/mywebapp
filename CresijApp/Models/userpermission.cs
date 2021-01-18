@@ -17,7 +17,7 @@ namespace CresijApp.Models
         public int userserialnum { get; set; }
         public int roleid { get; set; }
         public int id { get; set; }
-        public int AuthenticatedBy { get; set; }
+        public Nullable<int> AuthenticatedBy { get; set; }
     
         public virtual roledetail roledetail { get; set; }
         public virtual userdetail userdetail { get; set; }

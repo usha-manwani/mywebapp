@@ -4,14 +4,15 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
+using CresijApp.Models;
 namespace CresijApp.DataAccess
 {
     public class GetOrgData
     {
         readonly string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["SchoolConnectionString"].ConnectionString;
-        public int SetOrgInfo(string deptcode, string deptname, string bCtrlCode, string highoff
-            , string queno, string permission, string notes)
+        public int SetOrgInfo(string deptcode, string deptname, string bCtrlCode, string highoff,
+             string queno, string permission, string notes)
         {
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
@@ -28,7 +29,7 @@ namespace CresijApp.DataAccess
             return result;
         }
 
-        public List<object> GetOrgBuildingInfo(string pageIndex, string pageSize)
+        public List<object> GetOrgBuildingInfo(string pageIndex, string pageSize,string userid)
         {
             DataTable dt = new DataTable();
             var total=0;
@@ -42,6 +43,7 @@ namespace CresijApp.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@_PageIndex", pageIndex);
                     cmd.Parameters.AddWithValue("@_PageSize", pageSize);
+                    cmd.Parameters.AddWithValue("@userid", userid);
                     cmd.Parameters.Add("@_RecordCount", MySqlDbType.Int32, 4);
                     cmd.Parameters["@_RecordCount"].Direction = ParameterDirection.Output;
                     if (con.State != ConnectionState.Open)
@@ -172,7 +174,7 @@ namespace CresijApp.DataAccess
             return data;
         }
 
-        public List<object> GetClassroomInfo(string pageindex, string pagesize)
+        public List<object> GetClassroomInfo(string pageindex, string pagesize,string userid)
         {
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
@@ -186,6 +188,7 @@ namespace CresijApp.DataAccess
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
                         cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                    cmd.Parameters.AddWithValue("@userid", userid);
                         cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
                         cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
                         if (con.State != ConnectionState.Open)
@@ -210,7 +213,8 @@ namespace CresijApp.DataAccess
                 {
                     string query = "SELECT classID, ClassName, bd.buildingname, fd.floor,Seats,`camipS`,`camipT`, `camSmac`, " +
                     "`camTmac`,`camport`,`camuserid`,`campass`,`CCEquipIP`,`ccmac`, `desktopip`,`deskmac`, " +
-                    "`recordingEquip`,`recordermac`,`callhelpip`,`callhelpmac` FROM `organisationdatabase`.`classdetails` cd " +
+                    "`recordingEquip`,`recordermac`,`callhelpip`,`callhelpmac`, " +
+                    "bd.id as buildingid, fd.id as floorid FROM `organisationdatabase`.`classdetails` cd " +
                     "join buildingdetails bd on bd.id = cd.teachingbuilding join floordetails fd on fd.id = cd.floor" +
                     " where classid=" + classid;
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -267,10 +271,10 @@ namespace CresijApp.DataAccess
            
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
-                    string query = "SELECT usd.serialNo, loginID, userName, PersonType, bd.buildingName," +
-                        " PersonnelStatus, Notes, password, phone,startdate,expiredate," +
-                        "bd.id as deptid from userdetails usd join buildingdetails bd" +
-                        " on usd.deptcode = bd.id where loginid ='" + sn + "'";
+                    string query = "SELECT usd.serialNo, loginID, userName, PersonType, " +
+                        " PersonnelStatus, Notes, password, phone,startdate,expiredate" +
+                        " from userdetails usd " +
+                        " where loginid ='" + sn + "'";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -292,7 +296,6 @@ namespace CresijApp.DataAccess
             List<object> list = new List<object>();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-
                 using (MySqlCommand cmd = new MySqlCommand("sp_GetClassIPByBuilding", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -315,7 +318,26 @@ namespace CresijApp.DataAccess
             }
             return list;
         }
+        public Dictionary<string, object> GetClassAndCourse(Dictionary<string, string> data)
+        {
+            var idata = new Dictionary<string, object>();
 
+            try
+            {
+                var classId = Convert.ToInt32(data["ClassId"]);
+                var scheduleId = Convert.ToInt32(data["ScheduleId"]);
+                using (var context = new OrganisationdatabaseEntities())
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return idata;
+        }
         public List<object> GetIPClassByBuildingFloor(string building,string floor,string userid,string pageindex,int pagesize)
         {
             DataTable dt = new DataTable();
@@ -355,7 +377,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "SELECT floor, id from floordetails where buildingname='" + building + "'";
+                string query = "SELECT floor, id from floordetails where buildingname="+building;
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -378,8 +400,6 @@ namespace CresijApp.DataAccess
                         adapter.Fill(dt);
                     }
                 }
-            
-           
             return dt;
         }
 
@@ -397,12 +417,24 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
-        public DataTable GetFloorDetails(string building)
+        public DataTable GetFloorDetails(string building, string userid)
         {
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "SELECT * from Floordetails where BuildingName ='" + building+ "'";
+                string query = "SELECT fd.id,fd.floor,bd.buildingName as buildingname, " +
+                    " fd.BuildingCode as buildingcode, fd.queue, " +
+                    "fd.Public,fd.remarks, bd.id as buildingid from Floordetails fd join buildingdetails bd " +
+                    " on fd.Buildingname =bd.id where fd.id in (select floor from classdetails  " +
+                    " where classid in " +
+                    "(select locationid from userlocationaccess where Level ='Class' and " +
+                    " userserialnum = (select serialno from userdetails " +
+                    "where loginid = '"+userid+"'))) and fd.BuildingName =" + building+ 
+                    " union select fd.id,fd.floor,bd.buildingName as buildingname, " +
+                    " fd.BuildingCode as buildingcode, fd.queue, " +
+                    "fd.Public,fd.remarks, bd.id as buildingid from Floordetails fd join buildingdetails bd " +
+                    " on fd.Buildingname =bd.id where fd.buildingname="+ building+ " and fd.id in(select locationid from userlocationaccess where Level ='Floor' and " +
+                    "locationid not in(select floor from classdetails)) group by fd.id";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -411,5 +443,57 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+
+        public ClassDataDetails GetCameraByClassId(int id)
+        {
+            
+            DataTable dt = new DataTable();
+            var coursename = "";
+            var courseid = "";
+            using(var con = new MySqlConnection(constr))
+            {
+                using(var cmd = new MySqlCommand("sp_GetCourseByClassID", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("Id", id);
+                    var adp = new MySqlDataAdapter(cmd);
+                    adp.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        coursename = dt.Rows[0]["coursename"].ToString();
+                        courseid = dt.Rows[0]["Courseid"].ToString();
+                    }
+                }
+            }
+            
+            using(var context = new OrganisationdatabaseEntities())
+            {
+                var cameradetails = new ClassDataDetails();
+               
+                cameradetails = context.classdetails.Where(x => x.classID == id).Select(o=>new ClassDataDetails { CamStudentIp= o.camipS ,
+                   CamStudentMac= o.camSmac, CamTeacherIp=o.camipT,CamTeacherMac= o.camTmac,
+                   CamPassword= o.campass,CamLoginId= o.camuserid, CamPort=o.camport,
+                    CCEquipIp =o.CCEquipIP, CCMac=o.ccmac }).FirstOrDefault();
+                cameradetails.CourseName = coursename;
+                cameradetails.CourseId = courseid;
+                return cameradetails;
+            }
+            
+        }
+    }
+
+    public class ClassDataDetails
+    {
+        public string CamTeacherIp { get; set; }
+        public string CamStudentIp { get; set; }
+        public string CamTeacherMac { get; set; }
+        public string CamStudentMac { get; set; }
+        public string CamPassword { get; set; }
+        public string CamLoginId { get; set; }
+        public int CamPort { get; set; }
+        public string CourseName { get; set; }
+        public string CourseId { get; set; }
+        public string CCEquipIp { get; set; }
+        public string CCMac { get; set; }
     }
 }

@@ -26,9 +26,11 @@ namespace CresijApp.Models
         public string reason { get; set; }
         public string currentstatus { get; set; }
         public int id { get; set; }
+        public System.DateTime oldScheduleDate { get; set; }
     
         public virtual buildingdetail buildingdetail { get; set; }
         public virtual classdetail classdetail { get; set; }
         public virtual schedule schedule { get; set; }
+        public virtual teacherdata teacherdata { get; set; }
     }
 }

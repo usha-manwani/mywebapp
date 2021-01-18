@@ -1,0 +1,23 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><base href=/site-vue-new/ ><meta name=viewport content="width=device-width,initial-scale=1"><title>学校管理系统 - 首页</title><link rel=stylesheet href=css/Chart.min.css><link rel=stylesheet href=dist/css/bootstrap.min.css><link rel=stylesheet href=css/sensor.css><link rel=stylesheet href=font/css/font-awesome.min.css><script src=dist/js/jquery.min.js></script><script src=dist/js/Chart.min.js></script><script src=js/umd/popper.min.js></script><script src=dist/js/bootstrap.min.js></script><script src=js/moment.min.js></script><script src=js/moment.zh-cn.js></script><script src=dist/js/bootstrap-datetimepicker.min.js></script><link href=dist/css/bootstrap-datetimepicker.min.css rel=stylesheet><link href=css/bootstrap-datepicker.css rel=stylesheet><script src=js/bootstrap-datepicker.min.js></script><script src=js/CheckUserSession.js></script><script src=js/ip_input.js></script><script src="js/sensor.js?v=1"></script><script src=js/jquery.signalR-2.4.1.min.js></script><script src=../signalr/hubs></script><script src=js/date-holiday-umd.min.js></script><script src=js/vue.min.js></script><script src=https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.min.js></script><link href=https://cdn.bootcdn.net/ajax/libs/video.js/7.9.3/video-js.css rel=stylesheet><script src=https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js></script><script src=https://cdn.bootcdn.net/ajax/libs/video.js/7.9.3/video.js></script><script src=https://cdn.bootcdn.net/ajax/libs/echarts/4.8.0/echarts.min.js></script><script src=https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/index.js></script><script src=https://cdn.bootcdn.net/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js></script><link href=https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/theme-chalk/index.css rel=stylesheet><script>$.ajaxSetup({
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        complete: function(XMLHttpRequest, textStatus) {},
+        statusCode: {
+          404: function() {
+            alert("数据获取/输入失败，没有此服务。404");
+          },
+          200: function(e) {
+            console.log(e, 1111111111);
+            if (e.d && e.d.customErrorCode && e.d.customErrorCode === "440") {
+              ELEMENT.Notification({
+                title: '提示',
+                message: '会话过期，请重新登录',
+                duration: 5000
+              })
+              window.location.href = "./login.html";
+            }
+          },
+          500: function(e) {
+            // window.location.href="./login.html"
+          },
+        },
+      });</script><link href=/site-vue-new/css/chunk-0c552914.ae2b81eb1c55de99d7b3.css rel=prefetch><link href=/site-vue-new/js/chunk-0c552914.ae2b81eb1c55de99d7b3.js rel=prefetch><link href=/site-vue-new/css/chunk-common.ae2b81eb1c55de99d7b3.css rel=preload as=style><link href=/site-vue-new/css/chunk-vendors.ae2b81eb1c55de99d7b3.css rel=preload as=style><link href=/site-vue-new/js/chunk-common.ae2b81eb1c55de99d7b3.js rel=preload as=script><link href=/site-vue-new/js/chunk-vendors.ae2b81eb1c55de99d7b3.js rel=preload as=script><link href=/site-vue-new/js/index.ae2b81eb1c55de99d7b3.js rel=preload as=script><link href=/site-vue-new/css/chunk-vendors.ae2b81eb1c55de99d7b3.css rel=stylesheet><link href=/site-vue-new/css/chunk-common.ae2b81eb1c55de99d7b3.css rel=stylesheet></head><body style=overflow:hidden><div id=homebody style=overflow:hidden></div><script src=/site-vue-new/js/chunk-vendors.ae2b81eb1c55de99d7b3.js></script><script src=/site-vue-new/js/chunk-common.ae2b81eb1c55de99d7b3.js></script><script src=/site-vue-new/js/index.ae2b81eb1c55de99d7b3.js></script></body></html>

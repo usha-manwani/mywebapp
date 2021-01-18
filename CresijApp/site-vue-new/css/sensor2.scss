@@ -1,0 +1,1876 @@
+html{
+  -webkit-text-size-adjust: none!important;
+}
+$green:#66BA30;
+$green2:#96D171;
+$green_s01:#F7FFF2;
+$green_s02:#E8FFDB;
+$red:#DF6B6B;
+$red_s01:#FFF6F6;
+$red_s02:#FFEBEB;
+$blue:#3AC4F3;
+$blue_s01:#F3FCFF;
+$blue_s02:#D9F5FF;
+$orange:#FFBE3D;
+$orange_s01:#FFFCF3;
+$orange_s02:#FFF8E6;
+$purple:#9630BA;
+$gray:#737373;
+$gray2:#f5f5f5;
+$gray_s01:#F9F9F9;
+$gray_s02:#EEEEEE;
+$gray_s03:#e1e1e1;
+$gray_s04:#b9b9b9;
+$white:#fff;
+$black:#000;
+.jfont12{
+  font-size: 12px!important;
+}
+.jfont14{
+  font-size: 14px;
+}
+.jfont22{
+  font-size: 26px;
+}
+.jmodal{
+  display: none;
+  width:100%;
+  height:100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.8);
+	z-index: 999;
+	.jmodal_box{
+		position: absolute;
+		padding: 20px 40px;
+		top:50%;
+		left: 50%;
+		background-color: #fff;
+		box-shadow: 0 0 20px rgba(0,0,0,0.8);
+		&.jw-1{
+      display: table;
+      min-width: 660px;
+			// $width: 660px;
+			// width: $width;
+			// margin-left: -$width/2;
+      .searchbox2{
+        text-align: center;
+        display: inline-block;
+      }
+		}
+    .tt{
+      font-size: 18px;
+      color: #737373;
+      border-bottom:1px solid #f5f5f5;
+      padding-bottom: 20px;
+      display: table;
+      width: 100%;
+    }
+    .btns{
+      padding-top: 20px;
+      display: table;
+      a{
+        font-size: 12px;
+        display: block;
+        float: left;
+        margin-right: 10px!important;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 10px;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+	}
+}
+.bg_green{
+  background-color: #66BA30;
+}
+.bg_red{
+  background-color: #DF6B6B;
+}
+.bg_blue{
+  background-color: #3AC4F3;
+}
+.bg_blue.this{
+  background-color:$green;
+}
+.bg_orange{
+  background-color: #FFBE3D;
+}
+.bg_gray{
+  background-color: #737373;
+}
+.bg_gray2{
+  background-color: #f5f5f5;
+}
+.bg_purple{
+  background-color: $purple;
+}
+.bg_black{
+  background-color: $black;
+}
+.bg_white{
+  background-color: $white;
+}
+.bg_yellow{
+  background-color: #FFEC3E;
+}
+.jbtn2{
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin-right: 10px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  color: #fff!important;
+  cursor: pointer;
+  &.active{
+    background-color: $green!important;
+  }
+  i{
+    margin-top: 10px;
+    margin-right: 5px;
+  }
+}
+.inputgray{
+  border:none;
+  outline: none;
+  background-color: #f5f5f5;
+  padding: 0 10px;
+}
+.jdown{
+  display: none!important;
+}
+.jdropdown{
+  .jdown{
+    display: inline!important;
+  }
+}
+.jnavdrop{
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  position: absolute;
+  background-color: #f5f5f5;
+  top:40px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  display: none;
+  a{
+    display: block;
+    clear: both;
+    line-height: 30px;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    color: $gray!important;
+    &:last-child{
+      border-bottom: none;
+    }
+    &:hover{
+      background-color:$green2;
+      color: $white!important;
+    }
+    i{
+      margin-left: 10px;
+    }
+  }
+}
+.nav2{
+  margin-left: 20px;
+}
+.jbread{
+  line-height: 22px;
+  float: left;
+  font-size: 12px;
+  i{
+    float: left;
+    margin-top: 5px;
+  }
+  .step{
+    color: $gray;
+    display: block;
+    float: left;
+    padding:0 10px;
+    &:first-child{
+      padding-left: 0;
+    }
+    &.active{
+      color:$blue;
+      font-weight: bold;
+      span{
+        background-color: $blue;
+      }
+    }
+  }
+  span{
+    background-color: $gray;
+    color:$white;
+    display: block;
+    width: 22px;
+    height: 22px;
+    float: left;
+    margin-right: 5px;
+    text-align: center;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+}
+.bbgray{
+  border-bottom:1px solid $gray_s03;
+}
+.bbwhite{
+  border-bottom:1px solid $white;
+}
+h5{
+  color: $black;
+  font-size: 14px;
+  font-weight: bold;
+  clear: both;
+  padding: 25px 0 20px;
+  margin: 0;
+  i{
+    margin-right: 5px;
+  }
+}
+table.info_normal{
+  font-size: 12px;
+  color: $gray;
+  td{
+    padding: 5px 5px;
+  }
+  span{
+    color: $black;
+  }
+}
+.info_input{
+  outline: none;
+  border: 1px solid $gray;
+  color: $gray;
+  line-height: 20px;
+  padding: 5px 10px;
+}
+.maxw900{
+  max-width: 900px;
+}
+table.table_list{
+  line-height: 30px;
+  td{
+    height: 30px;
+  }
+}
+tr{
+
+}
+.jbtn_xs{
+  height: 24px;
+  line-height: 24px;
+  padding: 0 5px;
+  display: block;
+  float: left;
+  margin-right: 10px;
+  color: $gray2;
+  font-size: 12px;
+  &.btn_blue{
+    &.vis{
+      background-color: $blue;
+      color:$white!important;
+      padding: 0 10px;
+    }
+    &:hover, &:active{
+      background-color:#3AD3F3;
+      color:$white!important;
+    }
+  }
+}
+.tr_bg{
+  &_suc{
+    background-color: $green_s01;
+    &:hover{
+      background-color: $green_s02;
+    }
+  }
+  &_danger{
+    background-color: $red_s01;
+    &:hover{
+      background-color: $red_s02;
+    }
+  }
+  &_alert{
+    background-color: $orange_s01;
+    &:hover{
+      background-color: $orange_s02;
+    }
+  }
+  &_disable{
+    background-color: $gray_s01;
+    &:hover{
+      background-color: $gray_s02;
+    }
+  }
+}
+.jpager{
+  font-size: 12px;
+  color: $gray;
+  padding: 30px 0;
+  display: table;
+  height: 20px;
+  line-height: 20px;
+
+  a{
+    display: block;
+    float: left;
+    padding: 0 5px;
+    margin-right: 5px;
+    height: 20px;
+    line-height: 20px;
+    &:hover{
+      color:$blue!important;
+    }
+  }
+  a.page{
+    min-width: 15px!important;
+    &:hover{
+      color: $blue!important;
+      background-color: $blue_s02!important;
+    }
+    &.active{
+      background-color: $blue!important;
+      color: $white!important;
+    }
+  }
+  a.disable{
+    color:$gray2!important;
+  }
+  span{
+    display: block;
+    float: left;
+    padding: 0 5px;
+    margin-right: 5px;
+  }
+}
+.jroom_selector{
+  td,th{
+
+  }
+  b{
+    background-color: #737373;
+    color: #fff;
+    padding: 5px 10px;
+  }
+  .th-0{
+    width: 20px;
+  }
+  .th-1{
+    width: 130px;
+    vertical-align: top;
+    padding-top: 13px;
+  }
+  .th-2{
+    width: 100px;
+    padding-left: 0;
+  }
+  span{
+    margin-right: 15px;
+  }
+}
+.jroom_box{
+  display: none;
+  tr{
+    padding: 5px 10px;
+    margin-bottom: 5px;
+  }
+  tr:hover{
+    box-shadow: 0 0 20px rgba(102,186,48,0.3);
+  }
+  b{
+    padding: 3px 10px;
+    background-color: $gray2;
+    color:$gray;
+  }
+  & tr:hover b{
+    background-color: $green;
+    color: $white;
+  }
+}
+.ROOM_CTRL{
+  color: $green;
+  font-size: 16px;
+  &:hover{
+    color:$blue;
+  }
+}
+.style-tr-shadow{
+  &-green tr:hover{
+    box-shadow: 0 0 20px rgba(102,186,48,0.3);
+  }
+  &-blue tr:hover{
+    box-shadow: 0 0 20px rgba(58,196,243,0.3);
+  }
+}
+.style-tr-bg{
+  &-green tr:hover{
+    background-color: rgba(102,186,48,0.1);
+  }
+  &-blue tr:hover{
+    background-color: rgba(58,196,243,0.1);
+  }
+  &-gray tr:hover{
+    background-color: rgba(0,0,0,0.05);
+  }
+}
+span.span01{
+  width: 60px;
+  padding-left: 5px;
+  display: inline-block;
+  color:$gray;
+}
+span.span02{
+  width: 90px;
+  padding-left: 5px;
+  display: inline-block;
+  color:$gray;
+  text-align: right;
+}
+span.span03{
+  width: 110px;
+  padding-left: 5px;
+  display: inline-block;
+  color:$gray;
+  text-align: right;
+}
+.jtab{
+  display: table;
+  .tabbox{
+    height: 30px;
+    line-height: 30px;
+    padding: 0 35px;
+    background-color: $gray2;
+    color:$gray_s04;
+    float: left;
+    cursor: pointer;
+    font-size: 14px;
+    &.active, &:hover{
+      background-color: $blue;
+      color:$white;
+    }
+    &:hover{
+      opacity: 0.6;
+    }
+  }
+}
+.jvideo{
+  width: 720px;
+  height: 576px;
+  background-color: $gray;
+  display:inline-block;
+}
+.jvideo2{
+  width: 1022px;
+  height: 496px;
+  background-color: $gray;
+  display:inline-block;
+}
+.jtt2{
+  background-color: $gray2;
+  padding: 10px;
+}
+.jtab_r{
+  margin-left: 20px;
+  font-size: 12px;
+}
+hr{
+  color: $gray_s04;
+}
+.j{
+  &w-30px{
+    width: 30px;
+  }
+  &w-50px{
+    width: 50px;
+  }
+}
+h4 label{
+  font-size: 12px;
+  padding: 0 10px;
+}
+.jf-12{
+  font-size: 12px!important;
+}
+a.gray.icon:hover{
+  color:$white!important;
+  background-color: $blue;
+  border-radius: 5px;
+}
+a.gray.icon-red:hover{
+  color:$white!important;
+  background-color: $red;
+}
+a.gray.icon-green:hover{
+  color:$white!important;
+  background-color: $green;
+}
+.jtable-1{
+  td{
+    padding:10px 0;
+  }
+  tr:hover{
+    background-color: $gray2;
+  }
+}
+.jlh-30{
+  line-height: 30px;
+}
+label{
+  margin-bottom: 0!important;
+  position: relative;
+}
+textarea{
+  padding: 5px;
+}
+input[type=text], input[type=password], textarea{
+  outline:none;
+  border:1px solid $gray_s04;
+  padding: 0 3px;
+  height: 24px;
+  line-break: 24px;
+  color:$gray;
+  &:focus{
+    border:1px solid rgba(102,186,48,0.6);
+    box-shadow: 0 0 20px rgba(102,186,48,0.3);
+    color:$green;
+  }
+}
+input[type=checkbox]{
+  display: none;
+}
+input[type=text]:disabled, textarea:disabled{
+  border:1px solid $gray_s04;
+  background-color: $gray2;
+}
+.jcheckbox,.jcheckbox2{
+  width: 14px;
+  height:14px;
+  border-radius: 2px;
+  border:1px solid $green;
+  display: inline-block;
+  background-color:$white;
+  color:$white;
+  cursor: pointer;
+}
+input[type=checkbox]:checked + i.jcheckbox,.jcheckbox.check_all_table_active,.jcheckbox.check_all_tr_active,.jcheckbox.check_all_td_active{
+  background-color:$green;
+}
+.jcheckbox2.active{
+  background-color:$green;
+}
+input[type=checkbox] + span.jswift{
+  height: 20px;
+  background-color: $red;
+  border-radius: 20px;
+  display: inline-flex;
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+  & i{
+    font-style: normal;
+    line-height: 16px;
+  }
+  & i.jswift-btn{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 32px;
+    background-color: $white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    left: 2px;
+    top:2px;
+    margin-right: 0!important;
+  }
+  & i.on{
+    position: absolute;
+    height: 16px;
+    color: $white;
+    right: 10px;
+    top:2px;
+    margin-right: 0!important;
+    display: block;
+  }
+  & i.off{
+    position: absolute;
+    height: 16px;
+    color: $white;
+    left: 10px;
+    top:2px;
+    margin-right: 0!important;
+    display: none;
+  }
+}
+input[type=checkbox] + span.jswift.swift_blue{
+  background-color: $blue;
+}
+input[type=checkbox]:checked + span.jswift{
+  background-color: $green;
+  & i.jswift-btn{
+    right: 2px;
+    left: auto;
+  }
+  & i.on{
+    display: none;
+  }
+  & i.off{
+    display: block;
+  }
+}
+input[type=radio]{
+  display: none;
+  & + span.jradio{
+    width: 14px;
+    height: 14px;
+    border-radius: 15px;
+    border:1px solid $green;
+    display: inline-flex;
+    margin-right: 5px;
+    position: relative;
+    & .jradio-dot{
+      width: 8px;
+      height: 8px;
+      display: block;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      border-radius: 14px;
+      margin-top:0!important;
+    }
+  }
+  &:checked +span.jradio{
+    & .jradio-dot{
+      background-color: $green;
+    }
+
+  }
+}
+// datepicker
+.bootstrap-datetimepicker-widget{
+  font-size: 12px!important;
+  position: absolute!important;
+  top:35px!important;
+}
+.date-01{
+  .bootstrap-datetimepicker-widget{
+    left:-15px!important;
+  }
+}
+.date-02{
+  .bootstrap-datetimepicker-widget{
+    right:0!important;
+  }
+}
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover{
+  background-color:$green!important;
+}
+.bootstrap-datetimepicker-widget table td.today:before{
+  border-bottom-color:$green!important;
+}
+.bootstrap-datetimepicker-widget table td.active.today:before{
+  border-bottom-color:$white!important;
+}
+.bootstrap-datetimepicker-widget .timepicker-hour, .bootstrap-datetimepicker-widget .timepicker-minute, .bootstrap-datetimepicker-widget .timepicker-second{
+  font-size: 26px!important;
+}
+.jdatetime{
+  position: relative;
+  display: inline;
+  i{
+    position: absolute;
+    font-size: 14px;
+    color:$gray_s04;
+    top: 2px;
+    right: 5px;
+  }
+  input:focus + i{
+    color:$green!important;
+  }
+}
+.lh24{
+  line-height: 24px;
+  display: inline-block;
+  height: 24px;
+}
+//下拉菜单2
+.jdropdown2{
+  cursor: pointer;
+  height: 22px;
+  line-height: 22px;
+  font-size: 12px;
+  position: relative;
+  display: inline-table;
+  border:1px solid $gray_s04;
+  background-color: $white;
+  .jdropdown2-box{
+    float: left;
+  }
+  .jdropdown2-arrow{
+    width:22px;
+    float: right;
+  }
+  .jdropdown2-list{
+    position: absolute;
+    z-index: 99;
+    top:0px;
+    left:-1px;
+    border-top:2px solid $green;
+    background-color: $white;
+    box-shadow: 0 0 20px rgba(102,186,48,0.5);
+    label{
+      line-height: 24px;
+      padding: 0 10px;
+      width: 100%;
+      &:hover{
+        background-color: $green;
+        color: $white;
+      }
+    }
+  }
+  &.jdropdown2-blue{
+    border-color:$blue;
+    .jdropdown2-arrow{
+      color: $blue;
+    }
+    .jdropdown2-list{
+      border-top:2px solid $blue!important;
+      box-shadow: 0 0 20px rgba(58,196,234,0.5);
+      label:hover{
+        background-color: $blue!important;
+      }
+    }
+  }
+  &.jdropdown2-normal{
+    .jdropdown2-list{
+      label:hover{
+        background-color: $gray2!important;
+      }
+    }
+  }
+}
+.table_nostyle{
+  td{
+    padding:0!important
+  }
+}
+.bar01 input[type=text]{
+  height:30px;
+  border:none;
+  background-color: $gray2;
+  padding-left: 10px;
+}
+.cell-10{
+  td{
+    padding:10px 5px;
+    font-size: 12px!important;
+  }
+}
+.jbtn2{
+  &:hover{
+    opacity: 0.8;
+  }
+}
+.hover_btn{
+  & .hover_btn_td a{
+    padding: 0 8px;
+    text-align: center;
+    border-radius: 5px;
+  }
+  &:hover .hover_blue{
+    color:$white;
+    background-color: $blue;
+    &:hover{
+      opacity: 0.8;
+      color:$white;
+      box-shadow: 0 0 10px $blue;
+    }
+  }
+  &:hover .hover_red{
+    color:$white;
+    background-color: $red;
+    &:hover{
+      opacity: 0.8;
+      color:$white;
+      box-shadow: 0 0 10px $red;
+    }
+  }
+  &:hover .hover_orange{
+    color:$white;
+    background-color: $orange;
+    &:hover{
+      opacity: 0.8;
+      color:$white;
+      box-shadow: 0 0 10px $orange;
+    }
+  }
+  &:hover .hover_green{
+    color:$white;
+    background-color: $green;
+    &:hover{
+      opacity: 0.8;
+      color:$white;
+      box-shadow: 0 0 10px $green;
+    }
+  }
+  &:hover .hover_purple{
+    color:$white;
+    background-color: $purple;
+    &:hover{
+      opacity: 0.8;
+      color:$white;
+      box-shadow: 0 0 10px $purple;
+    }
+  }
+}
+.arr_blue_up{
+  width: 0;
+  height: 0;
+  border:5px solid transparent;
+  border-bottom-color: $blue;
+  position: absolute;
+  top: -10px;
+  left: 10px;
+}
+.jshowinfo{
+  position: relative;
+  height: 25px;
+  display: inline-block;
+  .jinfo{
+    display: none;
+    z-index: 99;
+    background-color: $blue;
+    color:$white;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    padding: 10px;
+    table{
+      line-height: 20px;
+      tr:hover{
+        background-color: $blue;
+      }
+      td{
+        height: 20px;
+        padding: 0;
+        color:$white;
+      }
+    }
+  }
+}
+// 状态容器
+.statu-box{
+  // box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  border:1px solid rgba(0,0,0,0.1);
+  // &:hover{
+  //   border-color: $white;
+  // }
+  &-red{
+    &:hover{
+      box-shadow: 0 0 30px $red;
+      border-color: $red;
+    }
+    & .statu-color{
+      color:$red;
+    }
+    & .statu-bg-color{
+      background-color: $red;
+    }
+  }
+  &-blue{
+    &:hover{
+      box-shadow: 0 0 30px $blue;
+      border-color: $blue;
+    }
+    & .statu-color{
+      color:$blue;
+    }
+    & .statu-bg-color{
+      background-color: $blue;
+    }
+  }
+  &-orange{
+    &:hover{
+      box-shadow: 0 0 30px $orange;
+      border-color: $orange;
+    }
+    & .statu-color{
+      color:$orange;
+    }
+    & .statu-bg-color{
+      background-color: $orange;
+    }
+  }
+  &-green{
+    &:hover{
+      box-shadow: 0 0 30px $green;
+      border-color: $green;
+    }
+    & .statu-color{
+      color:$green;
+    }
+    & .statu-bg-color{
+      background-color: $green;
+    }
+  }
+  &-gray{
+    &:hover{
+      box-shadow: 0 0 30px $gray;
+      border-color: $gray;
+    }
+    & .statu-color{
+      color:$gray;
+    }
+    & .statu-bg-color{
+      background-color: $gray;
+    }
+  }
+  &-purple{
+    &:hover{
+      box-shadow: 0 0 30px $purple;
+      border-color: $purple;
+    }
+    & .statu-color{
+      color:$purple;
+    }
+    & .statu-bg-color{
+      background-color: $purple;
+    }
+  }
+
+}
+//播放列表
+.j-play-list{
+  & a.active{
+    background-color: $blue;
+    color:$white!important;
+  }
+}
+.j-t-box-01{
+  display: none;
+}
+//播放控制
+.j-play-control{
+
+}
+.bg_black{
+  &_4{
+    background-color:rgba(0,0,0,0.4);
+  }
+  &_1{
+    background-color:rgba(0,0,0,0.1);
+  }
+  &_05{
+    background-color:rgba(0,0,0,0.05);
+  }
+}
+.j-ctrl-pannel{
+  height:85px;
+  position: relative;
+  overflow: hidden;
+}
+.j-mask, .j-mask2{
+  position: absolute;
+  width:100%;
+  height:150px;
+  z-index: 99;
+}
+.j-mask2{
+  opacity: 0.5;
+}
+.j-set{
+  .bg_status{
+    background-color: $blue;
+  }
+  .j-mask, .j-mask2{
+    display: none;
+  }
+  .j-ctrl-pannel{
+    opacity: 1;
+  }
+  .j-by-settings{
+    display: block;
+  }
+  .j-by-openning{
+    display: none;
+  }
+}
+.j-open{
+  .bg_status{
+    background-color: $green;
+  }
+  .j-mask{
+    display: block;
+  }
+  .j-ctrl-pannel{
+    opacity: 0.3;
+  }
+  .j-by-settings{
+    display: none;
+  }
+  .j-by-openning{
+    display: block;
+  }
+}
+.j-dropbox3{
+  position: absolute;
+  box-shadow: 0 0 200px rgba(58,196,243,1);
+  background-color: $white;
+  cursor:auto;
+  z-index: 99;
+}
+.j-dropbox-btn3{
+  position: relative;
+}
+.j-status-light{
+  width:15px;
+  height: 15px;
+  border-radius:20px;
+  border:2px solid $gray2;
+  display: block;
+  margin-top: 2px;
+  &.light-red{
+    background-color: $red;
+    box-shadow: 0 0 20px $red;
+  }
+  &.light-orange{
+    background-color: $orange;
+    box-shadow: 0 0 20px $orange;
+  }
+  &.light-green{
+    background-color: $green;
+    box-shadow: 0 0 20px $green;
+  }
+}
+.j-eqm{
+  &-gray{
+    border-radius: 3px;
+    border-bottom: 3px solid rgba(0,0,0,0.5);
+    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+  }
+  &-orange{
+    border-radius: 3px;
+    border-bottom: 3px solid $orange;
+    box-shadow: 0 0 6px $orange;
+  }
+  &-blue{
+    border-radius: 3px;
+    border-bottom: 3px solid $blue;
+    box-shadow: 0 0 6px $blue;
+  }
+  &-green{
+    border-radius: 3px;
+    border-bottom: 3px solid $green;
+    box-shadow: 0 0 6px $green;
+  }
+  &-red{
+    border-radius: 3px;
+    border-bottom: 3px solid $red;
+    box-shadow: 0 0 6px $red;
+  }
+}
+.border-white{
+  border:1px solid $white;
+}
+.j-process-bg{
+  width:80%;
+  height: 5px;
+  display: block;
+  background-color: $gray2;
+  .j-process-perc{
+    background-color: $green;
+    display: block;
+    height: 5px;
+    float: left;
+  }
+  &.j-process-ctrl{
+    background: linear-gradient(left, #91FF00, #FFEE00, #FF6600);
+    background: -ms-linear-gradient(left, #91FF00, #FFEE00, #FF6600);
+    background: -webkit-linear-gradient(left, #91FF00, #FFEE00, #FF6600);
+    background: -moz-linear-gradient(left, #91FF00, #FFEE00, #FF6600);
+  }
+  &.j-process-ctrl .j-process-perc{
+    background-color: $gray;
+  }
+}
+.j-ctrl-bar{
+  background-color:rgba(0,0,0,0.4);
+  position: absolute;
+  bottom:0;
+  left: 15px;
+}
+.j-ctrl-btn{
+  color:$gray2;
+  &:hover{
+    color:$white;
+    text-shadow: 0 0 15px $white;
+  }
+}
+.jtab2{
+  background-color: $white!important;
+  border-bottom: none;
+  & .tabbox{
+    background-color: $white!important;
+    color:$gray!important;
+    width:14%!important;
+    padding: 0;
+    text-align:center;
+    &:hover{
+      color:$blue!important;
+      background-color: $white!important;
+    }
+    &.active{
+      color:$blue!important;
+      border-bottom: 3px solid $blue!important;
+      background-color: $white!important;
+    }
+  }
+}
+.j-position-blue{
+  .selection{
+    background-color: $gray2;
+    color:$gray;
+    width:24px;
+    height:24px;
+    text-align: center;
+    margin-right: 10px;
+    line-height: 24px;
+    cursor: pointer;
+    &.active{
+      background-color: $blue;
+      color: $white;
+    }
+  }
+}
+.yuntai{
+  &.yuntai-circle{
+    width:100px;
+    height:100px;
+    position: relative;
+    border:1px solid lighten($black, 90%);
+    // box-shadow: 0px 0px 20px lighten($black, 85%);
+    &:hover{
+      border:1px solid $white;
+      box-shadow: 0px 0px 20px lighten($blue, 10%);
+    }
+  }
+  .yuntai-text{
+    width: 40px;
+    height: 40px;
+    background-color: $blue;
+    color: $white;
+    position: absolute;
+    top:30px;
+    left:30px;
+    text-align: center;
+    line-height: 40px;
+  }
+  i{
+    width:20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    color: $gray;
+    &:hover{
+      color:$blue;
+    }
+    &.up{
+      top:8px;
+      left:40px;
+    }
+    &.down{
+      bottom:3px;
+      left:40px;
+    }
+    &.left{
+      left:5px;
+      top:43px;
+      background-color: #fff;
+    }
+    &.right{
+      right:5px;
+      top:43px;
+    }
+  }
+}
+//ms new
+.j-slider{
+  padding:0;
+}
+.j-slider::-ms-track{
+  padding: 10px 0;
+  background-color: $white;
+  height:5px;
+  border-radius: 5px;
+  outline: 0;
+  color: transparent;
+  border-color:transparent;
+  margin:0;
+}
+.j-slider::-ms-thumb{
+  width:15px;
+  height:15px;
+  background-color:$white;
+  border-radius: 50%;
+  border:0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  &:hover{
+    box-shadow: 0 0 10px $green;
+  }
+}
+.j-slider::-ms-fill-lower{
+  background-color: $green;
+}
+.j-slider::-ms-fill-upper{
+  background-color: $gray2;
+}
+.j-slider{
+  -webkit-appearance: none;
+  overflow: visible;
+  border:none;
+  outline: none;
+  position: relative;
+  //moz
+  &::-moz-range-track{
+    background-color:$gray2;
+  }
+  &::-moz-range-progress{
+    background-color:$green;
+  }
+  &::-moz-range-thumb{
+    background-color: $white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border:0;
+    &:hover{
+      box-shadow: 0 0 10px $green;
+    }
+  }
+  //webkit
+  &::-webkit-slider-runnable-track{
+    -webkit-appearance: none;
+    height:5px;
+    margin-top: 5px;
+    // background:linear-gradient(90deg, $green 60%, $gray2 60%);
+  }
+  &::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    margin-top: -7px;
+    width:15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: $white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    &:hover{
+      box-shadow: 0 0 10px $green;
+    }
+  }
+}
+.j-video-sm{
+  display: inline;
+  width: 18%;
+  margin: 0 1%;
+}
+.j-sound-btn{
+  cursor:pointer;
+  line-height: 30px;
+  .j-icon{
+    width:30px;
+    height:30px;
+    display: inline-block;
+  }
+}
+.j-single-ctrl-btn{
+  &:hover{
+    .fa-stack-2x{
+      color:$green!important;
+    }
+  }
+}
+.j-thumb01{
+  width:61px;
+  height: 40px;
+  cursor: pointer;
+  & path{
+    fill:#gray2;
+    opacity: 0.2;
+  }
+  &:hover path{
+    fill:$green;
+    opacity: 0.7;
+  }
+  &.active path{
+    fill:$green;
+    opacity: 1;
+  }
+}
+div.j-thumb01{
+  border:1px solid;
+  border-color: $gray;
+  color:$gray;
+  opacity: 0.6;
+  font-size: 12px;
+  text-align: center;
+  line-height: 38px;
+  &:hover{
+    border-color: $green;
+    color:$green;
+    opacity: 0.7;
+  }
+  &.active{
+    background-color: $green;
+    border-color: $green;
+    color:$white;
+    opacity: 1;
+  }
+}
+.j-sound-btn:hover{
+  opacity: 0.6;
+}
+.j-sound-btn.active{
+  .bg_gray{
+    background-color: $blue;
+  }
+  &.call{
+    .bg_green{
+      background-color: $red;
+    }
+    span{
+      color: $red;
+    }
+  }
+}
+.font-12 {
+  font-size: 12px;
+}
+.font-14 {
+  font-size: 14px;
+}
+// 左侧菜单样式
+.j-room{
+  width: 50px;
+  padding: 5px 0;
+  display: block;
+  float: left;
+}
+.left-menu-head{
+  padding-left: 20px;
+  line-height: 40px;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  &:hover{
+    background-color: $green;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  &.active{
+    background-color: $green;
+  }
+}
+.left-menu-container{
+  width: 100%;
+  background-color: #2C2C2C;
+  display: table;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  &:last-child{
+    border-bottom:none;
+  }
+}
+.left-menu-building{
+  padding-left: 20px;
+  line-height: 35px;
+  color: $green;
+  font-weight: bold;
+}
+.left-menu-level{
+  padding-left: 40px;
+  line-height: 30px;
+  color: $green;
+}
+.left-menu-room{
+  display: table;
+  padding-left: 38px;
+  padding-bottom: 10px;
+}
+// login page
+.login-bg{
+  background-image: url(~@/assets/images/loginbg.jpg);
+  background-position:top center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  height: 50vh;
+}
+.login-box{
+  margin-top: -330px;
+}
+.login-title{
+  padding-bottom: 90px;
+  text-shadow: 0 0 10px rgb(58,196,243);
+  .chs{
+    font-size: 30px;
+    font-weight: bold;
+    color: $white;
+  }
+  .eng{
+    font-size: 14px;
+    color: $white;
+  }
+}
+.login-pannel{
+  background-color: rgba(255,255,255,0.8);
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  margin: auto;
+  width: 380px;
+  padding-top: 30px;
+  display: table;
+  padding-bottom: 30px;
+  input{
+    height: 35px;
+    line-height: 35px;
+    color:$gray;
+    padding-left: 30px;
+    width: 280px;
+    font-style: 12px!important;
+  }
+  .login-inputs{
+    margin: auto;
+    width: 280px;
+    padding: 10px 0;
+    position: relative;
+    i{
+      font-size: 16px;
+      position: absolute;
+      top:19px;
+      left:10px;
+      color: $gray;
+    }
+    &.icon-focus{
+      i{
+        color:$green;
+      }
+      input::-webkit-input-placeholder{
+        color:$white;
+        font-size: 10px;
+      }
+      input:-moz-placeholder{
+        color:$white;
+        font-size: 10px;
+      }
+      input::moz-placeholder{
+        color:$white;
+        font-size: 10px;
+      }
+      input:-ms-input-placeholder{
+        color:$white;
+        font-size: 10px;
+      }
+    }
+    }
+  }
+  .login-btns{
+    margin: auto;
+    width: 280px;
+    padding: 10px 0;
+  }
+  a.sign-up{
+    float: right;
+    font-size: 12px!important;
+    color: $black;
+    margin-top:10px;
+    margin-left: 15px;
+    position: relative;
+    &:hover{
+      color:$green;
+    }
+    i{
+      position: relative;
+      top:0;
+      left:0;
+    }
+  }
+  .copy-rights{
+    font-size: 12px;
+    width:300px;
+    left: 50%;
+    margin-left: -150px;
+    color: $gray_s04;
+    text-align: center;
+    position: absolute;
+    bottom: 30px;
+    .dev-logo{
+      padding-bottom: 20px;
+    }
+  }
+/*ip-input-group*/
+.ip-input-group { width:auto; }
+.ip-input-group-w { background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; width: 100%; border-radius: 2px; }
+.ip-input-group.focus .ip-input-group-w { color: #495057; background-color: #fff !important; border-color: $green; outline: 0; box-shadow:  0 0 20px rgba(102,186,48,0.3);}
+.ip-input-group .ip-input-group-input { }
+.ip-input-group .ip-input-group-input input.form-control { background-color: transparent; border: 1px solid transparent; width: 100%; text-align: center; padding: 2px 5px; }
+.ip-input-group .ip-input-group-input input.form-control.focus{ background-color: $white !important; }
+.ip-input-group-span { padding: 0 4px; color: #888; }
+// JURL
+.JURL{
+  cursor:pointer;
+}
+//补充样式
+.j-forb{
+  position: absolute;
+  background-color: $white;
+  opacity: 0;
+  height: 60px;
+  width:100%;
+  cursor:pointer;
+  &:hover{
+    opacity: 0.2;
+  }
+  &.active{
+    height: 85px;
+    background-color: $black;
+    opacity: 0.1;
+    &:hover{
+      opacity: 0.05;
+    }
+  }
+}
+.forb{
+  background-color: $gray_s03!important;
+  &-opc{
+    opacity: 0.2!important;
+  }
+}
+.stat-card{
+  &.not-active{
+    .j-mask2{
+      display: block;
+    }
+    .j-ctrl-pannel{
+      opacity: 0.2;
+    }
+    .j-forb{
+      height: 85px;
+    }
+    .bg_status{
+      background-color: $gray_s03!important;
+    }
+  }
+}
+.j-mask3{
+  position: absolute;
+  background-color: #fff;
+  opacity: 0.3;
+  width: 98%;
+  height:80px;
+  top:0;
+  left:40px;
+  display: none;
+  z-index: 999;
+}
+.jfsb-box{
+  overflow: hidden;
+  &.active{
+    .j-mask3{
+      display: block;
+    }
+    .jswift{
+      background-color: $gray!important;
+    }
+  }
+}
+.is-by-sch{
+  .datetimepicker-clock{
+    display: none;
+  }
+}
+.jdropdown2-list.j-4cols{
+  width:600px;
+  padding-bottom: 5px;
+  .j-group-01{
+    display: block;
+    width:300px;
+    float: left;
+    i{
+      float: left;
+    }
+  }
+  label{
+    width:140px;
+    margin: 5px;
+    float:left;
+    cursor: pointer;
+  }
+}
+.is-by-cond{
+  .by-cond{
+    display: none;
+  }
+}
+.building_table{
+  float: left;
+  width:100%;
+  margin:10px 0.8%;
+  td{
+    margin: 5px;
+    text-align: center!important;
+    cursor: pointer;
+    border-right:1px solid $white;
+    &:hover{
+      background-color: $green;
+      color:$white;
+      opacity: 0.8;
+    }
+    &.active{
+      background-color: $green;
+      color:$white;
+      opacity: 0.6;
+      &:hover{
+        background-color: $gray_s03!important;
+        color:$gray;
+      }
+    }
+  }
+  th{
+    background-color: $gray;
+    color:$white;
+    cursor: pointer;
+    border-right:1px solid $white;
+    &:hover{
+      background-color: $green;
+      color:$white;
+      opacity: 0.8;
+    }
+    &.active{
+      background-color: $green;
+      color:$white;
+      opacity: 1;
+      &:hover{
+        background-color: $gray;
+        opacity: 0.6;
+      }
+    }
+    &.name{
+      background-color: $gray2;
+      color: $black;
+      line-height: 35px;
+      border-right:0;
+      i{
+        color:$gray_s02;
+      }
+      &:hover{
+        i{
+          color:$green;
+          opacity: 0.6;
+        }
+      }
+      &.active{
+        i{
+          color:$green;
+          opacity: 1;
+        }
+        &:hover{
+          background-color: $gray2;
+          i{
+            color:$green;
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+  }
+}
+.chose-font-color{
+  width:25px;
+  height:20px;
+  display: block;
+  float: left;
+  margin-right: 10px;
+  line-height: 20px;
+  text-align: center;
+  overflow: hidden;
+  i{
+    color:$white;
+    opacity: 0;
+  }
+  &.bg_white{
+    border:1px solid $gray;
+    i{
+      color:$gray;
+    }
+  }
+  &:hover{
+    i{
+      opacity: 0.7;
+    }
+  }
+  &.active{
+    i{
+      opacity: 1;
+    }
+  }
+}
+.table-opc{
+  width:5px;
+  height:5px;
+  &.bg_gray{
+    opacity: 0.3;
+  }
+}
+@media screen and (max-width: 2010px) {
+  .eqp-ctrl-pannel{
+    width:48%;
+    margin:1%!important;
+  }
+  .stra-ctrl-pannel{
+    width:31.3333%;
+    margin:1%;
+  }
+  .stra-ctrl-pannel-2{
+    width:64%;
+    margin:1%;
+  }
+}
+@media screen and (min-width: 2010px) {
+  .eqp-ctrl-pannel{
+    width:31.3333%;
+    margin:1%;
+  }
+  .stra-ctrl-pannel{
+    width:23%;
+    margin:1%;
+  }
+  .stra-ctrl-pannel-2{
+    width:48%;
+    margin:1%;
+  }
+}
+.j-eqm-tabs{
+  position: relative;
+  .jtab-2{
+    position: absolute;
+    top:10px;
+    right:0;
+    z-index: 999;
+    .tabbox-2{
+      cursor: pointer;
+      line-height: 14px;
+      font-size: 12px;
+      width:25px;
+      height: auto;
+      text-align: center;
+      padding: 6px 0;
+      clear: both;
+      margin-bottom: 3px;
+      background-color: $gray_s03;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      &.active{
+        background-color: $white;
+        color: $gray;
+      }
+      &:hover{
+        color: $black;
+      }
+    }
+  }
+  .jtab-box-2{
+    width: 100%;
+    &.active{
+      width:100%;
+    }
+  }
+}
+.sintro{
+  position: absolute;
+  font-size: 12px;
+  transform: scale(0.8);
+  line-height: 16px;
+  height: 18px;
+  top:8px;
+  color:$white;
+  padding:0 4px;
+  background-color: $green;
+  border-radius: 3px;
+}
+.j-ctrl-btn-group{
+  .j-ctrl-btn{
+    &:hover .bg{
+      opacity: 0.8;
+    }
+    &:active .bg{
+      opacity: 0.8;
+      color: $green!important;
+      text-shadow: 0 0 20px rgba(102,186,48,1);
+    }
+    &.active .bg{
+      color: $green!important;
+    }
+  }
+}
+.j-status-light-sm{
+  margin-left: 0px;
+  margin-bottom: 5px;
+  width:10px;
+  height:10px;
+  border-radius: 10px;
+  display: inline-block;
+  &.light-red{
+    background-color: $red;
+    box-shadow: 0 0 10px $red;
+  }
+  &.light-green{
+    background-color: $green;
+    box-shadow: 0 0 10px $green;
+  }
+}
+.svg-1{
+  width:32px;
+  height:auto;
+
+}
+.svg-2{
+  width:15px;
+  height:auto;
+
+}
+.fill-white{
+  fill:$white;
+}
+.fill-gray{
+  fill:$gray;
+}
+.j-ban{
+  cursor: pointer;
+  & i{
+    color: $gray_s02;
+  }
+  &:hover{
+    opacity: 0.5;
+    i{
+      color: $red;
+    }
+  }
+  &.active{
+    i{
+      color: $red;
+    }
+  }
+}
+.j-input-icon{
+  position: relative;
+  i{
+    position: absolute;
+    top:2px;
+    left: 7px;
+  }
+  input[type=text]{
+    padding-left: 20px;
+    &:focus + i{
+      color:$green;
+    }
+  }
+}

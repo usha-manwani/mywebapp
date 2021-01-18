@@ -18,9 +18,9 @@ namespace CresijApp.Models
         public int StrategyRefId { get; set; }
         public int Equipmentid { get; set; }
         public string Config { get; set; }
-        public string Location { get; set; }
-        public string StrategyTimeFrame { get; set; }
-        public System.TimeSpan strategyTime { get; set; }
+        public string StrategyTimeFrame1 { get; set; }
+        public string strategyTime { get; set; }
+        public string StrategyTimeFrame2 { get; set; }
     
         public virtual strategyequipment strategyequipment { get; set; }
         public virtual strategymanagement strategymanagement { get; set; }

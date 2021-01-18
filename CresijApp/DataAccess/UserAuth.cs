@@ -21,26 +21,31 @@ namespace CresijApp.DataAccess
                 string q = "select serialno, loginid from userdetails where loginid in('" + userid + "','" + adminid + "')";
                 using (MySqlCommand cmd = new MySqlCommand(q, con))
                 {
-                    try
-                    {
+
                         con.Open();
                         MySqlDataAdapter mySqlData = new MySqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         mySqlData.Fill(dt);
-                        if (dt.Rows.Count == 2)
+                    if (dt.Rows.Count == 2)
+                    {
+                        if (dt.Rows[0][1].ToString() == adminid)
                         {
-                            if (dt.Rows[0][1].ToString() == adminid)
-                            {
-                                adminserial = Convert.ToInt32(dt.Rows[0][0]);
-                                userserial = Convert.ToInt32(dt.Rows[1][0]);
-                            }
-                            else
-                            {
-                                userserial = Convert.ToInt32(dt.Rows[0][0]);
-                                adminserial = Convert.ToInt32(dt.Rows[1][0]);
-                            }
+                            adminserial = Convert.ToInt32(dt.Rows[0][0]);
+                            userserial = Convert.ToInt32(dt.Rows[1][0]);
+                        }
+                        else
+                        {
+                            userserial = Convert.ToInt32(dt.Rows[0][0]);
+                            adminserial = Convert.ToInt32(dt.Rows[1][0]);
+                        }
 
-                            if (userserial != 0)
+                    }
+                    else if(dt.Rows.Count==1 && adminid==userid)
+                    {
+                        adminserial = Convert.ToInt32(dt.Rows[0][0]);
+                        userserial = Convert.ToInt32(dt.Rows[0][0]);
+                    }
+                    if (userserial != 0)
                             {
                                 var query = "insert into userpermissions(`userserialnum`,`roleid`,`AuthenticatedBy`) values ";
                                 StringBuilder d = new StringBuilder();
@@ -58,11 +63,11 @@ namespace CresijApp.DataAccess
                                 }
                                 if (classnames.Length > 0)
                                 {
-                                    var query1 = "insert into userlocationaccess(`userserialnum`,`classid`,`AuthenticatedBy`) values ";
+                                    var query1 = "insert into userlocationaccess(`userserialnum`,`locationid`,`AuthenticatedBy`, `Level`) values ";
                                     StringBuilder d1 = new StringBuilder();
                                     foreach (string s in classnames)
                                     {
-                                        d1.Append("(" + userserial + ", '" + s + "'," + adminserial + "),");
+                                        d1.Append("(" + userserial + ", '" + s + "'," + adminserial + ",'Class'),");
                                     }
                                     d1.Remove(d1.Length - 1, 1);
                                     query1 = query1 + d1.ToString();
@@ -75,22 +80,9 @@ namespace CresijApp.DataAccess
                                 }
                                 
                             }
-                        }
-                        else
-                        {
-                            result = -1;
-                        }
-                    }
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
-                    catch (Exception ex) {
-                        result = -2;
-                    }
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+                        
+                        
 
-                    finally
-                    {
-                        con.Close();
-                    }
                 }
             }
             return result;
@@ -164,8 +156,7 @@ namespace CresijApp.DataAccess
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {
+               
                     string query = "delete from userpermissions where userserialnum = " +
                         "(select serialno from userdetails where loginid = '" + id + "'); "+
                         "delete from userlocationaccess where userserialnum  = " +
@@ -176,15 +167,7 @@ namespace CresijApp.DataAccess
                             con.Open();
                         result =cmd.ExecuteNonQuery();
                     }
-                }
-                catch (Exception ex)
-                {
-                    result = -1;
-                }
-                finally
-                {
-                    con.Close();
-                }
+                    
             }
 
             return result;
@@ -195,8 +178,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {
+                
                     string query = "select distinct(roleid) as roleid from userpermissions where userserialnum = " +
                         "(select serialno from userdetails where loginid = '" + data + "')";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -207,15 +189,7 @@ namespace CresijApp.DataAccess
 
                         mySqlData.Fill(dt);
                     }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    con.Close();
-                }
+                
             }
 
             return dt;
@@ -226,9 +200,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {
-                    string query = "select distinct(classid) as classname from userlocationaccess where " +
+                    string query = "select distinct(locationid) as classname from userlocationaccess where Level ='Class' and " +
                         " userserialnum = " +
                         "(select serialno from userdetails where loginid = '" + data + "')";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -239,15 +211,7 @@ namespace CresijApp.DataAccess
 
                         mySqlData.Fill(dt);
                     }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    con.Close();
-                }
+                
             }
 
             return dt;

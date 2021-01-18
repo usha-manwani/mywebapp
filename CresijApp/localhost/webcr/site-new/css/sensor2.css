@@ -1,0 +1,635 @@
+.jmodal {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+}
+.jmodal .jmodal_box {
+  position: absolute;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+.jmodal .jmodal_box.jw-1 {
+  width: 660px;
+  margin-left: -330px;
+}
+.jmodal .jmodal_box.jw-1 .searchbox2 {
+  text-align: center;
+  display: inline-block;
+}
+.jmodal .jmodal_box .tt {
+  font-size: 18px;
+  color: #737373;
+  border-bottom: 1px solid #f5f5f5;
+  padding-bottom: 20px;
+  display: table;
+  width: 100%;
+}
+.jmodal .jmodal_box .btns {
+  padding-top: 20px;
+  display: table;
+}
+.jmodal .jmodal_box .btns a {
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin-right: 10px !important;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  color: #fff;
+  cursor: pointer;
+}
+.bg_green {
+  background-color: #66BA30;
+}
+.bg_red {
+  background-color: #DF6B6B;
+}
+.bg_blue {
+  background-color: #3AC4F3;
+}
+.bg_orange {
+  background-color: #FFBE3D;
+}
+.bg_gray {
+  background-color: #737373;
+}
+.jbtn2 {
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin-right: 10px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  color: #fff !important;
+  cursor: pointer;
+}
+.jbtn2.active {
+  background-color: #66BA30 !important;
+}
+.jbtn2 i {
+  margin-top: 10px;
+  margin-right: 5px;
+}
+.inputgray {
+  border: none;
+  outline: none;
+  background-color: #f5f5f5;
+  padding: 0 10px;
+}
+.jdown {
+  display: none !important;
+}
+.jdropdown .jdown {
+  display: inline !important;
+}
+.jnavdrop {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  background-color: #f5f5f5;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  display: none;
+}
+.jnavdrop a {
+  display: block;
+  clear: both;
+  line-height: 30px;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: #737373 !important;
+}
+.jnavdrop a:last-child {
+  border-bottom: none;
+}
+.jnavdrop a:hover {
+  background-color: #96D171;
+  color: #fff !important;
+}
+.jnavdrop a i {
+  margin-left: 10px;
+}
+.nav2 {
+  margin-left: 20px;
+}
+.jbread {
+  line-height: 22px;
+  float: left;
+  font-size: 12px;
+}
+.jbread i {
+  float: left;
+  margin-top: 5px;
+}
+.jbread .step {
+  color: #737373;
+  display: block;
+  float: left;
+  padding: 0 10px;
+}
+.jbread .step:first-child {
+  padding-left: 0;
+}
+.jbread .step.active {
+  color: #3AC4F3;
+  font-weight: bold;
+}
+.jbread .step.active span {
+  background-color: #3AC4F3;
+}
+.jbread span {
+  background-color: #737373;
+  color: #fff;
+  display: block;
+  width: 22px;
+  height: 22px;
+  float: left;
+  margin-right: 5px;
+  text-align: center;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.bbgray {
+  border-bottom: 1px solid #e1e1e1;
+}
+.bbwhite {
+  border-bottom: 1px solid #fff;
+}
+h5 {
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+  clear: both;
+  padding: 25px 0 20px;
+  margin: 0;
+}
+h5 i {
+  margin-right: 5px;
+}
+table.info_normal {
+  font-size: 12px;
+  color: #737373;
+}
+table.info_normal td {
+  padding: 5px 5px;
+}
+table.info_normal span {
+  color: #000;
+}
+.info_input {
+  outline: none;
+  border: 1px solid #737373;
+  color: #737373;
+  line-height: 20px;
+  padding: 5px 10px;
+}
+.maxw900 {
+  max-width: 900px;
+}
+table.table_list {
+  line-height: 30px;
+}
+table.table_list td {
+  height: 30px;
+}
+.jbtn_xs {
+  height: 24px;
+  line-height: 24px;
+  padding: 0 5px;
+  display: block;
+  float: left;
+  margin-right: 10px;
+  color: #f5f5f5;
+  font-size: 12px;
+}
+.jbtn_xs.btn_blue.vis {
+  background-color: #3AC4F3;
+  color: #fff !important;
+  padding: 0 10px;
+}
+.jbtn_xs.btn_blue:hover, .jbtn_xs.btn_blue:active {
+  background-color: #3AD3F3;
+  color: #fff !important;
+}
+.tr_bg_suc {
+  background-color: #F7FFF2;
+}
+.tr_bg_suc:hover {
+  background-color: #E8FFDB;
+}
+.tr_bg_danger {
+  background-color: #FFF6F6;
+}
+.tr_bg_danger:hover {
+  background-color: #FFEBEB;
+}
+.tr_bg_alert {
+  background-color: #FFFCF3;
+}
+.tr_bg_alert:hover {
+  background-color: #FFF8E6;
+}
+.tr_bg_disable {
+  background-color: #F9F9F9;
+}
+.tr_bg_disable:hover {
+  background-color: #EEEEEE;
+}
+.jpager {
+  font-size: 12px;
+  color: #737373;
+  padding: 30px 0;
+  display: table;
+  height: 20px;
+  line-height: 20px;
+}
+.jpager a {
+  display: block;
+  float: left;
+  padding: 0 5px;
+  margin-right: 5px;
+  height: 20px;
+  line-height: 20px;
+}
+.jpager a:hover {
+  color: #3AC4F3 !important;
+}
+.jpager a.page {
+  min-width: 15px !important;
+}
+.jpager a.page:hover {
+  color: #3AC4F3 !important;
+  background-color: #D9F5FF !important;
+}
+.jpager a.page.active {
+  background-color: #3AC4F3 !important;
+  color: #fff !important;
+}
+.jpager a.disable {
+  color: #f5f5f5 !important;
+}
+.jpager span {
+  display: block;
+  float: left;
+  padding: 0 5px;
+  margin-right: 5px;
+}
+.jroom_selector b {
+  background-color: #737373;
+  color: #fff;
+  padding: 5px 10px;
+}
+.jroom_selector .th-0 {
+  width: 20px;
+}
+.jroom_selector .th-1 {
+  width: 130px;
+  vertical-align: top;
+  padding-top: 13px;
+}
+.jroom_selector .th-2 {
+  width: 100px;
+  padding-left: 0;
+}
+.jroom_selector span {
+  margin-right: 15px;
+}
+.jroom_box {
+  display: none;
+}
+.jroom_box tr {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+}
+.jroom_box tr:hover {
+  box-shadow: 0 0 20px rgba(102, 186, 48, 0.3);
+}
+.jroom_box b {
+  padding: 3px 10px;
+  background-color: #f5f5f5;
+  color: #737373;
+}
+.jroom_box tr:hover b {
+  background-color: #66BA30;
+  color: #fff;
+}
+.ROOM_CTRL {
+  color: #66BA30;
+  font-size: 16px;
+}
+.ROOM_CTRL:hover {
+  color: #3AC4F3;
+}
+.style-tr-shadow-green tr:hover {
+  box-shadow: 0 0 20px rgba(102, 186, 48, 0.3);
+}
+.style-tr-shadow-blue tr:hover {
+  box-shadow: 0 0 20px rgba(58, 196, 243, 0.3);
+}
+.style-tr-bg-green tr:hover {
+  background-color: rgba(102, 186, 48, 0.1);
+}
+.style-tr-bg-blue tr:hover {
+  background-color: rgba(58, 196, 243, 0.1);
+}
+.style-tr-bg-gray tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+span.span01 {
+  width: 60px;
+  padding-left: 5px;
+  display: inline-block;
+  color: #737373;
+}
+span.span02 {
+  width: 90px;
+  padding-left: 5px;
+  display: inline-block;
+  color: #737373;
+  text-align: right;
+}
+span.span03 {
+  width: 110px;
+  padding-left: 5px;
+  display: inline-block;
+  color: #737373;
+  text-align: right;
+}
+.jtab .tabbox {
+  height: 30px;
+  line-height: 30px;
+  padding: 0 35px;
+  background-color: #f5f5f5;
+  color: #b9b9b9;
+  float: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+.jtab .tabbox.active, .jtab .tabbox:hover {
+  background-color: #3AC4F3;
+  color: #fff;
+}
+.jtab .tabbox:hover {
+  opacity: 0.6;
+}
+.jvideo {
+  width: 720px;
+  height: 576px;
+  background-color: #737373;
+  display: inline-block;
+}
+.jvideo2 {
+  width: 1022px;
+  height: 496px;
+  background-color: #737373;
+  display: inline-block;
+}
+.jtt2 {
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+.jtab_r {
+  margin-left: 20px;
+  font-size: 12px;
+}
+hr {
+  color: #b9b9b9;
+}
+.jw-30px {
+  width: 30px;
+}
+.jw-50px {
+  width: 50px;
+}
+h4 label {
+  font-size: 12px;
+  padding: 0 10px;
+}
+.jf-12 {
+  font-size: 12px !important;
+}
+a.gray.icon:hover {
+  color: #fff !important;
+  background-color: #3AC4F3;
+  border-radius: 5px;
+}
+a.gray.icon-red:hover {
+  color: #fff !important;
+  background-color: #DF6B6B;
+}
+a.gray.icon-green:hover {
+  color: #fff !important;
+  background-color: #66BA30;
+}
+.jtable-1 td {
+  padding: 10px 0;
+}
+.jtable-1 tr:hover {
+  background-color: #f5f5f5;
+}
+.jlh-30 {
+  line-height: 30px;
+}
+label {
+  margin-bottom: 0 !important;
+  position: relative;
+}
+input[type=text] {
+  outline: none;
+  border: 1px solid #b9b9b9;
+  padding: 0 3px;
+  height: 24px;
+  line-break: 24px;
+  color: #737373;
+}
+input[type=text]:focus {
+  border: 1px solid rgba(102, 186, 48, 0.6);
+  box-shadow: 0 0 20px rgba(102, 186, 48, 0.3);
+  color: #66BA30;
+}
+input[type=checkbox] {
+  display: none;
+}
+.jcheckbox {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #66BA30;
+  display: inline-block;
+  background-color: #fff;
+  color: #fff;
+}
+input[type=checkbox]:checked+i.jcheckbox, .jcheckbox.check_all_table_active, .jcheckbox.check_all_tr_active, .jcheckbox.check_all_td_active {
+  background-color: #66BA30;
+}
+input[type=checkbox]+span.jswift {
+  width: 60px;
+  height: 16px;
+  background-color: #DF6B6B;
+  border-radius: 16px;
+  display: inline-flex;
+  position: relative;
+  margin-right: 10px;
+}
+input[type=checkbox]+span.jswift i.jswift-btn {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 32px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  left: 0;
+  top: -4px;
+  margin-right: 0 !important;
+}
+input[type=checkbox]:checked+span.jswift {
+  background-color: #66BA30;
+}
+input[type=checkbox]:checked+span.jswift i.jswift-btn {
+  right: 0;
+  left: auto;
+}
+input[type=radio] {
+  display: none;
+}
+input[type=radio]+span.jradio {
+  width: 14px;
+  height: 14px;
+  border-radius: 15px;
+  border: 1px solid #66BA30;
+  display: inline-flex;
+  margin-right: 5px;
+  position: relative;
+}
+input[type=radio]+span.jradio .jradio-dot {
+  width: 8px;
+  height: 8px;
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 14px;
+  margin-top: 0 !important;
+}
+input[type=radio]:checked+span.jradio .jradio-dot {
+  background-color: #66BA30;
+}
+.bootstrap-datetimepicker-widget {
+  font-size: 12px !important;
+  display: table;
+}
+.bootstrap-datetimepicker-widget table td.active, .bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: #66BA30 !important;
+}
+.bootstrap-datetimepicker-widget table td.today:before {
+  border-bottom-color: #66BA30 !important;
+}
+.bootstrap-datetimepicker-widget table td.active.today:before {
+  border-bottom-color: #fff !important;
+}
+.bootstrap-datetimepicker-widget .timepicker-hour, .bootstrap-datetimepicker-widget .timepicker-minute, .bootstrap-datetimepicker-widget .timepicker-second {
+  font-size: 26px !important;
+}
+.jdatetime {
+  position: relative;
+  display: inline;
+}
+.jdatetime i {
+  position: absolute;
+  font-size: 14px;
+  color: #b9b9b9;
+  top: 2px;
+  right: 5px;
+}
+.jdatetime input:focus+i {
+  color: #66BA30 !important;
+}
+.lh24 {
+  line-height: 24px;
+  display: inline-block;
+  height: 24px;
+}
+.jdropdown2 {
+  cursor: pointer;
+  height: 22px;
+  line-height: 22px;
+  font-size: 12px;
+  position: relative;
+  display: inline-table;
+  border: 1px solid #b9b9b9;
+  background-color: #fff;
+}
+.jdropdown2 .jdropdown2-box {
+  float: left;
+}
+.jdropdown2 .jdropdown2-arrow {
+  width: 22px;
+  float: right;
+}
+.jdropdown2 .jdropdown2-list {
+  position: absolute;
+  z-index: 99;
+  top: 0px;
+  left: -1px;
+  border-top: 2px solid #66BA30;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(102, 186, 48, 0.5);
+}
+.jdropdown2 .jdropdown2-list label {
+  line-height: 24px;
+  padding: 0 10px;
+  width: 100%;
+}
+.jdropdown2 .jdropdown2-list label:hover {
+  background-color: #66BA30;
+  color: #fff;
+}
+.table_nostyle td {
+  padding: 0 !important;
+}
+.bar01 input[type=text] {
+  height: 30px;
+  border: none;
+}
+/*ip-input-group*/
+.ip-input-group {
+  width: auto;
+}
+.ip-input-group-w {
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  width: 100%;
+  border-radius: 2px;
+}
+.ip-input-group.focus .ip-input-group-w {
+  color: #495057;
+  background-color: #fff !important;
+  border-color: #66BA30;
+  outline: 0;
+  box-shadow: 0 0 20px rgba(102, 186, 48, 0.3);
+}
+.ip-input-group .ip-input-group-input input.form-control {
+  background-color: transparent;
+  border: 1px solid transparent;
+  width: 100%;
+  text-align: center;
+  padding: 2px 5px;
+}
+.ip-input-group .ip-input-group-input input.form-control.focus {
+  background-color: #fff !important;
+}
+.ip-input-group-span {
+  padding: 0 4px;
+  color: #888;
+}

@@ -1,6 +1,6 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -59,6 +59,15 @@
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.1.11\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.1.11\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.FriendlyUrls, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
@@ -67,6 +76,9 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -78,26 +90,32 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.7.1\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.4.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.1.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.4.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.1.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.Jwt, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.Jwt.4.1.0\lib\net45\Microsoft.Owin.Security.Jwt.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.1.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.18\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data.EntityFramework, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.EntityFramework.8.0.18\lib\net452\MySql.Data.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -106,6 +124,9 @@
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Drawing.Design" />
@@ -113,14 +134,27 @@
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.7.1\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -166,14 +200,8 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Http.WebHost">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -219,15 +247,15 @@
     <Content Include="images\logo.jpg" />
     <Content Include="images\logo.png" />
     <Content Include="images\ty.svg" />
-    <Content Include="Models\DatabaseEntities.Context.tt">
+    <Content Include="Models\OrganisationDatabase.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DatabaseEntities.edmx</DependentUpon>
-      <LastGenOutput>DatabaseEntities.Context.cs</LastGenOutput>
+      <DependentUpon>OrganisationDatabase.edmx</DependentUpon>
+      <LastGenOutput>OrganisationDatabase.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DatabaseEntities.tt">
+    <Content Include="Models\OrganisationDatabase.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DatabaseEntities.edmx</DependentUpon>
-      <LastGenOutput>DatabaseEntities.cs</LastGenOutput>
+      <DependentUpon>OrganisationDatabase.edmx</DependentUpon>
+      <LastGenOutput>OrganisationDatabase.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\AddClassroom.js" />
     <Content Include="Scripts\AddEditOrganisation.js" />
@@ -298,14 +326,15 @@
     <Content Include="Content\bootstrap-datepicker3.css.map" />
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
-    <EntityDeploy Include="Models\DatabaseEntities.edmx">
+    <EntityDeploy Include="Models\OrganisationDatabase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DatabaseEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>OrganisationDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DatabaseEntities.edmx.diagram">
-      <DependentUpon>DatabaseEntities.edmx</DependentUpon>
+    <Content Include="Models\OrganisationDatabase.edmx.diagram">
+      <DependentUpon>OrganisationDatabase.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Test_1_webApp.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -646,243 +675,487 @@
     <Content Include="site-new\window\pages\operate.html" />
     <Content Include="site-new\window\pages\settings.html" />
     <Content Include="site-new\window\pages\strategy.html" />
-    <Content Include="site\check\003.html" />
-    <Content Include="site\check\room.js" />
-    <Content Include="site\components\left_menu.html" />
-    <Content Include="site\components\top_menu.html" />
-    <Content Include="site\css\Chart.min.css" />
-    <Content Include="site\css\sensor.css" />
-    <Content Include="site\css\sensor2.css" />
-    <Content Include="site\css\sensor2.min.css" />
     <Content Include="CustomError.aspx" />
-    <Content Include="site\dist\css\bootstrap-datetimepicker.min.css" />
-    <Content Include="site\dist\css\bootstrap-grid.css" />
-    <Content Include="site\dist\css\bootstrap-grid.min.css" />
-    <Content Include="site\dist\css\bootstrap-reboot.css" />
-    <Content Include="site\dist\css\bootstrap-reboot.min.css" />
-    <Content Include="site\dist\css\bootstrap.css" />
-    <Content Include="site\dist\css\bootstrap.min.css" />
-    <Content Include="site\dist\js\bootstrap-datetimepicker.min.js" />
-    <Content Include="site\dist\js\bootstrap.bundle.js" />
-    <Content Include="site\dist\js\bootstrap.bundle.min.js" />
-    <Content Include="site\dist\js\bootstrap.js" />
-    <Content Include="site\dist\js\bootstrap.min.js" />
-    <Content Include="site\dist\js\Chart.min.js" />
-    <Content Include="site\dist\js\jquery-3.3.1.slim.min.js" />
-    <Content Include="site\dist\js\jquery.min.js" />
-    <Content Include="site\dist\js\popper.min.js" />
-    <Content Include="site\font\css\font-awesome.css" />
-    <Content Include="site\font\css\font-awesome.min.css" />
-    <Content Include="site\font\fonts\fontawesome-webfont.svg" />
-    <Content Include="site\font\less\font-awesome.css" />
-    <Content Include="site\font\scss\font-awesome.css" />
-    <Content Include="site\home.html" />
-    <Content Include="site\images\001.jpg" />
-    <Content Include="site\images\dev.png" />
-    <Content Include="site\images\loginbg.jpg" />
-    <Content Include="site\images\loginbg.png" />
-    <Content Include="site\images\logo.jpg" />
-    <Content Include="site\images\logo.png" />
-    <Content Include="site\images\SVG\A.svg" />
-    <Content Include="site\images\SVG\B.svg" />
-    <Content Include="site\images\SVG\C.svg" />
-    <Content Include="site\images\SVG\D.svg" />
-    <Content Include="site\images\SVG\E.svg" />
-    <Content Include="site\images\SVG\F.svg" />
-    <Content Include="site\images\SVG\G.svg" />
-    <Content Include="site\images\SVG\SVG\a001.svg" />
-    <Content Include="site\images\SVG\SVG\a002.svg" />
-    <Content Include="site\images\SVG\SVG\a003.svg" />
-    <Content Include="site\images\SVG\SVG\a004.svg" />
-    <Content Include="site\images\SVG\SVG\a005.svg" />
-    <Content Include="site\images\SVG\SVG\a006.svg" />
-    <Content Include="site\images\SVG\SVG\a007.svg" />
-    <Content Include="site\images\SVG\SVG\a008.svg" />
-    <Content Include="site\images\SVG\SVG\a009.svg" />
-    <Content Include="site\images\SVG\SVG\a010.svg" />
-    <Content Include="site\images\SVG\SVG\a011.svg" />
-    <Content Include="site\images\SVG\SVG\a012.svg" />
-    <Content Include="site\images\SVG\SVG\资源 22.svg" />
-    <Content Include="site\images\SVG\SVG\资源 23.svg" />
-    <Content Include="site\images\SVG\SVG\资源 24.svg" />
-    <Content Include="site\images\SVG\SVG\资源 25.svg" />
-    <Content Include="site\images\ty.svg" />
-    <Content Include="site\js\calendor.js" />
-    <Content Include="site\js\Chart.bundle.min.js" />
-    <Content Include="site\js\CheckUserSession.js" />
-    <Content Include="site\js\ip_input.js" />
-    <Content Include="site\js\moment.min.js" />
-    <Content Include="site\js\moment.zh-cn.js" />
-    <Content Include="site\js\sensor.js" />
-    <Content Include="site\login.html" />
-    <Content Include="site\window\alert\conf.html" />
-    <Content Include="site\window\alert\confer_delete.html" />
-    <Content Include="site\window\alert\coordinate.html" />
-    <Content Include="site\window\alert\course-tiaokeshenpi.html" />
-    <Content Include="site\window\alert\course-yuyueshenpi.html" />
-    <Content Include="site\window\alert\data\AddOrganisation.html" />
-    <Content Include="site\window\alert\data\AddUserData.html" />
-    <Content Include="site\window\alert\data\add_org.html" />
-    <Content Include="site\window\alert\data\add_room.html" />
-    <Content Include="site\window\alert\data\add_student.html" />
-    <Content Include="site\window\alert\data\add_teacher.html" />
-    <Content Include="site\window\alert\data\add_user.html" />
-    <Content Include="site\window\alert\data\auth.html" />
-    <Content Include="site\window\alert\data\distribute.html" />
-    <Content Include="site\window\alert\data\edit.html" />
-    <Content Include="site\window\alert\data\EditOrganisation.html" />
-    <Content Include="site\window\alert\data\Edit_Classroom.html" />
-    <Content Include="site\window\alert\data\Edit_Student.html" />
-    <Content Include="site\window\alert\data\Edit_Teacher.html" />
-    <Content Include="site\window\alert\data\Edit_UserInfo.html" />
-    <Content Include="site\window\alert\data\UserAuthSetting.html" />
-    <Content Include="site\window\alert\data\storage.html" />
-    <Content Include="site\window\alert\data\synchro.html" />
-    <Content Include="site\window\alert\data\transfer.html" />
-    <Content Include="site\window\alert\data\UploadFile.html" />
-    <Content Include="site\window\alert\DeleteClassroom.html" />
-    <Content Include="site\window\alert\DeleteOrg.html" />
-    <Content Include="site\window\alert\DeleteStudent.html" />
-    <Content Include="site\window\alert\DeleteTeacher.html" />
-    <Content Include="site\window\alert\Delete_User.html" />
-    <Content Include="site\window\alert\DownloadClassCSVTemplate.aspx" />
-    <Content Include="site\window\alert\DownloadScheduleTempelate.aspx" />
-    <Content Include="site\window\alert\DownloadStudentTempelate.aspx" />
-    <Content Include="site\window\alert\DownloadteacherTemplate.aspx" />
-    <Content Include="site\window\alert\DownloadUserDataTemplate.aspx" />
-    <Content Include="site\window\alert\ImportClassData.html" />
-    <Content Include="site\window\alert\importSchedule_xlsx.html" />
-    <Content Include="site\window\alert\ImportStudentData.html" />
-    <Content Include="site\window\alert\ImportTeacherData.html" />
-    <Content Include="site\window\alert\importUserdata.html" />
-    <Content Include="site\window\alert\import_xls.html" />
-    <Content Include="site\window\alert\interactive_settings.html" />
-    <Content Include="site\window\alert\operate\add_failure.html" />
-    <Content Include="site\window\alert\operate\add_maintain.html" />
-    <Content Include="site\window\alert\operate\add_task.html" />
-    <Content Include="site\window\alert\operate\add_tour.html" />
-    <Content Include="site\window\alert\operate\claim_task.html" />
-    <Content Include="site\window\alert\operate\distribute_m.html" />
-    <Content Include="site\window\alert\operate\edit_tour.html" />
-    <Content Include="site\window\alert\operate\failure_audit.html" />
-    <Content Include="site\window\alert\operate\maintain_review.html" />
-    <Content Include="site\window\alert\operate\manual_dispatch.html" />
-    <Content Include="site\window\alert\operate\order_examine.html" />
-    <Content Include="site\window\alert\operate\plan_excute.html" />
-    <Content Include="site\window\alert\operate\plan_excute_maintain.html" />
-    <Content Include="site\window\alert\operate\storage_in.html" />
-    <Content Include="site\window\alert\operate\storage_out.html" />
-    <Content Include="site\window\alert\operate\task_handle.html" />
-    <Content Include="site\window\alert\operate\task_rework.html" />
-    <Content Include="site\window\alert\operate\tour_det.html" />
-    <Content Include="site\window\alert\operate\tour_review.html" />
-    <Content Include="site\window\alert\operate\video_review.html" />
-    <Content Include="site\window\alert\state_fail.html" />
-    <Content Include="site\window\alert\state_suc.html" />
-    <Content Include="site\window\alert\state_suc_2.html" />
-    <Content Include="site\window\alert\strategy\a-001.html" />
-    <Content Include="site\window\alert\strategy\a-002.html" />
-    <Content Include="site\window\alert\strategy\a-003.html" />
-    <Content Include="site\window\alert\strategy\a-004.html" />
-    <Content Include="site\window\alert\strategy\a-005.html" />
-    <Content Include="site\window\alert\strategy\a-006.html" />
-    <Content Include="site\window\alert\strategy\a-007.html" />
-    <Content Include="site\window\alert\strategy\add_strategy_keywords.html" />
-    <Content Include="site\window\alert\strategy\range.html" />
-    <Content Include="site\window\alert\threshold.html" />
-    <Content Include="site\window\alert\tongbu-day.html" />
-    <Content Include="site\window\alert\tongbu-month.html" />
-    <Content Include="site\window\alert\tongbu-week.html" />
-    <Content Include="site\window\alert\tongbu.html" />
-    <Content Include="site\window\alert\DownloadCSVTempelate.aspx" />
-    <Content Include="site\window\alert\UploadClass.aspx" />
-    <Content Include="site\window\alert\UploadStudent.aspx" />
-    <Content Include="site\window\alert\UploadTeacher.aspx" />
-    <Content Include="site\window\alert\UploadUser.aspx" />
-    <Content Include="site\window\menus\m-course-01.html" />
-    <Content Include="site\window\menus\m-course-02.html" />
-    <Content Include="site\window\menus\m-course-03.html" />
-    <Content Include="site\window\menus\m-data-01.html" />
-    <Content Include="site\window\menus\m-data-02.html" />
-    <Content Include="site\window\menus\m-data-03.html" />
-    <Content Include="site\window\menus\m-data-04.html" />
-    <Content Include="site\window\menus\m-data-05.html" />
-    <Content Include="site\window\menus\m-data-06.html" />
-    <Content Include="site\window\menus\m-equipment-01.html" />
-    <Content Include="site\window\menus\m-equipment-02.html" />
-    <Content Include="site\window\menus\m-equipment-03.html" />
-    <Content Include="site\window\menus\m-equipment-04.html" />
-    <Content Include="site\window\menus\m-operate-01.html" />
-    <Content Include="site\window\menus\m-operate-02.html" />
-    <Content Include="site\window\menus\m-operate-03.html" />
-    <Content Include="site\window\menus\m-operate-04.html" />
-    <Content Include="site\window\menus\m-settings-01.html" />
-    <Content Include="site\window\menus\m-settings-02.html" />
-    <Content Include="site\window\menus\m-settings-03.html" />
-    <Content Include="site\window\menus\m-strategy-01.html" />
-    <Content Include="site\window\menus\m-strategy-02.html" />
-    <Content Include="site\window\p-course\001.html" />
-    <Content Include="site\window\p-course\002-1-1.html" />
-    <Content Include="site\window\p-course\002-1.html" />
-    <Content Include="site\window\p-course\002-2.html" />
-    <Content Include="site\window\p-course\003-1-1.html" />
-    <Content Include="site\window\p-course\003-1.html" />
-    <Content Include="site\window\p-course\003-2.html" />
-    <Content Include="site\window\p-data\001.html" />
-    <Content Include="site\window\p-data\002.html" />
-    <Content Include="site\window\p-data\003.html" />
-    <Content Include="site\window\p-data\004.html" />
-    <Content Include="site\window\p-data\005.html" />
-    <Content Include="site\window\p-data\006.html" />
-    <Content Include="site\window\p-equipment\001.html" />
-    <Content Include="site\window\p-equipment\002.html" />
-    <Content Include="site\window\p-equipment\004.html" />
-    <Content Include="site\window\p-equipment\ctrl-pannels\assist.html" />
-    <Content Include="site\window\p-equipment\ctrl-pannels\blank.html" />
-    <Content Include="site\window\p-equipment\ctrl-pannels\env.html" />
-    <Content Include="site\window\p-log\001.html" />
-    <Content Include="site\window\p-operate\001-1.html" />
-    <Content Include="site\window\p-operate\001-2.html" />
-    <Content Include="site\window\p-operate\001-3.html" />
-    <Content Include="site\window\p-operate\001-4.html" />
-    <Content Include="site\window\p-operate\001-5.html" />
-    <Content Include="site\window\p-operate\002-1.html" />
-    <Content Include="site\window\p-operate\003-1-1.html" />
-    <Content Include="site\window\p-operate\003-1.html" />
-    <Content Include="site\window\p-operate\003-2.html" />
-    <Content Include="site\window\p-operate\003-3.html" />
-    <Content Include="site\window\p-operate\004-1-1.html" />
-    <Content Include="site\window\p-operate\004-1-2.html" />
-    <Content Include="site\window\p-operate\004-1.html" />
-    <Content Include="site\window\p-operate\004-2.html" />
-    <Content Include="site\window\p-operate\004-3.html" />
-    <Content Include="site\window\p-settings\001-1.html" />
-    <Content Include="site\window\p-settings\002-1.html" />
-    <Content Include="site\window\p-settings\002-2.html" />
-    <Content Include="site\window\p-settings\002-3.html" />
-    <Content Include="site\window\p-settings\002-4.html" />
-    <Content Include="site\window\p-settings\003-1.html" />
-    <Content Include="site\window\p-settings\003-2.html" />
-    <Content Include="site\window\p-settings\Blank.html" />
-    <Content Include="site\window\p-strategy\001-1.html" />
-    <Content Include="site\window\p-strategy\001-2-edit.html" />
-    <Content Include="site\window\p-strategy\001-2.html" />
-    <Content Include="site\window\p-strategy\001-3-edit.html" />
-    <Content Include="site\window\p-strategy\001-3.html" />
-    <Content Include="site\window\p-strategy\002.html" />
-    <Content Include="site\window\pages\course.html" />
-    <Content Include="site\window\pages\data.html" />
-    <Content Include="site\window\pages\equipment.html" />
-    <Content Include="site\window\pages\equipment2.html" />
-    <Content Include="site\window\pages\log.html" />
-    <Content Include="site\window\pages\operate.html" />
-    <Content Include="site\window\pages\settings.html" />
-    <Content Include="site\window\pages\strategy.html" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\UserInfo.js" />
-    <Content Include="site\window\alert\UploadFile.aspx" />
-    <Content Include="site\window\alert\UploadScheduleFile.aspx" />
+    <Content Include="site-vue-new\check\003.html" />
+    <Content Include="site-vue-new\check\room.js" />
+    <Content Include="site-vue-new\components\left_menu.html" />
+    <Content Include="site-vue-new\components\top_menu.html" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker.css" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker.min.css" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker.standalone.css" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker3.css" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker3.min.css" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker3.standalone.css" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="site-vue-new\css\brands.css" />
+    <Content Include="site-vue-new\css\brands.min.css" />
+    <Content Include="site-vue-new\css\Chart.min.css" />
+    <Content Include="site-vue-new\css\chunk-0c552914.ae2b81eb1c55de99d7b3.css" />
+    <Content Include="site-vue-new\css\chunk-common.ae2b81eb1c55de99d7b3.css" />
+    <Content Include="site-vue-new\css\chunk-vendors.ae2b81eb1c55de99d7b3.css" />
+    <Content Include="site-vue-new\css\fontawesome-all.css" />
+    <Content Include="site-vue-new\css\fontawesome-all.min.css" />
+    <Content Include="site-vue-new\css\fontawesome.css" />
+    <Content Include="site-vue-new\css\fontawesome.min.css" />
+    <Content Include="site-vue-new\css\hikversionPlayer.ae2b81eb1c55de99d7b3.css" />
+    <Content Include="site-vue-new\css\regular.css" />
+    <Content Include="site-vue-new\css\regular.min.css" />
+    <Content Include="site-vue-new\css\sensor.css" />
+    <Content Include="site-vue-new\css\sensor.js" />
+    <Content Include="site-vue-new\css\sensor2.css" />
+    <Content Include="site-vue-new\css\sensor2.js" />
+    <Content Include="site-vue-new\css\sensor2.min.css" />
+    <Content Include="site-vue-new\css\solid.css" />
+    <Content Include="site-vue-new\css\solid.min.css" />
+    <Content Include="site-vue-new\css\svg-with-js.css" />
+    <Content Include="site-vue-new\css\svg-with-js.min.css" />
+    <Content Include="site-vue-new\css\v4-shims.css" />
+    <Content Include="site-vue-new\css\v4-shims.min.css" />
+    <Content Include="site-vue-new\deviceList.html" />
+    <Content Include="site-vue-new\dist\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="site-vue-new\dist\css\bootstrap-grid.css" />
+    <Content Include="site-vue-new\dist\css\bootstrap-grid.min.css" />
+    <Content Include="site-vue-new\dist\css\bootstrap-reboot.css" />
+    <Content Include="site-vue-new\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="site-vue-new\dist\css\bootstrap.css" />
+    <Content Include="site-vue-new\dist\css\bootstrap.min.css" />
+    <Content Include="site-vue-new\dist\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="site-vue-new\dist\js\bootstrap.bundle.js" />
+    <Content Include="site-vue-new\dist\js\bootstrap.bundle.min.js" />
+    <Content Include="site-vue-new\dist\js\bootstrap.js" />
+    <Content Include="site-vue-new\dist\js\bootstrap.min.js" />
+    <Content Include="site-vue-new\dist\js\Chart.min.js" />
+    <Content Include="site-vue-new\dist\js\jquery-3.3.1.slim.min.js" />
+    <Content Include="site-vue-new\dist\js\jquery.min.js" />
+    <Content Include="site-vue-new\dist\js\popper.min.js" />
+    <Content Include="site-vue-new\favicon.ico" />
+    <Content Include="site-vue-new\font\css\font-awesome.css" />
+    <Content Include="site-vue-new\font\css\font-awesome.min.css" />
+    <Content Include="site-vue-new\font\fonts\fontawesome-webfont.svg" />
+    <Content Include="site-vue-new\font\less\font-awesome.css" />
+    <Content Include="site-vue-new\font\scss\font-awesome.css" />
+    <Content Include="site-vue-new\hikversionPlayer.html" />
+    <Content Include="site-vue-new\home.html" />
+    <Content Include="site-vue-new\images\001.jpg" />
+    <Content Include="site-vue-new\images\cresij.png" />
+    <Content Include="site-vue-new\images\dev.png" />
+    <Content Include="site-vue-new\images\loginbg.jpg" />
+    <Content Include="site-vue-new\images\loginbg.png" />
+    <Content Include="site-vue-new\images\logo.jpg" />
+    <Content Include="site-vue-new\images\logo.png" />
+    <Content Include="site-vue-new\images\SVG\A.svg" />
+    <Content Include="site-vue-new\images\SVG\B.svg" />
+    <Content Include="site-vue-new\images\SVG\C.svg" />
+    <Content Include="site-vue-new\images\SVG\D.svg" />
+    <Content Include="site-vue-new\images\SVG\E.svg" />
+    <Content Include="site-vue-new\images\SVG\F.svg" />
+    <Content Include="site-vue-new\images\SVG\G.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a001.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a002.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a003.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a004.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a005.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a006.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a007.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a008.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a009.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a010.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a011.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\a012.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\资源 22.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\资源 23.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\资源 24.svg" />
+    <Content Include="site-vue-new\images\SVG\SVG\资源 25.svg" />
+    <Content Include="site-vue-new\images\ty.svg" />
+    <Content Include="site-vue-new\img\electFun.645f66f7.png" />
+    <Content Include="site-vue-new\img\loginbg.54460836.jpg" />
+    <Content Include="site-vue-new\img\newElectFun.4c2c10a0.png" />
+    <Content Include="site-vue-new\img\tyy.feff1d1d.svg" />
+    <Content Include="site-vue-new\index.html" />
+    <Content Include="site-vue-new\js\002.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\AddClassroom.js" />
+    <Content Include="site-vue-new\js\AddEditOrganisation.js" />
+    <Content Include="site-vue-new\js\AddStudent.js" />
+    <Content Include="site-vue-new\js\AddTeacher.js" />
+    <Content Include="site-vue-new\js\Add_UserInfo.js" />
+    <Content Include="site-vue-new\js\BasicDataSubMenu.js" />
+    <Content Include="site-vue-new\js\bootstrap-datepicker.js" />
+    <Content Include="site-vue-new\js\bootstrap-datepicker.min.js" />
+    <Content Include="site-vue-new\js\BuildingClassForSettings.js" />
+    <Content Include="site-vue-new\js\calendor.js" />
+    <Content Include="site-vue-new\js\CapitalInfoJS.js" />
+    <Content Include="site-vue-new\js\Chart.bundle.min.js" />
+    <Content Include="site-vue-new\js\CheckUserSession.js" />
+    <Content Include="site-vue-new\js\chunk-0c552914.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\chunk-common.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\chunk-vendors.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\ClassroomInfo.js" />
+    <Content Include="site-vue-new\js\ConfirmTransferSchedule.js" />
+    <Content Include="site-vue-new\js\ControlClick.js" />
+    <Content Include="site-vue-new\js\course.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\CourseManagement.js" />
+    <Content Include="site-vue-new\js\CourseSubMenu.js" />
+    <Content Include="site-vue-new\js\data.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\dataTables.bootstrap.js" />
+    <Content Include="site-vue-new\js\date-holiday-umd.min.js" />
+    <Content Include="site-vue-new\js\DeleteClass.js" />
+    <Content Include="site-vue-new\js\DeleteOrganisation.js" />
+    <Content Include="site-vue-new\js\DeleteStudent.js" />
+    <Content Include="site-vue-new\js\DeleteTeacher.js" />
+    <Content Include="site-vue-new\js\Delete_User.js" />
+    <Content Include="site-vue-new\js\deviceList.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap-grid.css" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap-grid.min.css" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap-reboot.css" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap.css" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap.min.css" />
+    <Content Include="site-vue-new\js\dist\js\bootstrap.bundle.js" />
+    <Content Include="site-vue-new\js\dist\js\bootstrap.bundle.min.js" />
+    <Content Include="site-vue-new\js\dist\js\bootstrap.js" />
+    <Content Include="site-vue-new\js\dist\js\bootstrap.min.js" />
+    <Content Include="site-vue-new\js\dist\js\Chart.min.js" />
+    <Content Include="site-vue-new\js\EditClassInfo.js" />
+    <Content Include="site-vue-new\js\EditOrgInfo.js" />
+    <Content Include="site-vue-new\js\EditStudentInfo.js" />
+    <Content Include="site-vue-new\js\EditTeacherInfo.js" />
+    <Content Include="site-vue-new\js\Edit_UserInfo.js" />
+    <Content Include="site-vue-new\js\EnvControl.js" />
+    <Content Include="site-vue-new\js\EquipControl002.js" />
+    <Content Include="site-vue-new\js\EquipmentMenu.js" />
+    <Content Include="site-vue-new\js\fontawesome\all.js" />
+    <Content Include="site-vue-new\js\fontawesome\all.min.js" />
+    <Content Include="site-vue-new\js\fontawesome\brands.js" />
+    <Content Include="site-vue-new\js\fontawesome\brands.min.js" />
+    <Content Include="site-vue-new\js\fontawesome\conflict-detection.js" />
+    <Content Include="site-vue-new\js\fontawesome\conflict-detection.min.js" />
+    <Content Include="site-vue-new\js\fontawesome\fontawesome.js" />
+    <Content Include="site-vue-new\js\fontawesome\fontawesome.min.js" />
+    <Content Include="site-vue-new\js\fontawesome\regular.js" />
+    <Content Include="site-vue-new\js\fontawesome\regular.min.js" />
+    <Content Include="site-vue-new\js\fontawesome\solid.js" />
+    <Content Include="site-vue-new\js\fontawesome\solid.min.js" />
+    <Content Include="site-vue-new\js\fontawesome\v4-shims.js" />
+    <Content Include="site-vue-new\js\fontawesome\v4-shims.min.js" />
+    <Content Include="site-vue-new\js\font\css\font-awesome.css" />
+    <Content Include="site-vue-new\js\font\css\font-awesome.min.css" />
+    <Content Include="site-vue-new\js\font\fonts\fontawesome-webfont.svg" />
+    <Content Include="site-vue-new\js\font\less\font-awesome.css" />
+    <Content Include="site-vue-new\js\font\scss\font-awesome.css" />
+    <Content Include="site-vue-new\js\GetOrgInfo.js" />
+    <Content Include="site-vue-new\js\GetTopMenu.js" />
+    <Content Include="site-vue-new\js\GroupControlMachine.js" />
+    <Content Include="site-vue-new\js\hikversionPlayer.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\home.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\index.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\ip_input.js" />
+    <None Include="site-vue-new\js\jquery-3.4.1.intellisense.js" />
+    <Content Include="site-vue-new\js\jquery-3.4.1.js" />
+    <Content Include="site-vue-new\js\jquery-3.4.1.min.js" />
+    <Content Include="site-vue-new\js\jquery-3.4.1.slim.js" />
+    <Content Include="site-vue-new\js\jquery-3.4.1.slim.min.js" />
+    <Content Include="site-vue-new\js\jquery.dataTables.js" />
+    <Content Include="site-vue-new\js\jquery.signalR-2.4.1.js" />
+    <Content Include="site-vue-new\js\jquery.signalR-2.4.1.min.js" />
+    <Content Include="site-vue-new\js\LeftMenu.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker-en-CA.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ar-tn.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ar.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.az.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.bg.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.bn.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.br.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.bs.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ca.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.cs.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.cy.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.da.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.de.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.el.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.en-AU.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.en-CA.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.en-GB.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.en-IE.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.en-NZ.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.en-ZA.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.eo.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.et.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.eu.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.fa.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.fi.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.fo.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.fr-CH.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.fr.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.gl.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.he.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.hi.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.hr.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.hu.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.hy.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.id.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.is.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.it-CH.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.it.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ja.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ka.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.kh.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.kk.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.km.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ko.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.kr.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.lt.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.lv.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.me.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.mk.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.mn.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ms.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.nl-BE.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.nl.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.no.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.oc.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.pl.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.pt.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ro.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.rs-latin.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.rs.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ru.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.si.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.sk.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.sl.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.sq.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.sr-latin.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.sr.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.sv.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.sw.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.ta.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.tg.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.th.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.tk.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.tr.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.uk.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.uz-cyrl.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.uz-latn.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.vi.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <Content Include="site-vue-new\js\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="site-vue-new\js\login.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\LoginScript.js" />
+    <Content Include="site-vue-new\js\m-data-01.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\m-data-02.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\MachineControl.js" />
+    <Content Include="site-vue-new\js\moment.min.js" />
+    <Content Include="site-vue-new\js\moment.zh-cn.js" />
+    <Content Include="site-vue-new\js\OperationmgmtMenu.js" />
+    <Content Include="site-vue-new\js\p-data\002.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\ProjectorConfigJS.js" />
+    <Content Include="site-vue-new\js\ReserveClassroom.js" />
+    <Content Include="site-vue-new\js\ReserveScheduleList.js" />
+    <Content Include="site-vue-new\js\Schedule.js" />
+    <Content Include="site-vue-new\js\ScheduleAppointment.js" />
+    <Content Include="site-vue-new\js\sensor.js" />
+    <Content Include="site-vue-new\js\settings.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\ShowUserAccess.js" />
+    <Content Include="site-vue-new\js\strategy.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\StrategySubMenu.js" />
+    <Content Include="site-vue-new\js\StudentInfo.js" />
+    <Content Include="site-vue-new\js\SystemConfigJS.js" />
+    <Content Include="site-vue-new\js\SystemSetting.js" />
+    <Content Include="site-vue-new\js\SystemSettingsSubMenu.js" />
+    <Content Include="site-vue-new\js\TeacherInfo.js" />
+    <Content Include="site-vue-new\js\TransferApplication.js" />
+    <Content Include="site-vue-new\js\Treeview.js" />
+    <Content Include="site-vue-new\js\umd\popper-utils.js" />
+    <Content Include="site-vue-new\js\umd\popper-utils.min.js" />
+    <Content Include="site-vue-new\js\umd\popper.js" />
+    <Content Include="site-vue-new\js\umd\popper.min.js" />
+    <Content Include="site-vue-new\js\uploadExcel.js" />
+    <Content Include="site-vue-new\js\UserAuthentication.js" />
+    <Content Include="site-vue-new\js\UserInfo.js" />
+    <Content Include="site-vue-new\js\UserLogs.js" />
+    <Content Include="site-vue-new\js\video-js.css" />
+    <Content Include="site-vue-new\js\video.js" />
+    <Content Include="site-vue-new\js\vlcPlayer.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\vue.min.js" />
+    <Content Include="site-vue-new\js\WebPlugin.js" />
+    <Content Include="site-vue-new\js\webVideoCtrl.js" />
+    <Content Include="site-vue-new\login.html" />
+    <Content Include="site-vue-new\Scripts\font\css\font-awesome.css" />
+    <Content Include="site-vue-new\Scripts\font\css\font-awesome.min.css" />
+    <Content Include="site-vue-new\Uploads\ImportTemplateCSV.txt" />
+    <Content Include="site-vue-new\vlcPlayer.html" />
+    <Content Include="site-vue-new\window\alert\conf.html" />
+    <Content Include="site-vue-new\window\alert\confer_delete.html" />
+    <Content Include="site-vue-new\window\alert\coordinate.html" />
+    <Content Include="site-vue-new\window\alert\course-tiaokeshenpi.html" />
+    <Content Include="site-vue-new\window\alert\course-yuyueshenpi.html" />
+    <Content Include="site-vue-new\window\alert\data\AddOrganisation.html" />
+    <Content Include="site-vue-new\window\alert\data\AddUserData.html" />
+    <Content Include="site-vue-new\window\alert\data\add_org.html" />
+    <Content Include="site-vue-new\window\alert\data\add_room.html" />
+    <Content Include="site-vue-new\window\alert\data\add_student.html" />
+    <Content Include="site-vue-new\window\alert\data\add_teacher.html" />
+    <Content Include="site-vue-new\window\alert\data\add_user.html" />
+    <Content Include="site-vue-new\window\alert\data\auth.html" />
+    <Content Include="site-vue-new\window\alert\data\distribute.html" />
+    <Content Include="site-vue-new\window\alert\data\edit.html" />
+    <Content Include="site-vue-new\window\alert\data\EditOrganisation.html" />
+    <Content Include="site-vue-new\window\alert\data\Edit_Classroom.html" />
+    <Content Include="site-vue-new\window\alert\data\Edit_Student.html" />
+    <Content Include="site-vue-new\window\alert\data\Edit_Teacher.html" />
+    <Content Include="site-vue-new\window\alert\data\Edit_UserInfo.html" />
+    <Content Include="site-vue-new\window\alert\data\storage.html" />
+    <Content Include="site-vue-new\window\alert\data\synchro.html" />
+    <Content Include="site-vue-new\window\alert\data\transfer.html" />
+    <Content Include="site-vue-new\window\alert\data\UploadFile.html" />
+    <Content Include="site-vue-new\window\alert\data\UserAuthSetting.html" />
+    <Content Include="site-vue-new\window\alert\DeleteClassroom.html" />
+    <Content Include="site-vue-new\window\alert\DeleteOrg.html" />
+    <Content Include="site-vue-new\window\alert\DeleteStudent.html" />
+    <Content Include="site-vue-new\window\alert\DeleteTeacher.html" />
+    <Content Include="site-vue-new\window\alert\Delete_User.html" />
+    <Content Include="site-vue-new\window\alert\DownloadClassCSVTemplate.aspx" />
+    <Content Include="site-vue-new\window\alert\DownloadCSVTempelate.aspx" />
+    <Content Include="site-vue-new\window\alert\DownloadScheduleTempelate.aspx" />
+    <Content Include="site-vue-new\window\alert\DownloadStudentTempelate.aspx" />
+    <Content Include="site-vue-new\window\alert\DownloadteacherTemplate.aspx" />
+    <Content Include="site-vue-new\window\alert\DownloadUserDataTemplate.aspx" />
+    <Content Include="site-vue-new\window\alert\ImportClassData.html" />
+    <Content Include="site-vue-new\window\alert\importSchedule_xlsx.html" />
+    <Content Include="site-vue-new\window\alert\ImportStudentData.html" />
+    <Content Include="site-vue-new\window\alert\ImportTeacherData.html" />
+    <Content Include="site-vue-new\window\alert\importUserdata.html" />
+    <Content Include="site-vue-new\window\alert\import_xls.html" />
+    <Content Include="site-vue-new\window\alert\interactive_settings.html" />
+    <Content Include="site-vue-new\window\alert\operate\add_failure.html" />
+    <Content Include="site-vue-new\window\alert\operate\add_maintain.html" />
+    <Content Include="site-vue-new\window\alert\operate\add_task.html" />
+    <Content Include="site-vue-new\window\alert\operate\add_tour.html" />
+    <Content Include="site-vue-new\window\alert\operate\claim_task.html" />
+    <Content Include="site-vue-new\window\alert\operate\distribute_m.html" />
+    <Content Include="site-vue-new\window\alert\operate\edit_tour.html" />
+    <Content Include="site-vue-new\window\alert\operate\failure_audit.html" />
+    <Content Include="site-vue-new\window\alert\operate\maintain_review.html" />
+    <Content Include="site-vue-new\window\alert\operate\manual_dispatch.html" />
+    <Content Include="site-vue-new\window\alert\operate\order_examine.html" />
+    <Content Include="site-vue-new\window\alert\operate\plan_excute.html" />
+    <Content Include="site-vue-new\window\alert\operate\plan_excute_maintain.html" />
+    <Content Include="site-vue-new\window\alert\operate\storage_in.html" />
+    <Content Include="site-vue-new\window\alert\operate\storage_out.html" />
+    <Content Include="site-vue-new\window\alert\operate\task_handle.html" />
+    <Content Include="site-vue-new\window\alert\operate\task_rework.html" />
+    <Content Include="site-vue-new\window\alert\operate\tour_det.html" />
+    <Content Include="site-vue-new\window\alert\operate\tour_review.html" />
+    <Content Include="site-vue-new\window\alert\operate\video_review.html" />
+    <Content Include="site-vue-new\window\alert\state_fail.html" />
+    <Content Include="site-vue-new\window\alert\state_suc.html" />
+    <Content Include="site-vue-new\window\alert\state_suc_2.html" />
+    <Content Include="site-vue-new\window\alert\strategy\a-001.html" />
+    <Content Include="site-vue-new\window\alert\strategy\a-002.html" />
+    <Content Include="site-vue-new\window\alert\strategy\a-003.html" />
+    <Content Include="site-vue-new\window\alert\strategy\a-004.html" />
+    <Content Include="site-vue-new\window\alert\strategy\a-005.html" />
+    <Content Include="site-vue-new\window\alert\strategy\a-006.html" />
+    <Content Include="site-vue-new\window\alert\strategy\a-007.html" />
+    <Content Include="site-vue-new\window\alert\strategy\add_strategy_keywords.html" />
+    <Content Include="site-vue-new\window\alert\strategy\range.html" />
+    <Content Include="site-vue-new\window\alert\threshold.html" />
+    <Content Include="site-vue-new\window\alert\tongbu-day.html" />
+    <Content Include="site-vue-new\window\alert\tongbu-month.html" />
+    <Content Include="site-vue-new\window\alert\tongbu-week.html" />
+    <Content Include="site-vue-new\window\alert\tongbu.html" />
+    <Content Include="site-vue-new\window\alert\UploadClass.aspx" />
+    <Content Include="site-vue-new\window\alert\UploadFile.aspx" />
+    <Content Include="site-vue-new\window\alert\UploadScheduleFile.aspx" />
+    <Content Include="site-vue-new\window\alert\UploadStudent.aspx" />
+    <Content Include="site-vue-new\window\alert\UploadTeacher.aspx" />
+    <Content Include="site-vue-new\window\alert\UploadUser.aspx" />
+    <Content Include="site-vue-new\window\menus\m-course-01.html" />
+    <Content Include="site-vue-new\window\menus\m-course-02.html" />
+    <Content Include="site-vue-new\window\menus\m-course-03.html" />
+    <Content Include="site-vue-new\window\menus\m-data-01.html" />
+    <Content Include="site-vue-new\window\menus\m-data-02.html" />
+    <Content Include="site-vue-new\window\menus\m-data-03.html" />
+    <Content Include="site-vue-new\window\menus\m-data-04.html" />
+    <Content Include="site-vue-new\window\menus\m-data-05.html" />
+    <Content Include="site-vue-new\window\menus\m-data-06.html" />
+    <Content Include="site-vue-new\window\menus\m-equipment-01.html" />
+    <Content Include="site-vue-new\window\menus\m-equipment-02.html" />
+    <Content Include="site-vue-new\window\menus\m-equipment-03.html" />
+    <Content Include="site-vue-new\window\menus\m-equipment-04.html" />
+    <Content Include="site-vue-new\window\menus\m-equipment-05.html" />
+    <Content Include="site-vue-new\window\menus\m-operate-01.html" />
+    <Content Include="site-vue-new\window\menus\m-operate-02.html" />
+    <Content Include="site-vue-new\window\menus\m-operate-03.html" />
+    <Content Include="site-vue-new\window\menus\m-operate-04.html" />
+    <Content Include="site-vue-new\window\menus\m-settings-01.html" />
+    <Content Include="site-vue-new\window\menus\m-settings-02.html" />
+    <Content Include="site-vue-new\window\menus\m-settings-03.html" />
+    <Content Include="site-vue-new\window\menus\m-strategy-01.html" />
+    <Content Include="site-vue-new\window\menus\m-strategy-02.html" />
+    <Content Include="site-vue-new\window\p-course\001.html" />
+    <Content Include="site-vue-new\window\p-course\002-1-1.html" />
+    <Content Include="site-vue-new\window\p-course\002-1.html" />
+    <Content Include="site-vue-new\window\p-course\002-2.html" />
+    <Content Include="site-vue-new\window\p-course\003-1-1.html" />
+    <Content Include="site-vue-new\window\p-course\003-1.html" />
+    <Content Include="site-vue-new\window\p-course\003-2.html" />
+    <Content Include="site-vue-new\window\p-data\001.html" />
+    <Content Include="site-vue-new\window\p-data\002.html" />
+    <Content Include="site-vue-new\window\p-data\003.html" />
+    <Content Include="site-vue-new\window\p-data\004.html" />
+    <Content Include="site-vue-new\window\p-data\005.html" />
+    <Content Include="site-vue-new\window\p-data\006.html" />
+    <Content Include="site-vue-new\window\p-equipment\001.html" />
+    <Content Include="site-vue-new\window\p-equipment\002.html" />
+    <Content Include="site-vue-new\window\p-equipment\004.html" />
+    <Content Include="site-vue-new\window\p-equipment\005.html" />
+    <Content Include="site-vue-new\window\p-equipment\ctrl-pannels\assist.html" />
+    <Content Include="site-vue-new\window\p-equipment\ctrl-pannels\blank.html" />
+    <Content Include="site-vue-new\window\p-equipment\ctrl-pannels\env.html" />
+    <Content Include="site-vue-new\window\p-log\001.html" />
+    <Content Include="site-vue-new\window\p-operate\001-1.html" />
+    <Content Include="site-vue-new\window\p-operate\001-2.html" />
+    <Content Include="site-vue-new\window\p-operate\001-3.html" />
+    <Content Include="site-vue-new\window\p-operate\001-4.html" />
+    <Content Include="site-vue-new\window\p-operate\001-5.html" />
+    <Content Include="site-vue-new\window\p-operate\002-1.html" />
+    <Content Include="site-vue-new\window\p-operate\003-1-1.html" />
+    <Content Include="site-vue-new\window\p-operate\003-1.html" />
+    <Content Include="site-vue-new\window\p-operate\003-2.html" />
+    <Content Include="site-vue-new\window\p-operate\003-3.html" />
+    <Content Include="site-vue-new\window\p-operate\004-1-1.html" />
+    <Content Include="site-vue-new\window\p-operate\004-1-2.html" />
+    <Content Include="site-vue-new\window\p-operate\004-1.html" />
+    <Content Include="site-vue-new\window\p-operate\004-2.html" />
+    <Content Include="site-vue-new\window\p-operate\004-3.html" />
+    <Content Include="site-vue-new\window\p-settings\001-1.html" />
+    <Content Include="site-vue-new\window\p-settings\002-1.html" />
+    <Content Include="site-vue-new\window\p-settings\002-2.html" />
+    <Content Include="site-vue-new\window\p-settings\002-3.html" />
+    <Content Include="site-vue-new\window\p-settings\002-4.html" />
+    <Content Include="site-vue-new\window\p-settings\003-1.html" />
+    <Content Include="site-vue-new\window\p-settings\003-2.html" />
+    <Content Include="site-vue-new\window\p-settings\Blank.html" />
+    <Content Include="site-vue-new\window\p-strategy\001-1.html" />
+    <Content Include="site-vue-new\window\p-strategy\001-2-edit.html" />
+    <Content Include="site-vue-new\window\p-strategy\001-2.html" />
+    <Content Include="site-vue-new\window\p-strategy\001-3-edit.html" />
+    <Content Include="site-vue-new\window\p-strategy\001-3.html" />
+    <Content Include="site-vue-new\window\p-strategy\002.html" />
+    <Content Include="site-vue-new\window\pages\course.html" />
+    <Content Include="site-vue-new\window\pages\data.html" />
+    <Content Include="site-vue-new\window\pages\equipment.html" />
+    <Content Include="site-vue-new\window\pages\equipment2.html" />
+    <Content Include="site-vue-new\window\pages\log.html" />
+    <Content Include="site-vue-new\window\pages\operate.html" />
+    <Content Include="site-vue-new\window\pages\settings.html" />
+    <Content Include="site-vue-new\window\pages\strategy.html" />
     <Content Include="Views\Control.aspx" />
     <Content Include="Views\EnvControl.aspx" />
     <Content Include="Views\Index.aspx" />
@@ -943,133 +1216,103 @@
     <Compile Include="HubsFile\Startup.cs" />
     <Compile Include="HubsFile\UpdateDevice.cs" />
     <Compile Include="Models\buildingdetail.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\classdetail.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\course.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\current_loggeduser.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DatabaseEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DatabaseEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DatabaseEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseEntities.edmx</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\departmentdetail.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\floordetail.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\machineoperationlog.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\operationmgmt.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationDatabase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrganisationDatabase.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationDatabase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrganisationDatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OrganisationDatabase.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\reserveandtransfer.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\roledetail.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\schedule.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\scheduleoriginal.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\schedulereserve.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\scheduletransfer.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sectionsinfo.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\semesterinfo.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetAllClassDetails_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetAllUserDetails_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetBuildingDetailsInfo_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetClassIPByBuilding_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetIPClassByBuildingFloor_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetOperationMgmtData_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sp_GetScheduleByDay_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetStudentData_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetTeacherData_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetTransferScheduleByDay_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_GetYearAndSemester_Result.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\strategydescription.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\strategyequipment.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\strategylog.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\strategymanagement.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\studentdata.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\systemsetting.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\teacherdata.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\temp_centralcontrol.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\userdetail.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\userlocationaccess.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\userlog.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\userpermission.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\userregistration.cs">
-      <DependentUpon>DatabaseEntities.tt</DependentUpon>
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\usersessioninfo.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DeleteOrgData.asmx.cs">
@@ -1126,88 +1369,88 @@
     <Compile Include="CustomError.aspx.designer.cs">
       <DependentUpon>CustomError.aspx</DependentUpon>
     </Compile>
-    <Compile Include="site\window\alert\DownloadClassCSVTemplate.aspx.cs">
+    <Compile Include="site-vue-new\window\alert\DownloadClassCSVTemplate.aspx.cs">
       <DependentUpon>DownloadClassCSVTemplate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="site\window\alert\DownloadClassCSVTemplate.aspx.designer.cs">
+    <Compile Include="site-vue-new\window\alert\DownloadClassCSVTemplate.aspx.designer.cs">
       <DependentUpon>DownloadClassCSVTemplate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="site\window\alert\DownloadScheduleTempelate.aspx.cs">
-      <DependentUpon>DownloadScheduleTempelate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site\window\alert\DownloadScheduleTempelate.aspx.designer.cs">
-      <DependentUpon>DownloadScheduleTempelate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site\window\alert\DownloadStudentTempelate.aspx.cs">
-      <DependentUpon>DownloadStudentTempelate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site\window\alert\DownloadStudentTempelate.aspx.designer.cs">
-      <DependentUpon>DownloadStudentTempelate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site\window\alert\DownloadteacherTemplate.aspx.cs">
-      <DependentUpon>DownloadteacherTemplate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site\window\alert\DownloadteacherTemplate.aspx.designer.cs">
-      <DependentUpon>DownloadteacherTemplate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site\window\alert\DownloadUserDataTemplate.aspx.cs">
-      <DependentUpon>DownloadUserDataTemplate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site\window\alert\DownloadUserDataTemplate.aspx.designer.cs">
-      <DependentUpon>DownloadUserDataTemplate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site\window\alert\UploadClass.aspx.cs">
-      <DependentUpon>UploadClass.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site\window\alert\UploadClass.aspx.designer.cs">
-      <DependentUpon>UploadClass.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site\window\alert\UploadFile.aspx.cs">
-      <DependentUpon>UploadFile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site\window\alert\UploadFile.aspx.designer.cs">
-      <DependentUpon>UploadFile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site\window\alert\UploadScheduleFile.aspx.cs">
-      <DependentUpon>UploadScheduleFile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site\window\alert\UploadScheduleFile.aspx.designer.cs">
-      <DependentUpon>UploadScheduleFile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site\window\alert\DownloadCSVTempelate.aspx.cs">
+    <Compile Include="site-vue-new\window\alert\DownloadCSVTempelate.aspx.cs">
       <DependentUpon>DownloadCSVTempelate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="site\window\alert\DownloadCSVTempelate.aspx.designer.cs">
+    <Compile Include="site-vue-new\window\alert\DownloadCSVTempelate.aspx.designer.cs">
       <DependentUpon>DownloadCSVTempelate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="site\window\alert\UploadStudent.aspx.cs">
+    <Compile Include="site-vue-new\window\alert\DownloadScheduleTempelate.aspx.cs">
+      <DependentUpon>DownloadScheduleTempelate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\DownloadScheduleTempelate.aspx.designer.cs">
+      <DependentUpon>DownloadScheduleTempelate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\DownloadStudentTempelate.aspx.cs">
+      <DependentUpon>DownloadStudentTempelate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\DownloadStudentTempelate.aspx.designer.cs">
+      <DependentUpon>DownloadStudentTempelate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\DownloadteacherTemplate.aspx.cs">
+      <DependentUpon>DownloadteacherTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\DownloadteacherTemplate.aspx.designer.cs">
+      <DependentUpon>DownloadteacherTemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\DownloadUserDataTemplate.aspx.cs">
+      <DependentUpon>DownloadUserDataTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\DownloadUserDataTemplate.aspx.designer.cs">
+      <DependentUpon>DownloadUserDataTemplate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\UploadClass.aspx.cs">
+      <DependentUpon>UploadClass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\UploadClass.aspx.designer.cs">
+      <DependentUpon>UploadClass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\UploadFile.aspx.cs">
+      <DependentUpon>UploadFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\UploadFile.aspx.designer.cs">
+      <DependentUpon>UploadFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\UploadScheduleFile.aspx.cs">
+      <DependentUpon>UploadScheduleFile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\UploadScheduleFile.aspx.designer.cs">
+      <DependentUpon>UploadScheduleFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="site-vue-new\window\alert\UploadStudent.aspx.cs">
       <DependentUpon>UploadStudent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="site\window\alert\UploadStudent.aspx.designer.cs">
+    <Compile Include="site-vue-new\window\alert\UploadStudent.aspx.designer.cs">
       <DependentUpon>UploadStudent.aspx</DependentUpon>
     </Compile>
-    <Compile Include="site\window\alert\UploadTeacher.aspx.cs">
+    <Compile Include="site-vue-new\window\alert\UploadTeacher.aspx.cs">
       <DependentUpon>UploadTeacher.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="site\window\alert\UploadTeacher.aspx.designer.cs">
+    <Compile Include="site-vue-new\window\alert\UploadTeacher.aspx.designer.cs">
       <DependentUpon>UploadTeacher.aspx</DependentUpon>
     </Compile>
-    <Compile Include="site\window\alert\UploadUser.aspx.cs">
+    <Compile Include="site-vue-new\window\alert\UploadUser.aspx.cs">
       <DependentUpon>UploadUser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="site\window\alert\UploadUser.aspx.designer.cs">
+    <Compile Include="site-vue-new\window\alert\UploadUser.aspx.designer.cs">
       <DependentUpon>UploadUser.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Control.aspx.cs">
@@ -1288,55 +1531,6 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Services\Handler.ashx" />
-    <Content Include="site\.vs\config\applicationhost.config" />
-    <Content Include="site\.vs\ProjectSettings.json" />
-    <Content Include="site\.vs\site%2820200509修改%29\v15\.suo" />
-    <Content Include="site\.vs\slnx.sqlite" />
-    <Content Include="site\.vs\VSWorkspaceState.json" />
-    <Content Include="site\dist\css\bootstrap-grid.css.map" />
-    <Content Include="site\dist\css\bootstrap-grid.min.css.map" />
-    <Content Include="site\dist\css\bootstrap-reboot.css.map" />
-    <Content Include="site\dist\css\bootstrap-reboot.min.css.map" />
-    <Content Include="site\dist\css\bootstrap.css.map" />
-    <Content Include="site\dist\css\bootstrap.min.css.map" />
-    <Content Include="site\dist\js\bootstrap.bundle.js.map" />
-    <Content Include="site\dist\js\bootstrap.bundle.min.js.map" />
-    <Content Include="site\dist\js\bootstrap.js.map" />
-    <Content Include="site\dist\js\bootstrap.min.js.map" />
-    <Content Include="site\font\fonts\fontawesome-webfont.eot" />
-    <Content Include="site\font\fonts\fontawesome-webfont.ttf" />
-    <Content Include="site\font\fonts\fontawesome-webfont.woff" />
-    <Content Include="site\font\fonts\fontawesome-webfont.woff2" />
-    <Content Include="site\font\fonts\FontAwesome.otf" />
-    <Content Include="site\font\less\animated.less" />
-    <Content Include="site\font\less\bordered-pulled.less" />
-    <Content Include="site\font\less\core.less" />
-    <Content Include="site\font\less\fixed-width.less" />
-    <Content Include="site\font\less\font-awesome.less" />
-    <Content Include="site\font\less\icons.less" />
-    <Content Include="site\font\less\larger.less" />
-    <Content Include="site\font\less\list.less" />
-    <Content Include="site\font\less\mixins.less" />
-    <Content Include="site\font\less\path.less" />
-    <Content Include="site\font\less\rotated-flipped.less" />
-    <Content Include="site\font\less\screen-reader.less" />
-    <Content Include="site\font\less\stacked.less" />
-    <Content Include="site\font\less\variables.less" />
-    <Content Include="site\font\scss\font-awesome.scss" />
-    <Content Include="site\font\scss\_animated.scss" />
-    <Content Include="site\font\scss\_bordered-pulled.scss" />
-    <Content Include="site\font\scss\_core.scss" />
-    <Content Include="site\font\scss\_fixed-width.scss" />
-    <Content Include="site\font\scss\_icons.scss" />
-    <Content Include="site\font\scss\_larger.scss" />
-    <Content Include="site\font\scss\_list.scss" />
-    <Content Include="site\font\scss\_mixins.scss" />
-    <Content Include="site\font\scss\_path.scss" />
-    <Content Include="site\font\scss\_rotated-flipped.scss" />
-    <Content Include="site\font\scss\_screen-reader.scss" />
-    <Content Include="site\font\scss\_stacked.scss" />
-    <Content Include="site\font\scss\_variables.scss" />
-    <Content Include="site\css\sensor2.scss" />
     <Content Include="site-new\css\sensor2.scss" />
     <Content Include="site-new\dist\css\bootstrap-grid.css.map" />
     <Content Include="site-new\dist\css\bootstrap-grid.min.css.map" />
@@ -1381,6 +1575,112 @@
     <Content Include="site-new\font\scss\_screen-reader.scss" />
     <Content Include="site-new\font\scss\_stacked.scss" />
     <Content Include="site-new\font\scss\_variables.scss" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker.css.map" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker.standalone.css.map" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker3.css.map" />
+    <Content Include="site-vue-new\css\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="site-vue-new\css\sensor2.scss" />
+    <Content Include="site-vue-new\dist\css\bootstrap-grid.css.map" />
+    <Content Include="site-vue-new\dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="site-vue-new\dist\css\bootstrap-reboot.css.map" />
+    <Content Include="site-vue-new\dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="site-vue-new\dist\css\bootstrap.css.map" />
+    <Content Include="site-vue-new\dist\css\bootstrap.min.css.map" />
+    <Content Include="site-vue-new\dist\js\bootstrap.bundle.js.map" />
+    <Content Include="site-vue-new\dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="site-vue-new\dist\js\bootstrap.js.map" />
+    <Content Include="site-vue-new\dist\js\bootstrap.min.js.map" />
+    <Content Include="site-vue-new\fonts\element-icons.535877f5.woff" />
+    <Content Include="site-vue-new\fonts\element-icons.732389de.ttf" />
+    <Content Include="site-vue-new\font\fonts\fontawesome-webfont.eot" />
+    <Content Include="site-vue-new\font\fonts\fontawesome-webfont.ttf" />
+    <Content Include="site-vue-new\font\fonts\fontawesome-webfont.woff" />
+    <Content Include="site-vue-new\font\fonts\fontawesome-webfont.woff2" />
+    <Content Include="site-vue-new\font\fonts\FontAwesome.otf" />
+    <Content Include="site-vue-new\font\less\animated.less" />
+    <Content Include="site-vue-new\font\less\bordered-pulled.less" />
+    <Content Include="site-vue-new\font\less\core.less" />
+    <Content Include="site-vue-new\font\less\fixed-width.less" />
+    <Content Include="site-vue-new\font\less\font-awesome.less" />
+    <Content Include="site-vue-new\font\less\icons.less" />
+    <Content Include="site-vue-new\font\less\larger.less" />
+    <Content Include="site-vue-new\font\less\list.less" />
+    <Content Include="site-vue-new\font\less\mixins.less" />
+    <Content Include="site-vue-new\font\less\path.less" />
+    <Content Include="site-vue-new\font\less\rotated-flipped.less" />
+    <Content Include="site-vue-new\font\less\screen-reader.less" />
+    <Content Include="site-vue-new\font\less\stacked.less" />
+    <Content Include="site-vue-new\font\less\variables.less" />
+    <Content Include="site-vue-new\font\scss\font-awesome.scss" />
+    <Content Include="site-vue-new\font\scss\_animated.scss" />
+    <Content Include="site-vue-new\font\scss\_bordered-pulled.scss" />
+    <Content Include="site-vue-new\font\scss\_core.scss" />
+    <Content Include="site-vue-new\font\scss\_fixed-width.scss" />
+    <Content Include="site-vue-new\font\scss\_icons.scss" />
+    <Content Include="site-vue-new\font\scss\_larger.scss" />
+    <Content Include="site-vue-new\font\scss\_list.scss" />
+    <Content Include="site-vue-new\font\scss\_mixins.scss" />
+    <Content Include="site-vue-new\font\scss\_path.scss" />
+    <Content Include="site-vue-new\font\scss\_rotated-flipped.scss" />
+    <Content Include="site-vue-new\font\scss\_screen-reader.scss" />
+    <Content Include="site-vue-new\font\scss\_stacked.scss" />
+    <Content Include="site-vue-new\font\scss\_variables.scss" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap-grid.css.map" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap-reboot.css.map" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap.css.map" />
+    <Content Include="site-vue-new\js\dist\css\bootstrap.min.css.map" />
+    <Content Include="site-vue-new\js\dist\js\bootstrap.bundle.js.map" />
+    <Content Include="site-vue-new\js\dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="site-vue-new\js\dist\js\bootstrap.js.map" />
+    <Content Include="site-vue-new\js\dist\js\bootstrap.min.js.map" />
+    <Content Include="site-vue-new\js\font\fonts\fontawesome-webfont.eot" />
+    <Content Include="site-vue-new\js\font\fonts\fontawesome-webfont.ttf" />
+    <Content Include="site-vue-new\js\font\fonts\fontawesome-webfont.woff" />
+    <Content Include="site-vue-new\js\font\fonts\fontawesome-webfont.woff2" />
+    <Content Include="site-vue-new\js\font\fonts\FontAwesome.otf" />
+    <Content Include="site-vue-new\js\font\less\animated.less" />
+    <Content Include="site-vue-new\js\font\less\bordered-pulled.less" />
+    <Content Include="site-vue-new\js\font\less\core.less" />
+    <Content Include="site-vue-new\js\font\less\fixed-width.less" />
+    <Content Include="site-vue-new\js\font\less\font-awesome.less" />
+    <Content Include="site-vue-new\js\font\less\icons.less" />
+    <Content Include="site-vue-new\js\font\less\larger.less" />
+    <Content Include="site-vue-new\js\font\less\list.less" />
+    <Content Include="site-vue-new\js\font\less\mixins.less" />
+    <Content Include="site-vue-new\js\font\less\path.less" />
+    <Content Include="site-vue-new\js\font\less\rotated-flipped.less" />
+    <Content Include="site-vue-new\js\font\less\screen-reader.less" />
+    <Content Include="site-vue-new\js\font\less\stacked.less" />
+    <Content Include="site-vue-new\js\font\less\variables.less" />
+    <Content Include="site-vue-new\js\font\scss\font-awesome.scss" />
+    <Content Include="site-vue-new\js\font\scss\_animated.scss" />
+    <Content Include="site-vue-new\js\font\scss\_bordered-pulled.scss" />
+    <Content Include="site-vue-new\js\font\scss\_core.scss" />
+    <Content Include="site-vue-new\js\font\scss\_fixed-width.scss" />
+    <Content Include="site-vue-new\js\font\scss\_icons.scss" />
+    <Content Include="site-vue-new\js\font\scss\_larger.scss" />
+    <Content Include="site-vue-new\js\font\scss\_list.scss" />
+    <Content Include="site-vue-new\js\font\scss\_mixins.scss" />
+    <Content Include="site-vue-new\js\font\scss\_path.scss" />
+    <Content Include="site-vue-new\js\font\scss\_rotated-flipped.scss" />
+    <Content Include="site-vue-new\js\font\scss\_screen-reader.scss" />
+    <Content Include="site-vue-new\js\font\scss\_stacked.scss" />
+    <Content Include="site-vue-new\js\font\scss\_variables.scss" />
+    <Content Include="site-vue-new\js\ins-80fnqfql-148.70.71.50.rdp" />
+    <Content Include="site-vue-new\js\jquery-3.4.1.min.map" />
+    <Content Include="site-vue-new\js\jquery-3.4.1.slim.min.map" />
+    <Content Include="site-vue-new\js\umd\popper-utils.js.map" />
+    <Content Include="site-vue-new\js\umd\popper-utils.min.js.map" />
+    <Content Include="site-vue-new\js\umd\popper.js.map" />
+    <Content Include="site-vue-new\js\umd\popper.min.js.map" />
+    <Content Include="site-vue-new\Uploads\ImportClassCSVTemplate.csv" />
+    <Content Include="site-vue-new\Uploads\ImportScheduleCSVTemplate.csv" />
+    <Content Include="site-vue-new\Uploads\ImportStudentCSVTemplate.csv" />
+    <Content Include="site-vue-new\Uploads\ImportTeacherCSVTemplate.csv" />
+    <Content Include="site-vue-new\Uploads\ImportTemplateCSV.csv" />
+    <Content Include="site-vue-new\Uploads\ImportUserCSVTemplate.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1438,9 +1738,9 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

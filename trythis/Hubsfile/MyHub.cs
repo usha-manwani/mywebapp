@@ -83,7 +83,7 @@ namespace WebCresij.Hubsfile
         ///show status of all machines
         public void SendMessage(string sender, string data)  
         {
-            Console.WriteLine("received data from " + sender);
+            Clients.All.broadcastMessage(sender, data);
             if (data.Contains("Temp"))
             {
                 if (keyValues.ContainsKey(sender))
@@ -94,24 +94,24 @@ namespace WebCresij.Hubsfile
                 {
                     keyValues.Add(sender, data);
                 }
-            }            
+            }
             if (data.Contains("Toregister"))
             {
                 Clients.All.registerCard(sender, data);
             }
             if (data.Contains("registered"))
             {
-                updatecardstatus(sender,data);
-               // Clients.All.confirmRegister();
+                updatecardstatus(sender, data);
+                // Clients.All.confirmRegister();
             }
             else if (data.Contains("readerlog"))
             {
-                updateCardLogs(sender,data);
+                updateCardLogs(sender, data);
                 Clients.All.SendControl(sender, "8B B9 00 04 01 0B C4 D4");
             }
             else if (data.Contains("KeyValue"))
             {
-               // string query = "";
+                // string query = "";
                 string[] values = data.Split(',');
                 switch (values[2])
                 {
@@ -124,7 +124,7 @@ namespace WebCresij.Hubsfile
             {
                 saveStatusinDatebase(sender, data);
             }
-            Clients.All.broadcastMessage(sender, data);
+
         }
 
         private void saveStatusinDatebase(string sender, string data)
@@ -192,7 +192,7 @@ namespace WebCresij.Hubsfile
                 }  
             }                     
         }
-
+        
         public void CountOfMachines(string counts)
         {
             Clients.All.machineCounts(counts);

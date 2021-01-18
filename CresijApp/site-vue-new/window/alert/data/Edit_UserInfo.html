@@ -1,0 +1,77 @@
+﻿<div class="tt border-bottom">
+    <i class="fa fa-plus-circle"></i>
+    <span> 新建学生数据</span>
+</div>
+<table class="main_table my-4">
+    <tr>
+        <td class="text-right">人员名称</td>
+        <td><input type="text" style="width:220px;" id="name"></td>
+    </tr>
+
+    <tr>
+        <td class="text-right">所属部门</td>
+        <td>
+            <div class="searchbox2" id="selectedbuilding"  style="width:220px;">
+                <div class="name">学期</div>
+                <div class="list" >
+                </div>
+            </div>        
+        </td>
+    </tr>
+
+    <tr>
+        <td class="text-right">登录账户</td>
+        <td><input type="text" style="width:220px;" id="id" disabled></td>
+    </tr>
+
+    <tr>
+        <td class="text-right">密码</td>
+        <td><input type="password" style="width:220px;" id="pass"></td>
+    </tr>
+
+    <tr>
+        <td class="text-right">人员类型</td>
+        <td>
+            <div class="jdropdown2" style="width:220px;">
+                <div class="jdropdown2-box px-2" id="persontype">longterm</div>
+                <div class="jdropdown2-arrow text-center gray">
+                    <i class="fa fa-caret-down"></i>
+                </div>
+
+                <div class="jdropdown2-list" style="display:none; width:220px;">
+                    <label><input type="radio" name="usertype" value="permanent">longterm</label>
+                    <label><input type="radio" name="usertype" value="temporary">temporary</label>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    <tr id="daterow">
+        <td class="text-right">Validity:</td>
+        <td>
+            <span class="input-group datetimepicker jdatetime" style="background-color:none;">
+                <input type="text" name="UserDate" id="userdate" value="" placeholder="select Date" class="input-group-addon" style="background-color:#f5f5f5;">
+                <i class="fa fa-calendar"></i>
+            </span>
+            <span class="input-group datetimepicker-clock jdatetime">
+                <input type="text" name="starttime" value="" id="validtime" class="input-group-addon" style="width:70px;"> <i class="fa fa-clock-o"></i>
+            </span>
+        </td>
+
+    </tr>
+    
+    <tr>
+        <td class="text-right">备注</td>
+        <td><input type="text" style="width:220px;" id="notes"></td>
+    </tr>
+    <tr>
+        <td class="text-right">人员编号</td>
+        <td><input type="text" style="width:220px;" id="phone"></td>
+    </tr>
+
+</table>
+<div class="btns btns_auto border-top w-100">
+    <a class="bg_green alert_jmodal " id="EditUser" j-page-box="#jcontent"><i class="fa fa-check"></i> 确定</a>
+    <a class="bg_red close_jmodal JURL"><i class="fa fa-close"></i> 取消</a>
+</div>
+<script src="js/Edit_UserInfo.js"></script>

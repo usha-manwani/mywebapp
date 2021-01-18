@@ -11,7 +11,7 @@ namespace CresijApp.DataAccess
     {
         readonly string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["SchoolConnectionString"].ConnectionString;
-        public int SaveSystemInfo(string schoolname, string schooleng, string logourl, string semname, string weeks, string semstartdate, Dictionary<string, string> days, string semno, string autoholiday)
+        public int SaveSystemInfo(string schoolname, string schooleng, string logourl, string semname, string weeks, string semstartdate, Dictionary<string, string> days, int semno, string autoholiday)
         {
             int result = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
@@ -40,7 +40,6 @@ namespace CresijApp.DataAccess
                     }
                     result = cmd.ExecuteNonQuery();
                 }
-
             }
             return result;
         }
@@ -120,10 +119,13 @@ namespace CresijApp.DataAccess
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 string query = "select fd.floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className from " +
-                        " classdetails  cd join floordetails fd on cd.floor = fd.id " +
-                        " where teachingbuilding=" + building + " and cd.floor in(select id from floordetails where buildingName=" + building + ") " +
-                        " group by cd.floor  union select floor,'' from floordetails where buildingname=" + building + " and " +
-                        " id not in(select floor from classdetails where teachingbuilding =" + building + ") group by floor order by floor";
+                        "classdetails cd join floordetails fd on fd.id = cd.floor where teachingbuilding=" + building +
+                        " and cd.floor in (select id from floordetails where buildingName= " +
+                        building + " ) group by cd.floor union " +
+                        "select floor,'' from floordetails where buildingname=" + building + " and id not in " +
+                        "(select floor from classdetails where teachingbuilding = " +
+                         building + ") " +
+                        "group by floor order by floor";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
                     if (con.State != ConnectionState.Open)
@@ -161,11 +163,11 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                string query = "select  fd.floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className" +
-                    " from classdetails cd join floordetails fd on cd.floor =fd.id " +
-                    " where teachingbuilding='" + building + "' and cd.floor in(select id from floordetails where " +
-                    " buildingName='" + building + "') and classid in " +
-                    "(select classid from userlocationaccess where userserialnum =(select serialno from userdetails" +
+                string query = "select fd.floor ,json_arrayagg(json_object('Name',classname , 'Id',classid)) as className from " +
+                        "classdetails cd join floordetails fd on fd.id = cd.floor where teachingbuilding=" + building + 
+                        "and cd.floor in (select id from floordetails where buildingName=" + building + ") " +
+                        "group by floor and classid in " +
+                    "(select locationid from userlocationaccess where level ='Class' and userserialnum =(select serialno from userdetails" +
                     " where loginid ='" + userid + "')) group by cd.floor ";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {

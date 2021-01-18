@@ -1,0 +1,1046 @@
+<div class="clearfix w-100" style="height:30px;"></div>
+<div class="col-12 row">
+  <div class="no-gutters col-4 flate-left my-2">
+    <div class="col-12 statu-box statu-box-red row">
+      <div class="statu-bg-color col-3 white py-3 pl-3">
+        <i class="fa fa-cog fa-lg" style="font-size:28px;"></i><br>
+        <span>未接单</span><br>
+        <span class="font-weight-light" style="font-size:40px;">65</span>
+      </div>
+      <div class="col-9">
+        <canvas id="myChart01" class="mt-3" style="width:100%; height:120px;"></canvas>
+        <script>
+          var ctx = document.getElementById('myChart01').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: [
+                '11月01日',
+                '11月02日',
+                '11月03日',
+                '11月04日',
+                '11月05日',
+                '11月06日'
+              ],
+              datasets: [
+                {
+                  label: '未接单',
+                  data: [
+                    12,
+                    19,
+                    3,
+                    5,
+                    2,
+                    3
+                  ],
+                  backgroundColor: [
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)'
+                  ],
+                  hoverBackgroundColor: [
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)'
+                  ],
+                  borderWidth: 0
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: false
+              },
+              scales: {
+                yAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    },
+                    ticks: {
+                      beginAtZero: false
+                    }
+                  }
+                ],
+                xAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    }
+                  }
+                ]
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-gutters col-4 flate-left my-2">
+    <div class="col-12 statu-box statu-box-orange row">
+      <div class="statu-bg-color col-3 white py-3 pl-3">
+        <i class="fa fa-cog fa-lg" style="font-size:28px;"></i><br>
+        <span>待派工</span><br>
+        <span class="font-weight-light" style="font-size:40px;">65</span>
+      </div>
+      <div class="col-8">
+        <canvas id="myChart02" class="mt-3" style="width:100%; height:120px;"></canvas>
+        <script>
+          var ctx = document.getElementById('myChart02').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: [
+                '11月01日',
+                '11月02日',
+                '11月03日',
+                '11月04日',
+                '11月05日',
+                '11月06日'
+              ],
+              datasets: [
+                {
+                  label: '待派工',
+                  data: [
+                    12,
+                    19,
+                    3,
+                    5,
+                    2,
+                    3
+                  ],
+                  backgroundColor: [
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)'
+                  ],
+                  hoverBackgroundColor: [
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)'
+                  ],
+                  borderWidth: 0
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: false
+              },
+              scales: {
+                yAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    },
+                    ticks: {
+                      beginAtZero: false
+                    }
+                  }
+                ],
+                xAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    }
+                  }
+                ]
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-gutters col-4 flate-left my-2">
+    <div class="col-12 statu-box statu-box-blue row">
+      <div class="statu-bg-color col-3 white py-3 pl-3">
+        <i class="fa fa-cog fa-lg" style="font-size:28px;"></i><br>
+        <span>已接单</span><br>
+        <span class="font-weight-light" style="font-size:40px;">65</span>
+      </div>
+      <div class="col-9">
+        <canvas id="myChart03" class="mt-3" style="width:100%; height:120px;"></canvas>
+        <script>
+          var ctx = document.getElementById('myChart03').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: [
+                '11月01日',
+                '11月02日',
+                '11月03日',
+                '11月04日',
+                '11月05日',
+                '11月06日'
+              ],
+              datasets: [
+                {
+                  label: '已接单',
+                  data: [
+                    12,
+                    19,
+                    3,
+                    5,
+                    2,
+                    3
+                  ],
+                  backgroundColor: [
+                    'rgba(58, 196, 245, 0.2)',
+                    'rgba(58, 196, 245, 0.2)',
+                    'rgba(58, 196, 245, 0.2)',
+                    'rgba(58, 196, 245, 0.2)',
+                    'rgba(58, 196, 245, 0.2)',
+                    'rgba(58, 196, 245, 0.2)'
+                  ],
+                  hoverBackgroundColor: [
+                    'rgba(58, 196, 245, 1)',
+                    'rgba(58, 196, 245, 1)',
+                    'rgba(58, 196, 245, 1)',
+                    'rgba(58, 196, 245, 1)',
+                    'rgba(58, 196, 245, 1)',
+                    'rgba(58, 196, 245, 1)'
+                  ],
+                  borderWidth: 0
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: false
+              },
+              scales: {
+                yAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    },
+                    ticks: {
+                      beginAtZero: false
+                    }
+                  }
+                ],
+                xAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    }
+                  }
+                ]
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-gutters col-4 flate-left my-2">
+    <div class="col-12 statu-box statu-box-orange row">
+      <div class="statu-bg-color col-3 white py-3 pl-3">
+        <i class="fa fa-cog fa-lg" style="font-size:28px;"></i><br>
+        <span>待处理</span><br>
+        <span class="font-weight-light" style="font-size:40px;">65</span>
+      </div>
+      <div class="col-9">
+        <canvas id="myChart04" class="mt-3" style="width:100%; height:120px;"></canvas>
+        <script>
+          var ctx = document.getElementById('myChart04').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: [
+                '11月01日',
+                '11月02日',
+                '11月03日',
+                '11月04日',
+                '11月05日',
+                '11月06日'
+              ],
+              datasets: [
+                {
+                  label: '待处理',
+                  data: [
+                    12,
+                    19,
+                    3,
+                    5,
+                    2,
+                    3
+                  ],
+                  backgroundColor: [
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)',
+                    'rgba(255, 190, 61, 0.2)'
+                  ],
+                  hoverBackgroundColor: [
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)',
+                    'rgba(255, 190, 61, 1)'
+                  ],
+                  borderWidth: 0
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: false
+              },
+              scales: {
+                yAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    },
+                    ticks: {
+                      beginAtZero: false
+                    }
+                  }
+                ],
+                xAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    }
+                  }
+                ]
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-gutters col-4 flate-left my-2">
+    <div class="col-12 statu-box statu-box-red row">
+      <div class="statu-bg-color col-3 white py-3 pl-3">
+        <i class="fa fa-cog fa-lg" style="font-size:28px;"></i><br>
+        <span>未返工</span><br>
+        <span class="font-weight-light" style="font-size:40px;">65</span>
+      </div>
+      <div class="col-9">
+        <canvas id="myChart05" class="mt-3" style="width:100%; height:120px;"></canvas>
+        <script>
+          var ctx = document.getElementById('myChart05').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: [
+                '11月01日',
+                '11月02日',
+                '11月03日',
+                '11月04日',
+                '11月05日',
+                '11月06日'
+              ],
+              datasets: [
+                {
+                  label: '未返工',
+                  data: [
+                    12,
+                    19,
+                    3,
+                    5,
+                    2,
+                    3
+                  ],
+                  backgroundColor: [
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)',
+                    'rgba(223, 107, 107, 0.2)'
+                  ],
+                  hoverBackgroundColor: [
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)',
+                    'rgba(223, 107, 107, 1)'
+                  ],
+                  borderWidth: 0
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: false
+              },
+              scales: {
+                yAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    },
+                    ticks: {
+                      beginAtZero: false
+                    }
+                  }
+                ],
+                xAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    }
+                  }
+                ]
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-gutters col-4 flate-left my-2">
+    <div class="col-12 statu-box statu-box-green row">
+      <div class="statu-bg-color col-3 white py-3 pl-3">
+        <i class="fa fa-cog fa-lg" style="font-size:28px;"></i><br>
+        <span>已完工</span><br>
+        <span class="font-weight-light" style="font-size:40px;">65</span>
+      </div>
+      <div class="col-9">
+        <canvas id="myChart06" class="mt-3" style="width:100%; height:120px;"></canvas>
+        <script>
+          var ctx = document.getElementById('myChart06').getContext('2d');
+          var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: [
+                '11月01日',
+                '11月02日',
+                '11月03日',
+                '11月04日',
+                '11月05日',
+                '11月06日'
+              ],
+              datasets: [
+                {
+                  label: '已完工',
+                  data: [
+                    12,
+                    19,
+                    3,
+                    5,
+                    2,
+                    3
+                  ],
+                  backgroundColor: [
+                    'rgba(102, 186, 48, 0.2)',
+                    'rgba(102, 186, 48, 0.2)',
+                    'rgba(102, 186, 48, 0.2)',
+                    'rgba(102, 186, 48, 0.2)',
+                    'rgba(102, 186, 48, 0.2)',
+                    'rgba(102, 186, 48, 0.2)'
+                  ],
+                  hoverBackgroundColor: [
+                    'rgba(102, 186, 48, 0.8)',
+                    'rgba(102, 186, 48, 0.8)',
+                    'rgba(102, 186, 48, 0.8)',
+                    'rgba(102, 186, 48, 0.8)',
+                    'rgba(102, 186, 48, 0.8)',
+                    'rgba(102, 186, 48, 0.8)'
+                  ],
+                  borderWidth: 0
+                }
+              ]
+            },
+            options: {
+              legend: {
+                display: false
+              },
+              scales: {
+                yAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    },
+                    ticks: {
+                      beginAtZero: false
+                    }
+                  }
+                ],
+                xAxes: [
+                  {
+                    gridLines: {
+                      display: false
+                    }
+                  }
+                ]
+              }
+            }
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+
+</div>
+<hr class="mt-4">
+<div class="row col-12 py-4 align-items-center JPAGENAV">
+  <h4 class="tt01 mr-5">
+    <i class="fa fa-address-book mr-1"></i>所有任务</h4>
+  <span class="jbtn2 bg_gray white JURL JPAGEMENU active">
+    <i class="fa fa-exclamation-triangle"></i>
+    未接单</span>
+  <span class="jbtn2 bg_gray white JURL JPAGEMENU">
+    <i class="fa fa-reply-all"></i>
+    待派工</span>
+  <span class="jbtn2 bg_gray white JURL JPAGEMENU">
+    <i class="fa fa-flag"></i>
+    已处理</span>
+  <span class="jbtn2 bg_gray white JURL JPAGEMENU">
+    <i class="fa fa-clipboard"></i>
+    已接单</span>
+  <span class="jbtn2 bg_gray white JURL JPAGEMENU">
+    <i class="fa fa-clock-o"></i>
+    待处理</span>
+  <span class="jbtn2 bg_gray white JURL JPAGEMENU">
+    <i class="fa fa-refresh"></i>
+    未返工</span>
+  <span class="jbtn2 bg_gray white JURL JPAGEMENU">
+    <i class="fa fa-check-circle"></i>
+    已返工</span>
+  <a class="jbtn2 bg_blue white JURL ml-3 show_jmodal" j-page-href="window/alert/operate/add_task.html" j-page-box="#jcontent">
+    <i class="fa fa-plus-circle"></i>
+    添加任务</a>
+</div>
+<div class="col-12">
+  <table class="main_table table_list w-100 jtable-1">
+    <tr class="border-bottom">
+      <th class="">
+        <label>
+          <i class="fa fa-check jcheckbox check_all_table"></i>
+        </label>
+      </th>
+      <th class="text-left pl-3">序号</th>
+      <th class="text-left pl-3">教学楼栋</th>
+      <th class="pl-3 text-left">课室</th>
+      <th class="text-left pl-3">报障方式</th>
+      <th class="text-left pl-3">故障描述</th>
+      <th class="text-left pl-3">报障人</th>
+      <th class="text-left pl-3">电话</th>
+      <th class="text-left pl-3">报障时间</th>
+      <th class="text-left pl-3">处理时限</th>
+      <th class="text-left pl-3">故障状态</th>
+      <th class="pl-3 text-left">处理方法</th>
+      <th class="text-left pl-3">处理人</th>
+      <th class="text-left pl-3">故障类型</th>
+      <th class="text-left pl-3">故障设备</th>
+      <th class="pl-3 text-left">故障视频</th>
+    </tr>
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>话筒没有声音</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 red">未派单</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/operate/video_review.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+    </tr>
+
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 red">未派单</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/operate/video_review.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+    </tr>
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 red">未派单</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>
+                  <b>MAC:</b>
+                  5D 6R 3S 1W</td>
+                <td class="pl-3">
+                  <b>IP:
+                  </b>
+                  192.168.100.112:3306</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>用户名:
+                  </b>
+                  zhangsf001</td>
+                <td class="pl-3">
+                  <b>密码：</b>
+                  ok2001</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/operate/video_review.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+    </tr>
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 red">未派单</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>
+                  <b>MAC:</b>
+                  5D 6R 3S 1W</td>
+                <td class="pl-3">
+                  <b>IP:
+                  </b>
+                  192.168.100.112:3306</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>用户名:
+                  </b>
+                  zhangsf001</td>
+                <td class="pl-3">
+                  <b>密码：</b>
+                  ok2001</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/operate/video_review.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+    </tr>
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 red">未派单</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>
+                  <b>MAC:</b>
+                  5D 6R 3S 1W</td>
+                <td class="pl-3">
+                  <b>IP:
+                  </b>
+                  192.168.100.112:3306</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>用户名:
+                  </b>
+                  zhangsf001</td>
+                <td class="pl-3">
+                  <b>密码：</b>
+                  ok2001</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/operate/video_review.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+    </tr>
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 red">未派单</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>
+                  <b>MAC:</b>
+                  5D 6R 3S 1W</td>
+                <td class="pl-3">
+                  <b>IP:
+                  </b>
+                  192.168.100.112:3306</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>用户名:
+                  </b>
+                  zhangsf001</td>
+                <td class="pl-3">
+                  <b>密码：</b>
+                  ok2001</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/operate/video_review.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+    </tr>
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 red">未派单</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>
+                  <b>MAC:</b>
+                  5D 6R 3S 1W</td>
+                <td class="pl-3">
+                  <b>IP:
+                  </b>
+                  192.168.100.112:3306</td>
+              </tr>
+              <tr>
+                <td>
+                  <b>用户名:
+                  </b>
+                  zhangsf001</td>
+                <td class="pl-3">
+                  <b>密码：</b>
+                  ok2001</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/operate/video_review.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+    </tr>
+    <tr class="border-bottom hover_btn" style="padding:10px 0;">
+      <td class="text-center">
+        <label><input type="checkbox">
+          <i class="fa fa-check jcheckbox"></i>
+        </label>
+      </td>
+      <td class="pl-3">1</td>
+      <td class="pl-3">明德楼</td>
+      <td class="text-left pl-3">2-101</td>
+      <td class="pl-3">扫码</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">欧阳锋</td>
+      <td class="pl-3">13888666999</td>
+      <td class="pl-3">2020-00-00 00:00</td>
+      <td class="pl-3">立即处理</td>
+      <td class="pl-3 red">未派单</td>
+      <td class="text-left pl-3">
+        <span class="jshowinfo">
+          <i class="fa fa-eye"></i>
+          <div class="jinfo">
+            <div class="arr_blue_up"></div>
+            <table style="width:280px;">
+              <tr>
+                <td>另存此页为PDF来获取一套矢量版本。或者在你的操作系统中安装FontAwesome.otf字体，将其设置为你的应用程序的字体，复制并从该页面</td>
+              </tr>
+            </table>
+          </div>
+        </span>
+      </td>
+      <td class="pl-3">陈友谅</td>
+      <td class="pl-3">设备故障</td>
+      <td class="pl-3">投影仪</td>
+      <td class="pl-3 hover_btn_td text-center">
+        <a class="JURL jbtn_xs hover_blue show_jmodal" j-page-href="window/alert/operate/video_review.html" j-page-box="#jcontent">
+          <i class="fa fa-play"></i>
+        </a>
+      </td>
+    </tr>
+  </table>
+  <div class="jpager">
+    <a j-page-href="" j-page-box="" class="fa fa-fast-backward FIRST CTRL"></a>
+    <a j-page-href="" j-page-box="" class="fa fa-play fa-flip-horizontal PREV CTRL"></a>
+    <span class="JPAGER_CTRL">
+      <a j-page-href="" j-page-box="" class="page JPAGE active">1</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">2</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">3</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">4</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">5</a>
+      <a j-page-href="" j-page-box="" class="page JPAGE">6</a>
+    </span>
+    <a j-page-href="" j-page-box="" class="fa fa-play NEXT CTRL"></a>
+    <a j-page-href="" j-page-box="" class="fa fa-fast-forward LAST CTRL"></a>
+  </div>
+</div>

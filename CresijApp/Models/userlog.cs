@@ -15,10 +15,9 @@ namespace CresijApp.Models
     public partial class userlog
     {
         public int id { get; set; }
-        public int Userid { get; set; }
+        public Nullable<int> Userid { get; set; }
         public string action { get; set; }
         public System.DateTime ActionTime { get; set; }
-    
-        public virtual userdetail userdetail { get; set; }
+        public int ClassID { get; set; }
     }
 }

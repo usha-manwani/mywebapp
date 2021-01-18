@@ -18,16 +18,20 @@ namespace CresijApp.Models
         public strategymanagement()
         {
             this.strategydescriptions = new HashSet<strategydescription>();
+            this.strategylogs = new HashSet<strategylog>();
         }
     
         public int strategyId { get; set; }
         public string strategyname { get; set; }
         public string StrategyDesc { get; set; }
         public System.DateTime CreationDate { get; set; }
-        public string CurrentStatus { get; set; }
+        public sbyte CurrentStatus { get; set; }
         public string strategyType { get; set; }
+        public string StrategyLocation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<strategydescription> strategydescriptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<strategylog> strategylogs { get; set; }
     }
 }

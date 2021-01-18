@@ -11,7 +11,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
-
+using CresijApp.Models;
 namespace CresijApp.DataAccess
 {
     public class TokenValidationHandler : DelegatingHandler
@@ -82,6 +82,85 @@ namespace CresijApp.DataAccess
                 if (DateTime.UtcNow < expires) return true;
             }
             return false;
+        }
+    }
+
+    public class SessionHandler
+    {
+        public async Task<int> AddUpdateConnectionID(string cookie,string connectionid)
+        {
+            int r = 0;
+            using (var context = new OrganisationdatabaseEntities())
+            {
+                if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
+                {
+                    var us = context.usersessioninfoes.First(x => x.SessionId == cookie);
+                    us.SocketConnectionID = connectionid;
+                }                
+               r= await context.SaveChangesAsync();
+            }
+            return r;
+        }
+
+        //public async Task<int> RemoveUserSession(string cookie)
+        //{
+        //    int r = 0;
+        //    using (var context = new OrganisationdatabaseEntities())
+        //    {
+        //        if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
+        //        {
+        //            var us = context.usersessioninfoes.First(x => x.SessionId == cookie);
+        //            us.SessionEndTime = DateTime.Now;
+        //            //context.usersessioninfoes.Remove(us);
+        //        }
+        //        r = await context.SaveChangesAsync();
+        //    }
+        //    return r;
+        //}
+
+        public async Task<int> AddOperationLogs(string cookie, string message,string machinemac)
+        {
+            if (message.Contains("Web"))
+            {
+               message= message.Replace("Web", "");
+            }
+            int r = 0;
+            using(var context = new OrganisationdatabaseEntities())
+            {
+                if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
+                {
+                    var us = context.usersessioninfoes.First(x => x.SessionId == cookie);
+                    var userid = us.LoginID;
+                    if (userid != null)
+                    {
+                        int? userserialnum = context.userdetails.Where(x => x.LoginID == userid).Select(x => x.SerialNo).FirstOrDefault();
+                        int classid = context.classdetails.Where(x => x.ccmac == machinemac).Select(x => x.classID).FirstOrDefault();
+                        if (userserialnum!=0 || userserialnum!=null)
+                        {
+                            userlog uslog = new userlog()
+                            {
+                                action = message,
+                                Userid = userserialnum,
+                                ActionTime = DateTime.Now,
+                                ClassID = classid
+                            };
+                            context.userlogs.Add(uslog);
+                        }
+                    }
+                }
+               r= await context.SaveChangesAsync();
+            }
+            return r;
+        }
+        public async Task<List<string>> GetMacAddress(List<int>classIds)
+        {
+            var result = new List<string>();
+            using (var context = new OrganisationdatabaseEntities())
+            {
+               result =context.classdetails.Where(x => classIds.Contains(x.classID)).Select(x => x.ccmac).ToList();
+               
+            }
+            return result;
         }
     }
 }

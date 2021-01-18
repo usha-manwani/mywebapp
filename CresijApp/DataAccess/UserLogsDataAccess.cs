@@ -42,9 +42,11 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
-        public DataTable GetUserLogDetails()
+        public List<object> GetUserLogDetails(string pageIndex,string pageSize)
         {
+            List<object> result = new List<object>();
             DataTable dt = new DataTable();
+            var count = 0;
             using (MySqlConnection con = new MySqlConnection(constr))
             {
                 try
@@ -53,13 +55,19 @@ namespace CresijApp.DataAccess
                     using (MySqlCommand cmd = new MySqlCommand("sp_GetUserLogs", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                       
+                        cmd.Parameters.AddWithValue("_PageIndex", Convert.ToInt32(pageIndex));
+                        cmd.Parameters.AddWithValue("_PageSize", Convert.ToInt32(pageSize));
+                        cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32);
+                        cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
                         if (con.State != ConnectionState.Open)
                         {
                             con.Open();
                         }
                         MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
                         mySqlDataAdapter.Fill(dt);
+                        count = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
+                        result.Add(dt);
+                        result.Add(count);
                     }
                 }
                 catch (Exception ex)
@@ -71,7 +79,7 @@ namespace CresijApp.DataAccess
                     con.Close();
                 }
             }
-            return dt;
+            return result;
         }
 
         public DataTable GetLogDetails()
@@ -81,7 +89,7 @@ namespace CresijApp.DataAccess
             {
                 try
                 {
-                    string query = "select distinct(action) as action, count(action) as total from userlogs";
+                    string query = "select distinct(action) as action, count(action) as Count from userlogs group by action";
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         if (con.State != ConnectionState.Open)

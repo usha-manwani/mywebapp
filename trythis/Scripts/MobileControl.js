@@ -474,7 +474,7 @@ $(function () {
             var img = document.getElementById("volsymbol");
             img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/总音量.png";
             if (lastVal > val && val > 0) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2B");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 21 2B");//volume down
                 if (parseInt(lastVal) > 10) {
                     document.getElementById("vol-control").value = parseInt(lastVal) - 10;
                     this.document.getElementById("volchange").innerText = parseInt(lastVal) - 10;
@@ -486,12 +486,12 @@ $(function () {
             }
             else if (val == 0) {
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/总音量静音.png";
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 2C");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 22 2C");//mute
                 this.document.getElementById("volchange").innerText = 0;
                 document.getElementById("vol-control").value = 0;
             }
             else if (lastVal < val) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2A");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 20 2A");//volume up
                 if (parseInt(lastVal) < 90) {
                     document.getElementById("vol-control").value = parseInt(lastVal) + 10;
                     this.document.getElementById("volchange").innerText = parseInt(lastVal) + 10;
@@ -510,7 +510,7 @@ $(function () {
             var img = document.getElementById("micIcon");
             img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/无线麦音量.png";
             if (lastVal > val && val > 0) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 74 7e");//down
                 if (parseInt(lastVal) > 10) {
                     document.getElementById("mic-control").value = parseInt(lastVal) - 10;
                     this.document.getElementById("micchange").innerText = parseInt(lastVal) - 10;
@@ -523,12 +523,12 @@ $(function () {
             }
             else if (val == 0) {
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/无线麦静音.png";
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 75 7f");//mute
                 this.document.getElementById("micchange").innerText = 0;
                 document.getElementById("mic-control").value = 0;
             }
             else if (lastVal < val) {
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 73 7d");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 73 7d");//up
                 if (parseInt(lastVal) < 90) {
                     document.getElementById("mic-control").value = parseInt(lastVal) + 10;
                     this.document.getElementById("micchange").innerText = parseInt(lastVal) + 10;
@@ -546,7 +546,7 @@ $(function () {
             if (lastVal > val && val > 0) {
                 var img = document.getElementById("wiredmicIcon");
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 24 2e");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 24 2e");//down
                 if (parseInt(lastVal) > 10) {
                     document.getElementById("wiredmic-control").value = parseInt(lastVal) - 10;
                     this.document.getElementById("wiredmicchange").innerText = parseInt(lastVal) - 10;
@@ -560,7 +560,7 @@ $(function () {
             else if (val == 0) {
                 var img = document.getElementById("wiredmicIcon");
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/有线麦静音.png";
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 25 2f");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 25 2f");//mute
                 this.document.getElementById("wiredmicchange").innerText = 0;
                 document.getElementById("wiredmic-control").value = 0;
             }
@@ -570,7 +570,7 @@ $(function () {
 
                 img.src = "../Images/AllImages/全部按钮/控制全页面-默认状态/有线麦音量.png";
 
-                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 23 2d");
+                chat.server.sendControlKeys(ipAddress, "8B B9 00 04 02 04 23 2d");//up
                 if (parseInt(lastVal) < 90) {
                     document.getElementById("wiredmic-control").value = parseInt(lastVal) + 10;
                     this.document.getElementById("wiredmicchange").innerText = parseInt(lastVal) + 10;

@@ -86,8 +86,9 @@ namespace CresijApp.DataAccess
         public int SaveTeacherData(Dictionary<string, string> data)
         {
             int result = -1;
+            
             string query = "insert into teacherdata values ('"+data["teacherId"]+"','"+ data["teacherName"]+"','"+ data["gender"]+
-                "','"+data["dob"]+"','"+ data["faculty"]+"','"+ data["phone"]+"','"+ data["idCard"]+"','"+ data["oneCard"]+"')";
+                "','"+data["birthday"]+"','"+ data["faculty"]+"','"+ data["phone"]+"','"+ data["idCard"]+"','"+ data["oneCard"]+"')";
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -107,8 +108,9 @@ namespace CresijApp.DataAccess
         {
             int result = -1;
             
-                string query = "insert into studentdata values ('" + data["studentId"] + "','" + data["studentName"] + "','" + data["gender"] +
-                "','" + data["dob"] + "','" + data["faculty"] + "','" + data["phone"] + "','" + data["idCard"] + "','" + data["oneCard"] + "')";
+
+            string query = "insert into studentdata values ('" + data["studentId"] + "','" + data["studentName"] + "','" + data["gender"] +
+                "','" + data["birthday"]+ "','" + data["faculty"] + "','" + data["phone"] + "','" + data["idCard"] + "','" + data["oneCard"] + "')";
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
@@ -127,8 +129,9 @@ namespace CresijApp.DataAccess
         public int UpdateTeacherData(Dictionary<string, string> data)
         {
             int result = -1;
+           
             string query = "update teacherdata set teachername='" + data["teacherName"] +
-                "',gender='" + data["gender"] +"', DateOfBirth='" + data["dob"] + "', faculty='" + data["faculty"] +
+                "',gender='" + data["gender"] +"', DateOfBirth='" + data["birthday"] + "', faculty='" + data["faculty"] +
                 "', phone='" + data["phone"] + "',idcard='" + data["idCard"] + 
                 "',onecard='" + data["oneCard"] + "' where teacherid ='" + data["teacherId"] + "'";
             using (MySqlConnection con = new MySqlConnection(constr))
@@ -143,16 +146,15 @@ namespace CresijApp.DataAccess
                         result = cmd.ExecuteNonQuery();
                     }
                 }
-
-            
             return result;
         }
 
         public int UpdateStudentData(Dictionary<string, string> data)
         {
             int result = -1;
+           
             string query = "update studentdata set studentname='" + data["studentName"] +
-                "',gender='" + data["gender"] + "', DateOfBirth='" + data["dob"] + "', deptcode='" + data["faculty"] +
+                "',gender='" + data["gender"] + "', DateOfBirth='" +data["birthday"] + "', deptcode='" + data["faculty"] +
                 "', phone='" + data["phone"] + "',idcard='" + data["idCard"] +
                 "',onecard='" + data["oneCard"] + "' where studentid ='" + data["studentId"] + "'";
             using (MySqlConnection con = new MySqlConnection(constr))
@@ -264,7 +266,7 @@ namespace CresijApp.DataAccess
                         cmd.Parameters.AddWithValue("logid", data["loginId"]);
                         cmd.Parameters.AddWithValue("uname", data["userName"]);
                         cmd.Parameters.AddWithValue("ptype", data["personType"]);
-                        cmd.Parameters.AddWithValue("deptname", data["departmentName"]);
+                        
                         cmd.Parameters.AddWithValue("stats", data["personnelStatus"]);
                         cmd.Parameters.AddWithValue("phone", data["phone"]);
                         cmd.Parameters.AddWithValue("note", data["notes"]);
@@ -297,7 +299,7 @@ namespace CresijApp.DataAccess
                     cmd.Parameters.AddWithValue("logid", data["loginId"]);
                     cmd.Parameters.AddWithValue("uname", data["userName"]);
                     cmd.Parameters.AddWithValue("ptype", data["personType"]);
-                    cmd.Parameters.AddWithValue("deptname", data["departmentId"]);
+                    
                     cmd.Parameters.AddWithValue("stats", data["personnelStatus"]);
                     cmd.Parameters.AddWithValue("phone", data["phone"]);
                     cmd.Parameters.AddWithValue("note", data["notes"]);

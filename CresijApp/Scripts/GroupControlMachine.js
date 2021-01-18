@@ -460,10 +460,7 @@ function ConnectToHub() {
         }
     };
     chat.client.machineCounts = function (counts) {
-
-        
-        var count = counts.split(',');
-       
+        var count = counts.split(',');       
         $("#onlinedevicescount").text(count[0]);
         $("#offlinedevicecount").text(count[1]);
         $("#totaldevicescount").text(count[2]);

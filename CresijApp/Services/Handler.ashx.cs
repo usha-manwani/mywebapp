@@ -37,7 +37,7 @@ namespace CresijApp.Services
                     new
                     {
                         name = fileName,
-                        path = folderPath + fileName
+                        path = fileName
                     });
                 context.Response.StatusCode = (int)HttpStatusCode.OK;
                 context.Response.ContentType = "text/json";

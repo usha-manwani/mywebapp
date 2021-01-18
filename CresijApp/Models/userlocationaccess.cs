@@ -15,11 +15,11 @@ namespace CresijApp.Models
     public partial class userlocationaccess
     {
         public int userserialnum { get; set; }
-        public int classid { get; set; }
+        public int locationid { get; set; }
         public int id { get; set; }
-        public int authenticatedby { get; set; }
+        public Nullable<int> authenticatedby { get; set; }
+        public string Level { get; set; }
     
-        public virtual classdetail classdetail { get; set; }
         public virtual userdetail userdetail { get; set; }
         public virtual userdetail userdetail1 { get; set; }
     }

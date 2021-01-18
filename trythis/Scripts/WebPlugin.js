@@ -177,10 +177,10 @@ function callCam() {
 var checkIframeLoadedInterval = setInterval(checkIframeLoaded, 1000);
 
 
-function changeplaycam1() {
+function changeplaycam1(ipval) {
     var frame = $("#MainContent_masterchildBody_Iframe1").contents();
     if (frame.length > 0) {
-        var ip = window.frames['frameplugin1'].getid();
+        var ip = ipval;// window.frames['frameplugin1'].getid();
         if (ip.length > 0) {
             var temp = document.getElementById('hiddenplugin').value;
             document.getElementById('hiddenplugin').value = ip;

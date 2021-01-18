@@ -45,11 +45,13 @@ namespace CresijApp.Services
             }
             else
             {
+                
                 try
                 {
+                    var userid = HttpContext.Current.Session["UserLoggedIn"].ToString();
                     var pageIndex = data["pageIndex"].ToString();
                     var pageSize = data["pageSize"].ToString();
-                    var result = gd.GetOrgBuildingInfo(pageIndex, pageSize);
+                    var result = gd.GetOrgBuildingInfo(pageIndex, pageSize,userid);
                     idata.Add("status", "success");
                     int total = Convert.ToInt32(result[0]);
                     KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
@@ -110,6 +112,7 @@ namespace CresijApp.Services
             }
             else
             {
+                
                 try
                 {
                     List<object> dat = gd.GetStudentInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
@@ -173,6 +176,7 @@ namespace CresijApp.Services
             }
             else
             {
+                
                 try
                 {
                     List<object> dat = gd.GetTeacherInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
@@ -216,7 +220,7 @@ namespace CresijApp.Services
             public string LoginID { get; set; }
             public string UserName { get; set; }
             public string PersonType { get; set; }
-            public string BuildingName { get; set; }
+            
             public string PersonnelStatus { get; set; }
             public string Phone { get; set; }
             public string DepartmentId { get; set; }
@@ -257,11 +261,11 @@ namespace CresijApp.Services
                                     LoginID = dr["LoginID"].ToString(),
                                     UserName = dr["UserName"].ToString(),
                                     PersonType = dr["PersonType"].ToString(),
-                                    BuildingName = dr["buildingName"].ToString(),
+                                    
                                     PersonnelStatus = dr["PersonnelStatus"].ToString(),
                                     Phone = dr["phone"].ToString(),
                                     Notes = dr["Notes"].ToString(),
-                                    DepartmentId =dr["deptid"].ToString(),
+                                    
                                     StartDate = dr["startdate"].ToString(),
                                     ExpireDate = dr["expiredate"].ToString(),
 
@@ -303,8 +307,7 @@ namespace CresijApp.Services
                         list.Add("LoginID", dt.Rows[0]["LoginID"].ToString());
                         list.Add("UserName", dt.Rows[0]["UserName"].ToString());
                         list.Add("PersonType", dt.Rows[0]["PersonType"].ToString());
-                        list.Add("buildingName", dt.Rows[0]["DeptCode"].ToString());
-						list.Add("DepartmentId", dt.Rows[0]["deptid"].ToString());														  
+                        													  
                         list.Add("PersonnelStatus", dt.Rows[0]["PersonnelStatus"].ToString());
                         list.Add("Notes", dt.Rows[0]["Notes"].ToString());
                         list.Add("Password", dt.Rows[0]["Password"].ToString());
@@ -327,6 +330,8 @@ namespace CresijApp.Services
             public string Classname { get; set; }
             public string Building { get; set; }
             public string Floor { get; set; }
+            public int BuildingId { get; set; }
+            public int FloorId { get; set; }
             public string Seat { get; set; }
             public string Ccip { get; set; }
             public string CamipS { get; set; }
@@ -366,7 +371,7 @@ namespace CresijApp.Services
         }
 
         [WebMethod(EnableSession = true)]
-        public Dictionary<string, object> GetClassData(Dictionary<string, object> data)
+        public Dictionary<string, object> GetClassData(Dictionary<string, string> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -378,13 +383,14 @@ namespace CresijApp.Services
             }
             else
             {
+               var userid= HttpContext.Current.Session["UserLoggedIn"].ToString();
                 try
                 {
                     GetOrgData gd = new GetOrgData();
                     DataTable dt = new DataTable();
                     List<ClassDetails> cdList = new List<ClassDetails>();
                     List<object> d = new List<object>();
-                    d = gd.GetClassroomInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    d = gd.GetClassroomInfo(data["pageIndex"].ToString(), data["pageSize"].ToString(),userid);
                     idata.Add("status", "success");
                     idata.Add("totalRow", d[0].ToString());
                     dt = d[1] as DataTable;
@@ -414,7 +420,9 @@ namespace CresijApp.Services
                                 RecorderIp = dr["recordingEquip"].ToString(),
                                 Recordermac = dr["Recordermac"].ToString(),
                                 CallHelpIP = dr["callhelpip"].ToString(),
-                                CallHelpmac = dr["callhelpmac"].ToString()
+                                CallHelpmac = dr["callhelpmac"].ToString(),
+                                BuildingId = Convert.ToInt32(dr["buildingId"]),
+                                FloorId =Convert.ToInt32(dr["floorid"])
                             };
                             cdList.Add(cd);
                         }
@@ -543,6 +551,10 @@ namespace CresijApp.Services
             public string Floor { get; set; }
             public string ClassId { get; set; }
             public string CCEquipIP { get; set; }
+            public string MacAddress { get; set; }
+            public string ScheduleId { get; set; }
+            public string CourseId { get; set; }
+            public string CourseName { get; set; }
         }
         
         [WebMethod(EnableSession = true)]
@@ -577,8 +589,12 @@ namespace CresijApp.Services
                                 RowNum = Convert.ToInt32(dr["rownumber"]),
                                 ClassName = dr["classname"].ToString(),
                                 Floor = dr["floor"].ToString(),
-                                ClassId =dr["classid"].ToString(),
-                                CCEquipIP = dr["ccequipip"].ToString()
+                                ClassId = dr["classid"].ToString(),
+                                CCEquipIP = dr["ccequipip"].ToString(),
+                                MacAddress = dr["ccmac"].ToString(),
+                                ScheduleId = dr["scheduleid"].ToString(),
+                                CourseId = dr["courseid"].ToString(),
+                                CourseName = dr["coursename"].ToString()
                             };
                             iPClassByBuildings.Add(iPClass);
                         }
@@ -601,6 +617,10 @@ namespace CresijApp.Services
             public string Floor { get; set; }
             public string CCEquipIP { get; set; }
             public string ClassId { get; set; }
+            public string MacAddress { get; set; }
+            public string ScheduleId { get; set; }
+            public string CourseId { get; set; }
+            public string CourseName { get; set; }
         }
         
         [WebMethod(EnableSession = true)]
@@ -636,7 +656,12 @@ namespace CresijApp.Services
                                 ClassName = dr["classname"].ToString(),
                                 ClassId =dr["classid"].ToString(),
                                 Floor = dr["floor"].ToString(),
-                                CCEquipIP = dr["ccequipip"].ToString()
+                                CCEquipIP = dr["ccequipip"].ToString(),
+                                MacAddress=dr["ccmac"].ToString(),
+                                ScheduleId = dr["scheduleid"].ToString(),
+                                CourseId = dr["courseid"].ToString(),
+                                CourseName = dr["coursename"].ToString()
+
                             };
                             iPClassByBuildings.Add(iPClass);
                         }
@@ -695,7 +720,9 @@ namespace CresijApp.Services
                                 RecorderIp = dr["recordingEquip"].ToString(),
                                 Recordermac = dr["Recordermac"].ToString(),
                                 CallHelpIP = dr["callhelpip"].ToString(),
-                                CallHelpmac = dr["callhelpmac"].ToString()
+                                CallHelpmac = dr["callhelpmac"].ToString(),
+                                BuildingId =Convert.ToInt32(dr["buildingid"]),
+                                FloorId =Convert.ToInt32(dr["floorid"])
                             };
                             idata.Add("value", cd);
                         }
@@ -841,6 +868,7 @@ namespace CresijApp.Services
             public string Queue { get; set; }
             public string Type { get; set; }
             public string Remarks { get; set; }
+            public int BuildingID { get; set; }
         }
         
         [WebMethod(EnableSession = true)]
@@ -858,8 +886,9 @@ namespace CresijApp.Services
             {
                 try
                 {
+                    var userid = HttpContext.Current.Session["UserLoggedIn"].ToString();
                     GetOrgData gd = new GetOrgData();
-                    DataTable dt = gd.GetFloorDetails(building);
+                    DataTable dt = gd.GetFloorDetails(building,userid);
                     List<FloorDataStructure> fd = new List<FloorDataStructure>();
                     idata.Add("status", "success");
                     if (dt.Rows.Count > 0)
@@ -874,7 +903,8 @@ namespace CresijApp.Services
                                 BuildingCode = row["buildingcode"].ToString(),
                                 Queue = row["Queue"].ToString(),
                                 Type = row["Public"].ToString(),
-                                Remarks = row["Remarks"].ToString()
+                                Remarks = row["Remarks"].ToString(),
+                                BuildingID = Convert.ToInt32(row["buildingid"])
                             };
                             fd.Add(st);
                         }
@@ -890,5 +920,64 @@ namespace CresijApp.Services
             }
             return idata;
         }
+
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetClassAndCourse(Dictionary<string, string> data)
+        {
+            var idata = new Dictionary<string, object>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
+            {
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    var classId = Convert.ToInt32(data["ClassId"]);
+                    var scheduleId= Convert.ToInt32(data["ScheduleId"]);
+                    
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            return idata;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetCameraByClassId(string id)
+        {
+            var idata = new Dictionary<string, object>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
+            {
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    var classId = Convert.ToInt32(id);
+                    GetOrgData gd = new GetOrgData();
+                    var data= gd.GetCameraByClassId(classId);
+                    idata.Add("status", "Success");
+                    idata.Add("value",data);
+
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage",ex.Message);
+                }
+            }
+            return idata;
+        }
+
     }
 }

@@ -1,19 +1,108 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 80px;
+            height: 25px;
+        }
+
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #21866e;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 22px;
+                width: 22px;
+                left: 5px;
+                bottom: 2px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2186f2;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2186F2;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(50px);
+            -ms-transform: translateX(50px);
+            transform: translateX(50px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+        .btn-custom {
+            color: #2c95af;
+            border: 1px solid #2c95af;
+            width: 80px;
+            margin-right: 20px;
+            background-color:transparent;
+            border-radius:6px 6px;
+            height:20px;
+            
+        }
+        
+            .btn-custom:hover {
+                color: #98def0;
+                border: 1px solid #98def0;
+            }
+            .btn-custom:after {
+                color: #2c95af;
+                border: 1px solid #2c95af;
+            }
+    </style>
 </head>
 <body>
     <div style="background-color:black">
         <div id="divPlugin1" style="background-color:black; height:80px">
 
         </div>
-        <span id="switch1" style="text-align:center; display:none; font-size:smaller; color:white; cursor:pointer"
-              onclick="clickonSwitch1(); return false;">Click to switch</span>
+        <!--<span id="switch1" style="text-align:center; display:none; font-size:smaller; color:white; cursor:pointer"
+              onclick="clickonSwitch1(); return false;">Click to switch</span>-->
+
+
     </div>
 
     <input type="hidden" id="hiddenplugin1" value="" />
+    
+   
+    <div style="text-align:center;padding-top:10px;">
+        <input type="button" class="btn btn-custom" value="Switch" title="Double Click" ondblclick="clickonSwitch1();" />
+    </div>
+    
 </body>
 </html>
 <script src="../Scripts/jquery-3.4.1.min.js"></script>
@@ -123,6 +212,7 @@
         }
     }
     function clickonSwitch1() {
-        parent.changeplaycam1();
+        console.log("double click");
+        parent.changeplaycam1(ip);
     }
 </script>

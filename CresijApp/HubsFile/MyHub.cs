@@ -10,60 +10,62 @@ using System.Configuration;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using CresijApp.DataAccess;
+using System.Web.Script.Serialization;
 
 namespace CresijApp.HubsFile
 {
     public class MyHub :Hub
     {
-
+        // string constr = ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        private static List<Users> users = new List<Users>();
         static Dictionary<string, string> keyValues = new Dictionary<string, string>();
-        public void GetUsers()
-        {
-            DataTable dt;
-            using (var connection = new MySqlConnection(constr))
-            {
-                string query = "SELECT * from dbo.[CentralControl]";
-                try
-                {
-                    connection.OpenAsync();
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
-                        //command.Notification = null;
-                        dt = new DataTable();
-                        DataSet ds = new DataSet();
+        //public void GetUsers()
+        //{
+        //    DataTable dt;
+        //    using (var connection = new MySqlConnection(constr))
+        //    {
+        //        string query = "SELECT * from dbo.[CentralControl]";
+        //        try
+        //        {
+        //            connection.OpenAsync();
+        //            using (MySqlCommand command = new MySqlCommand(query, connection))
+        //            {
+        //                //command.Notification = null;
+        //                dt = new DataTable();
+        //                DataSet ds = new DataSet();
 
-                        //SqlDependency dependency = new SqlDependency(command);
-                        //dependency.OnChange += dependency_OnChange;
-                        if (connection.State == ConnectionState.Closed)
-                            connection.OpenAsync();
-                        SqlDependency.Start(connection.ConnectionString);
-                        var reader = command.ExecuteReader();
-                        dt.Load(reader);
-                    }
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                if (dt.Rows.Count > 0)
-                {
-                    HttpContext.Current.Application.Lock();
-                    HttpContext.Current.Application["ScoreTable"] = dt;
-                    HttpContext.Current.Application.UnLock();
-                }
-            }
+        //                //SqlDependency dependency = new SqlDependency(command);
+        //                //dependency.OnChange += dependency_OnChange;
+        //                if (connection.State == ConnectionState.Closed)
+        //                    connection.OpenAsync();
+        //                SqlDependency.Start(connection.ConnectionString);
+        //                var reader = command.ExecuteReader();
+        //                dt.Load(reader);
+        //            }
+        //        }
+        //        finally
+        //        {
+        //            connection.Close();
+        //        }
+        //        if (dt.Rows.Count > 0)
+        //        {
+        //            HttpContext.Current.Application.Lock();
+        //            HttpContext.Current.Application["ScoreTable"] = dt;
+        //            HttpContext.Current.Application.UnLock();
+        //        }
+        //    }
             
-            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
-            context.Clients.All.recieveNotification(dt);
-        }
-        void dependency_OnChange(object sender, SqlNotificationEventArgs e)
-        {
-            if (e.Type == SqlNotificationType.Change)
-            {
-                MyHub _dataHub = new MyHub();
-                _dataHub.GetUsers();
-            }
-        }
+        //    IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
+        //    context.Clients.All.recieveNotification(dt);
+        //}
+        //void dependency_OnChange(object sender, SqlNotificationEventArgs e)
+        //{
+        //    if (e.Type == SqlNotificationType.Change)
+        //    {
+        //        MyHub _dataHub = new MyHub();
+        //        _dataHub.GetUsers();
+        //    }
+        //}
         ///[HubMethodName("sendMessages")]
         ///public static void SendMessages()
         ///{
@@ -71,7 +73,7 @@ namespace CresijApp.HubsFile
         ///    context.Clients.All.updateMessages();     
         ///}
         ///DataTable ScoresTable = HttpContext.Current.Application["ScoresTable"] as DataTable;
-        string constr = ConfigurationManager.ConnectionStrings["CresijCamConnectionString"].ConnectionString;
+        
         public void Hello()
         {
             
@@ -80,57 +82,89 @@ namespace CresijApp.HubsFile
         public async override Task OnConnected()
         {
             await base.OnConnected();
-            SendData();
+            //if(Context.User)
+            //var name =Context.User.Identity.Name;
+            var connectionID = Context.ConnectionId;
+            if (!users.Any(x => x.ConnectionId == connectionID))
+            {
+                users.Add(new Users {ConnectionId=connectionID });
+                
+            }
+           // SendData();
 
+        }
+        public override async Task OnDisconnected(bool stopCalled)
+        {
+            if (users.Any(x => x.ConnectionId== Context.ConnectionId))
+            {
+                Users disconnectedUser = users.First(x => x.ConnectionId == Context.ConnectionId);
+                var cookie = disconnectedUser.AuthCookie;
+                users.Remove(disconnectedUser);
+                SessionHandler ss = new SessionHandler();
+                //await ss.RemoveUserSession(disconnectedUser.AuthCookie);
+                //await ss.AddOperationLogs(cookie, "Logout");
+            }
+            await base.OnDisconnected(stopCalled);
         }
         ///show status of all machines
-        public void SendMessage(string sender, string data)
+        public void SendMessage(string sender, string data1)
         {
-            Console.WriteLine("received data from " + sender);
-            if (data.Contains("Temp"))
-            {
-                if (keyValues.ContainsKey(sender))
-                {
-                    keyValues[sender] = data;
-                }
-                else
-                {
-                    keyValues.Add(sender, data);
-                }
-            }
-            if (data.Contains("Toregister"))
-            {
-                Clients.All.registerCard(sender, data);
-            }
-            if (data.Contains("registered"))
-            {
-               // updatecardstatus(sender, data);
-                // Clients.All.confirmRegister();
-            }
-            //else if (data.Contains("readerlog"))
+            
+            //string data = "";
+            //Console.WriteLine("received data from " + sender);
+            //if (data.Contains("Temp"))
             //{
-            //    updateCardLogs(sender, data);
-            //    Clients.All.SendControl(sender, "8B B9 00 04 01 0B C4 D4");
+            //    if (keyValues.ContainsKey(sender))
+            //    {
+            //        keyValues[sender] = data;
+            //    }
+            //    else
+            //    {
+            //        keyValues.Add(sender, data);
+            //    }
             //}
-            else if (data.Contains("KeyValue"))
-            {
-                // string query = "";
-                string[] values = data.Split(',');
-                switch (values[2])
-                {
-                    case "SystemON":
-                        //query = "Insert into ";
-                        break;
-                }
-            }
-            else if (data.Contains("StatusData"))
-            {
-                //saveStatusinDatebase(sender, data);
-            }
-            Clients.All.broadcastMessage(sender, data);
-            Clients.All.envMessage(sender, data);
+            //if (data.Contains("Toregister"))
+            //{
+            //    Clients.All.registerCard(sender, data);
+            //}
+            //if (data.Contains("registered"))
+            //{
+            //   // updatecardstatus(sender, data);
+            //    // Clients.All.confirmRegister();
+            //}
+            ////else if (data.Contains("readerlog"))
+            ////{
+            ////    updateCardLogs(sender, data);
+            ////    Clients.All.SendControl(sender, "8B B9 00 04 01 0B C4 D4");
+            ////}
+            //else if (data.Contains("KeyValue"))
+            //{
+            //    // string query = "";
+            //    string[] values = data.Split(',');
+            //    switch (values[2])
+            //    {
+            //        case "SystemON":
+            //            //query = "Insert into ";
+            //            break;
+            //    }
+            //}
+            //else if (data.Contains("StatusData"))
+            //{
+            //    //saveStatusinDatebase(sender, data);
+            //}
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            
+            dynamic DatatoSend = js.Deserialize<dynamic>(data1);
+            Clients.All.broadcastMessage(sender, DatatoSend);
+            Clients.All.envMessage(sender, data1);
         }
 
+        public async Task SetProjectorConfig(List<int> classIds, Dictionary<string, string> data)
+        {
+            SessionHandler ss = new SessionHandler();
+            var macaddress =await ss.GetMacAddress(classIds);
+            Clients.All.SetProjectorConfiguration(macaddress, data);
+        }
         private void saveStatusinDatebase(string sender, string data)
         {
             
@@ -149,15 +183,32 @@ namespace CresijApp.HubsFile
             Clients.All.RefreshStatus(ip);
         }
         ///send ip and data to console server
-        public void SendControlKeys(string machine, string code)
+        public async Task SendControlKeys(string machine, string code, string cookies)
         {
-            Clients.All.SendControl(machine, code);
+            int val = 0;
+            var id = Context.ConnectionId;
+            SessionHandler ss = new SessionHandler();
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var cook = js.Deserialize<Dictionary<string,string>>(cookies);
+            if (cook.ContainsKey("value"))
+            {
+                val = Convert.ToInt32(cook["value"]);
+            }
+            await Clients.All.SendControl(machine, code,val);
+            if (users.Any(x => x.ConnectionId == id))
+            {
+                var us = users.Where(x => x.ConnectionId == id).FirstOrDefault();
+                us.AuthCookie = cook["AuthCookie"];
+            }
+            int r1 = await ss.AddUpdateConnectionID(cook["AuthCookie"], id);
+            int r = await ss.AddOperationLogs(cook["AuthCookie"], code,machine);
         }
-        public void GetStatus(string sender, string Message)
+        public void GetStatus()
         {
-            int dis;
-            byte[] statusRec = HexEncoding.GetBytes(Message, out dis);
-            Clients.All.broadcastMessage(sender, statusRec);
+            //int dis;
+            Clients.All.RefreshStatus(1);
+            //byte[] statusRec = HexEncoding.GetBytes(Message, out dis);
+           // Clients.All.broadcastMessage(sender, statusRec);
         }
         ///card status
         //public void updatecardstatus(string ip, string data)
@@ -178,7 +229,8 @@ namespace CresijApp.HubsFile
         //}
         public void CountMachines(int count)
         {
-            Clients.All.TotalCount(count);
+           // Clients.All.TotalCount(count);
+            Clients.All.machineCounts(count);
         }
         public void CountTotal()
         {
@@ -207,25 +259,13 @@ namespace CresijApp.HubsFile
         {
             Clients.All.machineCounts(counts);
         }
-
-        public void GetTempUsersToDelete(string userids)
-        {
-            string[] user = userids.Split(',');
-            RemoveOneTimeUser(user);
-        }
-
-        public void RemoveOneTimeUser(string[] userid)
-        {
-            //Userdetails ud = new Userdetails();
-            //foreach (string s in userid)
-            //{
-            //    int r = ud.RejectOneTimeUser(s);
-            //    if (r == 1)
-            //    {
-            //        Clients.All.logoutTempUsers(s);
-            //    }
-            //}
-        }
+  
+    }
+    public class Users
+    {
+       // public string Name { get; set; }
+        public string AuthCookie { get; set; }
+        public string ConnectionId { get; set; }
     }
     public class HexEncoding
     {
@@ -353,7 +393,6 @@ namespace CresijApp.HubsFile
             byte newByte = byte.Parse(hex, System.Globalization.NumberStyles.HexNumber);
             return newByte;
         }
-
-
     }
+    
 }

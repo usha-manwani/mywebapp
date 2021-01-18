@@ -53,11 +53,11 @@ $(function () {
     $("#air3div").hide();
     $("#air4div").hide();
     $("#ac1").closest("td").css("background-color", "#4ecdc4");
-    var chat = $.connection.myHub;
-  //ipAddress = parent.getElementById("InputIP").value;
-   // ipAddress = sessionStorage.getItem('ipofremote');
+    //ipAddress = parent.getElementById("InputIP").value;
+    // ipAddress = sessionStorage.getItem('ipofremote');
     ipAddress = document.getElementById("sessionInputIP").value;
    // console.log(ipAddress);
+    var chat = $.connection.myHub;
     chat.client.broadcastMessage = function (name, message) {
        // console.log(name + "    and  " + ipAddress);
         if (name == ipAddress) {            

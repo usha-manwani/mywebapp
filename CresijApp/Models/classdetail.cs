@@ -17,7 +17,6 @@ namespace CresijApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public classdetail()
         {
-            this.userlocationaccesses = new HashSet<userlocationaccess>();
             this.schedulereserves = new HashSet<schedulereserve>();
             this.scheduletransfers = new HashSet<scheduletransfer>();
         }
@@ -45,8 +44,6 @@ namespace CresijApp.Models
     
         public virtual buildingdetail buildingdetail { get; set; }
         public virtual floordetail floordetail { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<userlocationaccess> userlocationaccesses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<schedulereserve> schedulereserves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

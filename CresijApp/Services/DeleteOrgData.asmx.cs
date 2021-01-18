@@ -5,6 +5,7 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.Services;
 using CresijApp.DataAccess;
+			   
 namespace CresijApp.Services
 {
     /// <summary>
@@ -33,8 +34,10 @@ namespace CresijApp.Services
             {
                 try
                 {
+					List<string> buildingid = new List<string>();
+                    buildingid.Add(sno);
                     DeleteOrgDetails del = new DeleteOrgDetails();
-                    result = del.DeleteOrg(Convert.ToInt32(sno));
+                    result = del.DeleteMultipleBuilding(buildingid);
                     if (result>= 0)
                     {
                         keyValue.Add("status", "success");
@@ -133,9 +136,11 @@ namespace CresijApp.Services
             {
                 try
                 {
+					List<string> value = new List<string>();
+                    value.Add(id);
                     DeleteOrgDetails del = new DeleteOrgDetails();
-                    result = del.DeleteClass(Convert.ToInt32(id));
-                    if (result > 0)
+                    result = del.DeleteMultipleClass(value);
+                    if (result >= 0)
                     {
                         keyValue.Add("status", "success");
 
@@ -167,9 +172,12 @@ namespace CresijApp.Services
             {
                 try
                 {
+				List<string> value = new List<string>();
+                    value.Add(id);
                     DeleteOrgDetails del = new DeleteOrgDetails();
-                    result = del.DeleteUser(id);
-                    if (result > 0)
+                    
+                    result = del.DeleteMultipleUser(value);
+                    if (result >= 0)
                     {
                         keyValue.Add("status", "success");
 
@@ -201,9 +209,12 @@ namespace CresijApp.Services
             {
                 try
                 {
+					List<string> value = new List<string>();
+                    value.Add(id);
                     DeleteOrgDetails del = new DeleteOrgDetails();
-                    result = del.DeleteFloor(Convert.ToInt32(id));
-                    if (result > 0)
+
+                    result = del.DeleteMultipleFloor(value);
+                    if (result >= 0)
                     {
                         keyValue.Add("status", "success");
 
@@ -259,46 +270,96 @@ namespace CresijApp.Services
 
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleClass(List<string> data)
-        {
-            Dictionary<string, string> idata = new Dictionary<string, string>();
-            try
+        {Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-
+                HttpContext.Current.Session.Abandon();
+                keyValue.Add("status", "fail");
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
             }
-            catch (Exception ex)
+            else
             {
-
+                try
+                {
+                    DeleteOrgDetails dg = new DeleteOrgDetails();
+                    int result = dg.DeleteMultipleClass(data);
+                    if (result >= 0)
+                    {
+                        keyValue.Add("status", "success");
+                   //     keyValue.Add("Deleted Rows", result.ToString());
+                    }                    
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("errorMessage", ex.Message);
+                }
             }
-            return idata;
+            return keyValue;
         }
 
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleUser(List<string> data)
         {
-            Dictionary<string, string> idata = new Dictionary<string, string>();
-            try
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-
+                HttpContext.Current.Session.Abandon();
+                keyValue.Add("status", "fail");
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
             }
-            catch (Exception ex)
+            else
             {
-
+                try
+                {
+                    DeleteOrgDetails dg = new DeleteOrgDetails();
+                    int result = dg.DeleteMultipleUser(data);
+                    if (result >= 0)
+                    {
+                        keyValue.Add("status", "success");
+                        //keyValue.Add("Deleted Rows", result.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("errorMessage", ex.Message);
+                }
             }
-            return idata;
+            return keyValue;
         }
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleFloor(List<string> data)
         {
-            Dictionary<string, string> idata = new Dictionary<string, string>();
-            try
+            Dictionary<string, string> keyValue = new Dictionary<string, string>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
-
+                HttpContext.Current.Session.Abandon();
+                keyValue.Add("status", "fail");
+                keyValue.Add("errorMessage", "Session Expired");
+                keyValue.Add("customErrorCode", "440");
             }
-            catch (Exception ex)
+            else
             {
-
+                try
+                {
+                    DeleteOrgDetails dg = new DeleteOrgDetails();
+                    int result = dg.DeleteMultipleFloor(data);
+                    if (result >= 0)
+                    {
+                        keyValue.Add("status", "success");
+                     //   keyValue.Add("Deleted Rows", result.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    keyValue.Add("status", "fail");
+                    keyValue.Add("errorMessage", ex.Message);
+                }
             }
-            return idata;
+            return keyValue;
         }
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleTeacherData(List<string> data)
@@ -317,7 +378,7 @@ namespace CresijApp.Services
                 {
                     DeleteOrgDetails dg = new DeleteOrgDetails();
                     int result = dg.DeleteMultipleTeacher(data);
-                    if (result > 0)
+                    if (result >= 0)
                     {
                         keyValue.Add("status", "success");
                         keyValue.Add("Deleted Rows", result.ToString());
@@ -348,7 +409,7 @@ namespace CresijApp.Services
                 {
                     DeleteOrgDetails dg = new DeleteOrgDetails();
                     int result = dg.DeleteMultipleStudent(data);
-                    if (result > 0)
+                    if (result >= 0)
                     {
                         keyValue.Add("status", "success");
                         keyValue.Add("Deleted Rows", result.ToString());

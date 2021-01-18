@@ -1,0 +1,103 @@
+﻿<div class="tt border-bottom">
+    <i class="fa fa-plus-circle"></i>
+    <span> 编辑教室数据</span>
+</div>
+<table class="main_table">
+    <!-- 课室信息 -->
+    <tr>
+        <td rowspan="2" class="bbgray"><b>课室信息</b></td>
+        <td class="text-right">教室名称</td>
+        <td><input type="text" style="width:120px;" id="className"></td>
+        <td class="text-right">教学楼栋</td>
+        <td>
+            <div style="position: relative; top: -8px;">
+                <div  class="searchbox2 small"  id="buildinglist">           
+                    <div class="name">请选择楼栋</div>
+                    <div class="list"></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr class="bbgray">
+        <td class="text-right">课室楼层</td>
+        <td>
+            <div style="position: relative; top: -8px;">
+                <div  class="searchbox2 small"  id="floorlist">           
+                    <div class="name">请选择楼层</div>
+                    <div class="list"></div>
+                </div>
+            </div>
+        </td>
+        <td class="text-right">课室席位</td>
+        <td><input type="text" style="width:120px;" id="tbseat"></td>
+    </tr>
+
+    <!-- 摄像头（T） --><!-- 台式机 -->
+    <tr>
+        <td rowspan="4" class="bbgray"><b>摄像头信息</b></td>
+        <td class="text-right">MAC(S)</td>
+        <td><input type="text" style="width:120px;" id="camsmac"></td>
+        <td class="text-right">IP(S)</td>
+        <td><input type="text" style="width:120px;" id="camsip"></td>
+    </tr>
+    <tr>
+        <td class="text-right">MAC(T)</td>
+        <td><input type="text" style="width:120px;" id="camnmac"></td>
+        <td class="text-right">IP(T)</td>
+        <td><input type="text" style="width:120px;" id="camnip"></td>
+    </tr>
+    <tr>
+        <td class="text-right">登录名</td>
+        <td><input type="text" style="width:120px;" id="camlogin"></td>
+        <td class="text-right">密码</td>
+        <td><input type="text" style="width:120px;" id="campass"></td>
+    </tr>
+    <tr class="bbgray">
+        <td class="text-right">端口</td>
+        <td><input type="text" style="width:120px;" id="camport"></td>
+        <td class="text-right"></td>
+        <td></td>
+    </tr>
+
+    <!-- 中控设备 -->
+    <tr class="bbgray">
+        <td><b>中控设备</b></td>
+        <td class="text-right">MAC</td>
+        <td><input type="text" style="width:120px;" id="ccmac"></td>
+        <td class="text-right">IP</td>
+        <td><input type="text" style="width:120px;" id="ccip"></td>
+    </tr>
+
+    <!-- 录播设备 -->
+    <tr class="bbgray">
+        <td><b>录课设备</b></td>
+        <td class="text-right">MAC</td>
+        <td><input type="text" style="width:120px;" id="recmac"></td>
+        <td class="text-right">IP</td>
+        <td><input type="text" style="width:120px;" id="recip"></td>
+    </tr>
+    <!--call for help--><!-- 呼叫求助-->
+    <tr class="bbgray">
+        <td>
+            <b>呼叫求助</b>
+        </td>
+        <td class="text-right">MAC</td>
+        <td><input type="text" style="width:120px;" id="callhelpip"></td>
+        <td class="text-right">IP</td>
+        <td><input type="text" style="width:120px;" id="callhelpmac"></td>
+    </tr>
+    <!--台式电脑  -->
+    <tr class="bbgray">
+        <td><b>台式电脑</b></td>
+        <td class="text-right">MAC</td>
+        <td><input type="text" style="width:120px;" id="deskmac"></td>
+        <td class="text-right">IP</td>
+        <td><input type="text" style="width:120px;" id="deskip"></td>
+    </tr>
+
+</table>
+<div class="btns btns_auto border-top w-100">
+    <a class="bg_green alert_jmodal " id="EditClassDetail" j-page-box="#jcontent"><i class="fa fa-check"></i> 确定</a>
+    <a class="bg_red close_jmodal JURL"><i class="fa fa-close"></i> 取消</a>
+</div>
+<script src="js/EditClassInfo.js"></script>

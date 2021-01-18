@@ -5,6 +5,7 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.Services;
 using CresijApp.DataAccess;
+using CresijApp.Models;
 namespace CresijApp.Services
 {
     /// <summary>
@@ -21,7 +22,7 @@ namespace CresijApp.Services
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveBuildingData(Dictionary<string,string> data)
         {            
-            string result = "";
+              int result = -1 ;
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             SetOrgData orgData = new SetOrgData();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -35,10 +36,67 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    result = orgData.SaveOrgDataBuilding(data).ToString();
-                   
-                        keyValue.Add("status", "success");
-                        keyValue.Add("InsertedRows", result);
+                    var adminid = Session["UserLoggedIn"].ToString();
+                    using (var context = new OrganisationdatabaseEntities())
+                    {
+                        var buildid = 0;
+                        buildingdetail bd = new buildingdetail()
+                        {
+                            buildingcode = data["buildingCode"].ToString(),
+                            BuildingName = data["buildingName"].ToString(),
+                            Queue = data["queue"].ToString(),
+                            Remarks = data["notes"].ToString(),
+                            Public = data["accessType"].ToString()
+                        };
+                        if ( !context.buildingdetails.Any(b => b.BuildingName == bd.BuildingName))
+                        {
+                            context.buildingdetails.Add(bd);
+                            result = context.SaveChanges();
+                            buildid = bd.id;
+                        }                       
+                        else
+                        {
+                            var buildingid = context.buildingdetails.Where(b => b.BuildingName == bd.BuildingName).Select(x=>x.id).First();
+                            var buildingdata = context.buildingdetails.Find(buildingid);
+                            if (buildingdata != null)
+                            {
+                                buildingdata.buildingcode = data["buildingCode"].ToString();
+                                buildingdata.BuildingName = data["buildingName"].ToString();
+                                buildingdata.Queue = data["queue"].ToString();
+                                buildingdata.Remarks = data["notes"].ToString();
+                                buildingdata.Public = data["accessType"].ToString();
+                            }
+                            result = context.SaveChanges();
+                            buildid = buildingdata.id;
+                        }
+                        
+                        if (result >= 0) {
+                            var userserialno = context.userdetails.Where(b => b.LoginID == adminid).Select(x => x.SerialNo).First();
+                            var userlocation = new userlocationaccess()
+                            {
+                                locationid = buildid,
+                                authenticatedby = userserialno,
+                                userserialnum = userserialno,
+                                Level="Building"
+                            };
+                            if (!context.userlocationaccesses.Any(x => x.Level == "Building" && x.userserialnum == userserialno && x.locationid == buildid))
+                                context.userlocationaccesses.Add(userlocation);
+                            var adminserialno = context.userdetails.Where(b => b.LoginID == "admin").Select(x => x.SerialNo).First();
+                            var userlocation1 = new userlocationaccess()
+                            {
+                                locationid = buildid,
+                                authenticatedby = adminserialno,
+                                userserialnum = adminserialno,
+                                Level = "Building"
+                            };
+                            if (!context.userlocationaccesses.Any(x => x.Level == "Building" && x.userserialnum == userserialno 
+                            && x.locationid == buildid) && userserialno != adminserialno)
+                                context.userlocationaccesses.Add(userlocation1);
+                            context.SaveChanges();
+                            keyValue.Add("status", "success");
+                            keyValue.Add("InsertedRows", result.ToString());
+                        }
+                    }    
                 }
                 catch (Exception ex)
                 {
@@ -52,7 +110,7 @@ namespace CresijApp.Services
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveFloorData(Dictionary<string, string> data)
         {
-            string result = "";
+            int result=-1;
             SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -66,10 +124,71 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    result = orgData.SaveOrgDataFloor(data).ToString();
-                    
-                        keyValue.Add("status", "success");
-                        keyValue.Add("InsertedRows", result);
+                    var adminid = Session["UserLoggedIn"].ToString();
+                    using (var context = new OrganisationdatabaseEntities())
+                    {
+                        var flid = 0;
+                        floordetail fd = new floordetail()
+                        {
+                            floor = data["floorName"].ToString(),
+                            Queue = data["queue"].ToString(),
+                            buildingcode = data["buildingCode"].ToString(),
+                            BuildingName = Convert.ToInt32(data["building"]),
+                            Remarks = data["notes"].ToString(),
+                            Public = data["accessType"].ToString()
+                        };
+                        if(!context.floordetails.Any(x=>x.floor==fd.floor && x.BuildingName == fd.BuildingName))
+                        {
+                            context.floordetails.Add(fd);
+                            result = context.SaveChanges();
+                            flid = fd.id;
+                        }
+                        
+                        else
+                        {
+                            var floorid = context.floordetails.Where(x => x.floor == fd.floor && x.BuildingName == fd.BuildingName).Select(x => x.id).FirstOrDefault();
+                            var floordata = context.floordetails.Find(floorid);
+                            if (floordata != null)
+                            {
+                                floordata.floor = data["floorName"].ToString();
+                                floordata.Queue = data["queue"].ToString();
+                                floordata.buildingcode = data["buildingCode"].ToString();
+                                floordata.BuildingName = Convert.ToInt32(data["building"]);
+                                floordata.Remarks = data["notes"].ToString();
+                                floordata.Public = data["accessType"].ToString();
+                            }
+                            result = context.SaveChanges();
+                            flid = floordata.id;
+                        }
+                        
+                        if (result >= 0)
+                        {
+                            var userserialno = context.userdetails.Where(b => b.LoginID == adminid).Select(x => x.SerialNo).First();
+                            var userlocation = new userlocationaccess()
+                            {
+                                locationid = flid,
+                                authenticatedby = userserialno,
+                                userserialnum = userserialno,
+                                Level = "Floor"
+                            };
+                            if (!context.userlocationaccesses.Any(x => x.Level == "Floor" && x.userserialnum == userserialno && x.locationid == flid))
+                                context.userlocationaccesses.Add(userlocation);
+                            
+                            var adminserialno = context.userdetails.Where(b => b.LoginID == "admin").Select(x => x.SerialNo).First();
+                            var userlocation1 = new userlocationaccess()
+                            {
+                                locationid = flid,
+                                authenticatedby = adminserialno,
+                                userserialnum = adminserialno,
+                                Level = "Floor"
+                            };
+                            if(!context.userlocationaccesses.Any(x=>x.Level=="Floor" && x.userserialnum == adminserialno && x.locationid==flid)&& userserialno != adminserialno)
+                            context.userlocationaccesses.Add(userlocation1);
+                            context.SaveChanges();
+                            keyValue.Add("status", "success");
+                            keyValue.Add("InsertedRows", result.ToString());
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -132,10 +251,9 @@ namespace CresijApp.Services
                 try
                 {
                     result = orgData.SaveTeacherData(data).ToString();
-                    
-                        keyValue.Add("status", "success");
-                        keyValue.Add("InsertedRows", result);
-                    
+
+                    keyValue.Add("status", "success");
+                    keyValue.Add("InsertedRows", result);
                 }
                 catch (Exception ex)
                 {

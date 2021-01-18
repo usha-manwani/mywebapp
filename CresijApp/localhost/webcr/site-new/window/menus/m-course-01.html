@@ -1,0 +1,108 @@
+<h4 class="tt01">
+    <i class="fa fa-calendar mr-1"></i>课程表
+</h4>
+<div class="nav2"></div>
+<div class="searchbox">
+    <div class="searchbox2">
+        <select id="selectedbuilding"></select>
+        <div class="name">building</div>
+        <div class="list">
+        </div>
+
+    </div>
+
+    <div class="searchbox2" id="semdiv">
+        <div class="name">学期</div>
+        <div class="list">
+            <div class="option">
+                <input type="radio" name="semesterlist" value="1"><label for="">上学期</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="semesterlist" value="2"><label for="">下学期</label>
+            </div>
+        </div>
+    </div>
+    <div class="searchbox2">
+        <select id="weeklist"></select>
+        <!--<div class="name">教学周</div>
+        <div class="list" id="weeklist">
+            <div class="option">
+                <input type="radio" name="weeklist"><label for="">第1周</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="weeklist"><label for="">第2周</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="weeklist"><label for="">第3周</label>
+            </div>
+            <div class="option">
+                <input type="radio" name="weeklist"><label for="">第4周</label>
+            </div>
+        </div>-->
+    </div>
+    <div class="searchbox2">
+        <select id="dayslist">
+            <option value="1">Monday</option>
+            <option value="2">Tuesday</option>
+            <option value="3">Wednesday</option>
+            <option value="4">Thursday</option>
+            <option value="5">Friday</option>
+            <option value="6">Saturday</option>
+            <option value="7">Sunday</option>
+        </select>
+    </div>
+    <div class="searchbox2" id="selectdatediv">
+        <span class="input-group datetimepicker jdatetime" style="background-color:none;">
+            <input type="text" name="ScheduleDate" value="" placeholder="select Date" class="input-group-addon" style="width:120px; background-color:#f5f5f5;">
+            <i class="fa fa-calendar"></i>
+        </span>
+    </div>
+    <a class="jbtn_sm searchfilter" id="SearchFilter" onclick="SearchFilter();">
+        <i class="fa fa-search" style="margin-top:10px; margin-right:5px;"></i>查询
+    </a>
+</div>
+<script type="text/javascript">
+    $(function () {
+        0.();
+        var hd = new Holidays('CN');
+        var holidaysdata = hd.getHolidays(2020);
+
+        var dates = [];
+        for (i = 0; i < holidaysdata.length; i++) {
+            var d = holidaysdata[i];
+            dates.push(d["date"].split(' ')[0]);
+        }
+
+        $('.datetimepicker').datepicker({
+            daysOfWeekDisabled: [0, 6],
+            format: 'yyyy-mm-dd',
+            datesDisabled: dates,
+            locale: 'zh-cn',
+            autoclose: true,
+            orientation: "bottom right"
+        });
+        var date = new Date();
+        var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        $('.datetimepicker').datepicker('setDate', today);
+    });
+  //$(function () {
+  //  $('.datetimepicker').datetimepicker({
+  //    format: 'YYYY-MM-DD',
+  //    locale: 'zh-cn',
+  //    defaultDate: new Date(),
+  //    icons: {
+  //      previous: "fa fa-arrow-circle-left green",
+  //      next: "fa fa-arrow-circle-right green"
+  //    }
+  //  });
+  //  $('.datetimepicker-clock').datetimepicker({
+  //    format: 'LT',
+  //    locale: 'zh-cn',
+  //    icons: {
+  //      up: "fa fa-chevron-up green",
+  //      down: "fa fa-chevron-down green"
+  //    }
+  //  });
+  //});
+</script>
+
