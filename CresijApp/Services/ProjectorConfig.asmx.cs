@@ -28,16 +28,26 @@ namespace CresijApp.Services
             Dictionary<string, object> result = new Dictionary<string, object>();
             try
             {
-                var path = HttpContext.Current.Server.MapPath("~/Projector Type/") ;
-                var dirs = Directory.GetDirectories(path);
-                List<string> names = new List<string>();
-                foreach(var r in dirs)
+                if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
                 {
-                    names.Add(new DirectoryInfo(r).Name);
+                    HttpContext.Current.Session.Abandon();
+                    result.Add("status", "fail");
+                    result.Add("errorMessage", "Session Expired");
+                    result.Add("customErrorCode", "440");
                 }
-                result.Add("status", "success");
-                result.Add("total", names.Count);
-                result.Add("names", names);
+                else
+                {
+                    var path = HttpContext.Current.Server.MapPath("~/Projector Type/");
+                    var dirs = Directory.GetDirectories(path);
+                    List<string> names = new List<string>();
+                    foreach (var r in dirs)
+                    {
+                        names.Add(new DirectoryInfo(r).Name);
+                    }
+                    result.Add("status", "success");
+                    result.Add("total", names.Count);
+                    result.Add("names", names);
+                }
 
             }
             catch(Exception ex)
@@ -55,17 +65,27 @@ namespace CresijApp.Services
             Dictionary<string, object> result = new Dictionary<string, object>();
             try
             {
-                var path = HttpContext.Current.Server.MapPath("~/Projector Type/" + brand);
-                var dirs = Directory.GetFiles(path,"*.ini");
-                
-                List<string> names = new List<string>();
-                foreach (var r in dirs)
+                if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
                 {
-                    names.Add(new FileInfo(r).Name.Split('.')[0]);
+                    HttpContext.Current.Session.Abandon();
+                    result.Add("status", "fail");
+                    result.Add("errorMessage", "Session Expired");
+                    result.Add("customErrorCode", "440");
                 }
-                result.Add("status", "success");
-                result.Add("total", names.Count);
-                result.Add("names", names);
+                else
+                {
+                    var path = HttpContext.Current.Server.MapPath("~/Projector Type/" + brand);
+                    var dirs = Directory.GetFiles(path, "*.ini");
+
+                    List<string> names = new List<string>();
+                    foreach (var r in dirs)
+                    {
+                        names.Add(new FileInfo(r).Name.Split('.')[0]);
+                    }
+                    result.Add("status", "success");
+                    result.Add("total", names.Count);
+                    result.Add("names", names);
+                }
 
             }
             catch (Exception ex)
@@ -84,16 +104,26 @@ namespace CresijApp.Services
             Dictionary<string, object> result1 = new Dictionary<string, object>();
             try
             {
-                var brand = data["Brand"].ToString();
-                var model = data["Model"].ToString();
-                var path = HttpContext.Current.Server.MapPath("~/Projector Type/" + brand+"/"+model+".ini");
-                IniFile inf = new IniFile(path);
-                result.Add("BaudRate",inf.IniReadValue("Option", "BaudRate"));
-                result.Add("Parity", inf.IniReadValue("Option", "Parity"));
-                result.Add("OpenCode", inf.IniReadValue("Option", "Open"));
-                result.Add("CloseCode", inf.IniReadValue("Option", "Close"));
-                result1.Add("status", "success");
-                result1.Add("value", result);
+                if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
+                {
+                    HttpContext.Current.Session.Abandon();
+                    result1.Add("status", "fail");
+                    result1.Add("errorMessage", "Session Expired");
+                    result1.Add("customErrorCode", "440");
+                }
+                else
+                {
+                    var brand = data["Brand"].ToString();
+                    var model = data["Model"].ToString();
+                    var path = HttpContext.Current.Server.MapPath("~/Projector Type/" + brand + "/" + model + ".ini");
+                    IniFile inf = new IniFile(path);
+                    result.Add("BaudRate", inf.IniReadValue("Option", "BaudRate"));
+                    result.Add("Parity", inf.IniReadValue("Option", "Parity"));
+                    result.Add("OpenCode", inf.IniReadValue("Option", "Open"));
+                    result.Add("CloseCode", inf.IniReadValue("Option", "Close"));
+                    result1.Add("status", "success");
+                    result1.Add("value", result);
+                }
             }
             catch (Exception ex)
             {
@@ -108,60 +138,71 @@ namespace CresijApp.Services
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
             int r = 0;
+
             try
             {
-                var classids = ((object[])data["classids"]).Cast<int>().ToList();
-                var brand = data["Brand"].ToString();
-                var model = data["Model"].ToString();
-                var baudrate = Convert.ToInt32(data["BaudRate"]);
-                var parity = Convert.ToInt16(data["Parity"]);
-                var opencode = data["OpenCode"].ToString();
-                var closecode = data["CloseCode"].ToString();
-                using(var context = new OrganisationdatabaseEntities())
+                if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
                 {
-                    if (classids != null)
+                    HttpContext.Current.Session.Abandon();
+                    result.Add("status", "fail");
+                    result.Add("errorMessage", "Session Expired");
+                    result.Add("customErrorCode", "440");
+                }
+                else
+                {
+                    var classids = ((object[])data["classids"]).Cast<int>().ToList();
+                    var brand = data["Brand"].ToString();
+                    var model = data["Model"].ToString();
+                    var baudrate = Convert.ToInt32(data["BaudRate"]);
+                    var parity = Convert.ToInt16(data["Parity"]);
+                    var opencode = data["OpenCode"].ToString();
+                    var closecode = data["CloseCode"].ToString();
+                    using (var context = new OrganisationdatabaseEntities())
                     {
-                        foreach (var id in classids)
+                        if (classids != null)
                         {
-                            var configrow = context.projectorconfiginfoes.Where(x => x.Classid == id).Select(x=>x).FirstOrDefault();
-                            if (configrow != null)
+                            foreach (var id in classids)
                             {
-                                configrow.BrandName = brand;
-                                configrow.Model = model;
-                                configrow.Baudrate = baudrate;
-                                configrow.parity = parity;
-                                configrow.OpenCode = opencode;
-                                configrow.CloseCode = closecode;
-                                
-                            }
-                            else
-                            {
-                                
-                                var confignew = new projectorconfiginfo()
+                                var configrow = context.projectorconfiginfoes.Where(x => x.Classid == id).Select(x => x).FirstOrDefault();
+                                if (configrow != null)
                                 {
-                                    BrandName = brand,
-                                    Model = model,
-                                    Baudrate = baudrate,
-                                    parity = parity,
-                                    OpenCode = opencode,
-                                    CloseCode = closecode,
-                                    Classid = id,
-                                    status="Pending"
-                                    
-                                };
-                                context.projectorconfiginfoes.Add(confignew);
-                                
+                                    configrow.BrandName = brand;
+                                    configrow.Model = model;
+                                    configrow.Baudrate = baudrate;
+                                    configrow.parity = parity;
+                                    configrow.OpenCode = opencode;
+                                    configrow.CloseCode = closecode;
+
+                                }
+                                else
+                                {
+
+                                    var confignew = new projectorconfiginfo()
+                                    {
+                                        BrandName = brand,
+                                        Model = model,
+                                        Baudrate = baudrate,
+                                        parity = parity,
+                                        OpenCode = opencode,
+                                        CloseCode = closecode,
+                                        Classid = id,
+                                        status = "Pending"
+
+                                    };
+                                    context.projectorconfiginfoes.Add(confignew);
+
+                                }
+
                             }
-                            
+
+                            r += context.SaveChanges();
                         }
 
-                        r += context.SaveChanges();
-                    }
 
-                    
-                    result.Add("UpdatedRows",r);
+                        result.Add("UpdatedRows", r);
+                    }
+                    result.Add("status", "success");
                 }
-                result.Add("status", "success");
             }
             catch (Exception ex)
             {
@@ -177,16 +218,33 @@ namespace CresijApp.Services
             Dictionary<string, object> result = new Dictionary<string, object>();
             try
             {
-                using (var context = new OrganisationdatabaseEntities())
+                if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
                 {
-                    var row = context.projectorconfiginfoes.Where(x => x.Classid == classid)
-                        .Select(x =>new  {BaudRate= x.Baudrate,Parity=x.parity,Brand=x.BrandName,
-                            x.Model,x.OpenCode,x.CloseCode }).FirstOrDefault();
-                    if (row != null)
-                       
-                        result.Add("value", row);
+                    HttpContext.Current.Session.Abandon();
+                    result.Add("status", "fail");
+                    result.Add("errorMessage", "Session Expired");
+                    result.Add("customErrorCode", "440");
                 }
-                result.Add("status", "success");
+                else
+                {
+                    using (var context = new OrganisationdatabaseEntities())
+                    {
+                        var row = context.projectorconfiginfoes.Where(x => x.Classid == classid)
+                            .Select(x => new
+                            {
+                                BaudRate = x.Baudrate,
+                                Parity = x.parity,
+                                Brand = x.BrandName,
+                                x.Model,
+                                x.OpenCode,
+                                x.CloseCode
+                            }).FirstOrDefault();
+                        if (row != null)
+
+                            result.Add("value", row);
+                    }
+                    result.Add("status", "success");
+                }
             }
             catch (Exception ex)
             {
