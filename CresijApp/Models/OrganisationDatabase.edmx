@@ -110,6 +110,20 @@
           <Property Name="equipmentstatus" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="serialno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <EntityType Name="projectorconfiginfo">
+          <Key>
+            <PropertyRef Name="configid" />
+          </Key>
+          <Property Name="configid" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Classid" Type="int" Nullable="false" />
+          <Property Name="BrandName" Type="text" Nullable="false" />
+          <Property Name="Model" Type="text" Nullable="false" />
+          <Property Name="Baudrate" Type="int" Nullable="false" />
+          <Property Name="parity" Type="smallint" Nullable="false" />
+          <Property Name="OpenCode" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="CloseCode" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
         <EntityType Name="reserveandtransfer">
           <Key>
             <PropertyRef Name="id" />
@@ -544,6 +558,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_projectorclass">
+          <End Role="classdetails" Type="Self.classdetails" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="projectorconfiginfo" Type="Self.projectorconfiginfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classdetails">
+              <PropertyRef Name="classID" />
+            </Principal>
+            <Dependent Role="projectorconfiginfo">
+              <PropertyRef Name="Classid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_ReserveTransfer">
           <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -758,6 +786,7 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
           <EntitySet Name="floordetails" EntityType="Self.floordetails" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="machineoperationlogs" EntityType="Self.machineoperationlogs" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="operationmgmt" EntityType="Self.operationmgmt" Schema="organisationdatabase" store:Type="Tables" />
+          <EntitySet Name="projectorconfiginfo" EntityType="Self.projectorconfiginfo" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="reserveandtransfer" EntityType="Self.reserveandtransfer" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="roledetails" EntityType="Self.roledetails" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="schedule" EntityType="Self.schedule" Schema="organisationdatabase" store:Type="Tables" />
@@ -817,6 +846,10 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
           <AssociationSet Name="fk_monitoringclassid" Association="Self.fk_monitoringclassid">
             <End Role="classdetails" EntitySet="classdetails" />
             <End Role="alarmmonitorlogs" EntitySet="alarmmonitorlogs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_projectorclass" Association="Self.fk_projectorclass">
+            <End Role="classdetails" EntitySet="classdetails" />
+            <End Role="projectorconfiginfo" EntitySet="projectorconfiginfo" />
           </AssociationSet>
           <AssociationSet Name="fk_ReserveTransfer" Association="Self.fk_ReserveTransfer">
             <End Role="semesterinfo" EntitySet="semesterinfo" />
@@ -928,6 +961,7 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
           <NavigationProperty Name="temp_machinestatus" Relationship="OrganisationdatabaseModel.fk_machineclassid" FromRole="classdetail" ToRole="temp_machinestatus" />
           <NavigationProperty Name="temp_desktopevents" Relationship="OrganisationdatabaseModel.fk_deskeventclassid" FromRole="classdetail" ToRole="temp_desktopevents" />
           <NavigationProperty Name="alarmmonitorlogs" Relationship="OrganisationdatabaseModel.fk_monitoringclassid" FromRole="classdetail" ToRole="alarmmonitorlog" />
+          <NavigationProperty Name="projectorconfiginfoes" Relationship="OrganisationdatabaseModel.fk_projectorclass" FromRole="classdetail" ToRole="projectorconfiginfo" />
         </EntityType>
         <EntityType Name="departmentdetail">
           <Key>
@@ -1709,6 +1743,11 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
             <End Role="classdetail" EntitySet="classdetails" />
             <End Role="alarmmonitorlog" EntitySet="alarmmonitorlogs" />
           </AssociationSet>
+          <EntitySet Name="projectorconfiginfoes" EntityType="OrganisationdatabaseModel.projectorconfiginfo" />
+          <AssociationSet Name="fk_projectorclass" Association="OrganisationdatabaseModel.fk_projectorclass">
+            <End Role="classdetail" EntitySet="classdetails" />
+            <End Role="projectorconfiginfo" EntitySet="projectorconfiginfoes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="machineoperationlog">
           <Key>
@@ -1798,6 +1837,35 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
               <PropertyRef Name="classID" />
             </Principal>
             <Dependent Role="alarmmonitorlog">
+              <PropertyRef Name="Classid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="projectorconfiginfo">
+          <Key>
+            <PropertyRef Name="configid" />
+          </Key>
+          <Property Name="configid" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Classid" Type="Int32" Nullable="false" />
+          <Property Name="BrandName" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Baudrate" Type="Int32" Nullable="false" />
+          <Property Name="parity" Type="Int16" Nullable="false" />
+          <Property Name="OpenCode" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="CloseCode" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="classdetail" Relationship="OrganisationdatabaseModel.fk_projectorclass" FromRole="projectorconfiginfo" ToRole="classdetail" />
+        </EntityType>
+        <Association Name="fk_projectorclass">
+          <End Type="OrganisationdatabaseModel.classdetail" Role="classdetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="OrganisationdatabaseModel.projectorconfiginfo" Role="projectorconfiginfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classdetail">
+              <PropertyRef Name="classID" />
+            </Principal>
+            <Dependent Role="projectorconfiginfo">
               <PropertyRef Name="Classid" />
             </Dependent>
           </ReferentialConstraint>
@@ -2251,6 +2319,21 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
                 <ScalarProperty Name="almTime" ColumnName="almTime" />
                 <ScalarProperty Name="almMessage" ColumnName="almMessage" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="projectorconfiginfoes">
+            <EntityTypeMapping TypeName="OrganisationdatabaseModel.projectorconfiginfo">
+              <MappingFragment StoreEntitySet="projectorconfiginfo">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="CloseCode" ColumnName="CloseCode" />
+                <ScalarProperty Name="OpenCode" ColumnName="OpenCode" />
+                <ScalarProperty Name="parity" ColumnName="parity" />
+                <ScalarProperty Name="Baudrate" ColumnName="Baudrate" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="Classid" ColumnName="Classid" />
+                <ScalarProperty Name="configid" ColumnName="configid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

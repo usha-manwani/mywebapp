@@ -6,6 +6,7 @@ using System.IO;
 using System.Web.Services;
 using System.Runtime.InteropServices;
 using System.Text;
+using CresijApp.Models;
 
 namespace CresijApp.Services
 {
@@ -80,16 +81,111 @@ namespace CresijApp.Services
         public Dictionary<string, object> GetProjectorIniInfo(Dictionary<string,string> data)
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
+            Dictionary<string, object> result1 = new Dictionary<string, object>();
             try
             {
-                var brand = data["brand"].ToString();
-                var model = data["model"].ToString();
+                var brand = data["Brand"].ToString();
+                var model = data["Model"].ToString();
                 var path = HttpContext.Current.Server.MapPath("~/Projector Type/" + brand+"/"+model+".ini");
                 IniFile inf = new IniFile(path);
-                result.Add("baudRate",inf.IniReadValue("Option", "BaudRate"));
-                result.Add("parity", inf.IniReadValue("Option", "Parity"));
-                result.Add("ProjectorOpen", inf.IniReadValue("Option", "Open"));
-                result.Add("ProjectorClose", inf.IniReadValue("Option", "Close"));
+                result.Add("BaudRate",inf.IniReadValue("Option", "BaudRate"));
+                result.Add("Parity", inf.IniReadValue("Option", "Parity"));
+                result.Add("OpenCode", inf.IniReadValue("Option", "Open"));
+                result.Add("CloseCode", inf.IniReadValue("Option", "Close"));
+                result1.Add("status", "success");
+                result1.Add("value", result);
+            }
+            catch (Exception ex)
+            {
+                result1.Add("status", "fail");
+                result1.Add("Error", ex.Message);
+            }
+            return result1;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> SaveProjectorInfo(Dictionary<string, object> data)
+        {
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            int r = 0;
+            try
+            {
+                var classids = ((object[])data["classids"]).Cast<int>().ToList();
+                var brand = data["Brand"].ToString();
+                var model = data["Model"].ToString();
+                var baudrate = Convert.ToInt32(data["BaudRate"]);
+                var parity = Convert.ToInt16(data["Parity"]);
+                var opencode = data["OpenCode"].ToString();
+                var closecode = data["CloseCode"].ToString();
+                using(var context = new OrganisationdatabaseEntities())
+                {
+                    if (classids != null)
+                    {
+                        foreach (var id in classids)
+                        {
+                            var configrow = context.projectorconfiginfoes.Where(x => x.Classid == id).Select(x=>x).FirstOrDefault();
+                            if (configrow != null)
+                            {
+                                configrow.BrandName = brand;
+                                configrow.Model = model;
+                                configrow.Baudrate = baudrate;
+                                configrow.parity = parity;
+                                configrow.OpenCode = opencode;
+                                configrow.CloseCode = closecode;
+                                
+                            }
+                            else
+                            {
+                                
+                                var confignew = new projectorconfiginfo()
+                                {
+                                    BrandName = brand,
+                                    Model = model,
+                                    Baudrate = baudrate,
+                                    parity = parity,
+                                    OpenCode = opencode,
+                                    CloseCode = closecode,
+                                    Classid = id,
+                                    status="Pending"
+                                    
+                                };
+                                context.projectorconfiginfoes.Add(confignew);
+                                
+                            }
+                            
+                        }
+
+                        r += context.SaveChanges();
+                    }
+
+                    
+                    result.Add("UpdatedRows",r);
+                }
+                result.Add("status", "success");
+            }
+            catch (Exception ex)
+            {
+                result.Add("status", "fail");
+                result.Add("Error", ex.Message);
+            }
+            return result;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetProjectorInfo(int classid)
+        {
+            Dictionary<string, object> result = new Dictionary<string, object>();
+            try
+            {
+                using (var context = new OrganisationdatabaseEntities())
+                {
+                    var row = context.projectorconfiginfoes.Where(x => x.Classid == classid)
+                        .Select(x =>new  {BaudRate= x.Baudrate,Parity=x.parity,Brand=x.BrandName,
+                            x.Model,x.OpenCode,x.CloseCode }).FirstOrDefault();
+                    if (row != null)
+                       
+                        result.Add("value", row);
+                }
                 result.Add("status", "success");
             }
             catch (Exception ex)
@@ -100,7 +196,7 @@ namespace CresijApp.Services
             return result;
         }
     }
-
+    
     public class IniFile
     {
         public string path;

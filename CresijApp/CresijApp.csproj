@@ -1479,6 +1479,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OrganisationDatabase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\projectorconfiginfo.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\reserveandtransfer.cs">
       <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>

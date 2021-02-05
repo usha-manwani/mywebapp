@@ -61,6 +61,8 @@
         <AssociationConnector Association="OrganisationdatabaseModel.fk_deskeventclassid" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.alarmmonitorlog" Width="1.5" PointX="5.25" PointY="24.75" />
         <AssociationConnector Association="OrganisationdatabaseModel.fk_monitoringclassid" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.projectorconfiginfo" Width="1.5" PointX="5.25" PointY="35.5" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_projectorclass" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
