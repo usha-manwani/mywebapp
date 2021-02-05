@@ -90,13 +90,14 @@ namespace CresijApp.Services
             else
             {
                 HttpContext.Current.Session.Timeout = 10;
-                var pageIndex = data["pageIndex"];
-                var pageSize = data["pageSize"];
+                var pageIndex = Convert.ToInt32(data["pageIndex"]);
+                var pageSize = Convert.ToInt32(data["pageSize"]);
                 List<LogsList> idata = new List<LogsList>();
                 try
                 {
+
                     UserLogsDataAccess userLogs = new UserLogsDataAccess();
-                    var res = userLogs.GetUserLogDetails(pageIndex,pageSize);
+                    var res = userLogs.GetUserLogDetails(pageIndex.ToString(), pageSize.ToString());
                     var dt = res[0] as DataTable;
                     if (dt.Rows.Count > 0)
                     {
@@ -109,12 +110,12 @@ namespace CresijApp.Services
                                 Action = dr["action"].ToString(),
                                 BuildingName = dr["building"].ToString(),
                                 ClassName = dr["classroom"].ToString(),
-                                ActionTime = Convert.ToDateTime(dr["Actiontime"]).ToString("yyyy-MM-dd hh:mm:ss")
+                                ActionTime = Convert.ToDateTime(dr["Actiontime"]).ToString("yyyy-MM-dd HH:mm:ss")
                             };
                             idata.Add(logsList);
                         }
                         result.Add("status", "success");
-                        result.Add("TotalRows",Convert.ToInt32(res[1]));
+                        result.Add("TotalRows", Convert.ToInt32(res[1]));
                         result.Add("value", idata);
                     }
                 }

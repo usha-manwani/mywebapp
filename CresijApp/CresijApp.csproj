@@ -333,6 +333,229 @@
     <Content Include="Models\OrganisationDatabase.edmx.diagram">
       <DependentUpon>OrganisationDatabase.edmx</DependentUpon>
     </Content>
+    <Content Include="Projector Type\3M\MP7640.ini" />
+    <Content Include="Projector Type\3M\MP7640i.ini" />
+    <Content Include="Projector Type\3M\MP7650.ini" />
+    <Content Include="Projector Type\3M\MP7740.ini" />
+    <Content Include="Projector Type\3M\MP7740i.ini" />
+    <Content Include="Projector Type\3M\MP7750.ini" />
+    <Content Include="Projector Type\3M\MP8625.ini" />
+    <Content Include="Projector Type\3M\MP8635.ini" />
+    <Content Include="Projector Type\3M\MP8649.ini" />
+    <Content Include="Projector Type\3M\MP8650.ini" />
+    <Content Include="Projector Type\3M\MP8660.ini" />
+    <Content Include="Projector Type\3M\MP8670.ini" />
+    <Content Include="Projector Type\3M\MP8725.ini" />
+    <Content Include="Projector Type\3M\MP8730.ini" />
+    <Content Include="Projector Type\3M\MP8740.ini" />
+    <Content Include="Projector Type\3M\MP8745.ini" />
+    <Content Include="Projector Type\3M\MP8746.ini" />
+    <Content Include="Projector Type\3M\MP8747.ini" />
+    <Content Include="Projector Type\3M\MP8749.ini" />
+    <Content Include="Projector Type\3M\MP8765.ini" />
+    <Content Include="Projector Type\3M\MP8770.ini" />
+    <Content Include="Projector Type\3M\MP8775.ini" />
+    <Content Include="Projector Type\3M\MP8775i.ini" />
+    <Content Include="Projector Type\3M\MP8780.ini" />
+    <Content Include="Projector Type\3M\MP8790.ini" />
+    <Content Include="Projector Type\3M\MP8795.ini" />
+    <Content Include="Projector Type\APTI\AP-1500 SX.ini" />
+    <Content Include="Projector Type\ASEE\ATP2800.ini" />
+    <Content Include="Projector Type\ASEE\ATP2900.ini" />
+    <Content Include="Projector Type\ASEE\ATP2950.ini" />
+    <Content Include="Projector Type\ASEE\ATP3300.ini" />
+    <Content Include="Projector Type\ASEE\ATP3350.ini" />
+    <Content Include="Projector Type\ASEE\ATP3650.ini" />
+    <Content Include="Projector Type\ASEE\ATP3800.ini" />
+    <Content Include="Projector Type\ASEE\ATP3850.ini" />
+    <Content Include="Projector Type\ASEE\ATP3880.ini" />
+    <Content Include="Projector Type\ASEE\ATP500.ini" />
+    <Content Include="Projector Type\ASEE\ATP550.ini" />
+    <Content Include="Projector Type\ASEE\ATP600.ini" />
+    <Content Include="Projector Type\ASEE\ATP700.ini" />
+    <Content Include="Projector Type\ASK\A10+.ini" />
+    <Content Include="Projector Type\ASK\A2-10.ini" />
+    <Content Include="Projector Type\ASK\A8+.ini" />
+    <Content Include="Projector Type\ASK\A9+.ini" />
+    <Content Include="Projector Type\ASK\C100.ini" />
+    <Content Include="Projector Type\ASK\C105.ini" />
+    <Content Include="Projector Type\ASK\C20.ini" />
+    <Content Include="Projector Type\ASK\C300.ini" />
+    <Content Include="Projector Type\ASK\C420.ini" />
+    <Content Include="Projector Type\ASK\C60.ini" />
+    <Content Include="Projector Type\ASK\C80.ini" />
+    <Content Include="Projector Type\ASK\C85.ini" />
+    <Content Include="Projector Type\ASK\C90.ini" />
+    <Content Include="Projector Type\ASK\C95.ini" />
+    <Content Include="Projector Type\BAROC\2100LC.ini" />
+    <Content Include="Projector Type\BAROC\other1.ini" />
+    <Content Include="Projector Type\BAROC\other2.ini" />
+    <Content Include="Projector Type\BENQ%28明基%29\7750.ini" />
+    <Content Include="Projector Type\BENQ%28明基%29\A-7753.ini" />
+    <Content Include="Projector Type\BENQ%28明基%29\A-DX655.ini" />
+    <Content Include="Projector Type\BENQ%28明基%29\A-DX660.ini" />
+    <Content Include="Projector Type\BENQ%28明基%29\DX655.ini" />
+    <Content Include="Projector Type\BENQ%28明基%29\DX660.ini" />
+    <Content Include="Projector Type\BENQ%28明基%29\PB7系列.ini" />
+    <Content Include="Projector Type\BENQ%28明基%29\PB8系列.ini" />
+    <Content Include="Projector Type\BOXLIGHT\CP322I-CP731I.ini" />
+    <Content Include="Projector Type\BOXLIGHT\MP650I.ini" />
+    <Content Include="Projector Type\BOXLIGHT\MP83I.ini" />
+    <Content Include="Projector Type\CANON%28佳能%29\LV-754.ini" />
+    <Content Include="Projector Type\CANON%28佳能%29\LV-Serial.ini" />
+    <Content Include="Projector Type\CentorControl.exe.manifest" />
+    <Content Include="Projector Type\CHRISTIE\DS-30.ini" />
+    <Content Include="Projector Type\CHRISTIE\EPS1024.ini" />
+    <Content Include="Projector Type\CHRISTIE\OTHER.ini" />
+    <Content Include="Projector Type\DIGITEL\ALL.ini" />
+    <Content Include="Projector Type\dn\sdf .ini" />
+    <Content Include="Projector Type\EIKI%28爱琪%29\LC-NB3.ini" />
+    <Content Include="Projector Type\EIKI%28爱琪%29\LC-SM123.ini" />
+    <Content Include="Projector Type\EIKI%28爱琪%29\XG200.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\503.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\505.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\51.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\5600.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\703.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\71.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\710.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\7500.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\7700.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\7800.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\810.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\820.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\8200.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\9000.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\S1.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\TS10.ini" />
+    <Content Include="Projector Type\ESPON%28爱普生%29\TW100.ini" />
+    <Content Include="Projector Type\HP%28惠普%29\6210.ini" />
+    <Content Include="Projector Type\HP%28惠普%29\8010.ini" />
+    <Content Include="Projector Type\InFoucs\LP1000.ini" />
+    <Content Include="Projector Type\InFoucs\LP225.ini" />
+    <Content Include="Projector Type\InFoucs\LP260.ini" />
+    <Content Include="Projector Type\InFoucs\LP280.ini" />
+    <Content Include="Projector Type\InFoucs\LP290.ini" />
+    <Content Include="Projector Type\InFoucs\LP400.ini" />
+    <Content Include="Projector Type\InFoucs\LP420.ini" />
+    <Content Include="Projector Type\InFoucs\LP425 Z.ini" />
+    <Content Include="Projector Type\InFoucs\LP425.ini" />
+    <Content Include="Projector Type\InFoucs\LP435 Z.ini" />
+    <Content Include="Projector Type\InFoucs\LP500.ini" />
+    <Content Include="Projector Type\InFoucs\LP530.ini" />
+    <Content Include="Projector Type\InFoucs\LP630.ini" />
+    <Content Include="Projector Type\InFoucs\LP720.ini" />
+    <Content Include="Projector Type\InFoucs\LP725.ini" />
+    <Content Include="Projector Type\InFoucs\LP730.ini" />
+    <Content Include="Projector Type\InFoucs\LP735.ini" />
+    <Content Include="Projector Type\InFoucs\LP740.ini" />
+    <Content Include="Projector Type\InFoucs\LP740B.ini" />
+    <Content Include="Projector Type\InFoucs\LP750.ini" />
+    <Content Include="Projector Type\InFoucs\LP755.ini" />
+    <Content Include="Projector Type\InFoucs\LP770.ini" />
+    <Content Include="Projector Type\InFoucs\LP790.ini" />
+    <Content Include="Projector Type\InFoucs\LP800.ini" />
+    <Content Include="Projector Type\InFoucs\LP810.ini" />
+    <Content Include="Projector Type\InFoucs\LP820.ini" />
+    <Content Include="Projector Type\InFoucs\LP920.ini" />
+    <Content Include="Projector Type\InFoucs\LP925.ini" />
+    <Content Include="Projector Type\InFoucs\LP930.ini" />
+    <Content Include="Projector Type\InFoucs\LPF-B2XX.ini" />
+    <Content Include="Projector Type\KODAK%28柯达%29\DP-1100.ini" />
+    <Content Include="Projector Type\KODAK%28柯达%29\DP-900.ini" />
+    <Content Include="Projector Type\LG\50.ini" />
+    <Content Include="Projector Type\LG\ATP-2800.ini" />
+    <Content Include="Projector Type\LG\ATP-500 550 600 700.ini" />
+    <Content Include="Projector Type\LG\RL-JA20.ini" />
+    <Content Include="Projector Type\LIESEGANG\ALL.ini" />
+    <Content Include="Projector Type\LUMENS\95-136.ini" />
+    <Content Include="Projector Type\NEC\820.ini" />
+    <Content Include="Projector Type\NEC\GT1150.ini" />
+    <Content Include="Projector Type\NEC\LT260%28260+%29.ini" />
+    <Content Include="Projector Type\NEC\LT84.ini" />
+    <Content Include="Projector Type\NEC\MT 1050 .ini" />
+    <Content Include="Projector Type\NEC\VT 45.ini" />
+    <Content Include="Projector Type\NEC\VT 540.ini" />
+    <Content Include="Projector Type\NEC\XT 5000 .ini" />
+    <Content Include="Projector Type\OPTOMA\755-753-750-H55.ini" />
+    <Content Include="Projector Type\OPTOMA\756.ini" />
+    <Content Include="Projector Type\OPTOMA\757.ini" />
+    <Content Include="Projector Type\PALOROID\CP-Xl8810.ini" />
+    <Content Include="Projector Type\PALOROID\CP-Xl8840.ini" />
+    <Content Include="Projector Type\PALOROID\CP-Xl8850.ini" />
+    <Content Include="Projector Type\PHILIP%28菲利普%29\PXG-20.ini" />
+    <Content Include="Projector Type\PLUS%28普乐士%29\U2-1130.ini" />
+    <Content Include="Projector Type\PLUS%28普乐士%29\U2-1500.ini" />
+    <Content Include="Projector Type\PLUS%28普乐士%29\U2-815C.ini" />
+    <Content Include="Projector Type\PLUS%28普乐士%29\U2-850.ini" />
+    <Content Include="Projector Type\PLUS%28普乐士%29\U2-X2000.ini" />
+    <Content Include="Projector Type\PLUS%28普乐士%29\U5-262.ini" />
+    <Content Include="Projector Type\PROXIMA%28普思玛%29\DP6150.ini" />
+    <Content Include="Projector Type\PROXIMA%28普思玛%29\DP6850.ini" />
+    <Content Include="Projector Type\PROXIMA%28普思玛%29\DP8000.ini" />
+    <Content Include="Projector Type\PROXIMA%28普思玛%29\LS1.ini" />
+    <Content Include="Projector Type\PROXIMA%28普思玛%29\S520.ini" />
+    <Content Include="Projector Type\SHARP%28夏普%29\CN450S.ini" />
+    <Content Include="Projector Type\SHARP%28夏普%29\PG-A10S.ini" />
+    <Content Include="Projector Type\SHARP%28夏普%29\PG-B10S.ini" />
+    <Content Include="Projector Type\SHARP%28夏普%29\PG-C20XU.ini" />
+    <Content Include="Projector Type\SHARP%28夏普%29\其它型号.ini" />
+    <Content Include="Projector Type\SONY%28索尼%29\CX80.ini" />
+    <Content Include="Projector Type\SONY%28索尼%29\VPL-PX32.ini" />
+    <Content Include="Projector Type\SONY%28索尼%29\VPL-PX40.ini" />
+    <Content Include="Projector Type\三洋\5600.ini" />
+    <Content Include="Projector Type\三洋\8800.ini" />
+    <Content Include="Projector Type\三洋\9000.ini" />
+    <Content Include="Projector Type\三洋\EF10.ini" />
+    <Content Include="Projector Type\三洋\EFXX.ini" />
+    <Content Include="Projector Type\三洋\PLC-SU31.ini" />
+    <Content Include="Projector Type\三洋\PLC-XT3000.ini" />
+    <Content Include="Projector Type\三洋\PLC-XT3900.ini" />
+    <Content Include="Projector Type\三洋\SP40.ini" />
+    <Content Include="Projector Type\三洋\SU31.ini" />
+    <Content Include="Projector Type\三洋\SWXX.ini" />
+    <Content Include="Projector Type\三洋\XP10.ini" />
+    <Content Include="Projector Type\三洋\XP40.ini" />
+    <Content Include="Projector Type\三洋\XP45.ini" />
+    <Content Include="Projector Type\三洋\XP46.ini" />
+    <Content Include="Projector Type\三洋\XU2500.ini" />
+    <Content Include="Projector Type\三洋\XU31.ini" />
+    <Content Include="Projector Type\三洋\XU35.ini" />
+    <Content Include="Projector Type\三洋\XU358C.ini" />
+    <Content Include="Projector Type\三洋\XW20.ini" />
+    <Content Include="Projector Type\三菱\LVP-S250.ini" />
+    <Content Include="Projector Type\三菱\LVP-XL25.ini" />
+    <Content Include="Projector Type\东芝\TLP 250-251.ini" />
+    <Content Include="Projector Type\东芝\TLP 400-401.ini" />
+    <Content Include="Projector Type\东芝\TLP 600.ini" />
+    <Content Include="Projector Type\东芝\TLP 650.ini" />
+    <Content Include="Projector Type\东芝\TLP B2.ini" />
+    <Content Include="Projector Type\东芝\TLP MT7E.ini" />
+    <Content Include="Projector Type\东芝\TLP S40-S41.ini" />
+    <Content Include="Projector Type\中晶\VX5.ini" />
+    <Content Include="Projector Type\优派\PJ1060.ini" />
+    <Content Include="Projector Type\宝利伟\所有型号.ini" />
+    <Content Include="Projector Type\快思捷\DP-1100.ini" />
+    <Content Include="Projector Type\快思捷\DP-900.ini" />
+    <Content Include="Projector Type\新建\3321.ini" />
+    <Content Include="Projector Type\日立\CP-HS1000.ini" />
+    <Content Include="Projector Type\日立\CP-HX3000.ini" />
+    <Content Include="Projector Type\日立\CP-S310W.ini" />
+    <Content Include="Projector Type\日立\CP-S840W.ini" />
+    <Content Include="Projector Type\日立\CP-S860.ini" />
+    <Content Include="Projector Type\日立\CP-S958.ini" />
+    <Content Include="Projector Type\日立\CP-X970.ini" />
+    <Content Include="Projector Type\日立\CP-X980.ini" />
+    <Content Include="Projector Type\晨星\CX570.ini" />
+    <Content Include="Projector Type\晨星\CX590.ini" />
+    <Content Include="Projector Type\晨星\CX650.ini" />
+    <Content Include="Projector Type\松下\PT-L797.ini" />
+    <Content Include="Projector Type\松下\PT-ULX65.ini" />
+    <Content Include="Projector Type\松下\PX-200.ini" />
+    <Content Include="Projector Type\松下\sx556.ini" />
+    <Content Include="Projector Type\联想\22ppp.ini" />
+    <Content Include="Projector Type\联想\l500.ini" />
+    <Content Include="Projector Type\联想\TL460.ini" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -456,11 +679,13 @@
     <Content Include="Scripts\UserAuthentication.js" />
     <Content Include="Scripts\UserLogs.js" />
     <Content Include="Scripts\WebPlugin.js" />
+    <Content Include="Services\AlarmMonitor.asmx" />
     <Content Include="Services\DeleteOrgData.asmx" />
     <Content Include="Services\EncryptionMgmt.asmx" />
     <Content Include="Services\GetLeftMenu.asmx" />
     <Content Include="Services\GetOrganisationData.asmx" />
     <Content Include="Services\GetSetSystemConfigInfo.asmx" />
+    <Content Include="Services\ProjectorConfig.asmx" />
     <Content Include="Services\SaveOrganisationData.asmx" />
     <Content Include="Services\ScheduleData.asmx" />
     <Content Include="Services\StrategyManagement.asmx" />
@@ -694,14 +919,14 @@
     <Content Include="site-vue-new\css\brands.css" />
     <Content Include="site-vue-new\css\brands.min.css" />
     <Content Include="site-vue-new\css\Chart.min.css" />
-    <Content Include="site-vue-new\css\chunk-0c552914.ae2b81eb1c55de99d7b3.css" />
-    <Content Include="site-vue-new\css\chunk-common.ae2b81eb1c55de99d7b3.css" />
-    <Content Include="site-vue-new\css\chunk-vendors.ae2b81eb1c55de99d7b3.css" />
+    <Content Include="site-vue-new\css\chunk-059ff08e.bd54e4649d5a01db038d.css" />
+    <Content Include="site-vue-new\css\chunk-common.bd54e4649d5a01db038d.css" />
+    <Content Include="site-vue-new\css\chunk-vendors.bd54e4649d5a01db038d.css" />
     <Content Include="site-vue-new\css\fontawesome-all.css" />
     <Content Include="site-vue-new\css\fontawesome-all.min.css" />
     <Content Include="site-vue-new\css\fontawesome.css" />
     <Content Include="site-vue-new\css\fontawesome.min.css" />
-    <Content Include="site-vue-new\css\hikversionPlayer.ae2b81eb1c55de99d7b3.css" />
+    <Content Include="site-vue-new\css\hikversionPlayer.bd54e4649d5a01db038d.css" />
     <Content Include="site-vue-new\css\regular.css" />
     <Content Include="site-vue-new\css\regular.min.css" />
     <Content Include="site-vue-new\css\sensor.css" />
@@ -776,7 +1001,7 @@
     <Content Include="site-vue-new\img\newElectFun.4c2c10a0.png" />
     <Content Include="site-vue-new\img\tyy.feff1d1d.svg" />
     <Content Include="site-vue-new\index.html" />
-    <Content Include="site-vue-new\js\002.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\002.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\AddClassroom.js" />
     <Content Include="site-vue-new\js\AddEditOrganisation.js" />
     <Content Include="site-vue-new\js\AddStudent.js" />
@@ -790,16 +1015,16 @@
     <Content Include="site-vue-new\js\CapitalInfoJS.js" />
     <Content Include="site-vue-new\js\Chart.bundle.min.js" />
     <Content Include="site-vue-new\js\CheckUserSession.js" />
-    <Content Include="site-vue-new\js\chunk-0c552914.ae2b81eb1c55de99d7b3.js" />
-    <Content Include="site-vue-new\js\chunk-common.ae2b81eb1c55de99d7b3.js" />
-    <Content Include="site-vue-new\js\chunk-vendors.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\chunk-059ff08e.bd54e4649d5a01db038d.js" />
+    <Content Include="site-vue-new\js\chunk-common.bd54e4649d5a01db038d.js" />
+    <Content Include="site-vue-new\js\chunk-vendors.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\ClassroomInfo.js" />
     <Content Include="site-vue-new\js\ConfirmTransferSchedule.js" />
     <Content Include="site-vue-new\js\ControlClick.js" />
-    <Content Include="site-vue-new\js\course.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\course.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\CourseManagement.js" />
     <Content Include="site-vue-new\js\CourseSubMenu.js" />
-    <Content Include="site-vue-new\js\data.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\data.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\dataTables.bootstrap.js" />
     <Content Include="site-vue-new\js\date-holiday-umd.min.js" />
     <Content Include="site-vue-new\js\DeleteClass.js" />
@@ -807,7 +1032,7 @@
     <Content Include="site-vue-new\js\DeleteStudent.js" />
     <Content Include="site-vue-new\js\DeleteTeacher.js" />
     <Content Include="site-vue-new\js\Delete_User.js" />
-    <Content Include="site-vue-new\js\deviceList.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\deviceList.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\dist\css\bootstrap-grid.css" />
     <Content Include="site-vue-new\js\dist\css\bootstrap-grid.min.css" />
     <Content Include="site-vue-new\js\dist\css\bootstrap-reboot.css" />
@@ -849,9 +1074,9 @@
     <Content Include="site-vue-new\js\GetOrgInfo.js" />
     <Content Include="site-vue-new\js\GetTopMenu.js" />
     <Content Include="site-vue-new\js\GroupControlMachine.js" />
-    <Content Include="site-vue-new\js\hikversionPlayer.ae2b81eb1c55de99d7b3.js" />
-    <Content Include="site-vue-new\js\home.ae2b81eb1c55de99d7b3.js" />
-    <Content Include="site-vue-new\js\index.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\hikversionPlayer.bd54e4649d5a01db038d.js" />
+    <Content Include="site-vue-new\js\home.bd54e4649d5a01db038d.js" />
+    <Content Include="site-vue-new\js\index.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\ip_input.js" />
     <None Include="site-vue-new\js\jquery-3.4.1.intellisense.js" />
     <Content Include="site-vue-new\js\jquery-3.4.1.js" />
@@ -944,24 +1169,24 @@
     <Content Include="site-vue-new\js\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="site-vue-new\js\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="site-vue-new\js\locales\bootstrap-datepicker.zh-TW.min.js" />
-    <Content Include="site-vue-new\js\login.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\login.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\LoginScript.js" />
-    <Content Include="site-vue-new\js\m-data-01.ae2b81eb1c55de99d7b3.js" />
-    <Content Include="site-vue-new\js\m-data-02.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\m-data-01.bd54e4649d5a01db038d.js" />
+    <Content Include="site-vue-new\js\m-data-02.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\MachineControl.js" />
     <Content Include="site-vue-new\js\moment.min.js" />
     <Content Include="site-vue-new\js\moment.zh-cn.js" />
     <Content Include="site-vue-new\js\OperationmgmtMenu.js" />
-    <Content Include="site-vue-new\js\p-data\002.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\p-data\002.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\ProjectorConfigJS.js" />
     <Content Include="site-vue-new\js\ReserveClassroom.js" />
     <Content Include="site-vue-new\js\ReserveScheduleList.js" />
     <Content Include="site-vue-new\js\Schedule.js" />
     <Content Include="site-vue-new\js\ScheduleAppointment.js" />
     <Content Include="site-vue-new\js\sensor.js" />
-    <Content Include="site-vue-new\js\settings.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\settings.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\ShowUserAccess.js" />
-    <Content Include="site-vue-new\js\strategy.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\strategy.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\StrategySubMenu.js" />
     <Content Include="site-vue-new\js\StudentInfo.js" />
     <Content Include="site-vue-new\js\SystemConfigJS.js" />
@@ -980,7 +1205,7 @@
     <Content Include="site-vue-new\js\UserLogs.js" />
     <Content Include="site-vue-new\js\video-js.css" />
     <Content Include="site-vue-new\js\video.js" />
-    <Content Include="site-vue-new\js\vlcPlayer.ae2b81eb1c55de99d7b3.js" />
+    <Content Include="site-vue-new\js\vlcPlayer.bd54e4649d5a01db038d.js" />
     <Content Include="site-vue-new\js\vue.min.js" />
     <Content Include="site-vue-new\js\WebPlugin.js" />
     <Content Include="site-vue-new\js\webVideoCtrl.js" />
@@ -1215,7 +1440,13 @@
     <Compile Include="HubsFile\MyHub.cs" />
     <Compile Include="HubsFile\Startup.cs" />
     <Compile Include="HubsFile\UpdateDevice.cs" />
+    <Compile Include="Models\alarmmonitorlog.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\buildingdetail.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\cameramonitorinfo.cs">
       <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\classdetail.cs">
@@ -1296,6 +1527,12 @@
     <Compile Include="Models\temp_centralcontrol.cs">
       <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\temp_desktopevents.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\temp_machinestatus.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\userdetail.cs">
       <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
@@ -1315,6 +1552,10 @@
       <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AlarmMonitor.asmx.cs">
+      <DependentUpon>AlarmMonitor.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Services\DeleteOrgData.asmx.cs">
       <DependentUpon>DeleteOrgData.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -1337,6 +1578,10 @@
     </Compile>
     <Compile Include="Services\Handler.ashx.cs">
       <DependentUpon>Handler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ProjectorConfig.asmx.cs">
+      <DependentUpon>ProjectorConfig.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\SaveOrganisationData.asmx.cs">
       <DependentUpon>SaveOrganisationData.asmx</DependentUpon>

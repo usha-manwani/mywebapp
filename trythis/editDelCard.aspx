@@ -77,7 +77,7 @@
                                 <asp:BoundField ReadOnly="true"
                                     HeaderText="<%$Resources:Resource, Accesspermitted %>"
                                     SortExpression="locnames" ItemStyle-Width="20%"
-                                    DataField="location" ControlStyle-Width="100%"/>
+                                    DataField="locnames" ControlStyle-Width="100%"/>
                                 <%--<asp:BoundField Visible="false" DataField="locids" />--%>
                                 <asp:BoundField SortExpression="pending"
                                     HeaderText="<%$Resources:Resource, PendingAccess %>"

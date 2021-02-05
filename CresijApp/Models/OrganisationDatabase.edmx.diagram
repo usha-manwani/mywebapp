@@ -7,31 +7,31 @@
       <Diagram DiagramId="362c455802fa4cec881672a102992c84" Name="Diagram1">
         <EntityTypeShape EntityType="OrganisationdatabaseModel.buildingdetail" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.classdetail" Width="1.5" PointX="3" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.departmentdetail" Width="1.5" PointX="13.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.departmentdetail" Width="1.5" PointX="6.375" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.floordetail" Width="1.5" PointX="0.75" PointY="28.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.operationmgmt" Width="1.5" PointX="13.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.operationmgmt" Width="1.5" PointX="11.5" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.reserveandtransfer" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.roledetail" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.schedule" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.scheduleoriginal" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.schedulereserve" Width="1.5" PointX="6" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.schedulereserve" Width="1.5" PointX="5.75" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.scheduletransfer" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.sectionsinfo" Width="1.5" PointX="3" PointY="22.875" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.semesterinfo" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.strategydescription" Width="1.5" PointX="11" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.strategyequipment" Width="1.5" PointX="8.75" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.strategylog" Width="1.5" PointX="11" PointY="13.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.strategymanagement" Width="1.5" PointX="8.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.studentdata" Width="1.5" PointX="13.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.strategydescription" Width="1.5" PointX="9.375" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.strategyequipment" Width="1.5" PointX="7.125" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.strategylog" Width="1.5" PointX="8" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.strategymanagement" Width="1.5" PointX="7" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.studentdata" Width="1.5" PointX="10" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.systemsetting" Width="1.5" PointX="15.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.teacherdata" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.temp_centralcontrol" Width="1.5" PointX="15.75" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.userdetail" Width="1.5" PointX="5.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.userlocationaccess" Width="1.5" PointX="8" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.userlog" Width="1.5" PointX="8.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.userlog" Width="1.5" PointX="7.625" PointY="16.25" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.userpermission" Width="1.5" PointX="11" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.userregistration" Width="1.5" PointX="15.75" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="OrganisationdatabaseModel.usersessioninfo" Width="1.5" PointX="10.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.usersessioninfo" Width="1.5" PointX="9.625" PointY="16" IsExpanded="true" />
         <AssociationConnector Association="OrganisationdatabaseModel.fk_classbuildingname" ManuallyRouted="false" />
         <AssociationConnector Association="OrganisationdatabaseModel.fk_floorbuilding" ManuallyRouted="false" />
         <AssociationConnector Association="OrganisationdatabaseModel.fk_transferBuildingid" ManuallyRouted="false" />
@@ -54,6 +54,13 @@
         <AssociationConnector Association="OrganisationdatabaseModel.fk_userPermissionAdminId" ManuallyRouted="false" />
         <AssociationConnector Association="OrganisationdatabaseModel.fk_UserPermissionUsernum" ManuallyRouted="false" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.machineoperationlog" Width="1.5" PointX="16.375" PointY="13.75" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.cameramonitorinfo" Width="1.5" PointX="15.375" PointY="16.75" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.temp_machinestatus" Width="1.5" PointX="5.25" PointY="32.5" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_machineclassid" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.temp_desktopevents" Width="1.5" PointX="5.25" PointY="28.625" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_deskeventclassid" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.alarmmonitorlog" Width="1.5" PointX="5.25" PointY="24.75" />
+        <AssociationConnector Association="OrganisationdatabaseModel.fk_monitoringclassid" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

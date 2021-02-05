@@ -65,7 +65,7 @@
         <asp:Label ID="datatosend" runat="server" CssClass="displaynone" Text=""></asp:Label>
         <div id="myModal" class="modal">
             <!-- Modal content -->
-            <div class="modal-content">
+            <div class="modal-content" style="width:70%">
                 <div class=" row " style="padding-right: 20px; background-color: #4ECDC4">
                     <div class="panel-heading col ">
                         <h4>

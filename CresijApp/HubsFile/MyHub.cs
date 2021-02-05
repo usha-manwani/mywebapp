@@ -107,6 +107,7 @@ namespace CresijApp.HubsFile
             await base.OnDisconnected(stopCalled);
         }
         ///show status of all machines
+       
         public void SendMessage(string sender, string data1)
         {
             
@@ -155,15 +156,54 @@ namespace CresijApp.HubsFile
             JavaScriptSerializer js = new JavaScriptSerializer();
             
             dynamic DatatoSend = js.Deserialize<dynamic>(data1);
+            if (DatatoSend["Log"] == "SystemOn")
+            {
+                TriggerAlarm(sender, "TriggerOn");
+            }
+            else if (DatatoSend["Log"] == "SystemOff")
+            {
+                TriggerAlarm(sender, "TriggerOff");
+            }
             Clients.All.broadcastMessage(sender, DatatoSend);
             Clients.All.envMessage(sender, data1);
         }
 
-        public async Task SetProjectorConfig(List<int> classIds, Dictionary<string, string> data)
+        public async Task SetProjectorConfig(List<int> classIds, Dictionary<string, string> data, string cookies)
         {
+            var id = Context.ConnectionId;
             SessionHandler ss = new SessionHandler();
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var cook = js.Deserialize<Dictionary<string, string>>(cookies);
             var macaddress =await ss.GetMacAddress(classIds);
-            Clients.All.SetProjectorConfiguration(macaddress, data);
+            await Clients.All.SetProjectorConfiguration(macaddress, data);
+            if (users.Any(x => x.ConnectionId == id))
+            {
+                var us = users.Where(x => x.ConnectionId == id).FirstOrDefault();
+                us.AuthCookie = cook["AuthCookie"];
+            }
+            int r1 = await ss.AddUpdateConnectionID(cook["AuthCookie"], id);
+            foreach(var m in macaddress)
+            {
+                int r = await ss.AddOperationLogs(cook["AuthCookie"], "SetProjectorConfig", m);
+            }            
+        }
+
+        public async Task GetProjectorConfig(int classId, string code, string cookies)
+        {
+            var id = Context.ConnectionId;
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            var cook = js.Deserialize<Dictionary<string, string>>(cookies);
+            SessionHandler ss = new SessionHandler();
+            var machine = await ss.GetMacAddress(new List<int>() { classId });
+            int val = 0;
+            await Clients.All.SendControl(machine.FirstOrDefault(), code, val);
+            if (users.Any(x => x.ConnectionId == id))
+            {
+                var us = users.Where(x => x.ConnectionId == id).FirstOrDefault();
+                us.AuthCookie = cook["AuthCookie"];
+            }
+            int r1 = await ss.AddUpdateConnectionID(cook["AuthCookie"], id);
+            int r = await ss.AddOperationLogs(cook["AuthCookie"], "ReadProjectorConfig", machine.FirstOrDefault());
         }
         private void saveStatusinDatebase(string sender, string data)
         {
@@ -172,6 +212,14 @@ namespace CresijApp.HubsFile
             //cc.SaveDatainDatabase(sender, data);
         }
 
+        public void AlarmMessage(string alm)
+        {
+            Clients.All.MessageALarm(alm);
+        }
+        public void TriggerAlarm(string sender,string data)
+        {
+           Clients.All.AlarmEvent(sender, data);
+        }
         ///send to server to get status of all machines
         public void SendData()
         {

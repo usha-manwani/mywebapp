@@ -70,10 +70,11 @@ namespace CresijApp.Controllers
                         HttpPostedFile postedFile = request.Files[0];
                         //Set the Folder Path.
 
-                        filename = UploadLogo(postedFile, folderPath);
-                        if (!string.IsNullOrEmpty(filename))
+                        var fname = UploadLogo(postedFile, folderPath);
+                        if (!string.IsNullOrEmpty(fname))
                         {
                             idata.Add("status", "success");
+                            idata.Add("filename", fname);
                         }
                         else
                         {
@@ -250,10 +251,10 @@ namespace CresijApp.Controllers
         private string UploadLogo(HttpPostedFile file, string path)
         {
             //Set the File Name.
-            string fileName = Path.Combine(path + "Logo_" + file.FileName);
+            string fileName = Path.Combine(path + "Logo_" + file.FileName+DateTime.Now.ToString("HHmmss"));
             //Save the File in Folder.
             file.SaveAs(fileName);
-            return fileName;
+            return "~/Uploads/" + new FileInfo(fileName).Name;
         }
 
         private Dictionary<string, object> UploadStudentData(DataTable dt)

@@ -761,6 +761,7 @@
     <Content Include="ScriptsLInks\modules\wordcloud.js.map" />
     <Content Include="ScriptsLInks\modules\xrange.js.map" />
     <None Include="Properties\PublishProfiles\DalianWebApp.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\Laiyang192.168.81.244.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\fontawesome\all.js" />

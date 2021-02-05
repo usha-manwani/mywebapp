@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.IO;
 using System.Net;
 using System.Data;
+using System.Globalization;
 
 namespace WebCresij
 {
@@ -16,7 +17,7 @@ namespace WebCresij
         
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            
             if (HttpContext.Current.Session["UserId"] != null)
             {
                 if (!IsPostBack)

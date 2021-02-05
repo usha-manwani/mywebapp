@@ -847,7 +847,6 @@ namespace CresijApp.Services
                         val.Add("ClassName", dt.Rows[0]["classname"].ToString());
                         val.Add("ClassId", dt.Rows[0]["classid"].ToString());
                     }
-                    
                     idata.Add("value", val);
                 }
                 catch (Exception ex)
@@ -974,6 +973,136 @@ namespace CresijApp.Services
                 {
                     idata.Add("status", "fail");
                     idata.Add("errorMessage",ex.Message);
+                }
+            }
+            return idata;
+        }
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetCameraByMultipleClassIds(List<int> id)
+        {
+            var idata = new Dictionary<string, object>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
+            {
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {                    
+                    GetOrgData gd = new GetOrgData();
+                    var data = gd.GetCameraByClassIds(id);
+                    idata.Add("status", "Success");
+                    idata.Add("value", data);
+
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
+            }
+            return idata;
+        }
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetCameraDetailsByUser(Dictionary<string,object>data)
+        {
+            var idata = new Dictionary<string, object>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
+            {
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                List<object> data1 = new List<object>();
+                try
+                {
+                    string id = HttpContext.Current.Session["UserLoggedIn"].ToString();
+                    GetOrgData gd = new GetOrgData();
+                    var keyword = data["keyword"].ToString();
+                    var inOut = Convert.ToBoolean(data["in_or_out"]);
+                    var filter = Convert.ToBoolean(data["filter"]);
+                    if (filter)
+                    {                        
+                        var state = data["state"] as Dictionary<string, object>;
+                        var systemstate = state["system"].ToString();
+                        var hasTeacher = Convert.ToBoolean(state["hasTeacher"]);
+                        var classids = ((object[])data["classids"]).Cast<int>().ToList();
+                        if (!string.IsNullOrEmpty(keyword))
+                        {
+                            data1 = gd.GetCameraBySearchWithCondition(id,keyword, Convert.ToInt32(data["pageSize"]),
+                            Convert.ToInt32(data["pageIndex"]), systemstate, hasTeacher,classids, inOut);
+                        }
+                        else
+                        {
+                            
+                            data1 = gd.GetCameraByUserIdWithCondition(id, Convert.ToInt32(data["pageSize"]),
+                                       Convert.ToInt32(data["pageIndex"]), systemstate, hasTeacher, classids, inOut);
+                        }
+                        
+                    }
+                    else
+                    {
+                        var classids = ((object[])data["classids"]).Cast<int>().ToList();
+                        if (!string.IsNullOrEmpty(keyword))
+                        {
+                            data1 = gd.GetCameraBySearch(id,keyword, Convert.ToInt32(data["pageSize"]),
+                            Convert.ToInt32(data["pageIndex"]), classids, inOut);
+                        }
+                        else
+                        {
+                            
+                            data1 = gd.GetCameraByUserId(id, Convert.ToInt32(data["pageSize"]),
+                            Convert.ToInt32(data["pageIndex"]), classids, inOut);
+                        }
+                    }
+                    idata.Add("status", "Success");
+                    idata.Add("value", data1[0]);
+                    idata.Add("totalRows", data1[1]);
+
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
+                }
+            }
+            return idata;
+        }
+
+      
+
+
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetDesktopEventLogs(Dictionary<string, string> data)
+        {
+            var idata = new Dictionary<string, object>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
+            {
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    GetOrgData gd = new GetOrgData();
+                    var data1 = gd.GetDesktopEventLogs(Convert.ToInt32(data["pageSize"]), Convert.ToInt32(data["pageIndex"]));
+                    idata.Add("status", "Success");
+                    idata.Add("value", data1["data"]);
+                    idata.Add("totalRows", data1["Total"]);
+                }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("errorMessage", ex.Message);
                 }
             }
             return idata;

@@ -27,7 +27,8 @@ namespace CresijApp.Services
                 string folderPath = context.Server.MapPath("~/Uploads/");
 
                 //Set the File Name.
-                string fileName = "Logo_" + Path.GetFileName(postedFile.FileName) ;
+                string fileName = "Logo_" + Path.GetFileName(postedFile.FileName.Split('.')[0])
+                    +DateTime.Now.ToString("HHmmss")+"."+ Path.GetFileName(postedFile.FileName.Split('.')[1]);
 
                 //Save the File in Folder.
                 postedFile.SaveAs(folderPath + fileName);
@@ -37,7 +38,7 @@ namespace CresijApp.Services
                     new
                     {
                         name = fileName,
-                        path = fileName
+                        path = "~/Uploads/"+fileName
                     });
                 context.Response.StatusCode = (int)HttpStatusCode.OK;
                 context.Response.ContentType = "text/json";

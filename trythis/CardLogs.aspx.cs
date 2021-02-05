@@ -22,6 +22,7 @@ namespace WebCresij
         static DataTable dt = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
+            CultureInfo.CurrentCulture.DateTimeFormat = new CultureInfo("zh-cn").DateTimeFormat;
             if (!IsPostBack)
             {
                 BindData();
@@ -38,13 +39,14 @@ namespace WebCresij
         }
         protected void BindData()
         {
+            
             string query = "Select cc.memberName as name, cc.MemberID as memberID, "+
                 "rd.cardid as cardID, cd.ClassName as Location,"+
                 "rd.date as Time from Card_Register cc "+
                 "join Reader_logs rd on rd.cardid = cc.CardID "+
                 "COLLATE utf8mb4_unicode_ci join CentralControl ccc on "+
                 "rd.Readerid = ccc.CCIP COLLATE utf8mb4_unicode_ci join "+
-                "Class_Details cd on ccc.location = cd.id order by cc.memberName asc ";
+                "Class_Details cd on ccc.location = cd.id order by rd.date desc ";
             dt = PopulateTree.ExecuteCommand(query);
             if (dt.Rows.Count > 0)
             {

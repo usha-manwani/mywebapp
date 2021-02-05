@@ -1052,17 +1052,17 @@ namespace WebCresij
                     }
                     //string query = "insert into tempCardRegister values("+serialno+",'"+id+"','" +mem+ "','" + card+"','" +com+   "','Unregistered','--','Select Access')";
                     //MySqlCommand cmd = new MySqlCommand(query, con);
-                    MySqlCommand cmd = new MySqlCommand("InstempCard", con);
+                    MySqlCommand cmd = new MySqlCommand("sp_registerNewCard", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@memberID", id);
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@ReaderID", card);
+                    cmd.Parameters.AddWithValue("@memid", id);
+                    cmd.Parameters.AddWithValue("@memname", name);
+                    cmd.Parameters.AddWithValue("@readerid", card);
                     cmd.Parameters.AddWithValue("@comment", com);
                     cmd.Parameters.AddWithValue("@state", "unregistered");
                     cmd.Parameters.AddWithValue("@sno", serialno);
-                    cmd.Parameters.AddWithValue("@access", "--");
-                    cmd.Parameters.AddWithValue("@select", "Select Access");
+                    //cmd.Parameters.AddWithValue("@rights", "--");
+                    //cmd.Parameters.AddWithValue("@select", "Select Access");
                     cmd.Parameters.Add("@result", MySqlDbType.Int32);
                     cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                     cmd.ExecuteNonQuery();
@@ -1095,6 +1095,7 @@ namespace WebCresij
                             con.Open();
                         }
                         cmd.CommandType = CommandType.StoredProcedure;
+                        
                         cmd.Parameters.AddWithValue("sno", sno);
                         cmd.Parameters.AddWithValue("memberid", memid);
                         cmd.Parameters.AddWithValue("@name", name);
@@ -1108,9 +1109,9 @@ namespace WebCresij
                         cmd.Parameters["@result"].Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
                         result = Convert.ToInt32(cmd.Parameters["@result"].Value);
-                        string query = " delete from tempCardRegister where ReaderID ='" + card+"'";
-                        MySqlCommand cmd1 = new MySqlCommand(query, con);
-                        cmd1.ExecuteNonQuery();
+                        //string query = " delete from tempCardRegister where ReaderID ='" + card+"'";
+                       // MySqlCommand cmd1 = new MySqlCommand(query, con);
+                       // cmd1.ExecuteNonQuery();
                     }
                 }
 #pragma warning disable CS0168 // The variable 'ex' is declared but never used
@@ -1212,8 +1213,9 @@ namespace WebCresij
                             con.Open();
                         }
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@cardID", card);
-                        cmd.Parameters.AddWithValue("@ip", ip);
+                        cmd.Parameters.AddWithValue("cardID", card);
+
+                        cmd.Parameters.AddWithValue("ip", ip);
                         result = cmd.ExecuteNonQuery();
                     }
 #pragma warning disable CS0168 // The variable 'ex' is declared but never used

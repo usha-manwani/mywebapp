@@ -14,14 +14,9 @@
         }*/
         .imgsize {
             width: 100%;
-            max-width: 75px;
-           
-            min-width: 65px;
-           /*image-rendering: -moz-crisp-edges;         /* Firefox */
-    /*image-rendering:   -o-crisp-edges;*/         /* Opera */
-    /*image-rendering: -webkit-optimize-contrast;*//* Webkit (non-standard naming) */
-    /*image-rendering: crisp-edges;*/
-    /*-ms-interpolation-mode: nearest-neighbor;*/
+            max-width: 65px;
+		   
+            min-width: 30px;									 
         }
 
         .imgsize1 {
@@ -322,10 +317,10 @@
     <script src="Scripts/HomePageJS.js?v=26"></script>
     <link href="HikVision/demo.css" rel="stylesheet" />
     <div class="row " style="padding-left: 50px; max-width: 100%; min-width: 70%; margin-top: -10px; height: 95%">
-        <div class="col-xl-8 col-lg-10 col-md-12 col-sm-12" id="pluginsrow">
+        <div class="col-lg-8 col-md-12 col-sm-12" id="pluginsrow">
             <div class="row" >
                 <div class="row shadowRow" style="width: 100%; min-width: 280px;">
-                    <div class="col-lg-9 col-md-9 col-sm-12" id="pluginsize">
+                    <div class="col-lg-9 col-md-9 col-sm-12">
                         <div style="-moz-box-shadow: inset 0 0 10px #000000; -webkit-box-shadow: inset 0 0 10px #000000; 
                             box-shadow: inset 0 0 10px #000000; overflow: hidden; max-height: 330px; 
                             max-width: 550px; display: inline-block" id="divplugin1">
@@ -350,15 +345,15 @@
                         </div>
                     </div>
                     <script src="HikVision/codebase/webVideoCtrl.js"></script>
-                    <div class="col-lg-3 col-md-12 col-sm-12 " style="color: white;" id="pluginsize1">
+                    <div class="col-lg-3 col-md-12 col-sm-12 " style="color: white;">
                         <div class="row">
                             <div class="col-lg-10 col-md-6 col-sm-10" onclick="changeplaycam();return false;"
-                                style="margin-bottom: -15px; min-width: 144px; max-height: 150px">
-                                <iframe id="Iframe2" style="background-color: #1e1e36; height: 150px"
-                                    src="~/HikVision/Plugin1.html?v=23" name="frameplugin1"
+                                style="margin-bottom: -15px; min-width: 144px; max-height: 120px">
+                                <iframe id="Iframe2" style="background-color: #1e1e36; height: 120px"
+                                    src="~/HikVision/Plugin1.html" name="frameplugin1"
                                     width="100%" runat="server" frameborder="0"></iframe>
                             </div>
-                            <%--<div class="col-lg-10 col-md-6 col-sm-10" onclick="changeplaycam1();return false;"
+                            <div class="col-lg-10 col-md-6 col-sm-10" onclick="changeplaycam1();return false;"
                                 style="margin-bottom: -15px; min-width: 144px; max-height: 120px">
                                 <iframe id="Iframe3" style="background-color: #1e1e36; height: 120px"
                                     src="~/HikVision/Plugin2.html" name="frameplugin2"
@@ -369,45 +364,48 @@
                                 <iframe id="Iframe4" style="background-color: #1e1e36; height: 120px"
                                     src="~/HikVision/Plugin3.html" name="frameplugin3"
                                     width="100%" runat="server" frameborder="0"></iframe>
-                            </div>--%>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row marginTop" style="margin-left: -50px;">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+
                     <div class="row marginBottom ">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;系统&nbsp;</legend>
                         </fieldset>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 centered">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <span>
                                 <img src="Images/greyed/sysgrey.png" id="syspower"
                                     class="imgclick imgsize" /></span>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 centered">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/pcgrey.png" id="ppower"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 centered">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+
                             <img src="Images/greyed/lock1.png" id="lock"
                                 class="imgclick imgsize" />
                         </div>
+
                     </div>
 
-                    <div class="row  marginTop" style="display:none">
+                    <div class="row  marginTop">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;屏幕&nbsp;</legend>
                         </fieldset>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 centered">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/scup.png" id="Scup"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 centered">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/scdown.png" id="Scdown"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 centered">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/scstop.png" id="scStop"
                                 class="imgclick imgsize" />
                         </div>
@@ -415,30 +413,30 @@
 
                 </div>
 
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
+
+                <div class="col-lg-3 col-md-6 col-sm-12 ">
 
                     <div class="row marginBottom">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;信号切换&nbsp;</legend>
                         </fieldset>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 centered">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/desktop.png"
                                 id="desktop1"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 centered">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
                             <img src="Images/greyed/laptop.png" id="laptop1"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-4 centered">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
 
                             <img src="Images/AllImages/images/图标_194.png" id="Moremedia"
                                 class="imgclick imgsize" />
                         </div>
                     </div>
 
-
-                    <div class="row  marginTop" style="display:none">
+					<div class="row  marginTop">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;窗帘&nbsp;</legend>
                         </fieldset>
@@ -458,23 +456,23 @@
 
                 </div>
 
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                <div class="col-lg-2 col-md-6 col-sm-12">
 
                     <div class="row marginBottom" style="text-align: center">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;投影机&nbsp;</legend>
                         </fieldset>
-                        <div class="col-lg-6  col-md-6 col-sm-6  col-6 centered">
+                        <div class="col-lg-6  col-md-6 col-sm-6  col-6">
                             <img src="Images/greyed/proj1.png" id="projgreen"
                                 class="imgclick imgsize" />
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6  col-6 centered">
+                        <div class="col-lg-6 col-md-6 col-sm-6  col-6">
                             <img src="Images/greyed/proj2.png" id="projred"
                                 class="imgclick  imgsize" />
                         </div>
                     </div>
 
-                    <div class="row marginTop" style="text-align: center;display:none">
+                    <div class="row marginTop" style="text-align: center">
                         <fieldset class="fieldSetControl">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;<%=Resources.Resource.Light%>&nbsp;</legend>
                         </fieldset>
@@ -495,8 +493,8 @@
                     <asp:HiddenField ID="iptocam" Value="" runat="server" />
                 </div>
 
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="row marginBottom" style="display:none">
+               <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="row marginBottom">
                         <fieldset class="fieldSetControl" id="volfieldset">
                             <legend align="center" style="width: auto; font-size: 16px;">&nbsp;音量&nbsp;</legend>
                         </fieldset>
@@ -540,7 +538,7 @@
                                 <img src="Images/中控首页按钮/全部菜单.png"
                                     class="imgclick" id="yellowbuttons"
                                     onclick="DisplayModal(); return false;"
-                                    height="60" width="60" />
+                                    height="50" width="50" />
                             </span>
                         </div>
 
@@ -550,7 +548,7 @@
             </div>
         </div>
 
-        <div class="col-xl-2 col-lg-2 col-md-6 col-sm-8" style="max-height: 90%; padding-top: 30px; min-width: 200px"
+         <div class="col-lg-2 col-md-6 col-sm-8" style="max-height: 90%; padding-top: 30px; min-width: 200px"
             id="sidesrow;">
             <div class="row " style="border: 1px solid white;min-width:200px;">
                 <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 10px; font-size: 14px;">
@@ -568,7 +566,7 @@
                     </p>
                 </div>
             </div>
-            <div class="row" style="border: 1px dashed white; border-top: none; min-width: 200px; display:none">
+            <div class="row" style="border: 1px dashed white; border-top: none; min-width: 200px">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="row marginBottom marginTop1"
                         style="border-bottom: 1px dashed #aeb2b7;">

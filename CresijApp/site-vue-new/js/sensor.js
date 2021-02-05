@@ -640,13 +640,13 @@ $(document).ready(function () {
         $(this).addClass("active");
     });
     //静音
-    $("body").on("click", ".j-single-icon-btn", function () {
-        if ($(this).hasClass("active")) {
-            $(this).removeClass("active");
-        } else {
-            $(this).addClass("active");
-        }
-    });
+    // $("body").on("click", ".j-single-icon-btn", function () {
+    //     if ($(this).hasClass("active")) {
+    //         $(this).removeClass("active");
+    //     } else {
+    //         $(this).addClass("active");
+    //     }
+    // });
    
 //新建策略设备激活
 // $("body").on("click",".j-forb",function(){

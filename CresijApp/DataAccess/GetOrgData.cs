@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 using CresijApp.Models;
+using System.Data.Entity;
+
 namespace CresijApp.DataAccess
 {
     public class GetOrgData
@@ -473,17 +475,310 @@ namespace CresijApp.DataAccess
                 cameradetails = context.classdetails.Where(x => x.classID == id).Select(o=>new ClassDataDetails { CamStudentIp= o.camipS ,
                    CamStudentMac= o.camSmac, CamTeacherIp=o.camipT,CamTeacherMac= o.camTmac,
                    CamPassword= o.campass,CamLoginId= o.camuserid, CamPort=o.camport,
-                    CCEquipIp =o.CCEquipIP, CCMac=o.ccmac }).FirstOrDefault();
+                    CCEquipIp =o.CCEquipIP, CCMac=o.ccmac,
+                    ClassId = o.classID,
+                    ClassName = o.ClassName, DesktopIp=o.desktopip
+                }).FirstOrDefault();
                 cameradetails.CourseName = coursename;
                 cameradetails.CourseId = courseid;
                 return cameradetails;
             }
             
         }
-    }
 
+        public List<ClassDataDetails> GetCameraByClassIds(List<int> id)
+        {
+            List<ClassDataDetails> details = new List<ClassDataDetails>();
+            using (var context = new OrganisationdatabaseEntities())
+            {
+                details = context.classdetails.Where(x => id.Contains(x.classID)).Select(o => new ClassDataDetails
+                {
+                    CamStudentIp = o.camipS,
+                    CamStudentMac = o.camSmac,
+                    CamTeacherIp = o.camipT,
+                    CamTeacherMac = o.camTmac,
+                    CamPassword = o.campass,
+                    CamLoginId = o.camuserid,
+                    CamPort = o.camport,
+                    CCEquipIp = o.CCEquipIP,
+                    CCMac = o.ccmac,
+                    ClassId = o.classID,
+                    ClassName=o.ClassName,
+                    DesktopIp=o.desktopip
+                    
+                }).ToList();
+                
+               
+            }
+            return details;
+        }
+
+        public List<object> GetCameraByUserIdWithCondition(string userid, int pageSize, int pageNum,
+            string systemstate,bool hasTeacher, List<int>ids, bool inout)
+        {
+            var result = new List<object>();
+            List<ClassDataDetails> details = new List<ClassDataDetails>();
+            var finalids = new List<int>();
+            List<int> classids = new List<int>();
+            using (var context = new OrganisationdatabaseEntities())
+            {
+                if (inout == true)
+                {
+                    classids.AddRange(ids);
+                }
+                else
+                {
+                    int serialn = context.userdetails.Where(x => x.LoginID == userid).Select(x => x.SerialNo).FirstOrDefault();
+                    classids = context.userlocationaccesses.Where
+                        (x => x.userserialnum == serialn && x.Level == "Class").Select(x => x.locationid).ToList();
+                    classids.RemoveAll(x => ids.Contains(x));
+                }
+                    var tempclassid = context.temp_machinestatus.Where(x => x.machineStatus == systemstate
+                    && classids.Contains(x.classid)).Select(x => x.classid).ToList();
+                    var templist2 = classids.Intersect(tempclassid).ToList();
+                    var datetime = DateTime.Now.AddMinutes(-5);
+                    var templist1 = context.temp_desktopevents.Where(x => classids.Contains(x.classid)
+                    && x.ActionTime >= datetime).Select(x => x.classid).Union(
+                    context.alarmmonitorlogs.Where(x => classids.Contains(x.Classid)
+                    && x.almTime >= datetime).Select(x => x.Classid)).ToList();
+
+                if (systemstate != "SystemOff")
+                {
+                    if (hasTeacher)
+                    {
+                        finalids = templist2.Intersect(templist1).ToList();
+                    }
+                    else
+                    {
+                        tempclassid.RemoveAll(x => templist1.Contains(x));
+                        finalids = tempclassid;
+                    }
+                }
+                else
+                {
+                    finalids = templist2;
+                }              
+                details = context.classdetails.Where(x => finalids.Contains(x.classID)).Select(o => new ClassDataDetails
+                {
+                    CamStudentIp = o.camipS,
+                    CamStudentMac = o.camSmac,
+                    CamTeacherIp = o.camipT,
+                    CamTeacherMac = o.camTmac,
+                    CamPassword = o.campass,
+                    CamLoginId = o.camuserid,
+                    CamPort = o.camport,
+                    CCEquipIp = o.CCEquipIP,
+                    CCMac = o.ccmac,
+                    ClassId = o.classID,
+                    ClassName = o.ClassName,
+                    DesktopIp=o.desktopip
+
+                }).OrderBy(x=>x.ClassId).Skip(pageSize*(pageNum-1)).Take(pageSize).ToList();
+                result.Add(details);
+                var total = context.classdetails.Where(x => finalids.Contains(x.classID)).Count();
+                result.Add(total);
+            }
+            return result;
+        }
+
+        public List<object> GetCameraByUserId(string userid, int pageSize, int pageNum,
+            List<int> ids, bool inout)
+        {
+            var result = new List<object>();
+            List<ClassDataDetails> details = new List<ClassDataDetails>();
+            var finalids = new List<int>();
+            List<int> classids = new List<int>();
+            using (var context = new OrganisationdatabaseEntities())
+            {
+                if (inout == true)
+                {
+                    classids.AddRange(ids);
+                }
+                else
+                {
+                    int serialn = context.userdetails.Where(x => x.LoginID == userid).Select(x => x.SerialNo).FirstOrDefault();
+                    classids = context.userlocationaccesses.Where
+                        (x => x.userserialnum == serialn && x.Level == "Class").Select(x => x.locationid).ToList();
+                    classids.RemoveAll(x => ids.Contains(x));
+                }
+                
+                details = context.classdetails.Where(x => classids.Contains(x.classID)).Select(o => new ClassDataDetails
+                {
+                    CamStudentIp = o.camipS,
+                    CamStudentMac = o.camSmac,
+                    CamTeacherIp = o.camipT,
+                    CamTeacherMac = o.camTmac,
+                    CamPassword = o.campass,
+                    CamLoginId = o.camuserid,
+                    CamPort = o.camport,
+                    CCEquipIp = o.CCEquipIP,
+                    CCMac = o.ccmac,
+                    ClassId = o.classID,
+                    ClassName = o.ClassName,
+                    DesktopIp=o.desktopip
+
+                }).OrderBy(x => x.ClassId).Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+                result.Add(details);
+                var total = context.classdetails.Where(x => classids.Contains(x.classID)).Count();
+                result.Add(total);
+            }
+            return result;
+        }
+
+        public List<object> GetCameraBySearch(string user,string keywword, int pageSize, int pageNum,
+            List<int> ids, bool inout)
+        {
+            var result = new List<object>();
+            List<ClassDataDetails> details = new List<ClassDataDetails>();
+            
+            List<int> classids = new List<int>();
+            using (var context = new OrganisationdatabaseEntities())
+            {
+                if (inout == true)
+                {
+                    classids.AddRange(ids);
+                }
+                else
+                {
+                    int serialn = context.userdetails.Where(x => x.LoginID == user).Select(x => x.SerialNo).FirstOrDefault();
+                    classids = context.userlocationaccesses.Where
+                        (x => x.userserialnum == serialn && x.Level == "Class").Select(x => x.locationid).ToList();
+                    classids.RemoveAll(x => ids.Contains(x));
+                }
+                details = context.classdetails.Where(x => x.ClassName.Contains(keywword) 
+                            && classids.Contains(x.classID)).Select(o => new ClassDataDetails
+                {
+                    CamStudentIp = o.camipS,
+                    CamStudentMac = o.camSmac,
+                    CamTeacherIp = o.camipT,
+                    CamTeacherMac = o.camTmac,
+                    CamPassword = o.campass,
+                    CamLoginId = o.camuserid,
+                    CamPort = o.camport,
+                    CCEquipIp = o.CCEquipIP,
+                    CCMac = o.ccmac,
+                    ClassId = o.classID,
+                    ClassName = o.ClassName,
+                    DesktopIp=o.desktopip
+
+                }).OrderBy(x => x.ClassId).Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+                result.Add(details);
+                var total = context.classdetails.Where(x => x.ClassName.Contains(keywword)
+                            && classids.Contains(x.classID)).Count();
+                result.Add(total);
+            }
+            return result;
+        }
+
+        public List<object> GetCameraBySearchWithCondition(string user,string keywword, int pageSize, int pageNum,
+            string systemstate, bool hasTeacher, List<int> ids, bool inout)
+        {
+            var result = new List<object>();
+            List<ClassDataDetails> details = new List<ClassDataDetails>();
+            var finalids = new List<int>();
+            List<int> classids = new List<int>();
+            using (var context = new OrganisationdatabaseEntities())
+            {
+                if (inout == true)
+                {
+                    classids.AddRange(ids);
+                }
+                else
+                {
+                    int serialn = context.userdetails.Where(x => x.LoginID == user).Select(x => x.SerialNo).FirstOrDefault();
+                    classids = context.userlocationaccesses.Where
+                        (x => x.userserialnum == serialn && x.Level == "Class").Select(x => x.locationid).ToList();
+                    classids.RemoveAll(x => ids.Contains(x));
+                }
+                var tempclassid = context.temp_machinestatus.Where(x => x.machineStatus == systemstate
+                && classids.Contains(x.classid)).Select(x => x.classid).ToList();
+                var templist2 = classids.Intersect(tempclassid).ToList();
+                var datetime = DateTime.Now.AddMinutes(-5);
+                var templist1 = context.temp_desktopevents.Where(x => classids.Contains(x.classid)
+                && x.ActionTime >= datetime).Select(x => x.classid).Union(
+                context.alarmmonitorlogs.Where(x => classids.Contains(x.Classid)
+                && x.almTime >= datetime).Select(x => x.Classid)).ToList();
+
+
+                if (hasTeacher)
+                {
+                    finalids = templist2.Intersect(templist1).ToList();
+                }
+                else
+                {
+                    tempclassid.RemoveAll(x => templist1.Contains(x));
+                    finalids = tempclassid;
+                }
+                details = context.classdetails.Where(x => x.ClassName.Contains(keywword)
+                        && finalids.Contains(x.classID)).Select(o => new ClassDataDetails
+                {
+                    CamStudentIp = o.camipS,
+                    CamStudentMac = o.camSmac,
+                    CamTeacherIp = o.camipT,
+                    CamTeacherMac = o.camTmac,
+                    CamPassword = o.campass,
+                    CamLoginId = o.camuserid,
+                    CamPort = o.camport,
+                    CCEquipIp = o.CCEquipIP,
+                    CCMac = o.ccmac,
+                    ClassId = o.classID,
+                    ClassName = o.ClassName,
+                    DesktopIp = o.desktopip
+
+                }).OrderBy(x => x.ClassId).Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+                result.Add(details);
+                var total = context.classdetails.Where(x => x.ClassName.Contains(keywword)
+                && finalids.Contains(x.classID)).Count();
+                result.Add(total);
+            }
+            return result;
+        }
+
+        internal Dictionary<string,object> GetDesktopEventLogs(int v1, int v2)
+        {
+            var result = new Dictionary<string, object>();
+            using(var context = new OrganisationdatabaseEntities())
+            {
+                var data = context.temp_desktopevents.Select(x => new DesktopEvent
+                {
+                   Action= x.Action,
+                   ActionTime= x.ActionTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                   Deskmac= x.Deskmac
+                }).ToList();
+                result.Add("Data", data);
+                var total = context.temp_desktopevents.Count();
+                result.Add("Total", total);
+                return result;
+            }
+        }
+        internal Dictionary<string, object> GetAlarmMonitorLogs(int v1, int v2)
+        {
+            var result = new Dictionary<string, object>();
+            using (var context = new OrganisationdatabaseEntities())
+            {
+                var data = context.temp_desktopevents.Select(x => new DesktopEvent
+                {
+                    Action = x.Action,
+                    ActionTime = x.ActionTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                    Deskmac = x.Deskmac
+                }).ToList();
+                result.Add("Data", data);
+                var total = context.temp_desktopevents.Count();
+                result.Add("Total", total);
+                return result;
+            }
+        }
+    }
+    public class DesktopEvent
+    {
+        public string ActionTime { get; set; }
+        public string Action { get; set; }
+        public string Deskmac { get; set; }
+    }
     public class ClassDataDetails
     {
+        public int ClassId { get; set; }
+        public string ClassName { get; set; }
         public string CamTeacherIp { get; set; }
         public string CamStudentIp { get; set; }
         public string CamTeacherMac { get; set; }
@@ -495,5 +790,6 @@ namespace CresijApp.DataAccess
         public string CourseId { get; set; }
         public string CCEquipIp { get; set; }
         public string CCMac { get; set; }
+        public string DesktopIp { get; set; }
     }
 }

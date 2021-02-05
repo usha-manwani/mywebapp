@@ -53,5 +53,9 @@ namespace CresijApp.Models
         public virtual DbSet<userregistration> userregistrations { get; set; }
         public virtual DbSet<usersessioninfo> usersessioninfoes { get; set; }
         public virtual DbSet<machineoperationlog> machineoperationlogs { get; set; }
+        public virtual DbSet<cameramonitorinfo> cameramonitorinfoes { get; set; }
+        public virtual DbSet<temp_machinestatus> temp_machinestatus { get; set; }
+        public virtual DbSet<temp_desktopevents> temp_desktopevents { get; set; }
+        public virtual DbSet<alarmmonitorlog> alarmmonitorlogs { get; set; }
     }
 }

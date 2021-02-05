@@ -132,7 +132,7 @@ namespace WebCresij
             }
             else
             {
-                info.Text = "Please enter proper details of user(s)!!";
+               // info.Text = "Please enter proper details of user(s)!!";
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "removecardID", "delcc();", true);
             }
            

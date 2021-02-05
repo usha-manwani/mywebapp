@@ -20,7 +20,7 @@ namespace CresijApp.Services
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-     [ScriptService]
+    [ScriptService]
     public class SystemSetting : WebService
     {
         [PrincipalPermission(SecurityAction.Demand)]
@@ -29,10 +29,10 @@ namespace CresijApp.Services
         {
             return "Hello World";
         }
-        
-       
+
+
         [WebMethod(EnableSession = true)]
-        public Dictionary<string,object> GetSystemInfo(int semno)
+        public Dictionary<string, object> GetSystemInfo(int semno)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -66,7 +66,7 @@ namespace CresijApp.Services
                                         StartTime = r.StartTime.ToString("yyyy-MM-dd"),
                                         EndTime = r.EndTime.ToString("yyyy-MM-dd"),
                                         SemesterNo = r.SemesterNo,
-                                       
+
                                     };
                                     rt.Add(rs);
                                 }
@@ -80,16 +80,16 @@ namespace CresijApp.Services
                                         SemesterName = Seminfo.SemesterName,
                                         StartDate = Seminfo.StartDate.ToString("yyyy-MM-dd"),
                                         TotalWeeks = Seminfo.TotalWeeks,
-                                        Sunday = Seminfo.Sunday!=0?true:false,
+                                        Sunday = Seminfo.Sunday != 0 ? true : false,
                                         Monday = Seminfo.Monday != 0 ? true : false,
                                         Tuesday = Seminfo.Tuesday != 0 ? true : false,
                                         Wednesday = Seminfo.Wednesday != 0 ? true : false,
                                         Thursday = Seminfo.Thursday != 0 ? true : false,
                                         Friday = Seminfo.Friday != 0 ? true : false,
                                         Saturday = Seminfo.Saturday != 0 ? true : false,
-                                        AutoHoliday = Seminfo.AutoHoliday!=0?true:false,
+                                        AutoHoliday = Seminfo.AutoHoliday != 0 ? true : false,
                                         Semno = Seminfo.SemNo,
-                                       
+
                                     };
 
                                     idata.Add("SemsterInfo", sm);
@@ -105,7 +105,7 @@ namespace CresijApp.Services
                                         Semesterno = s.SemesterNo,
                                         StartTime = s.StartTime.ToString(@"hh\:mm"),
                                         StopTime = s.StopTime.ToString(@"hh\:mm"),
-                                        Checked=s.Checked!=0?true:false
+                                        Checked = s.Checked != 0 ? true : false
                                     };
                                     secList.Add(sec);
                                 }
@@ -120,7 +120,7 @@ namespace CresijApp.Services
                                             SchoolEngName = SchoolIn.SchoolEngName,
                                             SchoolName = SchoolIn.SchoolName,
                                             LogoLocation = SchoolIn.LogoLocation,
-                                            
+
                                         };
 
                                         idata.Add("SchoolInfo", sc);
@@ -143,7 +143,42 @@ namespace CresijApp.Services
                     }
                 }
                 else
-                { idata.Add("status", "fail"); idata.Add("Error", "User not authorized"); } 
+                { idata.Add("status", "fail"); idata.Add("Error", "User not authorized"); }
+            }
+            return idata;
+        }
+
+        [WebMethod]
+        public Dictionary<string, object> GetSchoolInfo()
+        {
+            var idata = new Dictionary<string, object>();
+
+            try
+            {
+                using (var context = new OrganisationdatabaseEntities())
+                {
+                    var semno = context.semesterinfoes.Where(x => x.StartDate < DateTime.Now)
+                        .OrderByDescending(x => x.StartDate).Select(x=>x.SemNo).FirstOrDefault();
+                    var SchoolIn = context.systemsettings.Select(x => x).First();
+                    if (SchoolIn != null)
+                    {
+                        SchoolInfo sc = new SchoolInfo()
+                        {
+                            SchoolEngName = SchoolIn.SchoolEngName,
+                            SchoolName = SchoolIn.SchoolName,
+                            LogoLocation = SchoolIn.LogoLocation,
+
+                        };
+                        idata.Add("status", "success");
+                        idata.Add("SchoolInfo", sc);
+                        idata.Add("Semno", semno);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                idata.Add("status", "fail");
+                idata.Add("error", ex.StackTrace);
             }
             return idata;
         }
@@ -151,8 +186,8 @@ namespace CresijApp.Services
         {
             public string SchoolEngName { get; set; }
             public string SchoolName { get; set; }
-            public string LogoLocation{ get; set; }
-            
+            public string LogoLocation { get; set; }
+
         }
         private class SectionInfo
         {
@@ -161,7 +196,7 @@ namespace CresijApp.Services
             public string StartTime { get; set; }
             public string StopTime { get; set; }
             public bool Checked { get; set; }
-            
+
         }
         private class SemesterInfo
         {
@@ -177,20 +212,20 @@ namespace CresijApp.Services
             public bool Saturday { get; set; }
             public int Semno { get; set; }
             public bool AutoHoliday { get; set; }
-           
+
         }
         private class ReserveTrans
         {
-            public string Type{get;set;}
+            public string Type { get; set; }
             public bool NonWorkingDays { get; set; }
             public bool AutoReview { get; set; }
             public string StartTime { get; set; }
             public string EndTime { get; set; }
             public int SemesterNo { get; set; }
-            
+
         }
         [WebMethod(EnableSession = true)]
-        public Dictionary<string, string> UpdateSystemInfo(Dictionary<string,object> data)
+        public Dictionary<string, string> UpdateSystemInfo(Dictionary<string, object> data)
         {
             int result = 0;
             JavaScriptSerializer js = new JavaScriptSerializer();
@@ -204,101 +239,101 @@ namespace CresijApp.Services
             }
             else
             {
-                if (HttpContext.Current.Session["UserLoggedIn"].ToString() == "admin")
+                //if (HttpContext.Current.Session["UserLoggedIn"].ToString() == "admin")
+                // {
+                try
                 {
-                    try
-                    {
-                        int semno = Convert.ToInt32(data["Semno"]);
-                        var temp = js.Serialize(data["ReserveTransfer"]);
-                        var restrans = js.Deserialize<List<ReserveTrans>>(temp);
-                        var temp1 = js.Serialize(data["SectionInfo"]);
-                        var SectionInfo = js.Deserialize<List<SectionInfo>>(temp1);
-                        var temp2 = js.Serialize(data["SemesterInfo"]);
-                        var seminfo = js.Deserialize<SemesterInfo>(temp2);
-                        var temp3 = js.Serialize(data["SchoolInfo"]);
-                        var schinfo = js.Deserialize<systemsetting>(temp3);
-                        
-                        using (var context = new OrganisationdatabaseEntities())
-                        {
-                            foreach (var x in restrans)
-                            {
-                                
-                                    if (context.reserveandtransfers.Any(z => z.Type==x.Type && z.SemesterNo== semno))
-                                    {
+                    int semno = Convert.ToInt32(data["Semno"]);
+                    var temp = js.Serialize(data["ReserveTransfer"]);
+                    var restrans = js.Deserialize<List<ReserveTrans>>(temp);
+                    var temp1 = js.Serialize(data["SectionInfo"]);
+                    var SectionInfo = js.Deserialize<List<SectionInfo>>(temp1);
+                    var temp2 = js.Serialize(data["SemesterInfo"]);
+                    var seminfo = js.Deserialize<SemesterInfo>(temp2);
+                    var temp3 = js.Serialize(data["SchoolInfo"]);
+                    var schinfo = js.Deserialize<systemsetting>(temp3);
 
-                                        var resupdate = context.reserveandtransfers.Where(z => z.Type == x.Type && z.SemesterNo == semno).Select(y=>y).FirstOrDefault();
-                                        if (resupdate != null)
-                                        {
-                                            resupdate.NonWorkingDays = x.NonWorkingDays?Convert.ToSByte(1): Convert.ToSByte(0);
-                                            resupdate.AutoReview = x.AutoReview ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                            resupdate.StartTime = Convert.ToDateTime(x.StartTime);
-                                            resupdate.EndTime = Convert.ToDateTime(x.EndTime);
-                                        }
-                                    }
-                                else
-                                {
-                                    reserveandtransfer rs = new reserveandtransfer()
-                                    {
-                                        Type=x.Type,
-                                        NonWorkingDays = x.NonWorkingDays ? Convert.ToSByte(1) : Convert.ToSByte(0),
-                                        AutoReview = x.AutoReview ? Convert.ToSByte(1) : Convert.ToSByte(0),
-                                        StartTime = Convert.ToDateTime(x.StartTime),
-                                        EndTime = Convert.ToDateTime(x.EndTime),
-                                        SemesterNo=semno
-                                    };
-                                    context.reserveandtransfers.Add(rs);
-                                }
-                                result = context.SaveChanges();
-                            }
-                            foreach (var x in SectionInfo)
+                    using (var context = new OrganisationdatabaseEntities())
+                    {
+                        foreach (var x in restrans)
+                        {
+                            if (context.reserveandtransfers.Any(z => z.Type == x.Type && z.SemesterNo == semno))
                             {
-                                if (context.sectionsinfoes.Any(z => z.Section == x.Section && z.SemesterNo==semno))
+
+                                var resupdate = context.reserveandtransfers.Where(z => z.Type == x.Type && z.SemesterNo == semno).Select(y => y).FirstOrDefault();
+                                if (resupdate != null)
                                 {
-                                    var secupdate = context.sectionsinfoes.Where(z => z.Section == x.Section && z.SemesterNo == semno).Select(z=>z).FirstOrDefault();
-                                    if (secupdate != null)
-                                    {
-                                        secupdate.Section = x.Section;
-                                        secupdate.SemesterNo = semno;
-                                        secupdate.StartTime =Convert.ToDateTime(x.StartTime).TimeOfDay;
-                                        secupdate.StopTime = Convert.ToDateTime(x.StopTime).TimeOfDay;
-                                        secupdate.Checked = x.Checked ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                        result = context.SaveChanges();
-                                    }
-                                    
-                                    
+                                    resupdate.NonWorkingDays = x.NonWorkingDays ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                                    resupdate.AutoReview = x.AutoReview ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                                    resupdate.StartTime = Convert.ToDateTime(x.StartTime);
+                                    resupdate.EndTime = Convert.ToDateTime(x.EndTime);
                                 }
-                                else
-                                {
-                                    sectionsinfo ssinfo = new sectionsinfo()
-                                    {
-                                        SemesterNo = semno,
-                                        Section = x.Section,
-                                        StartTime = Convert.ToDateTime(x.StartTime).TimeOfDay,
-                                        StopTime = Convert.ToDateTime(x.StopTime).TimeOfDay,
-                                        Checked = x.Checked ? Convert.ToSByte(1) : Convert.ToSByte(0)
-                                    };
-                                    context.sectionsinfoes.Add(ssinfo);
-                                }
-                            }
-                            context.SaveChanges();
-                            if (context.semesterinfoes.Any(z => z.SemNo == semno))
-                            {
-                                var semupdate = context.semesterinfoes.Find(semno);
-                                semupdate.StartDate = Convert.ToDateTime(seminfo.StartDate).Date;
-                                semupdate.TotalWeeks = seminfo.TotalWeeks;
-                                semupdate.Monday = seminfo.Monday ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                semupdate.Tuesday = seminfo.Tuesday ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                semupdate.Wednesday = seminfo.Wednesday ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                semupdate.Thursday = seminfo.Thursday ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                semupdate.Friday = seminfo.Friday ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                semupdate.Saturday = seminfo.Saturday ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                semupdate.Sunday = seminfo.Sunday ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                semupdate.AutoHoliday = seminfo.AutoHoliday ? Convert.ToSByte(1) : Convert.ToSByte(0);
-                                result = context.SaveChanges();
                             }
                             else
                             {
-                                var semobject = new semesterinfo() {
+                                reserveandtransfer rs = new reserveandtransfer()
+                                {
+                                    Type = x.Type,
+                                    NonWorkingDays = x.NonWorkingDays ? Convert.ToSByte(1) : Convert.ToSByte(0),
+                                    AutoReview = x.AutoReview ? Convert.ToSByte(1) : Convert.ToSByte(0),
+                                    StartTime = Convert.ToDateTime(x.StartTime),
+                                    EndTime = Convert.ToDateTime(x.EndTime),
+                                    SemesterNo = semno
+                                };
+                                context.reserveandtransfers.Add(rs);
+                            }
+                            result = context.SaveChanges();
+                        }
+                        foreach (var x in SectionInfo)
+                        {
+                            if (context.sectionsinfoes.Any(z => z.Section == x.Section && z.SemesterNo == semno))
+                            {
+                                var secupdate = context.sectionsinfoes.Where(z => z.Section == x.Section && z.SemesterNo == semno).Select(z => z).FirstOrDefault();
+                                if (secupdate != null)
+                                {
+                                    secupdate.Section = x.Section;
+                                    secupdate.SemesterNo = semno;
+                                    secupdate.StartTime = Convert.ToDateTime(x.StartTime).TimeOfDay;
+                                    secupdate.StopTime = Convert.ToDateTime(x.StopTime).TimeOfDay;
+                                    secupdate.Checked = x.Checked ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                                    result = context.SaveChanges();
+                                }
+
+
+                            }
+                            else
+                            {
+                                sectionsinfo ssinfo = new sectionsinfo()
+                                {
+                                    SemesterNo = semno,
+                                    Section = x.Section,
+                                    StartTime = Convert.ToDateTime(x.StartTime).TimeOfDay,
+                                    StopTime = Convert.ToDateTime(x.StopTime).TimeOfDay,
+                                    Checked = x.Checked ? Convert.ToSByte(1) : Convert.ToSByte(0)
+                                };
+                                context.sectionsinfoes.Add(ssinfo);
+                            }
+                        }
+                        context.SaveChanges();
+                        if (context.semesterinfoes.Any(z => z.SemNo == semno))
+                        {
+                            var semupdate = context.semesterinfoes.Find(semno);
+                            semupdate.StartDate = Convert.ToDateTime(seminfo.StartDate).Date;
+                            semupdate.TotalWeeks = seminfo.TotalWeeks;
+                            semupdate.Monday = seminfo.Monday ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                            semupdate.Tuesday = seminfo.Tuesday ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                            semupdate.Wednesday = seminfo.Wednesday ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                            semupdate.Thursday = seminfo.Thursday ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                            semupdate.Friday = seminfo.Friday ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                            semupdate.Saturday = seminfo.Saturday ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                            semupdate.Sunday = seminfo.Sunday ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                            semupdate.AutoHoliday = seminfo.AutoHoliday ? Convert.ToSByte(1) : Convert.ToSByte(0);
+                            result = context.SaveChanges();
+                        }
+                        else
+                        {
+                            var semobject = new semesterinfo()
+                            {
                                 StartDate = Convert.ToDateTime(seminfo.StartDate).Date,
                                 TotalWeeks = seminfo.TotalWeeks,
                                 Monday = seminfo.Monday ? Convert.ToSByte(1) : Convert.ToSByte(0),
@@ -309,39 +344,39 @@ namespace CresijApp.Services
                                 Saturday = seminfo.Saturday ? Convert.ToSByte(1) : Convert.ToSByte(0),
                                 Sunday = seminfo.Sunday ? Convert.ToSByte(1) : Convert.ToSByte(0),
                                 AutoHoliday = seminfo.AutoHoliday ? Convert.ToSByte(1) : Convert.ToSByte(0)
-                                };
-                                context.semesterinfoes.Add(semobject);
-                                result = context.SaveChanges();
-                            }
-                            if (context.systemsettings.Count() > 0)
-                            {
-                                var school = context.systemsettings.Select(x => x).First();
-                                school.SchoolEngName = schinfo.SchoolEngName;
-                                school.SchoolName = schinfo.SchoolName;
-                                school.LogoLocation = schinfo.LogoLocation;
-                            }
-                            else
-                            {
-                                systemsetting sch = new systemsetting()
-                                {
-                                    SchoolEngName = schinfo.SchoolEngName,
-                                    SchoolName = schinfo.SchoolName,
-                                    LogoLocation = schinfo.LogoLocation
-                                };
-                                context.systemsettings.Add(sch);
-                            }
-                            context.SaveChanges();
-                            idata.Add("status", "Success");
+                            };
+                            context.semesterinfoes.Add(semobject);
+                            result = context.SaveChanges();
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        idata.Add("status", "fail");
-                        idata.Add("Error", ex.StackTrace);
+                        if (context.systemsettings.Count() > 0)
+                        {
+                            var school = context.systemsettings.Select(x => x).First();
+                            school.SchoolEngName = schinfo.SchoolEngName;
+                            school.SchoolName = schinfo.SchoolName;
+                            school.LogoLocation = schinfo.LogoLocation;
+                        }
+                        else
+                        {
+                            systemsetting sch = new systemsetting()
+                            {
+                                SchoolEngName = schinfo.SchoolEngName,
+                                SchoolName = schinfo.SchoolName,
+                                LogoLocation = schinfo.LogoLocation
+                            };
+                            context.systemsettings.Add(sch);
+                        }
+                        context.SaveChanges();
+                        idata.Add("status", "Success");
                     }
                 }
-                else
-                { idata.Add("status", "fail"); idata.Add("Error", "User not authorized"); }
+                catch (Exception ex)
+                {
+                    idata.Add("status", "fail");
+                    idata.Add("Error", ex.StackTrace);
+                }
+                //}
+                //else
+                // { idata.Add("status", "fail"); idata.Add("Error", "User not authorized"); }
             }
             return idata;
         }
@@ -355,7 +390,7 @@ namespace CresijApp.Services
                 type.GetProperty(kv.Key).SetValue(obj, kv.Value);
             }
             return (T)obj;
-        }   
+        }
     }
 
     public class SectionList
@@ -365,7 +400,7 @@ namespace CresijApp.Services
         public string Stoptime { get; set; }
     }
 
-    
+
 }
 
 //[WebMethod(EnableSession = true)]

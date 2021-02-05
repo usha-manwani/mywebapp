@@ -19,6 +19,8 @@ namespace CresijApp.Models
         {
             this.schedulereserves = new HashSet<schedulereserve>();
             this.scheduletransfers = new HashSet<scheduletransfer>();
+            this.temp_desktopevents = new HashSet<temp_desktopevents>();
+            this.alarmmonitorlogs = new HashSet<alarmmonitorlog>();
         }
     
         public int classID { get; set; }
@@ -48,5 +50,10 @@ namespace CresijApp.Models
         public virtual ICollection<schedulereserve> schedulereserves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<scheduletransfer> scheduletransfers { get; set; }
+        public virtual temp_machinestatus temp_machinestatus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<temp_desktopevents> temp_desktopevents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<alarmmonitorlog> alarmmonitorlogs { get; set; }
     }
 }

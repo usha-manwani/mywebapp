@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,7 @@ namespace WebCresij
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CultureInfo.CurrentCulture.DateTimeFormat = new CultureInfo("zh-cn").DateTimeFormat;
             if (!IsPostBack)
             {
                 ScriptManager.GetCurrent(Page).RegisterPostBackControl(exportToExcel);
