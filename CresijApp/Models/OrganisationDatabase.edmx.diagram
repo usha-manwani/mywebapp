@@ -63,6 +63,7 @@
         <AssociationConnector Association="OrganisationdatabaseModel.fk_monitoringclassid" />
         <EntityTypeShape EntityType="OrganisationdatabaseModel.projectorconfiginfo" Width="1.5" PointX="5.25" PointY="35.5" />
         <AssociationConnector Association="OrganisationdatabaseModel.fk_projectorclass" />
+        <EntityTypeShape EntityType="OrganisationdatabaseModel.card_registration" Width="1.5" PointX="12.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

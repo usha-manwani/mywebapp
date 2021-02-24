@@ -162,5 +162,31 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
+
+        public async Task<int> AddCamMonitorLogs(string altime,string ip, string msg)
+        {
+            int result = 0;
+            try
+            {
+                using (var context = new OrganisationdatabaseEntities())
+                {
+                    var cid = context.classdetails.Where(x => x.camipS == ip || x.camipT == ip).Select(x => x.classID).FirstOrDefault();
+                    var monitorobj = new alarmmonitorlog()
+                    {
+                        almMessage = msg,
+                        almTime = Convert.ToDateTime(altime),
+                        Classid = cid,
+                        deviceip = ip
+                    };
+                    context.alarmmonitorlogs.Add(monitorobj);
+                    result = context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return result;
+        }
     }
 }

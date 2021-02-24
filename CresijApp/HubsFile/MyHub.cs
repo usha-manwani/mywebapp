@@ -110,52 +110,9 @@ namespace CresijApp.HubsFile
        
         public void SendMessage(string sender, string data1)
         {
-            
-            //string data = "";
-            //Console.WriteLine("received data from " + sender);
-            //if (data.Contains("Temp"))
-            //{
-            //    if (keyValues.ContainsKey(sender))
-            //    {
-            //        keyValues[sender] = data;
-            //    }
-            //    else
-            //    {
-            //        keyValues.Add(sender, data);
-            //    }
-            //}
-            //if (data.Contains("Toregister"))
-            //{
-            //    Clients.All.registerCard(sender, data);
-            //}
-            //if (data.Contains("registered"))
-            //{
-            //   // updatecardstatus(sender, data);
-            //    // Clients.All.confirmRegister();
-            //}
-            ////else if (data.Contains("readerlog"))
-            ////{
-            ////    updateCardLogs(sender, data);
-            ////    Clients.All.SendControl(sender, "8B B9 00 04 01 0B C4 D4");
-            ////}
-            //else if (data.Contains("KeyValue"))
-            //{
-            //    // string query = "";
-            //    string[] values = data.Split(',');
-            //    switch (values[2])
-            //    {
-            //        case "SystemON":
-            //            //query = "Insert into ";
-            //            break;
-            //    }
-            //}
-            //else if (data.Contains("StatusData"))
-            //{
-            //    //saveStatusinDatebase(sender, data);
-            //}
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            
+            JavaScriptSerializer js = new JavaScriptSerializer();            
             dynamic DatatoSend = js.Deserialize<dynamic>(data1);
+            
             if (DatatoSend["Log"] == "SystemOn")
             {
                 TriggerAlarm(sender, "TriggerOn");
@@ -165,9 +122,20 @@ namespace CresijApp.HubsFile
                 TriggerAlarm(sender, "TriggerOff");
             }
             Clients.All.broadcastMessage(sender, DatatoSend);
-            Clients.All.envMessage(sender, data1);
+           // Clients.All.envMessage(sender, data1);
         }
-
+        public void ReceiveDesktopEvent(string sender, string data1)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Dictionary<string, string> DatatoSend = js.Deserialize<Dictionary<string, string>>(data1);
+            Clients.All.desktopEvent(sender, DatatoSend);
+        }
+        public void ReceiveMachineException(string sender, string data1)
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Dictionary<string, string> DatatoSend = js.Deserialize<Dictionary<string, string>>(data1);
+            Clients.All.machineException(sender, DatatoSend);
+        }
         public async Task SetProjectorConfig(List<int> classIds, Dictionary<string, string> data, string cookies)
         {
             var id = Context.ConnectionId;
@@ -212,9 +180,15 @@ namespace CresijApp.HubsFile
             //cc.SaveDatainDatabase(sender, data);
         }
 
-        public void AlarmMessage(string alm)
+        public async Task AlarmMessage(string alm)
         {
-            Clients.All.MessageALarm(alm);
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Dictionary<string, string> DatatoSend = js.Deserialize<Dictionary<string, string>>(alm);
+            //SessionHandler ss = new SessionHandler();
+            //await ss.AddCamMonitorLogs(DatatoSend["AlarmTime"].ToString(), 
+            //    DatatoSend["DeviceIp"].ToString(), 
+            //    DatatoSend["AlarmMsg"].ToString());
+            Clients.All.messageAlarmMotion(DatatoSend);
         }
         public void TriggerAlarm(string sender,string data)
         {

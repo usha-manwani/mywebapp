@@ -1,4 +1,19 @@
 ﻿/* global $ */
+function logoinActiviti(password, userid, cb) {
+  var fd = new FormData();
+  fd.append("password", password);
+  fd.append("username", userid);
+  $.ajax({
+    type: "POST",
+    url: "/activit/login",
+    timeout: 10 * 1000, //超时时间设置，单位毫秒
+    processData: false, // 告诉jQuery不要去处理发送的数据
+    contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+    data: fd,
+    success: cb,
+    error: cb,
+  });
+}
 function Login() {
   var userid = $("#userid").val();
   var password = $("#password").val();
@@ -7,6 +22,7 @@ function Login() {
     var jsonData = JSON.stringify({
       data: d,
     });
+
     $.ajax({
       type: "POST",
       url: "../Services/UserLogs.asmx/Login",
@@ -17,8 +33,10 @@ function Login() {
       error: OnErrorCall_,
     });
   } else {
-    $('.messagebox').text("please insert LoginID and password");
-    $('.alert').addClass('show').show()
+    $(".messagebox").text("please insert LoginID and password");
+    $(".alert")
+      .addClass("show")
+      .show();
   }
 }
 
@@ -27,14 +45,20 @@ function OnSuccessLogin(response) {
   if (data["status"] == "success") {
     var dd = data["value"];
     sessionStorage.setItem("userName", dd["userName"]);
-    window.location.replace("home.html");
+    logoinActiviti($("#password").val(), $("#userid").val(), () => {
+      window.location.replace("home.html");
+    });
   } else {
-    $('.messagebox').text("LoginID or password incorrect");
-    $('.alert').addClass('show').show()
+    $(".messagebox").text("LoginID or password incorrect");
+    $(".alert")
+      .addClass("show")
+      .show();
   }
 }
 function OnErrorCall_(response) {
   console.log(response);
-  $('.messagebox').text("UserId or password is Incorrect. Please try again!");
-  $('.alert').addClass('show').show()
+  $(".messagebox").text("UserId or password is Incorrect. Please try again!");
+  $(".alert")
+    .addClass("show")
+    .show();
 }

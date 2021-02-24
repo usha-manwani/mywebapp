@@ -167,6 +167,7 @@ namespace CresijApp.Services
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             GetOrgData gd = new GetOrgData();
+            string text = "";
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -175,11 +176,14 @@ namespace CresijApp.Services
                 idata.Add("customErrorCode", "440");
             }
             else
-            {
-                
+            {                
                 try
                 {
-                    List<object> dat = gd.GetTeacherInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    if (data.ContainsKey("query"))
+                    {
+                        text = data["query"].ToString();
+                    }
+                    List<object> dat = gd.GetTeacherInfo(data["pageIndex"].ToString(), data["pageSize"].ToString(),text);
                     idata.Add("status", "success");
                     int total = Convert.ToInt32(dat[0]);
                     KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
@@ -1074,10 +1078,6 @@ namespace CresijApp.Services
             }
             return idata;
         }
-
-      
-
-
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetDesktopEventLogs(Dictionary<string, string> data)
         {

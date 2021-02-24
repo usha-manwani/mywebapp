@@ -87,7 +87,7 @@ namespace CresijApp.DataAccess
             return result;
         }
 
-        public List<object> GetTeacherInfo(string pageindex, string pagesize)
+        public List<object> GetTeacherInfo(string pageindex, string pagesize, string query)
         {
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
@@ -99,6 +99,7 @@ namespace CresijApp.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
                     cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                    cmd.Parameters.AddWithValue("@con", query);
                     cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
                     cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -477,7 +478,7 @@ namespace CresijApp.DataAccess
                    CamPassword= o.campass,CamLoginId= o.camuserid, CamPort=o.camport,
                     CCEquipIp =o.CCEquipIP, CCMac=o.ccmac,
                     ClassId = o.classID,
-                    ClassName = o.ClassName, DesktopIp=o.desktopip
+                    ClassName = o.ClassName, DesktopIp=o.desktopip,DesktopMac=o.deskmac
                 }).FirstOrDefault();
                 cameradetails.CourseName = coursename;
                 cameradetails.CourseId = courseid;
@@ -504,7 +505,8 @@ namespace CresijApp.DataAccess
                     CCMac = o.ccmac,
                     ClassId = o.classID,
                     ClassName=o.ClassName,
-                    DesktopIp=o.desktopip
+                    DesktopIp=o.desktopip,
+                    DesktopMac=o.deskmac
                     
                 }).ToList();
                 
@@ -571,8 +573,8 @@ namespace CresijApp.DataAccess
                     CCMac = o.ccmac,
                     ClassId = o.classID,
                     ClassName = o.ClassName,
-                    DesktopIp=o.desktopip
-
+                    DesktopIp=o.desktopip,
+                    DesktopMac=o.deskmac
                 }).OrderBy(x=>x.ClassId).Skip(pageSize*(pageNum-1)).Take(pageSize).ToList();
                 result.Add(details);
                 var total = context.classdetails.Where(x => finalids.Contains(x.classID)).Count();
@@ -615,7 +617,8 @@ namespace CresijApp.DataAccess
                     CCMac = o.ccmac,
                     ClassId = o.classID,
                     ClassName = o.ClassName,
-                    DesktopIp=o.desktopip
+                    DesktopIp=o.desktopip,
+                    DesktopMac=o.deskmac
 
                 }).OrderBy(x => x.ClassId).Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
                 result.Add(details);
@@ -659,7 +662,8 @@ namespace CresijApp.DataAccess
                     CCMac = o.ccmac,
                     ClassId = o.classID,
                     ClassName = o.ClassName,
-                    DesktopIp=o.desktopip
+                    DesktopIp=o.desktopip,
+                    DesktopMac=o.deskmac
 
                 }).OrderBy(x => x.ClassId).Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
                 result.Add(details);
@@ -723,7 +727,8 @@ namespace CresijApp.DataAccess
                     CCMac = o.ccmac,
                     ClassId = o.classID,
                     ClassName = o.ClassName,
-                    DesktopIp = o.desktopip
+                    DesktopIp = o.desktopip,
+                    DesktopMac=o.deskmac
 
                 }).OrderBy(x => x.ClassId).Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
                 result.Add(details);
@@ -734,6 +739,27 @@ namespace CresijApp.DataAccess
             return result;
         }
 
+        public List<object> GetClassEvent(string user) {
+            List<ClassDataDetails> details = new List<ClassDataDetails>();
+            var result = new List<object>();
+            List<int> classids = new List<int>();
+            using (var context = new OrganisationdatabaseEntities())
+            {
+                int serialn = context.userdetails.Where(x => x.LoginID == user).Select(x => x.SerialNo).FirstOrDefault();
+                classids = context.userlocationaccesses.Where
+                    (x => x.userserialnum == serialn && x.Level == "Class").Select(x => x.locationid).ToList();
+                var datetime = DateTime.Now.AddMinutes(-5);
+                var templist1 = context.temp_desktopevents.Where(x => classids.Contains(x.classid)
+                && x.ActionTime >= datetime).Select(x => x.classid).Union(
+                context.alarmmonitorlogs.Where(x => classids.Contains(x.Classid)
+                && x.almTime >= datetime).Select(x => x.Classid)).ToList();
+                
+               
+                result.Add(details);
+                
+            }
+            return result;
+        }
         internal Dictionary<string,object> GetDesktopEventLogs(int v1, int v2)
         {
             var result = new Dictionary<string, object>();
@@ -791,5 +817,6 @@ namespace CresijApp.DataAccess
         public string CCEquipIp { get; set; }
         public string CCMac { get; set; }
         public string DesktopIp { get; set; }
+        public string DesktopMac { get; set; }
     }
 }

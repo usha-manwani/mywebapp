@@ -58,5 +58,6 @@ namespace CresijApp.Models
         public virtual DbSet<temp_desktopevents> temp_desktopevents { get; set; }
         public virtual DbSet<alarmmonitorlog> alarmmonitorlogs { get; set; }
         public virtual DbSet<projectorconfiginfo> projectorconfiginfoes { get; set; }
+        public virtual DbSet<card_registration> card_registration { get; set; }
     }
 }
