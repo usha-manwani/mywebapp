@@ -204,7 +204,7 @@ namespace CresijApp.DataAccess
                     " union select distinct(buildingname) as building,id from buildingdetails bd " +
                     "where id in(select locationid from userlocationaccess where level ='Building' and "+
                     " userserialnum = (select serialno from userdetails " +
-                    "where loginid = '" + userid + "')) and id not in(select teachingbuilding from classdetails) order by building";
+                    "where loginid = '" + userid + "'))";
             using (MySqlConnection con = new MySqlConnection(constring))
             {
 

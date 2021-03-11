@@ -102,6 +102,15 @@ namespace CresijApp.DataAccess
             return r;
         }
 
+        public async Task<int> AddUpdateProjectorConfig(List<int> classids , Dictionary<string,string> data)
+        {
+            
+            using(var context = new OrganisationdatabaseEntities())
+            {
+
+            }
+            return 0;
+        }
         //public async Task<int> RemoveUserSession(string cookie)
         //{
         //    int r = 0;

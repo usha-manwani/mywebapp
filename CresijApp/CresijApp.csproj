@@ -686,6 +686,7 @@
     <Content Include="Services\GetLeftMenu.asmx" />
     <Content Include="Services\GetOrganisationData.asmx" />
     <Content Include="Services\GetSetSystemConfigInfo.asmx" />
+    <Content Include="Services\HistoryData.asmx" />
     <Content Include="Services\ProjectorConfig.asmx" />
     <Content Include="Services\SaveOrganisationData.asmx" />
     <Content Include="Services\ScheduleData.asmx" />
@@ -920,14 +921,14 @@
     <Content Include="site-vue-new\css\brands.css" />
     <Content Include="site-vue-new\css\brands.min.css" />
     <Content Include="site-vue-new\css\Chart.min.css" />
-    <Content Include="site-vue-new\css\chunk-5d9ba8b7.32941d90313af153ab09.css" />
-    <Content Include="site-vue-new\css\chunk-common.32941d90313af153ab09.css" />
-    <Content Include="site-vue-new\css\chunk-vendors.32941d90313af153ab09.css" />
+    <Content Include="site-vue-new\css\chunk-6a6cb6f9.8ed2e9ca0634d471066f.css" />
+    <Content Include="site-vue-new\css\chunk-common.8ed2e9ca0634d471066f.css" />
+    <Content Include="site-vue-new\css\chunk-vendors.8ed2e9ca0634d471066f.css" />
     <Content Include="site-vue-new\css\fontawesome-all.css" />
     <Content Include="site-vue-new\css\fontawesome-all.min.css" />
     <Content Include="site-vue-new\css\fontawesome.css" />
     <Content Include="site-vue-new\css\fontawesome.min.css" />
-    <Content Include="site-vue-new\css\hikversionPlayer.32941d90313af153ab09.css" />
+    <Content Include="site-vue-new\css\hikversionPlayer.8ed2e9ca0634d471066f.css" />
     <Content Include="site-vue-new\css\regular.css" />
     <Content Include="site-vue-new\css\regular.min.css" />
     <Content Include="site-vue-new\css\sensor.css" />
@@ -1004,7 +1005,7 @@
     <Content Include="site-vue-new\img\newElectFun.4c2c10a0.png" />
     <Content Include="site-vue-new\img\tyy.feff1d1d.svg" />
     <Content Include="site-vue-new\index.html" />
-    <Content Include="site-vue-new\js\002.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\002.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\AddClassroom.js" />
     <Content Include="site-vue-new\js\AddEditOrganisation.js" />
     <Content Include="site-vue-new\js\AddStudent.js" />
@@ -1018,16 +1019,16 @@
     <Content Include="site-vue-new\js\CapitalInfoJS.js" />
     <Content Include="site-vue-new\js\Chart.bundle.min.js" />
     <Content Include="site-vue-new\js\CheckUserSession.js" />
-    <Content Include="site-vue-new\js\chunk-5d9ba8b7.32941d90313af153ab09.js" />
-    <Content Include="site-vue-new\js\chunk-common.32941d90313af153ab09.js" />
-    <Content Include="site-vue-new\js\chunk-vendors.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\chunk-6a6cb6f9.8ed2e9ca0634d471066f.js" />
+    <Content Include="site-vue-new\js\chunk-common.8ed2e9ca0634d471066f.js" />
+    <Content Include="site-vue-new\js\chunk-vendors.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\ClassroomInfo.js" />
     <Content Include="site-vue-new\js\ConfirmTransferSchedule.js" />
     <Content Include="site-vue-new\js\ControlClick.js" />
-    <Content Include="site-vue-new\js\course.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\course.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\CourseManagement.js" />
     <Content Include="site-vue-new\js\CourseSubMenu.js" />
-    <Content Include="site-vue-new\js\data.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\data.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\dataTables.bootstrap.js" />
     <Content Include="site-vue-new\js\date-holiday-umd.min.js" />
     <Content Include="site-vue-new\js\DeleteClass.js" />
@@ -1035,7 +1036,7 @@
     <Content Include="site-vue-new\js\DeleteStudent.js" />
     <Content Include="site-vue-new\js\DeleteTeacher.js" />
     <Content Include="site-vue-new\js\Delete_User.js" />
-    <Content Include="site-vue-new\js\deviceList.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\deviceList.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\dist\css\bootstrap-grid.css" />
     <Content Include="site-vue-new\js\dist\css\bootstrap-grid.min.css" />
     <Content Include="site-vue-new\js\dist\css\bootstrap-reboot.css" />
@@ -1078,9 +1079,9 @@
     <Content Include="site-vue-new\js\GetOrgInfo.js" />
     <Content Include="site-vue-new\js\GetTopMenu.js" />
     <Content Include="site-vue-new\js\GroupControlMachine.js" />
-    <Content Include="site-vue-new\js\hikversionPlayer.32941d90313af153ab09.js" />
-    <Content Include="site-vue-new\js\home.32941d90313af153ab09.js" />
-    <Content Include="site-vue-new\js\index.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\hikversionPlayer.8ed2e9ca0634d471066f.js" />
+    <Content Include="site-vue-new\js\home.8ed2e9ca0634d471066f.js" />
+    <Content Include="site-vue-new\js\index.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\ip_input.js" />
     <None Include="site-vue-new\js\jquery-3.4.1.intellisense.js" />
     <Content Include="site-vue-new\js\jquery-3.4.1.js" />
@@ -1173,24 +1174,24 @@
     <Content Include="site-vue-new\js\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="site-vue-new\js\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="site-vue-new\js\locales\bootstrap-datepicker.zh-TW.min.js" />
-    <Content Include="site-vue-new\js\login.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\login.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\LoginScript.js" />
-    <Content Include="site-vue-new\js\m-data-01.32941d90313af153ab09.js" />
-    <Content Include="site-vue-new\js\m-data-02.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\m-data-01.8ed2e9ca0634d471066f.js" />
+    <Content Include="site-vue-new\js\m-data-02.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\MachineControl.js" />
     <Content Include="site-vue-new\js\moment.min.js" />
     <Content Include="site-vue-new\js\moment.zh-cn.js" />
     <Content Include="site-vue-new\js\OperationmgmtMenu.js" />
-    <Content Include="site-vue-new\js\p-data\002.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\p-data\002.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\ProjectorConfigJS.js" />
     <Content Include="site-vue-new\js\ReserveClassroom.js" />
     <Content Include="site-vue-new\js\ReserveScheduleList.js" />
     <Content Include="site-vue-new\js\Schedule.js" />
     <Content Include="site-vue-new\js\ScheduleAppointment.js" />
     <Content Include="site-vue-new\js\sensor.js" />
-    <Content Include="site-vue-new\js\settings.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\settings.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\ShowUserAccess.js" />
-    <Content Include="site-vue-new\js\strategy.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\strategy.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\StrategySubMenu.js" />
     <Content Include="site-vue-new\js\StudentInfo.js" />
     <Content Include="site-vue-new\js\SystemConfigJS.js" />
@@ -1209,7 +1210,7 @@
     <Content Include="site-vue-new\js\UserLogs.js" />
     <Content Include="site-vue-new\js\video-js.css" />
     <Content Include="site-vue-new\js\video.js" />
-    <Content Include="site-vue-new\js\vlcPlayer.32941d90313af153ab09.js" />
+    <Content Include="site-vue-new\js\vlcPlayer.8ed2e9ca0634d471066f.js" />
     <Content Include="site-vue-new\js\vue.min.js" />
     <Content Include="site-vue-new\js\WebPlugin.js" />
     <Content Include="site-vue-new\js\webVideoCtrl.js" />
@@ -1432,6 +1433,7 @@
     <Compile Include="DataAccess\DeleteOrgDetails.cs" />
     <Compile Include="DataAccess\GetMenuDataHelper.cs" />
     <Compile Include="DataAccess\GetOrgData.cs" />
+    <Compile Include="DataAccess\HistoryDataAccessHelper.cs" />
     <Compile Include="DataAccess\Schedule.cs" />
     <Compile Include="DataAccess\SessionManagement.cs" />
     <Compile Include="DataAccess\SetOrgData.cs" />
@@ -1466,7 +1468,13 @@
     <Compile Include="Models\floordetail.cs">
       <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\h_machineusagelogs.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\machineoperationlog.cs">
+      <DependentUpon>OrganisationDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\machineusagelogs_minute.cs">
       <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\operationmgmt.cs">
@@ -1593,6 +1601,10 @@
     </Compile>
     <Compile Include="Services\Handler.ashx.cs">
       <DependentUpon>Handler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\HistoryData.asmx.cs">
+      <DependentUpon>HistoryData.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\ProjectorConfig.asmx.cs">
       <DependentUpon>ProjectorConfig.asmx</DependentUpon>

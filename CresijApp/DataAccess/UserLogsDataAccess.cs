@@ -16,8 +16,7 @@ namespace CresijApp.DataAccess
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                try
-                {                    
+                                   
                     using (MySqlCommand cmd = new MySqlCommand("sp_LoginUser", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -30,15 +29,7 @@ namespace CresijApp.DataAccess
                         MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
                         mySqlDataAdapter.Fill(dt);
                     }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                finally
-                {
-                    con.Close();
-                }
+                
             }
             return dt;
         }

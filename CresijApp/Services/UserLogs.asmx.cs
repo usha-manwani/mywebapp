@@ -45,7 +45,7 @@ namespace CresijApp.Services
                     HttpContext.Current.Session["UserLoggedIn"] = loginid;
                     FormsAuthentication.SetAuthCookie(loginid, false);
                     string ticket = FormsAuthentication.Encrypt(
-                           new FormsAuthenticationTicket("userId", false, 30));
+                           new FormsAuthenticationTicket("userId", false, 90));
                     HttpCookie FormsCookie = new HttpCookie("AuthToken", ticket)
                     { HttpOnly = true };
                     var t = Guid.NewGuid().ToString();
@@ -71,7 +71,7 @@ namespace CresijApp.Services
             }
             catch (Exception ex)
             {
-                idata.Add("errorMessage ", ex.Message);
+                idata.Add("errorMessage ", ex.Message +" inner exception: "+ex.InnerException+ "stack trace: "+ ex.StackTrace);
             }
             return idata;
         }
@@ -269,12 +269,14 @@ namespace CresijApp.Services
                                     }).Take(100).AsEnumerable().Select(x=>new ClassLogs {
                                         Action=x.action,ActionTime=x.ActionTime.ToString("yyyy-MM-dd HH:mm:ss"),UserName=x.UserName,
                                         ClassId=x.ClassID,ClassName=x.ClassName
-                                    }).Union((from a in context.machineoperationlogs
+                                    })
+                                    .Union((from a in context.machineoperationlogs
                                              join b in context.classdetails on a.Location equals b.classID
                                              orderby a.ExecutionTime descending where b.classID==classid 
                                              && !a.Operation.Contains("NoData") && !a.Type.Contains("MacAddress")
-                                             && !a.Type.Contains("ControlExecution") && !a.Type.Contains("PowerControl")
-                        select new {a.ExecutionTime,a.Operation,
+                                             && !a.Type.Contains("ControlExecution") && !a.Type.Contains("PowerControl") &&
+                                             !a.Type.Contains("ReadConfig")  && !a.Type.Contains("SetConfig")
+                                            select new {a.ExecutionTime,a.Operation,
                                                  a.Type,a.Location,b.ClassName }).Take(100).AsEnumerable()
                                                  .Select(y=>new ClassLogs { Action=y.Operation.ToString(),
                                                      ActionTime =y.ExecutionTime.ToString("yyyy-MM-dd HH:mm:ss"),

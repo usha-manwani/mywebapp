@@ -60,7 +60,7 @@ namespace CresijApp.DataAccess
             return result;
         }
 
-        public List<object> GetuserInfo(string pageIndex, string pageSize)
+        public List<object> GetuserInfo(string pageIndex, string pageSize,string text)
         {
             DataTable dt = new DataTable();
             var total = 0;
@@ -73,6 +73,7 @@ namespace CresijApp.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@_PageIndex", pageIndex);
                     cmd.Parameters.AddWithValue("@_PageSize", pageSize);
+                    cmd.Parameters.AddWithValue("@con", text);
                     cmd.Parameters.Add("@_RecordCount", MySqlDbType.Int32, 4);
                     cmd.Parameters["@_RecordCount"].Direction = ParameterDirection.Output;
                     if (con.State != ConnectionState.Open)
@@ -117,38 +118,39 @@ namespace CresijApp.DataAccess
             return data;
         }
 
-        public List<object> GetStudentInfo(string pageindex, string pagesize)
+        public List<object> GetStudentInfo(string pageindex, string pagesize,string text)
         {
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
             var total = 0;
-            
-                using (MySqlConnection con = new MySqlConnection(constr))
+
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+
+                using (MySqlCommand cmd = new MySqlCommand("sp_GetStudentData", con))
                 {
-                    
-                    using (MySqlCommand cmd = new MySqlCommand("sp_GetStudentData", con))
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
+                    cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                    cmd.Parameters.AddWithValue("@con", text);
+                    cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
+                    cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
+                    if (con.State != ConnectionState.Open)
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
-                        cmd.Parameters.AddWithValue("@_PageSize", pagesize);
-                        cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
-                        cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
-                        if (con.State != ConnectionState.Open)
-                        {
-                            con.Open();
-                        }
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                        total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
-                        data.Add(total);
-                        data.Add(dt);
+                        con.Open();
                     }
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                    total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
+                    data.Add(total);
+                    data.Add(dt);
                 }
-            
+            }
+
             return data;
         }
 
-        public List<object> GetCapitalInfo( string pageindex, string pagesize)
+        public List<object> GetCapitalInfo( string pageindex, string pagesize,string text)
         {
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
@@ -161,6 +163,7 @@ namespace CresijApp.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
                     cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                    cmd.Parameters.AddWithValue("@con", text);
                     cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
                     cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
                     if (con.State != ConnectionState.Open)
@@ -177,35 +180,36 @@ namespace CresijApp.DataAccess
             return data;
         }
 
-        public List<object> GetClassroomInfo(string pageindex, string pagesize,string userid)
+        public List<object> GetClassroomInfo(string pageindex, string pagesize,string userid,string text)
         {
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
             var total = 0;
-            
-                using (MySqlConnection con = new MySqlConnection(constr))
+
+            using (MySqlConnection con = new MySqlConnection(constr))
+            {
+
+                using (MySqlCommand cmd = new MySqlCommand("sp_GetAllClassDetails", con))
                 {
-                    
-                    using (MySqlCommand cmd = new MySqlCommand("sp_GetAllClassDetails", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
-                        cmd.Parameters.AddWithValue("@_PageSize", pagesize);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
+                    cmd.Parameters.AddWithValue("@_PageSize", pagesize);
                     cmd.Parameters.AddWithValue("@userid", userid);
-                        cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
-                        cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
-                        if (con.State != ConnectionState.Open)
-                        {
-                            con.Open();
-                        }
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                        total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
-                        data.Add(total);
-                        data.Add(dt);
+                    cmd.Parameters.AddWithValue("@con", text);
+                    cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
+                    cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
                     }
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
+                    adapter.Fill(dt);
+                    total = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
+                    data.Add(total);
+                    data.Add(dt);
                 }
-            
+            }
+
             return data;
         }
         public DataTable GetClassData(string classid)

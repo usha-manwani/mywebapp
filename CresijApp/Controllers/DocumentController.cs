@@ -757,7 +757,6 @@ namespace CresijApp.Controllers
             using (var connection = new OleDbConnection(connectionstring))
             {
                 var dataSet = new DataSet();
-
                 connection.Open();
                 var schemaTable = connection.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
                 if (schemaTable == null)

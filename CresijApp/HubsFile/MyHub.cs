@@ -155,7 +155,25 @@ namespace CresijApp.HubsFile
                 int r = await ss.AddOperationLogs(cook["AuthCookie"], "SetProjectorConfig", m);
             }            
         }
-
+        //public async Task SetProjectorConfig1(List<int> classIds, Dictionary<string, string> data, string cookies)
+        //{
+        //    var id = Context.ConnectionId;
+        //    SessionHandler ss = new SessionHandler();
+        //    JavaScriptSerializer js = new JavaScriptSerializer();
+        //    var cook = js.Deserialize<Dictionary<string, string>>(cookies);
+        //    var macaddress = await ss.GetMacAddress(classIds);
+        //    await Clients.All.SetProjectorConfiguration1(macaddress, data);
+        //    if (users.Any(x => x.ConnectionId == id))
+        //    {
+        //        var us = users.Where(x => x.ConnectionId == id).FirstOrDefault();
+        //        us.AuthCookie = cook["AuthCookie"];
+        //    }
+        //    int r1 = await ss.AddUpdateConnectionID(cook["AuthCookie"], id);
+        //    foreach (var m in macaddress)
+        //    {
+        //        int r = await ss.AddOperationLogs(cook["AuthCookie"], "SetProjectorConfig", m);
+        //    }
+        //}
         public async Task GetProjectorConfig(int classId, string code, string cookies)
         {
             var id = Context.ConnectionId;
@@ -173,6 +191,8 @@ namespace CresijApp.HubsFile
             int r1 = await ss.AddUpdateConnectionID(cook["AuthCookie"], id);
             int r = await ss.AddOperationLogs(cook["AuthCookie"], "ReadProjectorConfig", machine.FirstOrDefault());
         }
+
+        
         private void saveStatusinDatebase(string sender, string data)
         {
             
@@ -188,7 +208,7 @@ namespace CresijApp.HubsFile
             //await ss.AddCamMonitorLogs(DatatoSend["AlarmTime"].ToString(), 
             //    DatatoSend["DeviceIp"].ToString(), 
             //    DatatoSend["AlarmMsg"].ToString());
-            Clients.All.messageAlarmMotion(DatatoSend);
+            await Clients.All.messageAlarmMotion(DatatoSend);
         }
         public void TriggerAlarm(string sender,string data)
         {

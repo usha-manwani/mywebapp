@@ -111,11 +111,15 @@ namespace CresijApp.Services
                 idata.Add("customErrorCode", "440");
             }
             else
-            {
-                
+            {                
                 try
                 {
-                    List<object> dat = gd.GetStudentInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    var text = "";
+                    if (data.ContainsKey("query"))
+                    {
+                        text = data["query"].ToString();
+                    }
+                    List<object> dat = gd.GetStudentInfo(data["pageIndex"].ToString(), data["pageSize"].ToString(),text);
                     idata.Add("status", "success");
                     int total = Convert.ToInt32(dat[0]);
                     KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
@@ -250,8 +254,13 @@ namespace CresijApp.Services
             {
                 try
                 {
+                    var text = "";
+                    if (data.ContainsKey("query"))
+                    {
+                        text = data["query"].ToString();
+                    }
                     List<object> result = new List<object>();
-                    result = gd.GetuserInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    result = gd.GetuserInfo(data["pageIndex"].ToString(), data["pageSize"].ToString(),text);
                     idata.Add("status", "success");
                     idata.Add("totalRows", result[0].ToString());
                     dt = result[1] as DataTable;
@@ -394,7 +403,12 @@ namespace CresijApp.Services
                     DataTable dt = new DataTable();
                     List<ClassDetails> cdList = new List<ClassDetails>();
                     List<object> d = new List<object>();
-                    d = gd.GetClassroomInfo(data["pageIndex"].ToString(), data["pageSize"].ToString(),userid);
+                    var text = "";
+                    if (data.ContainsKey("query"))
+                    {
+                        text = data["query"].ToString();
+                    }
+                    d = gd.GetClassroomInfo(data["pageIndex"].ToString(), data["pageSize"].ToString(),userid,text);
                     idata.Add("status", "success");
                     idata.Add("totalRow", d[0].ToString());
                     dt = d[1] as DataTable;
@@ -460,7 +474,12 @@ namespace CresijApp.Services
                     GetOrgData gd = new GetOrgData();
                     DataTable dt = new DataTable();
                     List<object> dd = new List<object>();
-                    dd = gd.GetCapitalInfo(data["pageIndex"].ToString(), data["pageSize"].ToString());
+                    var text = "";
+                    if (data.ContainsKey("query"))
+                    {
+                        text = data["query"].ToString();
+                    }
+                    dd = gd.GetCapitalInfo(data["pageIndex"].ToString(), data["pageSize"].ToString(),text);
                     idata.Add("status", "success");
                     idata.Add("totalRows", dd[0].ToString());
                     dt = dd[1] as DataTable;

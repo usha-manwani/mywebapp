@@ -22,6 +22,7 @@ namespace CresijApp.Models
             this.temp_desktopevents = new HashSet<temp_desktopevents>();
             this.alarmmonitorlogs = new HashSet<alarmmonitorlog>();
             this.projectorconfiginfoes = new HashSet<projectorconfiginfo>();
+            this.machineusagelogs_minute = new HashSet<machineusagelogs_minute>();
         }
     
         public int classID { get; set; }
@@ -58,5 +59,7 @@ namespace CresijApp.Models
         public virtual ICollection<alarmmonitorlog> alarmmonitorlogs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<projectorconfiginfo> projectorconfiginfoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<machineusagelogs_minute> machineusagelogs_minute { get; set; }
     }
 }

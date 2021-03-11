@@ -7,6 +7,7 @@ using System.Web.Services;
 using System.Runtime.InteropServices;
 using System.Text;
 using CresijApp.Models;
+using Microsoft.AspNet.SignalR;
 
 namespace CresijApp.Services
 {
@@ -20,7 +21,7 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class ProjectorConfig : System.Web.Services.WebService
     {
-
+        IHubContext hubContext;
         [WebMethod(EnableSession = true)]
        
         public Dictionary<string, object> GetProjectorBrand()
@@ -197,10 +198,18 @@ namespace CresijApp.Services
 
                             r += context.SaveChanges();
                         }
-
-
                         result.Add("UpdatedRows", r);
                     }
+                    List<string> machinemacs = new List<string>();
+                    using(var context = new OrganisationdatabaseEntities())
+                    {
+                        machinemacs = context.classdetails.Where(x => classids.Contains(x.classID)).Select(x => x.ccmac).ToList();
+                    }
+                    var dat = new Dictionary<string, string> { {"BaudRate", baudrate.ToString()}
+                        ,{"Parity", parity.ToString() },{"ProjectorOnCode", opencode},
+                        { "ProjectorOffCode", closecode } };
+                    hubContext = GlobalHost.ConnectionManager.GetHubContext<HubsFile.MyHub>();
+                    hubContext.Clients.All.SetProjectorConfiguration1(machinemacs, dat);
                     result.Add("status", "success");
                 }
             }

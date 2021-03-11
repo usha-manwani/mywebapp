@@ -5,7 +5,7 @@ function logoinActiviti(password, userid, cb) {
   fd.append("username", userid);
   $.ajax({
     type: "POST",
-    url: "/activit/login",
+    url: "/activiti/login",
     timeout: 10 * 1000, //超时时间设置，单位毫秒
     processData: false, // 告诉jQuery不要去处理发送的数据
     contentType: false, // 告诉jQuery不要去设置Content-Type请求头
@@ -18,7 +18,7 @@ function Login() {
   var userid = $("#userid").val();
   var password = $("#password").val();
   if (userid.trim().length > 0 && password.trim().length > 0) {
-    var d = { password: password, loginID: userid };
+    var d = { password: password, loginID: $("#userid").val() };
     var jsonData = JSON.stringify({
       data: d,
     });
@@ -45,8 +45,11 @@ function OnSuccessLogin(response) {
   if (data["status"] == "success") {
     var dd = data["value"];
     sessionStorage.setItem("userName", dd["userName"]);
+    sessionStorage.setItem("userNameID", $("#userid").val());
     logoinActiviti($("#password").val(), $("#userid").val(), () => {
-      window.location.replace("home.html");
+      setTimeout(() => {
+        window.location.replace("home.html");
+      }, 100);
     });
   } else {
     $(".messagebox").text("LoginID or password incorrect");
