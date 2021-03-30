@@ -18,7 +18,6 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class UserAuthorisation : System.Web.Services.WebService
     {
-
         [WebMethod]
         public string HelloWorld()
         {
@@ -71,7 +70,6 @@ namespace CresijApp.Services
             }
             return idata;
         }
-
         
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetUserTopMenu()
@@ -123,7 +121,6 @@ namespace CresijApp.Services
             }
             return result;
         }
-
         
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserSubMenu(string subMenuType)
@@ -173,7 +170,6 @@ namespace CresijApp.Services
             }
             return result;            
         }
-
        
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserAllSubMenu()
@@ -187,7 +183,7 @@ namespace CresijApp.Services
                 result.Add("status", "fail");
                 result.Add("errorMessage", "Session Expired");
                 result.Add("customErrorCode", "440");
-            }
+            } 
             else
             {
                 try
@@ -215,7 +211,6 @@ namespace CresijApp.Services
                         result.Add("errorMessage", "Session Expired");
                         result.Add("customErrorCode", "440");
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -225,7 +220,6 @@ namespace CresijApp.Services
             }
             return result;           
         }
-
         
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserAllLocationAccess()
@@ -245,7 +239,7 @@ namespace CresijApp.Services
                 {
                     if (Session["UserLoggedIn"].ToString() != null)
                     {
-
+                       
                         string userid = Session["UserLoggedIn"].ToString();
                         DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
                         DataTable dt = new DataTable();
@@ -277,7 +271,6 @@ namespace CresijApp.Services
             return result;
             
         }
-
         
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserPermissions(string userid)
@@ -315,9 +308,7 @@ namespace CresijApp.Services
                 }
             }
             return result;
-        }
-
-       
+        }       
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserLocationPermissions(string userid)
         {
@@ -337,9 +328,10 @@ namespace CresijApp.Services
                     DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
                     DataTable dt = new DataTable();
                     dt = userAuth.GetUserAllLocationAccess(userid);
+                    result.Add("status", "sucess");
                     if (dt.Rows.Count > 0)
                     {
-                        result.Add("status", "sucess");
+                        
                         foreach (DataRow dr in dt.Rows)
                         {
                             idata.Add(dr["className"].ToString());
@@ -354,7 +346,6 @@ namespace CresijApp.Services
                 }
             }
             return result;
-
         }
     }
 }

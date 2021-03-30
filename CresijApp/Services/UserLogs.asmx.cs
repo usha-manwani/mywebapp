@@ -88,14 +88,13 @@ namespace CresijApp.Services
                 result.Add("customErrorCode", "440");
             }
             else
-            {
+            {               
                 HttpContext.Current.Session.Timeout = 10;
                 var pageIndex = Convert.ToInt32(data["pageIndex"]);
                 var pageSize = Convert.ToInt32(data["pageSize"]);
                 List<LogsList> idata = new List<LogsList>();
                 try
                 {
-
                     UserLogsDataAccess userLogs = new UserLogsDataAccess();
                     var res = userLogs.GetUserLogDetails(pageIndex.ToString(), pageSize.ToString());
                     var dt = res[0] as DataTable;
@@ -259,7 +258,6 @@ namespace CresijApp.Services
                 {
                     using(var context = new OrganisationdatabaseEntities())
                     {
-
                         var data = (from p in context.userlogs
                                     join e in context.userdetails on p.Userid equals e.SerialNo
                                     join c in context.classdetails on p.ClassID equals c.classID

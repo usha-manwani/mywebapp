@@ -167,7 +167,6 @@ namespace CresijApp.Services
                             SchoolEngName = SchoolIn.SchoolEngName,
                             SchoolName = SchoolIn.SchoolName,
                             LogoLocation = SchoolIn.LogoLocation,
-
                         };
                         idata.Add("status", "success");
                         idata.Add("SchoolInfo", sc);
@@ -298,8 +297,6 @@ namespace CresijApp.Services
                                     secupdate.Checked = x.Checked ? Convert.ToSByte(1) : Convert.ToSByte(0);
                                     result = context.SaveChanges();
                                 }
-
-
                             }
                             else
                             {
@@ -399,7 +396,6 @@ namespace CresijApp.Services
         public string Starttime { get; set; }
         public string Stoptime { get; set; }
     }
-
 
 }
 

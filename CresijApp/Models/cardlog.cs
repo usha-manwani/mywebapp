@@ -12,16 +12,12 @@ namespace CresijApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class card_registration
+    public partial class cardlog
     {
         public int id { get; set; }
-        public string TeacherId { get; set; }
-        public int calssId { get; set; }
-        public string OneCardId { get; set; }
-        public string Status { get; set; }
-        public System.DateTime UpdateTime { get; set; }
-    
-        public virtual classdetail classdetail { get; set; }
-        public virtual teacherdata teacherdata { get; set; }
+        public string cardId { get; set; }
+        public int ClassId { get; set; }
+        public System.DateTime ActionTime { get; set; }
+        public string Message { get; set; }
     }
 }

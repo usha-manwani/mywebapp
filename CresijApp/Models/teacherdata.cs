@@ -18,6 +18,7 @@ namespace CresijApp.Models
         public teacherdata()
         {
             this.scheduletransfers = new HashSet<scheduletransfer>();
+            this.card_registration = new HashSet<card_registration>();
         }
     
         public string TeacherID { get; set; }
@@ -31,5 +32,7 @@ namespace CresijApp.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<scheduletransfer> scheduletransfers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<card_registration> card_registration { get; set; }
     }
 }

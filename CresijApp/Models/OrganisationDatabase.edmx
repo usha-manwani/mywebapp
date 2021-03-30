@@ -45,6 +45,17 @@
           <Property Name="calssId" Type="int" Nullable="false" />
           <Property Name="OneCardId" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cardlogs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cardId" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ClassId" Type="int" Nullable="false" />
+          <Property Name="ActionTime" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
         <EntityType Name="classdetails">
           <Key>
@@ -809,6 +820,20 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fkCardClassid">
+          <End Role="classdetails" Type="Self.classdetails" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="card_registration" Type="Self.card_registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classdetails">
+              <PropertyRef Name="classID" />
+            </Principal>
+            <Dependent Role="card_registration">
+              <PropertyRef Name="calssId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="sk_scReserveSemno">
           <End Role="semesterinfo" Type="Self.semesterinfo" Multiplicity="1" />
           <End Role="schedulereserve" Type="Self.schedulereserve" Multiplicity="*" />
@@ -826,6 +851,7 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
           <EntitySet Name="buildingdetails" EntityType="Self.buildingdetails" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="cameramonitorinfo" EntityType="Self.cameramonitorinfo" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="card_registration" EntityType="Self.card_registration" Schema="organisationdatabase" store:Type="Tables" />
+          <EntitySet Name="cardlogs" EntityType="Self.cardlogs" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="classdetails" EntityType="Self.classdetails" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="departmentdetail" EntityType="Self.departmentdetail" Schema="organisationdatabase" store:Type="Tables" />
           <EntitySet Name="floordetails" EntityType="Self.floordetails" Schema="organisationdatabase" store:Type="Tables" />
@@ -958,6 +984,10 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
             <End Role="userdetails" EntitySet="userdetails" />
             <End Role="userpermissions" EntitySet="userpermissions" />
           </AssociationSet>
+          <AssociationSet Name="fkCardClassid" Association="Self.fkCardClassid">
+            <End Role="classdetails" EntitySet="classdetails" />
+            <End Role="card_registration" EntitySet="card_registration" />
+          </AssociationSet>
           <AssociationSet Name="sk_scReserveSemno" Association="Self.sk_scReserveSemno">
             <End Role="semesterinfo" EntitySet="semesterinfo" />
             <End Role="schedulereserve" EntitySet="schedulereserve" />
@@ -1014,6 +1044,7 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
           <NavigationProperty Name="alarmmonitorlogs" Relationship="OrganisationdatabaseModel.fk_monitoringclassid" FromRole="classdetail" ToRole="alarmmonitorlog" />
           <NavigationProperty Name="projectorconfiginfoes" Relationship="OrganisationdatabaseModel.fk_projectorclass" FromRole="classdetail" ToRole="projectorconfiginfo" />
           <NavigationProperty Name="machineusagelogs_minute" Relationship="OrganisationdatabaseModel.fk_machineusageClassid" FromRole="classdetail" ToRole="machineusagelogs_minute" />
+          <NavigationProperty Name="card_registration" Relationship="OrganisationdatabaseModel.fkCardClassid" FromRole="classdetail" ToRole="card_registration" />
         </EntityType>
         <EntityType Name="departmentdetail">
           <Key>
@@ -1280,6 +1311,7 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
           <Property Name="idcard" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="onecard" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="scheduletransfers" Relationship="Self.fk_scheduletransfernewteacherid" FromRole="teacherdata" ToRole="scheduletransfer" />
+          <NavigationProperty Name="card_registration" Relationship="OrganisationdatabaseModel.fkCardTeacherId" FromRole="teacherdata" ToRole="card_registration" />
         </EntityType>
         <EntityType Name="temp_centralcontrol">
           <Key>
@@ -1800,13 +1832,22 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
             <End Role="classdetail" EntitySet="classdetails" />
             <End Role="projectorconfiginfo" EntitySet="projectorconfiginfoes" />
           </AssociationSet>
-          <EntitySet Name="card_registration" EntityType="OrganisationdatabaseModel.card_registration" />
           <EntitySet Name="h_machineusagelogs" EntityType="OrganisationdatabaseModel.h_machineusagelogs" />
           <EntitySet Name="machineusagelogs_minute" EntityType="OrganisationdatabaseModel.machineusagelogs_minute" />
           <AssociationSet Name="fk_machineusageClassid" Association="OrganisationdatabaseModel.fk_machineusageClassid">
             <End Role="classdetail" EntitySet="classdetails" />
             <End Role="machineusagelogs_minute" EntitySet="machineusagelogs_minute" />
           </AssociationSet>
+          <EntitySet Name="card_registration" EntityType="OrganisationdatabaseModel.card_registration" />
+          <AssociationSet Name="fkCardClassid" Association="OrganisationdatabaseModel.fkCardClassid">
+            <End Role="classdetail" EntitySet="classdetails" />
+            <End Role="card_registration" EntitySet="card_registration" />
+          </AssociationSet>
+          <AssociationSet Name="fkCardTeacherId" Association="OrganisationdatabaseModel.fkCardTeacherId">
+            <End Role="teacherdata" EntitySet="teacherdatas" />
+            <End Role="card_registration" EntitySet="card_registration" />
+          </AssociationSet>
+          <EntitySet Name="cardlogs" EntityType="OrganisationdatabaseModel.cardlog" />
         </EntityContainer>
         <EntityType Name="machineoperationlog">
           <Key>
@@ -1929,16 +1970,6 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="card_registration">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TeacherId" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="calssId" Type="Int32" Nullable="false" />
-          <Property Name="OneCardId" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="h_machineusagelogs">
           <Key>
             <PropertyRef Name="id" />
@@ -1974,6 +2005,57 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="card_registration">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeacherId" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="calssId" Type="Int32" Nullable="false" />
+          <Property Name="OneCardId" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="classdetail" Relationship="OrganisationdatabaseModel.fkCardClassid" FromRole="card_registration" ToRole="classdetail" />
+          <NavigationProperty Name="teacherdata" Relationship="OrganisationdatabaseModel.fkCardTeacherId" FromRole="card_registration" ToRole="teacherdata" />
+        </EntityType>
+        <Association Name="fkCardClassid">
+          <End Type="OrganisationdatabaseModel.classdetail" Role="classdetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="OrganisationdatabaseModel.card_registration" Role="card_registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="classdetail">
+              <PropertyRef Name="classID" />
+            </Principal>
+            <Dependent Role="card_registration">
+              <PropertyRef Name="calssId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkCardTeacherId">
+          <End Type="OrganisationdatabaseModel.teacherdata" Role="teacherdata" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="OrganisationdatabaseModel.card_registration" Role="card_registration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacherdata">
+              <PropertyRef Name="TeacherID" />
+            </Principal>
+            <Dependent Role="card_registration">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="cardlog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cardId" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ClassId" Type="Int32" Nullable="false" />
+          <Property Name="ActionTime" Type="DateTime" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2441,17 +2523,6 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="card_registration">
-            <EntityTypeMapping TypeName="OrganisationdatabaseModel.card_registration">
-              <MappingFragment StoreEntitySet="card_registration">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="OneCardId" ColumnName="OneCardId" />
-                <ScalarProperty Name="calssId" ColumnName="calssId" />
-                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="h_machineusagelogs">
             <EntityTypeMapping TypeName="OrganisationdatabaseModel.h_machineusagelogs">
               <MappingFragment StoreEntitySet="h_machineusagelogs">
@@ -2470,6 +2541,29 @@ warning 6035: The relationship 'fk_sessionLoginId' has columns that are not part
                 <ScalarProperty Name="value" ColumnName="value" />
                 <ScalarProperty Name="recordtime" ColumnName="recordtime" />
                 <ScalarProperty Name="classid" ColumnName="classid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="card_registration">
+            <EntityTypeMapping TypeName="OrganisationdatabaseModel.card_registration">
+              <MappingFragment StoreEntitySet="card_registration">
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OneCardId" ColumnName="OneCardId" />
+                <ScalarProperty Name="calssId" ColumnName="calssId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cardlogs">
+            <EntityTypeMapping TypeName="OrganisationdatabaseModel.cardlog">
+              <MappingFragment StoreEntitySet="cardlogs">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ActionTime" ColumnName="ActionTime" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="cardId" ColumnName="cardId" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
