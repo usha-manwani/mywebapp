@@ -10,9 +10,10 @@ namespace CresijApp.DataAccess
     public class Schedule
     {
 
-        readonly string constring = System.Configuration.ConfigurationManager.
-            ConnectionStrings["SchoolConnectionString"].ConnectionString;
-
+        string constring = System.Configuration.ConfigurationManager.
+            ConnectionStrings["Organisationdatabase"].ConnectionString;
+        public Schedule() { }
+        public Schedule(string constr) { constring = constr; }
         public DataTable GetCourse()
         {
             DataTable dt = new DataTable();

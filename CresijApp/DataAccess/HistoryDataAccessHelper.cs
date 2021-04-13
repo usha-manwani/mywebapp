@@ -10,8 +10,16 @@ namespace CresijApp.DataAccess
 {
     public class HistoryDataAccessHelper
     {
-        readonly string constr = System.Configuration.ConfigurationManager.
-           ConnectionStrings["SchoolConnectionString"].ConnectionString;
+        string constr = System.Configuration.ConfigurationManager.
+           ConnectionStrings["Organisationdatabase"].ConnectionString;
+        public HistoryDataAccessHelper()
+        {
+
+        }
+        public HistoryDataAccessHelper(string constring)
+        {
+            constr = constring;
+        }
         public DataTable ExecuteQuery(string query)
         {
             DataTable dt = new DataTable();
@@ -25,5 +33,6 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+        
     }
 }

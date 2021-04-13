@@ -29,10 +29,15 @@ namespace CresijApp.Services
             Dictionary<string, object> idata1 = new Dictionary<string, object>();
             try
             {
-                string loginid = "", password = "";
+               string loginid = "", password = "";
                 loginid = data["loginID"].ToString().Trim();
                 password = data["password"].ToString();
-                UserLogsDataAccess userLogs = new UserLogsDataAccess();
+                var campus = "Organisationdatabase";
+                if (data.ContainsKey("connectTo"))
+                {
+                    campus = data["connectTo"].ToString();
+                }
+                UserLogsDataAccess userLogs = new UserLogsDataAccess(campus);
                 DataTable dt = userLogs.Login(loginid, password);
                 if (dt.Rows.Count > 0)
                 {
@@ -43,6 +48,7 @@ namespace CresijApp.Services
                     idata1.Add("startDate", dt.Rows[0]["startdate"].ToString());
                     idata1.Add("expireDate", dt.Rows[0]["expiredate"].ToString());
                     HttpContext.Current.Session["UserLoggedIn"] = loginid;
+                    HttpContext.Current.Session["DBConnection"] = campus;
                     FormsAuthentication.SetAuthCookie(loginid, false);
                     string ticket = FormsAuthentication.Encrypt(
                            new FormsAuthenticationTicket("userId", false, 90));
@@ -52,7 +58,7 @@ namespace CresijApp.Services
                     HttpContext.Current.Session["AuthToken"] = t;
                     HttpContext.Current.Response.Cookies.Add(new HttpCookie("AuthCookie", t));
                     HttpContext.Current.Response.Cookies.Add(FormsCookie);
-                    using(var context = new OrganisationdatabaseEntities())
+                    using(var context = new OrganisationdatabaseEntities(campus+"Entities"))
                     {
                         usersessioninfo ss = new usersessioninfo() {
                             LoginID = dt.Rows[0]["loginid"].ToString(),
@@ -89,13 +95,14 @@ namespace CresijApp.Services
             }
             else
             {               
-                HttpContext.Current.Session.Timeout = 10;
+                HttpContext.Current.Session.Timeout = 20;
+                var db= HttpContext.Current.Session["DBConnection"].ToString();
                 var pageIndex = Convert.ToInt32(data["pageIndex"]);
                 var pageSize = Convert.ToInt32(data["pageSize"]);
                 List<LogsList> idata = new List<LogsList>();
                 try
                 {
-                    UserLogsDataAccess userLogs = new UserLogsDataAccess();
+                    UserLogsDataAccess userLogs = new UserLogsDataAccess(db);
                     var res = userLogs.GetUserLogDetails(pageIndex.ToString(), pageSize.ToString());
                     var dt = res[0] as DataTable;
                     if (dt.Rows.Count > 0)
@@ -158,8 +165,9 @@ namespace CresijApp.Services
                 result.Add("customErrorCode", "440");
             }
             else
-            {               
-                UserLogsDataAccess userLogs = new UserLogsDataAccess();
+            {
+                var db = HttpContext.Current.Session["DBConnection"].ToString();
+                UserLogsDataAccess userLogs = new UserLogsDataAccess(db);
                 DataTable dt = userLogs.GetLogDetails();
                 if (dt.Rows.Count > 0)
                 {
@@ -191,7 +199,8 @@ namespace CresijApp.Services
             try
             {
                 var loginid = "";
-                using (var context = new OrganisationdatabaseEntities())
+                var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                using (var context = new OrganisationdatabaseEntities(db))
                 {
                     //var cookiesid = HttpContext.Current.Request.Cookies["AuthCookie"].Value ;
                     if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
@@ -219,6 +228,7 @@ namespace CresijApp.Services
                 HttpContext.Current.Request.Cookies.Remove("AuthCookie");
                 HttpContext.Current.Request.Cookies.Remove("AuthToken");
                 HttpContext.Current.Session.Remove("UserLoggedIn");
+                HttpContext.Current.Session.Remove("DBConnection");
                 HttpContext.Current.Session.Remove("AuthToken");
                 HttpContext.Current.Session.Remove("AuthCookie");
                 HttpContext.Current.Session.RemoveAll();
@@ -251,12 +261,13 @@ namespace CresijApp.Services
             }
             else
             {
+                var db = HttpContext.Current.Session["DBConnection"].ToString() +"Entities";
                 HttpContext.Current.Session.Timeout = 10;
                 int classid = Convert.ToInt32(id);
                 List<LogsList> idata = new List<LogsList>();
                 try
                 {
-                    using(var context = new OrganisationdatabaseEntities())
+                    using(var context = new OrganisationdatabaseEntities(db))
                     {
                         var data = (from p in context.userlogs
                                     join e in context.userdetails on p.Userid equals e.SerialNo
@@ -269,16 +280,29 @@ namespace CresijApp.Services
                                         ClassId=x.ClassID,ClassName=x.ClassName
                                     })
                                     .Union((from a in context.machineoperationlogs
-                                             join b in context.classdetails on a.Location equals b.classID
+                                             join b in context.classdetails on a.Location equals b.classID 
+                                              
                                              orderby a.ExecutionTime descending where b.classID==classid 
                                              && !a.Operation.Contains("NoData") && !a.Type.Contains("MacAddress")
                                              && !a.Type.Contains("ControlExecution") && !a.Type.Contains("PowerControl") &&
-                                             !a.Type.Contains("ReadConfig")  && !a.Type.Contains("SetConfig")
+                                             !a.Type.Contains("ReadConfig")  && !a.Type.Contains("SetConfig") 
                                             select new {a.ExecutionTime,a.Operation,
                                                  a.Type,a.Location,b.ClassName }).Take(100).AsEnumerable()
                                                  .Select(y=>new ClassLogs { Action=y.Operation.ToString(),
                                                      ActionTime =y.ExecutionTime.ToString("yyyy-MM-dd HH:mm:ss"),
-                                                 UserName=y.Type, ClassId=y.Location,ClassName=y.ClassName})).OrderByDescending(x=>x.ActionTime).Take(100).ToList();
+                                                 UserName=y.Type, ClassId=y.Location,ClassName=y.ClassName})).
+                                                 OrderByDescending(x=>x.ActionTime).Take(100).ToList();
+                        foreach(var x in data)
+                        {
+                            if (x.Action.Contains("ReaderLog"))
+                            {
+                                var tname = context.teacherdatas.Where(y => y.onecard == x.UserName).Select(z => z.TeacherName).FirstOrDefault();
+                                if (!string.IsNullOrEmpty(tname))
+                                {
+                                    x.UserName= tname;
+                                }
+                            }
+                        }
                         result.Add("data", data);
                         result.Add("TotalRows", data.Count());
                     }

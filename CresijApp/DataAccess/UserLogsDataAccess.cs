@@ -9,27 +9,34 @@ namespace CresijApp.DataAccess
 {
     public class UserLogsDataAccess
     {
-        readonly string constr = System.Configuration.ConfigurationManager.
-            ConnectionStrings["SchoolConnectionString"].ConnectionString;
+        string constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings["Organisationdatabase"].ConnectionString;
+        public UserLogsDataAccess()
+        {
+
+        }
+        public UserLogsDataAccess(string constring)
+        {
+            constr= System.Configuration.ConfigurationManager.
+            ConnectionStrings[constring].ConnectionString;
+        }
         public DataTable Login(string id, string pass)
         {
             DataTable dt = new DataTable();
             using (MySqlConnection con = new MySqlConnection(constr))
             {
-                                   
-                    using (MySqlCommand cmd = new MySqlCommand("sp_LoginUser", con))
+                using (MySqlCommand cmd = new MySqlCommand("sp_LoginUser", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@userid", id);
+                    cmd.Parameters.AddWithValue("@pass", pass);
+                    if (con.State != ConnectionState.Open)
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@userid", id);
-                        cmd.Parameters.AddWithValue("@pass", pass);
-                        if (con.State != ConnectionState.Open)
-                        {
-                            con.Open();
-                        }
-                        MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
-                        mySqlDataAdapter.Fill(dt);
+                        con.Open();
                     }
-                
+                    MySqlDataAdapter mySqlDataAdapter = new MySqlDataAdapter(cmd);
+                    mySqlDataAdapter.Fill(dt);
+                }
             }
             return dt;
         }

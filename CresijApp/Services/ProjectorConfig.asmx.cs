@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using CresijApp.Models;
 using Microsoft.AspNet.SignalR;
+using IniFile;
 
 namespace CresijApp.Services
 {
@@ -76,9 +77,10 @@ namespace CresijApp.Services
                 else
                 {
                     var path = HttpContext.Current.Server.MapPath("~/Projector Type/" + brand);
-                    var dirs = Directory.GetFiles(path, "*.ini");
-
+                    var dirs = Directory.GetFiles(path, "*.ini").ToList();
+                    
                     List<string> names = new List<string>();
+                    //dirs.ForEach(x => names.Add( x.Split('.')[0]));
                     foreach (var r in dirs)
                     {
                         names.Add(new FileInfo(r).Name.Split('.')[0]);
@@ -117,11 +119,13 @@ namespace CresijApp.Services
                     var brand = data["Brand"].ToString();
                     var model = data["Model"].ToString();
                     var path = HttpContext.Current.Server.MapPath("~/Projector Type/" + brand + "/" + model + ".ini");
-                    IniFile inf = new IniFile(path);
+                    IniFile inf = new IniFile(path);                    
+                    
                     result.Add("BaudRate", inf.IniReadValue("Option", "BaudRate"));
                     result.Add("Parity", inf.IniReadValue("Option", "Parity"));
                     result.Add("OpenCode", inf.IniReadValue("Option", "Open"));
                     result.Add("CloseCode", inf.IniReadValue("Option", "Close"));
+                    
                     result1.Add("status", "success");
                     result1.Add("value", result);
                 }
@@ -158,7 +162,9 @@ namespace CresijApp.Services
                     var parity = Convert.ToInt16(data["Parity"]);
                     var opencode = data["OpenCode"].ToString();
                     var closecode = data["CloseCode"].ToString();
-                    using (var context = new OrganisationdatabaseEntities())
+
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         if (classids != null)
                         {
@@ -201,7 +207,9 @@ namespace CresijApp.Services
                         result.Add("UpdatedRows", r);
                     }
                     List<string> machinemacs = new List<string>();
-                    using(var context = new OrganisationdatabaseEntities())
+
+                    
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         machinemacs = context.classdetails.Where(x => classids.Contains(x.classID)).Select(x => x.ccmac).ToList();
                     }
@@ -236,7 +244,9 @@ namespace CresijApp.Services
                 }
                 else
                 {
-                    using (var context = new OrganisationdatabaseEntities())
+
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         var row = context.projectorconfiginfoes.Where(x => x.Classid == classid)
                             .Select(x => new

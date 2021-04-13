@@ -43,7 +43,8 @@ namespace CresijApp.Services
                 var timerange = data["timeRange"];
                 if (timerange == "SumOfDays")
                 {
-                    using (var context = new OrganisationdatabaseEntities())
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         var rows = context.machineusagelogs_minute.Where(x => x.recordtime >= startTime && x.recordtime <= endTime
                            && x.attribute == propname && x.classid == classid).Sum(x => x.value);

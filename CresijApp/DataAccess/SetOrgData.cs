@@ -9,8 +9,10 @@ namespace CresijApp.DataAccess
 {
     public class SetOrgData
     {
-        readonly string constr = System.Configuration.ConfigurationManager.
-            ConnectionStrings["SchoolConnectionString"].ConnectionString;
+        string constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings["Organisationdatabase"].ConnectionString;
+        public SetOrgData() { }
+        public SetOrgData(string constring) { constr = constring; }
         public int SaveOrgDataBuilding(Dictionary<string,string> data)
         {
             int result = -1;
@@ -255,8 +257,8 @@ namespace CresijApp.DataAccess
             int result = -1;           
                 if (data["personType"].ToString() == "longterm")
                 {
-                    data["expireDate"] = DateTime.Now.ToString("yyyy-MM-dd hh:mm");
-                    data["startDate"] = DateTime.Now.ToString("yyyy-MM-dd hh:mm");
+                    data["expireDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+                    data["startDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
                 }
                 using (MySqlConnection con = new MySqlConnection(constr))
                 {
@@ -288,8 +290,8 @@ namespace CresijApp.DataAccess
             int result = -1;
             if (data["personType"].ToString() == "longterm")
             {
-                data["expireDate"] = DateTime.Now.ToString("yyyy-MM-dd hh:mm");
-                data["startDate"] = DateTime.Now.ToString("yyyy-MM-dd hh:mm");
+                data["expireDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
+                data["startDate"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
             }
             using (MySqlConnection con = new MySqlConnection(constr))
             {

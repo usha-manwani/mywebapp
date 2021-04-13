@@ -50,7 +50,8 @@ namespace CresijApp.Services
                     if (semno != 1 && semno != 2) semno = 1;
                     try
                     {
-                        using (var context = new OrganisationdatabaseEntities())
+                        var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                        using (var context = new OrganisationdatabaseEntities(db))
                         {
                             if (context.semesterinfoes.Any(x => x.SemNo == semno))
                             {
@@ -155,7 +156,8 @@ namespace CresijApp.Services
 
             try
             {
-                using (var context = new OrganisationdatabaseEntities())
+                var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                using (var context = new OrganisationdatabaseEntities(db))
                 {
                     var semno = context.semesterinfoes.Where(x => x.StartDate < DateTime.Now)
                         .OrderByDescending(x => x.StartDate).Select(x=>x.SemNo).FirstOrDefault();
@@ -251,8 +253,8 @@ namespace CresijApp.Services
                     var seminfo = js.Deserialize<SemesterInfo>(temp2);
                     var temp3 = js.Serialize(data["SchoolInfo"]);
                     var schinfo = js.Deserialize<systemsetting>(temp3);
-
-                    using (var context = new OrganisationdatabaseEntities())
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         foreach (var x in restrans)
                         {
@@ -417,7 +419,8 @@ namespace CresijApp.Services
 //        {
 //            try
 //            {
-//                using (var context = new OrganisationdatabaseEntities())
+//var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+//                using (var context = new OrganisationdatabaseEntities(db))
 //                {
 //                    var sec = data["Sectionselected"];
 //                    var sec1 = ((IEnumerable)sec).Cast<object>();

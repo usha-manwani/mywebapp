@@ -19,12 +19,12 @@ namespace CresijApp.Models
             : base("name=OrganisationdatabaseEntities")
         {
         }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+
+        public OrganisationdatabaseEntities(string constr)
+           : base("name="+constr)
         {
-            throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<buildingdetail> buildingdetails { get; set; }
         public virtual DbSet<classdetail> classdetails { get; set; }
         public virtual DbSet<departmentdetail> departmentdetails { get; set; }

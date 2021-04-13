@@ -10,7 +10,9 @@ namespace CresijApp.DataAccess
     public class SystemInfo
     {
         readonly string constr = System.Configuration.ConfigurationManager.
-            ConnectionStrings["SchoolConnectionString"].ConnectionString;
+            ConnectionStrings["Organisationdatabase"].ConnectionString;
+        public SystemInfo() { }
+        public SystemInfo(string constring) { constr = constring; }
         public int SaveSystemInfo(string schoolname, string schooleng, string logourl, string semname, string weeks, string semstartdate, Dictionary<string, string> days, int semno, string autoholiday)
         {
             int result = 0;

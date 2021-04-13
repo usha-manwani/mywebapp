@@ -37,7 +37,9 @@ namespace CresijApp.Services
                 try
                 {
                     var adminid = Session["UserLoggedIn"].ToString();
-                    using (var context = new OrganisationdatabaseEntities())
+
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         var buildid = 0;
                         buildingdetail bd = new buildingdetail()
@@ -125,7 +127,8 @@ namespace CresijApp.Services
                 try
                 {
                     var adminid = Session["UserLoggedIn"].ToString();
-                    using (var context = new OrganisationdatabaseEntities())
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         var flid = 0;
                         floordetail fd = new floordetail()

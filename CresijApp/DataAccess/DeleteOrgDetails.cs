@@ -10,8 +10,10 @@ namespace CresijApp.DataAccess
 {
     public class DeleteOrgDetails
     {
-        readonly string constr = System.Configuration.ConfigurationManager.
-           ConnectionStrings["SchoolConnectionString"].ConnectionString;
+        string constr = System.Configuration.ConfigurationManager.
+           ConnectionStrings["Organisationdatabase"].ConnectionString;
+        public DeleteOrgDetails() { }
+        public DeleteOrgDetails(string constring) { constr = constring; }
         public int DeleteOrg(int id)
         {
             int result = 0;

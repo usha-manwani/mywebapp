@@ -80,10 +80,7 @@ foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())
 #>
     }
 
-    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    {
-        throw new UnintentionalCodeFirstException();
-    }
+    
 
 <#
     foreach (var entitySet in container.BaseEntitySets.OfType<EntitySet>())

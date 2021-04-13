@@ -34,7 +34,7 @@ namespace CresijApp.Services
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             List<BuildingDataStructure> buildings = new List<BuildingDataStructure>();
-            GetOrgData gd = new GetOrgData();
+            GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             DataTable dt = new DataTable();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -102,7 +102,7 @@ namespace CresijApp.Services
         public Dictionary<string,object> GetStudentData(Dictionary<string, object> data)
         {
             Dictionary<string,object> idata = new Dictionary<string, object>();
-            GetOrgData gd = new GetOrgData();
+            GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -170,7 +170,7 @@ namespace CresijApp.Services
         public Dictionary<string, object> GetTeacherData(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            GetOrgData gd = new GetOrgData();
+            GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             string text = "";
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -241,7 +241,7 @@ namespace CresijApp.Services
         public Dictionary<string, object> GetUserData(Dictionary<string, object> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            GetOrgData gd = new GetOrgData();
+            GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             DataTable dt = new DataTable();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -300,7 +300,7 @@ namespace CresijApp.Services
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             Dictionary<string, string> list = new Dictionary<string, string>();
-            GetOrgData gd = new GetOrgData();
+            GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -399,7 +399,7 @@ namespace CresijApp.Services
                var userid= HttpContext.Current.Session["UserLoggedIn"].ToString();
                 try
                 {
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = new DataTable();
                     List<ClassDetails> cdList = new List<ClassDetails>();
                     List<object> d = new List<object>();
@@ -471,7 +471,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = new DataTable();
                     List<object> dd = new List<object>();
                     var text = "";
@@ -536,7 +536,7 @@ namespace CresijApp.Services
         {
             Dictionary<string, object> d = new Dictionary<string, object>();
             Dictionary<string, string> idata = new Dictionary<string, string>();
-            GetOrgData gd = new GetOrgData();
+            GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -578,6 +578,7 @@ namespace CresijApp.Services
             public string ScheduleId { get; set; }
             public string CourseId { get; set; }
             public string CourseName { get; set; }
+            public string TeacherName { get; set; }
         }
         
         [WebMethod(EnableSession = true)]
@@ -595,7 +596,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     List<object> dat = gd.GetIPClassByBuilding(data["pageIndex"].ToString(), data["pageSize"].ToString(),
                         data["building"].ToString(), HttpContext.Current.Session["UserLoggedIn"].ToString());
                     DataTable dt = dat[1] as DataTable;
@@ -617,7 +618,9 @@ namespace CresijApp.Services
                                 MacAddress = dr["ccmac"].ToString(),
                                 ScheduleId = dr["scheduleid"].ToString(),
                                 CourseId = dr["courseid"].ToString(),
-                                CourseName = dr["coursename"].ToString()
+                                CourseName = dr["coursename"].ToString(),
+                                TeacherName =dr["teachername"].ToString()
+                                
                             };
                             iPClassByBuildings.Add(iPClass);
                         }
@@ -633,19 +636,6 @@ namespace CresijApp.Services
             return idata;
         }
 
-        private class IPClassByBuildingFloorStructure
-        {
-            public int RowNum { get; set; }
-            public string ClassName { get; set; }
-            public string Floor { get; set; }
-            public string CCEquipIP { get; set; }
-            public string ClassId { get; set; }
-            public string MacAddress { get; set; }
-            public string ScheduleId { get; set; }
-            public string CourseId { get; set; }
-            public string CourseName { get; set; }
-        }
-        
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetIPClassByBuildingFloor(Dictionary<string, object> data)
         {            
@@ -661,19 +651,19 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     List<object> dat = gd.GetIPClassByBuildingFloor(data["building"].ToString(), data["floor"].ToString(),
                         HttpContext.Current.Session["UserLoggedIn"].ToString(), data["pageIndex"].ToString(), Convert.ToInt32(data["pageSize"].ToString()));
                     DataTable dt = dat[1] as DataTable;
                     int total = Convert.ToInt32(dat[0]);
                     KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
                     idata.Add("totalRows", total);
-                    List<IPClassByBuildingFloorStructure> iPClassByBuildings = new List<IPClassByBuildingFloorStructure>();
+                    List<IPClassByBuildingStructure> iPClassByBuildings = new List<IPClassByBuildingStructure>();
                     if (dt.Rows.Count > 0)
                     {
                         foreach (DataRow dr in dt.Rows)
                         {
-                            IPClassByBuildingFloorStructure iPClass = new IPClassByBuildingFloorStructure()
+                            IPClassByBuildingStructure iPClass = new IPClassByBuildingStructure()
                             {
                                 RowNum = Convert.ToInt32(dr["rownumber"]),
                                 ClassName = dr["classname"].ToString(),
@@ -683,8 +673,8 @@ namespace CresijApp.Services
                                 MacAddress=dr["ccmac"].ToString(),
                                 ScheduleId = dr["scheduleid"].ToString(),
                                 CourseId = dr["courseid"].ToString(),
-                                CourseName = dr["coursename"].ToString()
-
+                                CourseName = dr["coursename"].ToString(),
+                                TeacherName = dr["teachername"].ToString()
                             };
                             iPClassByBuildings.Add(iPClass);
                         }
@@ -704,7 +694,7 @@ namespace CresijApp.Services
         public Dictionary<string, object> GetClassDataById(string id)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            GetOrgData gd = new GetOrgData();
+            GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -784,7 +774,7 @@ namespace CresijApp.Services
                 {
                     List<FloorList> idata = new List<FloorList>();
                     
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = gd.GetFloorlist(building);
                     if (dt.Rows.Count > 0)
                     {
@@ -827,7 +817,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = gd.GetSchoolName(building);
                     if (dt.Rows.Count > 0)
                         foreach (DataRow dr in dt.Rows)
@@ -860,7 +850,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = gd.GetClassByIP(ip);
                     Dictionary<string, string> val = new Dictionary<string, string>();
                     if (dt.Rows.Count > 0)
@@ -909,7 +899,7 @@ namespace CresijApp.Services
                 try
                 {
                     var userid = HttpContext.Current.Session["UserLoggedIn"].ToString();
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = gd.GetFloorDetails(building,userid);
                     List<FloorDataStructure> fd = new List<FloorDataStructure>();
                     idata.Add("status", "success");
@@ -986,7 +976,7 @@ namespace CresijApp.Services
                 try
                 {
                     var classId = Convert.ToInt32(id);
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     var data= gd.GetCameraByClassId(classId);
                     idata.Add("status", "Success");
                     idata.Add("value",data);
@@ -1015,7 +1005,7 @@ namespace CresijApp.Services
             {
                 try
                 {                    
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     var data = gd.GetCameraByClassIds(id);
                     idata.Add("status", "Success");
                     idata.Add("value", data);
@@ -1046,7 +1036,7 @@ namespace CresijApp.Services
                 try
                 {
                     string id = HttpContext.Current.Session["UserLoggedIn"].ToString();
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     var keyword = data["keyword"].ToString();
                     var inOut = Convert.ToBoolean(data["in_or_out"]);
                     var filter = Convert.ToBoolean(data["filter"]);
@@ -1112,7 +1102,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    GetOrgData gd = new GetOrgData();
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     var data1 = gd.GetDesktopEventLogs(Convert.ToInt32(data["pageSize"]), Convert.ToInt32(data["pageIndex"]));
                     idata.Add("status", "Success");
                     idata.Add("value", data1["data"]);

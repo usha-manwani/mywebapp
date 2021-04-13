@@ -32,7 +32,8 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    GetOrgData gd = new GetOrgData();
+                    
+                    GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
                     var data1 = gd.GetDesktopEventLogs(Convert.ToInt32(data["pageSize"]), Convert.ToInt32(data["pageIndex"]));
                     idata.Add("status", "Success");
                     idata.Add("value", data1["data"]);

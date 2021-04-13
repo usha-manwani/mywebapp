@@ -12,8 +12,9 @@ namespace CresijApp.DataAccess
     public class StrategyMgmt
     {
         readonly string constr = System.Configuration.ConfigurationManager.
-            ConnectionStrings["SchoolConnectionString"].ConnectionString;
-
+            ConnectionStrings["Organisationdatabase"].ConnectionString;
+        public StrategyMgmt() { }
+        public StrategyMgmt(string constring) { constr = constring; }
         public List<object> GetAllStrategy( Dictionary<string,string>data)
         {
             int totalrows = 0;
@@ -22,8 +23,7 @@ namespace CresijApp.DataAccess
             try
             {
                 using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    
+                {                    
                     using (MySqlCommand cmd = new MySqlCommand("sp_GetStrategyList", con))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -39,7 +39,6 @@ namespace CresijApp.DataAccess
                         mySqlDataAdapter.Fill(dt);
                         totalrows = Convert.ToInt32(cmd.Parameters["_RecordCount"].Value);
                     }
-
                 }
                 result.Add(totalrows);
                 result.Add(dt);

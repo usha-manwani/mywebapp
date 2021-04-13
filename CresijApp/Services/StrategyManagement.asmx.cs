@@ -116,7 +116,8 @@ namespace CresijApp.Services
                 {
                     var temp = js.Serialize(data["StrategyLocation"]);
                     var loc = js.Deserialize<string[]>(temp);
-                    using (var db = new OrganisationdatabaseEntities())
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         strategymanagement stmgmt = new strategymanagement()
                         {
@@ -127,8 +128,8 @@ namespace CresijApp.Services
                             strategyType = data["StrategyType"].ToString(),
                             CurrentStatus = Convert.ToSByte(data["CurrentStatus"].ToString() == "true" ? 1 : 0),
                         };
-                        db.strategymanagements.Add(stmgmt);
-                        result = db.SaveChanges();
+                        context.strategymanagements.Add(stmgmt);
+                        result = context.SaveChanges();
                         int stmgmtid = stmgmt.strategyId;
                         var obj = js.Serialize(data["StrategyServices"]);
                         var strategyServices = js.Deserialize<List<StrategyServiceStructure>>(obj);
@@ -148,8 +149,8 @@ namespace CresijApp.Services
                             scd.Add(sc);
                         }
 
-                        db.strategydescriptions.AddRange(scd);
-                        db.SaveChanges();
+                        context.strategydescriptions.AddRange(scd);
+                        context.SaveChanges();
                     }
                     idata.Add("status", "success");
                     idata.Add("totalRows", result);
@@ -206,11 +207,12 @@ namespace CresijApp.Services
                 {
                     var temp = js.Serialize(data["StrategyLocation"]);
                     var loc = js.Deserialize<string[]>(temp);
-                    using (var db = new OrganisationdatabaseEntities())
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         var strategylocation = string.Join(",", loc) ?? "";
                         var stid = Convert.ToInt32(data["StrategyId"]);
-                        var stg = db.strategymanagements.Find(stid);
+                        var stg = context.strategymanagements.Find(stid);
                         if (stg != null)
                         {
                             stg.StrategyLocation = strategylocation;
@@ -220,9 +222,9 @@ namespace CresijApp.Services
                             stg.strategyType = data["StrategyType"].ToString();
                         }
                             
-                        var list = db.strategydescriptions.Where(x => x.StrategyRefId == stid);
+                        var list = context.strategydescriptions.Where(x => x.StrategyRefId == stid);
                         foreach (var v in list)
-                            db.strategydescriptions.Remove(v);
+                            context.strategydescriptions.Remove(v);
 
                         var obj = js.Serialize(data["StrategyServices"]);
                         var strategyServices = js.Deserialize<List<StrategyServiceStructure>>(obj);
@@ -241,8 +243,8 @@ namespace CresijApp.Services
                             };
                             scd.Add(sc);
                         }
-                        db.strategydescriptions.AddRange(scd);
-                       result= db.SaveChanges();
+                        context.strategydescriptions.AddRange(scd);
+                       result= context.SaveChanges();
                     }
                     idata.Add("status", "success");
                     idata.Add("Affected Rows", result);
@@ -333,7 +335,8 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    using (var context = new OrganisationdatabaseEntities())
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         List<StrategyDescStructure> dataset = (from p in context.strategydescriptions
                                        join e in context.strategyequipments 
@@ -394,7 +397,8 @@ namespace CresijApp.Services
 
                 try
                 {
-                    using (var context = new OrganisationdatabaseEntities())
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         foreach (string id in data)
                         {
@@ -496,7 +500,8 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    using (var context = new OrganisationdatabaseEntities())
+                    var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                    using (var context = new OrganisationdatabaseEntities(db))
                     {
                         var tempid = Convert.ToInt32(data["Id"]);
                         var stat = Convert.ToSByte(Convert.ToBoolean(data["CurrentStatus"])?1:0);

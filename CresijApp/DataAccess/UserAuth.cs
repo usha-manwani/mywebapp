@@ -11,7 +11,9 @@ namespace CresijApp.DataAccess
     public class UserAuth
     {
         readonly string constr = System.Configuration.ConfigurationManager.
-            ConnectionStrings["SchoolConnectionString"].ConnectionString;
+            ConnectionStrings["Organisationdatabase"].ConnectionString;
+        public UserAuth() { }
+        public UserAuth(string constring) { constr = constring; }
         public int SaveAuthMenu(string[] data, string userid, string adminid, string[] classnames)
         {
             int result = 0;

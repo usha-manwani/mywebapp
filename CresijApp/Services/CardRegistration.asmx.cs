@@ -32,8 +32,9 @@ namespace CresijApp.Services
             int updatedRows = 0;
             List<int> classids = new List<int>();           
             var cardid = data["cardId"].ToString();
-            var teacherId = data["teacherId"].ToString();            
-            using (var context = new OrganisationdatabaseEntities())
+            var teacherId = data["teacherId"].ToString();
+            var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+            using (var context = new OrganisationdatabaseEntities(db))
             {
                 if (data["classids"].ToString() != "*")
                     classids = ((object[])data["classids"]).Cast<int>().ToList();
@@ -77,7 +78,8 @@ namespace CresijApp.Services
             //var classid = data["classid"].ToString();
             var teacherId =  data["teachers"].ToString();
             var dd = new Dictionary<string, string>();
-            using (var context = new OrganisationdatabaseEntities())
+            var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+            using (var context = new OrganisationdatabaseEntities(db))
             {               
                 if (data["classids"].ToString() != "*")
                     classids = ((object[])data["classids"]).Cast<int>().ToList();
@@ -140,10 +142,12 @@ namespace CresijApp.Services
             List<string> teacherIdlist = new List<string>();
             //var classid = data["classid"].ToString();
             try
+
             {
                 var teacherId = data["teachers"].ToString();
                 var dd = new Dictionary<string, string>();
-                using (var context = new OrganisationdatabaseEntities())
+                var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+                using (var context = new OrganisationdatabaseEntities(db))
                 {
                     
                     if (data["classids"].ToString() != "*")
@@ -220,8 +224,9 @@ namespace CresijApp.Services
                 result.Add("status", "success");
                 var pageSize = Convert.ToInt32(data["pageSize"]);
                 var pageIndex = Convert.ToInt32(data["pageIndex"]);
+                var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
                 var logslistobj = new List<CardLogsList>();
-                using (var context = new OrganisationdatabaseEntities())
+                using (var context = new OrganisationdatabaseEntities(db))
                 {
                     logslistobj = (from c2 in context.cardlogs
                                     join c1 in context.teacherdatas

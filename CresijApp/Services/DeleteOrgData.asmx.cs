@@ -36,7 +36,7 @@ namespace CresijApp.Services
                 {
 					List<string> buildingid = new List<string>();
                     buildingid.Add(sno);
-                    DeleteOrgDetails del = new DeleteOrgDetails();
+                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     result = del.DeleteMultipleBuilding(buildingid);
                     if (result>= 0)
                     {
@@ -68,7 +68,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DeleteOrgDetails del = new DeleteOrgDetails();
+                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     result = del.DeleteTeacher(id);
                     if (Convert.ToInt32(result) > 0)
                     {
@@ -102,7 +102,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DeleteOrgDetails del = new DeleteOrgDetails();
+                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     result = del.DeleteStudent(id);
                     if (result > 0)
                     {
@@ -138,7 +138,7 @@ namespace CresijApp.Services
                 {
 					List<string> value = new List<string>();
                     value.Add(id);
-                    DeleteOrgDetails del = new DeleteOrgDetails();
+                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     result = del.DeleteMultipleClass(value);
                     if (result >= 0)
                     {
@@ -174,8 +174,8 @@ namespace CresijApp.Services
                 {
 				List<string> value = new List<string>();
                     value.Add(id);
-                    DeleteOrgDetails del = new DeleteOrgDetails();
-                    
+                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
+
                     result = del.DeleteMultipleUser(value);
                     if (result >= 0)
                     {
@@ -211,7 +211,7 @@ namespace CresijApp.Services
                 {
 					List<string> value = new List<string>();
                     value.Add(id);
-                    DeleteOrgDetails del = new DeleteOrgDetails();
+                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
 
                     result = del.DeleteMultipleFloor(value);
                     if (result >= 0)
@@ -245,7 +245,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DeleteOrgDetails dg = new DeleteOrgDetails();
+                    DeleteOrgDetails dg = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     int result = dg.DeleteMultipleBuilding(data);
                     if (result >= 0)
                     {
@@ -282,7 +282,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DeleteOrgDetails dg = new DeleteOrgDetails();
+                    DeleteOrgDetails dg = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     int result = dg.DeleteMultipleClass(data);
                     if (result >= 0)
                     {
@@ -314,7 +314,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DeleteOrgDetails dg = new DeleteOrgDetails();
+                    DeleteOrgDetails dg = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     int result = dg.DeleteMultipleUser(data);
                     if (result >= 0)
                     {
@@ -345,7 +345,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DeleteOrgDetails dg = new DeleteOrgDetails();
+                    DeleteOrgDetails dg = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     int result = dg.DeleteMultipleFloor(data);
                     if (result >= 0)
                     {
@@ -376,7 +376,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DeleteOrgDetails dg = new DeleteOrgDetails();
+                    DeleteOrgDetails dg = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     int result = dg.DeleteMultipleTeacher(data);
                     if (result >= 0)
                     {
@@ -407,7 +407,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DeleteOrgDetails dg = new DeleteOrgDetails();
+                    DeleteOrgDetails dg = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
                     int result = dg.DeleteMultipleStudent(data);
                     if (result >= 0)
                     {

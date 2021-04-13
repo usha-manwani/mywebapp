@@ -11,8 +11,14 @@ namespace CresijApp.DataAccess
 {
     public class GetOrgData
     {
-        readonly string constr = System.Configuration.ConfigurationManager.
-            ConnectionStrings["SchoolConnectionString"].ConnectionString;
+       string constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings["Organisationdatabase"].ConnectionString;
+        public GetOrgData() { }
+        public GetOrgData(string constring)
+        {
+            constr= System.Configuration.ConfigurationManager.
+            ConnectionStrings[constring].ConnectionString;
+        }
         public int SetOrgInfo(string deptcode, string deptname, string bCtrlCode, string highoff,
              string queno, string permission, string notes)
         {
@@ -23,10 +29,10 @@ namespace CresijApp.DataAccess
                                 "HigherOffice,QueueNumber,Public,Notes) values ('" + deptcode + "','" + bCtrlCode + "','"
                                 + highoff + "'," + queno + ",'" + permission + "','" + notes + "')";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                            MySqlCommand cmd1 = new MySqlCommand(query, con);
-                           result= cmd.ExecuteNonQuery();
-                    }                
+                {
+                    MySqlCommand cmd1 = new MySqlCommand(query, con);
+                    result = cmd.ExecuteNonQuery();
+                }
             }
             return result;
         }
@@ -333,7 +339,7 @@ namespace CresijApp.DataAccess
             {
                 var classId = Convert.ToInt32(data["ClassId"]);
                 var scheduleId = Convert.ToInt32(data["ScheduleId"]);
-                using (var context = new OrganisationdatabaseEntities())
+                using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
                 {
 
                 }
@@ -473,7 +479,7 @@ namespace CresijApp.DataAccess
                 }
             }
             
-            using(var context = new OrganisationdatabaseEntities())
+            using(var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
                 var cameradetails = new ClassDataDetails();
                
@@ -494,7 +500,7 @@ namespace CresijApp.DataAccess
         public List<ClassDataDetails> GetCameraByClassIds(List<int> id)
         {
             List<ClassDataDetails> details = new List<ClassDataDetails>();
-            using (var context = new OrganisationdatabaseEntities())
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
                 details = context.classdetails.Where(x => id.Contains(x.classID)).Select(o => new ClassDataDetails
                 {
@@ -510,8 +516,7 @@ namespace CresijApp.DataAccess
                     ClassId = o.classID,
                     ClassName=o.ClassName,
                     DesktopIp=o.desktopip,
-                    DesktopMac=o.deskmac
-                    
+                    DesktopMac=o.deskmac                    
                 }).ToList();
                 
                
@@ -526,7 +531,7 @@ namespace CresijApp.DataAccess
             List<ClassDataDetails> details = new List<ClassDataDetails>();
             var finalids = new List<int>();
             List<int> classids = new List<int>();
-            using (var context = new OrganisationdatabaseEntities())
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
                 if (inout == true)
                 {
@@ -594,7 +599,7 @@ namespace CresijApp.DataAccess
             List<ClassDataDetails> details = new List<ClassDataDetails>();
             var finalids = new List<int>();
             List<int> classids = new List<int>();
-            using (var context = new OrganisationdatabaseEntities())
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
                 if (inout == true)
                 {
@@ -639,7 +644,7 @@ namespace CresijApp.DataAccess
             List<ClassDataDetails> details = new List<ClassDataDetails>();
             
             List<int> classids = new List<int>();
-            using (var context = new OrganisationdatabaseEntities())
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
                 if (inout == true)
                 {
@@ -685,7 +690,7 @@ namespace CresijApp.DataAccess
             List<ClassDataDetails> details = new List<ClassDataDetails>();
             var finalids = new List<int>();
             List<int> classids = new List<int>();
-            using (var context = new OrganisationdatabaseEntities())
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
                 if (inout == true)
                 {
@@ -706,8 +711,6 @@ namespace CresijApp.DataAccess
                 && x.ActionTime >= datetime).Select(x => x.classid).Union(
                 context.alarmmonitorlogs.Where(x => classids.Contains(x.Classid)
                 && x.almTime >= datetime).Select(x => x.Classid)).ToList();
-
-
                 if (hasTeacher)
                 {
                     finalids = templist2.Intersect(templist1).ToList();
@@ -719,7 +722,7 @@ namespace CresijApp.DataAccess
                 }
                 details = context.classdetails.Where(x => x.ClassName.Contains(keywword)
                         && finalids.Contains(x.classID)).Select(o => new ClassDataDetails
-                {
+                        {
                     CamStudentIp = o.camipS,
                     CamStudentMac = o.camSmac,
                     CamTeacherIp = o.camipT,
@@ -733,8 +736,9 @@ namespace CresijApp.DataAccess
                     ClassName = o.ClassName,
                     DesktopIp = o.desktopip,
                     DesktopMac=o.deskmac
-
-                }).OrderBy(x => x.ClassId).Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
+                })
+                .OrderBy(x => x.ClassId)
+                .Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
                 result.Add(details);
                 var total = context.classdetails.Where(x => x.ClassName.Contains(keywword)
                 && finalids.Contains(x.classID)).Count();
@@ -747,9 +751,10 @@ namespace CresijApp.DataAccess
             List<ClassDataDetails> details = new List<ClassDataDetails>();
             var result = new List<object>();
             List<int> classids = new List<int>();
-            using (var context = new OrganisationdatabaseEntities())
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
-                int serialn = context.userdetails.Where(x => x.LoginID == user).Select(x => x.SerialNo).FirstOrDefault();
+                int serialn = context.userdetails.Where(x => x.LoginID == user)
+                    .Select(x => x.SerialNo).FirstOrDefault();
                 classids = context.userlocationaccesses.Where
                     (x => x.userserialnum == serialn && x.Level == "Class").Select(x => x.locationid).ToList();
                 var datetime = DateTime.Now.AddMinutes(-5);
@@ -757,17 +762,14 @@ namespace CresijApp.DataAccess
                 && x.ActionTime >= datetime).Select(x => x.classid).Union(
                 context.alarmmonitorlogs.Where(x => classids.Contains(x.Classid)
                 && x.almTime >= datetime).Select(x => x.Classid)).ToList();
-                
-               
                 result.Add(details);
-                
             }
             return result;
         }
         internal Dictionary<string,object> GetDesktopEventLogs(int v1, int v2)
         {
             var result = new Dictionary<string, object>();
-            using(var context = new OrganisationdatabaseEntities())
+            using(var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
                 var data = context.temp_desktopevents.Select(x => new DesktopEvent
                 {
@@ -784,7 +786,7 @@ namespace CresijApp.DataAccess
         internal Dictionary<string, object> GetAlarmMonitorLogs(int v1, int v2)
         {
             var result = new Dictionary<string, object>();
-            using (var context = new OrganisationdatabaseEntities())
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
                 var data = context.temp_desktopevents.Select(x => new DesktopEvent
                 {
@@ -807,7 +809,7 @@ namespace CresijApp.DataAccess
     }
     public class ClassDataDetails
     {
-        public int ClassId { get; set; }
+        public int    ClassId { get; set; }
         public string ClassName { get; set; }
         public string CamTeacherIp { get; set; }
         public string CamStudentIp { get; set; }
@@ -815,7 +817,7 @@ namespace CresijApp.DataAccess
         public string CamStudentMac { get; set; }
         public string CamPassword { get; set; }
         public string CamLoginId { get; set; }
-        public int CamPort { get; set; }
+        public int    CamPort { get; set; }
         public string CourseName { get; set; }
         public string CourseId { get; set; }
         public string CCEquipIp { get; set; }
