@@ -18,6 +18,9 @@ namespace CresijApp.Services
     [System.Web.Script.Services.ScriptService]
     public class GetOrganisationData : WebService
     {
+        /// <summary>
+        /// Structure for Building Details as a result/response to the request
+        /// </summary>
         private class BuildingDataStructure
         {
             public string ID { get; set; }
@@ -29,6 +32,11 @@ namespace CresijApp.Services
             public string Remarks { get; set; }
         }
         
+        /// <summary>
+        /// Method to Get Building Details associated with current user id(session)
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>return Dictionary type for Building Details list with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetBuildingsDetails(Dictionary<string,object> data)
         {
@@ -44,8 +52,7 @@ namespace CresijApp.Services
                 idata.Add("customErrorCode", "440");
             }
             else
-            {
-                
+            {                
                 try
                 {
                     var userid = HttpContext.Current.Session["UserLoggedIn"].ToString();
@@ -85,6 +92,10 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        /// Structure for Student Details as a result/response to the request
+        /// </summary>
+        
         private class StudentDataStructure
         {
             public string StudentID { get; set; }
@@ -98,6 +109,11 @@ namespace CresijApp.Services
             public string DateOfBirth { get; set; } 
         }
 
+        /// <summary>
+        /// Method to get Student Details with optional search text
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>return Dictionary type for Student details list with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetStudentData(Dictionary<string, object> data)
         {
@@ -153,6 +169,9 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        /// Structure for teacher details as a result/response to the request
+        /// </summary>
         private class TeacherDataStructure
         {
             public string TeacherID { get; set; }
@@ -166,6 +185,11 @@ namespace CresijApp.Services
             public string DateOfBirth { get; set; }
         }
 
+        /// <summary>
+        /// Method to get Teacher details with optional search text
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Dictionary with TeacherDataStructure List and success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTeacherData(Dictionary<string, object> data)
         {
@@ -222,6 +246,9 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        /// Structure for User Details as a result/response to a request
+        /// </summary>
         public class UserDataStructure
         {
             public string SerialNo { get; set; }
@@ -236,7 +263,12 @@ namespace CresijApp.Services
             public string StartDate { get; set; }
             public string ExpireDate { get; set; }
         }
-        
+
+        /// <summary>
+        /// Method to get User Details along with optional search text
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Dictionary with UserDataStructure List and success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserData(Dictionary<string, object> data)
         {
@@ -295,6 +327,11 @@ namespace CresijApp.Services
             return idata;
         }
        
+        /// <summary>
+        /// Get user details by user id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Dictionary with specific user details and success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserByID(string id)
         {
@@ -338,6 +375,10 @@ namespace CresijApp.Services
             }
             return idata;
         }
+
+        /// <summary>
+        /// Structure for providing details of a class/class list from database
+        /// </summary>
         public class ClassDetails{
             public string Classid { get; set; }
             public string Classname { get; set; }
@@ -374,6 +415,9 @@ namespace CresijApp.Services
             public string CallHelpIP { get; set; }
             public string CallHelpmac { get; set; }
         }
+        /// <summary>
+        /// Structure for providing Devices details from the ClassDetails table in database
+        /// </summary>
         public class DeviceDetails
         {
             public string Ip { get; set; }
@@ -383,6 +427,12 @@ namespace CresijApp.Services
             public string Pass { get; set; }
         }
 
+        /// <summary>
+        ///Method to Get List of Classroom data 
+        ///optional search text as "query" param inside "data"
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns> Dictionary with ClassDetails list and success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetClassData(Dictionary<string, string> data)
         {
@@ -456,6 +506,12 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        ///Method to Get List of Operation Management data 
+        ///optional search text as "query" param inside "data"
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>list of Opedata with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetOpedata(Dictionary<string, object> data)
         {
@@ -512,7 +568,9 @@ namespace CresijApp.Services
             }
             return idata;
         }
-
+        /// <summary>
+        /// Structure for Operation Management Data list
+        /// </summary>
         public class Opedata
         {
             public int Sno {get ; set; }
@@ -531,6 +589,11 @@ namespace CresijApp.Services
             public string EquipStat { get; set; }
         }
 
+        /// <summary>
+        /// Method to get Building Details based on building id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> building detail with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetBuildingByID(string id)
         {
@@ -567,6 +630,11 @@ namespace CresijApp.Services
             }
             return d;
         }
+
+        /// <summary>
+        /// Structure for getting Central control machine details with class ids and schedule
+        /// </summary>
+       
         private class IPClassByBuildingStructure
         {
             public int RowNum { get; set; }
@@ -580,7 +648,12 @@ namespace CresijApp.Services
             public string CourseName { get; set; }
             public string TeacherName { get; set; }
         }
-        
+        /// <summary>
+        /// Method used for getting list of central control machines with class ids 
+        /// and the current schedule by providing building id as input
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Dictoinary data with IPClassByBuildingStructure List with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetIPClassByBuilding(Dictionary<string, object> data)
         {
@@ -635,7 +708,12 @@ namespace CresijApp.Services
             }
             return idata;
         }
-
+        /// <summary>
+        /// Method used for getting list of central control machines with class ids and
+        /// the current schedule by providing building id and floor id as input
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Dictoinary data with IPClassByBuildingStructure List with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetIPClassByBuildingFloor(Dictionary<string, object> data)
         {            
@@ -690,6 +768,11 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        /// Method to Get Classdetails by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Class Details of specific classid with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetClassDataById(string id)
         {
@@ -752,11 +835,20 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        /// Structure for returning Floor Name and ID
+        /// </summary>
         class FloorList
         {
             public string FloorName { get; set; }
             public string FloorId { get; set; }
         }
+
+        /// <summary>
+        /// Method used to get floor List by building Id
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns>Dictoinary data with Floor Name and id List and success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetFloorlist(string building)
         {
@@ -802,6 +894,11 @@ namespace CresijApp.Services
             return val;
         }
         
+        /// <summary>
+        /// method use to get School name from building ID
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns>returns school name with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetSchoolName(string building)
         {
@@ -835,6 +932,11 @@ namespace CresijApp.Services
             return idata;
         }
         
+        /// <summary>
+        /// Method use to get class name and id by the central control machine ip
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns>classname and class id with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetClassByIP(string ip)
         {
@@ -851,7 +953,7 @@ namespace CresijApp.Services
                 try
                 {
                     GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
-                    DataTable dt = gd.GetClassByIP(ip);
+                    DataTable dt = gd.GetClassByIP(ip); // Method to connect to database to get the required data
                     Dictionary<string, string> val = new Dictionary<string, string>();
                     if (dt.Rows.Count > 0)
                     {
@@ -871,6 +973,9 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        /// Structure to return floor details
+        /// </summary>
         private class FloorDataStructure
         {
             public string ID { get; set; }
@@ -883,6 +988,11 @@ namespace CresijApp.Services
             public int BuildingID { get; set; }
         }
         
+        /// <summary>
+        /// MEthod use to get floor details on basis of building id
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns>floor details with success/fail status</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetFloorDetails(string building)
         {
@@ -933,33 +1043,11 @@ namespace CresijApp.Services
             return idata;
         }
 
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, object> GetClassAndCourse(Dictionary<string, string> data)
-        {
-            var idata = new Dictionary<string, object>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", "Session Expired");
-                idata.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-                    var classId = Convert.ToInt32(data["ClassId"]);
-                    var scheduleId= Convert.ToInt32(data["ScheduleId"]);
-                    
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-            return idata;
-        }
-
+        /// <summary>
+        /// to get camera details by specific classid 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>returns student and teacher camera details with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCameraByClassId(string id)
         {
@@ -990,6 +1078,12 @@ namespace CresijApp.Services
             }
             return idata;
         }
+
+        /// <summary>
+        /// get camera details for multiple classes by class ids
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>returns student and teacher camera details with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCameraByMultipleClassIds(List<int> id)
         {
@@ -1019,6 +1113,12 @@ namespace CresijApp.Services
             }
             return idata;
         }
+
+        /// <summary>
+        /// get camera details By different search conditions 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCameraDetailsByUser(Dictionary<string,object>data)
         {
@@ -1037,10 +1137,10 @@ namespace CresijApp.Services
                 {
                     string id = HttpContext.Current.Session["UserLoggedIn"].ToString();
                     GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
-                    var keyword = data["keyword"].ToString();
-                    var inOut = Convert.ToBoolean(data["in_or_out"]);
-                    var filter = Convert.ToBoolean(data["filter"]);
-                    if (filter)
+                    var keyword = data["keyword"].ToString(); //search keyword
+                    var inOut = Convert.ToBoolean(data["in_or_out"]); //whether to include or exclude class ids in the classid list
+                    var filter = Convert.ToBoolean(data["filter"]);// condition
+                    if (filter) //with multiple conditions 
                     {                        
                         var state = data["state"] as Dictionary<string, object>;
                         var systemstate = state["system"].ToString();
@@ -1048,12 +1148,13 @@ namespace CresijApp.Services
                         var classids = ((object[])data["classids"]).Cast<int>().ToList();
                         if (!string.IsNullOrEmpty(keyword))
                         {
+                            // according to search keyword
                             data1 = gd.GetCameraBySearchWithCondition(id,keyword, Convert.ToInt32(data["pageSize"]),
                             Convert.ToInt32(data["pageIndex"]), systemstate, hasTeacher,classids, inOut);
                         }
                         else
                         {
-                            
+                            //classes which are permissioned to user
                             data1 = gd.GetCameraByUserIdWithCondition(id, Convert.ToInt32(data["pageSize"]),
                                        Convert.ToInt32(data["pageIndex"]), systemstate, hasTeacher, classids, inOut);
                         }
@@ -1087,6 +1188,11 @@ namespace CresijApp.Services
             }
             return idata;
         }
+        /// <summary>
+        /// use to get desktop event logs from database
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetDesktopEventLogs(Dictionary<string, string> data)
         {

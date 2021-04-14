@@ -37,7 +37,7 @@ namespace CresijApp.site.window.alert
                         using (var conn = new MySqlConnection(constr))
                         {
                             string filename1 = filename.Replace("\\", "/");
-                            var query = "load data infile '" + filename1 + "' ignore into table organisationdatabase.operationmgmt fields " +
+                            var query = "load data infile '" + filename1 + "' ignore into table operationmgmt fields " +
                                 "terminated by ',' enclosed by '\"' lines terminated by '\n' IGNORE 1 LINES(`devicename`,`assetno`,`model`," +
                                 "`specification`,`devicetype`,`price`,`factory`,`dateofmanufacture`,`dateofpurchase`,`dateofdelivery`," +
                                 "`warrantytime`,`locationType`,`equipmentstatus`)";

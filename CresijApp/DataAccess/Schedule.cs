@@ -592,18 +592,18 @@ namespace CresijApp.DataAccess
             return data;
         }
 
-        public int SaveReserveSchedule(string[] stat)
+        public int SaveReserveSchedule(List<string> stat)
         {
             int num = 0;
             using (MySqlConnection con = new MySqlConnection(constring))
             {
 
-                string query = "INSERT INTO `organisationdatabase`.`schedulereserve` " +
+                string query = "INSERT INTO `schedulereserve` " +
                 "(`SchoolYear`,`Semester`,`week`,`ReserveDate`,`Section`,`Classroom`,`BorrowingUnit`,`Workphone`,`PersonName`, " +
-                "`PersonID`,`ContactNo`,`Purpose`,`Reason`,`ReservationDevices`,`Status`) " +
+                "`PersonID`,`ContactNo`,`Purpose`,`Reason`,`ReservationDevices`,`Status`,`OpenMode`) " +
                 "VALUES('" + stat[0] + "','" + stat[1] + "','" + stat[2] + "','" + stat[3] + "','" + stat[4]
                 + "','" + stat[5] + "','" + stat[6] + "','" + stat[7] + "','" + stat[8] + "','" + stat[9] + "','" + stat[10]
-                + "','" + stat[11] + "','" + stat[12] + "','" + stat[13] + "','Pending')";
+                + "','" + stat[11] + "','" + stat[12] + "','" + stat[13] + "','Pending','"+stat[14]+"')";
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
 
@@ -646,18 +646,13 @@ namespace CresijApp.DataAccess
             int num = 0;
             using (MySqlConnection con = new MySqlConnection(constring))
             {
-
-                string query = "UPDATE `organisationdatabase`.`schedulereserve` SET `Status` = '" + stat + "' WHERE `id` =" + id;
+                string query = "UPDATE `schedulereserve` SET `Status` = '" + stat + "' WHERE `id` =" + id;
                 using (MySqlCommand cmd = new MySqlCommand(query, con))
                 {
-
                     if (con.State != ConnectionState.Open)
                         con.Open();
                     num = cmd.ExecuteNonQuery();
-
                 }
-
-
             }
             return num;
         }

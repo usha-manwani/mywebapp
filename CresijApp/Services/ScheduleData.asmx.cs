@@ -1113,8 +1113,9 @@ namespace CresijApp.Services
                     name.Add(data["purpose"].ToString());
                     name.Add(data["reservationPurpose"].ToString());
                     name.Add(data["equipment"].ToString());
+                    name.Add(data["OpenMode"].ToString());
                     int r = -1;
-                    r = schedule.SaveReserveSchedule(name.ToArray());
+                    r = schedule.SaveReserveSchedule(name);
                     if (r > 0)
                     {
                         idata.Add("status", "success");
@@ -1150,6 +1151,7 @@ namespace CresijApp.Services
             public string ReservationPurpose { get; set; }
             public string Equipments { get; set; }
             public string Status { get; set; }
+            public string OpenMode { get; set; }
         }
         
         [WebMethod(EnableSession = true)]
@@ -1194,8 +1196,9 @@ namespace CresijApp.Services
                                 Purpose = dr["purpose"].ToString(),
                                 ReservationPurpose = dr["Reason"].ToString(),
                                 Equipments = dr["ReservationDevices"].ToString(),
-                                Status = dr["Status"].ToString()
-
+                                Status = dr["Status"].ToString(),
+                                OpenMode=dr["OpenMode"].ToString()
+                                
                             };
                             reserveScheduleLists.Add(reserve);
                         }

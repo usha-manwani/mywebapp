@@ -35,7 +35,7 @@ namespace CresijApp.site.window.alert
                         using (var conn = new MySqlConnection(constr))
                         {
                             string filename1 = filename.Replace("\\", "/");
-                            var query = "load data infile '" + filename1 + "' ignore into table organisationdatabase.userdetails fields " +
+                            var query = "load data infile '" + filename1 + "' ignore into table userdetails fields " +
                                 "terminated by ',' enclosed by '\"' lines terminated by '\n' IGNORE 1 LINES(`loginID`,`UserName`,`PersonType`," +
                                 "`Deptcode`,`PersonnelStatus`,`Notes`,`Password`,`phone`,`validtill`,`expiretime`)";
                             MySqlCommand cmd = new MySqlCommand(query, conn);

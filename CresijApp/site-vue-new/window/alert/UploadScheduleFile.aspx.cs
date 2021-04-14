@@ -35,7 +35,7 @@ namespace CresijApp.site.window
                         using (var conn = new MySqlConnection(constr))
                         {
                             string filename1 = filename.Replace("\\", "/");
-                            var query = "load data infile '" + filename1 + "' ignore into table organisationdatabase.schedule fields " +
+                            var query = "load data infile '" + filename1 + "' ignore into table schedule fields " +
                                 "terminated by ',' enclosed by '\"' lines terminated by '\n' IGNORE 1 LINES(`year`,`sem`,`teacherid`," +
                                 "`teachername`,`courseid`,`classname`,`coursename`,`weekstart`,`weekend`,`dayno`,`section`)";
                             MySqlCommand cmd = new MySqlCommand(query, conn);
