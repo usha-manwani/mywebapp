@@ -8,144 +8,27 @@ using CresijApp.Models;
 
 namespace CresijApp.DataAccess
 {
+    /// <summary>
+    /// Class to Access Database to perform Delete Operation On data
+    /// </summary>
     public class DeleteOrgDetails
     {
         string constr = System.Configuration.ConfigurationManager.
            ConnectionStrings["Organisationdatabase"].ConnectionString;
+        #region constructor
         public DeleteOrgDetails() { }
+        /// <summary>
+        /// Contructor to initialize connection string according to required database connection
+        /// </summary>
+        /// <param name="constring"></param>
         public DeleteOrgDetails(string constring) { constr = constring; }
-        public int DeleteOrg(int id)
-        {
-            int result = 0;
-            using (MySqlConnection con = new MySqlConnection(constr))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("sp_DeleteBuilding", con))
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("sno", id);
-                    if (con.State != System.Data.ConnectionState.Open)
-                    {
-                        con.Open();
-                    }
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            return result;
-        }
-
-        public int DeleteTeacher(string id)
-        {
-            int result = 0;
-            using (MySqlConnection con = new MySqlConnection(constr))
-            {
-                string query = " Delete from TeacherData where teacherid = '" + id + "'";
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    if (con.State != System.Data.ConnectionState.Open)
-                    {
-                        con.Open();
-                    }
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            return result;
-        }
-
-        public int DeleteStudent(string id)
-        {
-            int result = 0;
-
-
-            using (MySqlConnection con = new MySqlConnection(constr))
-            {
-                string query = " Delete from StudentData where studentid = '" + id + "'";
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    if (con.State != System.Data.ConnectionState.Open)
-                    {
-                        con.Open();
-                    }
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-
-
-
-
-
-            return result;
-        }
-
-        public int DeleteClass(int id)
-        {
-            int result = 0;
-            using (MySqlConnection con = new MySqlConnection(constr))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("sp_DeleteClass", con))
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("idno", id);
-                    if (con.State != System.Data.ConnectionState.Open)
-                    {
-                        con.Open();
-                    }
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            return result;
-        }
-
-        public int DeleteUser(string id)
-        {
-            int result = 0;
-            using (MySqlConnection con = new MySqlConnection(constr))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("sp_DeleteUser", con))
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("userid", id);
-                    if (con.State != System.Data.ConnectionState.Open)
-                    {
-                        con.Open();
-                    }
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            return result;
-        }
-
-        public int DeleteFloor(int id)
-        {
-            int result = 0;
-
-
-            using (MySqlConnection con = new MySqlConnection(constr))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("sp_DeleteFloor", con))
-                {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("floorid", id);
-                    if (con.State != System.Data.ConnectionState.Open)
-                    {
-                        con.Open();
-                    }
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-
-
-
-
-
-            return result;
-        }
-
-        public int DeleteMultipleOrg(string id)
-        {
-            int result = 0;
-            return result;
-        }
-
+        #endregion
+        #region Methods
+        /// <summary>
+        /// Connection to database to delete Student Details by List of Id
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleStudent(List<string> ids)
         {
             int result = 0;
@@ -163,7 +46,11 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
+        /// <summary>
+        /// Connection to database to delete Teacher Details by List of Id
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleTeacher(List<string> ids)
         {
             int result = 0;
@@ -181,7 +68,11 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
+        /// <summary>
+        /// Connection to database to delete Building Details by List of Id
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleBuilding(List<string> ids)
         {
             int result = 0;
@@ -212,7 +103,11 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
+        /// <summary>
+        /// Connection to database to delete Class Details by List of Id
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleClass(List<string> ids)
         {
             int result = 0;
@@ -244,7 +139,11 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
+        /// <summary>
+        /// Connection to database to delete Floor Details by List of Id
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleFloor(List<string> ids)
         {
             int result = 0;
@@ -275,7 +174,11 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
+        /// <summary>
+        /// Connection to database to delete User Details by List of Id
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleUser(List<string> ids)
         {
             int result = 0;
@@ -301,5 +204,6 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
+        #endregion
     }
 }

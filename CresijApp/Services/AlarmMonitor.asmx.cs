@@ -8,6 +8,9 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for AlarmMonitor
+    /// Class use to call Different user event logs in class
+    /// Eg.: Camera Monitor logs , Desktop Event or usage Logs
+    /// More web methods need to be added
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -16,7 +19,11 @@ namespace CresijApp.Services
     // [System.Web.Script.Services.ScriptService]
     public class AlarmMonitor : System.Web.Services.WebService
     {
-
+        /// <summary>
+        ///Method use to get alarm logs from database
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Action,time and desktop mac with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetAlarmEventLogs(Dictionary<string, string> data)
         {
@@ -34,10 +41,11 @@ namespace CresijApp.Services
                 {
                     
                     GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
-                    var data1 = gd.GetDesktopEventLogs(Convert.ToInt32(data["pageSize"]), Convert.ToInt32(data["pageIndex"]));
+                    //
+                    var AlarmLogs = gd.GetAlarmMonitorLogs(Convert.ToInt32(data["pageSize"]), Convert.ToInt32(data["pageIndex"]));
                     idata.Add("status", "Success");
-                    idata.Add("value", data1["data"]);
-                    idata.Add("totalRows", data1["Total"]);
+                    idata.Add("value", AlarmLogs["data"]);
+                    idata.Add("totalRows", AlarmLogs["Total"]);
                 }
                 catch (Exception ex)
                 {

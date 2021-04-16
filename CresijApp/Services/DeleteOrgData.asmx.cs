@@ -10,226 +10,22 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for DeleteOrgData
+    /// This class deals with the deletion of Buildingdetails, floor details, userdetails, 
+    /// classdetails,studentdetails ,teacherdetails
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/DeleteOrgData.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
      [System.Web.Script.Services.ScriptService]
     public class DeleteOrgData : WebService
-    {        
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, string> DeleteBuilding(string sno)
-        {
-            int result = 0;
-            Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                keyValue.Add("status", "fail");
-                keyValue.Add("errorMessage", "Session Expired");
-                keyValue.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-					List<string> buildingid = new List<string>();
-                    buildingid.Add(sno);
-                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
-                    result = del.DeleteMultipleBuilding(buildingid);
-                    if (result>= 0)
-                    {
-                        keyValue.Add("status", "success");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    keyValue.Add("status", "fail");
-                    keyValue.Add("exception", ex.Message);
-                }
-            }            
-            return keyValue;            
-        }
-        
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, string> DeleteTeacher(string id)
-        {
-            int result = 0; ;
-            Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                keyValue.Add("status", "fail");
-                keyValue.Add("errorMessage", "Session Expired");
-                keyValue.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
-                    result = del.DeleteTeacher(id);
-                    if (Convert.ToInt32(result) > 0)
-                    {
-                        keyValue.Add("status", "success");
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    keyValue.Add("status", "fail");
-                    keyValue.Add("exception", ex.Message);
-                }
-            }
-            return keyValue;
-           
-        }
-       
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, string> DeleteStudent(string id)
-        {
-            int result = 0;
-            Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                keyValue.Add("status", "fail");
-                keyValue.Add("errorMessage", "Session Expired");
-                keyValue.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
-                    result = del.DeleteStudent(id);
-                    if (result > 0)
-                    {
-                        keyValue.Add("status", "success");
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    keyValue.Add("status", "fail");
-                    keyValue.Add("exception", ex.Message);
-                }
-            }
-            return keyValue;
-            
-        }
-        
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, string> DeleteClass(string id)
-        {
-            int result=-1;
-            Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                keyValue.Add("status", "fail");
-                keyValue.Add("errorMessage", "Session Expired");
-                keyValue.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-					List<string> value = new List<string>();
-                    value.Add(id);
-                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
-                    result = del.DeleteMultipleClass(value);
-                    if (result >= 0)
-                    {
-                        keyValue.Add("status", "success");
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    keyValue.Add("status", "fail");
-                    keyValue.Add("exception", ex.Message);
-                }
-            }
-            return keyValue;
-            
-        }
-        
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, string> DeleteUser(string id)
-        {
-            int result = 0;
-            Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                keyValue.Add("status", "fail");
-                keyValue.Add("errorMessage", "Session Expired");
-                keyValue.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-				List<string> value = new List<string>();
-                    value.Add(id);
-                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
-
-                    result = del.DeleteMultipleUser(value);
-                    if (result >= 0)
-                    {
-                        keyValue.Add("status", "success");
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    keyValue.Add("status", "fail");
-                    keyValue.Add("exception", ex.Message);
-                }
-            }
-            return keyValue;
-            
-        }
-       
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, string> DeleteFloor(string id)
-        {
-            int result = 0;
-            Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                keyValue.Add("status", "fail");
-                keyValue.Add("errorMessage", "Session Expired");
-                keyValue.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-					List<string> value = new List<string>();
-                    value.Add(id);
-                    DeleteOrgDetails del = new DeleteOrgDetails(HttpContext.Current.Session["DBConnection"].ToString());
-
-                    result = del.DeleteMultipleFloor(value);
-                    if (result >= 0)
-                    {
-                        keyValue.Add("status", "success");
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    keyValue.Add("status", "fail");
-                    keyValue.Add("exception", ex.Message);
-                }
-            }
-            return keyValue;
-
-        }
-
+    {
+        #region Web Methods
+        /// <summary>
+        /// Method to delete single or multiple row of Building details using its id
+        /// </summary>
+        /// <param name="sno"></param>
+        /// <returns>Success/fail result</returns>
         [WebMethod(EnableSession =true)]
         public Dictionary<string,string> DeleteMultipleBuilding(List<string> data)
         {
@@ -267,7 +63,11 @@ namespace CresijApp.Services
             }
             return keyValue;
         }
-
+        /// <summary>
+        /// Method to delete the single or multiple row of class details using ClassID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleClass(List<string> data)
         {Dictionary<string, string> keyValue = new Dictionary<string, string>();
@@ -298,7 +98,11 @@ namespace CresijApp.Services
             }
             return keyValue;
         }
-
+        /// <summary>
+        /// Method to delete single or multiple row of user data by its Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>succ</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleUser(List<string> data)
         {
@@ -330,6 +134,12 @@ namespace CresijApp.Services
             }
             return keyValue;
         }
+
+        /// <summary>
+        /// Method to delete single or multiple row of floor data using floor Id
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleFloor(List<string> data)
         {
@@ -361,6 +171,11 @@ namespace CresijApp.Services
             }
             return keyValue;
         }
+        /// <summary>
+        /// MEthod to delete single or multiple row of teacher details by using teacher id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleTeacherData(List<string> data)
         {
@@ -392,6 +207,11 @@ namespace CresijApp.Services
             }
             return keyValue;
         }
+        /// <summary>
+        /// Method to delete single or multiple row of student details by passing the student id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleStudentData(List<string> data)
         {
@@ -423,5 +243,6 @@ namespace CresijApp.Services
             }
             return keyValue;
         }
+        #endregion
     }
 }

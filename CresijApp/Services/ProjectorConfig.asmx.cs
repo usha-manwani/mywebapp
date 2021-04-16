@@ -14,6 +14,7 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for ProjectorConfig
+    /// The class is used to work with projector configuration
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -22,9 +23,15 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class ProjectorConfig : System.Web.Services.WebService
     {
+        /// <summary>
+        /// signalR Context Object
+        /// </summary>
         IHubContext hubContext;
-        [WebMethod(EnableSession = true)]
-       
+        /// <summary>
+        ///Method to get projector Brand names list from "Projector Type" folder inside applications folder
+        /// </summary>
+        /// <returns>list of projector Brand names</returns>
+        [WebMethod(EnableSession = true)]       
         public Dictionary<string, object> GetProjectorBrand()
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
@@ -61,6 +68,11 @@ namespace CresijApp.Services
             return result;
         }
 
+        /// <summary>
+        /// Method to get list of Projector Models by 
+        /// </summary>
+        /// <param name="brand"></param>
+        /// <returns></returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetProjectorModel(string brand)
         {

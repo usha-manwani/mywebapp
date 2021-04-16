@@ -691,7 +691,6 @@
     <Content Include="Services\CardRegistration.asmx" />
     <Content Include="Services\DeleteOrgData.asmx" />
     <Content Include="Services\EncryptionMgmt.asmx" />
-    <Content Include="Services\GetLeftMenu.asmx" />
     <Content Include="Services\GetOrganisationData.asmx" />
     <Content Include="Services\GetSetSystemConfigInfo.asmx" />
     <Content Include="Services\HistoryData.asmx" />
@@ -702,214 +701,6 @@
     <Content Include="Services\SystemSetting.asmx" />
     <Content Include="Services\UserAuthorisation.asmx" />
     <Content Include="Services\UserLogs.asmx" />
-    <Content Include="site-new\check\003.html" />
-    <Content Include="site-new\check\room.js" />
-    <Content Include="site-new\components\left_menu.html" />
-    <Content Include="site-new\components\top_menu.html" />
-    <Content Include="site-new\css\Chart.min.css" />
-    <Content Include="site-new\css\sensor.css" />
-    <Content Include="site-new\css\sensor2.css" />
-    <Content Include="site-new\css\sensor2.min.css" />
-    <Content Include="site-new\date-holiday-test.html" />
-    <Content Include="site-new\dist\css\bootstrap-datetimepicker.min.css" />
-    <Content Include="site-new\dist\css\bootstrap-grid.css" />
-    <Content Include="site-new\dist\css\bootstrap-grid.min.css" />
-    <Content Include="site-new\dist\css\bootstrap-reboot.css" />
-    <Content Include="site-new\dist\css\bootstrap-reboot.min.css" />
-    <Content Include="site-new\dist\css\bootstrap.css" />
-    <Content Include="site-new\dist\css\bootstrap.min.css" />
-    <Content Include="site-new\dist\date-holidays\index.min.js" />
-    <Content Include="site-new\dist\date-holidays\umd.min.js" />
-    <Content Include="site-new\dist\js\bootstrap-datetimepicker.min.js" />
-    <Content Include="site-new\dist\js\bootstrap.bundle.js" />
-    <Content Include="site-new\dist\js\bootstrap.bundle.min.js" />
-    <Content Include="site-new\dist\js\bootstrap.js" />
-    <Content Include="site-new\dist\js\bootstrap.min.js" />
-    <Content Include="site-new\dist\js\Chart.min.js" />
-    <Content Include="site-new\dist\js\jquery-3.3.1.slim.min.js" />
-    <Content Include="site-new\dist\js\jquery.min.js" />
-    <Content Include="site-new\dist\js\popper.min.js" />
-    <Content Include="site-new\font\css\font-awesome.css" />
-    <Content Include="site-new\font\css\font-awesome.min.css" />
-    <Content Include="site-new\font\fonts\fontawesome-webfont.svg" />
-    <Content Include="site-new\font\less\font-awesome.css" />
-    <Content Include="site-new\font\scss\font-awesome.css" />
-    <Content Include="site-new\home.html" />
-    <Content Include="site-new\images\001.jpg" />
-    <Content Include="site-new\images\dev.png" />
-    <Content Include="site-new\images\loginbg.jpg" />
-    <Content Include="site-new\images\loginbg.png" />
-    <Content Include="site-new\images\logo.jpg" />
-    <Content Include="site-new\images\logo.png" />
-    <Content Include="site-new\images\SVG\A.svg" />
-    <Content Include="site-new\images\SVG\B.svg" />
-    <Content Include="site-new\images\SVG\C.svg" />
-    <Content Include="site-new\images\SVG\D.svg" />
-    <Content Include="site-new\images\SVG\E.svg" />
-    <Content Include="site-new\images\SVG\F.svg" />
-    <Content Include="site-new\images\SVG\G.svg" />
-    <Content Include="site-new\images\SVG\SVG\a001.svg" />
-    <Content Include="site-new\images\SVG\SVG\a002.svg" />
-    <Content Include="site-new\images\SVG\SVG\a003.svg" />
-    <Content Include="site-new\images\SVG\SVG\a004.svg" />
-    <Content Include="site-new\images\SVG\SVG\a005.svg" />
-    <Content Include="site-new\images\SVG\SVG\a006.svg" />
-    <Content Include="site-new\images\SVG\SVG\a007.svg" />
-    <Content Include="site-new\images\SVG\SVG\a008.svg" />
-    <Content Include="site-new\images\SVG\SVG\a009.svg" />
-    <Content Include="site-new\images\SVG\SVG\a010.svg" />
-    <Content Include="site-new\images\SVG\SVG\a011.svg" />
-    <Content Include="site-new\images\SVG\SVG\a012.svg" />
-    <Content Include="site-new\images\SVG\SVG\资源 22.svg" />
-    <Content Include="site-new\images\SVG\SVG\资源 23.svg" />
-    <Content Include="site-new\images\SVG\SVG\资源 24.svg" />
-    <Content Include="site-new\images\SVG\SVG\资源 25.svg" />
-    <Content Include="site-new\images\SVG\投影.svg" />
-    <Content Include="site-new\images\SVG\新风.svg" />
-    <Content Include="site-new\images\ty.svg" />
-    <Content Include="site-new\js\calendor.js" />
-    <Content Include="site-new\js\Chart.bundle.min.js" />
-    <Content Include="site-new\js\ip_input.js" />
-    <Content Include="site-new\js\moment.min.js" />
-    <Content Include="site-new\js\moment.zh-cn.js" />
-    <Content Include="site-new\js\sensor.js" />
-    <Content Include="site-new\login.html" />
-    <Content Include="site-new\special\apply.html" />
-    <Content Include="site-new\special\record.html" />
-    <Content Include="site-new\special\settings.html" />
-    <Content Include="site-new\window\alert\conf.html" />
-    <Content Include="site-new\window\alert\confer_delete.html" />
-    <Content Include="site-new\window\alert\coordinate.html" />
-    <Content Include="site-new\window\alert\course-tiaokeshenpi.html" />
-    <Content Include="site-new\window\alert\course-yuyueshenpi.html" />
-    <Content Include="site-new\window\alert\data\add_org.html" />
-    <Content Include="site-new\window\alert\data\add_room.html" />
-    <Content Include="site-new\window\alert\data\add_student.html" />
-    <Content Include="site-new\window\alert\data\add_teacher.html" />
-    <Content Include="site-new\window\alert\data\add_user.html" />
-    <Content Include="site-new\window\alert\data\auth.html" />
-    <Content Include="site-new\window\alert\data\distribute.html" />
-    <Content Include="site-new\window\alert\data\edit.html" />
-    <Content Include="site-new\window\alert\data\setting.html" />
-    <Content Include="site-new\window\alert\data\storage.html" />
-    <Content Include="site-new\window\alert\data\synchro.html" />
-    <Content Include="site-new\window\alert\data\transfer.html" />
-    <Content Include="site-new\window\alert\import_xls.html" />
-    <Content Include="site-new\window\alert\interactive_settings.html" />
-    <Content Include="site-new\window\alert\operate\add_failure.html" />
-    <Content Include="site-new\window\alert\operate\add_maintain.html" />
-    <Content Include="site-new\window\alert\operate\add_task.html" />
-    <Content Include="site-new\window\alert\operate\add_tour.html" />
-    <Content Include="site-new\window\alert\operate\claim_task.html" />
-    <Content Include="site-new\window\alert\operate\distribute_m.html" />
-    <Content Include="site-new\window\alert\operate\edit_tour.html" />
-    <Content Include="site-new\window\alert\operate\failure_audit.html" />
-    <Content Include="site-new\window\alert\operate\maintain_review.html" />
-    <Content Include="site-new\window\alert\operate\manual_dispatch.html" />
-    <Content Include="site-new\window\alert\operate\order_examine.html" />
-    <Content Include="site-new\window\alert\operate\plan_excute.html" />
-    <Content Include="site-new\window\alert\operate\plan_excute_maintain.html" />
-    <Content Include="site-new\window\alert\operate\storage_in.html" />
-    <Content Include="site-new\window\alert\operate\storage_out.html" />
-    <Content Include="site-new\window\alert\operate\task_handle.html" />
-    <Content Include="site-new\window\alert\operate\task_rework.html" />
-    <Content Include="site-new\window\alert\operate\tour_det.html" />
-    <Content Include="site-new\window\alert\operate\tour_review.html" />
-    <Content Include="site-new\window\alert\operate\video_review.html" />
-    <Content Include="site-new\window\alert\state_fail.html" />
-    <Content Include="site-new\window\alert\state_suc.html" />
-    <Content Include="site-new\window\alert\state_suc_2.html" />
-    <Content Include="site-new\window\alert\strategy\a-001.html" />
-    <Content Include="site-new\window\alert\strategy\a-002.html" />
-    <Content Include="site-new\window\alert\strategy\a-003.html" />
-    <Content Include="site-new\window\alert\strategy\a-004.html" />
-    <Content Include="site-new\window\alert\strategy\a-005.html" />
-    <Content Include="site-new\window\alert\strategy\a-006.html" />
-    <Content Include="site-new\window\alert\strategy\a-007.html" />
-    <Content Include="site-new\window\alert\strategy\add_strategy_keywords.html" />
-    <Content Include="site-new\window\alert\strategy\range.html" />
-    <Content Include="site-new\window\alert\threshold.html" />
-    <Content Include="site-new\window\alert\tongbu-day.html" />
-    <Content Include="site-new\window\alert\tongbu-month.html" />
-    <Content Include="site-new\window\alert\tongbu-week.html" />
-    <Content Include="site-new\window\alert\tongbu.html" />
-    <Content Include="site-new\window\menus\m-course-01.html" />
-    <Content Include="site-new\window\menus\m-course-02.html" />
-    <Content Include="site-new\window\menus\m-course-03.html" />
-    <Content Include="site-new\window\menus\m-data-01.html" />
-    <Content Include="site-new\window\menus\m-data-02.html" />
-    <Content Include="site-new\window\menus\m-data-03.html" />
-    <Content Include="site-new\window\menus\m-data-04.html" />
-    <Content Include="site-new\window\menus\m-data-05.html" />
-    <Content Include="site-new\window\menus\m-data-06.html" />
-    <Content Include="site-new\window\menus\m-equipment-01.html" />
-    <Content Include="site-new\window\menus\m-equipment-02.html" />
-    <Content Include="site-new\window\menus\m-equipment-03.html" />
-    <Content Include="site-new\window\menus\m-equipment-04.html" />
-    <Content Include="site-new\window\menus\m-operate-01.html" />
-    <Content Include="site-new\window\menus\m-operate-02.html" />
-    <Content Include="site-new\window\menus\m-operate-03.html" />
-    <Content Include="site-new\window\menus\m-operate-04.html" />
-    <Content Include="site-new\window\menus\m-settings-01.html" />
-    <Content Include="site-new\window\menus\m-settings-02.html" />
-    <Content Include="site-new\window\menus\m-settings-03.html" />
-    <Content Include="site-new\window\menus\m-strategy-01.html" />
-    <Content Include="site-new\window\menus\m-strategy-02.html" />
-    <Content Include="site-new\window\p-course\001.html" />
-    <Content Include="site-new\window\p-course\002-1-1.html" />
-    <Content Include="site-new\window\p-course\002-1.html" />
-    <Content Include="site-new\window\p-course\002-2.html" />
-    <Content Include="site-new\window\p-course\003-1-1.html" />
-    <Content Include="site-new\window\p-course\003-1.html" />
-    <Content Include="site-new\window\p-course\003-2.html" />
-    <Content Include="site-new\window\p-data\001.html" />
-    <Content Include="site-new\window\p-data\002.html" />
-    <Content Include="site-new\window\p-data\003.html" />
-    <Content Include="site-new\window\p-data\004.html" />
-    <Content Include="site-new\window\p-data\005.html" />
-    <Content Include="site-new\window\p-data\006.html" />
-    <Content Include="site-new\window\p-equipment\001.html" />
-    <Content Include="site-new\window\p-equipment\002.html" />
-    <Content Include="site-new\window\p-equipment\004.html" />
-    <Content Include="site-new\window\p-equipment\ctrl-pannels\assist.html" />
-    <Content Include="site-new\window\p-equipment\ctrl-pannels\blank.html" />
-    <Content Include="site-new\window\p-equipment\ctrl-pannels\env.html" />
-    <Content Include="site-new\window\p-log\001.html" />
-    <Content Include="site-new\window\p-operate\001-1.html" />
-    <Content Include="site-new\window\p-operate\001-2.html" />
-    <Content Include="site-new\window\p-operate\001-3.html" />
-    <Content Include="site-new\window\p-operate\001-4.html" />
-    <Content Include="site-new\window\p-operate\001-5.html" />
-    <Content Include="site-new\window\p-operate\002-1.html" />
-    <Content Include="site-new\window\p-operate\003-1-1.html" />
-    <Content Include="site-new\window\p-operate\003-1.html" />
-    <Content Include="site-new\window\p-operate\003-2.html" />
-    <Content Include="site-new\window\p-operate\003-3.html" />
-    <Content Include="site-new\window\p-operate\004-1-1.html" />
-    <Content Include="site-new\window\p-operate\004-1-2.html" />
-    <Content Include="site-new\window\p-operate\004-1.html" />
-    <Content Include="site-new\window\p-operate\004-2.html" />
-    <Content Include="site-new\window\p-operate\004-3.html" />
-    <Content Include="site-new\window\p-settings\001-1.html" />
-    <Content Include="site-new\window\p-settings\002-1.html" />
-    <Content Include="site-new\window\p-settings\002-2.html" />
-    <Content Include="site-new\window\p-settings\002-3.html" />
-    <Content Include="site-new\window\p-settings\002-4.html" />
-    <Content Include="site-new\window\p-settings\003-1.html" />
-    <Content Include="site-new\window\p-settings\003-2.html" />
-    <Content Include="site-new\window\p-strategy\001-1.html" />
-    <Content Include="site-new\window\p-strategy\001-2-edit.html" />
-    <Content Include="site-new\window\p-strategy\001-2.html" />
-    <Content Include="site-new\window\p-strategy\001-3-edit.html" />
-    <Content Include="site-new\window\p-strategy\001-3.html" />
-    <Content Include="site-new\window\p-strategy\002.html" />
-    <Content Include="site-new\window\pages\course.html" />
-    <Content Include="site-new\window\pages\data.html" />
-    <Content Include="site-new\window\pages\equipment.html" />
-    <Content Include="site-new\window\pages\log.html" />
-    <Content Include="site-new\window\pages\operate.html" />
-    <Content Include="site-new\window\pages\settings.html" />
-    <Content Include="site-new\window\pages\strategy.html" />
     <Content Include="CustomError.aspx" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
     <Content Include="Scripts\jquery.dataTables.js" />
@@ -1308,12 +1099,6 @@
     <Content Include="site-vue-new\window\alert\tongbu-month.html" />
     <Content Include="site-vue-new\window\alert\tongbu-week.html" />
     <Content Include="site-vue-new\window\alert\tongbu.html" />
-    <Content Include="site-vue-new\window\alert\UploadClass.aspx" />
-    <Content Include="site-vue-new\window\alert\UploadFile.aspx" />
-    <Content Include="site-vue-new\window\alert\UploadScheduleFile.aspx" />
-    <Content Include="site-vue-new\window\alert\UploadStudent.aspx" />
-    <Content Include="site-vue-new\window\alert\UploadTeacher.aspx" />
-    <Content Include="site-vue-new\window\alert\UploadUser.aspx" />
     <Content Include="site-vue-new\window\menus\m-course-01.html" />
     <Content Include="site-vue-new\window\menus\m-course-02.html" />
     <Content Include="site-vue-new\window\menus\m-course-03.html" />
@@ -1599,10 +1384,6 @@
       <DependentUpon>EncryptionMgmt.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Services\GetLeftMenu.asmx.cs">
-      <DependentUpon>GetLeftMenu.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Services\GetOrganisationData.asmx.cs">
       <DependentUpon>GetOrganisationData.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -1695,48 +1476,6 @@
     <Compile Include="site-vue-new\window\alert\DownloadUserDataTemplate.aspx.designer.cs">
       <DependentUpon>DownloadUserDataTemplate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadClass.aspx.cs">
-      <DependentUpon>UploadClass.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadClass.aspx.designer.cs">
-      <DependentUpon>UploadClass.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadFile.aspx.cs">
-      <DependentUpon>UploadFile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadFile.aspx.designer.cs">
-      <DependentUpon>UploadFile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadScheduleFile.aspx.cs">
-      <DependentUpon>UploadScheduleFile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadScheduleFile.aspx.designer.cs">
-      <DependentUpon>UploadScheduleFile.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadStudent.aspx.cs">
-      <DependentUpon>UploadStudent.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadStudent.aspx.designer.cs">
-      <DependentUpon>UploadStudent.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadTeacher.aspx.cs">
-      <DependentUpon>UploadTeacher.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadTeacher.aspx.designer.cs">
-      <DependentUpon>UploadTeacher.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadUser.aspx.cs">
-      <DependentUpon>UploadUser.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="site-vue-new\window\alert\UploadUser.aspx.designer.cs">
-      <DependentUpon>UploadUser.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Control.aspx.cs">
       <DependentUpon>Control.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1815,50 +1554,6 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Services\Handler.ashx" />
-    <Content Include="site-new\css\sensor2.scss" />
-    <Content Include="site-new\dist\css\bootstrap-grid.css.map" />
-    <Content Include="site-new\dist\css\bootstrap-grid.min.css.map" />
-    <Content Include="site-new\dist\css\bootstrap-reboot.css.map" />
-    <Content Include="site-new\dist\css\bootstrap-reboot.min.css.map" />
-    <Content Include="site-new\dist\css\bootstrap.css.map" />
-    <Content Include="site-new\dist\css\bootstrap.min.css.map" />
-    <Content Include="site-new\dist\js\bootstrap.bundle.js.map" />
-    <Content Include="site-new\dist\js\bootstrap.bundle.min.js.map" />
-    <Content Include="site-new\dist\js\bootstrap.js.map" />
-    <Content Include="site-new\dist\js\bootstrap.min.js.map" />
-    <Content Include="site-new\font\fonts\fontawesome-webfont.eot" />
-    <Content Include="site-new\font\fonts\fontawesome-webfont.ttf" />
-    <Content Include="site-new\font\fonts\fontawesome-webfont.woff" />
-    <Content Include="site-new\font\fonts\fontawesome-webfont.woff2" />
-    <Content Include="site-new\font\fonts\FontAwesome.otf" />
-    <Content Include="site-new\font\less\animated.less" />
-    <Content Include="site-new\font\less\bordered-pulled.less" />
-    <Content Include="site-new\font\less\core.less" />
-    <Content Include="site-new\font\less\fixed-width.less" />
-    <Content Include="site-new\font\less\font-awesome.less" />
-    <Content Include="site-new\font\less\icons.less" />
-    <Content Include="site-new\font\less\larger.less" />
-    <Content Include="site-new\font\less\list.less" />
-    <Content Include="site-new\font\less\mixins.less" />
-    <Content Include="site-new\font\less\path.less" />
-    <Content Include="site-new\font\less\rotated-flipped.less" />
-    <Content Include="site-new\font\less\screen-reader.less" />
-    <Content Include="site-new\font\less\stacked.less" />
-    <Content Include="site-new\font\less\variables.less" />
-    <Content Include="site-new\font\scss\font-awesome.scss" />
-    <Content Include="site-new\font\scss\_animated.scss" />
-    <Content Include="site-new\font\scss\_bordered-pulled.scss" />
-    <Content Include="site-new\font\scss\_core.scss" />
-    <Content Include="site-new\font\scss\_fixed-width.scss" />
-    <Content Include="site-new\font\scss\_icons.scss" />
-    <Content Include="site-new\font\scss\_larger.scss" />
-    <Content Include="site-new\font\scss\_list.scss" />
-    <Content Include="site-new\font\scss\_mixins.scss" />
-    <Content Include="site-new\font\scss\_path.scss" />
-    <Content Include="site-new\font\scss\_rotated-flipped.scss" />
-    <Content Include="site-new\font\scss\_screen-reader.scss" />
-    <Content Include="site-new\font\scss\_stacked.scss" />
-    <Content Include="site-new\font\scss\_variables.scss" />
     <Content Include="site-vue-new\css\bootstrap-datepicker.css.map" />
     <Content Include="site-vue-new\css\bootstrap-datepicker.standalone.css.map" />
     <Content Include="site-vue-new\css\bootstrap-datepicker3.css.map" />

@@ -262,8 +262,6 @@ namespace CresijApp.Controllers
             return "~/Uploads/" + new FileInfo(fileName).Name;
         }
 
-       
-
         //public static DataTable GetDistinctRecords(DataTable dt, string[] Columns)
         //{
         //    DataTable dtUniqRecords = new DataTable();

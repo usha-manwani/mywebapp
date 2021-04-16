@@ -13,6 +13,7 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for GetSetSystemConfigInfo
+    /// This class is used for Configuration settings on system settings page. 
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -21,6 +22,12 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class GetSetSystemConfigInfo : WebService
     {
+        #region Web Methods
+        /// <summary>
+        /// Get Floor and class By building id
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns>list of floor and class names with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetFloorClassByBuilding(string building)
         {
@@ -40,7 +47,7 @@ namespace CresijApp.Services
                 try
                 {
                     result.Add("building", building);
-                    SystemInfo systemInfo = new SystemInfo();
+                    SystemInfo systemInfo = new SystemInfo(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = systemInfo.GetFloorClassByBuilding(building);
                     result.Add("status", "success");
                     if (dt.Rows.Count > 0)
@@ -67,18 +74,11 @@ namespace CresijApp.Services
             }            
             return result;
         }
-
-        public class ClassFloorStructure
-        {
-            public string Floor { get; set; }
-            public List<ClassNamesList> ClassNames { get; set; } 
-        }
-        public class ClassNamesList
-        {
-            public string Name;
-            public string Id;
-        }
-        
+        /// <summary>
+        /// Get Floor and class details using building id which has access to current user
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns>list of floor and class names with success/fail result</returns>
         [WebMethod(EnableSession =true)]
         public Dictionary<string, object> GetFloorClassByBuildingForUserAccess(string building)
         {
@@ -139,6 +139,11 @@ namespace CresijApp.Services
             return result;
         }
        
+        /// <summary>
+        /// Get the central control machine ip from its class id
+        /// </summary>
+        /// <param name="classlist"></param>
+        /// <returns>list of central control machine's ip with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetIpByClass(string classlist)
         {
@@ -177,11 +182,34 @@ namespace CresijApp.Services
             return result;
         }
 
-        class CcipStructure
-        {
-            public string Name { get; set; }
-            public string Id { get; set; }
-            public string CCIP { get; set; }
-        }
+        #endregion
     }
+    #region data structure for response
+    /// <summary>
+    /// data structure for getting central control maachine ip
+    /// </summary>
+    class CcipStructure
+    {
+        public string Name { get; set; }
+        public string Id { get; set; }
+        public string CCIP { get; set; }
+    }
+
+    /// <summary>
+    /// data structure for classnames and floor
+    /// </summary>
+    public class ClassFloorStructure
+    {
+        public string Floor { get; set; }
+        public List<ClassNamesList> ClassNames { get; set; }
+    }
+    /// <summary>
+    /// data structure for class name and id
+    /// </summary>
+    public class ClassNamesList
+    {
+        public string Name;
+        public string Id;
+    }
+    #endregion
 }

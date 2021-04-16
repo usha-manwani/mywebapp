@@ -11,21 +11,24 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for CardRegistration
+    /// This class deals with Swipe card registration requirements and card logs
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/CardRegistration.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
     public class CardRegistration : System.Web.Services.WebService
     {
+        //Hub context object for SignalR(web socket)
         IHubContext hubContext;
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
-
+        #region web methods
+        /// <summary>
+        /// Use to send card id(onecardid/onecard) to the machine and save the record in database
+        /// Websocket is use to send card id to machine 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>returns no. of rows updated in database</returns>
         [WebMethod]
         public int RegisterCard(Dictionary<string, object>data)
         {
@@ -69,6 +72,11 @@ namespace CresijApp.Services
             return updatedRows; 
         }
 
+        /// <summary>
+        /// Use to send Multiple card ids(onecardid/onecard) to the machine and save the record in database
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>no. of rows updated in database</returns>
         [WebMethod]
         public int RegisterMultipleCardToClass(Dictionary<string, object> data)
         {
@@ -132,6 +140,12 @@ namespace CresijApp.Services
             return updatedRows;
         }
 
+        /// <summary>
+        /// Use to check if the card ids successfully registered or not
+        /// Might need to change the inner code due to change in functionality
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns> true or false for records successfully registered or not</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> CheckCardRegistration(Dictionary<string, object> data)
         {
@@ -208,6 +222,11 @@ namespace CresijApp.Services
             return result;
         }
 
+        /// <summary>
+        /// use to get card swipe logs from database
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>returns card logs</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCardLogsList(Dictionary<string, string> data)
         {
@@ -259,18 +278,13 @@ namespace CresijApp.Services
             }
             return result;
         }
-
-        //[WebMethod]
-        //public Dictionary<string,object> GetCardLogs(Dictionary<string,string> data)
-        //{
-        //    using(var context = new OrganisationdatabaseEntities())
-        //    {
-        //        var pageIndex = Convert.ToInt32(data["pageIndex"]);
-        //        var pageSize = Convert.ToInt32(data["pageSize"]);
-        //    }
-        //}
-
+        #endregion
     }
+
+    #region Data Structure
+    /// <summary>
+    /// Class for structure of card logs
+    /// </summary>
     public class CardLogsList
     {
         public string CardID { get; set; }
@@ -279,4 +293,5 @@ namespace CresijApp.Services
         public string Message { get; set; }
         public string ActionTime { get; set; }
     }
+    #endregion
 }

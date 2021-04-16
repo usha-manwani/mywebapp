@@ -10,10 +10,14 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for Handler
+    /// handler for uploading Logo image of School
     /// </summary>
     public class Handler : IHttpHandler
     {
-
+        /// <summary>
+        /// Method to upload logo image of school
+        /// </summary>
+        /// <param name="context">returns live stat of uploading process</param>
         public void ProcessRequest(HttpContext context)
         {
             //Check if Request is to Upload the File.

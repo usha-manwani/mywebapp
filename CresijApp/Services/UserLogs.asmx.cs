@@ -14,14 +14,22 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for UserLogs
+    /// This class contains web methods for User login,user logout,
+    /// Get User Logs list,Get ClassLogs list(machine logs)
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/UserLogs.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
      [System.Web.Script.Services.ScriptService]
     public class UserLogs : System.Web.Services.WebService
     {
+        #region Web Methods
+        /// <summary>
+        /// Method to login the user with id, password and database
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>user details of logged in user with success/fail result</returns>
         [WebMethod(EnableSession = true)]   
         public Dictionary<string,object> Login(Dictionary<string, object> data)
         {            
@@ -82,6 +90,11 @@ namespace CresijApp.Services
             return idata;
         }
         
+        /// <summary>
+        /// Method to get logs for user operations
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>List of user logs with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetUserLogDetails(Dictionary<string,string>data)
         {
@@ -134,24 +147,10 @@ namespace CresijApp.Services
             return result;
         }
 
-        public class LogsList
-        {
-            public string UserId { get; set; }
-            public string UserName { get; set; }
-            public string Action { get; set; }
-            public string BuildingName { get; set; }
-            public string ClassName { get; set; }
-            public string ActionTime { get; set; }
-        }
-        
-        public class ClassLogs
-        {
-            public string UserName { get; set; }
-            public string Action { get; set; }
-            public string ActionTime { get; set; }
-            public int ClassId { get; set; }
-            public string ClassName { get; set; }
-        }
+       /// <summary>
+       /// method to Get count of logs group by type of actions
+       /// </summary>
+       /// <returns>list of type of action with its count</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetLogGraphData()
         {
@@ -181,21 +180,16 @@ namespace CresijApp.Services
             return result;
         }
 
+        /// <summary>
+        /// Method to logout the user from website
+        /// </summary>
+        /// <param name="cookie"></param>
+        /// <returns>success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> Logout(string cookie)
         {
             int r = 0;
             Dictionary<string, string> idata = new Dictionary<string, string>();
-
-            //if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            //{
-            //    HttpContext.Current.Session.Abandon();
-            //    idata.Add("status", "fail");
-            //    idata.Add("errorMessage", "Session Expired");
-            //    idata.Add("customErrorCode", "440");
-            //}
-            //else
-            //{
             try
             {
                 var loginid = "";
@@ -238,16 +232,12 @@ namespace CresijApp.Services
             //}
             return idata;
         }
-
-        public static void CheckSession()
-        {
-            var cc = HttpContext.Current.Session;
-            var coo = HttpContext.Current.Response.Cookies["AuthToken"];
-            if (cc.Count == 0)
-            {
-                HttpContext.Current.Response.Redirect("customerror.aspx");
-            }
-        }
+       
+        /// <summary>
+        /// Method to get class logs (machine logs) for the last 7 days of a specific class
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>list of class logs</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetClassLogs(string id)
         {
@@ -280,8 +270,7 @@ namespace CresijApp.Services
                                         ClassId=x.ClassID,ClassName=x.ClassName
                                     })
                                     .Union((from a in context.machineoperationlogs
-                                             join b in context.classdetails on a.Location equals b.classID 
-                                              
+                                             join b in context.classdetails on a.Location equals b.classID                                               
                                              orderby a.ExecutionTime descending where b.classID==classid 
                                              && !a.Operation.Contains("NoData") && !a.Type.Contains("MacAddress")
                                              && !a.Type.Contains("ControlExecution") && !a.Type.Contains("PowerControl") &&
@@ -294,12 +283,13 @@ namespace CresijApp.Services
                                                  OrderByDescending(x=>x.ActionTime).Take(100).ToList();
                         foreach(var x in data)
                         {
-                            if (x.Action.Contains("ReaderLog"))
+                            if (x.UserName.Contains("ReaderLog"))
                             {
-                                var tname = context.teacherdatas.Where(y => y.onecard == x.UserName).Select(z => z.TeacherName).FirstOrDefault();
+                                var tname = context.teacherdatas.Where(y => y.onecard == x.Action).Select(z => z.TeacherName).FirstOrDefault();
                                 if (!string.IsNullOrEmpty(tname))
-                                {
-                                    x.UserName= tname;
+                                {                             
+                                    x.Action= x.UserName;
+                                    x.UserName = tname;
                                 }
                             }
                         }
@@ -315,5 +305,46 @@ namespace CresijApp.Services
             }
             return result;
         }
+        #endregion
+        #region Internal Methods
+        /// <summary>
+        /// method to check if the current request session is still active
+        /// </summary>
+        static void CheckSession()
+        {
+            var cc = HttpContext.Current.Session;
+            var coo = HttpContext.Current.Response.Cookies["AuthToken"];
+            if (cc.Count == 0)
+            {
+                HttpContext.Current.Response.Redirect("customerror.aspx");
+            }
+        }
+        #endregion
     }
+    #region Data Structure for Response
+    /// <summary>
+    /// Structure for User Logs
+    /// </summary>
+    public class LogsList
+    {
+        public string UserId { get; set; }
+        public string UserName { get; set; }
+        public string Action { get; set; }
+        public string BuildingName { get; set; }
+        public string ClassName { get; set; }
+        public string ActionTime { get; set; }
+    }
+
+    /// <summary>
+    /// structure for Class logs(Machine operation logs)
+    /// </summary>
+    public class ClassLogs
+    {
+        public string UserName { get; set; }
+        public string Action { get; set; }
+        public string ActionTime { get; set; }
+        public int ClassId { get; set; }
+        public string ClassName { get; set; }
+    }
+    #endregion
 }

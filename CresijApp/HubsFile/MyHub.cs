@@ -72,7 +72,7 @@ namespace CresijApp.HubsFile
         ///    IHubContext context = GlobalHost.ConnectionManager.GetHubContext<MyHub>();
         ///    context.Clients.All.updateMessages();     
         ///}
-        ///DataTable ScoresTable = HttpContext.Current.Application["ScoresTable"] as DataTable;
+        
         
         public void Hello()
         {

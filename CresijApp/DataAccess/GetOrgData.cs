@@ -13,30 +13,22 @@ namespace CresijApp.DataAccess
     {
        string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
+        
         public GetOrgData() { }
+        //Constructor for initializing with required connection string
         public GetOrgData(string constring)
         {
             constr= System.Configuration.ConfigurationManager.
             ConnectionStrings[constring].ConnectionString;
         }
-        public int SetOrgInfo(string deptcode, string deptname, string bCtrlCode, string highoff,
-             string queno, string permission, string notes)
-        {
-            int result = 0;
-            using (MySqlConnection con = new MySqlConnection(constr))
-            {
-                string query = "insert into organisationdetails (deptCode,BusinessCtrlCode," +
-                                "HigherOffice,QueueNumber,Public,Notes) values ('" + deptcode + "','" + bCtrlCode + "','"
-                                + highoff + "'," + queno + ",'" + permission + "','" + notes + "')";
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    MySqlCommand cmd1 = new MySqlCommand(query, con);
-                    result = cmd.ExecuteNonQuery();
-                }
-            }
-            return result;
-        }
 
+        /// <summary>
+        /// Get associated building details List according to request by current user
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="userid"></param>
+        /// <returns>List of building details list according to page size and count of rows</returns>
         public List<object> GetOrgBuildingInfo(string pageIndex, string pageSize,string userid)
         {
             DataTable dt = new DataTable();
@@ -66,6 +58,13 @@ namespace CresijApp.DataAccess
             return result;
         }
 
+        /// <summary>
+        /// Get User Details List with optional search text
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="text"></param>
+        /// <returns>returns user details List according to size with count of rows</returns>
         public List<object> GetuserInfo(string pageIndex, string pageSize,string text)
         {
             DataTable dt = new DataTable();
@@ -94,7 +93,14 @@ namespace CresijApp.DataAccess
             return result;
         }
 
-        public List<object> GetTeacherInfo(string pageindex, string pagesize, string query)
+        /// <summary>
+        /// get teacher details list with optional search text
+        /// </summary>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="query"></param>
+        /// <returns>return teacher details list according to size with count of rows</returns>
+        public List<object> GetTeacherInfo(string pageindex, string pagesize, string text)
         {
             List<object> data = new List<object>();
             DataTable dt = new DataTable();
@@ -106,7 +112,7 @@ namespace CresijApp.DataAccess
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@_PageIndex", pageindex);
                     cmd.Parameters.AddWithValue("@_PageSize", pagesize);
-                    cmd.Parameters.AddWithValue("@con", query);
+                    cmd.Parameters.AddWithValue("@con", text);
                     cmd.Parameters.Add("_RecordCount", MySqlDbType.Int32, 4);
                     cmd.Parameters["_RecordCount"].Direction = ParameterDirection.Output;
                     MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
@@ -124,6 +130,13 @@ namespace CresijApp.DataAccess
             return data;
         }
 
+        /// <summary>
+        /// Get Student Details list with optional search text
+        /// </summary>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="text"></param>
+        /// <returns>returns student details list according to size with count of rows </returns>
         public List<object> GetStudentInfo(string pageindex, string pagesize,string text)
         {
             List<object> data = new List<object>();
@@ -156,6 +169,14 @@ namespace CresijApp.DataAccess
             return data;
         }
 
+        /// <summary>
+        /// Get Operation Management List data from database with optional search text       
+        /// </summary>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="text"></param>
+        /// <returns>
+        /// returns list of Operation Management List according to size with count of rows</returns>
         public List<object> GetCapitalInfo( string pageindex, string pagesize,string text)
         {
             List<object> data = new List<object>();
@@ -186,6 +207,14 @@ namespace CresijApp.DataAccess
             return data;
         }
 
+        /// <summary>
+        /// Get Class Details list associated with user permissions with optional search text
+        /// </summary>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="userid"></param>
+        /// <param name="text"></param>
+        /// <returns>returns list of classdetails according to size with count of rows </returns>
         public List<object> GetClassroomInfo(string pageindex, string pagesize,string userid,string text)
         {
             List<object> data = new List<object>();
@@ -766,7 +795,16 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-        internal Dictionary<string,object> GetDesktopEventLogs(int v1, int v2)
+
+        /// <summary>
+        /// Method to get Desktop Event logs
+        /// Not Used Yet
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns></returns>
+        #region Not Used Method Name: GetDesktopEventLogs
+        internal Dictionary<string,object> GetDesktopEventLogs(int pageSize, int pageIndex)
         {
             var result = new Dictionary<string, object>();
             using(var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
@@ -776,37 +814,63 @@ namespace CresijApp.DataAccess
                    Action= x.Action,
                    ActionTime= x.ActionTime.ToString("yyyy-MM-dd HH:mm:ss"),
                    Deskmac= x.Deskmac
-                }).ToList();
+                }).Skip(pageSize * pageIndex).Take(pageSize).ToList();
                 result.Add("Data", data);
                 var total = context.temp_desktopevents.Count();
                 result.Add("Total", total);
                 return result;
             }
         }
-        internal Dictionary<string, object> GetAlarmMonitorLogs(int v1, int v2)
+        #endregion
+
+        /// <summary>
+        /// Method to get Camera Alarm Event logs        
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <returns>Alarm event logs with total rows</returns>
+        internal Dictionary<string, object> GetAlarmMonitorLogs(int pageSize, int pageIndex)
         {
             var result = new Dictionary<string, object>();
             using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
             {
-                var data = context.temp_desktopevents.Select(x => new DesktopEvent
+                var data = context.alarmmonitorlogs.Select(x => new AlarmMonitorEvent
                 {
-                    Action = x.Action,
-                    ActionTime = x.ActionTime.ToString("yyyy-MM-dd HH:mm:ss"),
-                    Deskmac = x.Deskmac
-                }).ToList();
+                    Action = x.almMessage,
+                    ActionTime = x.almTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                    DeviceIp = x.deviceip
+                }).Skip(pageSize*pageIndex).Take(pageSize).ToList();
                 result.Add("Data", data);
-                var total = context.temp_desktopevents.Count();
+                var total = context.alarmmonitorlogs.Count();
                 result.Add("Total", total);
                 return result;
             }
         }
     }
+
+    /// <summary>
+    /// Structure for desktop Event Logs
+    /// </summary>
     public class DesktopEvent
     {
         public string ActionTime { get; set; }
         public string Action { get; set; }
         public string Deskmac { get; set; }
     }
+
+    /// <summary>
+    /// Structure for camera Monitor Logs
+    /// </summary>
+    public class AlarmMonitorEvent
+    {
+        public string ActionTime { get; set; }
+        public string Action { get; set; }
+        public string DeviceIp { get; set; }
+    }
+
+    /// <summary>
+    /// Structure for class equipment details with current Schedule(course name)
+    /// </summary>
     public class ClassDataDetails
     {
         public int    ClassId { get; set; }

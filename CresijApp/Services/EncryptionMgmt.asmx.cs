@@ -6,8 +6,11 @@ using System.Web.Services;
 
 namespace CresijApp.Services
 {
+    #region Not used Anywhere.
     /// <summary>
     /// Summary description for EncryptionMgmt
+    /// 
+    /// The service is currently in no use
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -62,4 +65,5 @@ namespace CresijApp.Services
                 throw new System.Security.SecurityException("Not authorized.");
         }
     }
+    #endregion
 }

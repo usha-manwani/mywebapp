@@ -11,6 +11,9 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for HistoryData
+    /// This class deals with the different properties/records of data by machine usage.
+    /// Currently It contains one service for getting Power usage data of a machine
+    /// Session needs to be added
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -19,6 +22,11 @@ namespace CresijApp.Services
     [System.Web.Script.Services.ScriptService]
     public class HistoryData : WebService
     {
+        /// <summary>
+        /// Method to get Power usage data of a machine in a class 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>return data records along with different time interval as required</returns>
         [WebMethod]
         public Dictionary<string,object> GetPowerUsageData(Dictionary<string,string> data)
         {

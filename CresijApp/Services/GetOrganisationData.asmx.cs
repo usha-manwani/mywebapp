@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Security.Permissions;
 using System.Web;
 using System.Web.Services;
 using CresijApp.DataAccess;
@@ -10,28 +9,18 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for GetOrganisationData
+    /// This Class is use to fetch different data from database tables
+    /// Class contains Get Methods for: UserDetails table, BuildingDetails , StudentDetails, TeacherDetails, ClassDetails
+    /// and their different variations according to requirement.
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/GetOrganisationData.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
     public class GetOrganisationData : WebService
     {
-        /// <summary>
-        /// Structure for Building Details as a result/response to the request
-        /// </summary>
-        private class BuildingDataStructure
-        {
-            public string ID { get; set; }
-            public string BuildingName { get; set; }
-            public string SchoolName { get; set; }
-            public string BuildingCode { get; set; }
-            public string Queue { get; set; }
-            public string Type { get; set; }
-            public string Remarks { get; set; }
-        }
-        
+        #region Web Methods
         /// <summary>
         /// Method to Get Building Details associated with current user id(session)
         /// </summary>
@@ -90,24 +79,7 @@ namespace CresijApp.Services
                 }
             }
             return idata;
-        }
-
-        /// <summary>
-        /// Structure for Student Details as a result/response to the request
-        /// </summary>
-        
-        private class StudentDataStructure
-        {
-            public string StudentID { get; set; }
-            public string StudentName { get; set; }
-            public string Gender { get; set; }
-            public string DeptName { get; set; }
-            public string Phone { get; set; }
-            public string Age { get; set; }
-            public string IdCard { get; set; }
-            public string OneCard { get; set; }
-            public string DateOfBirth { get; set; } 
-        }
+        }       
 
         /// <summary>
         /// Method to get Student Details with optional search text
@@ -244,25 +216,7 @@ namespace CresijApp.Services
             }
 
             return idata;
-        }
-
-        /// <summary>
-        /// Structure for User Details as a result/response to a request
-        /// </summary>
-        public class UserDataStructure
-        {
-            public string SerialNo { get; set; }
-            public string LoginID { get; set; }
-            public string UserName { get; set; }
-            public string PersonType { get; set; }
-            
-            public string PersonnelStatus { get; set; }
-            public string Phone { get; set; }
-            public string DepartmentId { get; set; }
-            public string Notes { get; set; }
-            public string StartDate { get; set; }
-            public string ExpireDate { get; set; }
-        }
+        }        
 
         /// <summary>
         /// Method to get User Details along with optional search text
@@ -374,57 +328,6 @@ namespace CresijApp.Services
                 }
             }
             return idata;
-        }
-
-        /// <summary>
-        /// Structure for providing details of a class/class list from database
-        /// </summary>
-        public class ClassDetails{
-            public string Classid { get; set; }
-            public string Classname { get; set; }
-            public string Building { get; set; }
-            public string Floor { get; set; }
-            public int BuildingId { get; set; }
-            public int FloorId { get; set; }
-            public string Seat { get; set; }
-            public string Ccip { get; set; }
-            public string CamipS { get; set; }
-            public string CamipT { get; set; }
-            public string DesktopIp { get; set; }
-            public string RecorderIp { get; set; }
-            public string CCmac { get; set; }
-            //public string CCPort { get; set; }
-            //public string CCuserid { get; set; }
-            //public string CCpass { get; set; }
-            public string CamSmac { get; set; }
-            //public string CamSPort { get; set; }
-           // public string CamSuserid { get; set; }
-           // public string CamSpass { get; set; }
-            public string CamTmac { get; set; }
-            public string CamPort { get; set; }
-            public string Camuserid { get; set; }
-            public string Campass { get; set; }
-            public string Desktopmac { get; set; }
-            //public string DeskPort { get; set; }
-            //public string Deskuserid { get; set; }
-            //public string Deskpass { get; set; }
-            public string Recordermac { get; set; }
-            //public string RecorderPort { get; set; }
-            //public string Recorderuserid { get; set; }
-            //public string Recorderpass { get; set; }
-            public string CallHelpIP { get; set; }
-            public string CallHelpmac { get; set; }
-        }
-        /// <summary>
-        /// Structure for providing Devices details from the ClassDetails table in database
-        /// </summary>
-        public class DeviceDetails
-        {
-            public string Ip { get; set; }
-            public string Mac { get; set; }
-            public string Port { get; set; }
-            public string Userid { get; set; }
-            public string Pass { get; set; }
         }
 
         /// <summary>
@@ -568,27 +471,7 @@ namespace CresijApp.Services
             }
             return idata;
         }
-        /// <summary>
-        /// Structure for Operation Management Data list
-        /// </summary>
-        public class Opedata
-        {
-            public int Sno {get ; set; }
-            public string Devicename { get; set; }
-            public string Assetno { get; set; }
-            public string Model { get; set; }
-            public string Spec { get; set; }
-            public string Devicetype { get; set; }
-            public string Price { get; set; }
-            public string Factory { get; set; }
-            public string Mfd { get; set; }
-            public string Dopurchase { get; set; }
-            public string Dod { get; set; }
-            public string Warrantytime { get; set; }
-            public string Locationtype { get; set; }
-            public string EquipStat { get; set; }
-        }
-
+        
         /// <summary>
         /// Method to get Building Details based on building id
         /// </summary>
@@ -630,24 +513,7 @@ namespace CresijApp.Services
             }
             return d;
         }
-
-        /// <summary>
-        /// Structure for getting Central control machine details with class ids and schedule
-        /// </summary>
        
-        private class IPClassByBuildingStructure
-        {
-            public int RowNum { get; set; }
-            public string ClassName { get; set; }
-            public string Floor { get; set; }
-            public string ClassId { get; set; }
-            public string CCEquipIP { get; set; }
-            public string MacAddress { get; set; }
-            public string ScheduleId { get; set; }
-            public string CourseId { get; set; }
-            public string CourseName { get; set; }
-            public string TeacherName { get; set; }
-        }
         /// <summary>
         /// Method used for getting list of central control machines with class ids 
         /// and the current schedule by providing building id as input
@@ -836,15 +702,6 @@ namespace CresijApp.Services
         }
 
         /// <summary>
-        /// Structure for returning Floor Name and ID
-        /// </summary>
-        class FloorList
-        {
-            public string FloorName { get; set; }
-            public string FloorId { get; set; }
-        }
-
-        /// <summary>
         /// Method used to get floor List by building Id
         /// </summary>
         /// <param name="building"></param>
@@ -971,22 +828,7 @@ namespace CresijApp.Services
                 }
             }
             return idata;
-        }
-
-        /// <summary>
-        /// Structure to return floor details
-        /// </summary>
-        private class FloorDataStructure
-        {
-            public string ID { get; set; }
-            public string BuildingName { get; set; }
-            public string Floor{ get; set; }
-            public string BuildingCode { get; set; }
-            public string Queue { get; set; }
-            public string Type { get; set; }
-            public string Remarks { get; set; }
-            public int BuildingID { get; set; }
-        }
+        }       
         
         /// <summary>
         /// MEthod use to get floor details on basis of building id
@@ -1222,6 +1064,167 @@ namespace CresijApp.Services
             }
             return idata;
         }
+        #endregion
 
+        #region Data Structure for Result set of Web Methods in current class
+        /// <summary>
+        /// Structure for User Details as a result/response to a request
+        /// </summary>
+        public class UserDataStructure
+        {
+            public string SerialNo { get; set; }
+            public string LoginID { get; set; }
+            public string UserName { get; set; }
+            public string PersonType { get; set; }
+
+            public string PersonnelStatus { get; set; }
+            public string Phone { get; set; }
+            public string DepartmentId { get; set; }
+            public string Notes { get; set; }
+            public string StartDate { get; set; }
+            public string ExpireDate { get; set; }
+        }
+
+        /// <summary>
+        /// Structure for Building Details as a result/response to the request
+        /// </summary>
+        private class BuildingDataStructure
+        {
+            public string ID { get; set; }
+            public string BuildingName { get; set; }
+            public string SchoolName { get; set; }
+            public string BuildingCode { get; set; }
+            public string Queue { get; set; }
+            public string Type { get; set; }
+            public string Remarks { get; set; }
+        }
+
+        /// <summary>
+        /// Structure for Student Details as a result/response to the request
+        /// </summary>
+        private class StudentDataStructure
+        {
+            public string StudentID { get; set; }
+            public string StudentName { get; set; }
+            public string Gender { get; set; }
+            public string DeptName { get; set; }
+            public string Phone { get; set; }
+            public string Age { get; set; }
+            public string IdCard { get; set; }
+            public string OneCard { get; set; }
+            public string DateOfBirth { get; set; }
+        }
+
+        /// <summary>
+        /// Structure for providing details of a class/class list from database
+        /// </summary>
+        public class ClassDetails
+        {
+            public string Classid { get; set; }
+            public string Classname { get; set; }
+            public string Building { get; set; }
+            public string Floor { get; set; }
+            public int BuildingId { get; set; }
+            public int FloorId { get; set; }
+            public string Seat { get; set; }
+            public string Ccip { get; set; }
+            public string CamipS { get; set; }
+            public string CamipT { get; set; }
+            public string DesktopIp { get; set; }
+            public string RecorderIp { get; set; }
+            public string CCmac { get; set; }
+            //public string CCPort { get; set; }
+            //public string CCuserid { get; set; }
+            //public string CCpass { get; set; }
+            public string CamSmac { get; set; }
+            //public string CamSPort { get; set; }
+            // public string CamSuserid { get; set; }
+            // public string CamSpass { get; set; }
+            public string CamTmac { get; set; }
+            public string CamPort { get; set; }
+            public string Camuserid { get; set; }
+            public string Campass { get; set; }
+            public string Desktopmac { get; set; }
+            //public string DeskPort { get; set; }
+            //public string Deskuserid { get; set; }
+            //public string Deskpass { get; set; }
+            public string Recordermac { get; set; }
+            //public string RecorderPort { get; set; }
+            //public string Recorderuserid { get; set; }
+            //public string Recorderpass { get; set; }
+            public string CallHelpIP { get; set; }
+            public string CallHelpmac { get; set; }
+        }
+        /// <summary>
+        /// Structure for providing Devices details from the ClassDetails table in database
+        /// </summary>
+        public class DeviceDetails
+        {
+            public string Ip { get; set; }
+            public string Mac { get; set; }
+            public string Port { get; set; }
+            public string Userid { get; set; }
+            public string Pass { get; set; }
+        }
+        /// <summary>
+        /// Structure for Operation Management Data list
+        /// </summary>
+        public class Opedata
+        {
+            public int Sno { get; set; }
+            public string Devicename { get; set; }
+            public string Assetno { get; set; }
+            public string Model { get; set; }
+            public string Spec { get; set; }
+            public string Devicetype { get; set; }
+            public string Price { get; set; }
+            public string Factory { get; set; }
+            public string Mfd { get; set; }
+            public string Dopurchase { get; set; }
+            public string Dod { get; set; }
+            public string Warrantytime { get; set; }
+            public string Locationtype { get; set; }
+            public string EquipStat { get; set; }
+        }
+        /// <summary>
+        /// Structure for getting Central control machine details with class ids and schedule
+        /// </summary>       
+        private class IPClassByBuildingStructure
+        {
+            public int RowNum { get; set; }
+            public string ClassName { get; set; }
+            public string Floor { get; set; }
+            public string ClassId { get; set; }
+            public string CCEquipIP { get; set; }
+            public string MacAddress { get; set; }
+            public string ScheduleId { get; set; }
+            public string CourseId { get; set; }
+            public string CourseName { get; set; }
+            public string TeacherName { get; set; }
+        }
+
+        /// <summary>
+        /// Structure for returning Floor Name and ID
+        /// </summary>
+        class FloorList
+        {
+            public string FloorName { get; set; }
+            public string FloorId { get; set; }
+        }
+        /// <summary>
+        /// Structure to return floor details
+        /// </summary>
+        private class FloorDataStructure
+        {
+            public string ID { get; set; }
+            public string BuildingName { get; set; }
+            public string Floor { get; set; }
+            public string BuildingCode { get; set; }
+            public string Queue { get; set; }
+            public string Type { get; set; }
+            public string Remarks { get; set; }
+            public int BuildingID { get; set; }
+        }
+        #endregion
     }
 }
