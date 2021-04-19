@@ -10,8 +10,11 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for SaveOrganisationData
+    /// The class is use to save/update data in database of selection done by user at login time.
+    /// Class contains Save and Update Methods for:UserDetails table, BuildingDetails , StudentDetails, TeacherDetails, ClassDetails
+    /// and their different variations according to requirement.
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/SaveOrganisationData.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -19,12 +22,18 @@ namespace CresijApp.Services
     public class SaveOrganisationData : WebService
     {
         
+        /// <summary>
+        /// Save new Building data or update building data in building details
+        /// Give access of that building to the current user in session
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>success/failresult with count of rows</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveBuildingData(Dictionary<string,string> data)
         {            
               int result = -1 ;
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            SetOrgData orgData = new SetOrgData();
+            
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -58,8 +67,8 @@ namespace CresijApp.Services
                         }                       
                         else
                         {
-                            var buildingid = context.buildingdetails.Where(b => b.BuildingName == bd.BuildingName).Select(x=>x.id).First();
-                            var buildingdata = context.buildingdetails.Find(buildingid);
+                            var buildingdata = context.buildingdetails.Where(b => b.BuildingName == bd.BuildingName).Select(x=>x).FirstOrDefault();
+                          
                             if (buildingdata != null)
                             {
                                 buildingdata.buildingcode = data["buildingCode"].ToString();
@@ -108,12 +117,16 @@ namespace CresijApp.Services
             }
             return keyValue;
         }
-        
+
+        /// <summary>
+        /// Save new Building data or update building data in building details
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>count of rows with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveFloorData(Dictionary<string, string> data)
         {
             int result=-1;
-            SetOrgData orgData = new SetOrgData();
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -149,8 +162,8 @@ namespace CresijApp.Services
                         
                         else
                         {
-                            var floorid = context.floordetails.Where(x => x.floor == fd.floor && x.BuildingName == fd.BuildingName).Select(x => x.id).FirstOrDefault();
-                            var floordata = context.floordetails.Find(floorid);
+                            var floordata = context.floordetails.Where(x => x.floor == fd.floor && x.BuildingName == fd.BuildingName).Select(x => x).FirstOrDefault();
+                            
                             if (floordata != null)
                             {
                                 floordata.floor = data["floorName"].ToString();
@@ -203,44 +216,12 @@ namespace CresijApp.Services
            
         }
         
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, string> UpdateBuildingData(Dictionary<string, string> data)
-        {
-            string result = "";
-            SetOrgData orgData = new SetOrgData();
-            Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                keyValue.Add("status", "fail");
-                keyValue.Add("errorMessage", "Session Expired");
-                keyValue.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-                    result = orgData.UpdateOrgData(data).ToString();
-                    
-                        keyValue.Add("status", "success");
-                        keyValue.Add("UpdatedRows", result);
-                   
-                }
-                catch (Exception ex)
-                {
-                    keyValue.Add("status", "fail");
-                    keyValue.Add("exception", ex.Message);
-                }
-            }
-            return keyValue;
-            
-        }
         
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveTeacherData(Dictionary<string, string> data)
         {
             string result = "";
-            SetOrgData orgData = new SetOrgData();
+            SetOrgData orgData = new SetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -272,7 +253,7 @@ namespace CresijApp.Services
         public Dictionary<string, string> UpdateTeacherData(Dictionary<string, string> data)
         {
             string result = "";
-            SetOrgData orgData = new SetOrgData();
+            SetOrgData orgData = new SetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -305,7 +286,7 @@ namespace CresijApp.Services
         public Dictionary<string, string> SaveStudentData(Dictionary<string, string> data)
         {
             string result = "";
-            SetOrgData orgData = new SetOrgData();
+            SetOrgData orgData = new SetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -337,7 +318,7 @@ namespace CresijApp.Services
         public Dictionary<string, string> UpdateStudentData(Dictionary<string, string> data)
         {
             string result = "";
-            SetOrgData orgData = new SetOrgData();
+            SetOrgData orgData = new SetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -370,7 +351,7 @@ namespace CresijApp.Services
         public Dictionary<string, string> SaveClassData(Dictionary<string, string> data)
         {
             string result = "";
-            SetOrgData orgData = new SetOrgData();
+            SetOrgData orgData = new SetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -403,7 +384,7 @@ namespace CresijApp.Services
         public Dictionary<string, string> UpdateClassData(Dictionary<string, string> data)
         {
             int result = 0 ;
-            SetOrgData orgData = new SetOrgData();
+            SetOrgData orgData = new SetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -437,7 +418,7 @@ namespace CresijApp.Services
         public Dictionary<string, string> AddUserData(Dictionary<string, string> data)
         {
             string result = "";
-            SetOrgData orgData = new SetOrgData();
+            SetOrgData orgData = new SetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -469,7 +450,7 @@ namespace CresijApp.Services
         public Dictionary<string, string> UpdateUserData(Dictionary<string, string> data)
         {
             string result = "";
-            SetOrgData orgData = new SetOrgData();
+            SetOrgData orgData = new SetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, string> keyValue = new Dictionary<string, string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -498,36 +479,5 @@ namespace CresijApp.Services
             
         }
 
-
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, string> UpdateFloorData(Dictionary<string, string> data)
-        {
-            string result = "";
-            SetOrgData orgData = new SetOrgData();
-            Dictionary<string, string> keyValue = new Dictionary<string, string>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                keyValue.Add("status", "fail");
-                keyValue.Add("errorMessage", "Session Expired");
-                keyValue.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-                    result = orgData.UpdateFloorData(data).ToString();
-                    keyValue.Add("status", "success");
-                    keyValue.Add("UpdatedRows", result);
-                }
-                catch (Exception ex)
-                {
-                    keyValue.Add("status", "fail");
-                    keyValue.Add("exception", ex.Message);
-                }
-            }
-            return keyValue;
-
-        }
     }
 }

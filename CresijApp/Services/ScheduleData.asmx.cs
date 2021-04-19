@@ -20,13 +20,11 @@ namespace CresijApp.Services
     public class ScheduleData : WebService
     {
 
-        #region Common Web methods for Schedule
-        
-        class BuildingIDName
-        {
-            public string BuildingName { get; set; }
-            public string BuildingId { get; set; }
-        }
+        #region Common Web methods for Schedule        
+        /// <summary>
+        /// method to get building id and names accessed by user in session
+        /// </summary>
+        /// <returns>list of building id and name</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetBuilding()
         {
@@ -43,7 +41,7 @@ namespace CresijApp.Services
                 var userid = HttpContext.Current.Session["UserLoggedIn"].ToString();
                 try
                 {
-                    Schedule schedule = new Schedule();
+                    Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable r = schedule.GetBuilding(userid);
                     List<object> idata = new List<object>();
                     val.Add("status", "success");
@@ -71,6 +69,10 @@ namespace CresijApp.Services
             }            
             return val;
         }
+        /// <summary>
+        /// method to get all building id and names
+        /// </summary>
+        /// <returns>list of building id and name</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetAllBuildingNameID()
         {
@@ -87,7 +89,7 @@ namespace CresijApp.Services
                 var userid = HttpContext.Current.Session["UserLoggedIn"].ToString();
                 try
                 {
-                    Schedule schedule = new Schedule();
+                    Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable r = schedule.GetBuildingNameandID();
                     List<object> idata = new List<object>();
                     val.Add("status", "success");
@@ -116,16 +118,16 @@ namespace CresijApp.Services
             }
             return val;
         }
-        class TeacherDetails
-        {
-            public string TeacherName { get; set; }
-            public string TeacherId { get; set; }
-        }
-        
+       
+        /// <summary>
+        /// Method to get teacher name and id list by the course in schedule
+        /// </summary>
+        /// <param name="courseName"></param>
+        /// <returns>teacher name and id list</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTeacherDetail(string courseName)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, object> idata = new Dictionary<string, object>();
             DataTable r = new DataTable();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -166,11 +168,16 @@ namespace CresijApp.Services
             }
             return idata;
         }
-        
+
+        /// <summary>
+        /// Method to get start and end date, autoreview values for reservation and transfer
+        /// </summary>
+        /// <param name="type"> value can be "Transfer" or "Reserve"</param>
+        /// <returns>Returns start, end dates and auto review values</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCalenderDates(string type)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, object> idata = new Dictionary<string, object>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -210,17 +217,17 @@ namespace CresijApp.Services
         #endregion
         #region Transfer Schedule
         /// <summary>
-        /// Web Methods For Transfer Schedules
+        /// Web Methods For getting the schedule by selecting the building, week and day that can be transferred
         /// </summary>
         /// <param name="data"></param>
-        /// <returns></returns>
+        /// <returns>Returns schedule for specific time range and building</returns>
         
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTransferScheduleByDay(Dictionary<string, object> data)
         {
             string userid = "";
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             List<object> dat = new List<object>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -294,8 +301,13 @@ namespace CresijApp.Services
                 }
             }
             return idata;
-        }                                                        
-        
+        }
+
+        /// <summary>
+        /// Web Methods For getting the schedule by selecting the bilding and date that can be transferred
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Returns schedule for specific time range and building</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTransferScheduleByDate(Dictionary<string, object> data)
         {
@@ -320,7 +332,7 @@ namespace CresijApp.Services
                         var date = data["date"].ToString();
                         var pgindex = data["pageIndex"].ToString();
                         var pgsize = data["pageSize"].ToString();
-                        Schedule schedule = new Schedule();
+                        Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
                         dat = schedule.GetScheduleForTransfer(building, date, userid, pgindex, pgsize);
                         idata.Add("status", "success");
                         int total = Convert.ToInt32(dat[0]);
@@ -376,28 +388,17 @@ namespace CresijApp.Services
             return idata;
 
         }
-
-        public class TransferScheduleListStructure
-        {
-            public string OldClassName { get; set; }
-            public string NewClassName { get; set; }
-            public string OldTime { get; set; }
-            public string NewTime { get; set; }
-            public string OldTeacherName { get; set; }
-            public string NewTeacherName { get; set; }
-            public string ClassType { get; set; }
-            public string CurrentStatus { get; set; }
-            public string Reason { get; set; }
-            public string CourseName { get; set; }
-            public string ID { get; set; }
-            
-        }
         
+        /// <summary>
+        /// Method to get the list of transfered schedules
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Return list of all transferred schedule</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetTransferScheduleList(Dictionary<string,string>data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             List<TransferScheduleListStructure> list = new List<TransferScheduleListStructure>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -499,28 +500,17 @@ namespace CresijApp.Services
             }
             return idata;
         }
-
-        public class TransferCourseDetailStructure
-        {
-            public string TeacherName { get; set; }
-            public string CourseName { get; set; }
-            public string ClassName { get; set; }
-            public string ClassId { get; set; }
-            public string WeekStart { get; set; }
-            public string Weekend { get; set; }
-            public string DayNum { get; set; }
-            public string Section { get; set; }
-            public string Building { get; set; }
-            public string StartDate { get; set; }
-            public string SemNum { get; set; }
-            public string TotalWeeks { get; set; }
-        }
         
+        /// <summary>
+        /// Method to get details about a schedule by its id for making a transfer
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>schedule details by id</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCourseDetailsForTransferID(string id)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -569,10 +559,15 @@ namespace CresijApp.Services
             return idata;
         }
         
+        /// <summary>
+        /// Method to add new record for transfer schedule
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Method to</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> AddTransferSchedule(Dictionary<string, object> data)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, object> idata = new Dictionary<string, object>();
             List<string> d = new List<string>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -623,10 +618,15 @@ namespace CresijApp.Services
             return idata;
         }
         
+        /// <summary>
+        /// Method to update the status of a transfer schedule
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> UpdateTransferScheduleStatus(Dictionary<string, object>  data)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, object> idata = new Dictionary<string, object>();
             int r = 0;
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -663,16 +663,15 @@ namespace CresijApp.Services
             
         }
 
-        class AvailClasses
-        {
-            public string ClassName { get; set; }
-            public string ClassId { get; set; }
-        }
-        
+        /// <summary>
+        /// method to get available classes accessed by user which has no schedule session
+        /// </summary>
+        /// <param name="data">the parameters include building id, weeknum and sem no</param>
+        /// <returns></returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetAvailClasses(Dictionary<string, object> data)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, object> idata = new Dictionary<string, object>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -733,10 +732,15 @@ namespace CresijApp.Services
             return idata;
         }
         
+        /// <summary>
+        /// Method to get free days and section in a class which has no schedule session
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Free days and sections list </returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetAvailDay(Dictionary<string, object> data)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, object> idata = new Dictionary<string, object>();
             DataTable r = new DataTable();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -810,23 +814,17 @@ namespace CresijApp.Services
                 }
             }
             return idata;
-        }
-
-        public class DaysAndSection
-        {
-            public int Day { get; set; }
-            public List<int> Section { get; set; }
-            public DaysAndSection()
-            {
-                Section = new List<int>() { 1, 3, 5, 7, 9, 11 };
-            }
-        }
-               
+        }    
+        /// <summary>
+        /// Method to week total weeks in a semester by its number
+        /// </summary>
+        /// <param name="semNum"></param>
+        /// <returns>NO. of total weeks</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTotalWeek(string semNum)
         {
             Dictionary<string, object> val = new Dictionary<string, object>();
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -859,28 +857,12 @@ namespace CresijApp.Services
         #endregion
 
         #region Schedule and Reserve Schedule
+
         /// <summary>
-        /// Web Methods for Schedule
+        /// Method to get Schedule by building,week and day
         /// </summary>
-        private class ScheduleDataStructureByBuildingWeek
-        {
-            public int RowNum { get; set; }
-            public string ClassId{get;set;}
-            public string Classname { get; set; }
-            public string Section1 { get; set; }
-            public string Section2 { get; set; }
-            public string Section3 { get; set; }
-            public string Section4 { get; set; }
-            public string Section5 { get; set; }
-            public string Section6 { get; set; }
-            public string Section7 { get; set; }
-            public string Section8 { get; set; }
-            public string Section9 { get; set; }
-            public string Section10 { get; set; }
-            public string Section11 { get; set; }
-            public string Section12 { get; set; }
-        }
-        
+        /// <param name="data"></param>
+        /// <returns>schedule list</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetScheduleByDay(Dictionary<string, object> data)
         {
@@ -894,7 +876,7 @@ namespace CresijApp.Services
             }            
             else
             {
-                Schedule schedule = new Schedule();
+                Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
                 List<object> dat = new List<object>();
                 try
                 {
@@ -960,7 +942,12 @@ namespace CresijApp.Services
             }
             return idata;
         }
-        
+
+        /// <summary>
+        /// Method to get Schedule by building and date
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>schedule list</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetScheduleByDate(Dictionary<string, object> data)
         {
@@ -987,7 +974,7 @@ namespace CresijApp.Services
 
                         var pgindex = data["pageIndex"].ToString();
                         var pgsize = data["pageSize"].ToString();
-                        Schedule schedule = new Schedule();
+                        Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
                         dat = schedule.GetScheduleByDate(building, date, userid, pgindex, pgsize);
 
                         idata.Add("status", "success");
@@ -1044,10 +1031,10 @@ namespace CresijApp.Services
             return idata;
         }
         /// <summary>
-        /// specific methods for Reserve Schedule
+        /// Methods to get week, year, semester in which the date falls 
         /// </summary>
         /// <param name="data"></param>
-        /// <returns></returns>
+        /// <returns>returns week year,semester</returns>
                
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetWeekYearSemester(string date)
@@ -1065,7 +1052,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    Schedule sc = new Schedule();
+                    Schedule sc = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
                     string week = sc.GetWeekByDate(date);
                     string[] dat = sc.GetYearAndSemester(date);
                     idata.Add("status", "success");
@@ -1082,10 +1069,15 @@ namespace CresijApp.Services
             return idata;
         }
         
+        /// <summary>
+        /// Method to add new reserve/appointment schedule
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>returns success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> AddReserveSchedule(Dictionary<string, object> data)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, object> idata = new Dictionary<string, object>();
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -1133,33 +1125,17 @@ namespace CresijApp.Services
             return idata;
         }
 
-        private class ReserveScheduleListDataStructure
-        {
-            public int ID { get; set; }
-            public string SchoolYear { get; set; }
-            public string Semester { get; set; }
-            public string Week { get; set; }
-            public string Date { get; set; }
-            public string Section { get; set; }
-            public string Classroom { get; set; }
-            public string BorrowingUnit { get; set; }
-            public string WorkPhone { get; set; }
-            public string PersonName { get; set; }
-            public string PersonID { get; set; }
-            public string ContactNum { get; set; }
-            public string Purpose { get; set; }
-            public string ReservationPurpose { get; set; }
-            public string Equipments { get; set; }
-            public string Status { get; set; }
-            public string OpenMode { get; set; }
-        }
-        
+        /// <summary>
+        /// Method to get list of reserve/appointment schedules
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>list of reserve/appointment schedule</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetReserveScheduleList(Dictionary<string,string> data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             List<ReserveScheduleListDataStructure> reserveScheduleLists = new List<ReserveScheduleListDataStructure>();
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -1219,10 +1195,15 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        /// Method to update the status of reserve schedule from pending to Reject/approve
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> UpdateReserveScheduleStatus(Dictionary<string, object> data)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             Dictionary<string, object> idata = new Dictionary<string, object>();
             int r = 0;
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
@@ -1260,69 +1241,10 @@ namespace CresijApp.Services
         #endregion
 
         #region Web Methods Not in use currently
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public List<object> GetScheduleByBuildWeekSem(string[] name)
-        {
-            Schedule schedule = new Schedule();
-            DataTable r = schedule.GetScheduleByBuildWeekSem(name[0],name[1],name[2],name[3]);
-            List<object> idata = new List<object>();
-            foreach (DataRow dr in r.Rows)
-            {
-                idata.Add(dr.ItemArray);
-            }
-            return idata;
-        }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public List<object> GetScheduleByBuildSem(string[] name)
-        {
-            Schedule schedule = new Schedule();
-            DataTable r = schedule.GetScheduleByBuildSem(name[0], name[1],name[2]);
-            List<object> idata = new List<object>();
-            foreach (DataRow dr in r.Rows)
-            {
-                idata.Add(dr.ItemArray);
-            }
-            return idata;
-        }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public List<object> GetScheduleByBuild(string[] name)
-        {
-            Schedule schedule = new Schedule();
-            DataTable r = schedule.GetScheduleByBuild(name[0],name[1]);
-            List<object> idata = new List<object>();
-            foreach (DataRow dr in r.Rows)
-            {
-                idata.Add(dr.ItemArray);
-            }
-            return idata;
-        }
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public List<object> GetScheduleForDate(string[] name)
-        {
-            Schedule schedule = new Schedule();
-            //string dd = DateTime.Now.ToString("yyyy-MM-dd");
-            DataTable r = schedule.GetScheduleForDate(name[0], name[1]);
-            List<object> data = new List<object>();
-            foreach (DataRow dr in r.Rows)
-            {
-                data.Add(dr.ItemArray);
-            }
-            return data;
-        }
-
-        [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
         public List<object> GetCourse(string name)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             DataTable dt = schedule.GetCourse();
             List<object> idata = new List<object>();
             List<string> data = new List<string>();
@@ -1343,26 +1265,12 @@ namespace CresijApp.Services
             return idata;
         }
 
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public List<object> GetSchedule(string name)
-        {
-            Schedule schedule = new Schedule();
-            DataTable dt = schedule.GetSchedule();
-            List<object> idata = new List<object>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                idata.Add(dr.ItemArray);
-            }
-            //idata.Add(dt.Rows);
-            return idata;
-        }
-
+       
         [PrincipalPermission(SecurityAction.Demand)]
         [WebMethod]
         public List<object> GetCourseDetails(string[] name)
         {
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             DataTable dt = schedule.GetCourseDetails(name);
             List<object> idata = new List<object>();
             foreach (DataRow dr in dt.Rows)
@@ -1382,7 +1290,7 @@ namespace CresijApp.Services
         {
             List<int> freeweek = new List<int>();
 
-            Schedule schedule = new Schedule();
+            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
             DataTable dt = schedule.GetFreeDay(Convert.ToInt32(name));
             List<object> idata = new List<object>();
             foreach (DataRow dr in dt.Rows)
@@ -1459,4 +1367,127 @@ namespace CresijApp.Services
         }
         #endregion
     }
+    #region Data Structure
+
+    /// <summary>
+    /// structure for building id and name for task of transferring schedule
+    /// </summary>
+    class BuildingIDName
+    {
+        public string BuildingName { get; set; }
+        public string BuildingId { get; set; }
+    }
+
+    /// <summary>
+    /// structure for teacher name and id for the specific course
+    /// </summary>
+    class TeacherDetails
+    {
+        public string TeacherName { get; set; }
+        public string TeacherId { get; set; }
+    }
+
+    /// <summary>
+    /// structure for transfer schedule List
+    /// </summary>
+    public class TransferScheduleListStructure
+    {
+        public string OldClassName { get; set; }
+        public string NewClassName { get; set; }
+        public string OldTime { get; set; }
+        public string NewTime { get; set; }
+        public string OldTeacherName { get; set; }
+        public string NewTeacherName { get; set; }
+        public string ClassType { get; set; }
+        public string CurrentStatus { get; set; }
+        public string Reason { get; set; }
+        public string CourseName { get; set; }
+        public string ID { get; set; }
+
+    }
+    /// <summary>
+    /// Structure for Details of the schedule which is requested to be transfered .
+    /// </summary>
+    public class TransferCourseDetailStructure
+    {
+        public string TeacherName { get; set; }
+        public string CourseName { get; set; }
+        public string ClassName { get; set; }
+        public string ClassId { get; set; }
+        public string WeekStart { get; set; }
+        public string Weekend { get; set; }
+        public string DayNum { get; set; }
+        public string Section { get; set; }
+        public string Building { get; set; }
+        public string StartDate { get; set; }
+        public string SemNum { get; set; }
+        public string TotalWeeks { get; set; }
+    }
+    /// <summary>
+    /// Structure for classid and name
+    /// </summary>
+    class AvailClasses
+    {
+        public string ClassName { get; set; }
+        public string ClassId { get; set; }
+    }
+
+    /// <summary>
+    /// Data structure to return free days and section in a week in a specific class
+    /// Total Sections in database is fixed and so here also
+    /// </summary>
+    public class DaysAndSection
+    {
+        public int Day { get; set; }
+        public List<int> Section { get; set; }
+        public DaysAndSection()
+        {
+            Section = new List<int>() { 1, 3, 5, 7, 9, 11 };
+        }
+    }
+    /// <summary>
+    /// Structure for schedule
+    /// </summary>
+    class ScheduleDataStructureByBuildingWeek
+    {
+        public int RowNum { get; set; }
+        public string ClassId { get; set; }
+        public string Classname { get; set; }
+        public string Section1 { get; set; }
+        public string Section2 { get; set; }
+        public string Section3 { get; set; }
+        public string Section4 { get; set; }
+        public string Section5 { get; set; }
+        public string Section6 { get; set; }
+        public string Section7 { get; set; }
+        public string Section8 { get; set; }
+        public string Section9 { get; set; }
+        public string Section10 { get; set; }
+        public string Section11 { get; set; }
+        public string Section12 { get; set; }
+    }
+    /// <summary>
+    /// Structure for reserve/appointment schedule
+    /// </summary>
+    class ReserveScheduleListDataStructure
+    {
+        public int ID { get; set; }
+        public string SchoolYear { get; set; }
+        public string Semester { get; set; }
+        public string Week { get; set; }
+        public string Date { get; set; }
+        public string Section { get; set; }
+        public string Classroom { get; set; }
+        public string BorrowingUnit { get; set; }
+        public string WorkPhone { get; set; }
+        public string PersonName { get; set; }
+        public string PersonID { get; set; }
+        public string ContactNum { get; set; }
+        public string Purpose { get; set; }
+        public string ReservationPurpose { get; set; }
+        public string Equipments { get; set; }
+        public string Status { get; set; }
+        public string OpenMode { get; set; }
+    }
+    #endregion
 }

@@ -9,7 +9,7 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for GetOrganisationData
-    /// This Class is use to fetch different data from database tables
+    /// This Class is use to fetch different data 
     /// Class contains Get Methods for: UserDetails table, BuildingDetails , StudentDetails, TeacherDetails, ClassDetails
     /// and their different variations according to requirement.
     /// </summary>
@@ -303,7 +303,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DataTable dt = gd.GetUserDataonDemand(id);
+                    DataTable dt = gd.GetUserById(id);
                     idata.Add("status", "success");
                     if (dt.Rows.Count > 0)
                     {
@@ -494,7 +494,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DataTable dt = gd.GetOrgDataonDemand(Convert.ToInt32(id));
+                    DataTable dt = gd.GetBuildingById(Convert.ToInt32(id));
                     d.Add("status", "success");
                     idata.Add("id", dt.Rows[0]["id"].ToString());
                     idata.Add("buildingName", dt.Rows[0]["buildingName"].ToString());

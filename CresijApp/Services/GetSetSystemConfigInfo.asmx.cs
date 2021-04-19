@@ -15,7 +15,7 @@ namespace CresijApp.Services
     /// Summary description for GetSetSystemConfigInfo
     /// This class is used for Configuration settings on system settings page. 
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/GetSetSystemConfigInfo.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 

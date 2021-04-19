@@ -15,6 +15,9 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for StrategyManagement
+    /// This class is use to deal with Strategy and Strategy Description Records in Database
+    /// The methods available in this class are for CRUD Operation on Strategy
+    /// and Strategy Description Records in Database
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -23,32 +26,17 @@ namespace CresijApp.Services
     [System.Web.Script.Services.ScriptService]
     public class StrategyManagement : WebService
     {
-
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
-        private class StrategyDataStructure
-        {
-            public string StrategyId { get; set; }
-            public string StrategyName { get; set; }
-            public string StrategyDescription { get; set; }
-            public string CreatingDate { get; set; }
-            public string TimeFrame { get; set; }
-            public string StrategyType { get; set; }
-            public string[] Location { get; set; }
-            public string CurrentStatus { get; set; }
-            public int Fail { get; set; }
-            public int Success { get; set; }
-            public int Pending { get; set; }
-        }
-
+        #region Web Methods
+        /// <summary>
+        /// Method to get the list of Strategy records with status of execution
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>List of StrategyDataStructure</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetStrategyList( Dictionary<string,string>data)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            StrategyMgmt strategy = new StrategyMgmt();
+            StrategyMgmt strategy = new StrategyMgmt(HttpContext.Current.Session["DBConnection"].ToString());
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -96,13 +84,22 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        /// Method to Add new Strategy Record
+        /// </summary>
+        /// <param name="data">
+        /// "data" contains params list: "StrategyLocation","StrategyId","CurrentStatus","StrategyName",
+        /// "StrategyDesc","StrategyType","StrategyServices"
+        /// "StrategyServices" contains params list: "EquipmentId","StrategyTime","StrategyTimeFrame1",
+        /// "StrategyTimeFrame2","ServiceConfig"</param>
+        /// <returns>Success/fail result with no of rows inserted</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> AddNewStrategy(Dictionary<string, object> data)
         {
             int result = 0;
             JavaScriptSerializer js = new JavaScriptSerializer();
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            StrategyMgmt strategy = new StrategyMgmt();
+            
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -179,21 +176,23 @@ namespace CresijApp.Services
             return idata;
         }
 
-        class StrategyServiceStructure
-        {            
-            public string EquipmentId { get; set; }            
-            public dynamic ServiceConfig { get; set; }
-            public string StrategyTimeFrame1 { get; set; }
-            public string StrategyTimeFrame2 { get; set; }
-            public string StrategyTime { get; set; }
-        }
+        /// <summary>
+        /// Method to update strategy record 
+        /// </summary>
+        /// <param name="data">
+        /// "data" contains params list: "StrategyLocation","StrategyId","CurrentStatus","StrategyName",
+        /// "StrategyDesc","StrategyType","StrategyServices"
+        /// "StrategyServices" contains params list: "EquipmentId","StrategyTime","StrategyTimeFrame1",
+        /// "StrategyTimeFrame2","ServiceConfig"
+        /// </param>
+        /// <returns>No of rows updated with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> UpdateStrategy(Dictionary<string, object> data)
         {
             int result = 0;
             JavaScriptSerializer js = new JavaScriptSerializer();
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            StrategyMgmt strategy = new StrategyMgmt();
+            
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
                 HttpContext.Current.Session.Abandon();
@@ -258,12 +257,10 @@ namespace CresijApp.Services
             return idata;
         }
 
-        public class TeacherAidStructure
-        {
-            public string Id{get;set;}
-            public string Name { get; set; }
-        }
-
+        /// <summary>
+        /// Method to get strategy Equipments with name and id to add new equipments into the strategy
+        /// </summary>
+        /// <returns>List of TeacherAidStructure</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetStrategyEquipments()
         {
@@ -307,22 +304,17 @@ namespace CresijApp.Services
             return idata;
         }
 
-        class StrategyDescStructure
-        {
-            public int StrategyDescId { get; set; }
-            public string StrategyTimeFrame1 { get; set; }
-            public string StrategyTimeFrame2 { get; set; }
-            public int EquipmentId { get; set; }
-            public string EquipmentName { get; set; }
-            public dynamic ServiceConfig { get; set; }
-            public string StrategyTime { get; set; }
-        }
+        /// <summary>
+        /// method to get Strategy by its id
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns>StrategyDescStructure</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetStrategyById(string Id)
         {
             
             Dictionary<string, object> idata = new Dictionary<string, object>();
-            StrategyMgmt strategy = new StrategyMgmt();
+            
             int val = Convert.ToInt32(Id);
             if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
             {
@@ -378,7 +370,11 @@ namespace CresijApp.Services
             }
             return idata;
         }
-
+        /// <summary>
+        /// Delete single or multiple strategy by its id
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>No of rows deleted along with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> DeleteStrategyById(List<string> data)
         {
@@ -421,69 +417,11 @@ namespace CresijApp.Services
             return idata;
         }
 
-        public class StrategyStructure
-        {
-            public int Id { get; set; }
-            public string StrategyName { get; set; }
-            public string StrategyDesc { get; set; }
-            public string CreationDate { get; set; }
-            public string CurrentStatus { get; set; }
-            public string StrategyType { get; set; }
-            public dynamic Configuration { get; set; }
-            //public string Location { get; set; }
-            public string StrategyTimeFrame { get; set; }
-            public string StrategyTime { get; set; }
-
-        }
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string,object> GetStrategy()
-        {
-            Dictionary<string, object> idata = new Dictionary<string, object>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", "Session Expired");
-                idata.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-                    List<StrategyStructure> strategies = new List<StrategyStructure>();
-                    StrategyMgmt strategyMgmt = new StrategyMgmt();
-                    DataTable dt = strategyMgmt.GetStrategy();
-                    if (dt.Rows.Count > 0)
-                    {
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            StrategyStructure st = new StrategyStructure()
-                            {
-                                Id = Convert.ToInt32(dr["strategyid"]),
-                                StrategyName = dr["strategyname"].ToString(),
-                                StrategyDesc = dr["strategydesc"].ToString(),
-                                CreationDate = DateTime.Parse(dr["creationdate"].ToString()).ToString("yyyy-MM-dd H:mm:ss"),
-                                CurrentStatus = dr["currentstatus"].ToString(),
-                                StrategyType = dr["strategytype"].ToString(),
-
-                                StrategyTimeFrame = dr["strategytimeframe"].ToString(),
-                                StrategyTime = dr["strategytime"].ToString(),
-                                Configuration = JsonConvert.DeserializeObject<Dictionary<dynamic, dynamic>>(dr["config"].ToString())
-                            };
-                            strategies.Add(st);
-                        }
-                    }
-
-                    idata.Add("status", "success");
-                    idata.Add("value", strategies);
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-            return idata;
-        }
+        /// <summary>
+        /// Method to update strategy Status from Inactive to Active and viceversa
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>affected rows with success/fail result </returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> UpdateStrategyStatus(Dictionary<string,string> data)
         {
@@ -522,6 +460,11 @@ namespace CresijApp.Services
             }
             return idata;
         }
+        /// <summary>
+        /// Method to get count of strategy execution based on its strategy id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>COunt of executions with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetStrategyCount(int id)
         {
@@ -538,7 +481,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    StrategyMgmt st = new StrategyMgmt();
+                    StrategyMgmt st = new StrategyMgmt(HttpContext.Current.Session["DBConnection"].ToString());
                     result = st.GetStrategyExectutionCount(id);
                     idata.Add("value", result);
                 }
@@ -551,5 +494,129 @@ namespace CresijApp.Services
             }
             return idata;
         }
+        #endregion
+        #region Method not in use. Can be deleted
+        /// <summary>
+        /// Method to get list of strategy
+        /// </summary>
+        /// <returns>list of StrategyStructure</returns>
+        [WebMethod(EnableSession = true)]
+        public Dictionary<string, object> GetStrategy()
+        {
+            Dictionary<string, object> idata = new Dictionary<string, object>();
+            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
+            {
+                HttpContext.Current.Session.Abandon();
+                idata.Add("status", "fail");
+                idata.Add("errorMessage", "Session Expired");
+                idata.Add("customErrorCode", "440");
+            }
+            else
+            {
+                try
+                {
+                    List<StrategyStructure> strategies = new List<StrategyStructure>();
+                    StrategyMgmt strategyMgmt = new StrategyMgmt(HttpContext.Current.Session["DBConnection"].ToString());
+                    DataTable dt = strategyMgmt.GetStrategy();
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            StrategyStructure st = new StrategyStructure()
+                            {
+                                Id = Convert.ToInt32(dr["strategyid"]),
+                                StrategyName = dr["strategyname"].ToString(),
+                                StrategyDesc = dr["strategydesc"].ToString(),
+                                CreationDate = DateTime.Parse(dr["creationdate"].ToString()).ToString("yyyy-MM-dd H:mm:ss"),
+                                CurrentStatus = dr["currentstatus"].ToString(),
+                                StrategyType = dr["strategytype"].ToString(),
+                                StrategyTimeFrame = dr["strategytimeframe"].ToString(),
+                                StrategyTime = dr["strategytime"].ToString(),
+                                Configuration = JsonConvert.DeserializeObject<Dictionary<dynamic, dynamic>>(dr["config"].ToString())
+                            };
+                            strategies.Add(st);
+                        }
+                    }
+
+                    idata.Add("status", "success");
+                    idata.Add("value", strategies);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            return idata;
+        }
+        #endregion
     }
+    #region Data Structure
+    /// <summary>
+    /// Structure for list of Strategies with execution status
+    /// </summary>
+    class StrategyDataStructure
+    {
+        public string StrategyId { get; set; }
+        public string StrategyName { get; set; }
+        public string StrategyDescription { get; set; }
+        public string CreatingDate { get; set; }
+        public string TimeFrame { get; set; }
+        public string StrategyType { get; set; }
+        public string[] Location { get; set; }
+        public string CurrentStatus { get; set; }
+        public int Fail { get; set; }
+        public int Success { get; set; }
+        public int Pending { get; set; }
+    }
+    /// <summary>
+    /// structure for strategy Description by strategy description id
+    /// </summary>
+    class StrategyServiceStructure
+    {
+        public string EquipmentId { get; set; }
+        public dynamic ServiceConfig { get; set; }
+        public string StrategyTimeFrame1 { get; set; }
+        public string StrategyTimeFrame2 { get; set; }
+        public string StrategyTime { get; set; }
+    }
+    /// <summary>
+    /// structure for list of strategy description
+    /// </summary>
+    class StrategyDescStructure
+    {
+        public int StrategyDescId { get; set; }
+        public string StrategyTimeFrame1 { get; set; }
+        public string StrategyTimeFrame2 { get; set; }
+        public int EquipmentId { get; set; }
+        public string EquipmentName { get; set; }
+        public dynamic ServiceConfig { get; set; }
+        public string StrategyTime { get; set; }
+    }
+    /// <summary>
+    /// Structure for Strategy List
+    /// </summary>
+    public class StrategyStructure
+    {
+        public int Id { get; set; }
+        public string StrategyName { get; set; }
+        public string StrategyDesc { get; set; }
+        public string CreationDate { get; set; }
+        public string CurrentStatus { get; set; }
+        public string StrategyType { get; set; }
+        public dynamic Configuration { get; set; }
+        //public string Location { get; set; }
+        public string StrategyTimeFrame { get; set; }
+        public string StrategyTime { get; set; }
+
+    }
+    /// <summary>
+    /// structure to contains equipment ids and names
+    /// </summary>
+    public class TeacherAidStructure
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
+    #endregion
+    
 }

@@ -9,6 +9,11 @@ using System.Data.Entity;
 
 namespace CresijApp.DataAccess
 {
+    /// <summary>
+    /// This Class is use to fetch different data from database tables
+    /// Class contains Get Methods for: UserDetails table, BuildingDetails , StudentDetails, TeacherDetails, ClassDetails
+    /// and their different variations according to requirement.
+    /// </summary>
     public class GetOrgData
     {
        string constr = System.Configuration.ConfigurationManager.
@@ -247,6 +252,11 @@ namespace CresijApp.DataAccess
 
             return data;
         }
+        /// <summary>
+        /// method to get class data by its id
+        /// </summary>
+        /// <param name="classid"></param>
+        /// <returns>class details data</returns>
         public DataTable GetClassData(string classid)
         {
             DataTable dt = new DataTable();
@@ -268,27 +278,14 @@ namespace CresijApp.DataAccess
             
             return dt;
         }
-        public DataTable GetDevicesInfo()
+       /// <summary>
+       /// Get Building details by its ID
+       /// </summary>
+       /// <param name="sn"></param>
+       /// <returns>Specific building detail</returns>
+        public DataTable GetBuildingById(int sn)
         {
-            DataTable dt = new DataTable();
-            
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    string query = "SELECT * from devicesdetails";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                        MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                        adapter.Fill(dt);
-                    }
-                }
-            
-            return dt;
-        }
-
-        public DataTable GetOrgDataonDemand(int sn)
-        {
-            DataTable dt = new DataTable();
-            
+            DataTable dt = new DataTable();            
                 using(MySqlConnection con = new MySqlConnection(constr))
                 {
                     string query = "SELECT id,  buildingName, buildingCode, schoolname, " +
@@ -306,8 +303,12 @@ namespace CresijApp.DataAccess
             
             return dt;
         }
-
-        public DataTable GetUserDataonDemand(string sn)
+        /// <summary>
+        /// Get user details by id
+        /// </summary>
+        /// <param name="sn"></param>
+        /// <returns>specific user detail</returns>
+        public DataTable GetUserById(string sn)
         {
             DataTable dt = new DataTable();
            
@@ -331,6 +332,14 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
+        /// <summary>
+        /// Get machine details and class ids and names by building id, specific to user
+        /// </summary>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="data"></param>
+        /// <param name="userid"></param>
+        /// <returns>list of class and machine ip </returns>
         public List<object> GetIPClassByBuilding(string pageindex, string pagesize,string data,string userid)
         {
             DataTable dt = new DataTable();
@@ -360,26 +369,15 @@ namespace CresijApp.DataAccess
             }
             return list;
         }
-        public Dictionary<string, object> GetClassAndCourse(Dictionary<string, string> data)
-        {
-            var idata = new Dictionary<string, object>();
-
-            try
-            {
-                var classId = Convert.ToInt32(data["ClassId"]);
-                var scheduleId = Convert.ToInt32(data["ScheduleId"]);
-                using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
-                {
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            return idata;
-        }
+        /// <summary>
+        /// Get machine details and class ids and names by building id and floor id, specific to user
+        /// </summary>
+        /// <param name="building"></param>
+        /// <param name="floor"></param>
+        /// <param name="userid"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <returns>list of class and machine ip</returns>
         public List<object> GetIPClassByBuildingFloor(string building,string floor,string userid,string pageindex,int pagesize)
         {
             DataTable dt = new DataTable();
@@ -414,6 +412,11 @@ namespace CresijApp.DataAccess
             return list;
         }
 
+        /// <summary>
+        /// Method to get the floor list by building id
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns>floor list </returns>
         public DataTable GetFloorlist(string building)
         {
             DataTable dt = new DataTable();
@@ -428,7 +431,11 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
-
+        /// <summary>
+        /// Method to get school name
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns></returns>
         public DataTable GetSchoolName(string building)
         {
             DataTable dt = new DataTable();
@@ -445,6 +452,11 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
+        /// <summary>
+        /// Method to get class name and id by machine ip
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns>Class name and id</returns>
         public DataTable GetClassByIP(string ip)
         {
             DataTable dt = new DataTable();
@@ -459,6 +471,12 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+        /// <summary>
+        /// Method to get the floor list by building id specific to user id
+        /// </summary>
+        /// <param name="building"></param>
+        /// <param name="userid"></param>
+        /// <returns>floor list</returns>
         public DataTable GetFloorDetails(string building, string userid)
         {
             DataTable dt = new DataTable();
@@ -486,6 +504,11 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
+        /// <summary>
+        ///Method to Get single camera details record using its class id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Student and teacher camera detail</returns>
         public ClassDataDetails GetCameraByClassId(int id)
         {
             
@@ -525,7 +548,11 @@ namespace CresijApp.DataAccess
             }
             
         }
-
+        /// <summary>
+        ///Method to Get camera details List using its class id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>List of Strudent and teacher camera detail</returns>
         public List<ClassDataDetails> GetCameraByClassIds(List<int> id)
         {
             List<ClassDataDetails> details = new List<ClassDataDetails>();
@@ -553,6 +580,17 @@ namespace CresijApp.DataAccess
             return details;
         }
 
+        /// <summary>
+        /// Get camera and machine details with userid and filters
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="systemstate"></param>
+        /// <param name="hasTeacher"></param>
+        /// <param name="ids"></param>
+        /// <param name="inout"></param>
+        /// <returns>list of camera and machine details</returns>
         public List<object> GetCameraByUserIdWithCondition(string userid, int pageSize, int pageNum,
             string systemstate,bool hasTeacher, List<int>ids, bool inout)
         {
@@ -621,6 +659,15 @@ namespace CresijApp.DataAccess
             return result;
         }
 
+        /// <summary>
+        /// Get camera and machine details with filters using userid
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="ids"></param>
+        /// <param name="inout"></param>
+        /// <returns>list of camera and machine details</returns>
         public List<object> GetCameraByUserId(string userid, int pageSize, int pageNum,
             List<int> ids, bool inout)
         {
@@ -665,7 +712,16 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
+        /// <summary>
+        /// Get camera and machine details with filters using search keyword
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="keywword"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="ids"></param>
+        /// <param name="inout"></param>
+        /// <returns>list of camera and machine details</returns>
         public List<object> GetCameraBySearch(string user,string keywword, int pageSize, int pageNum,
             List<int> ids, bool inout)
         {
@@ -711,7 +767,18 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
+        /// <summary>
+        /// Get camera and machine details with filters and search keywords using userid
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="keywword"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNum"></param>
+        /// <param name="systemstate"></param>
+        /// <param name="hasTeacher"></param>
+        /// <param name="ids"></param>
+        /// <param name="inout"></param>
+        /// <returns>list of camera and machine details</returns>
         public List<object> GetCameraBySearchWithCondition(string user,string keywword, int pageSize, int pageNum,
             string systemstate, bool hasTeacher, List<int> ids, bool inout)
         {
@@ -775,26 +842,7 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
-        public List<object> GetClassEvent(string user) {
-            List<ClassDataDetails> details = new List<ClassDataDetails>();
-            var result = new List<object>();
-            List<int> classids = new List<int>();
-            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
-            {
-                int serialn = context.userdetails.Where(x => x.LoginID == user)
-                    .Select(x => x.SerialNo).FirstOrDefault();
-                classids = context.userlocationaccesses.Where
-                    (x => x.userserialnum == serialn && x.Level == "Class").Select(x => x.locationid).ToList();
-                var datetime = DateTime.Now.AddMinutes(-5);
-                var templist1 = context.temp_desktopevents.Where(x => classids.Contains(x.classid)
-                && x.ActionTime >= datetime).Select(x => x.classid).Union(
-                context.alarmmonitorlogs.Where(x => classids.Contains(x.Classid)
-                && x.almTime >= datetime).Select(x => x.Classid)).ToList();
-                result.Add(details);
-            }
-            return result;
-        }
+        
 
         /// <summary>
         /// Method to get Desktop Event logs

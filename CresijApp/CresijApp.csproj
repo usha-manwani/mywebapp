@@ -237,7 +237,6 @@
     <Content Include="Content\v4-shims.min.css" />
     <Content Include="CssContent\Chart.min.css" />
     <Content Include="CssContent\sensor.css" />
-    <Content Include="DataAccess\Dump20200624.sql" />
     <Content Include="Global.asax" />
     <Content Include="HikVision\codebase\jsPlugin-1.0.0.min.js" />
     <Content Include="HikVision\codebase\playctrl\AudioRenderer.js" />
@@ -1221,10 +1220,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="DataAccess\Chart.cs" />
     <Compile Include="DataAccess\CreateCSV.cs" />
     <Compile Include="DataAccess\DeleteOrgDetails.cs" />
-    <Compile Include="DataAccess\GetMenuDataHelper.cs" />
     <Compile Include="DataAccess\GetOrgData.cs" />
     <Compile Include="DataAccess\HistoryDataAccessHelper.cs" />
     <Compile Include="DataAccess\Schedule.cs" />

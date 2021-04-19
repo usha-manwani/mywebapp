@@ -15,22 +15,25 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for SystemSetting
+    /// This class is use to deal with adding new school details, like
+    /// Time of sessions, semester start dates and weeks of operation, school name,
+    /// set different options for appointments and transfer Permissions
+    /// Getting all the related data back from database and update it
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/SystemSetting.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [ScriptService]
     public class SystemSetting : WebService
     {
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
-
-
+        #region Web Methods
+        /// <summary>
+        /// method to get System Info by the semester
+        /// 
+        /// </summary>
+        /// <param name="semno"></param>
+        /// <returns>School name with logo location , Semester Info, Section Info, Reserve and trasnfer permissions and dates</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetSystemInfo(int semno)
         {
@@ -149,6 +152,10 @@ namespace CresijApp.Services
             return idata;
         }
 
+        /// <summary>
+        /// Method to get School name and logo location
+        /// </summary>
+        /// <returns>School name with logo location </returns>
         [WebMethod]
         public Dictionary<string, object> GetSchoolInfo()
         {
@@ -183,48 +190,13 @@ namespace CresijApp.Services
             }
             return idata;
         }
-        private class SchoolInfo
-        {
-            public string SchoolEngName { get; set; }
-            public string SchoolName { get; set; }
-            public string LogoLocation { get; set; }
 
-        }
-        private class SectionInfo
-        {
-            public int Semesterno { get; set; }
-            public string Section { get; set; }
-            public string StartTime { get; set; }
-            public string StopTime { get; set; }
-            public bool Checked { get; set; }
-
-        }
-        private class SemesterInfo
-        {
-            public string SemesterName { get; set; }
-            public string StartDate { get; set; }
-            public int TotalWeeks { get; set; }
-            public bool Sunday { get; set; }
-            public bool Monday { get; set; }
-            public bool Tuesday { get; set; }
-            public bool Wednesday { get; set; }
-            public bool Thursday { get; set; }
-            public bool Friday { get; set; }
-            public bool Saturday { get; set; }
-            public int Semno { get; set; }
-            public bool AutoHoliday { get; set; }
-
-        }
-        private class ReserveTrans
-        {
-            public string Type { get; set; }
-            public bool NonWorkingDays { get; set; }
-            public bool AutoReview { get; set; }
-            public string StartTime { get; set; }
-            public string EndTime { get; set; }
-            public int SemesterNo { get; set; }
-
-        }
+        /// <summary>
+        /// Method to update the system details
+        /// updates School name with logo location , Semester Info, Section Info, Reserve and trasnfer permissions and dates
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>success/fail</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> UpdateSystemInfo(Dictionary<string, object> data)
         {
@@ -379,197 +351,72 @@ namespace CresijApp.Services
             }
             return idata;
         }
-        T GetObject<T>(Dictionary<string, object> dict)
-        {
-            Type type = typeof(T);
-            var obj = Activator.CreateInstance(type);
-
-            foreach (var kv in dict)
-            {
-                type.GetProperty(kv.Key).SetValue(obj, kv.Value);
-            }
-            return (T)obj;
-        }
+        #endregion
     }
+    #region Data structures
+    /// <summary>
+    /// Structure for school name, logo location
+    /// </summary>
+    class SchoolInfo
+    {
+        public string SchoolEngName { get; set; }
+        public string SchoolName { get; set; }
+        public string LogoLocation { get; set; }
 
+    }
+    /// <summary>
+    /// Structure for section info
+    /// </summary>
+    class SectionInfo
+    {
+        public int Semesterno { get; set; }
+        public string Section { get; set; }
+        public string StartTime { get; set; }
+        public string StopTime { get; set; }
+        public bool Checked { get; set; }
+
+    }
+    /// <summary>
+    /// structure for Semester Info
+    /// </summary>
+    class SemesterInfo
+    {
+        public string SemesterName { get; set; }
+        public string StartDate { get; set; }
+        public int TotalWeeks { get; set; }
+        public bool Sunday { get; set; }
+        public bool Monday { get; set; }
+        public bool Tuesday { get; set; }
+        public bool Wednesday { get; set; }
+        public bool Thursday { get; set; }
+        public bool Friday { get; set; }
+        public bool Saturday { get; set; }
+        public int Semno { get; set; }
+        public bool AutoHoliday { get; set; }
+
+    }
+    /// <summary>
+    /// Structure for reserver and transfer permission and dates
+    /// </summary>
+    class ReserveTrans
+    {
+        public string Type { get; set; }
+        public bool NonWorkingDays { get; set; }
+        public bool AutoReview { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+        public int SemesterNo { get; set; }
+
+    }
+    /// <summary>
+    /// structure for Section timings
+    /// </summary>
     public class SectionList
     {
         public string Section { get; set; }
         public string Starttime { get; set; }
         public string Stoptime { get; set; }
     }
-
+    #endregion
 }
 
-//[WebMethod(EnableSession = true)]
-//public Dictionary<string, string> SaveSystemInfo(Dictionary<string, object> data)
-//{
-//    int result = 0;
-//    Dictionary<string, string> idata = new Dictionary<string, string>();
-//    if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-//    {
-//        HttpContext.Current.Session.Abandon();
-//        idata.Add("status", "fail");
-//        idata.Add("errorMessage", "Session Expired");
-//        idata.Add("customErrorCode", "440");
-//    }
-//    else
-//    {
-//        if (HttpContext.Current.Session["UserLoggedIn"].ToString() == "admin")
-//        {
-//            try
-//            {
-//var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
-//                using (var context = new OrganisationdatabaseEntities(db))
-//                {
-//                    var sec = data["Sectionselected"];
-//                    var sec1 = ((IEnumerable)sec).Cast<object>();
-//                    //IEnumerable<Dictionary<string, object>> section = ((IEnumerable)sec).Cast<object>().ToList().Select(item => (Dictionary<string, object>)item);
-//                    List<SectionList> sectionlist = new List<SectionList>();
-
-//                    foreach (Dictionary<string, object> dr in sec1)
-//                    {
-//                        var test = GetObject<SectionList>(dr);
-//                        sectionlist.Add(test);
-//                    }
-
-//                    var d = data["Dayselected"];
-//                    List<string> strings = ((IEnumerable)d).Cast<object>().ToList().Select(s => (string)s).ToList();
-//                    string schoolname = data["Schoolname"].ToString();
-//                    string schooleng = data["Schooleng"].ToString();
-//                    string logourl = data["Logourl"].ToString();
-//                    string semname = data["Semestername"].ToString();
-//                    int semno = Convert.ToInt32(data["Semesterno"]);
-//                    string semweeks = data["Weeks"].ToString();
-//                    string semstartdate = data["Semesterstart"].ToString();
-//                    string autoholiday = data["Autoholiday"].ToString();
-//                    List<string> days = new List<string> { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
-//                    Dictionary<string, string> allowedDays = new Dictionary<string, string>();
-//                    foreach (string s in days)
-//                    {
-//                        if (strings.Contains(s))
-//                        {
-//                            allowedDays.Add(s, "true");
-//                        }
-//                        else { allowedDays.Add(s, "false"); }
-//                    }
-//                    if (context.systemsettings.Count() > 0)
-//                    {
-//                        var st = context.systemsettings.Where(x => x.SchoolName == schoolname).Select(x => x);
-//                        context.systemsettings.RemoveRange(st);
-//                        context.SaveChanges();
-//                    }
-
-//                    systemsetting ss = new systemsetting()
-//                    {
-//                        SchoolEngName = schooleng,
-//                        SchoolName = schoolname,
-//                        LogoLocation = logourl
-//                    };
-//                    context.systemsettings.Add(ss);
-
-
-//                    result = context.SaveChanges();
-//                    //SystemInfo cc = new SystemInfo();
-//                    //result = cc.SaveSystemInfo(schoolname, schooleng, logourl, semname, semweeks, semstartdate, allowedDays, semno, autoholiday);
-//                    if (result > 0)
-//                    {
-
-//                        if (context.semesterinfoes.Any(x => x.SemNo == semno))
-//                        {
-//                            var sem = context.semesterinfoes.Where(x => x.SemNo == semno);
-//                            context.semesterinfoes.RemoveRange(sem);
-//                            context.SaveChanges();
-//                        }
-
-//                        semesterinfo sm = new semesterinfo()
-//                        {
-//                            SemesterName = semname,
-//                            StartDate = Convert.ToDateTime(semstartdate).Date,
-//                            TotalWeeks = Convert.ToInt32(semweeks),
-//                            Sunday = allowedDays["Sunday"],
-//                            Monday = allowedDays["Monday"],
-//                            Tuesday = allowedDays["Tuesday"],
-//                            Wednesday = allowedDays["Wednesday"],
-//                            Thursday = allowedDays["Thursday"],
-//                            Friday = allowedDays["Friday"],
-//                            Saturday = allowedDays["Saturday"],
-//                            SemNo = semno,
-//                            AutoHoliday = autoholiday
-//                        };
-
-//                        context.semesterinfoes.Add(sm);
-//                        if (!context.reserveandtransfers.Any(x => x.Type == "Reserve" && x.SemesterNo == semno))
-//                        {
-//                            reserveandtransfer re = new reserveandtransfer()
-//                            {
-//                                AutoReview = data["Resauto"].ToString(),
-//                                NonWorkingDays = data["Resnonwork"].ToString(),
-//                                Type = "Reserve",
-//                                EndTime = Convert.ToDateTime(data["Resstopdate"]).Date,
-//                                StartTime = Convert.ToDateTime(data["Resstartdate"]).Date,
-//                                SemesterNo = semno
-//                            };
-//                            context.reserveandtransfers.Add(re);
-//                        }
-//                        if (!context.reserveandtransfers.Any(x => x.Type == "Transfer" && x.SemesterNo == semno))
-//                        {
-
-//                            reserveandtransfer re1 = new reserveandtransfer()
-//                            {
-//                                AutoReview = data["Transferauto"].ToString(),
-//                                NonWorkingDays = data["Transfernonwork"].ToString(),
-//                                Type = "Transfer",
-//                                EndTime = Convert.ToDateTime(data["Transferstop"]).Date,
-//                                StartTime = Convert.ToDateTime(data["Transferstart"]).Date,
-//                                SemesterNo = semno
-//                            };
-//                            context.reserveandtransfers.Add(re1);
-//                        }
-
-//                        context.SaveChanges();
-
-//                        foreach (SectionList s in sectionlist)
-//                        {
-//                            sectionsinfo sectionsinfo = new sectionsinfo();
-//                            if (context.sectionsinfoes.Any(x => x.Section == s.Section && x.SemesterNo == semno))
-//                            {
-//                                var sectionupdate = context.sectionsinfoes.Where(x => x.Section == s.Section && x.SemesterNo == semno).Select(x => x).FirstOrDefault();
-
-//                                if (sectionupdate.id > 0)
-//                                {
-//                                    sectionupdate.Section = s.Section;
-//                                    sectionupdate.SemesterNo = semno;
-//                                    sectionupdate.StopTime = Convert.ToDateTime(s.Stoptime).TimeOfDay;
-//                                    sectionupdate.StartTime = Convert.ToDateTime(s.Starttime).TimeOfDay;
-//                                }
-//                            }
-//                            else
-//                            {
-//                                sectionsinfo ssinfo = new sectionsinfo()
-//                                {
-//                                    SemesterNo = semno,
-//                                    Section = s.Section,
-//                                    StartTime = Convert.ToDateTime(s.Starttime).TimeOfDay,
-//                                    StopTime = Convert.ToDateTime(s.Stoptime).TimeOfDay
-//                                };
-//                                context.sectionsinfoes.Add(ssinfo);
-//                            }
-//                        }
-//                        context.SaveChanges();
-//                    }
-
-//                    idata.Add("status", "success");
-//                }
-//            }
-//            catch (Exception ex)
-//            {
-//                idata.Add("status", "fail");
-//                idata.Add("error", ex.Message);
-//            }
-//        }
-//        else
-//        { idata.Add("status", "fail"); idata.Add("Error", "User not authorized"); }
-//    }
-//    return idata;
-//}

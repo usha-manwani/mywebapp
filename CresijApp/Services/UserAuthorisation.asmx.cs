@@ -10,6 +10,9 @@ namespace CresijApp.Services
 {
     /// <summary>
     /// Summary description for UserAuthorisation
+    /// This class contains methods and structure to deal with
+    /// user permissions for menu options and location accesses.
+    /// CRUD Operations is done on the Permissions
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
@@ -18,11 +21,12 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class UserAuthorisation : System.Web.Services.WebService
     {
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
+        #region Web Methods
+        /// <summary>
+        /// Method to save or update user's permissions for menu usage and location access
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveUserAuthentications(Dictionary<string, object> data)
         {
@@ -46,7 +50,7 @@ namespace CresijApp.Services
                         string[] authloc = data["classNames"].ToString().Split(',');
                        
                         var userid = data["personId"].ToString();
-                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth(HttpContext.Current.Session["DBConnection"].ToString());
                         int r = userAuth.DeleteUserPermissions(userid);
                         int result = userAuth.SaveAuthMenu(authmenu, userid, adminid, authloc);
                         if (result < 0)
@@ -71,6 +75,10 @@ namespace CresijApp.Services
             return idata;
         }
         
+        /// <summary>
+        /// Method to get Top Menu accessed by user
+        /// </summary>
+        /// <returns>list of top menu</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetUserTopMenu()
         {
@@ -92,7 +100,7 @@ namespace CresijApp.Services
                     {
 
                         userid = Session["UserLoggedIn"].ToString();
-                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth(HttpContext.Current.Session["DBConnection"].ToString());
                         DataTable dt = new DataTable();
                         dt = userAuth.GetUserTopMenu(userid);
                         if (dt.Rows.Count > 0)
@@ -122,6 +130,11 @@ namespace CresijApp.Services
             return result;
         }
         
+        /// <summary>
+        /// Method to get submenu by a topmenu and specific to user in session.         
+        /// </summary>
+        /// <param name="subMenuType"></param>
+        /// <returns></returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserSubMenu(string subMenuType)
         {
@@ -141,7 +154,7 @@ namespace CresijApp.Services
                     if (Session["UserLoggedIn"].ToString() != null)
                     {
                         string userid = Session["UserLoggedIn"].ToString();
-                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth(HttpContext.Current.Session["DBConnection"].ToString());
                         DataTable dt = new DataTable();
                         dt = userAuth.GetUserSubMenu(subMenuType, userid);
                         if (dt.Rows.Count > 0)
@@ -170,7 +183,13 @@ namespace CresijApp.Services
             }
             return result;            
         }
-       
+
+        /// <summary>
+        /// Method to get submenu specific to user in session. 
+        /// Submenu are the options inside a top menu.
+        /// Eg: Schedule managment is a top menu. Then Transfer and appointment schedule tabs are sub menu
+        /// </summary>
+        /// <returns>list of submenu</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserAllSubMenu()
         {
@@ -191,7 +210,7 @@ namespace CresijApp.Services
                     if (Session["UserLoggedIn"].ToString() != null)
                     {
                         userid = Session["UserLoggedIn"].ToString();
-                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth(HttpContext.Current.Session["DBConnection"].ToString());
                         DataTable dt = new DataTable();
                         dt = userAuth.GetUserAllSubMenu(userid);
                         if (dt.Rows.Count > 0)
@@ -221,6 +240,10 @@ namespace CresijApp.Services
             return result;           
         }
         
+        /// <summary>
+        /// Method to get all the location names specific to current user in session
+        /// </summary>
+        /// <returns>list of locations</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserAllLocationAccess()
         {
@@ -241,7 +264,7 @@ namespace CresijApp.Services
                     {
                        
                         string userid = Session["UserLoggedIn"].ToString();
-                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                        DataAccess.UserAuth userAuth = new DataAccess.UserAuth(HttpContext.Current.Session["DBConnection"].ToString());
                         DataTable dt = new DataTable();
                         dt = userAuth.GetUserAllLocationAccess(userid);
                         if (dt.Rows.Count > 0)
@@ -271,7 +294,11 @@ namespace CresijApp.Services
             return result;
             
         }
-        
+        /// <summary>
+        /// Method to get the list of all submenus specific to user
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns>user specific list of submenus </returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserPermissions(string userid)
         {
@@ -288,7 +315,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = new DataTable();
                     dt = userAuth.GetUserAllSubMenu(userid);
                     if (dt.Rows.Count > 0)
@@ -308,7 +335,13 @@ namespace CresijApp.Services
                 }
             }
             return result;
-        }       
+        }
+
+        /// <summary>
+        /// Method to get all the location names specific to the user id in the parameter input
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns> user specific list of locations</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserLocationPermissions(string userid)
         {
@@ -325,7 +358,7 @@ namespace CresijApp.Services
             {
                 try
                 {
-                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth();
+                    DataAccess.UserAuth userAuth = new DataAccess.UserAuth(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = new DataTable();
                     dt = userAuth.GetUserAllLocationAccess(userid);
                     result.Add("status", "sucess");
@@ -347,5 +380,6 @@ namespace CresijApp.Services
             }
             return result;
         }
+        #endregion
     }
 }

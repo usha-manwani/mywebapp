@@ -16,7 +16,7 @@ namespace CresijApp.Services
     /// Summary description for ProjectorConfig
     /// The class is used to work with projector configuration
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/ProjectorConfig.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -112,6 +112,13 @@ namespace CresijApp.Services
             return result;
         }
 
+        /// <summary>
+        /// Method to get Ini info about the projector by its brand and model selection by user
+        /// Need to work: on reading parity from the comments in Ini file and 
+        /// then setting the parity 01,00,02 (even,odd,none) according to those comments
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>Baudrate, Open, close codes, parity check</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetProjectorIniInfo(Dictionary<string,string> data)
         {
@@ -150,6 +157,11 @@ namespace CresijApp.Services
             return result1;
         }
 
+        /// <summary>
+        /// Method to save projector Info into database and send the ini info to Machine of the selected classroom
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> SaveProjectorInfo(Dictionary<string, object> data)
         {
@@ -241,6 +253,11 @@ namespace CresijApp.Services
             return result;
         }
 
+        /// <summary>
+        /// method to get the Projector config info based on class id
+        /// </summary>
+        /// <param name="classid"></param>
+        /// <returns>projector config info with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetProjectorInfo(int classid)
         {
@@ -285,7 +302,9 @@ namespace CresijApp.Services
             return result;
         }
     }
-    
+    /// <summary>
+    /// Class to read/write from/into Ini File
+    /// </summary>
     public class IniFile
     {
         public string path;
