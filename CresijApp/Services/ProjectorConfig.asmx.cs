@@ -203,7 +203,7 @@ namespace CresijApp.Services
                                     configrow.parity = parity;
                                     configrow.OpenCode = opencode;
                                     configrow.CloseCode = closecode;
-
+                                    configrow.status = "Pending";
                                 }
                                 else
                                 {

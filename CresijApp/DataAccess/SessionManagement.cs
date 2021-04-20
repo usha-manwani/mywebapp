@@ -90,7 +90,7 @@ namespace CresijApp.DataAccess
         public async Task<int> AddUpdateConnectionID(string cookie,string connectionid)
         {
             int r = 0;
-            using (var context = new OrganisationdatabaseEntities())
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
             {
                 if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
                 {
@@ -105,27 +105,27 @@ namespace CresijApp.DataAccess
         public async Task<int> AddUpdateProjectorConfig(List<int> classids , Dictionary<string,string> data)
         {
             
-            using(var context = new OrganisationdatabaseEntities())
+            using(var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
             {
 
             }
             return 0;
         }
-        //public async Task<int> RemoveUserSession(string cookie)
-        //{
-        //    int r = 0;
-        //    using (var context = new OrganisationdatabaseEntities())
-        //    {
-        //        if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
-        //        {
-        //            var us = context.usersessioninfoes.First(x => x.SessionId == cookie);
-        //            us.SessionEndTime = DateTime.Now;
-        //            //context.usersessioninfoes.Remove(us);
-        //        }
-        //        r = await context.SaveChangesAsync();
-        //    }
-        //    return r;
-        //}
+        public async Task<int> RemoveUserSession(string cookie)
+        {
+            int r = 0;
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
+            {
+                if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
+                {
+                    var us = context.usersessioninfoes.First(x => x.SessionId == cookie);
+                    us.SessionEndTime = DateTime.Now;
+                    context.usersessioninfoes.Remove(us);
+                }
+                r = await context.SaveChangesAsync();
+            }
+            return r;
+        }
 
         public async Task<int> AddOperationLogs(string cookie, string message,string machinemac)
         {
@@ -134,7 +134,7 @@ namespace CresijApp.DataAccess
                message= message.Replace("Web", "");
             }
             int r = 0;
-            using(var context = new OrganisationdatabaseEntities())
+            using(var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
             {
                 if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
                 {
@@ -164,7 +164,7 @@ namespace CresijApp.DataAccess
         public async Task<List<string>> GetMacAddress(List<int>classIds)
         {
             var result = new List<string>();
-            using (var context = new OrganisationdatabaseEntities())
+            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
             {
                result =context.classdetails.Where(x => classIds.Contains(x.classID)).Select(x => x.ccmac).ToList();
                
@@ -177,7 +177,7 @@ namespace CresijApp.DataAccess
             int result = 0;
             try
             {
-                using (var context = new OrganisationdatabaseEntities())
+                using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
                 {
                     var cid = context.classdetails.Where(x => x.camipS == ip || x.camipT == ip).Select(x => x.classID).FirstOrDefault();
                     var monitorobj = new alarmmonitorlog()
