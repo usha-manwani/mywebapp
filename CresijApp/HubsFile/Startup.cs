@@ -15,20 +15,7 @@ namespace CresijApp.HubsFile
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR();
-            app.UseJwtBearerAuthentication(
-                new JwtBearerAuthenticationOptions
-                {
-                    AuthenticationMode = AuthenticationMode.Active,
-                    TokenValidationParameters = new TokenValidationParameters()
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = "http://localhost:53552/", //some string, normally web url,  
-                        ValidAudience = "http://localhost:53552/",
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("my_secret_key_12345"))
-                    }
-                });
+            
         }
     }
 }

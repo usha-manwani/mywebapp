@@ -1241,65 +1241,9 @@ namespace CresijApp.Services
         #endregion
 
         #region Web Methods Not in use currently
-        [WebMethod]
-        public List<object> GetCourse(string name)
-        {
-            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
-            DataTable dt = schedule.GetCourse();
-            List<object> idata = new List<object>();
-            List<string> data = new List<string>();
-            List<string> data1 = new List<string>();
-            List<string> data2 = new List<string>();
-            List<string> data3 = new List<string>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                data.Add(dr[0].ToString());
-                data1.Add(dr[1].ToString());
-                data2.Add(dr[2].ToString());
-                data3.Add(dr[3].ToString());
-            }
-            idata.Add(data);
-            idata.Add(data1);
-            idata.Add(data2);
-            idata.Add(data3);
-            return idata;
-        }
-
        
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public List<object> GetCourseDetails(string[] name)
-        {
-            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
-            DataTable dt = schedule.GetCourseDetails(name);
-            List<object> idata = new List<object>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                idata.Add(dr.ItemArray);
-            }
-            //idata.Add(dt.Rows);
-            return idata;
-        }
-
-        [PrincipalPermission(SecurityAction.Demand)]
+       
         
-
-        [PrincipalPermission(SecurityAction.Demand)]
-        [WebMethod]
-        public List<object> GetFreeDay(string name)
-        {
-            List<int> freeweek = new List<int>();
-
-            Schedule schedule = new Schedule(HttpContext.Current.Session["DBConnection"].ToString());
-            DataTable dt = schedule.GetFreeDay(Convert.ToInt32(name));
-            List<object> idata = new List<object>();
-            foreach (DataRow dr in dt.Rows)
-            {
-                idata.Add(dr.ItemArray);
-            }
-
-            return idata;
-        }
 
         public List<BusySchedule> GetFreeSchedule(DataTable dt)
         {

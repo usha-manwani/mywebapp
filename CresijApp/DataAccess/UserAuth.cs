@@ -8,12 +8,32 @@ using System.Web;
 
 namespace CresijApp.DataAccess
 {
+    /// <summary>
+    /// This class contains methods to deal with database to
+    /// user permissions for menu options and location accesses.
+    /// CRUD Operations is done on the Permissions
+    /// </summary>
     public class UserAuth
     {
+        /// <summary>
+        /// default connection
+        /// </summary>
         readonly string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
         public UserAuth() { }
+        /// <summary>
+        /// session connection
+        /// </summary>
+        /// <param name="constring"></param>
         public UserAuth(string constring) { constr = constring; }
+        /// <summary>
+        /// method use to insert or update the user permissions related to menu and locations
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="userid"></param>
+        /// <param name="adminid"></param>
+        /// <param name="classnames"></param>
+        /// <returns>no of affected record</returns>
         public int SaveAuthMenu(string[] data, string userid, string adminid, string[] classnames)
         {
             int result = 0;
@@ -91,6 +111,11 @@ namespace CresijApp.DataAccess
 
         }
 
+        /// <summary>
+        /// query to get top menu options accessed by the userid
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns>list of topmenu options</returns>
         public DataTable GetUserTopMenu(string userid)
         {
             DataTable dt = new DataTable();
@@ -121,6 +146,12 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
+        /// <summary>
+        /// query to get submenu options by top menu option type and userid
+        /// </summary>
+        /// <param name="subMenuType"></param>
+        /// <param name="userid"></param>
+        /// <returns>list of submenu options</returns>
         public DataTable GetUserSubMenu(string subMenuType, string userid)
         {
             DataTable dt = new DataTable();
@@ -152,7 +183,11 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
-
+        /// <summary>
+        /// method to delete all location access of a user by its id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>no. of affected records</returns>
         public int DeleteUserPermissions(string id)
         {
             int result = 0;
@@ -174,7 +209,11 @@ namespace CresijApp.DataAccess
 
             return result;
         }
-
+        /// <summary>
+        /// Get all submenus authorised to user
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public DataTable GetUserAllSubMenu(string data)
         {
             DataTable dt = new DataTable();
@@ -196,7 +235,11 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
-
+        /// <summary>
+        /// get all classids accessed by user
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>list of classids</returns>
         public DataTable GetUserAllLocationAccess(string data)
         {
             DataTable dt = new DataTable();

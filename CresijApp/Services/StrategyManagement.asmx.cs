@@ -495,60 +495,7 @@ namespace CresijApp.Services
             return idata;
         }
         #endregion
-        #region Method not in use. Can be deleted
-        /// <summary>
-        /// Method to get list of strategy
-        /// </summary>
-        /// <returns>list of StrategyStructure</returns>
-        [WebMethod(EnableSession = true)]
-        public Dictionary<string, object> GetStrategy()
-        {
-            Dictionary<string, object> idata = new Dictionary<string, object>();
-            if (HttpContext.Current.Session["UserLoggedIn"] == null || HttpContext.Current.Session.Count == 0)
-            {
-                HttpContext.Current.Session.Abandon();
-                idata.Add("status", "fail");
-                idata.Add("errorMessage", "Session Expired");
-                idata.Add("customErrorCode", "440");
-            }
-            else
-            {
-                try
-                {
-                    List<StrategyStructure> strategies = new List<StrategyStructure>();
-                    StrategyMgmt strategyMgmt = new StrategyMgmt(HttpContext.Current.Session["DBConnection"].ToString());
-                    DataTable dt = strategyMgmt.GetStrategy();
-                    if (dt.Rows.Count > 0)
-                    {
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            StrategyStructure st = new StrategyStructure()
-                            {
-                                Id = Convert.ToInt32(dr["strategyid"]),
-                                StrategyName = dr["strategyname"].ToString(),
-                                StrategyDesc = dr["strategydesc"].ToString(),
-                                CreationDate = DateTime.Parse(dr["creationdate"].ToString()).ToString("yyyy-MM-dd H:mm:ss"),
-                                CurrentStatus = dr["currentstatus"].ToString(),
-                                StrategyType = dr["strategytype"].ToString(),
-                                StrategyTimeFrame = dr["strategytimeframe"].ToString(),
-                                StrategyTime = dr["strategytime"].ToString(),
-                                Configuration = JsonConvert.DeserializeObject<Dictionary<dynamic, dynamic>>(dr["config"].ToString())
-                            };
-                            strategies.Add(st);
-                        }
-                    }
-
-                    idata.Add("status", "success");
-                    idata.Add("value", strategies);
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-            return idata;
-        }
-        #endregion
+        
     }
     #region Data Structure
     /// <summary>

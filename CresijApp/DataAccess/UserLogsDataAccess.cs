@@ -7,19 +7,37 @@ using System.Web;
 
 namespace CresijApp.DataAccess
 {
+    /// <summary>
+    /// this class is to deal with database 
+    ///  This class contains method for User login,
+    /// Get User Logs list,Get ClassLogs list(machine logs) from database
+    /// </summary>
     public class UserLogsDataAccess
     {
+        /// <summary>
+        /// default connection
+        /// </summary>
         string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
         public UserLogsDataAccess()
         {
 
         }
+        /// <summary>
+        /// session connection
+        /// </summary>
+        /// <param name="constring"></param>
         public UserLogsDataAccess(string constring)
         {
             constr= System.Configuration.ConfigurationManager.
             ConnectionStrings[constring].ConnectionString;
         }
+        /// <summary>
+        /// method to call "sp_LoginUser" to login and get the user detail
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pass"></param>
+        /// <returns>user details if successfull</returns>
         public DataTable Login(string id, string pass)
         {
             DataTable dt = new DataTable();
@@ -40,6 +58,12 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+        /// <summary>
+        /// method to call sp_GetUserLogs to get list of user logs
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         public List<object> GetUserLogDetails(string pageIndex,string pageSize)
         {
             List<object> result = new List<object>();
@@ -80,6 +104,10 @@ namespace CresijApp.DataAccess
             return result;
         }
 
+        /// <summary>
+        /// Method to get list of count(actions) group by actions 
+        /// </summary>
+        /// <returns></returns>
         public DataTable GetLogDetails()
         {
             DataTable dt = new DataTable();

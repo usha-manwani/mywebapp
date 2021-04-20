@@ -247,9 +247,6 @@
     <Content Include="HikVision\codebase\transform\SystemTransform.js" />
     <Content Include="HikVision\codebase\WebComponents.exe" />
     <Content Include="HikVision\codebase\webVideoCtrl.js" />
-    <Content Include="HikVision\Plugin1.html" />
-    <Content Include="HikVision\Plugin2.html" />
-    <Content Include="HikVision\Plugin3.html" />
     <Content Include="images\001.jpg" />
     <Content Include="images\logo.jpg" />
     <Content Include="images\logo.png" />
@@ -1179,9 +1176,6 @@
     <Content Include="site-vue-new\window\pages\operate.html" />
     <Content Include="site-vue-new\window\pages\settings.html" />
     <Content Include="site-vue-new\window\pages\strategy.html" />
-    <Content Include="Views\Control.aspx" />
-    <Content Include="Views\EnvControl.aspx" />
-    <Content Include="Views\Index.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1219,7 +1213,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="DataAccess\CreateCSV.cs" />
     <Compile Include="DataAccess\DeleteOrgDetails.cs" />
     <Compile Include="DataAccess\GetOrgData.cs" />
@@ -1237,7 +1230,6 @@
     </Compile>
     <Compile Include="HubsFile\MyHub.cs" />
     <Compile Include="HubsFile\Startup.cs" />
-    <Compile Include="HubsFile\UpdateDevice.cs" />
     <Compile Include="Models\alarmmonitorlog.cs">
       <DependentUpon>OrganisationDatabase.tt</DependentUpon>
     </Compile>
@@ -1473,38 +1465,9 @@
     <Compile Include="site-vue-new\window\alert\DownloadUserDataTemplate.aspx.designer.cs">
       <DependentUpon>DownloadUserDataTemplate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Control.aspx.cs">
-      <DependentUpon>Control.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Control.aspx.designer.cs">
-      <DependentUpon>Control.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\EnvControl.aspx.cs">
-      <DependentUpon>EnvControl.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\EnvControl.aspx.designer.cs">
-      <DependentUpon>EnvControl.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Index.aspx.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\Index.aspx.designer.cs">
-      <DependentUpon>Index.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SiteMaster.Master.cs">
-      <DependentUpon>SiteMaster.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Views\SiteMaster.Master.designer.cs">
-      <DependentUpon>SiteMaster.Master</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Views\SiteMaster.Master" />
     <Content Include="Scripts\font\fonts\fontawesome-webfont.eot" />
     <Content Include="Scripts\font\fonts\fontawesome-webfont.ttf" />
     <Content Include="Scripts\font\fonts\fontawesome-webfont.woff" />
@@ -1671,7 +1634,7 @@
     <Folder Include="App_Themes\Theme1\" />
     <Folder Include="Templates\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\Upload\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

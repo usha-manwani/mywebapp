@@ -1,57 +1,24 @@
-﻿using System;
+﻿using CresijApp.DataAccess;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web;
 using System.IO;
-using CresijApp.DataAccess;
-using System.Web.Script.Serialization;
-using MySql.Data.MySqlClient;
-using System.Data;
-using System.Text.RegularExpressions;
-using CresijApp.Models;
-using System.Text;
-using System.Data.OleDb;
-using System.Reflection;
-using System.Web.SessionState;
+using System.Web;
+using System.Web.Http;
 
 namespace CresijApp.Controllers
 {
-    
+    /// <summary>
+    /// the controller is used to upload csv/xls files
+    /// </summary>
     public class DocumentController : ApiController
     {
-        string constr = System.Configuration.ConfigurationManager.
-           ConnectionStrings["SchoolConnectionString"].ConnectionString;
+
         UploadFile upload;
-        // GET: api/Document
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
-        // GET: api/Document/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Document
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Document/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Document/5
-        public void Delete(int id)
-        {
-        }
-        
+        /// <summary>
+        /// this web method is use to call for documents uploading
+        /// </summary>
+        /// <returns>success/fail result</returns>
         [HttpPost]
         public Dictionary<string, object> UploadFiles()
         {
@@ -66,7 +33,7 @@ namespace CresijApp.Controllers
                 // TODO: Add insert logic here
                 try
                 {
-                    var fieldList =  request.Form.GetValues("FieldList");
+                    var fieldList = request.Form.GetValues("FieldList");
 
                     //Upload Logo
                     if (request["Type"] == "UploadLogo")
@@ -89,7 +56,9 @@ namespace CresijApp.Controllers
                     else
                     {
                         if (fieldList.Length == 0)
+                        {
                             idata.Add("status", "fail due to no column list found");
+                        }
                         else
                         {
                             //Upload Student File
@@ -101,7 +70,10 @@ namespace CresijApp.Controllers
                                 var fname = "UploadStudentData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
                                 filename = Path.Combine(folderPath + fname + Path.GetExtension(postedFile.FileName));
                                 if (File.Exists(filename))
+                                {
                                     File.Delete(filename);
+                                }
+
                                 postedFile.SaveAs(filename);
                                 var studentDataTable = upload.CreateTable(filename, fieldList);
                                 idata = upload.UploadStudentData(studentDataTable.Tables[0]);
@@ -119,7 +91,10 @@ namespace CresijApp.Controllers
                                 var fname = "UploadTeacherData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
                                 filename = Path.Combine(folderPath + fname + Path.GetExtension(postedFile.FileName));
                                 if (File.Exists(filename))
+                                {
                                     File.Delete(filename);
+                                }
+
                                 postedFile.SaveAs(filename);
                                 var teacherDataTable = upload.CreateTable(filename, fieldList);
                                 idata = upload.UploadTeacherData(teacherDataTable.Tables[0]);
@@ -142,7 +117,10 @@ namespace CresijApp.Controllers
 
                                 filename = Path.Combine(folderPath + fname + Path.GetExtension(postedFile.FileName));
                                 if (File.Exists(filename))
+                                {
                                     File.Delete(filename);
+                                }
+
                                 postedFile.SaveAs(filename);
 
                                 var scheduleDataTable = upload.CreateTable(filename, fieldList);
@@ -159,7 +137,10 @@ namespace CresijApp.Controllers
                                 var fname = "UploadUserData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
                                 filename = Path.Combine(folderPath + fname + Path.GetExtension(postedFile.FileName));
                                 if (File.Exists(filename))
+                                {
                                     File.Delete(filename);
+                                }
+
                                 postedFile.SaveAs(filename);
                                 var userDataTable = upload.CreateTable(filename, fieldList);
                                 idata = upload.UploadUserData(userDataTable.Tables[0]);
@@ -175,7 +156,10 @@ namespace CresijApp.Controllers
                                 var fname = "UploadClassData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
                                 filename = Path.Combine(folderPath + fname + Path.GetExtension(postedFile.FileName));
                                 if (File.Exists(filename))
+                                {
                                     File.Delete(filename);
+                                }
+
                                 postedFile.SaveAs(filename);
                                 var classDataTable = upload.CreateTable(filename, fieldList);
                                 idata = upload.UploadClassData(classDataTable.Tables[0]);
@@ -191,12 +175,15 @@ namespace CresijApp.Controllers
                                 var fname = "UploadCapitalData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
                                 filename = Path.Combine(folderPath + fname + Path.GetExtension(postedFile.FileName));
                                 if (File.Exists(filename))
+                                {
                                     File.Delete(filename);
+                                }
+
                                 postedFile.SaveAs(filename);
                                 var capitalDataTable = upload.CreateTable(filename, fieldList);
                                 idata = upload.UploadCapitalData(capitalDataTable.Tables[0]);
-                                    idata.Add("status", "success");
-                                
+                                idata.Add("status", "success");
+
                             }
 
                             else if (request["Type"] == "UploadBuildingData")
@@ -207,12 +194,15 @@ namespace CresijApp.Controllers
                                 var fname = "UploadBuildingData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
                                 filename = Path.Combine(folderPath + fname + Path.GetExtension(postedFile.FileName));
                                 if (File.Exists(filename))
+                                {
                                     File.Delete(filename);
+                                }
+
                                 postedFile.SaveAs(filename);
                                 var buildingDataTable = upload.CreateTable(filename, fieldList);
                                 idata = upload.UploadBuildingData(buildingDataTable.Tables[0]);
-                                    idata.Add("status", "success");
-                                
+                                idata.Add("status", "success");
+
                             }
 
                             else if (request["Type"] == "UploadFloorData")
@@ -224,7 +214,10 @@ namespace CresijApp.Controllers
                                 var fname = "UploadFloorData" + "_" + DateTime.Now.Minute + "_" + DateTime.Now.Second;
                                 filename = Path.Combine(folderPath + fname + Path.GetExtension(postedFile.FileName));
                                 if (File.Exists(filename))
+                                {
                                     File.Delete(filename);
+                                }
+
                                 postedFile.SaveAs(filename);
                                 var floorDataTable = upload.CreateTable(filename, fieldList);
                                 idata = upload.UploadFloorData(floorDataTable.Tables[0]);
@@ -245,7 +238,9 @@ namespace CresijApp.Controllers
                 finally
                 {
                     if (File.Exists(filename))
+                    {
                         File.Delete(filename);
+                    }
                 }
             }
             idata.Add("status", "fail");
@@ -256,43 +251,11 @@ namespace CresijApp.Controllers
         private string UploadLogo(HttpPostedFile file, string path)
         {
             //Set the File Name.
-            string fileName = Path.Combine(path + "Logo_" + file.FileName+DateTime.Now.ToString("HHmmss"));
+            string fileName = Path.Combine(path + "Logo_" + file.FileName + DateTime.Now.ToString("HHmmss"));
             //Save the File in Folder.
             file.SaveAs(fileName);
             return "~/Uploads/" + new FileInfo(fileName).Name;
         }
 
-        //public static DataTable GetDistinctRecords(DataTable dt, string[] Columns)
-        //{
-        //    DataTable dtUniqRecords = new DataTable();
-        //    dtUniqRecords = dt.DefaultView.ToTable(true, Columns);
-        //    return dtUniqRecords;
-        //}
-
-        //private DataTable ReadExcelFile(string sheetName, string path)
-        //{
-
-        //    using (OleDbConnection conn = new OleDbConnection())
-        //    {
-        //        DataTable dt = new DataTable();
-        //        string Import_FileName = path;
-        //        string fileExtension = Path.GetExtension(Import_FileName);
-        //        if (fileExtension == ".xls")
-        //            conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 8.0;HDR=YES;'";
-        //        if (fileExtension == ".xlsx")
-        //            conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 12.0 Xml;HDR=YES;'";
-        //        using (OleDbCommand comm = new OleDbCommand())
-        //        {
-        //            comm.CommandText = "Select * from [" + sheetName + "$]";
-        //            comm.Connection = conn;
-        //            using (OleDbDataAdapter da = new OleDbDataAdapter())
-        //            {
-        //                da.SelectCommand = comm;
-        //                da.Fill(dt);
-        //                return dt;
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

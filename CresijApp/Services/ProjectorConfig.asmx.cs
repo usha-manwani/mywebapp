@@ -285,7 +285,9 @@ namespace CresijApp.Services
                                 Brand = x.BrandName,
                                 x.Model,
                                 x.OpenCode,
-                                x.CloseCode
+                                x.CloseCode,
+                                ConfigStatus=x.status
+
                             }).FirstOrDefault();
                         if (row != null)
 

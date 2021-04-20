@@ -49,8 +49,7 @@ namespace CresijApp.HubsFile
                 Users disconnectedUser = users.First(x => x.ConnectionId == Context.ConnectionId);
                 var cookie = disconnectedUser.AuthCookie;
                 users.Remove(disconnectedUser);
-                SessionHandler ss = new SessionHandler();
-                //await ss.RemoveUserSession(disconnectedUser.AuthCookie);
+                
                 
             }
             await base.OnDisconnected(stopCalled);

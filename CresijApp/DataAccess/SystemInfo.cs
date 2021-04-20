@@ -7,12 +7,39 @@ using System.Web;
 
 namespace CresijApp.DataAccess
 {
+    /// <summary>
+    /// this class is use to deal with database operation for Website's System Setting
+    /// This class is use to deal with adding new school details, like
+    /// Time of sessions, semester start dates and weeks of operation, school name,
+    /// set different options for appointments and transfer Permissions
+    /// Getting all the related data back from database and update it
+    /// </summary>
     public class SystemInfo
     {
+        /// <summary>
+        /// Default Connection
+        /// </summary>
         readonly string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
         public SystemInfo() { }
+        /// <summary>
+        /// session connection
+        /// </summary>
+        /// <param name="constring"></param>
         public SystemInfo(string constring) { constr = constring; }
+        /// <summary>
+        /// Method to call sp_insertSystemInfo to save school name, semester infoes 
+        /// </summary>
+        /// <param name="schoolname"></param>
+        /// <param name="schooleng"></param>
+        /// <param name="logourl"></param>
+        /// <param name="semname"></param>
+        /// <param name="weeks"></param>
+        /// <param name="semstartdate"></param>
+        /// <param name="days"></param>
+        /// <param name="semno"></param>
+        /// <param name="autoholiday"></param>
+        /// <returns></returns>
         public int SaveSystemInfo(string schoolname, string schooleng, string logourl, string semname, string weeks, string semstartdate, Dictionary<string, string> days, int semno, string autoholiday)
         {
             int result = 0;
@@ -45,7 +72,14 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
+        /// <summary>
+        /// Mehtod to call "sp_insertUpdateSection" to insert record in section infoes 
+        /// </summary>
+        /// <param name="semname"></param>
+        /// <param name="section"></param>
+        /// <param name="starttime"></param>
+        /// <param name="stoptime"></param>
+        /// <returns>no. of affected records</returns>
         public int SaveSectionsInfo(string semname, string section, string starttime, string stoptime)
         {
             int result = 0;
@@ -71,6 +105,16 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
+        /// <summary>
+        /// Method to call "sp_InsertUpdateReserverTransfer" to insert record for Reserve/Transfer settings
+        /// </summary>
+        /// <param name="typ"></param>
+        /// <param name="nonwork"></param>
+        /// <param name="auto"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="semname"></param>
+        /// <returns>no of inserted records</returns>
         public int SaveReserveAndTransferInfo(string typ, string nonwork, string auto, string start, string end, string semname)
         {
             int result = 0;
@@ -96,6 +140,11 @@ namespace CresijApp.DataAccess
             return result;
         }
 
+        /// <summary>
+        /// call to "sp_deleteSection" to delete section infoes belong to a semester
+        /// </summary>
+        /// <param name="semname"></param>
+        /// <returns></returns>
         public int DeleteSectionsInfo(string semname)
         {
             int result = 0;
@@ -114,7 +163,11 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-
+        /// <summary>
+        /// get floor and class group by building
+        /// </summary>
+        /// <param name="building"></param>
+        /// <returns></returns>
         public DataTable GetFloorClassByBuilding(string building)
         {
             DataTable dt = new DataTable();
@@ -140,6 +193,12 @@ namespace CresijApp.DataAccess
             }
             return dt;
         }
+
+        /// <summary>
+        /// call sp_GetipByClass to get machine ip and classname with classids
+        /// </summary>
+        /// <param name="classlist"></param>
+        /// <returns>list of machienip:classname</returns>
         public DataTable GetIpByClass(string classlist)
         {
             DataTable dt = new DataTable();
@@ -160,6 +219,12 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
+        /// <summary>
+        /// get floor and class group by building that are accessible by user
+        /// </summary>
+        /// <param name="building"></param>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         public DataTable GetFloorClassByBuildingUserAccess(string building, string userid)
         {
             DataTable dt = new DataTable();

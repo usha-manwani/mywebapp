@@ -14,79 +14,17 @@ using System.Web;
 using CresijApp.Models;
 namespace CresijApp.DataAccess
 {
-    public class TokenValidationHandler : DelegatingHandler
-    {
-        private static bool TryRetrieveToken(HttpRequestMessage request, out string token)
-        {
-            token = null;
-            IEnumerable<string> authzHeaders;
-            if (!request.Headers.TryGetValues("Authorization", out authzHeaders) || authzHeaders.Count() > 1)
-            {
-                return false;
-            }
-            var bearerToken = authzHeaders.ElementAt(0);
-            token = bearerToken.StartsWith("Bearer ") ? bearerToken.Substring(7) : bearerToken;
-            return true;
-        }
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
-            HttpStatusCode statusCode;
-            string token;
-            //determine whether a jwt exists or not
-            if (!TryRetrieveToken(request, out token))
-            {
-                statusCode = HttpStatusCode.Unauthorized;
-                //allow requests with no token - whether a action method needs an authentication can be set with the claimsauthorization attribute
-                return base.SendAsync(request, cancellationToken);
-            }
-
-            try
-            {
-                const string sec = "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429090fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1";
-                var now = DateTime.UtcNow;
-                var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(sec));
-
-
-                SecurityToken securityToken;
-                JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-                TokenValidationParameters validationParameters = new TokenValidationParameters()
-                {
-                    ValidAudience = "http://localhost:50191",
-                    ValidIssuer = "http://localhost:50191",
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    LifetimeValidator = this.LifetimeValidator,
-                    IssuerSigningKey = securityKey
-                };
-                //extract and assign the user of the jwt
-                Thread.CurrentPrincipal = handler.ValidateToken(token, validationParameters, out securityToken);
-                HttpContext.Current.User = handler.ValidateToken(token, validationParameters, out securityToken);
-
-                return base.SendAsync(request, cancellationToken);
-            }
-            catch (SecurityTokenValidationException e)
-            {
-                statusCode = HttpStatusCode.Unauthorized;
-            }
-            catch (Exception ex)
-            {
-                statusCode = HttpStatusCode.InternalServerError;
-            }
-            return Task<HttpResponseMessage>.Factory.StartNew(() => new HttpResponseMessage(statusCode) { });
-        }
-
-        public bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
-        {
-            if (expires != null)
-            {
-                if (DateTime.UtcNow < expires) return true;
-            }
-            return false;
-        }
-    }
-
+    
     public class SessionHandler
     {
+        /// <summary>
+        /// this method is called from MyHub.cs to store the client connection id with cookie
+        /// in database for future purposes
+        /// can be deleted if not needed anymore
+        /// </summary>
+        /// <param name="cookie"></param>
+        /// <param name="connectionid"></param>
+        /// <returns>no. of rows inserted</returns>
         public async Task<int> AddUpdateConnectionID(string cookie,string connectionid)
         {
             int r = 0;
@@ -102,31 +40,13 @@ namespace CresijApp.DataAccess
             return r;
         }
 
-        public async Task<int> AddUpdateProjectorConfig(List<int> classids , Dictionary<string,string> data)
-        {
-            
-            using(var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
-            {
-
-            }
-            return 0;
-        }
-        public async Task<int> RemoveUserSession(string cookie)
-        {
-            int r = 0;
-            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
-            {
-                if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
-                {
-                    var us = context.usersessioninfoes.First(x => x.SessionId == cookie);
-                    us.SessionEndTime = DateTime.Now;
-                    context.usersessioninfoes.Remove(us);
-                }
-                r = await context.SaveChangesAsync();
-            }
-            return r;
-        }
-
+       /// <summary>
+       ///  this method is called from MyHub.cs to insert the logs in userlogs table
+       /// </summary>
+       /// <param name="cookie"></param>
+       /// <param name="message"></param>
+       /// <param name="machinemac"></param>
+       /// <returns>no of rows inserted</returns>
         public async Task<int> AddOperationLogs(string cookie, string message,string machinemac)
         {
             if (message.Contains("Web"))
@@ -161,41 +81,19 @@ namespace CresijApp.DataAccess
             }
             return r;
         }
+        /// <summary>
+        /// This method is called from MyHub.cs and use to get the mac address of machines by their classids
+        /// </summary>
+        /// <param name="classIds"></param>
+        /// <returns>list of mac addresses of machines</returns>
         public async Task<List<string>> GetMacAddress(List<int>classIds)
         {
             var result = new List<string>();
             using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
             {
-               result =context.classdetails.Where(x => classIds.Contains(x.classID)).Select(x => x.ccmac).ToList();
-               
+               result =context.classdetails.Where(x => classIds.Contains(x.classID)).Select(x => x.ccmac).ToList(); 
             }
             return result;
-        }
-
-        public async Task<int> AddCamMonitorLogs(string altime,string ip, string msg)
-        {
-            int result = 0;
-            try
-            {
-                using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()))
-                {
-                    var cid = context.classdetails.Where(x => x.camipS == ip || x.camipT == ip).Select(x => x.classID).FirstOrDefault();
-                    var monitorobj = new alarmmonitorlog()
-                    {
-                        almMessage = msg,
-                        almTime = Convert.ToDateTime(altime),
-                        Classid = cid,
-                        deviceip = ip
-                    };
-                    context.alarmmonitorlogs.Add(monitorobj);
-                    result = context.SaveChanges();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return result;
-        }
+        }       
     }
 }

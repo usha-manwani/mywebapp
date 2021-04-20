@@ -11,8 +11,16 @@ using System.Web;
 
 namespace CresijApp.DataAccess
 {
+    /// <summary>
+    /// class deals with inserting the records in database using data from files uploaded by user
+    /// </summary>
     public class UploadFile
     {
+        /// <summary>
+        /// insert multiple records in student details
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns>no of records inserted</returns>
         public Dictionary<string, object> UploadStudentData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -60,7 +68,11 @@ namespace CresijApp.DataAccess
             idata.Add("Import warnings", messages);
             return idata;
         }
-
+        /// <summary>
+        /// insert multiple records in teacherdetails
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns>no of records inserted</returns>
         public Dictionary<string, object> UploadTeacherData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -116,7 +128,11 @@ namespace CresijApp.DataAccess
 
             return idata;
         }
-
+        /// <summary>
+        /// insert multiple records in Schedule
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns>no of records inserted</returns>
         public Dictionary<string, object> UploadScheduleData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -176,7 +192,11 @@ namespace CresijApp.DataAccess
             idata.Add("Import warnings", messages);
             return idata;
         }
-
+        /// <summary>
+        /// insert multiple records in Userdetails
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns>no of records inserted</returns>
         public Dictionary<string, object> UploadUserData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -247,7 +267,11 @@ namespace CresijApp.DataAccess
             idata.Add("Import warnings", messages);
             return idata;
         }
-
+        /// <summary>
+        /// insert multiple records in classdetails
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns>no of records inserted</returns>
         public Dictionary<string, object> UploadClassData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -386,7 +410,11 @@ namespace CresijApp.DataAccess
             idata.Add("Import warnings", messages);
             return idata;
         }
-
+        /// <summary>
+        /// insert multiple records in Operationmgmt
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns>no of records inserted</returns>
         public Dictionary<string, object> UploadCapitalData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -424,7 +452,11 @@ namespace CresijApp.DataAccess
             idata.Add("Import warnings", messages);
             return idata;
         }
-
+        /// <summary>
+        /// insert multiple records in buildingdetails
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns>no of records inserted</returns>
         public Dictionary<string, object> UploadBuildingData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -460,7 +492,11 @@ namespace CresijApp.DataAccess
             idata.Add("Import warnings", messages);
             return idata;
         }
-
+        /// <summary>
+        /// insert multiple records in floordetails
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns>no of records inserted</returns>
         public Dictionary<string, object> UploadFloorData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -526,6 +562,13 @@ namespace CresijApp.DataAccess
             idata.Add("Import warnings", messages);
             return idata;
         }
+        /// <summary>
+        /// this method is to convert csv file data into datatable 
+        /// but is not used anywhere as of now
+        /// this can be the replacement of method CreateTable(string source, string[] columnnames)
+        /// </summary>
+        /// <param name="sCsvFilePath"></param>
+        /// <returns></returns>
         public static DataTable ConvertCSVtoDataTable(string sCsvFilePath)
         {
             DataTable dtTable = new DataTable();
@@ -555,6 +598,13 @@ namespace CresijApp.DataAccess
 
             return dtTable;
         }
+        /// <summary>
+        /// This method is use to read data friom excel or csv file into datatable to use 
+        /// it further to insert into database
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="columnnames"></param>
+        /// <returns></returns>
         public DataSet CreateTable(string source, string[] columnnames)
         {
             string Import_FileName = source;

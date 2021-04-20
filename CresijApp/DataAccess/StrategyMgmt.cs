@@ -3,18 +3,32 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
-using CresijApp.Models;
-using System.Web.Script.Serialization;
+
 
 namespace CresijApp.DataAccess
 {
+    /// <summary>
+    /// this class is use to deal with database for strategy related operations
+    /// </summary>
     public class StrategyMgmt
     {
+        #region Method
+        /// <summary>
+        /// dedault connection
+        /// </summary>
         readonly string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
         public StrategyMgmt() { }
+        /// <summary>
+        /// session connection
+        /// </summary>
+        /// <param name="constring"></param>
         public StrategyMgmt(string constring) { constr = constring; }
+        /// <summary>
+        /// Method to call the sp_GetStrategyList to get the list of strategy
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>list of strategy</returns>
         public List<object> GetAllStrategy( Dictionary<string,string>data)
         {
             int totalrows = 0;
@@ -47,6 +61,10 @@ namespace CresijApp.DataAccess
             return result;
         }
 
+        /// <summary>
+        /// method to get the devices list from database
+        /// </summary>
+        /// <returns>devices list</returns>
         public DataTable GetteacherAid()
         {
             DataTable dt = new DataTable();
@@ -69,35 +87,11 @@ namespace CresijApp.DataAccess
             catch (Exception ex) { }
             return dt;
         }
-
-        public DataTable GetStrategy()
-        {
-            DataTable dt = new DataTable();
-           
-                using (MySqlConnection con = new MySqlConnection(constr))
-                {
-                    string query = "select strategyid, strategyname,strategydesc, creationdate, "+
-                    "currentstatus,strategytype,"+
-                    "group_concat('{\"EquipmentId\":\"',equipmentid,'\", \"EquipmentName\":\"'," +
-                    "equipmentsNames,'\", \"config\":{',config,'}, \"location\":\"',location,'\"}') as config," +
-                    " strategytimeframe, strategytime from " +
-                    "strategymanagement stgm join strategydescription stgd on "+
-                    " stgm.strategyId = stgd.StrategyRefId join strategyequipments stgq "+
-                    "on stgq.id = stgd.Equipmentid group by strategyid";
-                    using (MySqlCommand cmd = new MySqlCommand(query, con))
-                    {
-                    if (con.State != ConnectionState.Open)
-                    {
-                        con.Open();
-                    }
-                    MySqlDataAdapter adapter = new MySqlDataAdapter(cmd);
-                    adapter.Fill(dt);  
-                    }
-                }
-           
-            return dt;
-        }
-
+        /// <summary>
+        /// Method to execute any select query
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
         public DataTable ExecuteCommand(string query)
         {
             DataTable dt = new DataTable();
@@ -118,6 +112,12 @@ namespace CresijApp.DataAccess
             
         }
 
+        /// <summary>
+        /// Method to get the strategy execution count for fail,pending and 
+        /// success groupby classids by its id for a specific strategy execution
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>count of strategy execution </returns>
         public List<StrategyExecCount> GetStrategyExectutionCount( int id)
         {
             DataTable dt = new DataTable();
@@ -162,8 +162,12 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
+        #endregion
     }
-
+    #region Data Structure
+    /// <summary>
+    /// Data structure for Strategy logs
+    /// </summary>
     public class InterStrategyLogs{
         public int StrategyId { get; set; }
         public int ClassId { get; set; }
@@ -172,6 +176,9 @@ namespace CresijApp.DataAccess
         public string ClassName { get; set; }
         public string Status { get; set; }        
     }
+    /// <summary>
+    /// Data structure for strategy execution count
+    /// </summary>
     public class StrategyExecCount
     {
         public int Fail { get; set; }
@@ -180,4 +187,5 @@ namespace CresijApp.DataAccess
         public string ClassName { get; set; }   
         public int ClassId { get; set; }
     }
+    #endregion
 }

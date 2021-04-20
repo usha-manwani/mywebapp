@@ -12,7 +12,8 @@ namespace CresijApp.Services
     /// Summary description for UserAuthorisation
     /// This class contains methods and structure to deal with
     /// user permissions for menu options and location accesses.
-    /// CRUD Operations is done on the Permissions
+    /// CRUD Operations is done on the Permissions.
+    /// call UserAuth.cs Methods to deal with database
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]

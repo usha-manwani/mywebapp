@@ -18,7 +18,7 @@ namespace CresijApp.Services
     /// This class is use to deal with adding new school details, like
     /// Time of sessions, semester start dates and weeks of operation, school name,
     /// set different options for appointments and transfer Permissions
-    /// Getting all the related data back from database and update it
+    /// Getting all the related data  and update it
     /// </summary>
     [WebService(Namespace = "http://ipaddress/services/SystemSetting.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]

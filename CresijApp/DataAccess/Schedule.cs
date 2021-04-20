@@ -6,48 +6,29 @@ using System.Linq;
 using System.Web;
 using CresijApp.Models;
 namespace CresijApp.DataAccess
-{
+{   
+    /// <summary>
+    /// This class is use to deal with the database connection for schedule managament functions
+    /// </summary>
     public class Schedule
     {
-
+        //default connection
         string constring = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
         public Schedule() { }
+        //connection according to session 
         public Schedule(string constr) { constring = constr; }
-        public DataTable GetCourse()
-        {
-            DataTable dt = new DataTable();
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                string query = "select section,className, coursename, id from schedule";
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-
-            return dt;
-        }
-        public DataTable GetSchedule()
-        {
-            DataTable dt = new DataTable();
-
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-
-                using (MySqlCommand cmd = new MySqlCommand("sp_GetSchedule", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-
-            return dt;
-        }
-        // Schedule for transfer request with row ids
+       
+        /// <summary>
+        /// this method is use to get schedule along with transfer schedule list of the classes for which
+        /// user has permission to access to
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="date"></param>
+        /// <param name="userid"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <returns>list of schedules</returns>
         public List<object> GetScheduleForTransfer(string name, string date, string userid, string pageindex, string pagesize)
         {
             List<object> data = new List<object>();
@@ -81,25 +62,12 @@ namespace CresijApp.DataAccess
 
             return data;
         }
-        public DataTable GetCourseDetails(string[] name)
-        {
-            DataTable dt = new DataTable();
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                string query = "select teachername, coursename, sc.Classname," +
-                    " weekstart,weekend, dayno, section, teachingbuilding from schedule sc " +
-                    "join classdetails cd on sc.classname =cd.classname " +
-                    "where sc.classname = '" + name[0] + "' and sc.coursename = '" + name[1] + "' ";
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-            return dt;
-
-        }
-
+      
+        /// <summary>
+        /// get the course and schedule detail for the schedule that is going to be put into transfer request
+        /// </summary>
+        /// <param name="id">schedule id</param>
+        /// <returns>schedule detail</returns>
         public DataTable GetCourseDetailsForTransfer(string id)
         {
             DataTable dt = new DataTable();
@@ -123,20 +91,11 @@ namespace CresijApp.DataAccess
 
         }
 
-        public DataTable GetFreeWeek()
-        {
-            DataTable dt = new DataTable();
-            string query = "select classname, weekstart, weekend from schedule";
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-            return dt;
-        }
+       /// <summary>
+       /// Method use to save new transfer request
+       /// </summary>
+       /// <param name="name">contains all other parameters that are required to be put in the datatable</param>
+       /// <returns>no. of inserted rows</returns>
         public int SaveTransferSchedule(Dictionary<string,string> name)
         {
             int num = -1;
@@ -177,23 +136,11 @@ namespace CresijApp.DataAccess
           
             return num;
         }
-
-        public DataTable GetFreeDay(int weeknum)
-        {
-            DataTable dt = new DataTable();
-            string query = "select  dayno as day, group_concat(section) as lecture from schedule where weekstart <=" + weeknum + "  group by day";
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-            return dt;
-        }
-        
-
+        /// <summary>
+        /// Get building names and ids which are allowed to the current user to access
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns>list of building name and id</returns>
         public DataTable GetBuilding(string userid)
         {
             DataTable dt = new DataTable();
@@ -218,7 +165,10 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
-
+        /// <summary>
+        /// Method to get all building names and ids from database
+        /// </summary>
+        /// <returns>list of building name and id</returns>
         public DataTable GetBuildingNameandID()
         {
             DataTable dt = new DataTable();
@@ -237,6 +187,14 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
+        /// <summary>
+        /// Get free classes,sections available  in a week according to user access
+        /// </summary>
+        /// <param name="week"></param>
+        /// <param name="building"></param>
+        /// <param name="userid"></param>
+        /// <param name="sem"></param>
+        /// <returns>classname, sections, classids</returns>
         public DataTable GetAvailClasses(string week, string building, string userid, string sem)
         {
             DataTable dt = new DataTable();
@@ -271,6 +229,13 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
+        /// <summary>
+        /// Get days and section in a week for a class from the schedule table
+        /// </summary>
+        /// <param name="week"></param>
+        /// <param name="classid"></param>
+        /// <param name="semno"></param>
+        /// <returns>list of days and section</returns>
         public DataTable GetAvailDay(string week, string classid, string semno)
         {
             DataTable dt = new DataTable();
@@ -289,6 +254,11 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
+        /// <summary>
+        /// Method to get teacher name associated with the course name from database
+        /// </summary>
+        /// <param name="coursename"></param>
+        /// <returns>list of teacher names and id</returns>
         public DataTable GetTeacherDetail(string coursename)
         {
             DataTable dt = new DataTable();
@@ -306,7 +276,12 @@ namespace CresijApp.DataAccess
 
             return dt;
         }
-
+        /// <summary>
+        /// Method to call the stored procedure "sp_GetTransferScheduleList" to get the
+        /// list of transfer schedules from database
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>list of tranfer schedules</returns>
         public List<object> GetTransferSchedule(Dictionary<string,string>data)
         {
             DataTable dt = new DataTable();
@@ -330,7 +305,12 @@ namespace CresijApp.DataAccess
             result.Add(dt);
             return result;
         }
-
+        /// <summary>
+        /// Method to update staus of a transfer schedule in database
+        /// </summary>
+        /// <param name="stat"></param>
+        /// <param name="id"></param>
+        /// <returns>no. of updated rows</returns>
         public int SaveTransferScheduleStat(string stat, string id)
         {
             int num = 0;
@@ -350,23 +330,15 @@ namespace CresijApp.DataAccess
 
         }
 
-        public DataTable GetScheduleForDate(string date, string userid)
-        {
-            DataTable dt = new DataTable();
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("sp_GetScheduleforDate", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@customdate", date);
-                    cmd.Parameters.AddWithValue("@userid", userid);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-            return dt;
-        }
-
+        /// <summary>
+        /// Method to call stored procedure sp_GetScheduleByDate to get the schedule by date, building and userid
+        /// </summary>
+        /// <param name="building"></param>
+        /// <param name="date"></param>
+        /// <param name="userid"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <returns>list of schedules</returns>
         public List<object> GetScheduleByDate(string building, string date, string userid, string pageindex, string pagesize)
         {
             List<object> data = new List<object>();
@@ -398,43 +370,11 @@ namespace CresijApp.DataAccess
 
             return data;
         }
-        public DataTable GetScheduleByBuildWeekSem(string building, string sem, string week, string userid)
-        {
-            DataTable dt = new DataTable();
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("Sp_getScheduleByBuildWeekSem", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@build", building);
-                    cmd.Parameters.AddWithValue("@weekno", week);
-                    cmd.Parameters.AddWithValue("@sem", sem);
-                    cmd.Parameters.AddWithValue("@userid", userid);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-            return dt;
-        }
-
-        public DataTable GetScheduleByBuildSem(string building, string sem, string userid)
-        {
-            DataTable dt = new DataTable();
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("sp_getScheduleByBuildSem", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@build", building);
-                    cmd.Parameters.AddWithValue("@userid", userid);
-                    cmd.Parameters.AddWithValue("@sem", sem);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-            return dt;
-        }
-
+        
+        /// <summary>
+        /// Method to get Section starttime and endtime according to sem no from database
+        /// </summary>
+        /// <returns></returns>
         internal DataTable GetSectionsInfo()
         {
             DataTable dt = new DataTable();
@@ -451,6 +391,17 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
+        /// <summary>
+        /// Method to call stored procedure sp_GetTransferScheduleByDay to get the schedule by day,week, building and userid
+        /// </summary>
+        /// <param name="building"></param>
+        /// <param name="sem"></param>
+        /// <param name="week"></param>
+        /// <param name="day"></param>
+        /// <param name="userid"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns>schedule list</returns>
         public List<object> GetTransferScheduleByDay(string building, int sem, int week, int day, string userid,
             int pageIndex, int pageSize)
         {
@@ -491,24 +442,17 @@ namespace CresijApp.DataAccess
             return data;
         }
 
-        public DataTable GetScheduleByBuild(string building, string userid)
-        {
-            DataTable dt = new DataTable();
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("sp_GetScheduleByBuild", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@build", building);
-                    cmd.Parameters.AddWithValue("@userid", userid);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-
-            return dt;
-        }
-
+        /// <summary>
+        /// Method to call stored procedure Sp_GetScheduleByDay to get the schedule by day,week, building and userid
+        /// </summary>
+        /// <param name="building"></param>
+        /// <param name="sem"></param>
+        /// <param name="week"></param>
+        /// <param name="day"></param>
+        /// <param name="userid"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns>schedule list</returns>
         public List<object> GetScheduleByDay(string building, int sem, int week, int day,
             string userid, int pageindex, int pagesize)
         {
@@ -548,7 +492,11 @@ namespace CresijApp.DataAccess
             return data;
         }
 
-
+        /// <summary>
+        /// Method to call sp_GetWeekByDate to get the current week of the current semester by the date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns>week no</returns>
         public string GetWeekByDate(string date)
         {
             string week = "";
@@ -569,6 +517,11 @@ namespace CresijApp.DataAccess
             return week;
         }
 
+        /// <summary>
+        /// method to call sp_GetYearAndSemester to calculate semno and year by the date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns>semno and school year</returns>
         public string[] GetYearAndSemester(string date)
         {
             string[] data = new string[2];
@@ -592,6 +545,11 @@ namespace CresijApp.DataAccess
             return data;
         }
 
+        /// <summary>
+        /// MEthod to insert a new record in ScheduleReserve table for the new appointment made
+        /// </summary>
+        /// <param name="stat"></param>
+        /// <returns></returns>
         public int SaveReserveSchedule(List<string> stat)
         {
             int num = 0;
@@ -617,6 +575,11 @@ namespace CresijApp.DataAccess
 
         }
 
+        /// <summary>
+        /// Method to call "sp_GetReserveScheduleList" to get the list of reserve/appointment schedule
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>list of appointment schedule</returns>
         public List<object> GetReserveSchedule(Dictionary<string,string>data)
         {
             DataTable dt = new DataTable();
@@ -641,6 +604,12 @@ namespace CresijApp.DataAccess
             return result;
         }
 
+        /// <summary>
+        /// MEthod to update the status of reserve/appointment by id
+        /// </summary>
+        /// <param name="stat"></param>
+        /// <param name="id"></param>
+        /// <returns>no. of updated rows</returns>
         public int ChangeReserveStatus(string stat, string id)
         {
             int num = 0;
@@ -656,7 +625,11 @@ namespace CresijApp.DataAccess
             }
             return num;
         }
-
+        /// <summary>
+        /// method to get total weeks in a semester
+        /// </summary>
+        /// <param name="semnum"></param>
+        /// <returns></returns>
         public DataTable GetTotalWeek(string semnum)
         {
             DataTable dt = new DataTable();
@@ -675,34 +648,12 @@ namespace CresijApp.DataAccess
             return dt;
         }
 
-        public DataTable GetScheduleByBuilding(string buildingname)
-        {
-            DataTable dt = new DataTable();
-
-            string query = "select max(totalweeks) from semesterinfo";
-            using (MySqlConnection con = new MySqlConnection(constring))
-            {
-
-                using (MySqlCommand cmd = new MySqlCommand(query, con))
-                {
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-
-            return dt;
-        }
-
-        public DataTable CallScheduleFilterMethods(string[] data)
-        {
-            DataTable dt = new DataTable();
-            string building = data[0].Split(':')[1].Trim();
-            string sem = data[2].Split(':')[1].Trim();
-            string date = data[1].Split(':')[1].Trim();
-
-            return dt;
-        }
-
+        /// <summary>
+        /// Get dates range allowed for reserve/transfer schedules along with permission to autoreview
+        /// or allowing the non-working days
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public DataTable GetCalenderDates(string name)
         {
             DataTable dt = new DataTable();
@@ -721,34 +672,6 @@ namespace CresijApp.DataAccess
             }
 
             return dt;
-        }
-
-        public List<object> GetScheduleByBuildWeekSemDayTest(string building, string sem, string week, string day,
-           string userid, string pageindex, string pagesize)
-        {
-            List<object> data = new List<object>();
-            DataTable dt = new DataTable();
-            var total = 0;
-
-            using (MySqlConnection conn = new MySqlConnection(constring))
-            {
-                using (MySqlCommand cmd = new MySqlCommand("GetScheduleTest", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("build", building);
-                    cmd.Parameters.AddWithValue("weekno", Convert.ToInt32(week));
-                    cmd.Parameters.AddWithValue("sem", Convert.ToInt32(sem));
-                    cmd.Parameters.AddWithValue("daynum", Convert.ToInt32(day));
-                    cmd.Parameters.AddWithValue("userid", userid);
-
-                    if (conn.State != ConnectionState.Open)
-                        conn.Open();
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    dataAdapter.Fill(dt);
-                }
-            }
-
-            return data;
         }
 
     }
