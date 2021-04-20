@@ -111,11 +111,11 @@ namespace CresijApp.Services
                 else if (timerange == "Hour")
                 {
 
-                    query = "select sum(value) as powervalue ,concat(lpad(Hour(recordtime), 2, '0'), ':00:00') as recordtime" +
+                    query = "select sum(value) as powervalue ,Hour(recordtime) as hourtime" +
                         " from machineusagelogs_minute where attribute = '" + propname + "' " +
                         "and classid = " + classid + " and recordtime >= '"
                         + startTime.ToString("yyyy-MM-dd HH:mm:ss") + "' and recordtime <= '" +
-                        endTime.ToString("yyyy-MM-dd HH:mm:ss") + "' group by hour(recordtime)";
+                        endTime.ToString("yyyy-MM-dd HH:mm:ss") + "' group by Hour(recordtime) order by Hour(recordtime) desc";
                     var dt = hd.ExecuteQuery(query);
                     
                     if (dt.Rows.Count > 0)
@@ -125,7 +125,7 @@ namespace CresijApp.Services
                         {
                             m.Add(new MonthPower
                             {
-                                RecordTime = dr["recordtime"].ToString(),
+                                RecordTime =  dr["hourtime"].ToString().PadLeft(2,'0')+"00:00",
                                 Value = Convert.ToDouble(dr["powervalue"])
                             });
                         };
