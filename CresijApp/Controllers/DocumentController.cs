@@ -1,4 +1,17 @@
-﻿using CresijApp.DataAccess;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 08-20-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-20-2021
+// ***********************************************************************
+// <copyright file="DocumentController.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using CresijApp.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,9 +23,17 @@ namespace CresijApp.Controllers
     /// <summary>
     /// the controller is used to upload csv/xls files
     /// </summary>
+    /// <summary>
+    /// Class DocumentController.
+    /// Implements the <see cref="System.Web.Http.ApiController" />
+    /// </summary>
+    /// <seealso cref="System.Web.Http.ApiController" />
     public class DocumentController : ApiController
     {
 
+        /// <summary>
+        /// The upload
+        /// </summary>
         UploadFile upload;
 
         /// <summary>
@@ -248,6 +269,12 @@ namespace CresijApp.Controllers
             return idata;
         }
 
+        /// <summary>
+        /// Uploads the logo.
+        /// </summary>
+        /// <param name="file">The file.</param>
+        /// <param name="path">The path.</param>
+        /// <returns>System.String.</returns>
         private string UploadLogo(HttpPostedFile file, string path)
         {
             //Set the File Name.

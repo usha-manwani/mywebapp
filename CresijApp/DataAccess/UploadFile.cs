@@ -1,4 +1,17 @@
-﻿using CresijApp.Models;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 04-02-2021
+//
+// Last Modified By : admin
+// Last Modified On : 04-21-2021
+// ***********************************************************************
+// <copyright file="UploadFile.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using CresijApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +27,7 @@ namespace CresijApp.DataAccess
     /// <summary>
     /// class deals with inserting the records in database using data from files uploaded by user
     /// </summary>
+    
     public class UploadFile
     {
         /// <summary>
@@ -21,12 +35,14 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="dt"></param>
         /// <returns>no of records inserted</returns>
+        
         public Dictionary<string, object> UploadStudentData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
             List<string> messages = new List<string>();
             int numofrows = 0;
-            using (var context = new OrganisationdatabaseEntities())
+            var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+            using (var context = new OrganisationdatabaseEntities(db))
             {
                 if (dt.Rows.Count > 0)
                 {
@@ -73,6 +89,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="dt"></param>
         /// <returns>no of records inserted</returns>
+       
         public Dictionary<string, object> UploadTeacherData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -133,6 +150,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="dt"></param>
         /// <returns>no of records inserted</returns>
+       
         public Dictionary<string, object> UploadScheduleData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -197,6 +215,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="dt"></param>
         /// <returns>no of records inserted</returns>
+     
         public Dictionary<string, object> UploadUserData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -272,6 +291,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="dt"></param>
         /// <returns>no of records inserted</returns>
+        
         public Dictionary<string, object> UploadClassData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -415,6 +435,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="dt"></param>
         /// <returns>no of records inserted</returns>
+       
         public Dictionary<string, object> UploadCapitalData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -457,6 +478,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="dt"></param>
         /// <returns>no of records inserted</returns>
+       
         public Dictionary<string, object> UploadBuildingData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -497,6 +519,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="dt"></param>
         /// <returns>no of records inserted</returns>
+       
         public Dictionary<string, object> UploadFloorData(DataTable dt)
         {
             Dictionary<string, object> idata = new Dictionary<string, object>();
@@ -563,12 +586,10 @@ namespace CresijApp.DataAccess
             return idata;
         }
         /// <summary>
-        /// this method is to convert csv file data into datatable 
+        /// this method is to convert csv file data into datatable
         /// but is not used anywhere as of now
         /// this can be the replacement of method CreateTable(string source, string[] columnnames)
-        /// </summary>
-        /// <param name="sCsvFilePath"></param>
-        /// <returns></returns>
+        
         public static DataTable ConvertCSVtoDataTable(string sCsvFilePath)
         {
             DataTable dtTable = new DataTable();
@@ -599,12 +620,12 @@ namespace CresijApp.DataAccess
             return dtTable;
         }
         /// <summary>
-        /// This method is use to read data friom excel or csv file into datatable to use 
+        /// This method is use to read data from excel or csv file into datatable to use
         /// it further to insert into database
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="columnnames"></param>
-        /// <returns></returns>
+        /// <param name="source">The source.</param>
+        /// <param name="columnnames">The columnnames.</param>
+        /// <returns>DataSet.</returns>
         public DataSet CreateTable(string source, string[] columnnames)
         {
             string Import_FileName = source;

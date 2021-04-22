@@ -1,4 +1,17 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 08-10-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-20-2021
+// ***********************************************************************
+// <copyright file="SessionManagement.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens;
@@ -14,7 +27,10 @@ using System.Web;
 using CresijApp.Models;
 namespace CresijApp.DataAccess
 {
-    
+
+    /// <summary>
+    /// Class SessionHandler.
+    /// </summary>
     public class SessionHandler
     {
         /// <summary>
@@ -22,8 +38,8 @@ namespace CresijApp.DataAccess
         /// in database for future purposes
         /// can be deleted if not needed anymore
         /// </summary>
-        /// <param name="cookie"></param>
-        /// <param name="connectionid"></param>
+        /// <param name="cookie">The cookie.</param>
+        /// <param name="connectionid">The connectionid.</param>
         /// <returns>no. of rows inserted</returns>
         public async Task<int> AddUpdateConnectionID(string cookie,string connectionid)
         {
@@ -40,13 +56,13 @@ namespace CresijApp.DataAccess
             return r;
         }
 
-       /// <summary>
-       ///  this method is called from MyHub.cs to insert the logs in userlogs table
-       /// </summary>
-       /// <param name="cookie"></param>
-       /// <param name="message"></param>
-       /// <param name="machinemac"></param>
-       /// <returns>no of rows inserted</returns>
+        /// <summary>
+        /// this method is called from MyHub.cs to insert the logs in userlogs table
+        /// </summary>
+        /// <param name="cookie">The cookie.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="machinemac">The machinemac.</param>
+        /// <returns>no of rows inserted</returns>
         public async Task<int> AddOperationLogs(string cookie, string message,string machinemac)
         {
             if (message.Contains("Web"))
@@ -84,7 +100,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// This method is called from MyHub.cs and use to get the mac address of machines by their classids
         /// </summary>
-        /// <param name="classIds"></param>
+        /// <param name="classIds">The class ids.</param>
         /// <returns>list of mac addresses of machines</returns>
         public async Task<List<string>> GetMacAddress(List<int>classIds)
         {

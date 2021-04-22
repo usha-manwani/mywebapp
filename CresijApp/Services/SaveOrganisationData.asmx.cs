@@ -21,13 +21,13 @@ namespace CresijApp.Services
      [System.Web.Script.Services.ScriptService]
     public class SaveOrganisationData : WebService
     {
-        
+
         /// <summary>
         /// Save new Building data or update building data in building details
         /// Give access of that building to the current user in session
         /// </summary>
         /// <param name="data"></param>
-        /// <returns>success/failresult with count of rows</returns>
+        /// <returns>success/fail result with count of rows</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> SaveBuildingData(Dictionary<string,string> data)
         {            

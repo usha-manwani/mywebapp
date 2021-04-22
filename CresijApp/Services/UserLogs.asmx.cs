@@ -196,7 +196,7 @@ namespace CresijApp.Services
                 var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
                 using (var context = new OrganisationdatabaseEntities(db))
                 {
-                    //var cookiesid = HttpContext.Current.Request.Cookies["AuthCookie"].Value ;
+                   
                     if (context.usersessioninfoes.Any(x => x.SessionId == cookie))
                     {
                         var us = context.usersessioninfoes.Where(x => x.SessionId == cookie).FirstOrDefault();

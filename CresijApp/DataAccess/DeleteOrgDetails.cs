@@ -1,4 +1,17 @@
-﻿using MySql.Data.MySqlClient;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 03-25-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-21-2021
+// ***********************************************************************
+// <copyright file="DeleteOrgDetails.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +26,28 @@ namespace CresijApp.DataAccess
     /// </summary>
     public class DeleteOrgDetails
     {
+        /// <summary>
+        /// The constr
+        /// </summary>
         string constr = System.Configuration.ConfigurationManager.
            ConnectionStrings["Organisationdatabase"].ConnectionString;
         #region constructor
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DeleteOrgDetails"/> class.
+        /// </summary>
         public DeleteOrgDetails() { }
         /// <summary>
         /// Contructor to initialize connection string according to required database connection
         /// </summary>
-        /// <param name="constring"></param>
-        public DeleteOrgDetails(string constring) { constr = constring; }
+        /// <param name="constring">The constring.</param>
+        public DeleteOrgDetails(string constring) { constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings[constring].ConnectionString; }
         #endregion
         #region Methods
         /// <summary>
         /// Connection to database to delete Student Details by List of Id
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="ids">The ids.</param>
         /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleStudent(List<string> ids)
         {
@@ -49,7 +69,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// Connection to database to delete Teacher Details by List of Id
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="ids">The ids.</param>
         /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleTeacher(List<string> ids)
         {
@@ -71,7 +91,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// Connection to database to delete Building Details by List of Id
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="ids">The ids.</param>
         /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleBuilding(List<string> ids)
         {
@@ -106,7 +126,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// Connection to database to delete Class Details by List of Id
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="ids">The ids.</param>
         /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleClass(List<string> ids)
         {
@@ -142,7 +162,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// Connection to database to delete Floor Details by List of Id
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="ids">The ids.</param>
         /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleFloor(List<string> ids)
         {
@@ -177,7 +197,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// Connection to database to delete User Details by List of Id
         /// </summary>
-        /// <param name="ids"></param>
+        /// <param name="ids">The ids.</param>
         /// <returns>No. of rows deleted</returns>
         public int DeleteMultipleUser(List<string> ids)
         {

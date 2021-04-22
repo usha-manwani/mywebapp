@@ -19,7 +19,7 @@ namespace CresijApp.Services
     /// The methods available in this class are for CRUD Operation on Strategy
     /// and Strategy Description Records in Database
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/StrategyManagement.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -162,14 +162,14 @@ namespace CresijApp.Services
                             var mess = "property: " + ve.PropertyName + " value: " +
                                 eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName) +
                                 " has the following validation errors:" + ve.ErrorMessage;
-                            idata.Add("ErroMessage", mess);
+                            idata.Add("ErrorMessage", mess);
                         }                       
                     }
                 }
                 catch (Exception ex)
                 {
                     idata.Add("status", "fail");
-                    idata.Add("ErroMessage", ex.Message);
+                    idata.Add("ErrorMessage", ex.Message);
                 }
                 
             }
@@ -251,7 +251,7 @@ namespace CresijApp.Services
                 catch (Exception ex)
                 {
                     idata.Add("status", "fail");
-                    idata.Add("ErroMessage", ex.Message);
+                    idata.Add("ErrorMessage", ex.Message);
                 }
             }
             return idata;
@@ -298,7 +298,7 @@ namespace CresijApp.Services
                 catch (Exception ex)
                 {
                     idata.Add("status", "fail");
-                    idata.Add("ErroMessage", ex.Message);
+                    idata.Add("ErrorMessage", ex.Message);
                 }
             }
             return idata;
@@ -411,7 +411,7 @@ namespace CresijApp.Services
                 catch (Exception ex)
                 {
                     idata.Add("status", "fail");
-                    idata.Add("ErroMessage", ex.Message);
+                    idata.Add("ErrorMessage", ex.Message);
                 }
             }
             return idata;
@@ -455,7 +455,7 @@ namespace CresijApp.Services
                 catch (Exception ex)
                 {
                     idata.Add("status", "fail");
-                    idata.Add("ErroMessage", ex.Message);
+                    idata.Add("ErrorMessage", ex.Message);
                 }
             }
             return idata;
@@ -464,7 +464,7 @@ namespace CresijApp.Services
         /// Method to get count of strategy execution based on its strategy id
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>COunt of executions with success/fail result</returns>
+        /// <returns>Count of executions with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetStrategyCount(int id)
         {

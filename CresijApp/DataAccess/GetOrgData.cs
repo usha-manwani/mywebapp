@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 03-17-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-21-2021
+// ***********************************************************************
+// <copyright file="GetOrgData.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,13 +27,26 @@ namespace CresijApp.DataAccess
     /// Class contains Get Methods for: UserDetails table, BuildingDetails , StudentDetails, TeacherDetails, ClassDetails
     /// and their different variations according to requirement.
     /// </summary>
+    /// <summary>
+    /// Class GetOrgData.
+    /// </summary>
     public class GetOrgData
     {
-       string constr = System.Configuration.ConfigurationManager.
+        /// <summary>
+        /// The constr
+        /// </summary>
+        string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetOrgData"/> class.
+        /// </summary>
         public GetOrgData() { }
         //Constructor for initializing with required connection string
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GetOrgData"/> class.
+        /// </summary>
+        /// <param name="constring">The constring.</param>
         public GetOrgData(string constring)
         {
             constr= System.Configuration.ConfigurationManager.
@@ -34,6 +60,7 @@ namespace CresijApp.DataAccess
         /// <param name="pageSize"></param>
         /// <param name="userid"></param>
         /// <returns>List of building details list according to page size and count of rows</returns>
+        
         public List<object> GetOrgBuildingInfo(string pageIndex, string pageSize,string userid)
         {
             DataTable dt = new DataTable();
@@ -70,6 +97,7 @@ namespace CresijApp.DataAccess
         /// <param name="pageSize"></param>
         /// <param name="text"></param>
         /// <returns>returns user details List according to size with count of rows</returns>
+       
         public List<object> GetuserInfo(string pageIndex, string pageSize,string text)
         {
             DataTable dt = new DataTable();
@@ -105,6 +133,7 @@ namespace CresijApp.DataAccess
         /// <param name="pagesize"></param>
         /// <param name="query"></param>
         /// <returns>return teacher details list according to size with count of rows</returns>
+       
         public List<object> GetTeacherInfo(string pageindex, string pagesize, string text)
         {
             List<object> data = new List<object>();
@@ -142,6 +171,7 @@ namespace CresijApp.DataAccess
         /// <param name="pagesize"></param>
         /// <param name="text"></param>
         /// <returns>returns student details list according to size with count of rows </returns>
+       
         public List<object> GetStudentInfo(string pageindex, string pagesize,string text)
         {
             List<object> data = new List<object>();
@@ -182,6 +212,7 @@ namespace CresijApp.DataAccess
         /// <param name="text"></param>
         /// <returns>
         /// returns list of Operation Management List according to size with count of rows</returns>
+        
         public List<object> GetCapitalInfo( string pageindex, string pagesize,string text)
         {
             List<object> data = new List<object>();
@@ -220,6 +251,7 @@ namespace CresijApp.DataAccess
         /// <param name="userid"></param>
         /// <param name="text"></param>
         /// <returns>returns list of classdetails according to size with count of rows </returns>
+        
         public List<object> GetClassroomInfo(string pageindex, string pagesize,string userid,string text)
         {
             List<object> data = new List<object>();
@@ -257,6 +289,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="classid"></param>
         /// <returns>class details data</returns>
+        
         public DataTable GetClassData(string classid)
         {
             DataTable dt = new DataTable();
@@ -278,11 +311,12 @@ namespace CresijApp.DataAccess
             
             return dt;
         }
-       /// <summary>
-       /// Get Building details by its ID
-       /// </summary>
-       /// <param name="sn"></param>
-       /// <returns>Specific building detail</returns>
+        /// <summary>
+        /// Get Building details by its ID
+        /// </summary>
+        /// <param name="sn"></param>
+        /// <returns>Specific building detail</returns>
+       
         public DataTable GetBuildingById(int sn)
         {
             DataTable dt = new DataTable();            
@@ -308,6 +342,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="sn"></param>
         /// <returns>specific user detail</returns>
+       
         public DataTable GetUserById(string sn)
         {
             DataTable dt = new DataTable();
@@ -340,6 +375,7 @@ namespace CresijApp.DataAccess
         /// <param name="data"></param>
         /// <param name="userid"></param>
         /// <returns>list of class and machine ip </returns>
+        
         public List<object> GetIPClassByBuilding(string pageindex, string pagesize,string data,string userid)
         {
             DataTable dt = new DataTable();
@@ -378,6 +414,7 @@ namespace CresijApp.DataAccess
         /// <param name="pageindex"></param>
         /// <param name="pagesize"></param>
         /// <returns>list of class and machine ip</returns>
+        
         public List<object> GetIPClassByBuildingFloor(string building,string floor,string userid,string pageindex,int pagesize)
         {
             DataTable dt = new DataTable();
@@ -417,6 +454,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="building"></param>
         /// <returns>floor list </returns>
+       
         public DataTable GetFloorlist(string building)
         {
             DataTable dt = new DataTable();
@@ -436,6 +474,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="building"></param>
         /// <returns></returns>
+        
         public DataTable GetSchoolName(string building)
         {
             DataTable dt = new DataTable();
@@ -457,6 +496,7 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="ip"></param>
         /// <returns>Class name and id</returns>
+        
         public DataTable GetClassByIP(string ip)
         {
             DataTable dt = new DataTable();
@@ -477,6 +517,7 @@ namespace CresijApp.DataAccess
         /// <param name="building"></param>
         /// <param name="userid"></param>
         /// <returns>floor list</returns>
+       
         public DataTable GetFloorDetails(string building, string userid)
         {
             DataTable dt = new DataTable();
@@ -505,10 +546,10 @@ namespace CresijApp.DataAccess
         }
 
         /// <summary>
-        ///Method to Get single camera details record using its class id
+        /// Gets the camera by class identifier.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Student and teacher camera detail</returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>ClassDataDetails.</returns>
         public ClassDataDetails GetCameraByClassId(int id)
         {
             
@@ -548,11 +589,12 @@ namespace CresijApp.DataAccess
             }
             
         }
+        
         /// <summary>
-        ///Method to Get camera details List using its class id
+        /// Gets the camera by class ids.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>List of Strudent and teacher camera detail</returns>
+        /// <param name="id">The identifier.</param>
+        /// <returns>List of ClassDataDetails and total count of rows.</returns>
         public List<ClassDataDetails> GetCameraByClassIds(List<int> id)
         {
             List<ClassDataDetails> details = new List<ClassDataDetails>();
@@ -581,16 +623,16 @@ namespace CresijApp.DataAccess
         }
 
         /// <summary>
-        /// Get camera and machine details with userid and filters
+        /// Gets the camera by user identifier with condition.
         /// </summary>
-        /// <param name="userid"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="pageNum"></param>
-        /// <param name="systemstate"></param>
-        /// <param name="hasTeacher"></param>
-        /// <param name="ids"></param>
-        /// <param name="inout"></param>
-        /// <returns>list of camera and machine details</returns>
+        /// <param name="userid">The userid.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="pageNum">The page number.</param>
+        /// <param name="systemstate">The systemstate.</param>
+        /// <param name="hasTeacher">if set to <c>true</c> [has teacher].</param>
+        /// <param name="ids">The ids.</param>
+        /// <param name="inout">if set to <c>true</c> [inout].</param>
+        /// <returns>List of ClassDataDetails and total count of rows.</returns>
         public List<object> GetCameraByUserIdWithCondition(string userid, int pageSize, int pageNum,
             string systemstate,bool hasTeacher, List<int>ids, bool inout)
         {
@@ -659,15 +701,15 @@ namespace CresijApp.DataAccess
             return result;
         }
 
-        /// <summary>
-        /// Get camera and machine details with filters using userid
+        ///<summary>
+        /// Gets the camera by user identifier and filters.
         /// </summary>
-        /// <param name="userid"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="pageNum"></param>
-        /// <param name="ids"></param>
-        /// <param name="inout"></param>
-        /// <returns>list of camera and machine details</returns>
+        /// <param name="userid">The userid.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="pageNum">The page number.</param>
+        /// <param name="ids">The ids.</param>
+        /// <param name="inout">if set to <c>true</c> [inout].</param>
+        /// <returns>List of ClassDataDetails and total count of rows.</returns>
         public List<object> GetCameraByUserId(string userid, int pageSize, int pageNum,
             List<int> ids, bool inout)
         {
@@ -712,17 +754,18 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
+        
         /// <summary>
         /// Get camera and machine details with filters using search keyword
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="keywword"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="pageNum"></param>
-        /// <param name="ids"></param>
-        /// <param name="inout"></param>
-        /// <returns>list of camera and machine details</returns>
-        public List<object> GetCameraBySearch(string user,string keywword, int pageSize, int pageNum,
+        /// <param name="user">The user.</param>
+        /// <param name="keyword">The keywword.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="pageNum">The page number.</param>
+        /// <param name="ids">The ids.</param>
+        /// <param name="inout">if set to <c>true</c> [inout].</param>
+        /// <returns>List of ClassDataDetails and total count of rows.</returns>
+        public List<object> GetCameraBySearch(string user,string keyword, int pageSize, int pageNum,
             List<int> ids, bool inout)
         {
             var result = new List<object>();
@@ -742,7 +785,7 @@ namespace CresijApp.DataAccess
                         (x => x.userserialnum == serialn && x.Level == "Class").Select(x => x.locationid).ToList();
                     classids.RemoveAll(x => ids.Contains(x));
                 }
-                details = context.classdetails.Where(x => x.ClassName.Contains(keywword) 
+                details = context.classdetails.Where(x => x.ClassName.Contains(keyword) 
                             && classids.Contains(x.classID)).Select(o => new ClassDataDetails
                 {
                     CamStudentIp = o.camipS,
@@ -761,24 +804,25 @@ namespace CresijApp.DataAccess
 
                 }).OrderBy(x => x.ClassId).Skip(pageSize * (pageNum - 1)).Take(pageSize).ToList();
                 result.Add(details);
-                var total = context.classdetails.Where(x => x.ClassName.Contains(keywword)
+                var total = context.classdetails.Where(x => x.ClassName.Contains(keyword)
                             && classids.Contains(x.classID)).Count();
                 result.Add(total);
             }
             return result;
         }
+
         /// <summary>
         /// Get camera and machine details with filters and search keywords using userid
         /// </summary>
-        /// <param name="user"></param>
-        /// <param name="keywword"></param>
-        /// <param name="pageSize"></param>
-        /// <param name="pageNum"></param>
-        /// <param name="systemstate"></param>
-        /// <param name="hasTeacher"></param>
-        /// <param name="ids"></param>
-        /// <param name="inout"></param>
-        /// <returns>list of camera and machine details</returns>
+        /// <param name="user">The user.</param>
+        /// <param name="keywword">The keywword.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="pageNum">The page number.</param>
+        /// <param name="systemstate">The systemstate.</param>
+        /// <param name="hasTeacher">if set to <c>true</c> [has teacher].</param>
+        /// <param name="ids">The ids.</param>
+        /// <param name="inout">if set to <c>true</c> [inout].</param>
+        /// <returns>List of ClassDataDetails and total count of rows</returns>
         public List<object> GetCameraBySearchWithCondition(string user,string keywword, int pageSize, int pageNum,
             string systemstate, bool hasTeacher, List<int> ids, bool inout)
         {
@@ -842,7 +886,6 @@ namespace CresijApp.DataAccess
             }
             return result;
         }
-        
 
         /// <summary>
         /// Method to get Desktop Event logs
@@ -852,6 +895,12 @@ namespace CresijApp.DataAccess
         /// <param name="pageIndex"></param>
         /// <returns></returns>
         #region Not Used Method Name: GetDesktopEventLogs
+        /// <summary>
+        /// Gets the desktop event logs.
+        /// </summary>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="pageIndex">Index of the page.</param>
+        /// <returns>Dictionary&lt;System.String, System.Object&gt;.</returns>
         internal Dictionary<string,object> GetDesktopEventLogs(int pageSize, int pageIndex)
         {
             var result = new Dictionary<string, object>();
@@ -871,16 +920,18 @@ namespace CresijApp.DataAccess
         }
         #endregion
 
+        
         /// <summary>
-        /// Method to get Camera Alarm Event logs        
+        /// Gets the alarm monitor logs.
         /// </summary>
-        /// <param name="pageSize"></param>
-        /// <param name="pageIndex"></param>
-        /// <returns>Alarm event logs with total rows</returns>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <param name="pageIndex">Index of the page.</param>
+        /// <returns>AlarmMonitorEvent list and total rows</returns>
         internal Dictionary<string, object> GetAlarmMonitorLogs(int pageSize, int pageIndex)
         {
             var result = new Dictionary<string, object>();
-            using (var context = new OrganisationdatabaseEntities(HttpContext.Current.Session["DBConnection"].ToString()+"Entities"))
+            var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
+            using (var context = new OrganisationdatabaseEntities(db))
             {
                 var data = context.alarmmonitorlogs.Select(x => new AlarmMonitorEvent
                 {
@@ -899,42 +950,135 @@ namespace CresijApp.DataAccess
     /// <summary>
     /// Structure for desktop Event Logs
     /// </summary>
+    /// <summary>
+    /// Class DesktopEvent.
+    /// </summary>
     public class DesktopEvent
     {
+        /// <summary>
+        /// Gets or sets the action time.
+        /// </summary>
+        /// <value>The action time.</value>
         public string ActionTime { get; set; }
+        /// <summary>
+        /// Gets or sets the action.
+        /// </summary>
+        /// <value>The action.</value>
         public string Action { get; set; }
+        /// <summary>
+        /// Gets or sets the deskmac.
+        /// </summary>
+        /// <value>The deskmac.</value>
         public string Deskmac { get; set; }
     }
 
     /// <summary>
     /// Structure for camera Monitor Logs
     /// </summary>
+    /// <summary>
+    /// Class AlarmMonitorEvent.
+    /// </summary>
     public class AlarmMonitorEvent
     {
+        /// <summary>
+        /// Gets or sets the action time.
+        /// </summary>
+        /// <value>The action time.</value>
         public string ActionTime { get; set; }
+        /// <summary>
+        /// Gets or sets the action.
+        /// </summary>
+        /// <value>The action.</value>
         public string Action { get; set; }
+        /// <summary>
+        /// Gets or sets the device ip.
+        /// </summary>
+        /// <value>The device ip.</value>
         public string DeviceIp { get; set; }
     }
 
     /// <summary>
     /// Structure for class equipment details with current Schedule(course name)
     /// </summary>
+    /// <summary>
+    /// Class ClassDataDetails.
+    /// </summary>
     public class ClassDataDetails
     {
+        /// <summary>
+        /// Gets or sets the class identifier.
+        /// </summary>
+        /// <value>The class identifier.</value>
         public int    ClassId { get; set; }
+        /// <summary>
+        /// Gets or sets the name of the class.
+        /// </summary>
+        /// <value>The name of the class.</value>
         public string ClassName { get; set; }
+        /// <summary>
+        /// Gets or sets the cam teacher ip.
+        /// </summary>
+        /// <value>The cam teacher ip.</value>
         public string CamTeacherIp { get; set; }
+        /// <summary>
+        /// Gets or sets the cam student ip.
+        /// </summary>
+        /// <value>The cam student ip.</value>
         public string CamStudentIp { get; set; }
+        /// <summary>
+        /// Gets or sets the cam teacher mac.
+        /// </summary>
+        /// <value>The cam teacher mac.</value>
         public string CamTeacherMac { get; set; }
+        /// <summary>
+        /// Gets or sets the cam student mac.
+        /// </summary>
+        /// <value>The cam student mac.</value>
         public string CamStudentMac { get; set; }
+        /// <summary>
+        /// Gets or sets the cam password.
+        /// </summary>
+        /// <value>The cam password.</value>
         public string CamPassword { get; set; }
+        /// <summary>
+        /// Gets or sets the cam login identifier.
+        /// </summary>
+        /// <value>The cam login identifier.</value>
         public string CamLoginId { get; set; }
+        /// <summary>
+        /// Gets or sets the cam port.
+        /// </summary>
+        /// <value>The cam port.</value>
         public int    CamPort { get; set; }
+        /// <summary>
+        /// Gets or sets the name of the course.
+        /// </summary>
+        /// <value>The name of the course.</value>
         public string CourseName { get; set; }
+        /// <summary>
+        /// Gets or sets the course identifier.
+        /// </summary>
+        /// <value>The course identifier.</value>
         public string CourseId { get; set; }
+        /// <summary>
+        /// Gets or sets the cc equip ip.
+        /// </summary>
+        /// <value>The cc equip ip.</value>
         public string CCEquipIp { get; set; }
+        /// <summary>
+        /// Gets or sets the cc mac.
+        /// </summary>
+        /// <value>The cc mac.</value>
         public string CCMac { get; set; }
+        /// <summary>
+        /// Gets or sets the desktop ip.
+        /// </summary>
+        /// <value>The desktop ip.</value>
         public string DesktopIp { get; set; }
+        /// <summary>
+        /// Gets or sets the desktop mac.
+        /// </summary>
+        /// <value>The desktop mac.</value>
         public string DesktopMac { get; set; }
     }
 }

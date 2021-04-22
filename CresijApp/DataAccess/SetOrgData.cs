@@ -1,4 +1,17 @@
-﻿using MySql.Data.MySqlClient;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 03-19-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-21-2021
+// ***********************************************************************
+// <copyright file="SetOrgData.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,22 +22,41 @@ namespace CresijApp.DataAccess
     /// Class contains Save and Update Methods for:UserDetails table, BuildingDetails , StudentDetails, TeacherDetails, ClassDetails
     /// and their different variations according to requirement.
     /// </summary>
+    /// <summary>
+    /// Class SetOrgData.
+    /// </summary>
     public class SetOrgData
     {
         //default connection string
+        /// <summary>
+        /// The constr
+        /// </summary>
         string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SetOrgData"/> class.
+        /// </summary>
         public SetOrgData() { }
         /// <summary>
         /// parameterized
         /// </summary>
         /// <param name="constring"></param>
-        public SetOrgData(string constring) { constr = constring; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SetOrgData"/> class.
+        /// </summary>
+        /// <param name="constring">The constring.</param>
+        public SetOrgData(string constring) { constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings[constring].ConnectionString; }
         /// <summary>
         /// This method is use to insert new record in teacherdetails table in database
         /// </summary>
         /// <param name="data"></param>
         /// <returns>no of inserted rows</returns>
+        /// <summary>
+        /// Saves the teacher data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveTeacherData(Dictionary<string, string> data)
         {
             int result = -1;
@@ -50,6 +82,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="data"></param>
         /// <returns>no. of inserted rows</returns>
+        /// <summary>
+        /// Saves the student data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveStudentData(Dictionary<string, string> data)
         {
             int result = -1;
@@ -76,6 +113,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="data"></param>
         /// <returns>no of updated rows</returns>
+        /// <summary>
+        /// Updates the teacher data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>System.Int32.</returns>
         public int UpdateTeacherData(Dictionary<string, string> data)
         {
             int result = -1;
@@ -103,6 +145,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="data"></param>
         /// <returns>no of updated rows</returns>
+        /// <summary>
+        /// Updates the student data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>System.Int32.</returns>
         public int UpdateStudentData(Dictionary<string, string> data)
         {
             int result = -1;
@@ -130,6 +177,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="data"></param>
         /// <returns>no of inserted rows</returns>
+        /// <summary>
+        /// Saves the class data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveClassData(Dictionary<string, string> data)
         {
             int result = -1;
@@ -173,6 +225,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="data"></param>
         /// <returns>no of updated rows</returns>
+        /// <summary>
+        /// Updates the class data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>System.Int32.</returns>
         public int UpdateClassData(Dictionary<string, string> data)
         {
             int result = -1;
@@ -217,6 +274,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="data"></param>
         /// <returns>no of records inserted</returns>
+        /// <summary>
+        /// Saves the user data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveUserData(Dictionary<string, string> data)
         {
             int result = -1;
@@ -253,7 +315,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// method to update a record in userdetails with its id
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The data.</param>
         /// <returns>no of updated records</returns>
         public int UpdateUserData(Dictionary<string, string> data)
         {

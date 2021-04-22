@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 12-09-2019
+//
+// Last Modified By : admin
+// Last Modified On : 04-13-2021
+// ***********************************************************************
+// <copyright file="Global.asax.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,9 +24,22 @@ using System.Configuration;
 using NLog;
 namespace CresijApp
 {
+    /// <summary>
+    /// Class Global.
+    /// Implements the <see cref="System.Web.HttpApplication" />
+    /// </summary>
+    /// <seealso cref="System.Web.HttpApplication" />
     public class Global : HttpApplication
     {
+        /// <summary>
+        /// The logger file
+        /// </summary>
         private static Logger loggerFile = LogManager.GetCurrentClassLogger();
+        /// <summary>
+        /// Handles the Start event of the Application control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         void Application_Start(object sender, EventArgs e)
         {
             Application["onlineNum"] = 0;
@@ -24,6 +50,11 @@ namespace CresijApp
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
         }
+        /// <summary>
+        /// Handles the Error event of the Application control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         protected void Application_Error(object sender, EventArgs e)
         {
             var er = HttpContext.Current.Server.GetLastError();
@@ -32,6 +63,11 @@ namespace CresijApp
                 HttpContext.Current.Response.Redirect(".../site/CustomError.aspx");
             }
         }
+        /// <summary>
+        /// Handles the PostRequestHandlerExecute event of the Application control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         void Application_PostRequestHandlerExecute(object sender, EventArgs e)
         {
             // 更新cookie
@@ -47,6 +83,9 @@ namespace CresijApp
                 HttpContext.Current.Response.Cookies.Add(FormsCookie);
             }
         }
+        /// <summary>
+        /// Sessions the start.
+        /// </summary>
         void Session_Start()
         {
             Application["onVisitorNum"] = double.Parse(Application["onVisitorNum"].ToString()) + 1;
@@ -56,6 +95,11 @@ namespace CresijApp
             cfa.AppSettings.Settings["onVisitorNum"].Value = Application["onVisitorNum"].ToString();
             cfa.Save();*/
         }
+        /// <summary>
+        /// Handles the End event of the Session control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         void Session_End(object sender, EventArgs e)
         {
             var num = double.Parse(Application["onlineNum"].ToString()) - 1;
@@ -65,6 +109,9 @@ namespace CresijApp
             // is set to InProc in the Web.config file. If session mode is set to StateServer   
             // or SQLServer, the event is not raised.
         }
+        /// <summary>
+        /// Applications the post authorize request.
+        /// </summary>
         protected void Application_PostAuthorizeRequest()
         {
             HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);

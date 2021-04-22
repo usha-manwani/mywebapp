@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 08-24-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-19-2021
+// ***********************************************************************
+// <copyright file="CreateCSV.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -8,7 +21,7 @@ using System.Web;
 
 namespace CresijApp.DataAccess
 {
-   
+
     /// <summary>
     /// THis classes is to create csv file but is not called yet anywhere
     /// Keeping it for future use and update
@@ -16,8 +29,16 @@ namespace CresijApp.DataAccess
     public class CreateCSV
     {
     }
-    public  class CSVUtlity
+    /// <summary>
+    /// Class CSVUtlity.
+    /// </summary>
+    public class CSVUtlity
     {
+        /// <summary>
+        /// Creates the CSV file.
+        /// </summary>
+        /// <param name="table">The table.</param>
+        /// <param name="strFilePath">The string file path.</param>
         public void CreateCSVFile(DataTable table, string strFilePath)
         {
             const int capacity = 50000;

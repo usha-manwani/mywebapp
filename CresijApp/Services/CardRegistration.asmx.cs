@@ -25,9 +25,14 @@ namespace CresijApp.Services
         #region web methods
         /// <summary>
         /// Use to send card id(onecardid/onecard) to the machine and save the record in database
-        /// Websocket is use to send card id to machine 
+        /// Web socket is use to send card id to machine 
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">
+        ///List of params inside data
+        ///cardId:4 Hex bytes
+        ///teacherId: teacher Id
+        ///classids: List of classids
+        /// </param>
         /// <returns>returns no. of rows updated in database</returns>
         [WebMethod]
         public int RegisterCard(Dictionary<string, object>data)
@@ -75,7 +80,10 @@ namespace CresijApp.Services
         /// <summary>
         /// Use to send Multiple card ids(onecardid/onecard) to the machine and save the record in database
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">
+        /// List of params inside data
+        ///teachers: contains params: teacherId , cardId
+        ///classids: List of classids</param>
         /// <returns>no. of rows updated in database</returns>
         [WebMethod]
         public int RegisterMultipleCardToClass(Dictionary<string, object> data)
@@ -83,7 +91,7 @@ namespace CresijApp.Services
             int updatedRows = 0;
             List<int> classids = new List<int>();
             List<string> teacherIdlist = new List<string>();
-            //var classid = data["classid"].ToString();
+            
             var teacherId =  data["teachers"].ToString();
             var dd = new Dictionary<string, string>();
             var db = HttpContext.Current.Session["DBConnection"].ToString() + "Entities";
@@ -144,7 +152,9 @@ namespace CresijApp.Services
         /// Use to check if the card ids successfully registered or not
         /// Might need to change the inner code due to change in functionality
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">
+        /// teachers: contains params: teacherId , cardId
+        /// classids: List of classids</param>
         /// <returns> true or false for records successfully registered or not</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> CheckCardRegistration(Dictionary<string, object> data)
@@ -154,7 +164,7 @@ namespace CresijApp.Services
             List<card_registration> idata = new List<card_registration>();
             List<int> classids = new List<int>();
             List<string> teacherIdlist = new List<string>();
-            //var classid = data["classid"].ToString();
+            
             try
 
             {
@@ -225,8 +235,9 @@ namespace CresijApp.Services
         /// <summary>
         /// use to get card swipe logs from database
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns>returns card logs</returns>
+        /// <param name="data">
+        /// pageSize, pageIndex</param>
+        /// <returns>returns list of CardLogsList, count of rows with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCardLogsList(Dictionary<string, string> data)
         {

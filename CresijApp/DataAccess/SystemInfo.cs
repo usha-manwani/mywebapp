@@ -1,4 +1,17 @@
-﻿using MySql.Data.MySqlClient;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 05-07-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-21-2021
+// ***********************************************************************
+// <copyright file="SystemInfo.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,19 +27,33 @@ namespace CresijApp.DataAccess
     /// set different options for appointments and transfer Permissions
     /// Getting all the related data back from database and update it
     /// </summary>
+    /// <summary>
+    /// Class SystemInfo.
+    /// </summary>
     public class SystemInfo
     {
         /// <summary>
         /// Default Connection
         /// </summary>
+        /// <summary>
+        /// The constr
+        /// </summary>
         readonly string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SystemInfo"/> class.
+        /// </summary>
         public SystemInfo() { }
         /// <summary>
         /// session connection
         /// </summary>
         /// <param name="constring"></param>
-        public SystemInfo(string constring) { constr = constring; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SystemInfo"/> class.
+        /// </summary>
+        /// <param name="constring">The constring.</param>
+        public SystemInfo(string constring) { constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings[constring].ConnectionString; }
         /// <summary>
         /// Method to call sp_insertSystemInfo to save school name, semester infoes 
         /// </summary>
@@ -40,6 +67,19 @@ namespace CresijApp.DataAccess
         /// <param name="semno"></param>
         /// <param name="autoholiday"></param>
         /// <returns></returns>
+        /// <summary>
+        /// Saves the system information.
+        /// </summary>
+        /// <param name="schoolname">The schoolname.</param>
+        /// <param name="schooleng">The schooleng.</param>
+        /// <param name="logourl">The logourl.</param>
+        /// <param name="semname">The semname.</param>
+        /// <param name="weeks">The weeks.</param>
+        /// <param name="semstartdate">The semstartdate.</param>
+        /// <param name="days">The days.</param>
+        /// <param name="semno">The semno.</param>
+        /// <param name="autoholiday">The autoholiday.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveSystemInfo(string schoolname, string schooleng, string logourl, string semname, string weeks, string semstartdate, Dictionary<string, string> days, int semno, string autoholiday)
         {
             int result = 0;
@@ -80,6 +120,14 @@ namespace CresijApp.DataAccess
         /// <param name="starttime"></param>
         /// <param name="stoptime"></param>
         /// <returns>no. of affected records</returns>
+        /// <summary>
+        /// Saves the sections information.
+        /// </summary>
+        /// <param name="semname">The semname.</param>
+        /// <param name="section">The section.</param>
+        /// <param name="starttime">The starttime.</param>
+        /// <param name="stoptime">The stoptime.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveSectionsInfo(string semname, string section, string starttime, string stoptime)
         {
             int result = 0;
@@ -115,6 +163,16 @@ namespace CresijApp.DataAccess
         /// <param name="end"></param>
         /// <param name="semname"></param>
         /// <returns>no of inserted records</returns>
+        /// <summary>
+        /// Saves the reserve and transfer information.
+        /// </summary>
+        /// <param name="typ">The typ.</param>
+        /// <param name="nonwork">The nonwork.</param>
+        /// <param name="auto">The automatic.</param>
+        /// <param name="start">The start.</param>
+        /// <param name="end">The end.</param>
+        /// <param name="semname">The semname.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveReserveAndTransferInfo(string typ, string nonwork, string auto, string start, string end, string semname)
         {
             int result = 0;
@@ -145,6 +203,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="semname"></param>
         /// <returns></returns>
+        /// <summary>
+        /// Deletes the sections information.
+        /// </summary>
+        /// <param name="semname">The semname.</param>
+        /// <returns>System.Int32.</returns>
         public int DeleteSectionsInfo(string semname)
         {
             int result = 0;
@@ -168,6 +231,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="building"></param>
         /// <returns></returns>
+        /// <summary>
+        /// Gets the floor class by building.
+        /// </summary>
+        /// <param name="building">The building.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetFloorClassByBuilding(string building)
         {
             DataTable dt = new DataTable();
@@ -197,7 +265,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// call sp_GetipByClass to get machine ip and classname with classids
         /// </summary>
-        /// <param name="classlist"></param>
+        /// <param name="classlist">The classlist.</param>
         /// <returns>list of machienip:classname</returns>
         public DataTable GetIpByClass(string classlist)
         {
@@ -222,9 +290,9 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// get floor and class group by building that are accessible by user
         /// </summary>
-        /// <param name="building"></param>
-        /// <param name="userid"></param>
-        /// <returns></returns>
+        /// <param name="building">The building.</param>
+        /// <param name="userid">The userid.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetFloorClassByBuildingUserAccess(string building, string userid)
         {
             DataTable dt = new DataTable();

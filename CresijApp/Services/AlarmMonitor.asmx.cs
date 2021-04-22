@@ -12,18 +12,19 @@ namespace CresijApp.Services
     /// Eg.: Camera Monitor logs , Desktop Event or usage Logs
     /// More web methods need to be added
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/AlarmMonitor.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
+     [System.Web.Script.Services.ScriptService]
     public class AlarmMonitor : System.Web.Services.WebService
     {
         /// <summary>
         ///Method use to get alarm logs from database
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns>Action,time and desktop mac with success/fail result</returns>
+        /// <param name="data">
+        /// pageSize , pageIndex</param>
+        /// <returns>AlarmMonitorEvent and count of rows with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetAlarmEventLogs(Dictionary<string, string> data)
         {
@@ -41,7 +42,6 @@ namespace CresijApp.Services
                 {
                     
                     GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
-                    //
                     var AlarmLogs = gd.GetAlarmMonitorLogs(Convert.ToInt32(data["pageSize"]), Convert.ToInt32(data["pageIndex"]));
                     idata.Add("status", "Success");
                     idata.Add("value", AlarmLogs["data"]);

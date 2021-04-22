@@ -1,4 +1,17 @@
-﻿using MySql.Data.MySqlClient;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 06-05-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-20-2021
+// ***********************************************************************
+// <copyright file="UserLogsDataAccess.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,13 +25,22 @@ namespace CresijApp.DataAccess
     ///  This class contains method for User login,
     /// Get User Logs list,Get ClassLogs list(machine logs) from database
     /// </summary>
+    /// <summary>
+    /// Class UserLogsDataAccess.
+    /// </summary>
     public class UserLogsDataAccess
     {
         /// <summary>
         /// default connection
         /// </summary>
+        /// <summary>
+        /// The constr
+        /// </summary>
         string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserLogsDataAccess"/> class.
+        /// </summary>
         public UserLogsDataAccess()
         {
 
@@ -27,6 +49,10 @@ namespace CresijApp.DataAccess
         /// session connection
         /// </summary>
         /// <param name="constring"></param>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserLogsDataAccess"/> class.
+        /// </summary>
+        /// <param name="constring">The constring.</param>
         public UserLogsDataAccess(string constring)
         {
             constr= System.Configuration.ConfigurationManager.
@@ -37,7 +63,13 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="id"></param>
         /// <param name="pass"></param>
-        /// <returns>user details if successfull</returns>
+        /// <returns>user details if successful</returns>
+        /// <summary>
+        /// Logins the specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="pass">The pass.</param>
+        /// <returns>DataTable.</returns>
         public DataTable Login(string id, string pass)
         {
             DataTable dt = new DataTable();
@@ -61,9 +93,9 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// method to call sp_GetUserLogs to get list of user logs
         /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
+        /// <param name="pageIndex">Index of the page.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <returns>List&lt;System.Object&gt;.</returns>
         public List<object> GetUserLogDetails(string pageIndex,string pageSize)
         {
             List<object> result = new List<object>();
@@ -105,9 +137,9 @@ namespace CresijApp.DataAccess
         }
 
         /// <summary>
-        /// Method to get list of count(actions) group by actions 
+        /// Method to get list of count(actions) group by actions
         /// </summary>
-        /// <returns></returns>
+        /// <returns>DataTable.</returns>
         public DataTable GetLogDetails()
         {
             DataTable dt = new DataTable();

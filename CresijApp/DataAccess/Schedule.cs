@@ -1,4 +1,17 @@
-﻿using MySql.Data.MySqlClient;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 03-11-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-21-2021
+// ***********************************************************************
+// <copyright file="Schedule.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,19 +19,33 @@ using System.Linq;
 using System.Web;
 using CresijApp.Models;
 namespace CresijApp.DataAccess
-{   
+{
     /// <summary>
     /// This class is use to deal with the database connection for schedule managament functions
+    /// </summary>
+    /// <summary>
+    /// Class Schedule.
     /// </summary>
     public class Schedule
     {
         //default connection
+        /// <summary>
+        /// The constring
+        /// </summary>
         string constring = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Schedule"/> class.
+        /// </summary>
         public Schedule() { }
         //connection according to session 
-        public Schedule(string constr) { constring = constr; }
-       
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Schedule"/> class.
+        /// </summary>
+        /// <param name="constr">The constr.</param>
+        public Schedule(string constr) { constring = System.Configuration.ConfigurationManager.
+            ConnectionStrings[constr].ConnectionString; }
+
         /// <summary>
         /// this method is use to get schedule along with transfer schedule list of the classes for which
         /// user has permission to access to
@@ -29,6 +56,15 @@ namespace CresijApp.DataAccess
         /// <param name="pageindex"></param>
         /// <param name="pagesize"></param>
         /// <returns>list of schedules</returns>
+        /// <summary>
+        /// Gets the schedule for transfer.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="date">The date.</param>
+        /// <param name="userid">The userid.</param>
+        /// <param name="pageindex">The pageindex.</param>
+        /// <param name="pagesize">The pagesize.</param>
+        /// <returns>List&lt;System.Object&gt;.</returns>
         public List<object> GetScheduleForTransfer(string name, string date, string userid, string pageindex, string pagesize)
         {
             List<object> data = new List<object>();
@@ -62,12 +98,17 @@ namespace CresijApp.DataAccess
 
             return data;
         }
-      
+
         /// <summary>
         /// get the course and schedule detail for the schedule that is going to be put into transfer request
         /// </summary>
         /// <param name="id">schedule id</param>
         /// <returns>schedule detail</returns>
+        /// <summary>
+        /// Gets the course details for transfer.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetCourseDetailsForTransfer(string id)
         {
             DataTable dt = new DataTable();
@@ -91,11 +132,16 @@ namespace CresijApp.DataAccess
 
         }
 
-       /// <summary>
-       /// Method use to save new transfer request
-       /// </summary>
-       /// <param name="name">contains all other parameters that are required to be put in the datatable</param>
-       /// <returns>no. of inserted rows</returns>
+        /// <summary>
+        /// Method use to save new transfer request
+        /// </summary>
+        /// <param name="name">contains all other parameters that are required to be put in the datatable</param>
+        /// <returns>no. of inserted rows</returns>
+        /// <summary>
+        /// Saves the transfer schedule.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveTransferSchedule(Dictionary<string,string> name)
         {
             int num = -1;
@@ -141,6 +187,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="userid"></param>
         /// <returns>list of building name and id</returns>
+        /// <summary>
+        /// Gets the building.
+        /// </summary>
+        /// <param name="userid">The userid.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetBuilding(string userid)
         {
             DataTable dt = new DataTable();
@@ -169,6 +220,10 @@ namespace CresijApp.DataAccess
         /// Method to get all building names and ids from database
         /// </summary>
         /// <returns>list of building name and id</returns>
+        /// <summary>
+        /// Gets the building nameand identifier.
+        /// </summary>
+        /// <returns>DataTable.</returns>
         public DataTable GetBuildingNameandID()
         {
             DataTable dt = new DataTable();
@@ -195,6 +250,14 @@ namespace CresijApp.DataAccess
         /// <param name="userid"></param>
         /// <param name="sem"></param>
         /// <returns>classname, sections, classids</returns>
+        /// <summary>
+        /// Gets the avail classes.
+        /// </summary>
+        /// <param name="week">The week.</param>
+        /// <param name="building">The building.</param>
+        /// <param name="userid">The userid.</param>
+        /// <param name="sem">The sem.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetAvailClasses(string week, string building, string userid, string sem)
         {
             DataTable dt = new DataTable();
@@ -236,6 +299,13 @@ namespace CresijApp.DataAccess
         /// <param name="classid"></param>
         /// <param name="semno"></param>
         /// <returns>list of days and section</returns>
+        /// <summary>
+        /// Gets the avail day.
+        /// </summary>
+        /// <param name="week">The week.</param>
+        /// <param name="classid">The classid.</param>
+        /// <param name="semno">The semno.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetAvailDay(string week, string classid, string semno)
         {
             DataTable dt = new DataTable();
@@ -259,6 +329,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="coursename"></param>
         /// <returns>list of teacher names and id</returns>
+        /// <summary>
+        /// Gets the teacher detail.
+        /// </summary>
+        /// <param name="coursename">The coursename.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetTeacherDetail(string coursename)
         {
             DataTable dt = new DataTable();
@@ -282,6 +357,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="data"></param>
         /// <returns>list of tranfer schedules</returns>
+        /// <summary>
+        /// Gets the transfer schedule.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>List&lt;System.Object&gt;.</returns>
         public List<object> GetTransferSchedule(Dictionary<string,string>data)
         {
             DataTable dt = new DataTable();
@@ -311,6 +391,12 @@ namespace CresijApp.DataAccess
         /// <param name="stat"></param>
         /// <param name="id"></param>
         /// <returns>no. of updated rows</returns>
+        /// <summary>
+        /// Saves the transfer schedule stat.
+        /// </summary>
+        /// <param name="stat">The stat.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveTransferScheduleStat(string stat, string id)
         {
             int num = 0;
@@ -339,6 +425,15 @@ namespace CresijApp.DataAccess
         /// <param name="pageindex"></param>
         /// <param name="pagesize"></param>
         /// <returns>list of schedules</returns>
+        /// <summary>
+        /// Gets the schedule by date.
+        /// </summary>
+        /// <param name="building">The building.</param>
+        /// <param name="date">The date.</param>
+        /// <param name="userid">The userid.</param>
+        /// <param name="pageindex">The pageindex.</param>
+        /// <param name="pagesize">The pagesize.</param>
+        /// <returns>List&lt;System.Object&gt;.</returns>
         public List<object> GetScheduleByDate(string building, string date, string userid, string pageindex, string pagesize)
         {
             List<object> data = new List<object>();
@@ -370,11 +465,15 @@ namespace CresijApp.DataAccess
 
             return data;
         }
-        
+
         /// <summary>
         /// Method to get Section starttime and endtime according to sem no from database
         /// </summary>
         /// <returns></returns>
+        /// <summary>
+        /// Gets the sections information.
+        /// </summary>
+        /// <returns>DataTable.</returns>
         internal DataTable GetSectionsInfo()
         {
             DataTable dt = new DataTable();
@@ -402,6 +501,17 @@ namespace CresijApp.DataAccess
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns>schedule list</returns>
+        /// <summary>
+        /// Gets the transfer schedule by day.
+        /// </summary>
+        /// <param name="building">The building.</param>
+        /// <param name="sem">The sem.</param>
+        /// <param name="week">The week.</param>
+        /// <param name="day">The day.</param>
+        /// <param name="userid">The userid.</param>
+        /// <param name="pageIndex">Index of the page.</param>
+        /// <param name="pageSize">Size of the page.</param>
+        /// <returns>List&lt;System.Object&gt;.</returns>
         public List<object> GetTransferScheduleByDay(string building, int sem, int week, int day, string userid,
             int pageIndex, int pageSize)
         {
@@ -453,6 +563,17 @@ namespace CresijApp.DataAccess
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns>schedule list</returns>
+        /// <summary>
+        /// Gets the schedule by day.
+        /// </summary>
+        /// <param name="building">The building.</param>
+        /// <param name="sem">The sem.</param>
+        /// <param name="week">The week.</param>
+        /// <param name="day">The day.</param>
+        /// <param name="userid">The userid.</param>
+        /// <param name="pageindex">The pageindex.</param>
+        /// <param name="pagesize">The pagesize.</param>
+        /// <returns>List&lt;System.Object&gt;.</returns>
         public List<object> GetScheduleByDay(string building, int sem, int week, int day,
             string userid, int pageindex, int pagesize)
         {
@@ -497,6 +618,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="date"></param>
         /// <returns>week no</returns>
+        /// <summary>
+        /// Gets the week by date.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>System.String.</returns>
         public string GetWeekByDate(string date)
         {
             string week = "";
@@ -522,6 +648,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="date"></param>
         /// <returns>semno and school year</returns>
+        /// <summary>
+        /// Gets the year and semester.
+        /// </summary>
+        /// <param name="date">The date.</param>
+        /// <returns>System.String[].</returns>
         public string[] GetYearAndSemester(string date)
         {
             string[] data = new string[2];
@@ -550,6 +681,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="stat"></param>
         /// <returns></returns>
+        /// <summary>
+        /// Saves the reserve schedule.
+        /// </summary>
+        /// <param name="stat">The stat.</param>
+        /// <returns>System.Int32.</returns>
         public int SaveReserveSchedule(List<string> stat)
         {
             int num = 0;
@@ -580,6 +716,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="data"></param>
         /// <returns>list of appointment schedule</returns>
+        /// <summary>
+        /// Gets the reserve schedule.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>List&lt;System.Object&gt;.</returns>
         public List<object> GetReserveSchedule(Dictionary<string,string>data)
         {
             DataTable dt = new DataTable();
@@ -610,6 +751,12 @@ namespace CresijApp.DataAccess
         /// <param name="stat"></param>
         /// <param name="id"></param>
         /// <returns>no. of updated rows</returns>
+        /// <summary>
+        /// Changes the reserve status.
+        /// </summary>
+        /// <param name="stat">The stat.</param>
+        /// <param name="id">The identifier.</param>
+        /// <returns>System.Int32.</returns>
         public int ChangeReserveStatus(string stat, string id)
         {
             int num = 0;
@@ -628,8 +775,8 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// method to get total weeks in a semester
         /// </summary>
-        /// <param name="semnum"></param>
-        /// <returns></returns>
+        /// <param name="semnum">The semnum.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetTotalWeek(string semnum)
         {
             DataTable dt = new DataTable();
@@ -652,8 +799,8 @@ namespace CresijApp.DataAccess
         /// Get dates range allowed for reserve/transfer schedules along with permission to autoreview
         /// or allowing the non-working days
         /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">The name.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetCalenderDates(string name)
         {
             DataTable dt = new DataTable();

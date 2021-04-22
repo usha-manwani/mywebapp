@@ -186,7 +186,7 @@ namespace CresijApp.Services
     }
     #region data structure for response
     /// <summary>
-    /// data structure for getting central control maachine ip
+    /// data structure for getting central control machine ip
     /// </summary>
     class CcipStructure
     {

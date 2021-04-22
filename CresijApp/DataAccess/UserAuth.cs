@@ -1,4 +1,17 @@
-﻿using MySql.Data.MySqlClient;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 07-13-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-21-2021
+// ***********************************************************************
+// <copyright file="UserAuth.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,27 +26,37 @@ namespace CresijApp.DataAccess
     /// user permissions for menu options and location accesses.
     /// CRUD Operations is done on the Permissions
     /// </summary>
+    /// <summary>
+    /// Class UserAuth.
+    /// </summary>
     public class UserAuth
     {
         /// <summary>
         /// default connection
         /// </summary>
-        readonly string constr = System.Configuration.ConfigurationManager.
+        
+        string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
-        public UserAuth() { }
         /// <summary>
-        /// session connection
+        /// Initializes a new instance of the <see cref="UserAuth"/> class.
         /// </summary>
-        /// <param name="constring"></param>
-        public UserAuth(string constring) { constr = constring; }
+        public UserAuth() { }
+
         /// <summary>
-        /// method use to insert or update the user permissions related to menu and locations
+        /// Initializes a new instance of the <see cref="UserAuth"/> class.
+        /// </summary>
+        /// <param name="constring">The constring.</param>
+        public UserAuth(string constring) { constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings[constring].ConnectionString; }
+        /// <summary>
+        /// method to insert or update the user permissions related to menu and locations
         /// </summary>
         /// <param name="data"></param>
         /// <param name="userid"></param>
         /// <param name="adminid"></param>
         /// <param name="classnames"></param>
         /// <returns>no of affected record</returns>
+        
         public int SaveAuthMenu(string[] data, string userid, string adminid, string[] classnames)
         {
             int result = 0;
@@ -115,7 +138,8 @@ namespace CresijApp.DataAccess
         /// query to get top menu options accessed by the userid
         /// </summary>
         /// <param name="userid"></param>
-        /// <returns>list of topmenu options</returns>
+        /// <returns>list of top menu options</returns>
+        
         public DataTable GetUserTopMenu(string userid)
         {
             DataTable dt = new DataTable();
@@ -149,8 +173,8 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// query to get submenu options by top menu option type and userid
         /// </summary>
-        /// <param name="subMenuType"></param>
-        /// <param name="userid"></param>
+        /// <param name="subMenuType">Type of the sub menu.</param>
+        /// <param name="userid">The userid.</param>
         /// <returns>list of submenu options</returns>
         public DataTable GetUserSubMenu(string subMenuType, string userid)
         {
@@ -186,7 +210,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// method to delete all location access of a user by its id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The identifier.</param>
         /// <returns>no. of affected records</returns>
         public int DeleteUserPermissions(string id)
         {
@@ -210,10 +234,10 @@ namespace CresijApp.DataAccess
             return result;
         }
         /// <summary>
-        /// Get all submenus authorised to user
+        /// Get all submenus authorized to user
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
+        /// <param name="data">The data.</param>
+        /// <returns>DataTable.</returns>
         public DataTable GetUserAllSubMenu(string data)
         {
             DataTable dt = new DataTable();
@@ -238,7 +262,7 @@ namespace CresijApp.DataAccess
         /// <summary>
         /// get all classids accessed by user
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The data.</param>
         /// <returns>list of classids</returns>
         public DataTable GetUserAllLocationAccess(string data)
         {

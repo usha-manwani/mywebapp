@@ -33,7 +33,7 @@ namespace CresijApp.Services
         /// 
         /// </summary>
         /// <param name="semno"></param>
-        /// <returns>School name with logo location , Semester Info, Section Info, Reserve and trasnfer permissions and dates</returns>
+        /// <returns>School name with logo location , Semester Info, Section Info, Reserve and transfer permissions and dates</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetSystemInfo(int semno)
         {
@@ -96,9 +96,9 @@ namespace CresijApp.Services
 
                                     };
 
-                                    idata.Add("SemsterInfo", sm);
+                                    idata.Add("SemesterInfo", sm);
                                 }
-                                else idata.Add("SemsterInfo", "");
+                                else idata.Add("SemesterInfo", "");
                                 var sectionInfo = context.sectionsinfoes.Where(x => x.SemesterNo == semno).Select(x => x).ToList();
                                 List<SectionInfo> secList = new List<SectionInfo>();
                                 foreach (var s in sectionInfo)
@@ -193,7 +193,7 @@ namespace CresijApp.Services
 
         /// <summary>
         /// Method to update the system details
-        /// updates School name with logo location , Semester Info, Section Info, Reserve and trasnfer permissions and dates
+        /// updates School name with logo location , Semester Info, Section Info, Reserve and transfer permissions and dates
         /// </summary>
         /// <param name="data"></param>
         /// <returns>success/fail</returns>

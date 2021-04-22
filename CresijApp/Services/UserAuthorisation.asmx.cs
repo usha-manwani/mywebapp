@@ -9,13 +9,13 @@ using System.Web.Services;
 namespace CresijApp.Services
 {
     /// <summary>
-    /// Summary description for UserAuthorisation
+    /// Summary description for UserAuthorization
     /// This class contains methods and structure to deal with
     /// user permissions for menu options and location accesses.
     /// CRUD Operations is done on the Permissions.
     /// call UserAuth.cs Methods to deal with database
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/UserAuthorisation.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -106,7 +106,7 @@ namespace CresijApp.Services
                         dt = userAuth.GetUserTopMenu(userid);
                         if (dt.Rows.Count > 0)
                         {
-                            result.Add("status", "sucess");
+                            result.Add("status", "success");
                             foreach (DataRow dr in dt.Rows)
                             {
                                 idata.Add(dr["rolenames"].ToString());
@@ -130,9 +130,9 @@ namespace CresijApp.Services
             }
             return result;
         }
-        
+
         /// <summary>
-        /// Method to get submenu by a topmenu and specific to user in session.         
+        /// Method to get submenu by a top menu and specific to user in session.         
         /// </summary>
         /// <param name="subMenuType"></param>
         /// <returns></returns>
@@ -160,7 +160,7 @@ namespace CresijApp.Services
                         dt = userAuth.GetUserSubMenu(subMenuType, userid);
                         if (dt.Rows.Count > 0)
                         {
-                            result.Add("status", "sucess");
+                            result.Add("status", "success");
                             foreach (DataRow dr in dt.Rows)
                             {
                                 idata.Add(dr["rolenames"].ToString());
@@ -188,7 +188,7 @@ namespace CresijApp.Services
         /// <summary>
         /// Method to get submenu specific to user in session. 
         /// Submenu are the options inside a top menu.
-        /// Eg: Schedule managment is a top menu. Then Transfer and appointment schedule tabs are sub menu
+        /// Eg: Schedule management is a top menu. Then Transfer and appointment schedule tabs are sub menu
         /// </summary>
         /// <returns>list of submenu</returns>
         [WebMethod(EnableSession = true)]
@@ -216,7 +216,7 @@ namespace CresijApp.Services
                         dt = userAuth.GetUserAllSubMenu(userid);
                         if (dt.Rows.Count > 0)
                         {
-                            result.Add("status", "sucess");
+                            result.Add("status", "success");
                             foreach (DataRow dr in dt.Rows)
                             {
                                 idata.Add(dr["roleid"].ToString());
@@ -270,7 +270,7 @@ namespace CresijApp.Services
                         dt = userAuth.GetUserAllLocationAccess(userid);
                         if (dt.Rows.Count > 0)
                         {
-                            result.Add("status", "sucess");
+                            result.Add("status", "success");
                             foreach (DataRow dr in dt.Rows)
                             {
                                 idata.Add(dr["className"].ToString());
@@ -321,7 +321,7 @@ namespace CresijApp.Services
                     dt = userAuth.GetUserAllSubMenu(userid);
                     if (dt.Rows.Count > 0)
                     {
-                        result.Add("status", "sucess");
+                        result.Add("status", "success");
                         foreach (DataRow dr in dt.Rows)
                         {
                             idata.Add(dr["roleid"].ToString());
@@ -362,7 +362,7 @@ namespace CresijApp.Services
                     DataAccess.UserAuth userAuth = new DataAccess.UserAuth(HttpContext.Current.Session["DBConnection"].ToString());
                     DataTable dt = new DataTable();
                     dt = userAuth.GetUserAllLocationAccess(userid);
-                    result.Add("status", "sucess");
+                    result.Add("status", "success");
                     if (dt.Rows.Count > 0)
                     {
                         

@@ -24,8 +24,9 @@ namespace CresijApp.Services
         /// <summary>
         /// Method to Get Building Details associated with current user id(session)
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns>return Dictionary type for Building Details list with success/fail result</returns>
+        /// <param name="data">
+        /// pageSize,pageIndex</param>
+        /// <returns>returns BuildingDataStructure list and total no of rows with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetBuildingsDetails(Dictionary<string,object> data)
         {
@@ -79,13 +80,13 @@ namespace CresijApp.Services
                 }
             }
             return idata;
-        }       
+        }
 
         /// <summary>
         /// Method to get Student Details with optional search text
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns>return Dictionary type for Student details list with success/fail result</returns>
+        /// <param name="data">pageSize,pageIndex</param>
+        /// <returns>returns StudentDataStructure list and total no of rows with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string,object> GetStudentData(Dictionary<string, object> data)
         {
@@ -142,25 +143,9 @@ namespace CresijApp.Services
         }
 
         /// <summary>
-        /// Structure for teacher details as a result/response to the request
-        /// </summary>
-        private class TeacherDataStructure
-        {
-            public string TeacherID { get; set; }
-            public string TeacherName { get; set; }
-            public string Gender { get; set; }
-            public string DeptName { get; set; }
-            public string Phone { get; set; }
-            public string Age { get; set; }
-            public string IdCard { get; set; }
-            public string OneCard { get; set; }
-            public string DateOfBirth { get; set; }
-        }
-
-        /// <summary>
         /// Method to get Teacher details with optional search text
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">pageSize,pageIndex</param>
         /// <returns>Dictionary with TeacherDataStructure List and success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetTeacherData(Dictionary<string, object> data)
@@ -216,12 +201,12 @@ namespace CresijApp.Services
             }
 
             return idata;
-        }        
+        }
 
         /// <summary>
         /// Method to get User Details along with optional search text
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">pageSize,pageIndex,query</param>
         /// <returns>Dictionary with UserDataStructure List and success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetUserData(Dictionary<string, object> data)
@@ -334,7 +319,7 @@ namespace CresijApp.Services
         ///Method to Get List of Classroom data 
         ///optional search text as "query" param inside "data"
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">pageSize,pageIndex,query</param>
         /// <returns> Dictionary with ClassDetails list and success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetClassData(Dictionary<string, string> data)
@@ -413,7 +398,7 @@ namespace CresijApp.Services
         ///Method to Get List of Operation Management data 
         ///optional search text as "query" param inside "data"
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">pageSize,pageIndex,query</param>
         /// <returns>list of Opedata with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetOpedata(Dictionary<string, object> data)
@@ -513,12 +498,12 @@ namespace CresijApp.Services
             }
             return d;
         }
-       
+
         /// <summary>
         /// Method used for getting list of central control machines with class ids 
         /// and the current schedule by providing building id as input
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">pageSize,pageIndex,building</param>
         /// <returns>Dictoinary data with IPClassByBuildingStructure List with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetIPClassByBuilding(Dictionary<string, object> data)
@@ -578,7 +563,7 @@ namespace CresijApp.Services
         /// Method used for getting list of central control machines with class ids and
         /// the current schedule by providing building id and floor id as input
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">pageSize,pageIndex,building,floor</param>
         /// <returns>Dictoinary data with IPClassByBuildingStructure List with success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetIPClassByBuildingFloor(Dictionary<string, object> data)
@@ -596,8 +581,10 @@ namespace CresijApp.Services
                 try
                 {
                     GetOrgData gd = new GetOrgData(HttpContext.Current.Session["DBConnection"].ToString());
-                    List<object> dat = gd.GetIPClassByBuildingFloor(data["building"].ToString(), data["floor"].ToString(),
-                        HttpContext.Current.Session["UserLoggedIn"].ToString(), data["pageIndex"].ToString(), Convert.ToInt32(data["pageSize"].ToString()));
+                    List<object> dat = gd.GetIPClassByBuildingFloor(data["building"].ToString(), 
+                        data["floor"].ToString(),
+                        HttpContext.Current.Session["UserLoggedIn"].ToString(), 
+                        data["pageIndex"].ToString(), Convert.ToInt32(data["pageSize"].ToString()));
                     DataTable dt = dat[1] as DataTable;
                     int total = Convert.ToInt32(dat[0]);
                     KeyValuePair<string, int> totalRowCount = new KeyValuePair<string, int>("totalRows", total);
@@ -704,7 +691,7 @@ namespace CresijApp.Services
         /// <summary>
         /// Method used to get floor List by building Id
         /// </summary>
-        /// <param name="building"></param>
+        /// <param name="building">building id</param>
         /// <returns>Dictoinary data with Floor Name and id List and success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetFloorlist(string building)
@@ -828,10 +815,10 @@ namespace CresijApp.Services
                 }
             }
             return idata;
-        }       
-        
+        }
+
         /// <summary>
-        /// MEthod use to get floor details on basis of building id
+        /// MMethod use to get floor details on basis of building id
         /// </summary>
         /// <param name="building"></param>
         /// <returns>floor details with success/fail status</returns>
@@ -959,7 +946,8 @@ namespace CresijApp.Services
         /// <summary>
         /// get camera details By different search conditions 
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">keyword,in_or_out,classids,pageSize, pageIndex, 
+        /// state(Dictionary<string,string>):sub-params list :system,hasTeacher </param>
         /// <returns></returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetCameraDetailsByUser(Dictionary<string,object>data)
@@ -996,7 +984,7 @@ namespace CresijApp.Services
                         }
                         else
                         {
-                            //classes which are permissioned to user
+                            //classes which are accessible to user
                             data1 = gd.GetCameraByUserIdWithCondition(id, Convert.ToInt32(data["pageSize"]),
                                        Convert.ToInt32(data["pageIndex"]), systemstate, hasTeacher, classids, inOut);
                         }
@@ -1033,8 +1021,9 @@ namespace CresijApp.Services
         /// <summary>
         /// use to get desktop event logs from database
         /// </summary>
+        /// <param name="data">pageSize,pageIndex,building,floor</param>
         /// <param name="data"></param>
-        /// <returns></returns>
+        /// <returns>List of DesktopEvent class with total rows</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetDesktopEventLogs(Dictionary<string, string> data)
         {
@@ -1120,39 +1109,119 @@ namespace CresijApp.Services
         /// </summary>
         public class ClassDetails
         {
+            /// <summary>
+            /// Gets or sets the classid.
+            /// </summary>
+            /// <value>The classid.</value>
             public string Classid { get; set; }
+            /// <summary>
+            /// Gets or sets the classname.
+            /// </summary>
+            /// <value>The classname.</value>
             public string Classname { get; set; }
+            /// <summary>
+            /// Gets or sets the building.
+            /// </summary>
+            /// <value>The building.</value>
             public string Building { get; set; }
+            /// <summary>
+            /// Gets or sets the floor.
+            /// </summary>
+            /// <value>The floor.</value>
             public string Floor { get; set; }
+            /// <summary>
+            /// Gets or sets the building identifier.
+            /// </summary>
+            /// <value>The building identifier.</value>
             public int BuildingId { get; set; }
+            /// <summary>
+            /// Gets or sets the floor identifier.
+            /// </summary>
+            /// <value>The floor identifier.</value>
             public int FloorId { get; set; }
+            /// <summary>
+            /// Gets or sets the seat.
+            /// </summary>
+            /// <value>The seat.</value>
             public string Seat { get; set; }
+            /// <summary>
+            /// Gets or sets the ccip.
+            /// </summary>
+            /// <value>The ccip.</value>
             public string Ccip { get; set; }
+            /// <summary>
+            /// Gets or sets the camip s.
+            /// </summary>
+            /// <value>The camip s.</value>
             public string CamipS { get; set; }
+            /// <summary>
+            /// Gets or sets the camip t.
+            /// </summary>
+            /// <value>The camip t.</value>
             public string CamipT { get; set; }
+            /// <summary>
+            /// Gets or sets the desktop ip.
+            /// </summary>
+            /// <value>The desktop ip.</value>
             public string DesktopIp { get; set; }
+            /// <summary>
+            /// Gets or sets the recorder ip.
+            /// </summary>
+            /// <value>The recorder ip.</value>
             public string RecorderIp { get; set; }
+            /// <summary>
+            /// Gets or sets the c cmac.
+            /// </summary>
+            /// <value>The c cmac.</value>
             public string CCmac { get; set; }
-            //public string CCPort { get; set; }
-            //public string CCuserid { get; set; }
-            //public string CCpass { get; set; }
+
+            /// <summary>
+            /// Gets or sets the cam smac.
+            /// </summary>
+            /// <value>The cam smac.</value>
             public string CamSmac { get; set; }
-            //public string CamSPort { get; set; }
-            // public string CamSuserid { get; set; }
-            // public string CamSpass { get; set; }
+
+            /// <summary>
+            /// Gets or sets the cam tmac.
+            /// </summary>
+            /// <value>The cam tmac.</value>
             public string CamTmac { get; set; }
+            /// <summary>
+            /// Gets or sets the cam port.
+            /// </summary>
+            /// <value>The cam port.</value>
             public string CamPort { get; set; }
+            /// <summary>
+            /// Gets or sets the camuserid.
+            /// </summary>
+            /// <value>The camuserid.</value>
             public string Camuserid { get; set; }
+            /// <summary>
+            /// Gets or sets the campass.
+            /// </summary>
+            /// <value>The campass.</value>
             public string Campass { get; set; }
+            /// <summary>
+            /// Gets or sets the desktopmac.
+            /// </summary>
+            /// <value>The desktopmac.</value>
             public string Desktopmac { get; set; }
-            //public string DeskPort { get; set; }
-            //public string Deskuserid { get; set; }
-            //public string Deskpass { get; set; }
+
+            /// <summary>
+            /// Gets or sets the recordermac.
+            /// </summary>
+            /// <value>The recordermac.</value>
             public string Recordermac { get; set; }
-            //public string RecorderPort { get; set; }
-            //public string Recorderuserid { get; set; }
-            //public string Recorderpass { get; set; }
+
+            /// <summary>
+            /// Gets or sets the call help ip.
+            /// </summary>
+            /// <value>The call help ip.</value>
             public string CallHelpIP { get; set; }
+            /// <summary>
+            /// Gets or sets the call help mac.
+            /// </summary>
+            /// <value>The call help mac.</value>
             public string CallHelpmac { get; set; }
         }
         /// <summary>
@@ -1224,6 +1293,21 @@ namespace CresijApp.Services
             public string Type { get; set; }
             public string Remarks { get; set; }
             public int BuildingID { get; set; }
+        }
+        /// <summary>
+        /// Structure for teacher details as a result/response to the request
+        /// </summary>
+        private class TeacherDataStructure
+        {
+            public string TeacherID { get; set; }
+            public string TeacherName { get; set; }
+            public string Gender { get; set; }
+            public string DeptName { get; set; }
+            public string Phone { get; set; }
+            public string Age { get; set; }
+            public string IdCard { get; set; }
+            public string OneCard { get; set; }
+            public string DateOfBirth { get; set; }
         }
         #endregion
     }

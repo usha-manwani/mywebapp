@@ -12,7 +12,7 @@ namespace CresijApp.Services
     /// <summary>
     /// Summary description for ScheduleData
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/ScheduleData.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -170,7 +170,7 @@ namespace CresijApp.Services
         }
 
         /// <summary>
-        /// Method to get start and end date, autoreview values for reservation and transfer
+        /// Method to get start and end date, auto review values for reservation and transfer
         /// </summary>
         /// <param name="type"> value can be "Transfer" or "Reserve"</param>
         /// <returns>Returns start, end dates and auto review values</returns>
@@ -304,7 +304,7 @@ namespace CresijApp.Services
         }
 
         /// <summary>
-        /// Web Methods For getting the schedule by selecting the bilding and date that can be transferred
+        /// Web Methods For getting the schedule by selecting the building and date that can be transferred
         /// </summary>
         /// <param name="data"></param>
         /// <returns>Returns schedule for specific time range and building</returns>
@@ -435,11 +435,11 @@ namespace CresijApp.Services
                                 var oldtime = dr["oldtime"].ToString().Split(',');
                                 var newtime = dr["newtime"].ToString().Split(',');
                                 var startdate = dr["startdate"].ToString();
-                               // var date1 = new DateTime();
+                               
                                 var date2 = new DateTime();
-                                //var olddate = new DateTime();
+                                
                                 var newdate = new DateTime();
-                              //  DateTime.TryParse(startdate, out date1);
+                              
                                 DateTime.TryParse(startdate, out date2);
                                 if (Convert.ToInt32(newtime[0]) == 1)
                                 {
@@ -454,18 +454,7 @@ namespace CresijApp.Services
                                     newdate = tempdate2.AddDays(Convert.ToInt32(newtime[1]));
                                 }
                                 var finalnewdate = newdate.ToString("yyyy-MM-dd") + "," + newsection;
-                                //if (Convert.ToInt32(oldtime[0]) == 1)
-                                //{
-                                //    olddate = date1.AddDays(Convert.ToInt32(oldtime[0]));
-                                //}
-                                //else
-                                //{
-                                //    var daytemp = Convert.ToInt16(date1.DayOfWeek);
-                                //    if (daytemp == 0) daytemp = 7;
-                                //    var datetocount = date1.AddDays(7 - daytemp);
-                                //    var tempdate2 = datetocount.AddDays(7 * (Convert.ToInt32(oldtime[0]) - 2));
-                                //    olddate = tempdate2.AddDays(Convert.ToInt32(oldtime[1]));
-                                //}
+                                
                                 var finalolddate = Convert.ToDateTime(oldtime[0]).ToString("yyyy-MM-dd") + "," + oldsection;
 
                                 TransferScheduleListStructure transfer = new TransferScheduleListStructure()
@@ -1293,6 +1282,10 @@ namespace CresijApp.Services
             }
         }
 
+        /// <summary>
+        /// Gets the weekdays.
+        /// </summary>
+        /// <param name="idata">The idata.</param>
         public void GetWeekdays(List<BusySchedule> idata)
         {
             string[] totaldays = new string[] { "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday" };

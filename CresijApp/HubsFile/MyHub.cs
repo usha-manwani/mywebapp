@@ -14,9 +14,13 @@ using System.Web.Script.Serialization;
 
 namespace CresijApp.HubsFile
 {
+    /// <summary>
+    /// Class MyHub.
+    /// Implements the <see cref="Microsoft.AspNet.SignalR.Hub" />
+    /// </summary>
+    /// <see also cref="Microsoft.AspNet.SignalR.Hub" />
     public class MyHub :Hub
-    {
-        
+    {        
         private static List<Users> users = new List<Users>();
         static Dictionary<string, string> keyValues = new Dictionary<string, string>();
        /// <summary>
@@ -258,12 +262,20 @@ namespace CresijApp.HubsFile
             Clients.All.CountsMachines(1);
         }
     }
+    /// <summary>
+    /// Class Users.
+    /// </summary>
     public class Users
     {
-       // public string Name { get; set; }
+        /// <summary>
+        /// Gets or sets the authentication cookie.
+        /// </summary>
+        /// <value>The authentication cookie.</value>
         public string AuthCookie { get; set; }
+        /// <summary>
+        /// Gets or sets the connection identifier.
+        /// </summary>
+        /// <value>The connection identifier.</value>
         public string ConnectionId { get; set; }
     }
-    
-    
 }

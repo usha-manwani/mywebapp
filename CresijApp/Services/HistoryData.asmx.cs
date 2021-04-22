@@ -15,7 +15,7 @@ namespace CresijApp.Services
     /// Currently It contains one service for getting Power usage data of a machine
     /// Session needs to be added
     /// </summary>
-    [WebService(Namespace = "http://tempuri.org/")]
+    [WebService(Namespace = "http://ipaddress/services/HistoryData.asmx/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
@@ -110,7 +110,6 @@ namespace CresijApp.Services
                 }
                 else if (timerange == "Hour")
                 {
-
                     query = "select sum(value) as powervalue ,Hour(recordtime) as hourtime" +
                         " from machineusagelogs_minute where attribute = '" + propname + "' " +
                         "and classid = " + classid + " and recordtime >= '"
@@ -125,7 +124,7 @@ namespace CresijApp.Services
                         {
                             m.Add(new MonthPower
                             {
-                                RecordTime =  dr["hourtime"].ToString().PadLeft(2,'0')+"00:00",
+                                RecordTime =  dr["hourtime"].ToString().PadLeft(2,'0')+":00:00",
                                 Value = Convert.ToDouble(dr["powervalue"])
                             });
                         };

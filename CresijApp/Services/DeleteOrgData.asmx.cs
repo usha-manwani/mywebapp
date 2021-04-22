@@ -24,7 +24,7 @@ namespace CresijApp.Services
         /// <summary>
         /// Method to delete single or multiple row of Building details using its id
         /// </summary>
-        /// <param name="sno"></param>
+        /// <param name="data">The data.: list of building ids</param>
         /// <returns>Success/fail result</returns>
         [WebMethod(EnableSession =true)]
         public Dictionary<string,string> DeleteMultipleBuilding(List<string> data)
@@ -66,7 +66,7 @@ namespace CresijApp.Services
         /// <summary>
         /// Method to delete the single or multiple row of class details using ClassID
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="data">The data.: list of class ids</param>
         /// <returns>success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleClass(List<string> data)
@@ -101,8 +101,8 @@ namespace CresijApp.Services
         /// <summary>
         /// Method to delete single or multiple row of user data by its Id
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>succ</returns>
+        /// <param name="data">The data.: list of user ids</param>
+        /// <returns>Success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleUser(List<string> data)
         {
@@ -138,7 +138,7 @@ namespace CresijApp.Services
         /// <summary>
         /// Method to delete single or multiple row of floor data using floor Id
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">The data.: list of floor ids</param>
         /// <returns>Success/fail result</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleFloor(List<string> data)
@@ -172,10 +172,10 @@ namespace CresijApp.Services
             return keyValue;
         }
         /// <summary>
-        /// MEthod to delete single or multiple row of teacher details by using teacher id
+        /// Method to delete single or multiple row of teacher details by using teacher id
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="data">The data.: list of teacher ids</param>
+        /// <returns>Success/fail result with count of affected rows.</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleTeacherData(List<string> data)
         {
@@ -210,8 +210,8 @@ namespace CresijApp.Services
         /// <summary>
         /// Method to delete single or multiple row of student details by passing the student id
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns>success/fail result</returns>
+        /// <param name="data">The data.: list of student ids</param>
+        /// <returns>Success/fail result with count of affected rows.</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, string> DeleteMultipleStudentData(List<string> data)
         {

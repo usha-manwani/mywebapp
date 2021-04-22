@@ -118,7 +118,7 @@ namespace CresijApp.Services
         /// then setting the parity 01,00,02 (even,odd,none) according to those comments
         /// </summary>
         /// <param name="data"></param>
-        /// <returns>Baudrate, Open, close codes, parity check</returns>
+        /// <returns>Baud rate, Open, close codes, parity check</returns>
         [WebMethod(EnableSession = true)]
         public Dictionary<string, object> GetProjectorIniInfo(Dictionary<string,string> data)
         {

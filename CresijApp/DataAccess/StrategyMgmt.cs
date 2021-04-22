@@ -1,4 +1,17 @@
-﻿using MySql.Data.MySqlClient;
+﻿// ***********************************************************************
+// Assembly         : CresijApp
+// Author           : admin
+// Created          : 08-21-2020
+//
+// Last Modified By : admin
+// Last Modified On : 04-21-2021
+// ***********************************************************************
+// <copyright file="StrategyMgmt.cs" company="Microsoft">
+//     Copyright © Microsoft 2019
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,25 +23,44 @@ namespace CresijApp.DataAccess
     /// <summary>
     /// this class is use to deal with database for strategy related operations
     /// </summary>
+    /// <summary>
+    /// Class StrategyMgmt.
+    /// </summary>
     public class StrategyMgmt
     {
         #region Method
         /// <summary>
         /// dedault connection
         /// </summary>
-        readonly string constr = System.Configuration.ConfigurationManager.
+        /// <summary>
+        /// The constr
+        /// </summary>
+        string constr = System.Configuration.ConfigurationManager.
             ConnectionStrings["Organisationdatabase"].ConnectionString;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StrategyMgmt"/> class.
+        /// </summary>
         public StrategyMgmt() { }
         /// <summary>
         /// session connection
         /// </summary>
         /// <param name="constring"></param>
-        public StrategyMgmt(string constring) { constr = constring; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StrategyMgmt"/> class.
+        /// </summary>
+        /// <param name="constring">The constring.</param>
+        public StrategyMgmt(string constring) { constr = System.Configuration.ConfigurationManager.
+            ConnectionStrings[constring].ConnectionString; }
         /// <summary>
         /// Method to call the sp_GetStrategyList to get the list of strategy
         /// </summary>
         /// <param name="data"></param>
         /// <returns>list of strategy</returns>
+        /// <summary>
+        /// Gets all strategy.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns>List&lt;System.Object&gt;.</returns>
         public List<object> GetAllStrategy( Dictionary<string,string>data)
         {
             int totalrows = 0;
@@ -65,6 +97,10 @@ namespace CresijApp.DataAccess
         /// method to get the devices list from database
         /// </summary>
         /// <returns>devices list</returns>
+        /// <summary>
+        /// Getteachers the aid.
+        /// </summary>
+        /// <returns>DataTable.</returns>
         public DataTable GetteacherAid()
         {
             DataTable dt = new DataTable();
@@ -92,6 +128,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
+        /// <summary>
+        /// Executes the command.
+        /// </summary>
+        /// <param name="query">The query.</param>
+        /// <returns>DataTable.</returns>
         public DataTable ExecuteCommand(string query)
         {
             DataTable dt = new DataTable();
@@ -118,6 +159,11 @@ namespace CresijApp.DataAccess
         /// </summary>
         /// <param name="id"></param>
         /// <returns>count of strategy execution </returns>
+        /// <summary>
+        /// Gets the strategy exectution count.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>List&lt;StrategyExecCount&gt;.</returns>
         public List<StrategyExecCount> GetStrategyExectutionCount( int id)
         {
             DataTable dt = new DataTable();
@@ -168,23 +214,73 @@ namespace CresijApp.DataAccess
     /// <summary>
     /// Data structure for Strategy logs
     /// </summary>
+    /// <summary>
+    /// Class InterStrategyLogs.
+    /// </summary>
     public class InterStrategyLogs{
+        /// <summary>
+        /// Gets or sets the strategy identifier.
+        /// </summary>
+        /// <value>The strategy identifier.</value>
         public int StrategyId { get; set; }
+        /// <summary>
+        /// Gets or sets the class identifier.
+        /// </summary>
+        /// <value>The class identifier.</value>
         public int ClassId { get; set; }
+        /// <summary>
+        /// Gets or sets the execution time.
+        /// </summary>
+        /// <value>The execution time.</value>
         public DateTime ExecutionTime { get; set; }
+        /// <summary>
+        /// Gets or sets the instruction.
+        /// </summary>
+        /// <value>The instruction.</value>
         public string Instruction { get; set; }
+        /// <summary>
+        /// Gets or sets the name of the class.
+        /// </summary>
+        /// <value>The name of the class.</value>
         public string ClassName { get; set; }
+        /// <summary>
+        /// Gets or sets the status.
+        /// </summary>
+        /// <value>The status.</value>
         public string Status { get; set; }        
     }
     /// <summary>
     /// Data structure for strategy execution count
     /// </summary>
+    /// <summary>
+    /// Class StrategyExecCount.
+    /// </summary>
     public class StrategyExecCount
     {
+        /// <summary>
+        /// Gets or sets the fail.
+        /// </summary>
+        /// <value>The fail.</value>
         public int Fail { get; set; }
+        /// <summary>
+        /// Gets or sets the success.
+        /// </summary>
+        /// <value>The success.</value>
         public int Success { get; set; }
+        /// <summary>
+        /// Gets or sets the pending.
+        /// </summary>
+        /// <value>The pending.</value>
         public int Pending { get; set; }
-        public string ClassName { get; set; }   
+        /// <summary>
+        /// Gets or sets the name of the class.
+        /// </summary>
+        /// <value>The name of the class.</value>
+        public string ClassName { get; set; }
+        /// <summary>
+        /// Gets or sets the class identifier.
+        /// </summary>
+        /// <value>The class identifier.</value>
         public int ClassId { get; set; }
     }
     #endregion
