@@ -1,17 +1,4 @@
-﻿// ***********************************************************************
-// Assembly         : CresijApp
-// Author           : admin
-// Created          : 12-09-2019
-//
-// Last Modified By : admin
-// Last Modified On : 04-13-2021
-// ***********************************************************************
-// <copyright file="Global.asax.cs" company="Microsoft">
-//     Copyright © Microsoft 2019
-// </copyright>
-// <summary></summary>
-// ***********************************************************************
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;

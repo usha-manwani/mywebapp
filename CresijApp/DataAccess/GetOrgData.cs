@@ -299,7 +299,7 @@ namespace CresijApp.DataAccess
                     string query = "SELECT classID, ClassName, bd.buildingname, fd.floor,Seats,`camipS`,`camipT`, `camSmac`, " +
                     "`camTmac`,`camport`,`camuserid`,`campass`,`CCEquipIP`,`ccmac`, `desktopip`,`deskmac`, " +
                     "`recordingEquip`,`recordermac`,`callhelpip`,`callhelpmac`, " +
-                    "bd.id as buildingid, fd.id as floorid FROM `organisationdatabase`.`classdetails` cd " +
+                    "bd.id as buildingid, fd.id as floorid FROM `classdetails` cd " +
                     "join buildingdetails bd on bd.id = cd.teachingbuilding join floordetails fd on fd.id = cd.floor" +
                     " where classid=" + classid;
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
